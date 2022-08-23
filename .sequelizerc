@@ -1,0 +1,8 @@
+import { resolve, join } from 'path';
+
+export default {
+  'config': resolve("./config", "database.js"),
+  'migrations-path': join(__dirname, 'migrations'),
+  'seeders-path': join(__dirname, 'app/seeders'),
+  'models-path': join(__dirname, 'app/models'),
+};
