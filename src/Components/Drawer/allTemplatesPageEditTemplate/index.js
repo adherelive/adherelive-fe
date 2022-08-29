@@ -30,7 +30,7 @@ import SyrupIcon from "../../../Assets/images/pharmacy.png";
 import uuid from "react-uuid";
 import messages from "./message";
 import Input from "antd/es/input";
-import { PoweroffOutlined } from "@ant-design/icons";
+import { PoweroffOutlined, EditFilled } from "@ant-design/icons";
 
 class TemplatePageCreateDrawer extends Component {
   constructor(props) {
@@ -1322,8 +1322,8 @@ class TemplatePageCreateDrawer extends Component {
                     )}
                   </div>
 
-                  <Icon
-                    type="edit"
+                  <EditFilled
+                    // type="edit"
                     className="ml20"
                     style={{ color: "#4a90e2" }}
                     theme="filled"
@@ -1373,8 +1373,8 @@ class TemplatePageCreateDrawer extends Component {
               <div className="drawer-block">
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{reason}</div>
-                  <Icon
-                    type="edit"
+                  <EditFilled
+                    // type="edit"
                     className="ml20"
                     style={{ color: "#4a90e2" }}
                     theme="filled"
@@ -1429,8 +1429,8 @@ class TemplatePageCreateDrawer extends Component {
               <div className="drawer-block">
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{vital_name}</div>
-                  <Icon
-                    type="edit"
+                  <EditFilled
+                    // type="edit"
                     className="ml20"
                     style={{ color: "#4a90e2" }}
                     theme="filled"
@@ -1472,8 +1472,8 @@ class TemplatePageCreateDrawer extends Component {
               <div className="drawer-block">
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{name}</div>
-                  <Icon
-                    type="edit"
+                  <EditFilled
+                    // type="edit"
                     className="ml20"
                     style={{ color: "#4a90e2" }}
                     theme="filled"
@@ -1517,8 +1517,8 @@ class TemplatePageCreateDrawer extends Component {
               <div className="drawer-block">
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{name}</div>
-                  <Icon
-                    type="edit"
+                  <EditFilled
+                    // type="edit"
                     className="ml20"
                     style={{ color: "#4a90e2" }}
                     theme="filled"

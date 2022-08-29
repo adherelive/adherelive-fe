@@ -6,6 +6,7 @@ import { getFullName } from "../../../../Helper/common";
 import { Icon } from "antd";
 import messages from "../messages";
 import { Tooltip } from "antd";
+import { EyeInvisibleFilled, EyeFilled } from "@ant-design/icons";
 
 class Watchlist extends Component {
   constructor(props) {
@@ -160,8 +161,8 @@ class Watchlist extends Component {
         >
           {isAdded ? (
             <Tooltip title={formatMessage(messages.removeFromWatchlist)}>
-              <Icon
-                type="eye"
+              <EyeFilled
+                // type="eye"
                 className="fs20"
                 value={isAdded}
                 onClick={this.removeFromWatchlist}
@@ -169,8 +170,8 @@ class Watchlist extends Component {
             </Tooltip>
           ) : (
             <Tooltip title={formatMessage(messages.addToWatchlist)}>
-              <Icon
-                type="eye-invisible"
+              <EyeInvisibleFilled
+                // type="eye-invisible"
                 theme="filled"
                 className="fs20"
                 value={isAdded}

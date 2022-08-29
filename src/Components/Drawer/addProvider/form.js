@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { injectIntl } from "react-intl";
 
-import Form from "antd/es/form";
+// import Form from "antd/es/form";
 import Input from "antd/es/input";
 import Radio from "antd/es/radio";
 import Button from "antd/es/button";
@@ -14,6 +14,9 @@ import messages from "./message";
 import { EyeTwoTone, EyeInvisibleOutlined } from "@ant-design/icons";
 import prefixField from "../../Prefix";
 import { SAVINGS, CURRENT, ACCOUNT_TYPES } from "../../../constant";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 const { Item: FormItem } = Form;
 const { Password, TextArea } = Input;

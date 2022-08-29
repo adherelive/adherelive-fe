@@ -956,7 +956,7 @@ class PatientDetails extends Component {
           : false;
 
       this.setState({
-        carePlanTemplateId,
+        // carePlanTemplateId,
         carePlanTemplateExists,
         loading: false,
         patientCarePlanIds: care_plan_ids,

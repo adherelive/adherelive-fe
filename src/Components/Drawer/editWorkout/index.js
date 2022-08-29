@@ -5,11 +5,14 @@ import messages from "./messages";
 import SingleDayExerciseComponent from "../singleDayExerciseComponent/index";
 import message from "antd/es/message";
 import WorkoutFieldsForm from "./form";
-import Form from "antd/es/form";
+// import Form from "antd/es/form";
 import Footer from "../footer";
 import Loading from "../../Common/Loading";
 import confirm from "antd/es/modal/confirm";
 import moment from "moment";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 class EditWorkout extends Component {
   constructor(props) {

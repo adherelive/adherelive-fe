@@ -4,6 +4,7 @@ import message from "antd/es/message";
 import { getFullName } from "../../../../Helper/common";
 import { Icon } from "antd";
 import messages from "../messages";
+import { EyeInvisibleFilled, EyeFilled } from "@ant-design/icons";
 
 class Watchlist extends Component {
   constructor(props) {
@@ -119,16 +120,16 @@ class Watchlist extends Component {
         onClick={this.stopEventBubbling}
       >
         {isAdded ? (
-          <Icon
-            type="eye-invisible"
+          <EyeInvisibleFilled
+            // type="eye-invisible"
             theme="filled"
             className="fs24"
             value={isAdded}
             onClick={this.addThisToWatchlist}
           />
         ) : (
-          <Icon
-            type="eye"
+          <EyeFilled
+            // type="eye"
             className="fs24"
             value={isAdded}
             onClick={this.removeFromWatchlist}

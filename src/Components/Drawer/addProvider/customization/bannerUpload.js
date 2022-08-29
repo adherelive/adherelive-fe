@@ -8,6 +8,7 @@ import LoadingStatus from "../../../Common/Loading";
 import messages from "../message";
 import Modal from "antd/es/modal";
 import Button from "antd/es/button";
+import { UploadOutlined } from "@ant-design/icons";
 
 const { Item: FormItem } = Form;
 
@@ -111,7 +112,7 @@ class Field extends Component {
           {loading ? (
             <LoadingStatus />
           ) : (
-            <Icon type="upload" style={{ width: 20, height: 20 }} />
+            <UploadOutlined style={{ width: 20, height: 20 }} />
           )}
           <span>{formatMessage(messages.iconUploadText)}</span>
         </div>

@@ -5,9 +5,12 @@ import messages from "./messages";
 import SingleDayExerciseComponent from "../singleDayExerciseComponent/index";
 import message from "antd/es/message";
 import ExerciseFieldsForm from "./form";
-import Form from "antd/es/form";
+// import Form from "antd/es/form";
 import Footer from "../footer";
 import moment from "moment";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 class AddExercise extends Component {
   constructor(props) {

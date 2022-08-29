@@ -5,7 +5,7 @@ import Tooltip from "antd/es/tooltip";
 import messages from "../messages";
 import confirm from "antd/es/modal/confirm";
 import moment from "moment";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, CheckCircleOutlined } from "@ant-design/icons";
 
 const ALL_TABS = {
   PUBLIC: "1",
@@ -150,10 +150,10 @@ export default (props) => {
             : formatMessage(messages.makePublic)
         }
       >
-        <Icon
+        <CheckCircleOutlined
           className="pointer align-self-end mr20 fs20 align-self-end"
           onClick={public_medicine ? "" : handleMakeMedicinePublic}
-          type="check-circle"
+          // type="check-circle"
           theme="twoTone"
           twoToneColor={public_medicine ? "#52c41a" : "pink"}
         />

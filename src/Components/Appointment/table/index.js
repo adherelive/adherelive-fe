@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { injectIntl } from "react-intl";
-import { Table, Icon } from "antd";
+import { Table } from "antd";
 import generateRow from "./dataRow";
 import getColumn from "./header";
 // import { getAppointmentsForPatientUrl } from "../../../Helper/url/appointments";
 import messages from "./messages";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class PatientTable extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class PatientTable extends Component {
   };
 
   getLoadingComponent = () => {
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     return {
       indicator: antIcon,
     };

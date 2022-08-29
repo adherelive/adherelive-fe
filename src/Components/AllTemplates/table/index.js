@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { injectIntl } from "react-intl";
 import { Table } from "antd";
-import Icon from "@ant-design/icons";
 import generateRow from "./dataRow";
 import getColumn from "./header";
 import messages from "./messages";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class TemplateTable extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class TemplateTable extends Component {
   };
 
   getLoadingComponent = () => {
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     return {
       indicator: antIcon,
     };

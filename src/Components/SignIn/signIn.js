@@ -5,10 +5,11 @@ import messages from "./message";
 import { withRouter } from "react-router-dom";
 import { PATH } from "../../constant";
 import config from "../../config";
-import { Form as LegacyForm } from "@ant-design/compatible";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
-const { Item: FormItem } = LegacyForm;
+const { Item: FormItem } = Form;
 const { Password } = Input;
 
 const EMAIL = "email";
@@ -104,7 +105,7 @@ class SignIn extends Component {
     });
     const { handleSignIn, tosComponent } = this;
     return (
-      <LegacyForm onSubmit={handleSignIn} className="login-form">
+      <Form onSubmit={handleSignIn} className="login-form">
         <FormItem
           validateStatus={fieldsError[EMAIL] ? "error" : ""}
           help={fieldsError[EMAIL] || ""}
@@ -174,7 +175,7 @@ class SignIn extends Component {
             {/*              </p>*/}
           </div>
         </FormItem>
-      </LegacyForm>
+      </Form>
     );
   }
 }
@@ -183,6 +184,6 @@ class SignIn extends Component {
 //const NormalLoginForm = ({ name: "signin_form" })(injectIntl(SignIn));
 
 export default withRouter(
-  LegacyForm.create({ name: "signin_form" })(injectIntl(SignIn))
+  Form.create({ name: "signin_form" })(injectIntl(SignIn))
 );
 //export default withRouter(mapStateToProps, mapDispatchToProps)(NormalLoginForm);

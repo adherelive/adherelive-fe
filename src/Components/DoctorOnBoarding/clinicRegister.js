@@ -3,7 +3,6 @@ import { injectIntl } from "react-intl";
 import { DeleteTwoTone } from "@ant-design/icons";
 import uuid from "react-uuid";
 import { Input, message } from "antd";
-import Icon from "@ant-design/icons";
 import {
   PATH,
   FULL_DAYS,
@@ -17,6 +16,12 @@ import TimingModal from "./timingModal";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
 import messages from "./messages";
+import Icon from "@ant-design/icons";
+import {
+  EnvironmentFilled,
+  EditFilled,
+  ClockCircleOutlined,
+} from "@ant-design/icons";
 
 const dayTimings = {
   [FULL_DAYS.MON]: [{ startTime: "", endTime: "" }],
@@ -367,7 +372,7 @@ class ClinicRegister extends Component {
                 >
                   {locationToDisplay ? locationToDisplay : "Location"}
                 </div>
-                <Icon type="environment" theme="filled" />
+                <EnvironmentFilled theme="filled" />
               </div>
 
               <div className="flex justify-space-between align-center direction-row">
@@ -381,8 +386,8 @@ class ClinicRegister extends Component {
                 <div className={`form-input-timing active-grey `}>
                   <div className={"active-grey"}>
                     <div className="flex justify-end wp100">
-                      <Icon
-                        type="edit"
+                      <EditFilled
+                        // type="edit"
                         style={{ color: "#4a90e2" }}
                         theme="filled"
                         onClick={this.setModalTimingVisible(key)}
@@ -399,7 +404,7 @@ class ClinicRegister extends Component {
                   <div className={"default-grey"}>
                     {this.formatMessage(messages.timings)}
                   </div>
-                  {<Icon type="clock-circle" />}
+                  {<ClockCircleOutlined type="clock-circle" />}
                 </div>
               )}
               {/* <div className={`form-input-timing ${Object.keys(timings).length ? 'active-grey' : 'default-grey'} pointer`} onClick={this.setModalTimingVisible(key)}>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { injectIntl } from "react-intl";
 
 import Drawer from "antd/es/drawer";
-import Form from "antd/es/form";
+// import Form from "antd/es/form";
 import message from "antd/es/message";
 import confirm from "antd/es/modal/confirm";
 import Button from "antd/es/button";
@@ -20,6 +20,9 @@ import moment from "moment";
 import instructions from "../common/instructions";
 import vitalOccurence from "../common/vitalOccurence";
 import vitalNameField from "../common/vitalName";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 class EditVital extends Component {
   constructor(props) {

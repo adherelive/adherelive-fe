@@ -6,6 +6,7 @@ import getColumn from "./header";
 import messages from "./messages";
 import message from "antd/es/message";
 import { CURRENT_TAB } from "../../Dashboard";
+import { LoadingOutlined } from "@ant-design/icons";
 
 export const SORTING_TYPE = {
   SORT_BY_DATE: "0",
@@ -230,7 +231,7 @@ class patientTable extends Component {
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
   getLoadingComponent = () => {
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     return {
       indicator: antIcon,
     };
