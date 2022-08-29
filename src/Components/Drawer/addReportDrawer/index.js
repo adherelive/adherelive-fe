@@ -18,6 +18,7 @@ import {
   EyeTwoTone,
   DownloadOutlined,
   LoadingOutlined,
+  PaperClipOutlined,
 } from "@ant-design/icons";
 
 import messages from "./message";
@@ -121,7 +122,7 @@ class addReportDrawer extends Component {
       <div className={"qualification-avatar-uploader "}>
         <div className="absolute tp45 l0 wp100 flex justify-center align-space-evenly doc-container ">
           {/* {extension.toUpperCase()} */}
-          <Icon type="paper-clip" />
+          <PaperClipOutlined />
         </div>
         <div className="overlay"></div>
         <div className="absolute tp45 l0 wp100 flex justify-center align-space-evenly doc-container ">

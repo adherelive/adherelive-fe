@@ -15,7 +15,8 @@ import { doRequest } from "../../Helper/network";
 import { Twilio } from "../../Helper/urls";
 import { REQUEST_TYPE, USER_CATEGORY } from "../../constant";
 
-import { Button, message, Icon, Spin } from "antd";
+import { Button, message, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class VideoComponent extends Component {
   constructor(props) {
@@ -396,7 +397,7 @@ class VideoComponent extends Component {
       </Button>
     );
 
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
     const { video2connected, participantConnected, hasJoinedRoom, status } =
       this.state;

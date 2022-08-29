@@ -3,10 +3,11 @@ import React, { Component } from "react";
 import { Button, Input, message } from "antd";
 import CompanyIcon from "../../Assets/images/logo3x.png";
 import { PATH } from "../../constant";
-import { Form as LegacyForm } from "@ant-design/compatible";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
-const { Item: FormItem } = LegacyForm;
+const { Item: FormItem } = Form;
 const { Password } = Input;
 
 const PASSWORD = "new_password";
@@ -165,7 +166,7 @@ class ResetPassword extends Component {
                 Forgot Password
               </div>
 
-              <LegacyForm onSubmit={handleResetPassword} className="login-form">
+              <Form onSubmit={handleResetPassword} className="login-form">
                 <FormItem
                   validateStatus={fieldsError[PASSWORD] ? "error" : ""}
                   help={fieldsError[PASSWORD] || ""}
@@ -209,7 +210,7 @@ class ResetPassword extends Component {
 
                   {/*</div>*/}
                 </FormItem>
-              </LegacyForm>
+              </Form>
 
               <div className="flex direction-column justify-space-between align-center"></div>
             </div>
@@ -220,4 +221,4 @@ class ResetPassword extends Component {
   }
 }
 
-export default LegacyForm.create()(ResetPassword);
+export default Form.create()(ResetPassword);

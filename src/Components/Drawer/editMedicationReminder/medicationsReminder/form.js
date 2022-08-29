@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Form, Button, Input, message, Radio } from "antd";
+import { Button, Input, message, Radio } from "antd";
 import moment from "moment";
 import participantsField from "../common/participants";
 import startTimeField from "../common/startTime";
@@ -29,6 +29,9 @@ import {
   DAYS_NUMBER,
   MEDICINE_UNITS,
 } from "../../../../constant";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 const InputGroup = Input.Group;
 const { Item: FormItem } = Form;
@@ -496,10 +499,23 @@ class EditMedicationReminderForm extends Component {
       enableSubmit,
     } = this.props;
     const currentValue = getFieldValue(medicineStrengthField.field_name) || 0.0;
-    setFieldsValue({
-      [medicineStrengthField.field_name]:
-        parseFloat(currentValue) + parseFloat(e.target.value),
-    });
+
+    //AKSAHY NEW CODE IMPLEMENTATION FOR ONE
+    if (e.target.value == 1) {
+      setFieldsValue({
+        [medicineStrengthField.field_name]: 1,
+      });
+    } else if (e.target.value != 1) {
+      setFieldsValue({
+        [medicineStrengthField.field_name]:
+          parseFloat(currentValue) + parseFloat(e.target.value),
+      });
+    }
+
+    // setFieldsValue({
+    //   [medicineStrengthField.field_name]:
+    //     parseFloat(currentValue) + parseFloat(e.target.value),
+    // });
     validateFields([medicineStrengthField.field_name]);
     enableSubmit();
   };
@@ -585,6 +601,21 @@ class EditMedicationReminderForm extends Component {
                 className="mg-ml flex justify-content-end"
                 disabled={canViewDetails}
               >
+                {/* AKSHAY NEW CODE IMPLEMENTATION FOR ONE */}
+                <RadioButton
+                  value={1}
+                  className={
+                    // medicineUnit !== MEDICINE_UNITS.MG
+                    //   ? `unselected-text no-shadow`
+                    //   : "no-shadow"
+                    "no-shadow"
+                  }
+                  onClick={setStrength}
+                  // checked={medicineUnit === MEDICINE_UNITS.MG}
+                  // disabled={medicineUnit !== MEDICINE_UNITS.MG}
+                >
+                  One
+                </RadioButton>
                 <RadioButton
                   value={MEDICINE_UNITS.ML}
                   className={

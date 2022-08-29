@@ -11,9 +11,10 @@ import {
   Radio,
   DatePicker,
 } from "antd";
-import Icon from "@ant-design/icons";
 import Form from "antd/es/form";
 import TextArea from "antd/es/input/TextArea";
+import Icon from "@ant-design/icons";
+import { EditFilled } from "@ant-design/icons";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
 
 import moment from "moment";
@@ -146,8 +147,8 @@ class AddSubscription extends Component {
             <div className="drawer-block">
               <div className="flex direction-row justify-space-between align-center">
                 <div className="form-headings-ap">1 * Virtual consultation</div>
-                <Icon
-                  type="edit"
+                <EditFilled
+                  // type="edit"
                   className="ml20"
                   style={{ color: "#4a90e2" }}
                   theme="filled"

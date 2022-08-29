@@ -9,11 +9,12 @@ import {
   Button,
   TimePicker,
   Modal,
+  Spin,
 } from "antd";
-import Icon from "@ant-design/icons";
 
 import {
   WHEN_TO_TAKE_ABBR_TYPES,
+  WHEN_TO_TAKE_ABBR_LABELS,
   MEDICATION_TIMING,
   DAYS,
   DAYS_TEXT_NUM_SHORT,
@@ -45,7 +46,8 @@ import getMonth from "date-fns/getMonth";
 import getHours from "date-fns/getHours";
 import getMinutes from "date-fns/getMinutes";
 
-import { PoweroffOutlined } from "@ant-design/icons";
+import { PoweroffOutlined, EditFilled, DeleteFilled } from "@ant-design/icons";
+import Icon from "@ant-design/icons";
 
 const { Option } = Select;
 const BLANK_TEMPLATE = "Blank Template";
@@ -376,6 +378,7 @@ class TemplateDrawer extends Component {
       }
     }
     this.setState({
+      care_plan_templates,
       carePlanTemplateIds,
       carePlanTemplateId,
       medications: newMedics,
@@ -652,7 +655,9 @@ class TemplateDrawer extends Component {
 
   getCarePlanTemplateOptions = () => {
     const { carePlanTemplateIds = [] } = this.state;
-    const { care_plan_templates = {} } = this.props;
+    const { care_plan_templates = {} } = this.state;
+    console.log("care_plan_templates", care_plan_templates);
+    console.log("carePlanTemplateIds", carePlanTemplateIds);
     const templates = Object.values(carePlanTemplateIds).map((templateId) => {
       const { basic_info: { name = "" } = {} } =
         care_plan_templates[templateId];
@@ -687,6 +692,35 @@ class TemplateDrawer extends Component {
       });
     } else {
       this.setState({ carePlanTemplateId: parseInt(value) });
+    }
+  };
+
+  // AKSHAY NEW CODE CHNAGES FOR TEMPLATE SEARCH
+
+  onTemplateSearch = async (value) => {
+    try {
+      // if (value) {
+      const { getAllTemplatesForDoctorUsingQuery } = this.props;
+      this.setState({ fetchingTemplate: true });
+      const response = await getAllTemplatesForDoctorUsingQuery(value);
+      const { status, payload: { data: responseData, message } = {} } =
+        response;
+      if (status) {
+        this.setState({
+          carePlanTemplateIds: responseData.care_plan_template_ids,
+          care_plan_templates: responseData.care_plan_templates,
+          fetchingTemplate: false,
+        });
+      } else {
+        this.setState({ fetchingTemplate: false });
+      }
+      // } else {
+      //   this.setState({ fetchingTemplate: false });
+      // }
+    } catch (err) {
+      console.log("err", err);
+      message.warn("Something Went Wrong");
+      this.setState({ fetchingTemplate: false });
     }
   };
 
@@ -988,15 +1022,30 @@ class TemplateDrawer extends Component {
     // console.log("32786428457523476834234532847",{l:Object.keys(carePlanTemplateIds).length,showDropDown,care_plan_templates,firstTemplateId,carePlanTemplateIds});
     return (
       <div className="template-block">
-        {Object.keys(carePlanTemplateIds).length && showDropDown ? (
-          <Select
-            value={carePlanTemplateId}
-            className={"template-drawer-select wp100"}
-            onChange={this.setTemplateId}
-          >
-            {this.getCarePlanTemplateOptions()}
-          </Select>
-        ) : null}
+        {/* {Object.keys(carePlanTemplateIds).length && showDropDown ? ( */}
+        <Select
+          showSearch
+          value={carePlanTemplateId}
+          className={"template-drawer-select wp100"}
+          onChange={this.setTemplateId}
+          onSearch={this.onTemplateSearch}
+          autoComplete="off"
+          optionFilterProp="children"
+          // filterOption={(input, option) =>
+          //   option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
+          //   0
+          // }
+          notFoundContent={
+            this.state.fetchingTemplate ? (
+              <Spin size="small" />
+            ) : (
+              "No match found"
+            )
+          }
+        >
+          {this.getCarePlanTemplateOptions()}
+        </Select>
+        {/* ) : null} */}
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap ">
             {this.formatMessage(messages.medications)}
@@ -1014,8 +1063,33 @@ class TemplateDrawer extends Component {
               start_date = moment(),
               medicine_type = "1",
               repeat_days = [],
+              strength = "",
+              unit = "",
+              quantity = "",
+              when_to_take_abbr = "",
             } = {},
           } = medications[key];
+
+          // AKSHAY NEW CODE IMPLEMETATIONS
+
+          let newStrength = "";
+          let newUnit = "";
+
+          if (strength !== 1) {
+            if (unit === "1") {
+              newStrength = strength;
+              newUnit = "mg";
+            } else if (unit === "2") {
+              newUnit = "ml";
+              newStrength = strength;
+            }
+          } else {
+            newStrength = "";
+            newUnit = "One";
+          }
+
+          console.log("medications data for template", medications[key]);
+
           when_to_take.sort();
           let nextDueTime = moment().format("HH:MM A");
           let closestWhenToTake = 0;
@@ -1105,11 +1179,12 @@ class TemplateDrawer extends Component {
                         className={"medication-image-tablet"}
                       />
                     )}
+                    <div className="ml10">{`(${newStrength} ${newUnit})`}</div>
                   </div>
 
                   <div>
-                    <Icon
-                      type="edit"
+                    <EditFilled
+                      // type="edit"
                       className="ml20"
                       style={{ color: "#4a90e2" }}
                       theme="filled"
@@ -1118,8 +1193,8 @@ class TemplateDrawer extends Component {
                         key
                       )}
                     />
-                    <Icon
-                      type="delete"
+                    <DeleteFilled
+                      // type="delete"
                       className="ml20"
                       style={{ color: "#d12a0b" }}
                       theme="filled"
@@ -1134,12 +1209,14 @@ class TemplateDrawer extends Component {
                                     return ( */}
 
                 <div className="drawer-block-description">
-                  {medTimingsToShow}
+                  {medTimingsToShow} ({" "}
+                  {WHEN_TO_TAKE_ABBR_LABELS[when_to_take_abbr]})
                 </div>
                 {/* );
                                 }) */}
                 {/* } */}
                 <div className="drawer-block-description">{`Next due: ${nextDue}`}</div>
+                <div className="drawer-block-description">{`Quantity: ${quantity}`}</div>
               </div>
               {/* <DeleteTwoTone
                                 className={"mr8"}
@@ -1176,14 +1253,14 @@ class TemplateDrawer extends Component {
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{reason}</div>
                   <div>
-                    <Icon
-                      type="edit"
+                    <EditFilled
+                      // type="edit"
                       className="ml20"
                       style={{ color: "#4a90e2" }}
                       theme="filled"
                       onClick={this.showInnerForm(EVENT_TYPE.APPOINTMENT, key)}
                     />
-                    <Icon
+                    <DeleteFilled
                       type="delete"
                       className="ml20"
                       style={{ color: "#d12a0b" }}
@@ -1240,15 +1317,15 @@ class TemplateDrawer extends Component {
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{vital_name}</div>
                   <div>
-                    <Icon
-                      type="edit"
+                    <EditFilled
+                      // type="edit"
                       className="ml20"
                       style={{ color: "#4a90e2" }}
                       theme="filled"
                       onClick={this.showInnerForm(EVENT_TYPE.VITALS, key)}
                     />
-                    <Icon
-                      type="delete"
+                    <DeleteFilled
+                      // type="delete"
                       className="ml20"
                       style={{ color: "#d12a0b" }}
                       theme="filled"
@@ -1297,15 +1374,15 @@ class TemplateDrawer extends Component {
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{name}</div>
                   <div>
-                    <Icon
-                      type="edit"
+                    <EditFilled
+                      // type="edit"
                       className="ml20"
                       style={{ color: "#4a90e2" }}
                       theme="filled"
                       onClick={this.showInnerForm(EVENT_TYPE.DIET, key)}
                     />
-                    <Icon
-                      type="delete"
+                    <DeleteFilled
+                      // type="delete"
                       className="ml20"
                       style={{ color: "#d12a0b" }}
                       theme="filled"
@@ -1352,15 +1429,15 @@ class TemplateDrawer extends Component {
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{name}</div>
                   <div>
-                    <Icon
-                      type="edit"
+                    <EditFilled
+                      // type="edit"
                       className="ml20"
                       style={{ color: "#4a90e2" }}
                       theme="filled"
                       onClick={this.showInnerForm(EVENT_TYPE.WORKOUT, key)}
                     />
-                    <Icon
-                      type="delete"
+                    <DeleteFilled
+                      // type="delete"
                       className="ml20"
                       style={{ color: "#d12a0b" }}
                       theme="filled"

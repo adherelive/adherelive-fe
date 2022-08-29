@@ -7,10 +7,11 @@ import { injectIntl } from "react-intl";
 import messages from "./message";
 import { PATH } from "../../constant";
 import config from "../../config";
-import { Form as LegacyForm } from "@ant-design/compatible";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
-const { Item: FormItem } = LegacyForm;
+const { Item: FormItem } = Form;
 const { Password } = Input;
 
 const EMAIL = "email";
@@ -152,7 +153,7 @@ class SignUp extends Component {
     } = this;
     return (
       <Fragment>
-        <LegacyForm onSubmit={openTOSModalComp} className="login-form">
+        <Form onSubmit={openTOSModalComp} className="login-form">
           <FormItem
             validateStatus={fieldsError[EMAIL] ? "error" : ""}
             help={fieldsError[EMAIL] || ""}
@@ -205,7 +206,7 @@ class SignUp extends Component {
             </Button>
             <div className="flex justify-space-between direction-column mt10 align-end"></div>
           </FormItem>
-        </LegacyForm>
+        </Form>
         {openTOSModal && (
           <PPModal
             checked={readTermsOfService}
@@ -219,4 +220,4 @@ class SignUp extends Component {
   }
 }
 
-export default LegacyForm.create({ name: "signup_form" })(injectIntl(SignUp));
+export default Form.create({ name: "signup_form" })(injectIntl(SignUp));

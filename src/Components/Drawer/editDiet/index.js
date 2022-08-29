@@ -5,10 +5,13 @@ import messages from "./messages";
 import SingleDayComponent from "../singleDayComponent/index";
 import message from "antd/es/message";
 import DietFieldsForm from "./form";
-import Form from "antd/es/form";
+// import Form from "antd/es/form";
 import Footer from "../footer";
 import Loading from "../../Common/Loading";
 import confirm from "antd/es/modal/confirm";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 class EditDiet extends Component {
   constructor(props) {

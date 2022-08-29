@@ -4,7 +4,7 @@ import { hasErrors } from "../../../Helper/validation";
 import moment from "moment";
 
 import Drawer from "antd/es/drawer";
-import Form from "antd/es/form";
+// import Form from "antd/es/form";
 import message from "antd/es/message";
 import Button from "antd/es/button";
 import confirm from "antd/es/modal/confirm";
@@ -14,6 +14,9 @@ import EditAppointmentForm from "./form";
 import Footer from "../footer";
 
 import { RADIOLOGY } from "../../../constant";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 class EditAppointment extends Component {
   constructor(props) {

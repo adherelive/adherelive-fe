@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { injectIntl } from "react-intl";
 import { Table } from "antd";
-import Icon from "@ant-design/icons";
 import Input from "antd/es/input";
 import Button from "antd/es/button";
 import moment from "moment";
@@ -14,6 +13,8 @@ import message from "antd/es/message";
 import { TABLE_COLUMN } from "./helper";
 
 import messages from "./messages";
+import Icon from "@ant-design/icons";
+import { LoadingOutlined, SearchOutlined } from "@ant-design/icons";
 
 const ALL_TABS = {
   PUBLIC: "1",
@@ -403,8 +404,8 @@ class MedicineTable extends Component {
         );
       },
       filterIcon: (filtered) => (
-        <Icon
-          type="search"
+        <SearchOutlined
+          // type="search"
           style={{ color: filtered ? "#1890ff" : undefined }}
         />
       ),
@@ -437,7 +438,7 @@ class MedicineTable extends Component {
   };
 
   getLoadingComponent = () => {
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     return {
       indicator: antIcon,
     };

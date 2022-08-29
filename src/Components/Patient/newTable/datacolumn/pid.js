@@ -4,10 +4,11 @@ import { injectIntl } from "react-intl";
 import message from "antd/es/message";
 import { getFullName } from "../../../../Helper/common";
 // import { Icon } from "antd";
-import Icon from "@ant-design/icons";
 import messages from "../messages";
 import { Tooltip } from "antd";
 import { TABLE_DEFAULT_BLANK_FIELD } from "../../../../constant";
+import Icon from "@ant-design/icons";
+import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 
 class Watchlist extends Component {
   constructor(props) {
@@ -121,8 +122,8 @@ class Watchlist extends Component {
         >
           {isAdded ? (
             <Tooltip title={formatMessage(messages.removeFromWatchlist)}>
-              <Icon
-                type="eye"
+              <EyeFilled
+                // type="eye"
                 className="fs20"
                 value={isAdded}
                 onClick={this.removeFromWatchlist}
@@ -130,8 +131,8 @@ class Watchlist extends Component {
             </Tooltip>
           ) : (
             <Tooltip title={formatMessage(messages.addToWatchlist)}>
-              <Icon
-                type="eye-invisible"
+              <EyeInvisibleFilled
+                // type="eye-invisible"
                 theme="filled"
                 className="fs20"
                 value={isAdded}

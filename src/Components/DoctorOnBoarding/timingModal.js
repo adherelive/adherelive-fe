@@ -5,12 +5,13 @@ import { injectIntl } from "react-intl";
 import moment from "moment";
 import uuid from "react-uuid";
 import { Button, Modal, TimePicker, message, Checkbox } from "antd";
-import Icon from "@ant-design/icons";
 import { FULL_DAYS } from "../../constant";
 import messages from "./messages";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import Dropdown from "antd/es/dropdown";
 import TimeKeeper from "react-timekeeper";
+import Icon from "@ant-design/icons";
+import { MinusCircleFilled } from "@ant-design/icons";
 
 // const Initial_State = {
 //     daySelected: {
@@ -388,9 +389,9 @@ class TimingModal extends Component {
                             <div className="flex wp100 align-center justify-space-between fs14 mt8 mb8">
                               {this.formatMessage(messages.endTime)}{" "}
                               {index > 0 && (
-                                <Icon
+                                <MinusCircleFilled
                                   className="ml10"
-                                  type="minus-circle-o"
+                                  // type="minus-circle-o"
                                   onClick={this.deleteDayTimings(day, tKey)}
                                 />
                               )}

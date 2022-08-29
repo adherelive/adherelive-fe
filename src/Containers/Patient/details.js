@@ -30,7 +30,10 @@ import { getVitalOccurence } from "../../modules/vital_occurence";
 import { searchVital } from "../../modules/vital_templates";
 import { setUnseenNotificationCount } from "../../modules/pages/NotificationCount";
 import { resetNotificationRedirect } from "../../modules/notificationRedirect";
-import { getAllTemplatesForDoctor } from "../../modules/carePlanTemplates";
+import {
+  getAllTemplatesForDoctor,
+  getAllTemplatesForDoctorUsingQuery,
+} from "../../modules/carePlanTemplates";
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -188,6 +191,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(open({ type: DRAWER.ADD_WORKOUT, payload })),
     resetNotificationRedirect: () => dispatch(resetNotificationRedirect()),
     getAllTemplatesForDoctor: () => dispatch(getAllTemplatesForDoctor()),
+    getAllTemplatesForDoctorUsingQuery: (text) =>
+      dispatch(getAllTemplatesForDoctorUsingQuery(text)),
+
     openAddSecondaryDoctorDrawer: (payload) =>
       dispatch(open({ type: DRAWER.ADD_SECONDARY_DOCTOR, payload })),
   };

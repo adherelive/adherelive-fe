@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Drawer, Form, message } from "antd";
+import { Drawer, message } from "antd";
 import { injectIntl } from "react-intl";
 
 import moment from "moment";
@@ -15,6 +15,9 @@ import startTimeField from "../common/startTime";
 import startDateField from "../common/startDate";
 import endDateField from "../common/endDate";
 import repeatDaysField from "../common/selectedDays";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 class AddMedicationReminder extends Component {
   constructor(props) {
