@@ -35,6 +35,7 @@ import MissedMedicationsDrawer from "../../Containers/Drawer/missedMedication";
 import MissedDietsDrawer from "../../Containers/Drawer/missedDiet";
 import MissedWorkoutsDrawer from "../../Containers/Drawer/missedWorkout";
 import isEmpty from "../../Helper/is-empty";
+import { PlusOutlined } from "@ant-design/icons";
 
 // helpers...
 import { getRoomId } from "../../Helper/twilio";
@@ -780,7 +781,7 @@ class Dashboard extends Component {
                   <Button
                     type="primary"
                     className="ml10 add-button "
-                    icon={"plus"}
+                    icon={<PlusOutlined />}
                   >
                     <span className="fs16">Add</span>
                   </Button>

@@ -12,7 +12,7 @@ import {
   Upload,
   Modal,
   TimePicker,
-  Icon,
+  // Icon,
   message,
 } from "antd";
 import SideMenu from "./sidebar";
@@ -20,6 +20,7 @@ import { REQUEST_TYPE } from "../../constant";
 import { getUploadURL } from "../../Helper/urls/user";
 import { doRequest } from "../../Helper/network";
 import plus from "../../Assets/images/plus.png";
+import { FlagFilled } from "@ant-design/icons";
 
 const { Step } = Steps;
 
@@ -564,63 +565,63 @@ class Register extends Component {
         {/* australia */}
         <Option value="61">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+61</div>
           </div>
         </Option>
         {/* india */}
         <Option value="91">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+91</div>
           </div>
         </Option>
         {/* us */}
         <Option value="1">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+1</div>
           </div>
         </Option>
         {/* uk */}
         <Option value="44">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+44</div>
           </div>
         </Option>
         {/* china */}
         <Option value="86">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+86</div>
           </div>
         </Option>
         {/* japan */}
         <Option value="81">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+81</div>
           </div>
         </Option>
         {/* germany */}
         <Option value="49">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+49</div>
           </div>
         </Option>
         {/* france */}
         <Option value="33">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+33</div>
           </div>
         </Option>
         {/* switzerland */}
         <Option value="41">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+41</div>
           </div>
         </Option>
@@ -628,28 +629,28 @@ class Register extends Component {
         {/* russia */}
         <Option value="7">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+7</div>
           </div>
         </Option>
         {/* south africa */}
         <Option value="27">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+27</div>
           </div>
         </Option>
         {/* pakistan */}
         <Option value="92">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+92</div>
           </div>
         </Option>
         {/* bangladesh */}
         <Option value="880">
           <div className="flex align-center">
-            <Icon type="flag" theme="filled" />
+            <FlagFilled type="flag" theme="filled" />
             <div className="ml4">+880</div>
           </div>
         </Option>

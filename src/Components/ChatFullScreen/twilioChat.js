@@ -10,7 +10,6 @@ import {
   Modal,
   message,
 } from "antd";
-import Icon from "@ant-design/icons";
 import moment from "moment";
 import Chat from "twilio-chat";
 // import DoubleTick from "../../Assets/images/double-tick-indicator.png";
@@ -39,6 +38,7 @@ import Dropdown from "antd/es/dropdown";
 import { CHAT_MESSAGE_TYPE } from "../../constant";
 // import { USER_ADHERE_BOT, CHAT_MESSAGE_TYPE, PARTS, PART_LIST_BACK, PART_LIST_CODES, PART_LIST_FRONT, BODY,PARTS_GRAPH,BODY_VIEW,BODY_SIDE } from "../../constant";
 import isEmpty from "../../Helper/is-empty";
+import { PaperClipOutlined } from "@ant-design/icons";
 
 export const MENU_ITEMS = {
   TOGGLE_CHAT_MESSAGES_PERMISSION: "TOGGLE_CHAT_MESSAGES_PERMISSION",
@@ -299,10 +299,7 @@ class ChatForm extends Component {
             className="flex align-center chat-upload-component"
           >
             <div className="chat-upload-btn">
-              <Icon
-                type="paper-clip"
-                className="text-white fs20 pointer br50 h36 w36 p8 bg-lighter-sky-blue"
-              />
+              <PaperClipOutlined className="text-white fs20 pointer br50 h36 w36 p8 bg-lighter-sky-blue" />
             </div>
           </Upload>
         </Form>

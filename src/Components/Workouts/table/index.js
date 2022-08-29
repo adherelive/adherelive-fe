@@ -8,6 +8,7 @@ import Icon from "antd/es/icon";
 
 import messages from "./messages";
 import isEmpty from "../../../Helper/is-empty";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class WorkoutTable extends Component {
   constructor(props) {
@@ -178,7 +179,7 @@ class WorkoutTable extends Component {
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
   getLoadingComponent = () => {
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     return {
       indicator: antIcon,
     };

@@ -6,6 +6,7 @@ import CompanyIcon from "../../../Assets/images/logo3x.png";
 import Button from "antd/es/button";
 import messages from "./messages";
 import { PATH } from "../../../constant";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const ERROR_CODE = 404;
 
@@ -52,7 +53,7 @@ const BlankState = (props) => {
           {/* <div onClick={handleRedirect(props)}> redirect </div> */}
           <Button
             type={"primary"}
-            icon={"arrow-left"}
+            icon={<ArrowLeftOutlined />}
             onClick={handleRedirect(props)}
             className={"flex align-center"}
           >

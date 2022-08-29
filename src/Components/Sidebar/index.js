@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { injectIntl } from "react-intl";
 import { Menu, Tooltip, message, Avatar, Dropdown } from "antd";
-import Icon from "@ant-design/icons";
 import { PATH, USER_CATEGORY, USER_PERMISSIONS } from "../../constant";
 import confirm from "antd/es/modal/confirm";
 
@@ -14,10 +13,14 @@ import {
   ProfileOutlined,
   AccountBookOutlined,
   WalletOutlined,
+  SwapOutlined,
+  MedicineBoxOutlined,
+  BellFilled,
 } from "@ant-design/icons";
 import messages from "./messages";
 import config from "../../config";
 import { getAbbreviation } from "../../Helper/common";
+import Icon from "@ant-design/icons";
 
 const { Item: MenuItem } = Menu || {};
 
@@ -395,6 +398,8 @@ class SideMenu extends Component {
       getProviderUserRoleIcon,
     } = this;
 
+    console.log("user_role_ids", user_role_ids);
+
     return user_role_ids.map((id) => {
       const { basic_info: { user_identity, linked_id } = {} } =
         user_roles[id] || {};
@@ -733,7 +738,7 @@ class SideMenu extends Component {
               placement="right"
               title={this.formatMessage(messages.notifications)}
             >
-              <Icon type="bell" theme="twoTone" twoToneColor="white" />
+              <BellFilled style={{ color: "#fff" }} />
               {/* className={`${unseen_notification_count>0 && "noti-icon"}`} */}
             </Tooltip>
             {unseen_notification_count ? (
@@ -801,7 +806,7 @@ class SideMenu extends Component {
               title={this.formatMessage(messages.transactionDetails)}
             >
               {/* <AccountBookOutlined style={{color: "#fff"}} /> */}
-              <Icon style={{ color: "#fff" }} type="swap" />
+              <SwapOutlined style={{ color: "#fff" }} type="swap" />
             </Tooltip>
           </MenuItem>
         ) : null}
@@ -830,7 +835,10 @@ class SideMenu extends Component {
               title={this.formatMessage(messages.medicineText)}
             >
               {/* <AccountBookOutlined style={{color: "#fff"}} /> */}
-              <Icon style={{ color: "#fff" }} type="medicine-box" />
+              <MedicineBoxOutlined
+                style={{ color: "#fff" }}
+                type="medicine-box"
+              />
             </Tooltip>
           </MenuItem>
         ) : null}

@@ -2,12 +2,15 @@ import React, { Component, Fragment } from "react";
 import { injectIntl } from "react-intl";
 import { hasErrors } from "../../../Helper/validation";
 import Drawer from "antd/es/drawer";
-import Form from "antd/es/form";
+// import Form from "antd/es/form";
 import message from "antd/es/message";
 import messages from "./messages";
 import AddExerciseForm from "./form";
 import Footer from "../footer";
 import { VIDEO_TYPES } from "../../../constant";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 class AddExercise extends Component {
   constructor(props) {

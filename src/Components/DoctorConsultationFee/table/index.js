@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { injectIntl } from "react-intl";
 import { Table, Empty } from "antd";
-import Icon from "@ant-design/icons";
 import generateRow from "./datarow";
 // import { USER_PERMISSIONS } from '../../../constant'
 import getColumn from "./header";
 import messages from "./messages";
 import message from "antd/es/message";
+
+import { LoadingOutlined } from "@ant-design/icons";
 
 class ConsultationFeeTable extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class ConsultationFeeTable extends Component {
   componentDidUpdate(prevProps, prevState) {}
 
   getLoadingComponent = () => {
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     return {
       indicator: antIcon,
     };

@@ -3,11 +3,14 @@ import { injectIntl } from "react-intl";
 import { Drawer, Select, Input } from "antd";
 import message from "antd/es/message";
 import Footer from "../footer";
-import Form from "antd/es/form";
+// import Form from "antd/es/form";
 import messages from "./message";
 
 import UpdateProviderForm from "./form";
 import { SAVINGS, CURRENT, ACCOUNT_TYPES } from "../../../constant";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 class updateProviderDrawer extends Component {
   constructor(props) {

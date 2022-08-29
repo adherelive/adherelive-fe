@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { injectIntl } from "react-intl";
 import { Table, Empty } from "antd";
-import Icon from "@ant-design/icons";
 import generateRow from "./datarow";
 // import { USER_PERMISSIONS } from '../../../constant'
 import getColumn from "./header";
@@ -9,6 +8,8 @@ import messages from "./messages";
 import message from "antd/es/message";
 import EditRecommendSubscription from "../Drawer/RecommendSubscription/EditRecommendSubscription";
 import MyTasks from "../Drawer/MyTasks/index";
+import Icon from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class SubscriptionTable extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class SubscriptionTable extends Component {
   componentDidUpdate(prevProps, prevState) {}
 
   getLoadingComponent = () => {
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     return {
       indicator: antIcon,
     };

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { injectIntl } from "react-intl";
 import { Table } from "antd";
-import Icon from "@ant-design/icons";
 import generateRow from "./dataRow";
 import getColumn from "./header";
 import messages from "./messages";
@@ -14,6 +13,7 @@ import Input from "antd/es/input";
 import Button from "antd/es/button";
 import SearchOutlined from "@ant-design/icons/SearchOutlined";
 import { DIAGNOSIS_TYPE, ASCEND, DESCEND } from "../../../constant";
+import { LoadingOutlined } from "@ant-design/icons";
 
 import {
   SORT_CREATEDAT,
@@ -75,7 +75,7 @@ class patientTable extends Component {
   }
 
   getLoadingComponent = () => {
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     return {
       indicator: antIcon,
     };
@@ -354,7 +354,7 @@ class patientTable extends Component {
         <Button
           type="primary"
           onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          icon={"search"}
+          icon={<SearchOutlined />}
           size="small"
           style={{ width: 90, marginRight: 8 }}
         >

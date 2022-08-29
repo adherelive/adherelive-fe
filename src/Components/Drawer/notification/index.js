@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { injectIntl } from "react-intl";
-import { Drawer, Select, Form, message } from "antd";
+import { Drawer, Select, message } from "antd";
 import config from "../../../config";
 import moment from "moment";
 import { connect } from "getstream";
@@ -32,6 +32,9 @@ import { throttle } from "lodash";
 import { getPatientConsultingVideoUrl } from "../../../Helper/url/patients";
 import workout_icon from "../../../Assets/images/workout_icon.png";
 import vital_icon from "../../../Assets/images/vital.png";
+// AKSHAY NEW COE FOR ANTD V4
+import { Form, Mention } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
 
 // import { getNotifications } from "../../../Helper/urls/notifications";
 const { Option } = Select;

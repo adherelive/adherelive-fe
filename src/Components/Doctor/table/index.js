@@ -3,13 +3,13 @@ import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
 
 import Table from "antd/es/table";
-import Icon from "antd/es/icon";
 
 import generateRow from "./dataRow";
 import getColumn from "./header";
 
 import messages from "./messages";
 import { USER_CATEGORY } from "../../../constant";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class DoctorTable extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class DoctorTable extends Component {
   };
 
   getLoadingComponent = () => {
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     return {
       indicator: antIcon,
     };

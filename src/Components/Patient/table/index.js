@@ -11,6 +11,7 @@ import SearchOutlined from "@ant-design/icons/SearchOutlined";
 import Highlighter from "react-highlight-words";
 import { TABLE_COLUMN } from "./helper";
 import { DIAGNOSIS_TYPE } from "../../../constant";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class PatientTable extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class PatientTable extends Component {
   };
 
   getLoadingComponent = () => {
-    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     return {
       indicator: antIcon,
     };
