@@ -40,22 +40,27 @@ function CustomDiagnosisEdit({
   } else {
     finalDaignosis = diagnosis;
   }
-  return (
-    <div className="mt10 mb10">
-      <Select
-        mode="tags"
-        style={{ width: "100%" }}
-        onChange={handleDiagnosisChanges}
-        tokenSeparators={[","]}
-        placeholder="Search for symptoms"
-        onSelect={handleSelect}
-        defaultValue={finalDaignosis}
-        onSearch={onDiagnosisSearchHanlder}
-      >
-        {children}
-      </Select>
-    </div>
-  );
+
+  if (finalDaignosis) {
+    return (
+      <div className="mt10 mb10">
+        <Select
+          mode="tags"
+          style={{ width: "100%" }}
+          onChange={handleDiagnosisChanges}
+          tokenSeparators={[","]}
+          placeholder="Search for symptoms"
+          onSelect={handleSelect}
+          defaultValue={finalDaignosis}
+          onSearch={onDiagnosisSearchHanlder}
+        >
+          {children}
+        </Select>
+      </div>
+    );
+  } else {
+    return null;
+  }
 }
 
 export default CustomDiagnosisEdit;

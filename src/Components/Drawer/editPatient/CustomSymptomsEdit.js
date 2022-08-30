@@ -1324,22 +1324,26 @@ function CustomSymptomsEdit({
 
   console.log("symptoms", symptoms);
 
-  return (
-    <div className="mt10 mb10">
-      <Select
-        mode="tags"
-        style={{ width: "100%" }}
-        onChange={handleSymptomsChanges}
-        tokenSeparators={[","]}
-        placeholder="Search for symptoms"
-        onSelect={handleSymptomSelect}
-        onDeselect={hendleSymptomDeselect}
-        defaultValue={symptoms}
-      >
-        {children}
-      </Select>
-    </div>
-  );
+  if (symptoms) {
+    return (
+      <div className="mt10 mb10">
+        <Select
+          mode="tags"
+          style={{ width: "100%" }}
+          onChange={handleSymptomsChanges}
+          tokenSeparators={[","]}
+          placeholder="Search for symptoms"
+          onSelect={handleSymptomSelect}
+          onDeselect={hendleSymptomDeselect}
+          defaultValue={symptoms}
+        >
+          {children}
+        </Select>
+      </div>
+    );
+  } else {
+    return null;
+  }
 }
 
 export default CustomSymptomsEdit;

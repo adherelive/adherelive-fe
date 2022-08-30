@@ -99,6 +99,7 @@ import Tooltip from "antd/es/tooltip";
 import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscription";
 import RecommendService from "../../Subscription/Drawer/RecommendService";
 import SubscriptionTable from "../../Subscription/SubscriptionTable";
+import { PlusOutlined } from "@ant-design/icons";
 
 const BLANK_TEMPLATE = "Blank Template";
 const { TabPane } = Tabs;
@@ -425,7 +426,11 @@ const PatientProfileHeader = ({
             trigger={["click"]}
             placement="bottomRight"
           >
-            <Button type="primary" className="ml10 add-button " icon={"plus"}>
+            <Button
+              type="primary"
+              className="ml10 add-button "
+              icon={<PlusOutlined />}
+            >
               <span className="fs16">Add</span>
             </Button>
           </Dropdown>
