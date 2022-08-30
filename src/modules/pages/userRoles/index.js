@@ -3,7 +3,9 @@ import { GET_USER_ROLES_COMPLETED } from "../../userRoles";
 function userRoleReducer(state, data) {
   const { user_role_ids } = data || {};
   if (user_role_ids) {
-    return [...state, ...user_role_ids];
+    // return [...state, ...user_role_ids];
+    // AKSHAY NEW CODE IMPLEMENTATIONS
+    return user_role_ids;
   } else {
     return state;
   }
