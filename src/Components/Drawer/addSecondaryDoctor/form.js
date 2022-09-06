@@ -100,7 +100,7 @@ class AddSecondaryDoctor extends Component {
         [doctor_id]: { basic_info = {} },
       } = doctors || {};
 
-      const { full_name } = basic_info || {};
+      const { full_name = "" } = basic_info || {};
 
       const { basic_info: { linked_id = null } = {} } =
         user_roles[user_role_id] || {};
