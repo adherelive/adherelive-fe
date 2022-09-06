@@ -432,6 +432,7 @@ class EditMedicationReminderForm extends Component {
 
     const startDate = getFieldValue(startDateField.field_name);
     let newEndDate = moment(startDate).add(1, "week");
+    newEndDate = newEndDate.subtract(1, "days");
     setFieldsValue({
       [endDateField.field_name]: newEndDate,
     });
@@ -447,6 +448,7 @@ class EditMedicationReminderForm extends Component {
 
     const startDate = getFieldValue(startDateField.field_name);
     let newEndDate = moment(startDate).add(2, "week");
+    newEndDate = newEndDate.subtract(1, "days");
     setFieldsValue({
       [endDateField.field_name]: newEndDate,
     });
@@ -461,9 +463,10 @@ class EditMedicationReminderForm extends Component {
     } = this.props;
     // AKSHAY NEW CODE IMPLEMENTATIONS
     const startDate = getFieldValue(startDateField.field_name);
-
+    let newEndDate = moment(startDate).add(6, "week");
+    newEndDate = newEndDate.subtract(1, "days");
     setFieldsValue({
-      [endDateField.field_name]: moment(startDate).add(6, "week"),
+      [endDateField.field_name]: newEndDate,
     });
     enableSubmit();
   };
