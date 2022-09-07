@@ -521,7 +521,7 @@ class AddExerciseGroupForm extends Component {
               placeholder={this.formatMessage(messages.search_exercise)}
               onSearch={handleExerciseSearch}
               showSearch
-              onBlur={onBlur}
+              // onBlur={onBlur}
               notFoundContent={null}
               onSelect={setExerciseId}
               optionFilterProp="children"

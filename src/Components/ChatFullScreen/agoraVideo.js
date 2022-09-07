@@ -85,7 +85,10 @@ class AgoraVideo extends Component {
       measurementId,
     };
 
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
     this.analytics = firebase.analytics();
   }
 
@@ -135,7 +138,9 @@ class AgoraVideo extends Component {
   };
 
   componentWillUnmount() {
-    this.rtc.client.removeAllListeners();
+    if (this.rtc.client) {
+      this.rtc.client.removeAllListeners();
+    }
   }
 
   formatMessage = (message, data) =>
