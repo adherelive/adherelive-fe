@@ -506,7 +506,7 @@ class AddFoodGroupForm extends Component {
               placeholder={this.formatMessage(messages.search_food)}
               onSearch={handleFoodSearch}
               showSearch
-              onBlur={onBlur}
+              // onBlur={onBlur}
               notFoundContent={null}
               onSelect={setFoodItemId}
               optionFilterProp="children"
