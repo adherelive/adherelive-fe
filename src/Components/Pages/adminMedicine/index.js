@@ -7,6 +7,7 @@ import AddMedicineDrawer from "../../../Containers/Drawer/addMedicine";
 import MedicineTable from "../../../Containers/Medicines/table";
 import config from "../../../config";
 import message from "antd/es/message";
+import { PlusOutlined } from "@ant-design/icons";
 
 const { TabPane } = Tabs;
 
@@ -87,7 +88,11 @@ class AdminMedicine extends Component {
           {formatMessage(messages.medicine_header)}
         </div>
         {/* add button */}
-        <Button type="primary" onClick={handleAddMedicine} icon={"plus"}>
+        <Button
+          type="primary"
+          onClick={handleAddMedicine}
+          icon={<PlusOutlined />}
+        >
           {formatMessage(messages.add_text)}
         </Button>
       </div>

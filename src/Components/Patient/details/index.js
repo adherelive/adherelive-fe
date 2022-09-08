@@ -412,7 +412,7 @@ const PatientProfileHeader = ({
           <Button
             type="primary"
             className="ml10 mr20 add-button "
-            icon={"plus"}
+            icon={<PlusOutlined/>}
             style={{ backgroundColor: "#98FB98", border: "none" }}
           >
             <span className="fs16">Recommend</span>

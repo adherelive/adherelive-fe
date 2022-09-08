@@ -11,6 +11,7 @@ import ConsultationFeeTable from "../../../Containers/ConsultationFees";
 import messages from "./messages";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Loading from "../../Common/Loading";
+import { PlusOutlined } from "@ant-design/icons";
 
 class ProviderDoctorPaymentProduct extends Component {
   constructor(props) {
@@ -208,7 +209,7 @@ class ProviderDoctorPaymentProduct extends Component {
             <Button
               type="primary"
               className="ml10 mr20 add-button "
-              icon={"plus"}
+              icon={<PlusOutlined />}
               onClick={this.displayAddDoctorPaymentProduct}
             >
               <span className="fs16">
