@@ -96,11 +96,17 @@ class AddSecondaryDoctor extends Component {
 
       // AKSHAY NEW CODE IMPLEMETATION START
 
-      const {
-        [doctor_id]: { basic_info = {} },
-      } = doctors || {};
+      let doctorData = doctors[doctor_id];
+      let doctorBasicInfo = "";
+      if (doctorData) {
+        doctorBasicInfo = doctorData.basic_info;
+      }
 
-      const { full_name = "" } = basic_info || {};
+      // const {
+      //   [doctor_id]: { basic_info = {} },
+      // } = doctors || {};
+
+      const { full_name = "" } = doctorBasicInfo || {};
 
       const { basic_info: { linked_id = null } = {} } =
         user_roles[user_role_id] || {};

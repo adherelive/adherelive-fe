@@ -26,6 +26,7 @@ import messages from "./messages";
 import DoctorTable from "../../../Containers/Doctor/table";
 import GraphsModal from "./graphsModal";
 import Donut from "../../Common/graphs/donut";
+import { PlusOutlined } from "@ant-design/icons";
 
 const CHART_MISSED_MEDICATION = "Missed Medication";
 const CHART_MISSED_APPOINTMENT = "Missed Appointment";
@@ -271,7 +272,7 @@ class ProviderDoctorPage extends Component {
                   <Button
                     type="primary"
                     className="ml10 add-button mb0 "
-                    icon={"plus"}
+                    icon={<PlusOutlined />}
                   >
                     <span className="fs16">
                       {this.formatMessage(messages.add)}

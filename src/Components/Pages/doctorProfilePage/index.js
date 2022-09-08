@@ -53,6 +53,7 @@ import { PageLoading } from "../../../Helper/loading/pageLoading";
 import { withRouter } from "react-router-dom";
 import confirm from "antd/es/modal/confirm";
 import Tag from "antd/es/tag";
+import { PlusOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -1990,7 +1991,7 @@ class DoctorProfilePage extends Component {
                   <Button
                     type="primary"
                     className="mr10 mb10 add-button "
-                    icon={"plus"}
+                    icon={<PlusOutlined />}
                   >
                     <span className="fs16">
                       {this.formatMessage(messages.add)}

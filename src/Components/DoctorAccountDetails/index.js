@@ -9,6 +9,7 @@ import messages from "./messages";
 import confirm from "antd/es/modal/confirm";
 import edit_image from "../../Assets/images/edit.svg";
 import Loading from "../Common/Loading";
+import { PlusOutlined } from "@ant-design/icons";
 
 class DoctorAccountDetails extends Component {
   constructor(props) {
@@ -310,7 +311,7 @@ class DoctorAccountDetails extends Component {
         type="dashed"
         className="p10 hauto w400 flex  align-center justify-center"
         onClick={this.displayRazorpayAccountDetails}
-        icon={"plus"}
+        icon={<PlusOutlined />}
         value={this.formatMessage(messages.addAccountDetails)}
       >
         <div className="mr10 flex direction-column align-center justify-center hp100">
