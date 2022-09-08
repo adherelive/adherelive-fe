@@ -35,6 +35,7 @@ import messages from "./messages";
 import { PATH, CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
 import { withRouter } from "react-router-dom";
 import Menu from "antd/es/menu";
+import { PlusOutlined } from "@ant-design/icons";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import AddService from "../../../Components/Subscription/Drawer/AddService";
@@ -280,7 +281,7 @@ class DoctorSettingsPage extends Component {
         type="dashed"
         className="p10 hauto w400 flex  align-center justify-center"
         onClick={this.displayRazorpayAccountDetails}
-        icon={"plus"}
+        icon={<PlusOutlined />}
         value={this.formatMessage(messages.addAccountDetails)}
       >
         {/* <div className="flex direction-column align-center justify-center hp100">
@@ -791,7 +792,7 @@ class DoctorSettingsPage extends Component {
                 <Button
                   type="primary"
                   className="ml10 mr20 add-button "
-                  icon={"plus"}
+                  icon={<PlusOutlined />}
                   onClick={this.displayAddDoctorPaymentProduct}
                 >
                   <span className="fs16">
