@@ -173,11 +173,13 @@ class EditPatientDrawer extends Component {
     let symptomData = [];
     try {
       symptomData = JSON.parse(symptoms);
-
+      console.log("symptomData", symptomData);
       if (!isEmpty(symptomData)) {
         symptomData.forEach((ele) => {
           symptomNames.push(ele.symptomName);
         });
+      } else {
+        symptomData = [];
       }
     } catch (e) {
       symptomNames = symptoms;
@@ -192,6 +194,8 @@ class EditPatientDrawer extends Component {
     }
 
     const formattedDate = this.getFormattedDate(dob);
+
+    console.log("symptomData,symptomData,symptomData", symptomData);
 
     if (prev_visible !== visible) {
       this.handleGetPatientDetails(patient_id);
