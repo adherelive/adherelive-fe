@@ -42,7 +42,7 @@ class AddCareplanDrawer extends Component {
     this.state = {
       treatment: "",
       severity: "",
-      condition: 6,
+      condition: 1,
       fetchingCondition: false,
       fetchingTreatment: false,
       fetchingSeverity: false,
@@ -720,7 +720,7 @@ class AddCareplanDrawer extends Component {
     this.setState({
       treatment: "",
       severity: "",
-      condition: 6,
+      condition: 1,
       fetchingCondition: false,
       fetchingTreatment: false,
       fetchingSeverity: false,
