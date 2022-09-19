@@ -113,18 +113,16 @@ class WorkoutFieldsFrom extends Component {
   getTimePicker = () => {
     const { time: state_time = "" } = this.props;
     let time = moment(state_time).format("hh:mm A");
-    if (time) {
-      return (
-        <TimeKeeper
-          time={time}
-          switchToMinuteOnHourSelect={true}
-          closeOnMinuteSelect={false}
-          onChange={this.onDoneClick}
-          doneButton={null}
-          coarseMinutes={15}
-        />
-      );
-    }
+    return (
+      <TimeKeeper
+        time={time}
+        switchToMinuteOnHourSelect={true}
+        closeOnMinuteSelect={false}
+        onChange={this.onDoneClick}
+        doneButton={null}
+        coarseMinutes={15}
+      />
+    );
   };
 
   getTimeOption = () => {
