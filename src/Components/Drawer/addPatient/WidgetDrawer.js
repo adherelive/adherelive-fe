@@ -450,7 +450,7 @@ function WidgetDrawer({
             Body Parts
           </span>
         </div>
-        <div className="mb10">
+        <div style={{ position: "relative" }} className="mb10">
           {/* <Checkbox.Group
             style={{ width: "100%" }}
             onChange={onChangeCheckbox}
@@ -462,7 +462,7 @@ function WidgetDrawer({
                 <Col
                   style={
                     part.value === "Generalised"
-                      ? { position: "absolute", top: "-35px", left: "143px" }
+                      ? { position: "absolute", top: "-35px", left: "139px" }
                       : {}
                   }
                   key={index}
@@ -485,33 +485,30 @@ function WidgetDrawer({
           {/* </Checkbox.Group> */}
         </div>
 
-        <div
-          className="form-headings
-                //    flex align-center justify-start
-                   tac"
-        >
+        <div className="form-headings flex align-center justify-start tac">
           <span className="fwbolder fs18 ">
             {/* {this.formatMessage(messages.defaultConsultationOptions)} */}
             Duration
           </span>
         </div>
-
-        <Select
-          showSearch
-          placeholder="Select Duration"
-          className="form-inputs-ap drawer-select"
-          value={duration}
-          onChange={setDuration}
-          autoComplete="off"
-          optionFilterProp="children"
-          filterOption={(input, option) =>
-            option.props.children
-              .toLowerCase()
-              .indexOf(input.trim().toLowerCase()) >= 0
-          }
-        >
-          {getDurationOptions()}
-        </Select>
+        <div style={{ paddingBottom: "55px" }}>
+          <Select
+            showSearch
+            placeholder="Select Duration"
+            className="form-inputs-ap drawer-select"
+            value={duration}
+            onChange={setDuration}
+            autoComplete="off"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              option.props.children
+                .toLowerCase()
+                .indexOf(input.trim().toLowerCase()) >= 0
+            }
+          >
+            {getDurationOptions()}
+          </Select>
+        </div>
       </div>
     );
   };
