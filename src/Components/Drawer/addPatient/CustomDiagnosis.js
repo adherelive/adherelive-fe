@@ -25,7 +25,7 @@ function CustomDiagnosis({ handleDiagnosisChanges, onDiagnosisSearchHanlder }) {
   }
 
   return (
-    <div className="mt10 mb10">
+    <div className="mt10 mb10 cdss-select">
       <Select
         mode="tags"
         style={{ width: "100%" }}
