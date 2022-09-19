@@ -51,13 +51,18 @@ class AddExercise extends Component {
       if (!status) {
         message.error(resp_msg);
       } else {
-        const {
-          all_workout_details: {
-            days = [],
-            start_time: { hours = "", minutes = "" } = {},
-          } = {},
-        } = this.props;
+        // const {
+        //   all_workout_details: {
+        //     days = [],
+        //     start_time: { hours = "", minutes = "" } = {},
+        //   } = {},
+        // } = this.props;
+        //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+        const { days = [], start_time: { hours = "", minutes = "" } = {} } =
+          data;
+
         const time = moment(`${hours}:${minutes}`, "HH:mm A").toISOString();
+
         this.setState({ days, time });
       }
     } catch (error) {

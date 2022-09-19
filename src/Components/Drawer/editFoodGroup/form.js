@@ -247,10 +247,14 @@ class EditFoodGroupForm extends Component {
           <Option
             key={`${each}-${name}`}
             value={portion_id}
-            onClick={this.handleExistingPortionSelect({
-              detail_id,
-              editable: canEdit,
-            })}
+            //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+            detail_id={detail_id}
+            canEdit={canEdit}
+            // PREVIOUS CODE
+            // onClick={this.handleExistingPortionSelect({
+            //   detail_id,
+            //   editable: canEdit,
+            // })}
           >
             {name}
           </Option>
@@ -268,7 +272,10 @@ class EditFoodGroupForm extends Component {
           <Option
             key={`${each}-${name}`}
             value={id}
-            onClick={this.handleDifferentPortionSelect({ editable: canEdit })}
+            //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+            canEdit={canEdit}
+            // PREVIOUS CODE
+            // onClick={this.handleDifferentPortionSelect({ editable: canEdit })}
           >
             {name}
           </Option>
@@ -279,16 +286,14 @@ class EditFoodGroupForm extends Component {
     return options;
   };
 
-  handleExistingPortionSelect =
-    ({ detail_id: value, editable }) =>
-    () => {
-      const {
-        form: { setFieldsValue } = {},
-        searched_food_item_details,
-        setFoodItemDetailId,
-        setEditable,
-      } = this.props;
-
+  handleChangePortionType = (key, value) => {
+    const {
+      form: { setFieldsValue } = {},
+      searched_food_item_details,
+      setFoodItemDetailId,
+      setEditable,
+    } = this.props;
+    if (value.detail_id) {
       const {
         basic_info: {
           id: detail_id,
@@ -300,7 +305,7 @@ class EditFoodGroupForm extends Component {
           portion_id,
           portion_size = 1,
         } = {},
-      } = searched_food_item_details[value] || {};
+      } = searched_food_item_details[value.value.detail_id] || {};
 
       setFieldsValue({ [PORTION_ID]: portion_id });
       setFieldsValue({ [PORTION_SIZE]: portion_size });
@@ -311,19 +316,9 @@ class EditFoodGroupForm extends Component {
       setFieldsValue({ [FIBERS]: fibers });
 
       setFoodItemDetailId(detail_id);
-      setEditable(editable);
-    };
-
-  handleDifferentPortionSelect =
-    ({ editable }) =>
-    () => {
+      setEditable(value.canEdit);
+    } else {
       // portion doesnt exist for item
-
-      const {
-        form: { setFieldsValue } = {},
-        setFoodItemDetailId,
-        setEditable,
-      } = this.props;
 
       setFieldsValue({ [PORTION_ID]: null });
       setFieldsValue({ [PORTION_SIZE]: 1 });
@@ -334,8 +329,67 @@ class EditFoodGroupForm extends Component {
       setFieldsValue({ [FIBERS]: null });
 
       setFoodItemDetailId(null);
-      setEditable(editable);
-    };
+      setEditable(value.canEdit);
+    }
+  };
+
+  // handleExistingPortionSelect =
+  //   ({ detail_id: value, editable }) =>
+  //   () => {
+  //     const {
+  //       form: { setFieldsValue } = {},
+  //       searched_food_item_details,
+  //       setFoodItemDetailId,
+  //       setEditable,
+  //     } = this.props;
+
+  //     const {
+  //       basic_info: {
+  //         id: detail_id,
+  //         calorific_value,
+  //         carbs,
+  //         proteins,
+  //         fats,
+  //         fibers,
+  //         portion_id,
+  //         portion_size = 1,
+  //       } = {},
+  //     } = searched_food_item_details[value] || {};
+
+  //     setFieldsValue({ [PORTION_ID]: portion_id });
+  //     setFieldsValue({ [PORTION_SIZE]: portion_size });
+  //     setFieldsValue({ [CALORIFIC_VALUE]: calorific_value });
+  //     setFieldsValue({ [CARBS]: carbs });
+  //     setFieldsValue({ [PROTEINS]: proteins });
+  //     setFieldsValue({ [FATS]: fats });
+  //     setFieldsValue({ [FIBERS]: fibers });
+
+  //     setFoodItemDetailId(detail_id);
+  //     setEditable(editable);
+  //   };
+
+  // handleDifferentPortionSelect =
+  //   ({ editable }) =>
+  //   () => {
+  //     // portion doesnt exist for item
+
+  //     const {
+  //       form: { setFieldsValue } = {},
+  //       setFoodItemDetailId,
+  //       setEditable,
+  //     } = this.props;
+
+  //     setFieldsValue({ [PORTION_ID]: null });
+  //     setFieldsValue({ [PORTION_SIZE]: 1 });
+  //     setFieldsValue({ [CALORIFIC_VALUE]: null });
+  //     setFieldsValue({ [CARBS]: null });
+  //     setFieldsValue({ [PROTEINS]: null });
+  //     setFieldsValue({ [FATS]: null });
+  //     setFieldsValue({ [FIBERS]: null });
+
+  //     setFoodItemDetailId(null);
+  //     setEditable(editable);
+  //   };
 
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
@@ -659,6 +713,7 @@ class EditFoodGroupForm extends Component {
                   initialValue: portion_id,
                 })(
                   <Select
+                    onChange={this.handleChangePortionType}
                     className="drawer-select"
                     disabled={!food_item_id}
                     optionFilterProp="children"

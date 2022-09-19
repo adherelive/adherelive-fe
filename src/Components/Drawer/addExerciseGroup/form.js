@@ -198,10 +198,14 @@ class AddExerciseGroupForm extends Component {
         <Option
           key={`${each}-${type}`}
           value={repetition_id}
-          onClick={this.handleExistingPortionSelect({
-            detail_id,
-            editable: canEdit,
-          })}
+          //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+          detail_id={detail_id}
+          canEdit={canEdit}
+          // PREVIOUS CODE
+          // onClick={this.handleExistingPortionSelect({
+          //   detail_id,
+          //   editable: canEdit,
+          // })}
         >
           {type}
         </Option>
@@ -218,7 +222,10 @@ class AddExerciseGroupForm extends Component {
           <Option
             key={`${each}-${type}`}
             value={id}
-            onClick={this.handleDifferentPortionSelect({ editable: canEdit })}
+            //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+            canEdit={canEdit}
+            // PREVIOUS CODE
+            // onClick={this.handleDifferentPortionSelect({ editable: canEdit })}
           >
             {type}
           </Option>
@@ -229,46 +236,74 @@ class AddExerciseGroupForm extends Component {
     return options;
   };
 
-  handleExistingPortionSelect =
-    ({ detail_id: value, editable }) =>
-    () => {
-      const {
-        form: { setFieldsValue } = {},
-        searched_exercise_details,
-        setExerciseDetailId,
-        setEditable,
-      } = this.props;
-
+  handleChangeRepeat = (key, value) => {
+    const {
+      form: { setFieldsValue } = {},
+      searched_exercise_details,
+      setExerciseDetailId,
+      setEditable,
+    } = this.props;
+    if (value.detail_id) {
       const {
         basic_info: { id: detail_id, repetition_id, repetition_value } = {},
         calorific_value = 0,
-      } = searched_exercise_details[value] || {};
+      } = searched_exercise_details[value.detail_id] || {};
 
       setFieldsValue({ [REPETITION_ID]: repetition_id });
       setFieldsValue({ [CALORIFIC_VALUE]: calorific_value });
       setFieldsValue({ [REPETITION_VALUE]: repetition_value });
       setExerciseDetailId(detail_id);
-      setEditable(editable);
-    };
-
-  handleDifferentPortionSelect =
-    ({ editable }) =>
-    () => {
-      // non existing details for exercise
-
-      const {
-        form: { setFieldsValue } = {},
-        setExerciseDetailId,
-        setEditable,
-      } = this.props;
-
+      setEditable(value.canEdit);
+    } else {
       setFieldsValue({ [REPETITION_ID]: null });
       setFieldsValue({ [CALORIFIC_VALUE]: null });
       setFieldsValue({ [REPETITION_VALUE]: 1 });
 
       setExerciseDetailId(null);
-      setEditable(editable);
-    };
+      setEditable(value.canEdit);
+    }
+  };
+
+  // handleExistingPortionSelect =
+  //   ({ detail_id: value, editable }) =>
+  //   () => {
+  //     const {
+  //       form: { setFieldsValue } = {},
+  //       searched_exercise_details,
+  //       setExerciseDetailId,
+  //       setEditable,
+  //     } = this.props;
+
+  //     const {
+  //       basic_info: { id: detail_id, repetition_id, repetition_value } = {},
+  //       calorific_value = 0,
+  //     } = searched_exercise_details[value] || {};
+
+  //     setFieldsValue({ [REPETITION_ID]: repetition_id });
+  //     setFieldsValue({ [CALORIFIC_VALUE]: calorific_value });
+  //     setFieldsValue({ [REPETITION_VALUE]: repetition_value });
+  //     setExerciseDetailId(detail_id);
+  //     setEditable(editable);
+  //   };
+
+  // handleDifferentPortionSelect =
+  //   ({ editable }) =>
+  //   () => {
+  //     // non existing details for exercise
+
+  //     const {
+  //       form: { setFieldsValue } = {},
+  //       setExerciseDetailId,
+  //       setEditable,
+  //     } = this.props;
+
+  //     setFieldsValue({ [REPETITION_ID]: null });
+  //     setFieldsValue({ [CALORIFIC_VALUE]: null });
+  //     setFieldsValue({ [REPETITION_VALUE]: 1 });
+
+  //     setExerciseDetailId(null);
+  //     setEditable(editable);
+  //   };
 
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
@@ -603,6 +638,7 @@ class AddExerciseGroupForm extends Component {
                   ],
                 })(
                   <Select
+                    onChange={this.handleChangeRepeat}
                     className="drawer-select"
                     disabled={!exercise_id}
                     optionFilterProp="children"
