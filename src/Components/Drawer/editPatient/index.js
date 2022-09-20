@@ -819,7 +819,7 @@ class EditPatientDrawer extends Component {
     );
 
     return (
-      <div className="form-block-ap ">
+      <div className="form-block-ap addEdit-patient-drawer-container">
         <div className="form-headings flex align-center justify-start">
           {this.formatMessage(messages.phoneNo)}
           <div className="star-red">*</div>
@@ -827,7 +827,7 @@ class EditPatientDrawer extends Component {
 
         <Input
           addonBefore={prefixSelector}
-          className={"form-inputs-ap"}
+          className={"form-inputs-ap add-patient-phone"}
           placeholder={this.formatMessage(messages.phoneNo)}
           minLength={6}
           maxLength={12}
@@ -952,7 +952,7 @@ class EditPatientDrawer extends Component {
         </div>
         {isCollapse === "height" && (
           <Input
-            className={"form-inputs-ap"}
+            className={"form-inputs-ap add-patient-height-field"}
             type={"number"}
             placeholder={this.formatMessage(messages.height_placeholder)}
             value={height}
@@ -977,7 +977,7 @@ class EditPatientDrawer extends Component {
         {isCollapse === "weight" && (
           <Input
             type={"number"}
-            className={"form-inputs-ap"}
+            className={"form-inputs-ap add-patient-height-field"}
             placeholder={this.formatMessage(messages.weight_placeholder)}
             value={weight}
             onChange={this.setWeight}
@@ -1239,34 +1239,35 @@ class EditPatientDrawer extends Component {
             )}
           </div>
         </div>
-
-        {isCollapse === "condition" && (
-          <Select
-            className="form-inputs-ap drawer-select"
-            placeholder="Select Condition"
-            value={condition}
-            onChange={this.setCondition}
-            onSearch={this.handleConditionSearch}
-            notFoundContent={
-              this.state.fetchingCondition ? (
-                <Spin size="small" />
-              ) : (
-                "No match found"
-              )
-            }
-            showSearch
-            autoComplete="off"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              option.props.children
-                .toLowerCase()
-                .indexOf(input.toLowerCase()) >= 0
-            }
-            // disabled={!isTreatmentDisabled}
-          >
-            {this.getConditionOption()}
-          </Select>
-        )}
+        <div>
+          {isCollapse === "condition" && (
+            <Select
+              className="form-inputs-ap drawer-select"
+              placeholder="Select Condition"
+              value={condition}
+              onChange={this.setCondition}
+              onSearch={this.handleConditionSearch}
+              notFoundContent={
+                this.state.fetchingCondition ? (
+                  <Spin size="small" />
+                ) : (
+                  "No match found"
+                )
+              }
+              showSearch
+              autoComplete="off"
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                option.props.children
+                  .toLowerCase()
+                  .indexOf(input.toLowerCase()) >= 0
+              }
+              // disabled={!isTreatmentDisabled}
+            >
+              {this.getConditionOption()}
+            </Select>
+          )}
+        </div>
 
         <div className="form-headings-ap   flex align-center justify-space-between mt10 mb10">
           {this.formatMessage(messages.severity)}
@@ -1281,33 +1282,35 @@ class EditPatientDrawer extends Component {
           </div>
         </div>
 
-        {isCollapse === "severity" && (
-          <Select
-            className="form-inputs-ap drawer-select"
-            placeholder="Select Severity"
-            value={severity}
-            onChange={this.setSeverity}
-            onSearch={this.handleSeveritySearch}
-            notFoundContent={
-              this.state.fetchingSeverity ? (
-                <Spin size="small" />
-              ) : (
-                "No match found"
-              )
-            }
-            showSearch
-            autoComplete="off"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              option.props.children
-                .toLowerCase()
-                .indexOf(input.toLowerCase()) >= 0
-            }
-            // disabled={!isTreatmentDisabled}
-          >
-            {this.getSeverityOption()}
-          </Select>
-        )}
+        <div className="severity-field-container">
+          {isCollapse === "severity" && (
+            <Select
+              className="form-inputs-ap drawer-select"
+              placeholder="Select Severity"
+              value={severity}
+              onChange={this.setSeverity}
+              onSearch={this.handleSeveritySearch}
+              notFoundContent={
+                this.state.fetchingSeverity ? (
+                  <Spin size="small" />
+                ) : (
+                  "No match found"
+                )
+              }
+              showSearch
+              autoComplete="off"
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                option.props.children
+                  .toLowerCase()
+                  .indexOf(input.toLowerCase()) >= 0
+              }
+              // disabled={!isTreatmentDisabled}
+            >
+              {this.getSeverityOption()}
+            </Select>
+          )}
+        </div>
       </div>
     );
   };
