@@ -624,7 +624,7 @@ class AddMedicationReminderForm extends Component {
             {/* <div className="label-color fontsize12 mb8">
               
             </div> */}
-            <div className="mg-ml-radio-group flex-grow-0">
+            <div className="mg-ml-radio-group flex-grow-0 add-edit-medicineUnit-container">
               <RadioGroup
                 buttonStyle="solid"
                 size="small"
