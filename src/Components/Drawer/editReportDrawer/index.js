@@ -378,13 +378,15 @@ class editReportDrawer extends Component {
           <div className="star-red">*</div>
         </div>
         <div className="report-datepicker">
-          <DatePicker
-            size="default"
-            className="mb10"
-            onChange={setTestDate}
-            defaultValue={moment(test_date)}
-            style={{ width: "100%" }}
-          />
+          {test_date && (
+            <DatePicker
+              size="default"
+              className="mb10"
+              onChange={setTestDate}
+              defaultValue={moment(test_date, "YYYY-MM-DD")}
+              style={{ width: "100%" }}
+            />
+          )}
         </div>
 
         <div className="form-headings-ap flex align-center justify-start">
