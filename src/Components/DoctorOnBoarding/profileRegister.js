@@ -864,7 +864,7 @@ class Profileregister extends Component {
         </div>
         <Input
           addonBefore={prefixSelector}
-          className={"form-inputs"}
+          className={"form-inputs phone-field"}
           placeholder={this.formatMessage(messages.phoneNo)}
           minLength={6}
           maxLength={10}
@@ -961,7 +961,7 @@ class Profileregister extends Component {
     return (
       <Fragment>
         {/* <SideMenu {...this.props} /> */}
-        <div className="registration-container">
+        <div className="registration-container create-new-profile-container">
           {authenticated_category === USER_CATEGORY.PROVIDER ? (
             <div className="header">
               {this.formatMessage(messages.createNewProfile)}
