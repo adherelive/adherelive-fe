@@ -1800,6 +1800,30 @@ class DoctorProfilePage extends Component {
     }
   };
 
+  handleSpecialitySearchOnFocus = async (data = "") => {
+    try {
+      // if (data) {
+      const { searchSpecialities } = this.props;
+      this.setState({ fetchingSpeciality: true });
+      const response = await searchSpecialities("");
+      const { status } = response;
+      if (status) {
+        this.setState({ fetchingSpeciality: false });
+      } else {
+        this.setState({ fetchingSpeciality: false });
+      }
+      // } else {
+      //   this.setState({ fetchingSpeciality: false });
+      // }
+
+      this.setState({ searchSpecialityText: data });
+    } catch (err) {
+      console.log("err", err);
+      message.warn("Something went wrong, please try again later");
+      this.setState({ fetchingSpeciality: false });
+    }
+  };
+
   handleCouncilSearch = async (data) => {
     try {
       if (data) {
@@ -1866,7 +1890,7 @@ class DoctorProfilePage extends Component {
       return (
         <Select
           size={"small"}
-          onFocus={this.handleSpecialitySearch}
+          onFocus={this.handleSpecialitySearchOnFocus}
           onSearch={this.handleSpecialitySearch}
           notFoundContent={
             this.state.fetchingSpeciality ? (
@@ -2148,7 +2172,7 @@ class DoctorProfilePage extends Component {
             </div>
 
             {/*speciality*/}
-            <div className="wp40 hp20 mt16 mb16 mr16">
+            <div className="wp40 hp20 mt16 mb16 mr16 doctor-profile-speciality-field">
               <div className="fs16 fw700">
                 {formatMessage(messages.speciality_text)}
               </div>

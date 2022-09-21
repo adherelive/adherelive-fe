@@ -938,92 +938,95 @@ class TemplatePageCreateDrawer extends Component {
             </div>
           );
         })}
-
-        <div className="wp100 flex align-center justify-space-between">
-          <div className="form-category-headings-ap align-self-start">
-            {this.formatMessage(messages.workouts)}
+        {/* AKSHAY NEW CODE IMPLEMETTAION FOR V4 */}
+        <div className="template-workout-container wp100">
+          <div className="wp100 flex align-center justify-space-between">
+            <div className="form-category-headings-ap align-self-start">
+              {this.formatMessage(messages.workouts)}
+            </div>
+            {workoutKeys.length > 0 ? (
+              <div className="add-more" onClick={this.showAddWorkout}>
+                {this.formatMessage(messages.addMore)}
+              </div>
+            ) : (
+              <div className="add-more" onClick={this.showAddWorkout}>
+                {this.formatMessage(messages.add)}
+              </div>
+            )}
           </div>
-          {workoutKeys.length > 0 ? (
-            <div className="add-more" onClick={this.showAddWorkout}>
-              {this.formatMessage(messages.addMore)}
-            </div>
-          ) : (
-            <div className="add-more" onClick={this.showAddWorkout}>
-              {this.formatMessage(messages.add)}
-            </div>
+          {workoutKeys.map((key) => {
+            const {
+              name = "",
+              total_calories = 0,
+              duration = null,
+              details: { repeat_days = [] } = {},
+            } = workouts[key] || {};
+
+            const repeat = repeat_days.length ? repeat_days.toString() : "";
+
+            return (
+              <div className="flex wp100 flex-grow-1 align-center" key={key}>
+                <div className="drawer-block">
+                  <div className="flex direction-row justify-space-between align-center">
+                    <div className="form-headings-ap">{name}</div>
+                    <EditFilled
+                      // type="edit"
+                      className="ml20"
+                      style={{ color: "#4a90e2" }}
+                      theme="filled"
+                      onClick={this.showInnerForm(EVENT_TYPE.WORKOUT, key)}
+                    />
+                  </div>
+                  <div className="drawer-block-description">{`${
+                    total_calories ? total_calories : "--"
+                  }${" "}Cal`}</div>
+                  <div className="drawer-block-description">{`Repeat: ${repeat}`}</div>
+                </div>
+              </div>
+            );
+          })}
+          {/* AKSHAY NEW CODE IMPLEMENTATION */}
+          {doctor_provider_id !== null && (
+            <Fragment>
+              {" "}
+              <div className="template-share-swicth">
+                <p
+                  className={
+                    !this.state.templateIsPrivate
+                      ? "private-text active-text"
+                      : "private-text"
+                  }
+                >
+                  Private
+                </p>
+                <Switch
+                  checked={this.state.templateIsPrivate}
+                  onChange={this.onChangeTemplateShare}
+                />
+                <p
+                  className={
+                    this.state.templateIsPrivate
+                      ? "public-text active-text"
+                      : "public-text"
+                  }
+                >
+                  Public
+                </p>
+              </div>
+              <div className="tepmale-share-note">
+                {" "}
+                {!this.state.templateIsPrivate ? (
+                  <p>Note : This template is visible for the doctor itself</p>
+                ) : (
+                  <p>
+                    Note : This template is visible to all doctors within
+                    provider
+                  </p>
+                )}
+              </div>
+            </Fragment>
           )}
         </div>
-        {workoutKeys.map((key) => {
-          const {
-            name = "",
-            total_calories = 0,
-            duration = null,
-            details: { repeat_days = [] } = {},
-          } = workouts[key] || {};
-
-          const repeat = repeat_days.length ? repeat_days.toString() : "";
-
-          return (
-            <div className="flex wp100 flex-grow-1 align-center" key={key}>
-              <div className="drawer-block">
-                <div className="flex direction-row justify-space-between align-center">
-                  <div className="form-headings-ap">{name}</div>
-                  <EditFilled
-                    // type="edit"
-                    className="ml20"
-                    style={{ color: "#4a90e2" }}
-                    theme="filled"
-                    onClick={this.showInnerForm(EVENT_TYPE.WORKOUT, key)}
-                  />
-                </div>
-                <div className="drawer-block-description">{`${
-                  total_calories ? total_calories : "--"
-                }${" "}Cal`}</div>
-                <div className="drawer-block-description">{`Repeat: ${repeat}`}</div>
-              </div>
-            </div>
-          );
-        })}
-        {/* AKSHAY NEW CODE IMPLEMENTATION */}
-        {doctor_provider_id !== null && (
-          <Fragment>
-            {" "}
-            <div className="template-share-swicth">
-              <p
-                className={
-                  !this.state.templateIsPrivate
-                    ? "private-text active-text"
-                    : "private-text"
-                }
-              >
-                Private
-              </p>
-              <Switch
-                checked={this.state.templateIsPrivate}
-                onChange={this.onChangeTemplateShare}
-              />
-              <p
-                className={
-                  this.state.templateIsPrivate
-                    ? "public-text active-text"
-                    : "public-text"
-                }
-              >
-                Public
-              </p>
-            </div>
-            <div className="tepmale-share-note">
-              {" "}
-              {!this.state.templateIsPrivate ? (
-                <p>Note : This template is visible for the doctor itself</p>
-              ) : (
-                <p>
-                  Note : This template is visible to all doctors within provider
-                </p>
-              )}
-            </div>
-          </Fragment>
-        )}
       </div>
     );
   };

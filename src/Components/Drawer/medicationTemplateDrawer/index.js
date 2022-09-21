@@ -1405,61 +1405,63 @@ class TemplateDrawer extends Component {
             </div>
           );
         })}
-
-        <div className="wp100 flex align-center justify-space-between">
-          <div className="form-category-headings-ap align-self-start">
-            {this.formatMessage(messages.workouts)}
-          </div>
-          <div className="add-more" onClick={this.showAddWorkout}>
-            {this.formatMessage(messages.addMore)}
-          </div>
-        </div>
-        {workoutKeys.map((key) => {
-          const {
-            name = "",
-            total_calories = 0,
-            details: {
-              repeat_days = [],
-              not_to_do = "",
-              workout_exercise_groups = {},
-            } = {},
-          } = workouts[key] || {};
-
-          const repeat = repeat_days.length ? repeat_days.toString() : "";
-
-          return (
-            <div className="flex wp100 flex-grow-1 align-center" key={key}>
-              <div className="drawer-block">
-                <div className="flex direction-row justify-space-between align-center">
-                  <div className="form-headings-ap">{name}</div>
-                  <div>
-                    <EditFilled
-                      // type="edit"
-                      className="ml20"
-                      style={{ color: "#4a90e2" }}
-                      theme="filled"
-                      onClick={this.showInnerForm(EVENT_TYPE.WORKOUT, key)}
-                    />
-                    <DeleteFilled
-                      // type="delete"
-                      className="ml20"
-                      style={{ color: "#d12a0b" }}
-                      theme="filled"
-                      onClick={this.deleteTemplateDataHandler(
-                        EVENT_TYPE.WORKOUT,
-                        key
-                      )}
-                    />
-                  </div>
-                </div>
-                <div className="drawer-block-description">{`${
-                  total_calories ? total_calories : "--"
-                }${" "}Cal`}</div>
-                <div className="drawer-block-description">{`Repeat: ${repeat}`}</div>
-              </div>
+        {/* AKSHAY NEW CODE IMPLEMETTAION FOR V4 */}
+        <div className="template-workout-container wp100">
+          <div className="wp100 flex align-center justify-space-between">
+            <div className="form-category-headings-ap align-self-start">
+              {this.formatMessage(messages.workouts)}
             </div>
-          );
-        })}
+            <div className="add-more" onClick={this.showAddWorkout}>
+              {this.formatMessage(messages.addMore)}
+            </div>
+          </div>
+          {workoutKeys.map((key) => {
+            const {
+              name = "",
+              total_calories = 0,
+              details: {
+                repeat_days = [],
+                not_to_do = "",
+                workout_exercise_groups = {},
+              } = {},
+            } = workouts[key] || {};
+
+            const repeat = repeat_days.length ? repeat_days.toString() : "";
+
+            return (
+              <div className="flex wp100 flex-grow-1 align-center" key={key}>
+                <div className="drawer-block">
+                  <div className="flex direction-row justify-space-between align-center">
+                    <div className="form-headings-ap">{name}</div>
+                    <div>
+                      <EditFilled
+                        // type="edit"
+                        className="ml20"
+                        style={{ color: "#4a90e2" }}
+                        theme="filled"
+                        onClick={this.showInnerForm(EVENT_TYPE.WORKOUT, key)}
+                      />
+                      <DeleteFilled
+                        // type="delete"
+                        className="ml20"
+                        style={{ color: "#d12a0b" }}
+                        theme="filled"
+                        onClick={this.deleteTemplateDataHandler(
+                          EVENT_TYPE.WORKOUT,
+                          key
+                        )}
+                      />
+                    </div>
+                  </div>
+                  <div className="drawer-block-description">{`${
+                    total_calories ? total_calories : "--"
+                  }${" "}Cal`}</div>
+                  <div className="drawer-block-description">{`Repeat: ${repeat}`}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   };
