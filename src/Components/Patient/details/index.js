@@ -704,7 +704,7 @@ const PatientTreatmentCard = ({
         <h3>{formatMessage(messages.treatment_details)}</h3>
         {selectedCarePlanId && isPrescriptionOfCurrentDoc ? (
           <a
-            href={`${config.WEB_URL}${generatePrescriptionUrl(
+            href={`${generatePrescriptionUrl(
               selectedCarePlanId
             )}`}
             target={"_blank"}
