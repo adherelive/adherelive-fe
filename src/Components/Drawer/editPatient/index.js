@@ -818,6 +818,8 @@ class EditPatientDrawer extends Component {
       </Select>
     );
 
+    console.log("setDOB", setDOB);
+
     return (
       <div className="form-block-ap addEdit-patient-drawer-container">
         <div className="form-headings flex align-center justify-start">
@@ -892,6 +894,7 @@ class EditPatientDrawer extends Component {
           max={`${year}-${month}-${day}`}
           onChange={this.setDOB}
           // disabled={isdisabled}
+          value={setDOB}
         />
 
         <div className="form-headings-ap flex align-center justify-space-between mt10 mb10">
