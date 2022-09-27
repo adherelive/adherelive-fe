@@ -13,14 +13,6 @@ function CustomDiagnosisEdit({
 }) {
   const { diagnosisList = [] } = useSelector((state) => state.cdss);
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-
-  const handleSelect = (value) => {
-    console.log(`selected ${value}`);
-  };
-
   const children = [];
 
   for (let each in diagnosisList) {
@@ -29,38 +21,33 @@ function CustomDiagnosisEdit({
     );
   }
 
-  console.log("diagnosis", diagnosis);
-
-  console.log(typeof diagnosis);
-
   let finalDaignosis = diagnosis.split(",");
   console.log(finalDaignosis.length);
   if (finalDaignosis.length > 1) {
     finalDaignosis = diagnosis.split(",");
   } else {
-    finalDaignosis = diagnosis;
+    if (diagnosis.length > 0) {
+      finalDaignosis = diagnosis;
+    } else {
+      finalDaignosis = [];
+    }
   }
 
-  if (finalDaignosis) {
-    return (
-      <div className="mt10 mb10 cdss-select">
-        <Select
-          mode="tags"
-          style={{ width: "100%" }}
-          onChange={handleDiagnosisChanges}
-          tokenSeparators={[","]}
-          placeholder="Search for diagnosis"
-          onSelect={handleSelect}
-          defaultValue={finalDaignosis}
-          onSearch={onDiagnosisSearchHanlder}
-        >
-          {children}
-        </Select>
-      </div>
-    );
-  } else {
-    return null;
-  }
+  return (
+    <div className="mt10 mb10 cdss-select">
+      <Select
+        mode="tags"
+        style={{ width: "100%" }}
+        onChange={handleDiagnosisChanges}
+        tokenSeparators={[","]}
+        placeholder="Search for diagnosis"
+        onSearch={onDiagnosisSearchHanlder}
+        value={finalDaignosis}
+      >
+        {children}
+      </Select>
+    </div>
+  );
 }
 
 export default CustomDiagnosisEdit;

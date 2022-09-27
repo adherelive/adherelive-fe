@@ -87,7 +87,7 @@ const durations = [
   },
   {
     id: 2,
-    name: "2 Days.",
+    name: "2 Days",
   },
   {
     id: 3,
