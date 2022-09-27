@@ -1314,36 +1314,22 @@ function CustomSymptomsEdit({
   handleSymptomSelect,
   hendleSymptomDeselect,
 }) {
-  // const handleChange = (value) => {
-  //   console.log(`selected ${value}`);
-  // };
-
-  // const handleSelect = (value) => {
-  //   console.log(`selected ${value}`);
-  // };
-
-  console.log("symptoms", symptoms);
-
-  if (symptoms) {
-    return (
-      <div className="mt10 mb10 cdss-select">
-        <Select
-          mode="tags"
-          style={{ width: "100%" }}
-          onChange={handleSymptomsChanges}
-          tokenSeparators={[","]}
-          placeholder="Search for symptoms"
-          onSelect={handleSymptomSelect}
-          onDeselect={hendleSymptomDeselect}
-          defaultValue={symptoms}
-        >
-          {children}
-        </Select>
-      </div>
-    );
-  } else {
-    return null;
-  }
+  return (
+    <div className="mt10 mb10 cdss-select">
+      <Select
+        mode="tags"
+        style={{ width: "100%" }}
+        onChange={handleSymptomsChanges}
+        tokenSeparators={[","]}
+        placeholder="Search for symptoms"
+        onSelect={handleSymptomSelect}
+        onDeselect={hendleSymptomDeselect}
+        value={symptoms}
+      >
+        {children}
+      </Select>
+    </div>
+  );
 }
 
 export default CustomSymptomsEdit;
