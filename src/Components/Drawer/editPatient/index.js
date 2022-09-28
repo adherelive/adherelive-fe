@@ -1357,7 +1357,7 @@ class EditPatientDrawer extends Component {
     } else if (!treatment) {
       message.error(this.formatMessage(messages.treatmentError));
       return false;
-    } else if (!diagnosis_description) {
+    } else if (!diagnosis_description || diagnosis_description.length <= 0) {
       message.error(this.formatMessage(messages.diagnosisError));
       return false;
     } else if (!diagnosis_type) {
@@ -1367,7 +1367,6 @@ class EditPatientDrawer extends Component {
       message.error(this.formatMessage(messages.somethingWentWrong));
       return false;
     }
-
     return true;
   };
 
@@ -1569,9 +1568,9 @@ class EditPatientDrawer extends Component {
                         </Button>
                     </div> */}
         </Drawer>
-        {/* <MultipleTreatmentAlert
+        <MultipleTreatmentAlert
           diagnosis_description={this.state.diagnosis_description}
-        /> */}
+        />
       </Fragment>
     );
   }
