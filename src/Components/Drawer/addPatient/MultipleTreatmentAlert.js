@@ -7,9 +7,18 @@ function MultipleTreatmentAlert({ diagnosis_description }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    if (!isEmpty(diagnosis_description) && diagnosis_description.length > 1) {
+    console.log("diagnosis_description", diagnosis_description.length);
+    if (
+      !isEmpty(diagnosis_description) &&
+      typeof diagnosis_description == "object" &&
+      diagnosis_description.length >= 2
+    ) {
       setIsModalVisible(true);
     }
+
+    return () => {
+      setIsModalVisible(false);
+    };
   }, [diagnosis_description]);
 
   const openModelHandler = () => {
