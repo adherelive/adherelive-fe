@@ -108,6 +108,12 @@ class EditAppointment extends Component {
               .clone()
               .set({ month: newMonth, year: newYear, date: newDate })
           : end_time;
+        // akshay new code implementations
+        let finalDate = moment();
+        finalDate.set("year", newYear);
+        finalDate.set("month", newMonth);
+        finalDate.set("date", newDate);
+
         const data = newProvider_id
           ? {
               // todo: change participant one with patient from store
@@ -116,7 +122,7 @@ class EditAppointment extends Component {
                 id: pId,
                 category: "patient",
               },
-              date,
+              date: finalDate,
               start_time: newEventStartTime,
               end_time: newEventEndTime,
               reason,
@@ -135,7 +141,7 @@ class EditAppointment extends Component {
                 id: pId,
                 category: "patient",
               },
-              date,
+              date: finalDate,
               start_time: newEventStartTime,
               end_time: newEventEndTime,
               reason,
@@ -175,6 +181,8 @@ class EditAppointment extends Component {
           // this.setState({ disabledSubmit: true });
           addAppointment(data);
         } else {
+          console.log("finalDate", finalDate.toISOString());
+          console.log("data", data);
           try {
             this.setState({ submitting: true });
             const response = await updateAppointment(data);
