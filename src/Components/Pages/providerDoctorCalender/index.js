@@ -88,7 +88,7 @@ class ProviderDoctorCalneder extends Component {
           end_time = "",
         } = {},
         participant_one: { id: p1_id = "", category: p1_category = "" } = {},
-        participant_two: { id: p2_id = "", category: p2_category = "" },
+        participant_two: { id: p2_id = "", category: p2_category = "" } = {},
       } = appointments[id] || {};
 
       let doctor_name = "";
@@ -287,7 +287,7 @@ class ProviderDoctorCalneder extends Component {
           end_time = "",
         } = {},
         participant_one: { id: p1_id = "", category: p1_category = "" } = {},
-        participant_two: { id: p2_id = "", category: p2_category = "" },
+        participant_two: { id: p2_id = "", category: p2_category = "" } = {},
       } = appointments[each] || {};
       let doctor_name = "";
       let patient_name = "";
