@@ -75,6 +75,7 @@ class Dashboard extends Component {
       doctorUserId: 1,
       patient_ids: [],
       showModal: false,
+      graphLoading: false,
       loading: false,
       submitting: false,
       currentTab: CURRENT_TAB.ALL_PATIENTS,
@@ -109,7 +110,7 @@ class Dashboard extends Component {
       searchCondition,
     } = this.props;
 
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
 
     closePopUp();
     let doctorUserId = ""; //user_id of doctor
@@ -119,22 +120,23 @@ class Dashboard extends Component {
         doctorUserId = authenticated_user;
       }
     }
-    this.setState({ graphLoading: true, doctorUserId });
-    getGraphs().then((response) => {
-      const {
-        status,
-        payload: { data: { user_preferences: { charts = [] } = {} } = {} } = {},
-      } = response;
-      if (status) {
-        this.setState({
-          graphsToShow: [...charts],
-          graphLoading: false,
-          loading: false,
-        });
-      } else {
-        this.setState({ loading: false });
-      }
-    });
+    this.setState({ doctorUserId });
+    // this.setState({ graphLoading: true, doctorUserId });
+    // getGraphs().then((response) => {
+    //   const {
+    //     status,
+    //     payload: { data: { user_preferences: { charts = [] } = {} } = {} } = {},
+    //   } = response;
+    //   if (status) {
+    //     this.setState({
+    //       graphsToShow: [...charts],
+    //       graphLoading: false,
+    //       loading: false,
+    //     });
+    //   } else {
+    //     this.setState({ loading: false });
+    //   }
+    // });
 
     if (authPermissions.length === 0) {
       this.setState({ showModal: true });
@@ -142,8 +144,7 @@ class Dashboard extends Component {
     fetchChatAccessToken(authenticated_user);
     searchMedicine("");
     getAllFeatures();
-    getAllMissedScheduleEvents();
-    searchCondition("");
+    // getAllMissedScheduleEvents();
     this.initiateInAppNotificationObj();
   }
 
@@ -422,6 +423,8 @@ class Dashboard extends Component {
   };
 
   showAddPatientDrawer = () => {
+    const { searchCondition } = this.props;
+    searchCondition("");
     this.setState({ visible: true });
   };
   showEditGraphModal = () => {
@@ -734,17 +737,19 @@ class Dashboard extends Component {
       bannerFlag = false;
     }
 
-    if (
-      Object.keys(graphs).length === 0 ||
-      loading ||
-      docName === TABLE_DEFAULT_BLANK_FIELD
-    ) {
-      return (
-        <div className="hvh100 flex direction-column align-center justify-center">
-          <Loading className={"wp100"} />
-        </div>
-      );
-    }
+    // AKSHAY NEW CODE IMPLEMENTATIONS
+
+    // if (
+    //   Object.keys(graphs).length === 0 ||
+    //   loading ||
+    //   docName === TABLE_DEFAULT_BLANK_FIELD
+    // ) {
+    //   return (
+    //     <div className="hvh100 flex direction-column align-center justify-center">
+    //       <Loading className={"wp100"} />
+    //     </div>
+    //   );
+    // }
 
     return (
       <Fragment>
