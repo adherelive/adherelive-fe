@@ -142,7 +142,7 @@ class Dashboard extends Component {
       this.setState({ showModal: true });
     }
     fetchChatAccessToken(authenticated_user);
-    searchMedicine("");
+    // searchMedicine("");
     getAllFeatures();
     // getAllMissedScheduleEvents();
     this.initiateInAppNotificationObj();
