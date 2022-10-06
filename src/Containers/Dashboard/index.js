@@ -55,6 +55,7 @@ const mapStateToProps = (state) => {
     providers = {},
     care_plans = {},
     drawer: { visible, data: { type, payload = {} } = {} },
+    medicines = {},
   } = state;
   return {
     notificationToken,
@@ -80,6 +81,7 @@ const mapStateToProps = (state) => {
     auth_role,
     care_plans,
     payload,
+    medicines,
   };
 };
 
