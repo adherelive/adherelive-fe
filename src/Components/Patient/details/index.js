@@ -876,6 +876,7 @@ class PatientDetails extends Component {
       resetNotificationRedirect,
       notification_redirect = {},
       authenticated_category,
+      medicines = {},
     } = this.props;
 
     if (redirect_patient_id) {
@@ -977,7 +978,11 @@ class PatientDetails extends Component {
     // getAppointments(patient_id);
 
     // }
-    searchMedicine("");
+
+    if (isEmpty(medicines)) {
+      searchMedicine("");
+    }
+
     let carePlanTemplateId = 0;
     for (let carePlan of Object.values(care_plans)) {
       let {
