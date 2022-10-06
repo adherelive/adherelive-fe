@@ -35,7 +35,9 @@ class EditDiet extends Component {
   async componentDidMount() {
     const { dietData = {}, editTemplateDiet = null } = this.props;
 
-    await this.getAllPortions();
+    //AKSHAY NEW CODE IMPLEMENTATIONS
+    // THIS ONE COMMENTED
+    // await this.getAllPortions();
 
     if (editTemplateDiet !== null) {
       const { total_calories, details: { diet_food_groups = {} } = {} } =
@@ -62,6 +64,9 @@ class EditDiet extends Component {
     if (visible && visible !== prev_visible) {
       await this.setPatientPreferenceTimings();
       await this.getDietDetails();
+      //AKSHAY NEW CODE IMPLEMENTATIONS
+      // THIS ONE ADDED
+      await this.getAllPortions();
     }
 
     if (isDietVisible && isDietVisible !== prev_isDietVisible) {

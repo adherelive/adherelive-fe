@@ -28,9 +28,11 @@ class AddExercise extends Component {
     );
   }
 
-  async componentDidMount() {
-    await this.getAllWorkoutDetails();
-  }
+  // AKSHAY NEW CODE IMPLEMENTATIONS
+  // THIS ONE COMMENTED
+  // async componentDidMount() {
+  //   await this.getAllWorkoutDetails();
+  // }
 
   async componentDidUpdate(prevProps, prevState) {
     const { visible = false } = this.props;

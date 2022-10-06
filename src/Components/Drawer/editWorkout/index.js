@@ -35,7 +35,9 @@ class EditWorkout extends Component {
   async componentDidMount() {
     const { workoutData = {}, editTemplateWorkout = null } = this.props;
 
-    await this.getAllWorkoutDetails();
+    // AKSHAY NEW CODE IMPLEMENTATIONS
+    // THIS ONE COMMENTED
+    // await this.getAllWorkoutDetails();
 
     if (editTemplateWorkout !== null) {
       const {
@@ -75,6 +77,7 @@ class EditWorkout extends Component {
     } = prevProps;
 
     if (visible && visible !== prev_visible) {
+      await this.getAllWorkoutDetails();
       await this.getWorkoutDetails();
     }
 
