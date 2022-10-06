@@ -108,6 +108,7 @@ class Dashboard extends Component {
       getAllFeatures,
       getAllMissedScheduleEvents,
       searchCondition,
+      medicines,
     } = this.props;
 
     // this.setState({ loading: true });
@@ -142,7 +143,10 @@ class Dashboard extends Component {
       this.setState({ showModal: true });
     }
     fetchChatAccessToken(authenticated_user);
-    // searchMedicine("");
+    if (isEmpty(medicines)) {
+      searchMedicine("");
+    }
+
     getAllFeatures();
     // getAllMissedScheduleEvents();
     this.initiateInAppNotificationObj();
