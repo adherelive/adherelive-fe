@@ -704,9 +704,7 @@ const PatientTreatmentCard = ({
         <h3>{formatMessage(messages.treatment_details)}</h3>
         {selectedCarePlanId && isPrescriptionOfCurrentDoc ? (
           <a
-            href={`${generatePrescriptionUrl(
-              selectedCarePlanId
-            )}`}
+            href={`${generatePrescriptionUrl(selectedCarePlanId)}`}
             target={"_blank"}
             className="presc-link"
           >
@@ -894,9 +892,11 @@ class PatientDetails extends Component {
 
     fetchChatAccessToken(authenticated_user);
     this.fetchSymptomsData();
-    this.fetchReportData();
-    this.fetchVitalDetails();
+    // this.fetchReportData();
+    // this.fetchVitalDetails();
 
+    // if (showTd) {
+    const response = await getPatientCarePlanDetails(patient_id);
     //AKSHAY NEW CODE IMPLEMENTATIONS START
     const responsePatientDetails = await getPatientDetailsById(patient_id);
     if (responsePatientDetails.status) {
@@ -906,9 +906,6 @@ class PatientDetails extends Component {
       });
     }
     //AKSHAY NEW CODE IMPLEMENTATIONS END
-
-    // if (showTd) {
-    const response = await getPatientCarePlanDetails(patient_id);
 
     let { status = false, payload = {} } = response;
     if (status) {
@@ -975,9 +972,9 @@ class PatientDetails extends Component {
       });
     }
 
-    getMedications(patient_id);
-    getAppointmentsDetails();
-    getAppointments(patient_id);
+    // getMedications(patient_id);
+    // getAppointmentsDetails();
+    // getAppointments(patient_id);
 
     // }
     searchMedicine("");
@@ -1025,7 +1022,7 @@ class PatientDetails extends Component {
       getAllTemplatesForDoctor,
     } = this.props;
     await this.handleInititalData();
-    await getAllTemplatesForDoctor();
+    // await getAllTemplatesForDoctor();
     if (Object.keys(notification_redirect).length) {
       resetNotificationRedirect();
     }
@@ -1415,7 +1412,9 @@ class PatientDetails extends Component {
 
   handleAppointment = (e) => {
     // e.preventDefault();
-    const { openAppointmentDrawer, patient_id } = this.props;
+    const { openAppointmentDrawer, patient_id, getAppointmentsDetails } =
+      this.props;
+    getAppointmentsDetails();
     openAppointmentDrawer({
       patients: {
         id: patient_id,
@@ -1629,6 +1628,7 @@ class PatientDetails extends Component {
         openEditAppointmentDrawer,
         patient_id,
         auth_role = null,
+        getAppointmentsDetails,
       } = this.props;
       const { isOtherCarePlan = false } = this.state;
       const { basic_info: { user_role_id = null } = {} } = carePlan || {};
@@ -1642,7 +1642,7 @@ class PatientDetails extends Component {
       ) {
         canViewDetails = false;
       }
-
+      getAppointmentsDetails();
       openEditAppointmentDrawer({ id, patient_id, canViewDetails });
     };
 
@@ -2381,6 +2381,13 @@ class PatientDetails extends Component {
   };
 
   setActiveKey = (value) => {
+    const { getAppointments } = this.props;
+    let patientId = window.location.href.split("/")[4];
+
+    if (value === "2") {
+      getAppointments(patientId);
+    }
+
     this.setState({ activeKey: value });
   };
 

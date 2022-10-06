@@ -27,10 +27,11 @@ class AddDiet extends Component {
       DietFieldsForm
     );
   }
-
-  async componentDidMount() {
-    await this.getAllPortions();
-  }
+  //AKSHAY NEW CODE IMPLEMENTATIONS
+  // THIS ONE COMMENTED
+  // async componentDidMount() {
+  //   await this.getAllPortions();
+  // }
 
   async componentDidUpdate(prevProps) {
     const { visible = false } = this.props;
@@ -38,6 +39,9 @@ class AddDiet extends Component {
 
     if (visible && visible != prev_visible) {
       await this.setPatientPreferenceTimings();
+      //AKSHAY NEW CODE IMPLEMENTATIONS
+      // THIS ONE ADDED
+      await this.getAllPortions();
     }
   }
 

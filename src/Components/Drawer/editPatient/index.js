@@ -102,10 +102,11 @@ class EditPatientDrawer extends Component {
       2000
     );
   }
-
-  componentDidMount() {
-    this.handleConditionSearch(" ");
-  }
+  //AKSHAY NEW CODE IMPLEMENTATIONS
+  // THIS ONE COMMENTED
+  // componentDidMount() {
+  //   this.handleConditionSearch(" ");
+  // }
 
   //AKSHAY NEW CODE IMPLEMENTATIONS START
   async handleGetPatientDetails(patient_id) {
@@ -199,6 +200,7 @@ class EditPatientDrawer extends Component {
 
     if (prev_visible !== visible) {
       this.handleGetPatientDetails(patient_id);
+      this.handleConditionSearch(" ");
       this.setState({
         mobile_number,
         name: full_name,
