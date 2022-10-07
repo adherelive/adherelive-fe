@@ -122,22 +122,22 @@ class Dashboard extends Component {
       }
     }
     this.setState({ doctorUserId });
-    // this.setState({ graphLoading: true, doctorUserId });
-    // getGraphs().then((response) => {
-    //   const {
-    //     status,
-    //     payload: { data: { user_preferences: { charts = [] } = {} } = {} } = {},
-    //   } = response;
-    //   if (status) {
-    //     this.setState({
-    //       graphsToShow: [...charts],
-    //       graphLoading: false,
-    //       loading: false,
-    //     });
-    //   } else {
-    //     this.setState({ loading: false });
-    //   }
-    // });
+    this.setState({ graphLoading: true, doctorUserId });
+    getGraphs().then((response) => {
+      const {
+        status,
+        payload: { data: { user_preferences: { charts = [] } = {} } = {} } = {},
+      } = response;
+      if (status) {
+        this.setState({
+          graphsToShow: [...charts],
+          graphLoading: false,
+          loading: false,
+        });
+      } else {
+        this.setState({ loading: false });
+      }
+    });
 
     if (authPermissions.length === 0) {
       this.setState({ showModal: true });
@@ -148,7 +148,7 @@ class Dashboard extends Component {
     }
 
     getAllFeatures();
-    // getAllMissedScheduleEvents();
+    getAllMissedScheduleEvents();
     this.initiateInAppNotificationObj();
   }
 
