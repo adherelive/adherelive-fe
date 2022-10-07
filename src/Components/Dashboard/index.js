@@ -109,6 +109,7 @@ class Dashboard extends Component {
       getAllMissedScheduleEvents,
       searchCondition,
       medicines,
+      features,
     } = this.props;
 
     // this.setState({ loading: true });
@@ -147,7 +148,10 @@ class Dashboard extends Component {
       searchMedicine("");
     }
 
-    getAllFeatures();
+    if (isEmpty(features)) {
+      getAllFeatures();
+    }
+
     getAllMissedScheduleEvents();
     this.initiateInAppNotificationObj();
   }
