@@ -36,10 +36,22 @@ class AddMedicationReminder extends Component {
       AddMedicationReminderForm
     );
   }
+  //AKSHAY NEW CODE IMPLEMENTATIONS
+  // THIS ONE COMMENTED
+  // componentDidMount() {
+  //   const { getMedicationDetails, patientId } = this.props;
+  //   getMedicationDetails(patientId);
+  // }
 
-  componentDidMount() {
-    const { getMedicationDetails, patientId } = this.props;
-    getMedicationDetails(patientId);
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { visible = false, getMedicationDetails, patientId } = this.props;
+    const { visible: prev_visible = false } = prevProps;
+
+    if (visible && visible != prev_visible) {
+      getMedicationDetails(patientId);
+    }
+    console.log("this.props", this.props);
+    console.log("prevProps", prevProps);
   }
 
   hasErrors = (fieldsError) => {
