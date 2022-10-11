@@ -18,7 +18,7 @@ class MedicationTable extends Component {
 
   componentDidMount() {
     console.log("Medication table Component did Mount!", this.props);
-    // this.getMedications();
+    this.getMedications();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
