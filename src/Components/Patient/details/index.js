@@ -980,9 +980,9 @@ class PatientDetails extends Component {
 
     // }
 
-    // if (isEmpty(medicines)) {
-    //   searchMedicine("");
-    // }
+    if (isEmpty(medicines)) {
+      searchMedicine("");
+    }
 
     let carePlanTemplateId = 0;
     for (let carePlan of Object.values(care_plans)) {
