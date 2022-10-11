@@ -11,7 +11,7 @@ export default (data) => {
   } = data;
   const formattedData = formatMedicationTableData(data);
   const { medicationData, medicationTemplateData } = formattedData || {};
-  console.log("medicationData", medicationData);
+
   return {
     key: id,
     [TABLE_COLUMN.MEDICINE.dataIndex]: {
