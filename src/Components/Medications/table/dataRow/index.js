@@ -7,15 +7,17 @@ export default (data) => {
     openEditDrawer,
     formatMessage,
     canViewDetails = false,
+    medicinesNames = [],
   } = data;
   const formattedData = formatMedicationTableData(data);
   const { medicationData, medicationTemplateData } = formattedData || {};
-
+  console.log("medicationData", medicationData);
   return {
     key: id,
     [TABLE_COLUMN.MEDICINE.dataIndex]: {
       medicationTemplateData,
       medicationData,
+      medicinesNames,
     },
     [TABLE_COLUMN.TAKEN.dataIndex]: {
       medicationData,
@@ -30,6 +32,7 @@ export default (data) => {
       id,
       openResponseDrawer,
       formatMessage,
+      medicationData,
     },
     [TABLE_COLUMN.EDIT.dataIndex]: {
       id,
