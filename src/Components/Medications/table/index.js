@@ -18,7 +18,7 @@ class MedicationTable extends Component {
 
   componentDidMount() {
     console.log("Medication table Component did Mount!", this.props);
-    this.getMedications();
+    // this.getMedications();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -51,6 +51,8 @@ class MedicationTable extends Component {
       intl: { formatMessage } = {},
       care_plans,
       auth_role = null,
+      // AKSHAY NEW CODE IMPLEMENTATION
+      medicinesNames,
     } = this.props;
 
     const { medication_ids = [] } = care_plans || {};
@@ -78,6 +80,8 @@ class MedicationTable extends Component {
         isOtherCarePlan,
         medicines,
         canViewDetails,
+        // AKSHAY NEW CODE IMPLEMENTATION
+        medicinesNames,
       });
     });
   };

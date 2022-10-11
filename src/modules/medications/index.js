@@ -8,6 +8,7 @@ import {
   deleteMedicationUrl,
   getMedicationTimelineURL,
 } from "../../Helper/urls/mReminders";
+import { GET_MEDICINES_NAMES } from "../commonReducer";
 
 // const INITIAL_STATE = {
 //   "100": {
@@ -186,6 +187,10 @@ export const getMedications = (id) => {
         dispatch({
           type: GET_MEDICATION_COMPLETE,
           data,
+        });
+        dispatch({
+          type: GET_MEDICINES_NAMES,
+          payload: data.medicins,
         });
       } else {
         dispatch({

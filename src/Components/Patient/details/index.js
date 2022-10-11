@@ -893,6 +893,7 @@ class PatientDetails extends Component {
 
     fetchChatAccessToken(authenticated_user);
     this.fetchSymptomsData();
+    getMedications(patient_id);
     // this.fetchReportData();
     // this.fetchVitalDetails();
 
