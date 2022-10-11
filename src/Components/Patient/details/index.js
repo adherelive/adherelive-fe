@@ -898,6 +898,7 @@ class PatientDetails extends Component {
     // this.fetchVitalDetails();
 
     // if (showTd) {
+    const response = await getPatientCarePlanDetails(patient_id);
     //AKSHAY NEW CODE IMPLEMENTATIONS START
     const responsePatientDetails = await getPatientDetailsById(patient_id);
     if (responsePatientDetails.status) {
@@ -907,7 +908,6 @@ class PatientDetails extends Component {
       });
     }
     //AKSHAY NEW CODE IMPLEMENTATIONS END
-    const response = await getPatientCarePlanDetails(patient_id);
 
     let { status = false, payload = {} } = response;
     if (status) {
@@ -980,9 +980,9 @@ class PatientDetails extends Component {
 
     // }
 
-    if (isEmpty(medicines)) {
-      searchMedicine("");
-    }
+    // if (isEmpty(medicines)) {
+    //   searchMedicine("");
+    // }
 
     let carePlanTemplateId = 0;
     for (let carePlan of Object.values(care_plans)) {
