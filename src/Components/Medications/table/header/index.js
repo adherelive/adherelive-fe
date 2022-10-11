@@ -17,11 +17,13 @@ export default (props) => {
       title: formatMessage(messages.medicine_name),
       ...TABLE_COLUMN.MEDICINE,
       render: (data) => {
-        const { medicationData, medicationTemplateData } = data || {};
+        const { medicationData, medicationTemplateData, medicinesNames } =
+          data || {};
         return (
           <Medicine
             medicationTemplateData={medicationTemplateData}
             medicationData={medicationData}
+            medicinesNames={medicinesNames}
           />
         );
       },
@@ -53,11 +55,12 @@ export default (props) => {
       title: "Taken/Total (Adherence)",
       ...TABLE_COLUMN.TIMELINE,
 
-      render: ({ openResponseDrawer, formatMessage, id }) => (
+      render: ({ openResponseDrawer, formatMessage, id, medicationData }) => (
         <TimelineButton
           formatMessage={formatMessage}
           openResponseDrawer={openResponseDrawer}
           id={id}
+          medicationData={medicationData}
         />
       ),
     },

@@ -13,6 +13,8 @@ const mapStateToProps = (state) => {
     pages: { medication_ids = [] } = {},
     care_plans = {},
     medicines = {},
+    // AKSHAY NEW CODE IMPLEMENTATION
+    commonReducer: { medicinesNames = [] },
   } = state;
 
   return {
@@ -21,6 +23,8 @@ const mapStateToProps = (state) => {
     care_plans,
     medicines,
     auth_role,
+    // AKSHAY NEW CODE IMPLEMENTATION
+    medicinesNames,
   };
 };
 
@@ -42,6 +46,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     care_plans,
     medicines,
     auth_role,
+    // AKSHAY NEW CODE IMPLEMENTATION
+    medicinesNames,
   } = stateProps;
 
   const {
@@ -63,6 +69,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     medicationResponseDrawer,
     medicines,
     auth_role,
+    // AKSHAY NEW CODE IMPLEMENTATION
+    medicinesNames,
   };
 };
 
