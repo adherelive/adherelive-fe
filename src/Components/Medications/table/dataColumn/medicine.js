@@ -18,8 +18,10 @@ export default (props) => {
 
   console.log("medicinesNames", props);
 
-  let finalName = name;
-  if (isEmpty(medicationTemplateData)) {
+  let finalName = "";
+  if (!isEmpty(medicationTemplateData)) {
+    let finalName = name;
+  } else {
     finalName = medicinesNames.filter((ele) => ele.id === medicine_id)[0].name;
   }
 
