@@ -11,99 +11,116 @@ import BlankState from "../../Components/Common/BlankState";
 import { PATH } from "../../constant";
 import NotificationDrawer from "../../Containers/Drawer/notificationDrawer";
 
-const PatientDetails = lazy(() =>
-  import(
-    /* webpackChunkName: "PatientDetails" */ "../../Containers/Patient/details"
-  )
-);
+import PatientDetails from "../../Containers/Patient/details";
+import Dashboard from "../../Containers/Dashboard";
+import RegisterProfile from "../../Containers/DoctorOnBoarding/profileRegister";
+import RegisterQualifications from "../../Containers/DoctorOnBoarding/qualificationRegister";
+import RegisterClinics from "../../Containers/DoctorOnBoarding/clinicRegister";
+import ChatFullScreen from "../../Containers/ChatFullScreen";
+import TwilioVideo from "../../Containers/ChatFullScreen/agoraVideo";
+import TestTwilioVideo from "../../Containers/ChatFullScreen/testAgoraVideo";
+import DoctorProfilePage from "../../Containers/Pages/doctorProfilePage";
+import DoctorSettingsPage from "../../Containers/Pages/doctorSettingsPage";
+import TermsOfService from "../../Containers/Pages/TermsOfService";
+import TermsOfPayment from "../../Containers/Pages/termsOfPayment";
+import PrivacyPolicy from "../../Containers/Pages/PrivacyPolicy";
+import TemplatePage from "../../Containers/Pages/doctorTemplateSettingsPage";
+import DoctorTransactionPage from "../../Containers/Pages/doctorTransactionPage";
+import DoctorCalenderPage from "../../Containers/Pages/providerDoctorCalender";
 
-const Dashboard = lazy(() =>
-  import(/* webpackChunkName: "Dashboard" */ "../../Containers/Dashboard")
-);
+// const PatientDetails = lazy(() =>
+//   import(
+//     /* webpackChunkName: "PatientDetails" */ "../../Containers/Patient/details"
+//   )
+// );
 
-const RegisterProfile = lazy(() =>
-  import(
-    /* webpackChunkName: "RegisterProfile" */ "../../Containers/DoctorOnBoarding/profileRegister"
-  )
-);
+// const Dashboard = lazy(() =>
+//   import(/* webpackChunkName: "Dashboard" */ "../../Containers/Dashboard")
+// );
 
-const RegisterQualifications = lazy(() =>
-  import(
-    /* webpackChunkName: "RegisterQualifications" */ "../../Containers/DoctorOnBoarding/qualificationRegister"
-  )
-);
+// const RegisterProfile = lazy(() =>
+//   import(
+//     /* webpackChunkName: "RegisterProfile" */ "../../Containers/DoctorOnBoarding/profileRegister"
+//   )
+// );
 
-const RegisterClinics = lazy(() =>
-  import(
-    /* webpackChunkName: "RegisterClinics" */ "../../Containers/DoctorOnBoarding/clinicRegister"
-  )
-);
+// const RegisterQualifications = lazy(() =>
+//   import(
+//     /* webpackChunkName: "RegisterQualifications" */ "../../Containers/DoctorOnBoarding/qualificationRegister"
+//   )
+// );
 
-const ChatFullScreen = lazy(() =>
-  import(
-    /* webpackChunkName: "ChatFullScreen" */ "../../Containers/ChatFullScreen"
-  )
-);
+// const RegisterClinics = lazy(() =>
+//   import(
+//     /* webpackChunkName: "RegisterClinics" */ "../../Containers/DoctorOnBoarding/clinicRegister"
+//   )
+// );
 
-const TwilioVideo = lazy(() =>
-  import(
-    /* webpackChunkName: "TwilioVideo" */ "../../Containers/ChatFullScreen/agoraVideo"
-  )
-);
+// const ChatFullScreen = lazy(() =>
+//   import(
+//     /* webpackChunkName: "ChatFullScreen" */ "../../Containers/ChatFullScreen"
+//   )
+// );
 
-const TestTwilioVideo = lazy(() =>
-  import(
-    /* webpackChunkName: "TwilioVideo" */ "../../Containers/ChatFullScreen/testAgoraVideo"
-  )
-);
+// const TwilioVideo = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TwilioVideo" */ "../../Containers/ChatFullScreen/agoraVideo"
+//   )
+// );
 
-const DoctorProfilePage = lazy(() =>
-  import(
-    /* webpackChunkName: "DoctorProfilePage" */ "../../Containers/Pages/doctorProfilePage"
-  )
-);
+// const TestTwilioVideo = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TwilioVideo" */ "../../Containers/ChatFullScreen/testAgoraVideo"
+//   )
+// );
 
-const DoctorSettingsPage = lazy(() =>
-  import(
-    /* webpackChunkName: "DoctorSettingsPage" */ "../../Containers/Pages/doctorSettingsPage"
-  )
-);
+// const DoctorProfilePage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "DoctorProfilePage" */ "../../Containers/Pages/doctorProfilePage"
+//   )
+// );
 
-const TermsOfService = lazy(() =>
-  import(
-    /* webpackChunkName: "TermsOfServiceAuthPage" */ "../../Containers/Pages/TermsOfService"
-  )
-);
+// const DoctorSettingsPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "DoctorSettingsPage" */ "../../Containers/Pages/doctorSettingsPage"
+//   )
+// );
 
-const TermsOfPayment = lazy(() =>
-  import(
-    /* webpackChunkName: "TermsOfPayment" */ "../../Containers/Pages/termsOfPayment"
-  )
-);
+// const TermsOfService = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TermsOfServiceAuthPage" */ "../../Containers/Pages/TermsOfService"
+//   )
+// );
 
-const PrivacyPolicy = lazy(() =>
-  import(
-    /* webpackChunkName: "PrivacyPolicyAuthPage" */ "../../Containers/Pages/PrivacyPolicy"
-  )
-);
+// const TermsOfPayment = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TermsOfPayment" */ "../../Containers/Pages/termsOfPayment"
+//   )
+// );
 
-const TemplatePage = lazy(() =>
-  import(
-    /* webpackChunkName: "TemplatePage" */ "../../Containers/Pages/doctorTemplateSettingsPage"
-  )
-);
+// const PrivacyPolicy = lazy(() =>
+//   import(
+//     /* webpackChunkName: "PrivacyPolicyAuthPage" */ "../../Containers/Pages/PrivacyPolicy"
+//   )
+// );
 
-const DoctorTransactionPage = lazy(() =>
-  import(
-    /* webpackChunkName: "DoctorTransactionPage" */ "../../Containers/Pages/doctorTransactionPage"
-  )
-);
+// const TemplatePage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TemplatePage" */ "../../Containers/Pages/doctorTemplateSettingsPage"
+//   )
+// );
+
+// const DoctorTransactionPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "DoctorTransactionPage" */ "../../Containers/Pages/doctorTransactionPage"
+//   )
+// );
 // AKSHAY NEW CODE IMPLEMENTATION
-const DoctorCalenderPage = lazy(() =>
-  import(
-    /* webpackChunkName: "DoctorCalenderPage" */ "../../Containers/Pages/providerDoctorCalender"
-  )
-);
+// const DoctorCalenderPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "DoctorCalenderPage" */ "../../Containers/Pages/providerDoctorCalender"
+//   )
+// );
 
 const PatientDetailsComp = (props) => {
   const { match: { params: { patient_id } = {} } = {} } = props;

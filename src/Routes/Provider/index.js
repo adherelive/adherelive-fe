@@ -12,78 +12,102 @@ import { PATH } from "../../constant";
 // import SideMenu from "../../Components/Sidebar";
 import SideMenu from "../../Containers/Sidebar";
 
+import ProviderDoctorPage from "../../Containers/Pages/providerDashboard";
+
+import RegisterProfile from "../../Containers/DoctorOnBoarding/profileRegister";
+
+import RegisterQualifications from "../../Containers/DoctorOnBoarding/qualificationRegister";
+
+import RegisterClinics from "../../Containers/DoctorOnBoarding/clinicRegister";
+
+import ProviderDoctorDetailsPage from "../../Containers/Pages/providerDoctorDetails";
+
+import ProviderDoctorPaymentPage from "../../Containers/Pages/providerDoctorPaymentProduct";
+
+import DoctorCalenderPage from "../../Containers/Pages/providerDoctorCalender";
+
+import TermsOfService from "../../Containers/Pages/TermsOfService";
+
+import TermsOfPayment from "../../Containers/Pages/termsOfPayment";
+
+import PrivacyPolicy from "../../Containers/Pages/PrivacyPolicy";
+
+import ProviderTransactionPage from "../../Containers/Pages/providerTransactionPage";
+
+import PaymentDetailsPage from "../../Containers/ProviderAccountDetails";
+
 // FOR DOCTOR TODO: can be in separate doctors folder for easy management
-const ProviderDoctorPage = lazy(() =>
-  import(
-    /* webpackChunkName: "ProviderDoctorTable" */ "../../Containers/Pages/providerDashboard"
-  )
-);
+// const ProviderDoctorPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "ProviderDoctorTable" */ "../../Containers/Pages/providerDashboard"
+//   )
+// );
 
-const RegisterProfile = lazy(() =>
-  import(
-    /* webpackChunkName: "RegisterProfile" */ "../../Containers/DoctorOnBoarding/profileRegister"
-  )
-);
+// const RegisterProfile = lazy(() =>
+//   import(
+//     /* webpackChunkName: "RegisterProfile" */ "../../Containers/DoctorOnBoarding/profileRegister"
+//   )
+// );
 
-const RegisterQualifications = lazy(() =>
-  import(
-    /* webpackChunkName: "RegisterQualifications" */ "../../Containers/DoctorOnBoarding/qualificationRegister"
-  )
-);
+// const RegisterQualifications = lazy(() =>
+//   import(
+//     /* webpackChunkName: "RegisterQualifications" */ "../../Containers/DoctorOnBoarding/qualificationRegister"
+//   )
+// );
 
-const RegisterClinics = lazy(() =>
-  import(
-    /* webpackChunkName: "RegisterClinics" */ "../../Containers/DoctorOnBoarding/clinicRegister"
-  )
-);
+// const RegisterClinics = lazy(() =>
+//   import(
+//     /* webpackChunkName: "RegisterClinics" */ "../../Containers/DoctorOnBoarding/clinicRegister"
+//   )
+// );
 
-const ProviderDoctorDetailsPage = lazy(() =>
-  import(
-    /* webpackChunkName: "ProviderDoctorDetailsPage" */ "../../Containers/Pages/providerDoctorDetails"
-  )
-);
+// const ProviderDoctorDetailsPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "ProviderDoctorDetailsPage" */ "../../Containers/Pages/providerDoctorDetails"
+//   )
+// );
 
-const ProviderDoctorPaymentPage = lazy(() =>
-  import(
-    /* webpackChunkName: "ProviderDoctorPaymentProductPage" */ "../../Containers/Pages/providerDoctorPaymentProduct"
-  )
-);
+// const ProviderDoctorPaymentPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "ProviderDoctorPaymentProductPage" */ "../../Containers/Pages/providerDoctorPaymentProduct"
+//   )
+// );
 
-const DoctorCalenderPage = lazy(() =>
-  import(
-    /* webpackChunkName: "DoctorCalenderPage" */ "../../Containers/Pages/providerDoctorCalender"
-  )
-);
+// const DoctorCalenderPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "DoctorCalenderPage" */ "../../Containers/Pages/providerDoctorCalender"
+//   )
+// );
 
-const TermsOfService = lazy(() =>
-  import(
-    /* webpackChunkName: "TermsOfServicePage" */ "../../Containers/Pages/TermsOfService"
-  )
-);
+// const TermsOfService = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TermsOfServicePage" */ "../../Containers/Pages/TermsOfService"
+//   )
+// );
 
-const TermsOfPayment = lazy(() =>
-  import(
-    /* webpackChunkName: "TermsOfPayment" */ "../../Containers/Pages/termsOfPayment"
-  )
-);
+// const TermsOfPayment = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TermsOfPayment" */ "../../Containers/Pages/termsOfPayment"
+//   )
+// );
 
-const PrivacyPolicy = lazy(() =>
-  import(
-    /* webpackChunkName: "PrivacyPolicyPage" */ "../../Containers/Pages/PrivacyPolicy"
-  )
-);
+// const PrivacyPolicy = lazy(() =>
+//   import(
+//     /* webpackChunkName: "PrivacyPolicyPage" */ "../../Containers/Pages/PrivacyPolicy"
+//   )
+// );
 
-const ProviderTransactionPage = lazy(() =>
-  import(
-    /* webpackChunkName: "ProviderTransactionPage" */ "../../Containers/Pages/providerTransactionPage"
-  )
-);
+// const ProviderTransactionPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "ProviderTransactionPage" */ "../../Containers/Pages/providerTransactionPage"
+//   )
+// );
 
-const PaymentDetailsPage = lazy(() =>
-  import(
-    /* webpackChunkName: "ProviderPaymentDetailsPage" */ "../../Containers/ProviderAccountDetails"
-  )
-);
+// const PaymentDetailsPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "ProviderPaymentDetailsPage" */ "../../Containers/ProviderAccountDetails"
+//   )
+// );
 
 const ProviderDoctorDetailsComp = (props) => {
   const { match: { params: { id } = {} } = {} } = props;

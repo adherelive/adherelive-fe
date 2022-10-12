@@ -9,53 +9,69 @@ import { PATH } from "../../../constant";
 import SideMenu from "../../../Containers/Sidebar";
 // import BlankState from "../../../Components/Common/BlankState";
 
-const AdminDoctorPage = lazy(() =>
-  import(
-    /* webpackChunkName: "AdminDoctorTable" */ "../../../Containers/Pages/doctor"
-  )
-);
+import AdminDoctorPage from "../../../Containers/Pages/doctor";
 
-const AdminProviderPage = lazy(() =>
-  import(
-    /* webpackChunkName: "AdminProviderPage" */ "../../../Containers/Pages/provider"
-  )
-);
+import AdminProviderPage from "../../../Containers/Pages/provider";
 
-const AdminDoctorDetailsPage = lazy(() =>
-  import(
-    /* webpackChunkName: "AdminDoctorDetails" */ "../../../Containers/Pages/doctorDetails"
-  )
-);
+import AdminDoctorDetailsPage from "../../../Containers/Pages/doctorDetails";
 
-const TosPpEditorPage = lazy(() =>
-  import(
-    /* webpackChunkName: "TosPpEditorPage" */ "../../../Containers/Pages/TosPPEditorPage"
-  )
-);
+import TosPpEditorPage from "../../../Containers/Pages/TosPPEditorPage";
 
-const TermsOfService = lazy(() =>
-  import(
-    /* webpackChunkName: "TermsOfServicePage" */ "../../../Containers/Pages/TermsOfService"
-  )
-);
+import TermsOfService from "../../../Containers/Pages/TermsOfService";
 
-const TermsOfPayment = lazy(() =>
-  import(
-    /* webpackChunkName: "TermsOfPayment" */ "../../../Containers/Pages/termsOfPayment"
-  )
-);
+import TermsOfPayment from "../../../Containers/Pages/termsOfPayment";
 
-const PrivacyPolicy = lazy(() =>
-  import(
-    /* webpackChunkName: "PrivacyPolicyPage" */ "../../../Containers/Pages/PrivacyPolicy"
-  )
-);
+import PrivacyPolicy from "../../../Containers/Pages/PrivacyPolicy";
 
-const AdminMedicines = lazy(() =>
-  import(
-    /* webpackChunkName: "AdminMedicinesPage" */ "../../../Containers/Pages/adminMedicines"
-  )
-);
+import AdminMedicines from "../../../Containers/Pages/adminMedicines";
+
+// const AdminDoctorPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "AdminDoctorTable" */ "../../../Containers/Pages/doctor"
+//   )
+// );
+
+// const AdminProviderPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "AdminProviderPage" */ "../../../Containers/Pages/provider"
+//   )
+// );
+
+// const AdminDoctorDetailsPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "AdminDoctorDetails" */ "../../../Containers/Pages/doctorDetails"
+//   )
+// );
+
+// const TosPpEditorPage = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TosPpEditorPage" */ "../../../Containers/Pages/TosPPEditorPage"
+//   )
+// );
+
+// const TermsOfService = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TermsOfServicePage" */ "../../../Containers/Pages/TermsOfService"
+//   )
+// );
+
+// const TermsOfPayment = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TermsOfPayment" */ "../../../Containers/Pages/termsOfPayment"
+//   )
+// );
+
+// const PrivacyPolicy = lazy(() =>
+//   import(
+//     /* webpackChunkName: "PrivacyPolicyPage" */ "../../../Containers/Pages/PrivacyPolicy"
+//   )
+// );
+
+// const AdminMedicines = lazy(() =>
+//   import(
+//     /* webpackChunkName: "AdminMedicinesPage" */ "../../../Containers/Pages/adminMedicines"
+//   )
+// );
 
 const SideMenuComp = (props) => {
   const { location: { pathname = "" } = {} } = props;

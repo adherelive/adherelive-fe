@@ -3,11 +3,14 @@ import React, { Component, lazy, Fragment } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Loading from "../Components/Common/Loading";
 
-const Global = lazy(() => import(/* webpackChunkName: "Global"*/ "./Global"));
+import Global from "./Global";
+import Auth from "../Containers/Auth";
 
-const Auth = lazy(() =>
-  import(/* webpackChunkName: "Auth"*/ "../Containers/Auth")
-);
+// const Global = lazy(() => import(/* webpackChunkName: "Global"*/ "./Global"));
+
+// const Auth = lazy(() =>
+//   import(/* webpackChunkName: "Auth"*/ "../Containers/Auth")
+// );
 
 export default class Routes extends Component {
   constructor(props) {

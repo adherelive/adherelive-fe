@@ -13,9 +13,11 @@ import store from "./store";
 
 import "./Styles/index.less";
 
-const Desktop = lazy(() =>
-  import(/* webpackChunkName: "DesktopWrapper" */ "./Containers/Routes")
-);
+import Desktop from "./Containers/Routes";
+
+// const Desktop = lazy(() =>
+//   import(/* webpackChunkName: "DesktopWrapper" */ "./Containers/Routes")
+// );
 
 // const middleware = [thunk, retainState];
 

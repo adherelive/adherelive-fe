@@ -1,21 +1,29 @@
 import React, { lazy, Component, Fragment } from "react";
 import { USER_CATEGORY } from "../../constant";
 
-const Doctors = lazy(() =>
-  import(/* webpackChunkName: "DoctorsRouter" */ "../Doctors")
-);
+import Doctors from "../Doctors";
 
-const Admin = lazy(() =>
-  import(/* webpackChunkName: "AdminRouter" */ "../Admin")
-);
+import Admin from "../Admin";
 
-const Provider = lazy(() =>
-  import(/* webpackChunkName: "ProviderRouter" */ "../Provider")
-);
+import Provider from "../Provider";
 
-const Common = lazy(() =>
-  import(/* webpackChunkName: "Consent" */ "../Common")
-);
+import Common from "../Common";
+
+// const Doctors = lazy(() =>
+//   import(/* webpackChunkName: "DoctorsRouter" */ "../Doctors")
+// );
+
+// const Admin = lazy(() =>
+//   import(/* webpackChunkName: "AdminRouter" */ "../Admin")
+// );
+
+// const Provider = lazy(() =>
+//   import(/* webpackChunkName: "ProviderRouter" */ "../Provider")
+// );
+
+// const Common = lazy(() =>
+//   import(/* webpackChunkName: "Consent" */ "../Common")
+// );
 
 export default class Authenticated extends Component {
   constructor(props) {

@@ -13,23 +13,29 @@ import ResetPassword from "../../Containers/forgotPassword/resetPassword";
 //import SignIn from "../../Components/SignIn";
 import { PATH } from "../../constant";
 
-const TermsOfService = lazy(() =>
-  import(
-    /* webpackChunkName: "TermsOfServicePage" */ "../../Containers/Pages/TermsOfService"
-  )
-);
+import TermsOfService from "../../Containers/Pages/TermsOfService";
 
-const TermsOfPayment = lazy(() =>
-  import(
-    /* webpackChunkName: "TermsOfPayment" */ "../../Containers/Pages/termsOfPayment"
-  )
-);
+import TermsOfPayment from "../../Containers/Pages/termsOfPayment";
 
-const PrivacyPolicy = lazy(() =>
-  import(
-    /* webpackChunkName: "PrivacyPolicyPage" */ "../../Containers/Pages/PrivacyPolicy"
-  )
-);
+import PrivacyPolicy from "../../Containers/Pages/PrivacyPolicy";
+
+// const TermsOfService = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TermsOfServicePage" */ "../../Containers/Pages/TermsOfService"
+//   )
+// );
+
+// const TermsOfPayment = lazy(() =>
+//   import(
+//     /* webpackChunkName: "TermsOfPayment" */ "../../Containers/Pages/termsOfPayment"
+//   )
+// );
+
+// const PrivacyPolicy = lazy(() =>
+//   import(
+//     /* webpackChunkName: "PrivacyPolicyPage" */ "../../Containers/Pages/PrivacyPolicy"
+//   )
+// );
 
 export default class Global extends Component {
   constructor(props) {
