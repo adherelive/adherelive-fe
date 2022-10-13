@@ -1243,11 +1243,15 @@ class TemplateDrawer extends Component {
           console.log("Appointment keys", key);
           const {
             reason = "",
-            schedule_data: {
-              description = "",
-              date = "",
-              start_time = "",
-            } = {},
+            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // COMMENTED THIS
+            // schedule_data: {
+            //   description = "",
+            //   date = "",
+            //   start_time = "",
+            // } = {},
+            // ADDED THIS
+            details: { description = "", date = "" } = {},
             time_gap = "",
           } = appointments[key];
           // let timeToShow = date && start_time ? `${moment(date).format('ll')} ${moment(date).format('hh:mm')}` : date ? moment(date).format('ll') : '';
@@ -1278,10 +1282,16 @@ class TemplateDrawer extends Component {
                 </div>
                 <div className="drawer-block-description">
                   {
-                    date && `After ${moment(date).diff(moment(), "days")} days`
-                    // : time_gap
-                    // ? `After ${time_gap - 1} days`
-                    // : ""
+                    date
+                      ? `After ${moment(date).diff(moment(), "days") + 1} days`
+                      : time_gap
+                      ? `After ${time_gap} days`
+                      : ""
+
+                    // date && `After ${moment(date).diff(moment(), "days")} days`
+                    // // : time_gap
+                    // // ? `After ${time_gap - 1} days`
+                    // // : ""
                   }
                 </div>
                 <div className="drawer-block-description">{`Notes:${description}`}</div>
