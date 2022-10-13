@@ -1820,8 +1820,17 @@ class PatientDetails extends Component {
   };
 
   showTemplateDrawer = async () => {
-    const { getAllTemplatesForDoctor } = this.props;
+    const {
+      getAllTemplatesForDoctor,
+      getAppointmentsDetails,
+      getPortions,
+      // getWorkoutDetails,
+    } = this.props;
     await getAllTemplatesForDoctor();
+    getAppointmentsDetails();
+    this.fetchVitalDetails();
+    getPortions();
+    // getWorkoutDetails();
     this.setState({ templateDrawerVisible: true });
   };
 
