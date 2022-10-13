@@ -34,6 +34,8 @@ import {
   getAllTemplatesForDoctor,
   getAllTemplatesForDoctorUsingQuery,
 } from "../../modules/carePlanTemplates";
+import { getPortions } from "../../modules/portions";
+// import { getWorkoutDetails } from "../../modules/workouts";
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -196,6 +198,10 @@ const mapDispatchToProps = (dispatch) => {
 
     openAddSecondaryDoctorDrawer: (payload) =>
       dispatch(open({ type: DRAWER.ADD_SECONDARY_DOCTOR, payload })),
+
+    // AKSHAY NEW CODE IMPLEMENTATIONS
+    getPortions: () => dispatch(getPortions()),
+    // getWorkoutDetails: () => dispatch(getWorkoutDetails()),
   };
 };
 
