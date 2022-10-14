@@ -5,7 +5,7 @@ import { Select } from "antd";
 const symptoms = [
   {
     id: 1,
-    name: "Abdominal distension",
+    name: "Abdominal Distension",
   },
   {
     id: 2,
@@ -17,15 +17,15 @@ const symptoms = [
   },
   {
     id: 4,
-    name: "Abnormal body movement",
+    name: "Abnormal Body Movement",
   },
   {
     id: 5,
-    name: "Abnormal Posture / GAIT",
+    name: "Abnormal Posture",
   },
   {
     id: 6,
-    name: "Absent cry at birth",
+    name: "Absent Cry At Birth",
   },
   {
     id: 7,
@@ -37,7 +37,7 @@ const symptoms = [
   },
   {
     id: 9,
-    name: "Altered sensorium",
+    name: "Altered Sensorium",
   },
   {
     id: 10,
@@ -53,11 +53,11 @@ const symptoms = [
   },
   {
     id: 13,
-    name: "Back or flank pain",
+    name: "Back Or Flank Pain",
   },
   {
     id: 14,
-    name: "Back pain",
+    name: "Back Pain",
   },
   {
     id: 15,
@@ -65,7 +65,7 @@ const symptoms = [
   },
   {
     id: 16,
-    name: "Bleeding PV",
+    name: "Bleeding Per Vaginum",
   },
   {
     id: 17,
@@ -81,31 +81,31 @@ const symptoms = [
   },
   {
     id: 20,
-    name: "Blood from ear",
+    name: "Blood From Ear",
   },
   {
     id: 21,
-    name: "Blood from mouth",
+    name: "Blood From Mouth",
   },
   {
     id: 22,
-    name: "Blood from nose",
+    name: "Blood From Nose",
   },
   {
     id: 23,
-    name: "Blood in urine",
+    name: "Blood In Urine",
   },
   {
     id: 24,
-    name: "Bloody diarrhea",
+    name: "Bloody Diarrhea",
   },
   {
     id: 25,
-    name: "bluish discoloration",
+    name: "Bluish Discoloration",
   },
   {
     id: 26,
-    name: "Blurred vision",
+    name: "Blurred Vision",
   },
   {
     id: 27,
@@ -117,11 +117,11 @@ const symptoms = [
   },
   {
     id: 29,
-    name: "breathing difficulty",
+    name: "Breathing Difficulty",
   },
   {
     id: 30,
-    name: "Breathing too fast",
+    name: "Breathing Too Fast",
   },
   {
     id: 31,
@@ -133,19 +133,19 @@ const symptoms = [
   },
   {
     id: 33,
-    name: "Bulging oF Eyes",
+    name: "Bulging Of Eyes",
   },
   {
     id: 34,
-    name: "Bump near limbus",
+    name: "Bump Near Limbus",
   },
   {
     id: 35,
-    name: "Burning during micturition",
+    name: "Burning During Micturition",
   },
   {
     id: 36,
-    name: "Burning micturition",
+    name: "Burning Micturition",
   },
   {
     id: 37,
@@ -153,7 +153,7 @@ const symptoms = [
   },
   {
     id: 38,
-    name: "Change in voice",
+    name: "Change In Voice",
   },
   {
     id: 39,
@@ -161,7 +161,7 @@ const symptoms = [
   },
   {
     id: 40,
-    name: "Chest pain",
+    name: "Chest Pain",
   },
   {
     id: 41,
@@ -173,11 +173,11 @@ const symptoms = [
   },
   {
     id: 43,
-    name: "Cold intolerance",
+    name: "Cold Intolerance",
   },
   {
     id: 44,
-    name: "Colicky abdomen pain",
+    name: "Colicky Abdomen Pain",
   },
   {
     id: 45,
@@ -201,7 +201,7 @@ const symptoms = [
   },
   {
     id: 50,
-    name: "CONSTIPATION",
+    name: "Constipation",
   },
   {
     id: 51,
@@ -209,7 +209,7 @@ const symptoms = [
   },
   {
     id: 52,
-    name: "Cor pulmonale",
+    name: "Cor Pulmonale",
   },
   {
     id: 53,
@@ -217,11 +217,11 @@ const symptoms = [
   },
   {
     id: 54,
-    name: "cough with Expectoration",
+    name: "Cough With Expectoration",
   },
   {
     id: 55,
-    name: "Cough without expectoration",
+    name: "Cough Without Expectoration",
   },
   {
     id: 56,
@@ -229,7 +229,7 @@ const symptoms = [
   },
   {
     id: 57,
-    name: "Curtain like shadow over visual field",
+    name: "Curtain Like Shadow Over Visual Field",
   },
   {
     id: 58,
@@ -241,7 +241,7 @@ const symptoms = [
   },
   {
     id: 60,
-    name: "Dark spots in Visual Field",
+    name: "Dark Spots In Visual Field",
   },
   {
     id: 61,
@@ -249,11 +249,11 @@ const symptoms = [
   },
   {
     id: 62,
-    name: "Decrease urine output",
+    name: "Decrease Urine Output",
   },
   {
     id: 63,
-    name: "decrease vision activity",
+    name: "Decrease Vision Activity",
   },
   {
     id: 64,
@@ -261,7 +261,7 @@ const symptoms = [
   },
   {
     id: 65,
-    name: "Decreased vision",
+    name: "Decreased Vision",
   },
   {
     id: 66,
@@ -269,7 +269,7 @@ const symptoms = [
   },
   {
     id: 67,
-    name: "Delayed periods",
+    name: "Delayed Periods",
   },
   {
     id: 68,
@@ -281,7 +281,7 @@ const symptoms = [
   },
   {
     id: 70,
-    name: "Developmental delay",
+    name: "Developmental Delay",
   },
   {
     id: 71,
@@ -289,27 +289,27 @@ const symptoms = [
   },
   {
     id: 72,
-    name: "Difficulty in breathing",
+    name: "Difficulty In Breathing",
   },
   {
     id: 73,
-    name: "Difficulty in movement",
+    name: "Difficulty In Movement",
   },
   {
     id: 74,
-    name: "Difficulty in speech language",
+    name: "Difficulty In Speech Language",
   },
   {
     id: 75,
-    name: "Difficulty in swallowing",
+    name: "Difficulty In Swallowing",
   },
   {
     id: 76,
-    name: "Difficulty walking",
+    name: "Difficulty Walking",
   },
   {
     id: 77,
-    name: "Dilated pupils",
+    name: "Dilated Pupils",
   },
   {
     id: 78,
@@ -337,31 +337,31 @@ const symptoms = [
   },
   {
     id: 84,
-    name: "Double vision",
+    name: "Double Vision",
   },
   {
     id: 85,
-    name: "Drooping of eyelid",
+    name: "Drooping Of Eyelid",
   },
   {
     id: 86,
-    name: "Dropping things",
+    name: "Dropping Things",
   },
   {
     id: 87,
-    name: "Dry cough",
+    name: "Dry Cough",
   },
   {
     id: 88,
-    name: "Dry eyes",
+    name: "Dry Eyes",
   },
   {
     id: 89,
-    name: "Dry mouth",
+    name: "Dry Mouth",
   },
   {
     id: 90,
-    name: "Dry skin",
+    name: "Dry Skin",
   },
   {
     id: 91,
@@ -369,11 +369,11 @@ const symptoms = [
   },
   {
     id: 92,
-    name: "Duration association",
+    name: "Duration Association",
   },
   {
     id: 93,
-    name: "Dust pan",
+    name: "Dust Pan",
   },
   {
     id: 94,
@@ -381,15 +381,15 @@ const symptoms = [
   },
   {
     id: 95,
-    name: "Ear discharge",
+    name: "Ear Discharge",
   },
   {
     id: 96,
-    name: "Easy bruising around face",
+    name: "Easy Bruising Around Face",
   },
   {
     id: 97,
-    name: "Easy fatigability",
+    name: "Easy Fatigability",
   },
   {
     id: 98,
@@ -409,15 +409,15 @@ const symptoms = [
   },
   {
     id: 102,
-    name: "Excess nausea",
+    name: "Excess Nausea",
   },
   {
     id: 103,
-    name: "Excess vomiting",
+    name: "Excess Vomiting",
   },
   {
     id: 104,
-    name: "Exercise intolerance",
+    name: "Exercise Intolerance",
   },
   {
     id: 105,
@@ -425,19 +425,19 @@ const symptoms = [
   },
   {
     id: 106,
-    name: "Extremely painful joints",
+    name: "Extremely Painful Joints",
   },
   {
     id: 107,
-    name: "Eye irritation",
+    name: "Eye Irritation",
   },
   {
     id: 108,
-    name: "Eye fatigue",
+    name: "Eye Fatigue",
   },
   {
     id: 109,
-    name: "Eye pain",
+    name: "Eye Pain",
   },
   {
     id: 110,
@@ -445,7 +445,7 @@ const symptoms = [
   },
   {
     id: 111,
-    name: "F.B. Sensation throat",
+    name: "Foreign Body Sensation Throat",
   },
   {
     id: 112,
@@ -453,7 +453,7 @@ const symptoms = [
   },
   {
     id: 113,
-    name: "Fall built",
+    name: "Fall Built",
   },
   {
     id: 114,
@@ -461,7 +461,7 @@ const symptoms = [
   },
   {
     id: 115,
-    name: "Family history",
+    name: "Family History",
   },
   {
     id: 116,
@@ -469,7 +469,7 @@ const symptoms = [
   },
   {
     id: 117,
-    name: "feeding difficulty",
+    name: "Feeding difficulty",
   },
   {
     id: 118,
@@ -481,15 +481,15 @@ const symptoms = [
   },
   {
     id: 120,
-    name: "Fever with chills",
+    name: "Fever With Chills",
   },
   {
     id: 121,
-    name: "Fever with Chills & Rigor",
+    name: "Fever With Chills & Rigor",
   },
   {
     id: 122,
-    name: "Fever with Rash",
+    name: "Fever With Rash",
   },
   {
     id: 123,
@@ -497,23 +497,23 @@ const symptoms = [
   },
   {
     id: 124,
-    name: "Foamy urine",
+    name: "Foamy Urine",
   },
   {
     id: 125,
-    name: "Foreign body present over cornea",
+    name: "Foreign Body Present Over Cornea",
   },
   {
     id: 126,
-    name: "Foreign body sensation",
+    name: "Foreign Body Sensation",
   },
   {
     id: 127,
-    name: "Freq. pnumonia",
+    name: "Frequent Pnumonia",
   },
   {
     id: 129,
-    name: "Gait disturbance",
+    name: "Gait Disturbance",
   },
   {
     id: 130,
@@ -529,7 +529,7 @@ const symptoms = [
   },
   {
     id: 133,
-    name: "Hair loss site",
+    name: "Hair Loss Site",
   },
   {
     id: 134,
@@ -541,19 +541,19 @@ const symptoms = [
   },
   {
     id: 136,
-    name: "Hearing loss",
+    name: "Hearing Loss",
   },
   {
     id: 137,
-    name: "Heart burn",
+    name: "Heart Burn",
   },
   {
     id: 138,
-    name: "Heat intolerance",
+    name: "Heat Intolerance",
   },
   {
     id: 139,
-    name: "Heavy Menses/ bleeding",
+    name: "Heavy Menses/ Bleeding",
   },
   {
     id: 140,
@@ -585,47 +585,47 @@ const symptoms = [
   },
   {
     id: 147,
-    name: "Impaired behaviour",
+    name: "Impaired Behaviour",
   },
   {
     id: 148,
-    name: "Impaired bladder control",
+    name: "Impaired Bladder Control",
   },
   {
     id: 149,
-    name: "Impaired memory",
+    name: "Impaired Memory",
   },
   {
     id: 150,
-    name: "Impaired thinking",
+    name: "Impaired Thinking",
   },
   {
     id: 151,
-    name: "Inability to close eyes",
+    name: "Inability To Close Eyes",
   },
   {
     id: 152,
-    name: "Inability to take orally",
+    name: "Inability To Take Orally",
   },
   {
     id: 153,
-    name: "Increase palpitations",
+    name: "Increase Palpitations",
   },
   {
     id: 154,
-    name: "Increase urine frequency",
+    name: "Increase Urine Frequency",
   },
   {
     id: 155,
-    name: "Increased fat around the neck",
+    name: "Increased Fat Around The Neck",
   },
   {
     id: 156,
-    name: "Increased hunger",
+    name: "Increased Hunger",
   },
   {
     id: 157,
-    name: "Increased thirst",
+    name: "Increased Thirst",
   },
   {
     id: 158,
@@ -637,15 +637,15 @@ const symptoms = [
   },
   {
     id: 160,
-    name: "Intermenstrual bleeding",
+    name: "Intermenstrual Bleeding",
   },
   {
     id: 161,
-    name: "Irregular BPV",
+    name: "Irregular Blood Pressure Variability",
   },
   {
     id: 162,
-    name: "Irregular periods",
+    name: "Irregular Periods",
   },
   {
     id: 163,
@@ -653,7 +653,7 @@ const symptoms = [
   },
   {
     id: 164,
-    name: "Irritation in throat",
+    name: "Irritation In Throat",
   },
   {
     id: 165,
@@ -661,23 +661,23 @@ const symptoms = [
   },
   {
     id: 166,
-    name: "Itching in ear",
+    name: "Itching In Ear",
   },
   {
     id: 167,
-    name: "Itching in nose",
+    name: "Itching In Nose",
   },
   {
     id: 168,
-    name: "Itching over pelvis",
+    name: "Itching Over Pelvis",
   },
   {
     id: 169,
-    name: "Itching site",
+    name: "Itching Site",
   },
   {
     id: 170,
-    name: "Itching ulcer site",
+    name: "Itching Ulcer Site",
   },
   {
     id: 171,
@@ -685,31 +685,31 @@ const symptoms = [
   },
   {
     id: 172,
-    name: "Joint pain",
+    name: "Joint Pain",
   },
   {
     id: 173,
-    name: "Joint redness",
+    name: "Joint Redness",
   },
   {
     id: 174,
-    name: "Joint stiffness",
+    name: "Joint Stiffness",
   },
   {
     id: 175,
-    name: "Joint swelling",
+    name: "Joint Swelling",
   },
   {
     id: 176,
-    name: "Joint tenderness",
+    name: "Joint Tenderness",
   },
   {
     id: 177,
-    name: "Lack of conciousness",
+    name: "Lack Of Conciousness",
   },
   {
     id: 178,
-    name: "Lack of immunization",
+    name: "Lack Of Immunization",
   },
   {
     id: 179,
@@ -717,11 +717,11 @@ const symptoms = [
   },
   {
     id: 180,
-    name: "Larger waistline",
+    name: "Larger Waistline",
   },
   {
     id: 181,
-    name: "Leaking PV",
+    name: "Leaking Per Vaginum",
   },
   {
     id: 182,
@@ -729,59 +729,59 @@ const symptoms = [
   },
   {
     id: 183,
-    name: "lesion itching",
+    name: "Lesion Itching",
   },
   {
     id: 184,
-    name: "Lid lag",
+    name: "Lid Lag",
   },
   {
     id: 185,
-    name: "Lid swelling",
+    name: "Lid Swelling",
   },
   {
     id: 186,
-    name: "Loose stool",
+    name: "Loose Stool",
   },
   {
     id: 187,
-    name: "Loss of Apetite",
+    name: "Loss Of Apetite",
   },
   {
     id: 188,
-    name: "Loss of conciousness",
+    name: "Loss Of Conciousness",
   },
   {
     id: 189,
-    name: "Loss of depth perception",
+    name: "Loss Of Depth Perception",
   },
   {
     id: 190,
-    name: "loss of feeling in face",
+    name: "Loss Of Feeling In Face",
   },
   {
     id: 191,
-    name: "Loss of flexibility",
+    name: "Loss Of Flexibility",
   },
   {
     id: 192,
-    name: "Loss of smell",
+    name: "Loss Of Smell",
   },
   {
     id: 193,
-    name: "Loss of taste",
+    name: "Loss Of Taste",
   },
   {
     id: 194,
-    name: "Loss of tears",
+    name: "Loss Of Tears",
   },
   {
     id: 195,
-    name: "Loss of vision",
+    name: "Loss Of Vision",
   },
   {
     id: 196,
-    name: "Lower back pain",
+    name: "Lower Back Pain",
   },
   {
     id: 197,
@@ -793,23 +793,23 @@ const symptoms = [
   },
   {
     id: 199,
-    name: "Mild dementia",
+    name: "Mild Dementia",
   },
   {
     id: 200,
-    name: "Mild irritation",
+    name: "Mild Irritation",
   },
   {
     id: 201,
-    name: "Mild pain",
+    name: "Mild Pain",
   },
   {
     id: 202,
-    name: "Missed periods",
+    name: "Missed Periods",
   },
   {
     id: 203,
-    name: "Missed periods > 7 months",
+    name: "Missed Periods More Than Seven months",
   },
   {
     id: 204,
@@ -817,11 +817,11 @@ const symptoms = [
   },
   {
     id: 205,
-    name: "Muscle ache",
+    name: "Muscle Ache",
   },
   {
     id: 206,
-    name: "Muscle spasm",
+    name: "Muscle Spasm",
   },
   {
     id: 207,
@@ -837,15 +837,15 @@ const symptoms = [
   },
   {
     id: 210,
-    name: "NaiL pattern",
+    name: "NaiL Pattern",
   },
   {
     id: 211,
-    name: "Nasal discharge",
+    name: "Nasal Discharge",
   },
   {
     id: 212,
-    name: "Nasal obstruction",
+    name: "Nasal Obstruction",
   },
   {
     id: 213,
@@ -857,11 +857,11 @@ const symptoms = [
   },
   {
     id: 215,
-    name: "Neck stiffness",
+    name: "Neck Stiffness",
   },
   {
     id: 216,
-    name: "Night itch",
+    name: "Night Itch",
   },
   {
     id: 217,
@@ -873,7 +873,7 @@ const symptoms = [
   },
   {
     id: 219,
-    name: "Non passage of Stool",
+    name: "Non passage Of Stool",
   },
   {
     id: 220,
@@ -881,7 +881,7 @@ const symptoms = [
   },
   {
     id: 221,
-    name: "Oral ulcer",
+    name: "Oral Ulcer",
   },
   {
     id: 222,
@@ -893,59 +893,59 @@ const symptoms = [
   },
   {
     id: 224,
-    name: "Pain and stiffness in the hips",
+    name: "Pain And Stiffness In The Hips",
   },
   {
     id: 225,
-    name: "Pain and stiffness in the lower back",
+    name: "Pain And Stiffness In The Lower back",
   },
   {
     id: 226,
-    name: "Pain in ear",
+    name: "Pain In Ear",
   },
   {
     id: 227,
-    name: "Pain in eye movement",
+    name: "Pain In Eye Movement",
   },
   {
     id: 228,
-    name: "Pain in limbs",
+    name: "Pain In Limbs",
   },
   {
     id: 229,
-    name: "Pain in throats",
+    name: "Pain In Throats",
   },
   {
     id: 230,
-    name: "Pain on EOM",
+    name: "Pain On EOM",
   },
   {
     id: 231,
-    name: "Pain ulcer site",
+    name: "Pain Ulcer Site",
   },
   {
     id: 232,
-    name: "Painful coitus",
+    name: "Painful Coitus",
   },
   {
     id: 233,
-    name: "Painful menses",
+    name: "Painful Menses",
   },
   {
     id: 234,
-    name: "Painful micturition",
+    name: "Painful Micturition",
   },
   {
     id: 235,
-    name: "Painless selling on lids",
+    name: "Painless Selling On Lids",
   },
   {
     id: 236,
-    name: "PALE",
+    name: "Pale",
   },
   {
     id: 237,
-    name: "Palms & soles",
+    name: "Palms & Soles",
   },
   {
     id: 238,
@@ -961,7 +961,7 @@ const symptoms = [
   },
   {
     id: 241,
-    name: "Paroxysmal nocturnal dyspnea",
+    name: "Paroxysmal Nocturnal Dyspnea",
   },
   {
     id: 242,
@@ -973,7 +973,7 @@ const symptoms = [
   },
   {
     id: 244,
-    name: "Personal fatigue",
+    name: "Personal Fatigue",
   },
   {
     id: 245,
@@ -981,11 +981,11 @@ const symptoms = [
   },
   {
     id: 246,
-    name: "Periorbital puffiness",
+    name: "Periorbital Puffiness",
   },
   {
     id: 247,
-    name: "Photo sensitivity",
+    name: "Photo Sensitivity",
   },
   {
     id: 248,
@@ -997,15 +997,15 @@ const symptoms = [
   },
   {
     id: 250,
-    name: "Pleuritic pain",
+    name: "Pleuritic Pain",
   },
   {
     id: 252,
-    name: "Poor weight gain",
+    name: "Poor Weight Gain",
   },
   {
     id: 253,
-    name: "Postcoital bleeding",
+    name: "Postcoital Bleeding",
   },
   {
     id: 254,
@@ -1029,7 +1029,7 @@ const symptoms = [
   },
   {
     id: 259,
-    name: "Puffy eyes",
+    name: "Puffy Eyes",
   },
   {
     id: 260,
@@ -1045,11 +1045,11 @@ const symptoms = [
   },
   {
     id: 263,
-    name: "Red lesions",
+    name: "Red Lesions",
   },
   {
     id: 264,
-    name: "Red tender swelling on lids",
+    name: "Red Tender Swelling On Lids",
   },
   {
     id: 265,
@@ -1057,15 +1057,15 @@ const symptoms = [
   },
   {
     id: 266,
-    name: "Redness of eyelid",
+    name: "Redness Of Eyelid",
   },
   {
     id: 267,
-    name: "Refuse to feed",
+    name: "Refuse To Feed",
   },
   {
     id: 268,
-    name: "Resting tremor",
+    name: "Resting Tremor",
   },
   {
     id: 269,
@@ -1077,7 +1077,7 @@ const symptoms = [
   },
   {
     id: 271,
-    name: "Ropy discharge",
+    name: "Ropy Discharge",
   },
   {
     id: 272,
@@ -1089,7 +1089,7 @@ const symptoms = [
   },
   {
     id: 274,
-    name: "Scalp involvement",
+    name: "Scalp Involvement",
   },
   {
     id: 275,
@@ -1097,11 +1097,11 @@ const symptoms = [
   },
   {
     id: 276,
-    name: "Seasonal variation",
+    name: "Seasonal Variation",
   },
   {
     id: 277,
-    name: "Secondary infection",
+    name: "Secondary Infection",
   },
   {
     id: 278,
@@ -1109,11 +1109,11 @@ const symptoms = [
   },
   {
     id: 279,
-    name: "Sensitivity to light",
+    name: "Sensitivity To Light",
   },
   {
     id: 280,
-    name: "Severe headache",
+    name: "Severe Headache",
   },
   {
     id: 281,
@@ -1121,23 +1121,23 @@ const symptoms = [
   },
   {
     id: 282,
-    name: "Shortness of breath",
+    name: "Shortness Of Breath",
   },
   {
     id: 283,
-    name: "Shrill cry",
+    name: "Shrill Cry",
   },
   {
     id: 284,
-    name: "Skin rash",
+    name: "Skin Rash",
   },
   {
     id: 285,
-    name: "Slurring of speech",
+    name: "Slurring Of Speech",
   },
   {
     id: 286,
-    name: "Small yellow growth",
+    name: "Small Yellow Growth",
   },
   {
     id: 287,
@@ -1145,15 +1145,15 @@ const symptoms = [
   },
   {
     id: 288,
-    name: "SOB",
+    name: "Shortness Of Breathing",
   },
   {
     id: 289,
-    name: "SOB on exertion",
+    name: "Shortness Of Breathing On Exertion",
   },
   {
     id: 290,
-    name: "Something coming out of vagina",
+    name: "Something Coming Out Of Vagina",
   },
   {
     id: 291,
@@ -1161,11 +1161,11 @@ const symptoms = [
   },
   {
     id: 292,
-    name: "Spine deformity",
+    name: "Spine Deformity",
   },
   {
     id: 293,
-    name: "Spine stiffness",
+    name: "Spine Stiffness",
   },
   {
     id: 294,
@@ -1177,11 +1177,11 @@ const symptoms = [
   },
   {
     id: 296,
-    name: "Steroid abuse",
+    name: "Steroid Abuse",
   },
   {
     id: 297,
-    name: "Stiff neck",
+    name: "Stiff Neck",
   },
   {
     id: 298,
@@ -1193,11 +1193,11 @@ const symptoms = [
   },
   {
     id: 300,
-    name: "Swelling in muscle",
+    name: "Swelling In Muscle",
   },
   {
     id: 301,
-    name: "Swollen finger & toes",
+    name: "Swollen Finger & Toes",
   },
   {
     id: 302,
@@ -1209,11 +1209,11 @@ const symptoms = [
   },
   {
     id: 304,
-    name: "Temperature instability",
+    name: "Temperature Instability",
   },
   {
     id: 305,
-    name: "tender red ",
+    name: "Tender Red",
   },
   {
     id: 306,
@@ -1229,11 +1229,11 @@ const symptoms = [
   },
   {
     id: 309,
-    name: "Tracheal shift",
+    name: "Tracheal Shift",
   },
   {
     id: 310,
-    name: "Trail sign",
+    name: "Trail Sign",
   },
   {
     id: 311,
@@ -1241,7 +1241,7 @@ const symptoms = [
   },
   {
     id: 312,
-    name: "Trouble seeing",
+    name: "Trouble Seeing",
   },
   {
     id: 313,
@@ -1249,11 +1249,11 @@ const symptoms = [
   },
   {
     id: 314,
-    name: "Unable to conceive",
+    name: "Unable To Conceive",
   },
   {
     id: 315,
-    name: "Urinary incontinence",
+    name: "Urinary Incontinence",
   },
   {
     id: 316,
@@ -1273,15 +1273,15 @@ const symptoms = [
   },
   {
     id: 320,
-    name: "Weakness in face",
+    name: "Weakness In Face",
   },
   {
     id: 321,
-    name: "Weakness of limbs",
+    name: "Weakness Of Limbs",
   },
   {
     id: 322,
-    name: "Weight gain",
+    name: "Weight Gain",
   },
   {
     id: 323,
@@ -1293,7 +1293,7 @@ const symptoms = [
   },
   {
     id: 325,
-    name: "Young age",
+    name: "Young Age",
   },
 ];
 
