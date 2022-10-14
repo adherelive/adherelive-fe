@@ -4,6 +4,9 @@ import {
   getScheduleEventsUrl,
   getAppointmentCompleteUrl,
   getAllMissedScheduleEventsUrl,
+  //AKSHAY NEW CODE IMPLEMENTATIONS
+  getAllMissedChartsCount,
+  getAllMissedEventDataByQueryUrl,
 } from "../../Helper/urls/event";
 import {
   getCalenderDataCountForDayUrl,
@@ -239,6 +242,66 @@ export const getAllMissedScheduleEvents = () => {
       response = await doRequest({
         method: REQUEST_TYPE.GET,
         url: getAllMissedScheduleEventsUrl(),
+      });
+
+      const { status, payload: { data, error } = {} } = response || {};
+      if (status === true) {
+        dispatch({
+          type: GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED,
+          data: data,
+        });
+      } else {
+        dispatch({
+          type: GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED,
+          error,
+        });
+      }
+    } catch (error) {
+      console.log("GetAllMissedScheduleEvents Error --->", error);
+    }
+    return response;
+  };
+};
+// AKSHAY NEW CODE IMPLEMENTATIONS
+export const getAllMissedEventDataByQuery = () => {
+  let response = {};
+  return async (dispatch) => {
+    try {
+      dispatch({ type: GET_ALL_MISSED_SCHEDULE_EVENTS_START });
+
+      response = await doRequest({
+        method: REQUEST_TYPE.GET,
+        url: getAllMissedEventDataByQueryUrl(),
+      });
+
+      const { status, payload: { data, error } = {} } = response || {};
+      if (status === true) {
+        dispatch({
+          type: GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED,
+          data: data,
+        });
+      } else {
+        dispatch({
+          type: GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED,
+          error,
+        });
+      }
+    } catch (error) {
+      console.log("GetAllMissedScheduleEvents Error --->", error);
+    }
+    return response;
+  };
+};
+
+export const getAllMissedEventChartCount = () => {
+  let response = {};
+  return async (dispatch) => {
+    try {
+      dispatch({ type: GET_ALL_MISSED_SCHEDULE_EVENTS_START });
+
+      response = await doRequest({
+        method: REQUEST_TYPE.GET,
+        url: getAllMissedChartsCount(),
       });
 
       const { status, payload: { data, error } = {} } = response || {};

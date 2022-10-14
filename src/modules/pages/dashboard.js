@@ -7,13 +7,26 @@ function missedEventReducer(state, data) {
     missed_vitals = {},
     missed_diets = {},
     missed_workouts = {},
+    // AKSHAY NEW CODE IMPLEMENTATIONS
+    appointment_ids = {},
+    diet_ids = {},
+    medication_ids = {},
+    vital_ids = {},
+    workout_ids = {},
   } = data || {};
+
+  console.log("datadata", data);
   if (
     Object.keys(missed_medications).length > 0 ||
     Object.keys(missed_appointments).length > 0 ||
     Object.keys(missed_vitals).length > 0 ||
     Object.keys(missed_diets).length > 0 ||
-    Object.keys(missed_workouts).length > 0
+    Object.keys(missed_workouts).length > 0 ||
+    Object.keys(appointment_ids).length > 0 ||
+    Object.keys(diet_ids).length > 0 ||
+    Object.keys(medication_ids).length > 0 ||
+    Object.keys(vital_ids).length > 0 ||
+    Object.keys(workout_ids).length > 0
   ) {
     return {
       ...state,

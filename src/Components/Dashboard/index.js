@@ -110,6 +110,8 @@ class Dashboard extends Component {
       searchCondition,
       medicines,
       features,
+      // AKSHAY NEW CODE IMPLEMENTATIONS
+      getAllMissedEventChartCount,
     } = this.props;
 
     // this.setState({ loading: true });
@@ -152,7 +154,10 @@ class Dashboard extends Component {
       getAllFeatures();
     }
 
-    getAllMissedScheduleEvents();
+    // getAllMissedScheduleEvents();
+    // AKSHAY NEW CODE IMPLEMENTATIONS
+    getAllMissedEventChartCount();
+
     this.initiateInAppNotificationObj();
   }
 
@@ -316,6 +321,7 @@ class Dashboard extends Component {
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
   chartClicked = (name) => {
+    const { getAllMissedEventDataByQuery } = this.props;
     if (name === CHART_MISSED_APPOINTMENT) {
       const { openMissedAppointmentDrawer } = this.props;
       openMissedAppointmentDrawer();
@@ -326,6 +332,7 @@ class Dashboard extends Component {
       const { openMissedMedicationDrawer } = this.props;
       openMissedMedicationDrawer();
     } else if (name === CHART_MISSED_DIET) {
+      // getAllMissedEventDataByQuery();
       const { openMissedDietDrawer } = this.props;
       openMissedDietDrawer();
     } else if (name === CHART_MISSED_WORKOUT) {

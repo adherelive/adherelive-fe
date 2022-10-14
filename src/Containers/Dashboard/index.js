@@ -19,7 +19,11 @@ import { showVerifyModal } from "../../modules/pages/features";
 import { getAllFeatures } from "../../modules/featuresMappings";
 import { DRAWER } from "../../constant";
 import { open } from "../../modules/drawer";
-import { getAllMissedScheduleEvents } from "../../modules/scheduleEvents";
+import {
+  getAllMissedScheduleEvents,
+  getAllMissedEventChartCount,
+  getAllMissedEventDataByQuery,
+} from "../../modules/scheduleEvents";
 import { setUnseenNotificationCount } from "../../modules/pages/NotificationCount";
 import { getAllDietsForDoctor } from "../../modules/diets";
 // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
@@ -120,6 +124,9 @@ const mapDispatchToProps = (dispatch) => {
     getDiagnosisList: (payload) => dispatch(getDiagnosisList(payload)),
     addDiagnosis: (payload) => dispatch(addDiagnosis(payload)),
     diagnosisSearch: (payload) => dispatch(diagnosisSearch(payload)),
+    getAllMissedEventChartCount: () => dispatch(getAllMissedEventChartCount()),
+    getAllMissedEventDataByQuery: () =>
+      dispatch(getAllMissedEventDataByQuery()),
   };
 };
 

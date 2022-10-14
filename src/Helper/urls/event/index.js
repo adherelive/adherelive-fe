@@ -99,6 +99,15 @@ export const getAllMissedScheduleEventsUrl = () => {
   return `/events/missed`;
 };
 
+// AKSHAY NEW CODE IMPLEMENTATIONS FOR DASHBOARD GRAPHS
+
+export const getAllMissedChartsCount = () => {
+  return `/events/count`;
+};
+export const getAllMissedEventDataByQueryUrl = () => {
+  return `/events/details?event_type=diet`;
+};
+
 export const getPatientMissedEventsUrl = (patient_id) => {
   return `/events/missed/${patient_id}`;
 };
