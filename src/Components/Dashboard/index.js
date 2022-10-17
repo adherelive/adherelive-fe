@@ -324,19 +324,23 @@ class Dashboard extends Component {
     const { getAllMissedEventDataByQuery } = this.props;
     if (name === CHART_MISSED_APPOINTMENT) {
       const { openMissedAppointmentDrawer } = this.props;
+      getAllMissedEventDataByQuery("appointment");
       openMissedAppointmentDrawer();
     } else if (name === CHART_MISSED_ACTION) {
       const { openMissedVitalDrawer } = this.props;
+      getAllMissedEventDataByQuery("vitals");
       openMissedVitalDrawer();
     } else if (name === CHART_MISSED_MEDICATION) {
       const { openMissedMedicationDrawer } = this.props;
+      getAllMissedEventDataByQuery("medication-reminder");
       openMissedMedicationDrawer();
     } else if (name === CHART_MISSED_DIET) {
-      // getAllMissedEventDataByQuery();
+      getAllMissedEventDataByQuery("diet");
       const { openMissedDietDrawer } = this.props;
       openMissedDietDrawer();
     } else if (name === CHART_MISSED_WORKOUT) {
       const { openMissedWorkoutDrawer } = this.props;
+      getAllMissedEventDataByQuery("workout");
       openMissedWorkoutDrawer();
     }
   };

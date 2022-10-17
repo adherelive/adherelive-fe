@@ -263,7 +263,7 @@ export const getAllMissedScheduleEvents = () => {
   };
 };
 // AKSHAY NEW CODE IMPLEMENTATIONS
-export const getAllMissedEventDataByQuery = () => {
+export const getAllMissedEventDataByQuery = (type) => {
   let response = {};
   return async (dispatch) => {
     try {
@@ -271,7 +271,7 @@ export const getAllMissedEventDataByQuery = () => {
 
       response = await doRequest({
         method: REQUEST_TYPE.GET,
-        url: getAllMissedEventDataByQueryUrl(),
+        url: getAllMissedEventDataByQueryUrl(type),
       });
 
       const { status, payload: { data, error } = {} } = response || {};

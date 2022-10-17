@@ -104,8 +104,8 @@ export const getAllMissedScheduleEventsUrl = () => {
 export const getAllMissedChartsCount = () => {
   return `/events/count`;
 };
-export const getAllMissedEventDataByQueryUrl = () => {
-  return `/events/details?event_type=diet`;
+export const getAllMissedEventDataByQueryUrl = (type) => {
+  return `/events/details?event_type=${type}`;
 };
 
 export const getPatientMissedEventsUrl = (patient_id) => {

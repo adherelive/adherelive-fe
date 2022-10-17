@@ -125,8 +125,8 @@ const mapDispatchToProps = (dispatch) => {
     addDiagnosis: (payload) => dispatch(addDiagnosis(payload)),
     diagnosisSearch: (payload) => dispatch(diagnosisSearch(payload)),
     getAllMissedEventChartCount: () => dispatch(getAllMissedEventChartCount()),
-    getAllMissedEventDataByQuery: () =>
-      dispatch(getAllMissedEventDataByQuery()),
+    getAllMissedEventDataByQuery: (type) =>
+      dispatch(getAllMissedEventDataByQuery(type)),
   };
 };
 
