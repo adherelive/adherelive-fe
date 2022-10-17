@@ -1,9 +1,12 @@
 import isEmpty from "../../Helper/is-empty";
 
 export const GET_MEDICINES_NAMES = "GET_MEDICINES_NAMES";
+export const SET_MISSED_CHART_DRAWER_LOADING =
+  "SET_MISSED_CHART_DRAWER_LOADING";
 
 export const COMMON_INITIAL_STATE = {
   medicinesNames: [],
+  missedChartDrawerLoading: true,
 };
 
 export default (state = COMMON_INITIAL_STATE, action = {}) => {
@@ -14,6 +17,11 @@ export default (state = COMMON_INITIAL_STATE, action = {}) => {
       return {
         ...state,
         medicinesNames: payload,
+      };
+    case SET_MISSED_CHART_DRAWER_LOADING:
+      return {
+        ...state,
+        missedChartDrawerLoading: payload,
       };
     default:
       return state;

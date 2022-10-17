@@ -14,6 +14,7 @@ import {
   getDoctorsCalenderDataForDayUrl,
 } from "../../Helper/urls/provider";
 import { getPatientLastVisitAlertUrl } from "../../Helper/url/patients";
+import { SET_MISSED_CHART_DRAWER_LOADING } from "../commonReducer";
 
 export const GET_SCHEDULE_EVENTS_START = "GET_SCHEDULE_EVENTS_START";
 export const GET_SCHEDULE_EVENTS_COMPLETED = "GET_SCHEDULE_EVENTS_COMPLETED";
@@ -267,6 +268,7 @@ export const getAllMissedEventDataByQuery = (type) => {
   let response = {};
   return async (dispatch) => {
     try {
+      dispatch({ type: SET_MISSED_CHART_DRAWER_LOADING, payload: true });
       dispatch({ type: GET_ALL_MISSED_SCHEDULE_EVENTS_START });
 
       response = await doRequest({
@@ -280,11 +282,13 @@ export const getAllMissedEventDataByQuery = (type) => {
           type: GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED,
           data: data,
         });
+        dispatch({ type: SET_MISSED_CHART_DRAWER_LOADING, payload: false });
       } else {
         dispatch({
           type: GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED,
           error,
         });
+        dispatch({ type: SET_MISSED_CHART_DRAWER_LOADING, payload: false });
       }
     } catch (error) {
       console.log("GetAllMissedScheduleEvents Error --->", error);
