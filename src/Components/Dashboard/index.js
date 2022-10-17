@@ -110,6 +110,8 @@ class Dashboard extends Component {
       searchCondition,
       medicines,
       features,
+      // AKSHAY NEW CODE IMPLEMENTATIONS
+      getAllMissedEventChartCount,
     } = this.props;
 
     // this.setState({ loading: true });
@@ -152,7 +154,10 @@ class Dashboard extends Component {
       getAllFeatures();
     }
 
-    getAllMissedScheduleEvents();
+    // getAllMissedScheduleEvents();
+    // AKSHAY NEW CODE IMPLEMENTATIONS
+    getAllMissedEventChartCount();
+
     this.initiateInAppNotificationObj();
   }
 
@@ -316,20 +321,26 @@ class Dashboard extends Component {
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
   chartClicked = (name) => {
+    const { getAllMissedEventDataByQuery } = this.props;
     if (name === CHART_MISSED_APPOINTMENT) {
       const { openMissedAppointmentDrawer } = this.props;
+      getAllMissedEventDataByQuery("appointment");
       openMissedAppointmentDrawer();
     } else if (name === CHART_MISSED_ACTION) {
       const { openMissedVitalDrawer } = this.props;
+      getAllMissedEventDataByQuery("vitals");
       openMissedVitalDrawer();
     } else if (name === CHART_MISSED_MEDICATION) {
       const { openMissedMedicationDrawer } = this.props;
+      getAllMissedEventDataByQuery("medication-reminder");
       openMissedMedicationDrawer();
     } else if (name === CHART_MISSED_DIET) {
+      getAllMissedEventDataByQuery("diet");
       const { openMissedDietDrawer } = this.props;
       openMissedDietDrawer();
     } else if (name === CHART_MISSED_WORKOUT) {
       const { openMissedWorkoutDrawer } = this.props;
+      getAllMissedEventDataByQuery("workout");
       openMissedWorkoutDrawer();
     }
   };

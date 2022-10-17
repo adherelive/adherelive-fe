@@ -171,7 +171,7 @@ class MissedMedicationsDrawer extends Component {
   };
 
   render() {
-    const { visible = false } = this.props;
+    const { visible = false, missedChartDrawerLoading } = this.props;
     const { fetching } = this.state;
 
     if (visible !== true) {
@@ -188,7 +188,7 @@ class MissedMedicationsDrawer extends Component {
           width={`30%`}
         >
           <div className="mt20 black-85 wp100">
-            {fetching ? (
+            {missedChartDrawerLoading ? (
               <Spin size="small" className="flex align-center justify-center" />
             ) : (
               this.getVitalList()

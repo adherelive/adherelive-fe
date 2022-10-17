@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
     drawer: { visible, loading, data: { type, payload = {} } = {} },
     patients = {},
     pages: { dashboard: { missed_vitals, vital_ids } = {} } = {},
+    commonReducer: { missedChartDrawerLoading },
   } = state;
 
   return {
@@ -27,6 +28,7 @@ const mapStateToProps = (state) => {
     patients,
     missed_vitals,
     vital_ids,
+    missedChartDrawerLoading,
   };
 };
 
