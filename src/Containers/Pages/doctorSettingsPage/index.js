@@ -17,6 +17,11 @@ import {
 import { open } from "../../../modules/drawer";
 import { DRAWER } from "../../../constant";
 
+// AKSHAY NEW CODE FOR SUBSCRIPTIONS
+
+import { getServices } from "../../../modules/subscription/services";
+import { getSubscriptions } from "../../../modules/subscription/subscriptions";
+
 const mapStateToProps = (state) => {
   const {
     auth,
@@ -29,6 +34,9 @@ const mapStateToProps = (state) => {
       authenticated_category,
     } = {},
     account_details = {},
+    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    subscription: { services = {} },
+    providers,
   } = state;
 
   return {
@@ -40,6 +48,8 @@ const mapStateToProps = (state) => {
     authenticated_category,
     account_details,
     user_roles,
+    services,
+    providers,
   };
 };
 
@@ -63,6 +73,9 @@ const mapDispatchToProps = (dispatch) => {
     deleteAccountDetails: (id) => dispatch(deleteAccountDetails(id)),
     updateAccountDetails: (id, payload) =>
       dispatch(updateAccountDetails(id, payload)),
+    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    getServices: () => dispatch(getServices()),
+    getSubscriptions: () => dispatch(getSubscriptions()),
   };
 };
 

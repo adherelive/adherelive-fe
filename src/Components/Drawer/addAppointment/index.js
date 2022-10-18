@@ -14,6 +14,7 @@ import { RADIOLOGY } from "../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
+import isEmpty from "../../../Helper/is-empty";
 
 class AddAppointment extends Component {
   constructor(props) {
@@ -46,6 +47,11 @@ class AddAppointment extends Component {
       addCarePlanAppointment,
       payload: { patient_id },
       carePlanId,
+      updateActivityById,
+      scheduleAppointment,
+      setFlashCard,
+      history,
+      setScheduleAppontmentData,
     } = this.props;
     const { formRef = {}, formatMessage } = this;
 
@@ -70,6 +76,7 @@ class AddAppointment extends Component {
           description = "",
           treatment = "",
           radiology_type = "",
+          appointment_careplan,
         } = values;
 
         // if(type === RADIOLOGY){
@@ -99,8 +106,13 @@ class AddAppointment extends Component {
         const data = newProvider_id
           ? {
               // todo: change participant one with patient from store
+              // participant_two: {
+              //   id: patient_id,
+              //   category: "patient",
+              // },
+              // AKSHAY NEW CODE IMPLEMENTAION FOR SUBSCRIPTION
               participant_two: {
-                id: patient_id,
+                id: !isEmpty(scheduleAppointment) ? 1 : patient_id,
                 category: "patient",
               },
               date,
@@ -113,12 +125,19 @@ class AddAppointment extends Component {
               provider_id: newProvider_id,
               provider_name,
               critical,
-              treatment_id: treatment,
+              // treatment_id: treatment,
+              treatment_id: !isEmpty(scheduleAppointment)
+                ? appointment_careplan
+                : treatment,
             }
           : {
               // todo: change participant one with patient from store
+              // participant_two: {
+              //   id: patient_id,
+              //   category: "patient",
+              // },
               participant_two: {
-                id: patient_id,
+                id: !isEmpty(scheduleAppointment) ? 1 : patient_id,
                 category: "patient",
               },
               date,
@@ -130,7 +149,10 @@ class AddAppointment extends Component {
               type_description,
               provider_name,
               critical,
-              treatment_id: treatment,
+              // treatment_id: treatment,
+              treatment_id: !isEmpty(scheduleAppointment)
+                ? appointment_careplan
+                : treatment,
             };
 
         if (type === RADIOLOGY) {
@@ -162,6 +184,7 @@ class AddAppointment extends Component {
               status,
               statusCode: code,
               payload: {
+                data: { appointment_id = "" },
                 message: errorMessage = "",
                 error: { error_type = "" } = {},
               },
@@ -176,6 +199,34 @@ class AddAppointment extends Component {
             } else if (status === true) {
               resetFields();
               message.success(formatMessage(messages.add_appointment_success));
+
+              // AKSHAY NEW CODE FOR SUBSCRIPTION
+
+              if (!isEmpty(scheduleAppointment)) {
+                const formData = {
+                  appointment_id: appointment_id,
+                  appointment_time: newEventStartTime,
+                  status: "scheduled",
+                  // provider_id: newProvider_id,
+                };
+                let updateResponse = await updateActivityById(
+                  scheduleAppointment.id,
+                  formData
+                );
+                if (
+                  updateResponse &&
+                  scheduleAppointment.fromButton === "start"
+                ) {
+                  localStorage.setItem("flashcardOpen", true);
+                  setFlashCard(true);
+                  history.push("patients/1");
+                } else if (
+                  updateResponse &&
+                  scheduleAppointment.fromButton === "schedule"
+                ) {
+                  setScheduleAppontmentData({});
+                }
+              }
               // getAppointments(patient_id);
             } else {
               if (code === 500) {
@@ -196,7 +247,7 @@ class AddAppointment extends Component {
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
   onClose = () => {
-    const { close } = this.props;
+    const { close, setScheduleAppontmentData } = this.props;
     const { formRef } = this;
     const {
       props: {
@@ -205,6 +256,8 @@ class AddAppointment extends Component {
     } = formRef;
     resetFields();
     close();
+    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    setScheduleAppontmentData({});
   };
 
   setFormRef = (formRef) => {
@@ -215,8 +268,13 @@ class AddAppointment extends Component {
   };
 
   render() {
-    const { visible, hideAppointment, appointmentVisible, editAppointment } =
-      this.props;
+    const {
+      visible,
+      hideAppointment,
+      appointmentVisible,
+      editAppointment,
+      scheduleAppointment,
+    } = this.props;
     const { disabledSubmit, submitting = false } = this.state;
 
     const { onClose, formatMessage, setFormRef, handleSubmit, FormWrapper } =
@@ -267,7 +325,12 @@ class AddAppointment extends Component {
           <Footer
             onSubmit={handleSubmit}
             onClose={onClose}
-            submitText={formatMessage(messages.submit_text)}
+            submitText={
+              !isEmpty(scheduleAppointment) &&
+              scheduleAppointment.fromButton === "start"
+                ? "Submit and start"
+                : formatMessage(messages.submit_text)
+            }
             submitButtonProps={submitButtonProps}
             cancelComponent={null}
             submitting={submitting}

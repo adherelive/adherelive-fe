@@ -22,6 +22,7 @@ import message from "antd/es/message";
 // AKSHAY NEW COE FOR ANTD V4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
+import isEmpty from "../../../Helper/is-empty";
 
 const { Item: FormItem } = Form;
 const { Option, OptGroup } = Select;
@@ -38,6 +39,8 @@ const APPOINTMENT_TYPE_DESCRIPTION = "type_description";
 const PROVIDER_ID = "provider_id";
 const REASON = "reason";
 const RADIOLOGY_TYPE = "radiology_type";
+// AKSHAY NEW CODE IMPLEMENTATION
+const APPOINTMENT_CAREPLAN = "appointment_careplan";
 
 const FIELDS = [
   PATIENT,
@@ -50,6 +53,8 @@ const FIELDS = [
   APPOINTMENT_TYPE_DESCRIPTION,
   PROVIDER_ID,
   RADIOLOGY_TYPE,
+  // AKSHAY NEW CODE IMPLEMENTATION
+  APPOINTMENT_CAREPLAN,
 ];
 
 class AddAppointmentForm extends Component {
@@ -64,13 +69,18 @@ class AddAppointmentForm extends Component {
       radiologyDropDownVisible: false,
       radiologyTypeSelected: null,
       typeDescValue: "",
+      carePlans: [],
     };
   }
 
   componentDidMount() {
     this.scrollToTop();
+    const { scheduleAppointment, getPatientCareplanByPatientId } = this.props;
     this.getMedicalTestFavourites();
     this.getRadiologyFavourites();
+    if (!isEmpty(scheduleAppointment)) {
+      this.getCarePlanForPatient();
+    }
   }
 
   getMedicalTestFavourites = async () => {
@@ -108,6 +118,30 @@ class AddAppointmentForm extends Component {
       }
     } catch (error) {
       console.log("RadiologyResponse Get errrrorrrr ===>", error);
+    }
+  };
+
+  // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+  getCarePlanForPatient = async () => {
+    try {
+      const { getPatientCareplanByPatientId, scheduleAppointment } = this.props;
+      const getCarePlanResponse = await getPatientCareplanByPatientId(
+        scheduleAppointment.patient_id
+      );
+      const {
+        status,
+        statusCode,
+        payload: { data = {}, message: resp_msg = "" } = {},
+      } = getCarePlanResponse || {};
+      if (!status) {
+        message.error(resp_msg);
+      } else if (status) {
+        this.setState({
+          carePlans: data.careplans,
+        });
+      }
+    } catch (error) {
+      console.log("Patient Careplans Get errrrorrrr ===>", error);
     }
   };
 
@@ -300,9 +334,28 @@ class AddAppointmentForm extends Component {
   getTypeOption = () => {
     let {
       static_templates: { appointments: { appointment_type = {} } = {} } = {},
+      scheduleAppointment = {},
     } = this.props;
+    // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+    let finalType = {};
+    if (!isEmpty(scheduleAppointment)) {
+      for (let type of Object.keys(appointment_type)) {
+        let { title = "" } = appointment_type[type] || {};
+        if (title === "Consultation") {
+          finalType[type] = appointment_type[type];
+        }
+      }
+    } else {
+      for (let type of Object.keys(appointment_type)) {
+        let { title = "" } = appointment_type[type] || {};
+        if (title !== "Consultation") {
+          finalType[type] = appointment_type[type];
+        }
+      }
+    }
+
     let newTypes = [];
-    for (let type of Object.keys(appointment_type)) {
+    for (let type of Object.keys(finalType)) {
       let { title = "" } = appointment_type[type] || {};
       newTypes.push(
         <Option key={type} value={type}>
@@ -728,6 +781,7 @@ class AddAppointmentForm extends Component {
   render() {
     const {
       form: { getFieldDecorator, isFieldTouched, getFieldError, getFieldValue },
+      scheduleAppointment,
     } = this.props;
     const { radiologyTypeSelected = null } = this.state;
     const {
@@ -789,6 +843,39 @@ class AddAppointmentForm extends Component {
             </Select>
           )}
         </FormItem>
+
+        {/* AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION */}
+
+        {!isEmpty(scheduleAppointment) && (
+          <>
+            <div className="flex mt24 direction-row flex-grow-1">
+              <label
+                htmlFor="type"
+                className="form-label"
+                title={"Select treatment"}
+              >
+                {/* {formatMessage(messages.appointmentType)} */}
+                Select treatment
+              </label>
+
+              <div className="star-red">*</div>
+            </div>
+
+            <FormItem>
+              {getFieldDecorator(APPOINTMENT_CAREPLAN, {
+                rules: [{ required: true, message: "Please Select Careplan" }],
+              })(
+                <Select
+                  className="drawer-select"
+                  placeholder={"Select Careplan"}
+                  onSelect={this.handleCareplanSelect}
+                >
+                  {this.getCareplanOption()}
+                </Select>
+              )}
+            </FormItem>
+          </>
+        )}
 
         {typeValue !== RADIOLOGY && (
           <Fragment>
@@ -982,6 +1069,12 @@ class AddAppointmentForm extends Component {
               onBlur={handleDateSelect(currentDate)}
               // suffixIcon={calendarComp()}
               disabledDate={disabledDate}
+              disabled={
+                !isEmpty(scheduleAppointment) &&
+                scheduleAppointment.fromButton === "start"
+                  ? true
+                  : false
+              }
               // getCalendarContainer={this.getParentNode}
             />
           )}
@@ -1010,7 +1103,15 @@ class AddAppointmentForm extends Component {
                 START_TIME,
                 {}
               )(
-                <Dropdown overlay={getTimePicker(START_TIME)}>
+                <Dropdown
+                  overlay={getTimePicker(START_TIME)}
+                  disabled={
+                    !isEmpty(scheduleAppointment) &&
+                    scheduleAppointment.fromButton === "start"
+                      ? true
+                      : false
+                  }
+                >
                   <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
                     <div>{getStartTime()}</div>
                     <ClockCircleOutlined />
@@ -1042,7 +1143,15 @@ class AddAppointmentForm extends Component {
                 END_TIME,
                 {}
               )(
-                <Dropdown overlay={getTimePicker(END_TIME)}>
+                <Dropdown
+                  overlay={getTimePicker(END_TIME)}
+                  disabled={
+                    !isEmpty(scheduleAppointment) &&
+                    scheduleAppointment.fromButton === "start"
+                      ? true
+                      : false
+                  }
+                >
                   <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
                     <div>{getEndTime()}</div>
                     <ClockCircleOutlined />

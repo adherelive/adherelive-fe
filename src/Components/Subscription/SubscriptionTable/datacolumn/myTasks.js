@@ -38,12 +38,12 @@ export default (props) => {
     // }
   };
 
-  const { data: { editable } = {} } = props;
+  // const { data: { editable } = {} } = props;
   // console.log("5464564564645654",provider_id);
 
-  if (!editable) {
-    return null;
-  }
+  // if (!editable) {
+  //   return null;
+  // }
 
   return (
     <Tooltip

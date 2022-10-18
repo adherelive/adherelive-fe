@@ -1,22 +1,24 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { injectIntl } from "react-intl";
-import { Table, Empty } from "antd";
+import { Table, Icon, Empty } from "antd";
 import generateRow from "./datarow";
 // import { USER_PERMISSIONS } from '../../../constant'
 import getColumn from "./header";
 import messages from "./messages";
 import message from "antd/es/message";
 import EditRecommendSubscription from "../Drawer/RecommendSubscription/EditRecommendSubscription";
+import EditRecommendService from "../Drawer/RecommendService/EditRecommendService";
 import MyTasks from "../Drawer/MyTasks/index";
-import Icon from "@ant-design/icons";
 import { LoadingOutlined } from "@ant-design/icons";
 
 class SubscriptionTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      editSubscriptionDrawer: false,
       editServiceDrawer: false,
       myTasksDrawer: false,
+      editData: {},
     };
   }
 
@@ -32,11 +34,19 @@ class SubscriptionTable extends Component {
   };
 
   onCloseDrawer = () => {
-    this.setState({ editServiceDrawer: false, myTasksDrawer: false });
+    this.setState({
+      editServiceDrawer: false,
+      myTasksDrawer: false,
+      editSubscriptionDrawer: false,
+    });
   };
 
-  onOpenEditServiceDrawer = () => {
-    this.setState({ editServiceDrawer: true });
+  onOpenEditServiceDrawer = (data) => {
+    if (data.type === "service") {
+      this.setState({ editServiceDrawer: true, editData: data });
+    } else {
+      this.setState({ editSubscriptionDrawer: true, editData: data });
+    }
   };
   onOpenMyTasksDrawer = () => {
     this.setState({ myTasksDrawer: true });
@@ -52,62 +62,29 @@ class SubscriptionTable extends Component {
       openConsultationFeeDrawer,
       intl: { formatMessage } = {},
       payment_products = {},
+      recommendServices,
     } = this.props;
-    const dummyProducts = {
-      7: {
-        basic_info: {
-          id: 7,
-          name: "Remote monitoring",
-          type: "Physical",
-          amount: 200,
-        },
-        creator_role_id: 10,
-        creator_type: "doctor",
-        for_user_role_id: 10,
-        for_user_type: "doctor",
-        product_user_type: "patient",
-        details: null,
-        razorpay_link: "",
-      },
-      14: {
-        basic_info: {
-          id: 14,
-          name: "At clinic physical consultation",
-          type: "Digital",
-          amount: 300,
-        },
-        creator_role_id: 10,
-        creator_type: "doctor",
-        for_user_role_id: 10,
-        for_user_type: "doctor",
-        product_user_type: "patient",
-        details: null,
-        razorpay_link: "",
-      },
-    };
-
-    console.log(doctors);
 
     // const {onRowClick} = this;
     let options = [];
 
-    for (let each in dummyProducts) {
-      const { creator_role_id = null, for_user_role_id = null } =
-        dummyProducts[each] || {};
-      if (creator_role_id !== null) {
-        options.push(
-          generateRow({
-            ...dummyProducts[each],
-            deleteDoctorProduct: deleteDoctorPaymentProduct,
-            openConsultationFeeDrawer,
-            onOpenEditServiceDrawer: this.onOpenEditServiceDrawer,
-            onOpenMyTasksDrawer: this.onOpenMyTasksDrawer,
-            formatMessage,
-            doctors,
-            editable: creator_role_id === for_user_role_id ? true : false,
-          })
-        );
-      }
+    for (let each in recommendServices) {
+      // const { creator_role_id = null, for_user_role_id = null } =
+      // recommendServices[each] || {};
+      // if (creator_role_id !== null) {
+      options.push(
+        generateRow({
+          ...recommendServices[each],
+          // deleteDoctorProduct: deleteDoctorPaymentProduct,
+          // openConsultationFeeDrawer,
+          onOpenEditServiceDrawer: this.onOpenEditServiceDrawer,
+          onOpenMyTasksDrawer: this.onOpenMyTasksDrawer,
+          formatMessage,
+          // doctors,
+          // editable: creator_role_id === for_user_role_id ? true : false,
+        })
+      );
+      // }
     }
 
     console.log(options);
@@ -116,7 +93,12 @@ class SubscriptionTable extends Component {
   };
 
   render() {
-    const { editServiceDrawer, myTasksDrawer } = this.state;
+    const {
+      editServiceDrawer,
+      myTasksDrawer,
+      editSubscriptionDrawer,
+      editData,
+    } = this.state;
     const {
       // onRow,
       onSelectChange,
@@ -141,7 +123,7 @@ class SubscriptionTable extends Component {
     };
 
     return (
-      <Fragment>
+      <>
         <Table
           // onRow={authPermissions.includes(USER_PERMISSIONS.PATIENTS.VIEW) ? onRow : null}
           rowClassName={() => "pointer"}
@@ -159,15 +141,23 @@ class SubscriptionTable extends Component {
           locale={locale}
         />
         {editServiceDrawer === true && (
-          <EditRecommendSubscription
+          <EditRecommendService
             visible={editServiceDrawer}
             onCloseDrawer={this.onCloseDrawer}
+            editData={editData}
+          />
+        )}
+        {editSubscriptionDrawer === true && (
+          <EditRecommendSubscription
+            visible={editSubscriptionDrawer}
+            onCloseDrawer={this.onCloseDrawer}
+            editData={editData}
           />
         )}
         {myTasksDrawer === true && (
           <MyTasks visible={myTasksDrawer} onCloseDrawer={this.onCloseDrawer} />
         )}
-      </Fragment>
+      </>
     );
   }
 }

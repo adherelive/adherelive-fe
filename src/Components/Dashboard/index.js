@@ -36,6 +36,9 @@ import MissedDietsDrawer from "../../Containers/Drawer/missedDiet";
 import MissedWorkoutsDrawer from "../../Containers/Drawer/missedWorkout";
 import isEmpty from "../../Helper/is-empty";
 import { PlusOutlined } from "@ant-design/icons";
+// AKSHAY NEW CODE FOR SUBSCRIPTION
+import ScheduledActivitiesTable from "../../Containers/subscription/ScheduleActivitiesTable";
+import PendingActivitiesTable from "../../Containers/subscription/PendingActivitiesTable";
 
 // helpers...
 import { getRoomId } from "../../Helper/twilio";
@@ -52,6 +55,8 @@ const CHART_MISSED_WORKOUT = "Missed Workout";
 export const CURRENT_TAB = {
   ALL_PATIENTS: "1",
   WATCHLIST: "2",
+  SCHEDULE_ACTIVITIES: "3",
+  PENDING_ACTIVITIES: "4",
 };
 
 export const SORTING_TYPE = {
@@ -883,6 +888,30 @@ class Dashboard extends Component {
                   sortByName={this.sortByName}
                   sortByCreatedAt={this.sortByCreatedAt}
                 />
+              )}
+            </TabPane>
+            <TabPane
+              tab={
+                <span className="fs16 fw600">
+                  {formatMessage(messages.schedule_activities)}
+                </span>
+              }
+              key={CURRENT_TAB.SCHEDULE_ACTIVITIES}
+            >
+              {currentTab === CURRENT_TAB.SCHEDULE_ACTIVITIES && (
+                <ScheduledActivitiesTable />
+              )}
+            </TabPane>
+            <TabPane
+              tab={
+                <span className="fs16 fw600">
+                  {formatMessage(messages.pending_activities)}
+                </span>
+              }
+              key={CURRENT_TAB.PENDING_ACTIVITIES}
+            >
+              {currentTab === CURRENT_TAB.PENDING_ACTIVITIES && (
+                <PendingActivitiesTable />
               )}
             </TabPane>
           </Tabs>

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { injectIntl } from "react-intl";
 import {
   Drawer,
@@ -13,8 +13,6 @@ import {
 } from "antd";
 import Form from "antd/es/form";
 import TextArea from "antd/es/input/TextArea";
-import Icon from "@ant-design/icons";
-import { EditFilled } from "@ant-design/icons";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
 
 import moment from "moment";
@@ -25,6 +23,11 @@ import Footer from "../../../Drawer/footer";
 import AddServiceOfferings from "../AddServiceOfferings";
 import EditServiceOfferings from "../AddServiceOfferings/EditServiceOfferings";
 import CreateSubscriptionWarn from "./../../Modal/CreateSubscriptionWarn";
+import EditSubscriptionFeesWarn from "../../Modal/EditSubscriptionFeesWarn";
+import isEmpty from "./../../../../Helper/is-empty";
+import { addSubscriptions } from "./../../../../modules/subscription/subscriptions/index";
+import { useDispatch } from "react-redux";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -32,10 +35,48 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Item: FormItem } = Form;
 
-class AddSubscription extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+function Index({ onCloseDrawer, visible, doctor_id }) {
+  const dispatch = useDispatch();
+  const [values, setValues] = useState({
+    subscriptionName: "",
+    totalSubscriptionFees: "",
+    planDescription: "",
+    submitting: false,
+    serviceOfferingsDrawer: false,
+    createSubscriptionWarn: false,
+    editServiceOfferingDrawer: false,
+    editSubscriptionFeesWarn: false,
+    setRazorpayLink: "",
+  });
+
+  const [serviceOfferingsArray, setServiceOfferingArray] = useState([]);
+  const [editServiceOfferingData, setEditServiceOfferingData] = useState({});
+  const [editOfferingIndex, setEditOfferingIndex] = useState("");
+  const [enableSubscriptionFees, setEnableSubscriptionFees] = useState(false);
+
+  useEffect(() => {
+    if (!isEmpty(serviceOfferingsArray)) {
+      let totalAmount = serviceOfferingsArray
+        .map((item) => item.service_charge * item.noOfTimesMonthly)
+        .reduce((prev, curr) => prev + curr, 0);
+      setValues({
+        ...values,
+        totalSubscriptionFees: totalAmount,
+      });
+    }
+  }, [serviceOfferingsArray]);
+
+  const onSubmit = () => {
+    setValues({
+      ...values,
+      createSubscriptionWarn: true,
+    });
+  };
+
+  const callBack = () => {
+    setValues({
+      ...values,
+      createSubscriptionWarn: false,
       subscriptionName: "",
       totalSubscriptionFees: "",
       planDescription: "",
@@ -43,62 +84,143 @@ class AddSubscription extends Component {
       serviceOfferingsDrawer: false,
       createSubscriptionWarn: false,
       editServiceOfferingDrawer: false,
+    });
+    setServiceOfferingArray([]);
+    setEnableSubscriptionFees(false);
+    onCloseDrawer();
+    message.success("Subscription added sucessfully");
+  };
+
+  const handleOk = () => {
+    let finalServiceArray = [];
+
+    serviceOfferingsArray.forEach((ele) => {
+      finalServiceArray.push({
+        service_id: ele.id,
+        frequency: ele.noOfTimesMonthly,
+      });
+    });
+
+    setValues({
+      ...values,
+      createSubscriptionWarn: false,
+    });
+
+    let formData = {
+      // provider_type: "doctor",
+      // provider_id: 1,
+      notes: values.subscriptionName,
+      service_charge_per_month: values.totalSubscriptionFees,
+      is_active_for_doctor: true,
+      description: values.planDescription,
+      currency: "INR",
+      services: finalServiceArray,
     };
-  }
 
-  componentDidMount() {}
+    if (doctor_id) {
+      formData.doctor_id = doctor_id;
+    }
 
-  onSubmit = () => {
-    console.log(this.state);
-    this.setState({
-      createSubscriptionWarn: true,
-    });
+    dispatch(addSubscriptions(formData, callBack));
   };
 
-  handleOk = () => {
-    this.setState({
+  const handleCancel = () => {
+    setValues({
+      ...values,
       createSubscriptionWarn: false,
     });
-    this.props.onCloseDrawer();
+    setServiceOfferingArray([]);
+    onCloseDrawer();
   };
 
-  handleCancel = () => {
-    this.setState({
+  // formatMessage = (data) => this.props.intl.formatMessage(data);
+
+  const onClose = () => {
+    setValues({
+      ...values,
       createSubscriptionWarn: false,
+      subscriptionName: "",
+      totalSubscriptionFees: "",
+      planDescription: "",
+      submitting: false,
+      serviceOfferingsDrawer: false,
+      createSubscriptionWarn: false,
+      editServiceOfferingDrawer: false,
     });
-    this.props.onCloseDrawer();
+    setServiceOfferingArray([]);
+    onCloseDrawer();
   };
 
-  formatMessage = (data) => this.props.intl.formatMessage(data);
-
-  onClose = () => {};
-
-  onChangeHandler = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  const onChangeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  setServiceOfferingDrawer = () => {
-    this.setState({
+  const setServiceOfferingDrawer = () => {
+    setValues({
+      ...values,
       serviceOfferingsDrawer: true,
     });
   };
 
-  onCloseDrawer = () => {
-    this.setState({
+  const onCloseDrawerNew = () => {
+    setValues({
+      ...values,
       serviceOfferingsDrawer: false,
       editServiceOfferingDrawer: false,
     });
   };
 
-  editServiceOfferingHandler = () => {
-    this.setState({
-      editServiceOfferingDrawer: true,
+  const editServiceOfferingHandler =
+    (editServiceOfferingData, index) => (e) => {
+      e.preventDefault();
+      setValues({
+        ...values,
+        editServiceOfferingDrawer: true,
+      });
+      setEditServiceOfferingData(editServiceOfferingData);
+      setEditOfferingIndex(index);
+    };
+
+  const deleteServiceOfferingHandler = (index) => (e) => {
+    e.preventDefault();
+    let array = [...serviceOfferingsArray];
+
+    array.splice(index, 1);
+    setServiceOfferingArray(array);
+  };
+
+  const editSubscriptionFees = () => {
+    setValues({
+      ...values,
+      editSubscriptionFeesWarn: true,
     });
   };
 
-  renderAddNewSubscription = () => {
-    const { subscriptionName, totalSubscriptionFees, planDescription } =
-      this.state;
+  const handleFeesAction = (action) => (e) => {
+    e.preventDefault();
+    if (action === "ok") {
+      setValues({
+        ...values,
+        editSubscriptionFeesWarn: false,
+      });
+      setEnableSubscriptionFees(true);
+    } else {
+      setValues({
+        ...values,
+        editSubscriptionFeesWarn: false,
+      });
+    }
+  };
+
+  const setRazorpayLink = (e) => {
+    setValues({
+      ...values,
+      razorpayLink: e.target.value,
+    });
+  };
+
+  const renderAddNewSubscription = () => {
+    const { subscriptionName, totalSubscriptionFees, planDescription } = values;
 
     return (
       <div className="form-block-ap">
@@ -122,7 +244,7 @@ class AddSubscription extends Component {
               placeholder={"Health lite"}
               name="subscriptionName"
               value={subscriptionName}
-              onChange={this.onChangeHandler}
+              onChange={onChangeHandler}
             />
           </FormItem>
 
@@ -134,37 +256,68 @@ class AddSubscription extends Component {
               </span>
             </div>
 
-            <div className="add-more" onClick={this.setServiceOfferingDrawer}>
+            <div className="add-more" onClick={setServiceOfferingDrawer}>
               {/* {this.formatMessage(messages.addMore)} */}
-              Add
-            </div>
-
-            {/* <div className="add-more" onClick={this.showAddVital}>
-              {this.formatMessage(messages.add)}
-            </div> */}
-          </div>
-          <div className="flex wp100 flex-grow-1 align-center">
-            <div className="drawer-block">
-              <div className="flex direction-row justify-space-between align-center">
-                <div className="form-headings-ap">1 * Virtual consultation</div>
-                <EditFilled
-                  // type="edit"
-                  className="ml20"
-                  style={{ color: "#4a90e2" }}
-                  theme="filled"
-                  onClick={this.editServiceOfferingHandler}
-                />
-              </div>
-              <div className="drawer-block-description">Digital</div>
-              <div className="drawer-block-description">{`Rs 200`}</div>
+              {isEmpty(serviceOfferingsArray) ? "Add" : "Add More"}
             </div>
           </div>
+          {!isEmpty(serviceOfferingsArray) ? (
+            serviceOfferingsArray.map((data, index) => {
+              return (
+                <div
+                  key={index}
+                  className="flex wp100 flex-grow-1 align-center"
+                >
+                  <div className="drawer-block">
+                    <div className="flex direction-row justify-space-between align-center">
+                      <div className="form-headings-ap">{`${data.noOfTimesMonthly} * ${data.service_offering_name}`}</div>
+                      <div>
+                        <EditOutlined
+                          // type="edit"
+                          className="ml20"
+                          style={{ color: "#4a90e2" }}
+                          theme="filled"
+                          onClick={editServiceOfferingHandler(data, index)}
+                        />
+                        <DeleteOutlined
+                          // type="delete"
+                          className="ml20"
+                          style={{ color: "#d12a0b" }}
+                          theme="filled"
+                          onClick={deleteServiceOfferingHandler(index)}
+                        />
+                      </div>
+                    </div>
+                    <div className="drawer-block-description">
+                      {data.description}
+                    </div>
+                    <div className="drawer-block-description">{`${data.currency} ${data.service_charge}`}</div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="flex wp100 flex-grow-1 align-center">
+              {" "}
+              <div className="drawer-block">No service offering added</div>
+            </div>
+          )}
 
-          <div className="form-headings flex align-center justify-start">
-            <span>
-              {/* {this.formatMessage(messages.defaultConsultationOptions)} */}
-              Total subscription fees
-            </span>
+          <div className="wp100 flex align-center justify-space-between">
+            <div className="form-headings flex align-center justify-start">
+              <span>
+                {/* {this.formatMessage(messages.defaultConsultationOptions)} */}
+                Total subscription fees
+              </span>
+            </div>
+
+            {!isEmpty(serviceOfferingsArray) && (
+              <EditSubscriptionFeesWarn
+                editSubscriptionFeesWarn={values.editSubscriptionFeesWarn}
+                editSubscriptionFees={editSubscriptionFees}
+                handleFeesAction={handleFeesAction}
+              />
+            )}
           </div>
 
           <FormItem
@@ -176,9 +329,11 @@ class AddSubscription extends Component {
               autoFocus
               className="mt4"
               //   placeholder={formatMessage(messages.genericName)}
-              placeholder={"Rs. 600"}
+              name="totalSubscriptionFees"
+              placeholder={"Rs. 0"}
               value={totalSubscriptionFees}
-              disabled
+              onChange={onChangeHandler}
+              disabled={enableSubscriptionFees ? false : true}
             />
           </FormItem>
           <div className="form-headings flex align-center justify-start">
@@ -202,9 +357,22 @@ class AddSubscription extends Component {
               rows={4}
               name="planDescription"
               value={planDescription}
-              onChange={this.onChangeHandler}
+              onChange={onChangeHandler}
             />
           </FormItem>
+          <div className="form-headings flex align-center justify-start">
+            {/* {this.formatMessage(messages.consultationFee)} */}
+            <span>Razorpay Link</span>
+            <div className="star-red">*</div>
+          </div>
+
+          <Input
+            className={"form-inputs-ap"}
+            value={values.razorpayLink}
+            onChange={setRazorpayLink}
+            // disabled={}
+            type="string"
+          />
           <h3>
             Subscription period is always monthly please refer to T&C for
             details
@@ -214,62 +382,68 @@ class AddSubscription extends Component {
     );
   };
 
-  render() {
-    const { visible, onCloseDrawer } = this.props;
-    const {
-      submitting,
-      serviceOfferingsDrawer,
-      createSubscriptionWarn,
-      editServiceOfferingDrawer,
-    } = this.state;
+  const {
+    submitting,
+    serviceOfferingsDrawer,
+    createSubscriptionWarn,
+    editServiceOfferingDrawer,
+  } = values;
 
-    return (
-      <Fragment>
-        <Drawer
-          title={"Add New Subscription Plan"}
-          placement="right"
-          maskClosable={false}
-          headerStyle={{
-            position: "sticky",
-            zIndex: "9999",
-            top: "0px",
-          }}
-          destroyOnClose={true}
-          onClose={onCloseDrawer}
-          visible={visible} // todo: change as per state, -- WIP --
-          width={400}
-        >
-          {this.renderAddNewSubscription()}
-          {serviceOfferingsDrawer === true && (
-            <AddServiceOfferings
-              visible={serviceOfferingsDrawer}
-              onCloseDrawer={this.onCloseDrawer}
-            />
-          )}
-          {editServiceOfferingDrawer === true && (
-            <EditServiceOfferings
-              visible={editServiceOfferingDrawer}
-              onCloseDrawer={this.onCloseDrawer}
-            />
-          )}
-          <Footer
-            onSubmit={this.onSubmit}
-            onClose={this.onClose}
-            // submitText={this.formatMessage(messages.submit)}
-            submitText={"Submit"}
-            submitButtonProps={{}}
-            cancelComponent={null}
-            submitting={submitting}
+  // console.log("serviceOfferingsArray", serviceOfferingsArray);
+  // console.log("editServiceOfferingData", editServiceOfferingData);
+
+  return (
+    <Fragment>
+      <Drawer
+        title={"Add New Subscription Plan"}
+        placement="right"
+        maskClosable={false}
+        headerStyle={{
+          position: "sticky",
+          zIndex: "9999",
+          top: "0px",
+        }}
+        destroyOnClose={true}
+        onClose={onClose}
+        visible={visible} // todo: change as per state, -- WIP --
+        width={400}
+      >
+        {renderAddNewSubscription()}
+        {serviceOfferingsDrawer === true && (
+          <AddServiceOfferings
+            visible={serviceOfferingsDrawer}
+            onCloseDrawer={onCloseDrawerNew}
+            setServiceOfferingArray={setServiceOfferingArray}
+            serviceOfferingsArray={serviceOfferingsArray}
           />
-        </Drawer>
-        <CreateSubscriptionWarn
-          isModalVisible={createSubscriptionWarn}
-          handleOk={this.handleOk}
-          handleCancel={this.handleCancel}
+        )}
+        {editServiceOfferingDrawer === true && (
+          <EditServiceOfferings
+            visible={editServiceOfferingDrawer}
+            onCloseDrawer={onCloseDrawerNew}
+            setServiceOfferingArray={setServiceOfferingArray}
+            editServiceOfferingData={editServiceOfferingData}
+            serviceOfferingsArray={serviceOfferingsArray}
+            editOfferingIndex={editOfferingIndex}
+          />
+        )}
+        <Footer
+          onSubmit={onSubmit}
+          onClose={onClose}
+          // submitText={this.formatMessage(messages.submit)}
+          submitText={"Submit"}
+          submitButtonProps={{}}
+          cancelComponent={null}
+          submitting={submitting}
         />
-      </Fragment>
-    );
-  }
+      </Drawer>
+      <CreateSubscriptionWarn
+        isModalVisible={createSubscriptionWarn}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      />
+    </Fragment>
+  );
 }
 
-export default injectIntl(AddSubscription);
+export default Index;

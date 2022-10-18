@@ -94,12 +94,13 @@ import SymptomTabs from "../../../Containers/Symptoms";
 import { getRoomId } from "../../../Helper/twilio";
 import { getFullName } from "../../../Helper/common";
 import Tooltip from "antd/es/tooltip";
+import { PlusOutlined } from "@ant-design/icons";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscription";
 import RecommendService from "../../Subscription/Drawer/RecommendService";
 import SubscriptionTable from "../../Subscription/SubscriptionTable";
-import { PlusOutlined } from "@ant-design/icons";
+import FlashCard from "../../Subscription/Flashcard";
 
 const BLANK_TEMPLATE = "Blank Template";
 const { TabPane } = Tabs;
@@ -404,7 +405,7 @@ const PatientProfileHeader = ({
         </div>
       </div>
       <div className="flex-grow-1 tar">
-        {/* <Dropdown
+        <Dropdown
           overlay={getRecommendMenu()}
           trigger={["click"]}
           placement="bottomRight"
@@ -412,12 +413,12 @@ const PatientProfileHeader = ({
           <Button
             type="primary"
             className="ml10 mr20 add-button "
-            icon={<PlusOutlined/>}
+            icon={<PlusOutlined />}
             style={{ backgroundColor: "#98FB98", border: "none" }}
           >
             <span className="fs16">Recommend</span>
           </Button>
-        </Dropdown> */}
+        </Dropdown>
         {(showAddButton ||
           user_role_id.toString() === auth_role.toString() ||
           secondary_doctor_user_role_ids.includes(auth_role) === true) && (
@@ -896,6 +897,11 @@ class PatientDetails extends Component {
     getMedications(patient_id);
     // this.fetchReportData();
     // this.fetchVitalDetails();
+
+    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    this.props.getServices();
+    this.props.getSubscriptions();
+    this.props.getRecommendServiceAndSubscription(patient_id);
 
     // if (showTd) {
     const response = await getPatientCarePlanDetails(patient_id);
@@ -2469,6 +2475,7 @@ class PatientDetails extends Component {
       authenticated_category,
       providers = {},
       user_roles = {},
+      flashcardOpen = false,
     } = this.props;
 
     const {
@@ -2994,12 +3001,14 @@ class PatientDetails extends Component {
                         )}
                       </TabPane>
                       {/* AKSHAY NEW CODE FOR SUBSCRIPTIONS */}
-                      {/* <TabPane
+                      <TabPane
                         tab={PATIENT_TABS.SUBSCRIPTIONS["name"]}
                         key={PATIENT_TABS.SUBSCRIPTIONS["key"]}
                       >
-                        <SubscriptionTable />
-                      </TabPane> */}
+                        <SubscriptionTable
+                          recommendServices={this.props.recommendServices}
+                        />
+                      </TabPane>
                     </Tabs>
                   </div>
                 </div>
@@ -3065,6 +3074,10 @@ class PatientDetails extends Component {
               />
             </div>
           )}
+
+          {/* AKSHAY NEW CODE IMPLEMENTATIONS FOR SUBSCRIPTION */}
+          {flashcardOpen === true && <FlashCard />}
+
           <SymptomsDrawer />
           <VitalTimelineDrawer />
           <MedicationTimelineDrawer />
@@ -3109,12 +3122,14 @@ class PatientDetails extends Component {
           <RecommendSubscription
             visible={recommendSubscription}
             onCloseDrawer={this.onCloseDrawer}
+            patient_id={patient_id}
           />
         )}
         {recommendService === true && (
           <RecommendService
             visible={recommendService}
             onCloseDrawer={this.onCloseDrawer}
+            patient_id={patient_id}
           />
         )}
       </Fragment>

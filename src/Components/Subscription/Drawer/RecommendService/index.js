@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { injectIntl } from "react-intl";
 import {
   Drawer,
@@ -17,10 +17,12 @@ import TextArea from "antd/es/input/TextArea";
 
 import moment from "moment";
 import throttle from "lodash-es/throttle";
+import { useDispatch, useSelector } from "react-redux";
 
 // import messages from "./message";
 import Footer from "../../../Drawer/footer";
 import InputNumber from "antd/es/input-number";
+import { recommendService } from "../../../../modules/subscription/recommend";
 
 const { Option } = Select;
 
@@ -28,74 +30,120 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Item: FormItem } = Form;
 
-class RecommendService extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+function Index({ onCloseDrawer, visible, patient_id }) {
+  const dispatch = useDispatch();
+  const [values, setValues] = useState({
+    serviceOfferingName: "",
+    serviceFees: "",
+    submitting: false,
+    discount: 0,
+    notes: "",
+    netServiceFees: "",
+    selectedService: {},
+  });
+
+  const services = useSelector((state) => state.subscription.services);
+
+  const callBack = () => {
+    setValues({
       serviceOfferingName: "",
       serviceFees: "",
       submitting: false,
-      discount: 5,
+      discount: 0,
       notes: "",
       netServiceFees: "",
-    };
-  }
-
-  componentDidMount() {}
-
-  onSubmit = () => {
-    console.log("state", this.state);
-    this.props.onCloseDrawer();
+      selectedService: {},
+    });
+    onCloseDrawer();
+    message.success("Service recommended sucessfully");
   };
 
-  formatMessage = (data) => this.props.intl.formatMessage(data);
-
-  onClose = () => {};
-
-  onChangeHandler = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  const onSubmit = () => {
+    setValues({
+      ...values,
+      submitting: true,
+    });
+    dispatch(
+      recommendService(
+        {
+          patient_id: patient_id,
+          // doctor_id: 1,
+          // provider_id: 1,
+          service_charge: values.netServiceFees,
+          notes: values.notes,
+          service_plan_id: values.selectedService.id,
+          durations: 1,
+        },
+        callBack
+      )
+    );
   };
 
-  setServiceOfferingName = (value) => {
-    this.setState({
+  // formatMessage = (data) => this.props.intl.formatMessage(data);
+
+  const onClose = () => {};
+
+  const onChangeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const setServiceOfferingName = (value, keyData) => {
+    let selectedService = {};
+    for (const key in services) {
+      if (services[key].id == keyData.key) {
+        selectedService = services[key];
+      }
+    }
+
+    setValues({
+      ...values,
       serviceOfferingName: value,
-      serviceFees: 200,
+      serviceFees: selectedService.service_charge,
+      netServiceFees: selectedService.service_charge,
+      discount: 0,
+      notes: "",
+      selectedService: selectedService,
     });
   };
 
-  onDiscountChange = (e) => {
-    this.setState({
-      discount: this.state.discount + parseInt(e.target.value),
+  const onDiscountChange = (e) => {
+    let totalDiscountApplied = values.discount + parseInt(e.target.value);
+    let netSubscriptionFees = values.serviceFees;
+    let numVal1 = netSubscriptionFees;
+    let numVal2 = totalDiscountApplied / 100;
+    let totalValue = numVal1 - numVal1 * numVal2;
+    setValues({
+      ...values,
+      discount: values.discount + parseInt(e.target.value),
+      netServiceFees: totalValue,
     });
   };
 
-  getServiceOfferingOption = () => {
-    let serviceOfferingOptions = [
-      { name: "Virtual consultation", id: 1 },
-      { name: "Remote monitoring", id: 2 },
-      { name: "At clinic physical consultation", id: 3 },
-      { name: "At home physical consultation", id: 4 },
-    ];
+  const getServiceOfferingOption = () => {
     let options = [];
-    serviceOfferingOptions.forEach((service) => {
+
+    for (const key in services) {
       options.push(
-        <Option key={service.id} value={service.name}>
-          {service.name}
+        <Option
+          key={services[key].id}
+          value={services[key].service_offering_name}
+        >
+          {services[key].service_offering_name}
         </Option>
       );
-    });
+    }
 
     return options;
   };
 
-  renderRecommendSubscription = () => {
+  const renderRecommendSubscription = () => {
     const {
       serviceOfferingName,
       serviceFees,
       discount,
       notes,
       netServiceFees,
-    } = this.state;
+    } = values;
 
     return (
       <div className="form-block-ap">
@@ -111,7 +159,7 @@ class RecommendService extends Component {
             className="form-inputs-ap drawer-select"
             placeholder="Select Consultation Type"
             value={serviceOfferingName}
-            onChange={this.setServiceOfferingName}
+            onChange={setServiceOfferingName}
             autoComplete="off"
             optionFilterProp="children"
             filterOption={(input, option) =>
@@ -120,7 +168,7 @@ class RecommendService extends Component {
                 .indexOf(input.toLowerCase()) >= 0
             }
           >
-            {this.getServiceOfferingOption()}
+            {getServiceOfferingOption()}
           </Select>
 
           <div className="form-headings flex align-center justify-start">
@@ -144,21 +192,23 @@ class RecommendService extends Component {
               disabled
             />
           </FormItem>
-          <div className="flex align-items-end justify-content-space-between">
+          {/* <div className="flex align-items-end justify-content-space-between">
             <div className="flex direction-row flex-grow-1">
               <label htmlFor="quantity" className="form-label" title="Quantity">
-                {/* {formatMessage(messages.quantity)} */}
+            
                 Do you want to offer discount ?
               </label>
 
-              {/* <div className="star-red">*</div> */}
+              <div className="star-red">*</div>
             </div>
-            {/* <div className="label-color fontsize12 mb8">
-            
-            </div> */}
+         
             <div className="flex-grow-0">
               <RadioGroup size="small" className="flex justify-content-end">
-                <RadioButton value={5} onClick={this.onDiscountChange}>
+                <RadioButton
+                  style={{ color: "#1890ff" }}
+                  value={5}
+                  onClick={onDiscountChange}
+                >
                   +5%
                 </RadioButton>
               </RadioGroup>
@@ -170,12 +220,12 @@ class RecommendService extends Component {
             // validateStatus={error ? "error" : ""}
             // help={error ? error[0] : ""}
           >
-            <InputNumber min={1} style={{ width: "100%" }} value={discount} />
-          </FormItem>
+            <InputNumber min={0} style={{ width: "100%" }} value={discount} />
+          </FormItem> */}
           <div className="form-headings flex align-center justify-start">
             <span>
               {/* {this.formatMessage(messages.defaultConsultationOptions)} */}
-              Net Service fees after discount
+              Net Service fees
             </span>
           </div>
 
@@ -214,7 +264,7 @@ class RecommendService extends Component {
               rows={4}
               name="notes"
               value={notes}
-              onChange={this.onChangeHandler}
+              onChange={onChangeHandler}
             />
           </FormItem>
         </Form>
@@ -222,51 +272,38 @@ class RecommendService extends Component {
     );
   };
 
-  render() {
-    const { visible, onCloseDrawer } = this.props;
-    const {
-      submitting,
-      serviceOfferingsDrawer,
-      createSubscriptionWarn,
-      editServiceOfferingDrawer,
-    } = this.state;
+  const { submitting } = values;
 
-    return (
-      <Fragment>
-        <Drawer
-          title={"Recommend services offerings"}
-          placement="right"
-          maskClosable={false}
-          headerStyle={{
-            position: "sticky",
-            zIndex: "9999",
-            top: "0px",
-          }}
-          destroyOnClose={true}
-          onClose={onCloseDrawer}
-          visible={visible} // todo: change as per state, -- WIP --
-          width={400}
-        >
-          {this.renderRecommendSubscription()}
+  return (
+    <Fragment>
+      <Drawer
+        title={"Recommend services offerings"}
+        placement="right"
+        maskClosable={false}
+        headerStyle={{
+          position: "sticky",
+          zIndex: "9999",
+          top: "0px",
+        }}
+        destroyOnClose={true}
+        onClose={onCloseDrawer}
+        visible={visible} // todo: change as per state, -- WIP --
+        width={400}
+      >
+        {renderRecommendSubscription()}
 
-          <Footer
-            onSubmit={this.onSubmit}
-            onClose={this.onClose}
-            // submitText={this.formatMessage(messages.submit)}
-            submitText={"Submit"}
-            submitButtonProps={{}}
-            cancelComponent={null}
-            submitting={submitting}
-          />
-        </Drawer>
-        {/* <CreateSubscriptionWarn
-          isModalVisible={createSubscriptionWarn}
-          handleOk={this.handleOk}
-          handleCancel={this.handleCancel}
-        /> */}
-      </Fragment>
-    );
-  }
+        <Footer
+          onSubmit={onSubmit}
+          onClose={onClose}
+          // submitText={this.formatMessage(messages.submit)}
+          submitText={"Submit"}
+          submitButtonProps={{}}
+          cancelComponent={null}
+          submitting={submitting}
+        />
+      </Drawer>
+    </Fragment>
+  );
 }
 
-export default injectIntl(RecommendService);
+export default Index;

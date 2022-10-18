@@ -52,29 +52,33 @@ class TransactionTable extends Component {
     const {
       transactions,
       // transaction_ids,
-      payment_products,
-      patients,
-      doctors,
-      users,
-      authenticated_category,
-      user_roles,
+      // payment_products,
+      // patients,
+      // doctors,
+      // users,
+      // authenticated_category,
+      // user_roles,
     } = this.props;
 
-    let transaction_ids = ["1", "2", "3", "4"];
+    let options = [];
 
-    return transaction_ids.map((id) => {
-      return generateRow({
-        id,
-        transactions,
-        transaction_ids,
-        payment_products,
-        patients,
-        doctors,
-        users,
-        authenticated_category,
-        user_roles,
-      });
-    });
+    for (let each in transactions) {
+      options.push(
+        generateRow({
+          id: transactions[each].id,
+          transactions: transactions[each],
+          // transaction_ids,
+          // payment_products,
+          // patients,
+          // doctors,
+          // users,
+          // authenticated_category,
+          // user_roles,
+        })
+      );
+    }
+
+    return options;
   };
 
   getParentNode = (t) => t.parentNode;
@@ -89,7 +93,7 @@ class TransactionTable extends Component {
     const transactionLocale = {
       emptyText: this.formatMessage(messages.emptyTransactionTable),
     };
-    const { authenticated_category } = this.props;
+    // const { authenticated_category } = this.props;
 
     return (
       <Table
@@ -100,7 +104,7 @@ class TransactionTable extends Component {
         columns={getColumn({
           formatMessage,
           className: "pointer",
-          authenticated_category,
+          // authenticated_category,
         })}
         getPopupContainer={getParentNode}
         dataSource={getDataSource()}

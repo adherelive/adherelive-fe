@@ -63,7 +63,7 @@ export const TABLE_COLUMN = {
   PAYMENT: {
     key: "PAYMENT",
     dataIndex: "PAYMENT",
-    width: 200,
+    width: 300,
   },
 };
 

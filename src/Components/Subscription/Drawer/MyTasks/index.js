@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { injectIntl } from "react-intl";
 import {
   Drawer,
@@ -24,25 +24,18 @@ const { Option } = Select;
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
-class MyTasks extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      submitting: false,
-    };
-  }
+function Index({ onCloseDrawer, visible }) {
+  const [values, setValues] = useState(false);
 
-  componentDidMount() {}
-
-  onSubmit = () => {
-    this.props.onCloseDrawer();
+  const onSubmit = () => {
+    onCloseDrawer();
   };
 
-  formatMessage = (data) => this.props.intl.formatMessage(data);
+  // formatMessage = (data) => this.props.intl.formatMessage(data);
 
-  onClose = () => {};
+  const onClose = () => {};
 
-  renderMyTasks = () => {
+  const renderMyTasks = () => {
     return (
       <div className="wp100">
         <h3 style={{ fontWeight: "bold" }}>Health lite subscription plan</h3>
@@ -90,27 +83,26 @@ class MyTasks extends Component {
     );
   };
 
-  render() {
-    const { visible, onCloseDrawer } = this.props;
-    const { submitting } = this.state;
-    return (
-      <Fragment>
-        <Drawer
-          title={"My tasks"}
-          placement="right"
-          maskClosable={false}
-          headerStyle={{
-            position: "sticky",
-            zIndex: "9999",
-            top: "0px",
-          }}
-          destroyOnClose={true}
-          onClose={onCloseDrawer}
-          visible={visible} // todo: change as per state, -- WIP --
-          width={400}
-        >
-          {this.renderMyTasks()}
-          {/* <Footer
+  const { submitting } = values;
+
+  return (
+    <Fragment>
+      <Drawer
+        title={"My tasks"}
+        placement="right"
+        maskClosable={false}
+        headerStyle={{
+          position: "sticky",
+          zIndex: "9999",
+          top: "0px",
+        }}
+        destroyOnClose={true}
+        onClose={onCloseDrawer}
+        visible={visible} // todo: change as per state, -- WIP --
+        width={400}
+      >
+        {renderMyTasks()}
+        {/* <Footer
             onSubmit={this.onSubmit}
             onClose={this.onClose}
             // submitText={this.formatMessage(messages.submit)}
@@ -119,10 +111,9 @@ class MyTasks extends Component {
             cancelComponent={null}
             submitting={submitting}
           /> */}
-        </Drawer>
-      </Fragment>
-    );
-  }
+      </Drawer>
+    </Fragment>
+  );
 }
 
-export default injectIntl(MyTasks);
+export default Index;

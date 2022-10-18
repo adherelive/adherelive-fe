@@ -306,8 +306,6 @@ export const getPatientDetailsById = (patientId) => {
       const { status, payload: { error = "", data = {} } = {} } =
         response || {};
 
-      console.log("response", response);
-
       if (status === false) {
         // dispatch({
         //   type: ADD_PATIENT_COMPLETED_WITH_ERROR,

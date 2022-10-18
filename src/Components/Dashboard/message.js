@@ -41,6 +41,16 @@ const messages = defineMessages({
     description: "",
     defaultMessage: "Watch List",
   },
+  schedule_activities: {
+    id: "app.dashboard.content.schedule_activities",
+    description: "",
+    defaultMessage: "My scheduled activities",
+  },
+  pending_activities: {
+    id: "app.dashboard.content.pending_activities",
+    description: "",
+    defaultMessage: "My pending activities",
+  },
   critical_text: {
     id: "app.dashboard.graph.critical",
     description: "",

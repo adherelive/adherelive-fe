@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { injectIntl } from "react-intl";
 import {
   Drawer,
@@ -21,6 +21,9 @@ import throttle from "lodash-es/throttle";
 // import messages from "./message";
 import Footer from "../../../Drawer/footer";
 import InputNumber from "antd/es/input-number";
+import { useDispatch, useSelector } from "react-redux";
+import { updateRecommendSubscription } from "../../../../modules/subscription/recommend";
+import isEmpty from "../../../../Helper/is-empty";
 
 const { Option } = Select;
 
@@ -28,66 +31,151 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Item: FormItem } = Form;
 
-class EditRecommendSubscription extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      subscriptionName: "Health lite",
+function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
+  const dispatch = useDispatch();
+  const [values, setValues] = useState({
+    subscriptionName: "",
+    serviceFees: "",
+    netSubscriptionFees: "",
+    submitting: false,
+    duration: 1,
+    discount: 0,
+    notes: "",
+    selectedSubscription: {},
+    status: "ACTIVE",
+  });
+
+  const subscriptions = useSelector(
+    (state) => state.subscription.subscriptions
+  );
+
+  useEffect(() => {
+    // console.log(editData);
+    setValues({
+      ...values,
+      subscriptionName: editData.notes,
+      serviceFees: editData.service_charge_per_month,
+      notes: editData.description,
+      netSubscriptionFees: editData.details.service_charge,
+      duration: editData.details.durations,
+      status:
+        editData.details.patient_status === "inactive" ? "IN-ACTIVE" : "ACTIVE",
+    });
+  }, [editData]);
+
+  const callBack = () => {
+    setValues({
+      subscriptionName: "",
       serviceFees: "",
       netSubscriptionFees: "",
       submitting: false,
       duration: 1,
-      discount: 5,
+      discount: 0,
       notes: "",
-      status: "ACTIVE",
+      selectedSubscription: {},
+    });
+    onCloseDrawer();
+    message.success("Recommend subscription updated sucessfully");
+  };
+
+  const onSubmit = () => {
+    console.log(values);
+    const {
+      netSubscriptionFees,
+      selectedSubscription,
+      notes,
+      duration,
+      status,
+    } = values;
+    setValues({
+      ...values,
+      submitting: true,
+    });
+
+    let formData = {
+      notes: notes,
+      durations: duration,
+      service_charge: netSubscriptionFees,
+      patient_status: status === "ACTIVE" ? "active" : "inactive",
     };
-  }
-
-  componentDidMount() {}
-
-  onSubmit = () => {
-    console.log("state", this.state);
-    this.props.onCloseDrawer();
+    dispatch(
+      updateRecommendSubscription(
+        editData.id,
+        editData.details.patient_id,
+        formData,
+        callBack
+      )
+    );
   };
 
-  formatMessage = (data) => this.props.intl.formatMessage(data);
+  // formatMessage = (data) => this.props.intl.formatMessage(data);
 
-  onClose = () => {};
+  const onClose = () => {};
 
-  onChangeHandler = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  const onChangeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  setStatus = (value) => {
-    this.setState({
-      status: value,
+  const setSubscriptionName = (value, keyData) => {
+    let selectedSubscription = {};
+    for (const key in subscriptions) {
+      if (subscriptions[key].id == keyData.key) {
+        selectedSubscription = subscriptions[key];
+      }
+    }
+
+    setValues({
+      ...values,
+      subscriptionName: value,
+      serviceFees: selectedSubscription.service_charge_per_month,
+      netSubscriptionFees: selectedSubscription.service_charge_per_month,
+      duration: 1,
+      discount: 0,
+      notes: "",
+      selectedSubscription: selectedSubscription,
     });
   };
 
-  onRadioChange = (e) => {
+  const onRadioChange = (e) => {
     e.preventDefault();
     console.log(e.target.value);
     if (e.target.value == 100) {
-      this.setState({
+      setValues({
+        ...values,
         duration: e.target.value,
       });
     } else {
-      this.setState({
+      setValues({
+        ...values,
         duration:
-          this.state.duration == 100
+          values.duration == 100
             ? 1
-            : this.state.duration + parseInt(e.target.value),
+            : values.duration + parseInt(e.target.value),
       });
     }
   };
 
-  onDiscountChange = (e) => {
-    this.setState({
-      discount: this.state.discount + parseInt(e.target.value),
+  const onDiscountChange = (e) => {
+    let totalDiscountApplied = values.discount + parseInt(e.target.value);
+    let netSubscriptionFees = values.serviceFees;
+    let numVal1 = netSubscriptionFees;
+    let numVal2 = totalDiscountApplied / 100;
+    let totalValue = numVal1 - numVal1 * numVal2;
+    setValues({
+      ...values,
+      discount: values.discount + parseInt(e.target.value),
+      netSubscriptionFees: totalValue,
     });
   };
 
-  getStatusOption = () => {
+  const setStatus = (value) => {
+    setValues({
+      ...values,
+      status: value,
+    });
+  };
+
+  const getStatusOption = () => {
     let statusOptions = [
       { name: "ACTIVE", id: 1 },
       { name: "IN-ACTIVE", id: 2 },
@@ -104,7 +192,7 @@ class EditRecommendSubscription extends Component {
     return options;
   };
 
-  renderRecommendSubscription = () => {
+  const renderRecommendSubscription = () => {
     const {
       subscriptionName,
       serviceFees,
@@ -112,8 +200,7 @@ class EditRecommendSubscription extends Component {
       discount,
       notes,
       netSubscriptionFees,
-      status,
-    } = this.state;
+    } = values;
 
     return (
       <div className="form-block-ap">
@@ -149,8 +236,8 @@ class EditRecommendSubscription extends Component {
           <Select
             className="form-inputs-ap drawer-select"
             placeholder="Select Consultation Type"
-            value={status}
-            onChange={this.setStatus}
+            value={values.status}
+            onChange={setStatus}
             autoComplete="off"
             optionFilterProp="children"
             filterOption={(input, option) =>
@@ -159,7 +246,7 @@ class EditRecommendSubscription extends Component {
                 .indexOf(input.toLowerCase()) >= 0
             }
           >
-            {this.getStatusOption()}
+            {getStatusOption()}
           </Select>
 
           <div className="flex align-items-end justify-content-space-between">
@@ -176,10 +263,18 @@ class EditRecommendSubscription extends Component {
             </div> */}
             <div className="flex-grow-0">
               <RadioGroup size="small" className="flex justify-content-end">
-                <RadioButton value={1} onClick={this.onRadioChange}>
+                <RadioButton
+                  style={{ color: "#1890ff" }}
+                  value={1}
+                  onClick={onRadioChange}
+                >
                   +1 month
                 </RadioButton>
-                <RadioButton value={100} onClick={this.onRadioChange}>
+                <RadioButton
+                  style={{ color: "#1890ff" }}
+                  value={100}
+                  onClick={onRadioChange}
+                >
                   ongoing
                 </RadioButton>
               </RadioGroup>
@@ -240,7 +335,11 @@ class EditRecommendSubscription extends Component {
             </div> */}
             <div className="flex-grow-0">
               <RadioGroup size="small" className="flex justify-content-end">
-                <RadioButton value={5} onClick={this.onDiscountChange}>
+                <RadioButton
+                  style={{ color: "#1890ff" }}
+                  value={5}
+                  onClick={onDiscountChange}
+                >
                   +5%
                 </RadioButton>
               </RadioGroup>
@@ -252,7 +351,7 @@ class EditRecommendSubscription extends Component {
             // validateStatus={error ? "error" : ""}
             // help={error ? error[0] : ""}
           >
-            <InputNumber min={1} style={{ width: "100%" }} value={discount} />
+            <InputNumber min={0} style={{ width: "100%" }} value={discount} />
           </FormItem>
           <div className="form-headings flex align-center justify-start">
             <span>
@@ -296,7 +395,7 @@ class EditRecommendSubscription extends Component {
               rows={4}
               name="notes"
               value={notes}
-              onChange={this.onChangeHandler}
+              onChange={onChangeHandler}
             />
           </FormItem>
         </Form>
@@ -304,51 +403,43 @@ class EditRecommendSubscription extends Component {
     );
   };
 
-  render() {
-    const { visible, onCloseDrawer } = this.props;
-    const {
-      submitting,
-      serviceOfferingsDrawer,
-      createSubscriptionWarn,
-      editServiceOfferingDrawer,
-    } = this.state;
+  const {
+    submitting,
+    serviceOfferingsDrawer,
+    createSubscriptionWarn,
+    editServiceOfferingDrawer,
+  } = values;
 
-    return (
-      <Fragment>
-        <Drawer
-          title={"Edit Recommend Subscription Plan"}
-          placement="right"
-          maskClosable={false}
-          headerStyle={{
-            position: "sticky",
-            zIndex: "9999",
-            top: "0px",
-          }}
-          destroyOnClose={true}
-          onClose={onCloseDrawer}
-          visible={visible} // todo: change as per state, -- WIP --
-          width={400}
-        >
-          {this.renderRecommendSubscription()}
+  return (
+    <Fragment>
+      <Drawer
+        title={"Recommend Subscription Plan"}
+        placement="right"
+        maskClosable={false}
+        headerStyle={{
+          position: "sticky",
+          zIndex: "9999",
+          top: "0px",
+        }}
+        destroyOnClose={true}
+        onClose={onCloseDrawer}
+        visible={visible} // todo: change as per state, -- WIP --
+        width={400}
+      >
+        {renderRecommendSubscription()}
 
-          <Footer
-            onSubmit={this.onSubmit}
-            onClose={this.onClose}
-            // submitText={this.formatMessage(messages.submit)}
-            submitText={"Submit"}
-            submitButtonProps={{}}
-            cancelComponent={null}
-            submitting={submitting}
-          />
-        </Drawer>
-        {/* <CreateSubscriptionWarn
-          isModalVisible={createSubscriptionWarn}
-          handleOk={this.handleOk}
-          handleCancel={this.handleCancel}
-        /> */}
-      </Fragment>
-    );
-  }
+        <Footer
+          onSubmit={onSubmit}
+          onClose={onClose}
+          // submitText={this.formatMessage(messages.submit)}
+          submitText={"Submit"}
+          submitButtonProps={{}}
+          cancelComponent={null}
+          submitting={submitting}
+        />
+      </Drawer>
+    </Fragment>
+  );
 }
 
-export default injectIntl(EditRecommendSubscription);
+export default EditRecommendSubscription;

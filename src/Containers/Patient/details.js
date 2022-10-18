@@ -36,6 +36,13 @@ import {
 } from "../../modules/carePlanTemplates";
 import { getPortions } from "../../modules/portions";
 // import { getWorkoutDetails } from "../../modules/workouts";
+// AKSHAY NEW CODE FOR SUBSCRIPTIONS
+import { getServices } from "../../modules/subscription/services";
+import { getSubscriptions } from "../../modules/subscription/subscriptions";
+import { setFlashCard } from "../../modules/subscription/flashcard";
+import { getRecommendServiceAndSubscription } from "../../modules/subscription/recommend";
+import { setScheduleAppontmentData } from "../../modules/subscription/activities";
+import { getFlashCardByActivityId } from "../../modules/subscription/flashcard";
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -80,6 +87,12 @@ const mapStateToProps = (state, ownProps) => {
     notification_redirect = {},
     diets = {},
     exercise_contents = {},
+    // AKSHAY NEW CODE FOR SUBSCRIPTIONS
+    subscription: {
+      recommendServices = {},
+      flashcardOpen = false,
+      scheduleAppointment = {},
+    },
   } = state;
 
   // const { id } = ownprops;
@@ -134,6 +147,10 @@ const mapStateToProps = (state, ownProps) => {
     feedId,
     diets,
     exercise_contents,
+    // AKSHAY NEW CODE FOR SUBSCRIPTIONS
+    recommendServices,
+    flashcardOpen,
+    scheduleAppointment,
   };
 };
 
@@ -202,6 +219,16 @@ const mapDispatchToProps = (dispatch) => {
     // AKSHAY NEW CODE IMPLEMENTATIONS
     getPortions: () => dispatch(getPortions()),
     // getWorkoutDetails: () => dispatch(getWorkoutDetails()),
+    // AKSHAY NEW CODE FOR SUBSCRIPTIONS
+    getFlashCardByActivityId: (activityId) =>
+      dispatch(getFlashCardByActivityId(activityId)),
+    setScheduleAppontmentData: (payload) =>
+      dispatch(setScheduleAppontmentData(payload)),
+    setFlashCard: () => dispatch(setFlashCard()),
+    getServices: () => dispatch(getServices()),
+    getSubscriptions: () => dispatch(getSubscriptions()),
+    getRecommendServiceAndSubscription: (patientId) =>
+      dispatch(getRecommendServiceAndSubscription(patientId)),
   };
 };
 

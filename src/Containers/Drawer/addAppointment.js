@@ -17,6 +17,14 @@ import {
   removeFavouriteByRecordId,
 } from "../../modules/favouritesData/index";
 
+// AKSHAY NEW CODE FOR SUBSCRIPTION
+import { updateActivityById } from "./../../modules/subscription/activities";
+import {
+  setScheduleAppontmentData,
+  getPatientCareplanByPatientId,
+} from "./../../modules/subscription/activities";
+import { setFlashCard } from "../../modules/subscription/flashcard";
+
 const mapStateToProps = (state) => {
   const {
     drawer: { visible, loading, data: { type, payload = {} } = {} },
@@ -27,6 +35,7 @@ const mapStateToProps = (state) => {
     providers,
     favourites_data = {},
     pages: { favourite_medical_test_ids = [] } = {},
+    subscription: { scheduleAppointment = {} },
   } = state;
   return {
     visible: visible && type === DRAWER.ADD_APPOINTMENT,
@@ -39,6 +48,7 @@ const mapStateToProps = (state) => {
     providers,
     favourites_data,
     favourite_medical_test_ids,
+    scheduleAppointment,
   };
 };
 
@@ -56,6 +66,14 @@ const mapDispatchToProps = (dispatch) => {
     removeFavourite: ({ typeId, type }) =>
       dispatch(removeFavourite({ typeId, type })),
     removeFavouriteRecord: (id) => dispatch(removeFavouriteByRecordId(id)),
+    // AKSHAY NEW CODE FRO SUBSCRIPTION
+    updateActivityById: (id, payload) =>
+      dispatch(updateActivityById(id, payload)),
+    setFlashCard: (value) => dispatch(setFlashCard(value)),
+    setScheduleAppontmentData: (payload) =>
+      dispatch(setScheduleAppontmentData(payload)),
+    getPatientCareplanByPatientId: (patientId) =>
+      dispatch(getPatientCareplanByPatientId(patientId)),
   };
 };
 

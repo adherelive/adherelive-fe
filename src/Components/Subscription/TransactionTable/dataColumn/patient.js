@@ -4,37 +4,15 @@ import Tooltip from "antd/es/tooltip";
 import Avatar from "antd/es/avatar";
 
 export default (props) => {
-  // const { patientData } = props || {};
-  // const {
-  //   basic_info: {
-  //     first_name,
-  //     middle_name,
-  //     last_name,
-  //     full_name = "",
-  //     uid = "",
-  //   } = {},
-  //   details: { profile_pic = null } = {},
-  // } = patientData || {};
-
-  // console.log("73542345237843246324", patientData);
-
-  // let initials = `${first_name ? first_name[0] : ""}${
-  //   last_name ? last_name[0] : ""
-  // }`;
+  const { transactions } = props || {};
+  const {
+    patient: { user_name = {}, mobile_number = {}, prefix = {} },
+  } = transactions;
 
   return (
-    <div className="flex direction-row  justify-space-between">
-      {/* <div className=" wp10 flex direction-column align-center justify-center">
-        <Tooltip placement="right">
-          <Avatar icon="user" />
-        </Tooltip>
-      </div> */}
-      <div className="flex direction-column ha wp85 ml24">
-        <span className="fs16 fw700 ellipsis "> Akshay Nagargoje</span>
-        <span className="flex direction-row justify-space-between">
-          <span>234</span>
-        </span>
-      </div>
+    <div className="ellipsis wp100 flex direction-column  ">
+      <div className="wp100 fs16 fw600">{user_name}</div>
+      <div className="wp100 ">{`+${prefix + mobile_number}`}</div>
     </div>
   );
 };
