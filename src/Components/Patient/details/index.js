@@ -878,6 +878,10 @@ class PatientDetails extends Component {
       notification_redirect = {},
       authenticated_category,
       medicines = {},
+      // AKSHAY NEW CODE IMPLEMENTATIONS
+      flashcardOpen,
+      scheduleAppointment,
+      getFlashCardByActivityId,
     } = this.props;
 
     if (redirect_patient_id) {
@@ -978,6 +982,16 @@ class PatientDetails extends Component {
         //   ? patientCarePlans[0]
         //   : "",
       });
+      if (
+        !isEmpty(scheduleAppointment) &&
+        scheduleAppointment.details.service_offering_name ===
+          "Virtual consultation"
+      ) {
+        this.openVideoScreen();
+      }
+      if (!isEmpty(scheduleAppointment)) {
+        getFlashCardByActivityId(scheduleAppointment.id);
+      }
     }
 
     // getMedications(patient_id);
@@ -1038,6 +1052,13 @@ class PatientDetails extends Component {
     if (Object.keys(notification_redirect).length) {
       resetNotificationRedirect();
     }
+  }
+
+  componentWillUnmount() {
+    // AKSHAY NEW CODE IMPLEMENTATIONS FOR SUBSCRIPTION
+    const { setFlashCard, setScheduleAppontmentData } = this.props;
+    setFlashCard(false);
+    setScheduleAppontmentData({});
   }
 
   componentDidUpdate = async (prevProps, prevState) => {

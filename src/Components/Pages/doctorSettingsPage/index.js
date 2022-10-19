@@ -860,7 +860,7 @@ class DoctorSettingsPage extends Component {
                   <Button
                     type="primary"
                     className="ml10 mr20 add-button "
-                    icon={"plus"}
+                    icon={<PlusOutlined />}
                   >
                     <span className="fs16">Add More</span>
                   </Button>

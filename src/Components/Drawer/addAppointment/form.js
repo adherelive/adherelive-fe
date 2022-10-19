@@ -366,6 +366,21 @@ class AddAppointmentForm extends Component {
     return newTypes;
   };
 
+  getCareplanOption = () => {
+    const { carePlans = [] } = this.state;
+
+    let options = [];
+    carePlans.forEach((careplan) => {
+      options.push(
+        <Option key={careplan.id} value={careplan.id}>
+          {careplan.details.diagnosis.description}
+        </Option>
+      );
+    });
+
+    return options;
+  };
+
   setRadiologyTypeSelected = (id) => () => {
     this.setState({ radiologyTypeSelected: `${id}` });
   };
