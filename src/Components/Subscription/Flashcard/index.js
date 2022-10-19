@@ -19,9 +19,11 @@ import NotesList from "./NotesList";
 import {
   addFlashcard,
   updateFlashcardById,
+  setFlashcardData,
 } from "../../../modules/subscription/flashcard";
 import { MinusOutlined } from "@ant-design/icons";
 import { ShrinkOutlined } from "@ant-design/icons";
+import { SET_ACTIVITY_DATA_FOR_SCHEDULE } from "../../../reducer/index";
 
 const Header = ({ close, minimizeHandler, minimize }) => {
   // let pic = patientName ?
@@ -62,6 +64,15 @@ const Header = ({ close, minimizeHandler, minimize }) => {
       </div>
     </div>
   );
+};
+
+const flashCardInitialState = {
+  activityId: "",
+  patientId: "",
+  flashCardId: "",
+  flashCardQue: [],
+  flashCardNotes: [],
+  is_published: "",
 };
 
 function FlashCard() {
@@ -113,11 +124,21 @@ function FlashCard() {
       if (status == true) {
         // message.success("Flashcard saved as draft");
         dispatch(setFlashCard(false));
+        dispatch(setFlashcardData(flashCardInitialState));
+        dispatch({
+          type: SET_ACTIVITY_DATA_FOR_SCHEDULE,
+          payload: {},
+        });
       } else {
         message.error("Something went wrong");
       }
     } else {
       dispatch(setFlashCard(false));
+      dispatch(setFlashcardData(flashCardInitialState));
+      dispatch({
+        type: SET_ACTIVITY_DATA_FOR_SCHEDULE,
+        payload: {},
+      });
     }
   };
 
@@ -154,6 +175,11 @@ function FlashCard() {
     if (status == true) {
       message.success("Flashcard published successfully");
       dispatch(setFlashCard(false));
+      dispatch(setFlashcardData(flashCardInitialState));
+      dispatch({
+        type: SET_ACTIVITY_DATA_FOR_SCHEDULE,
+        payload: {},
+      });
     } else {
       message.error("Something went wrong");
     }
@@ -184,6 +210,11 @@ function FlashCard() {
     if (status == true) {
       message.success("Flashcard saved as draft");
       dispatch(setFlashCard(false));
+      dispatch(setFlashcardData(flashCardInitialState));
+      dispatch({
+        type: SET_ACTIVITY_DATA_FOR_SCHEDULE,
+        payload: {},
+      });
     } else {
       message.error("Something went wrong");
     }

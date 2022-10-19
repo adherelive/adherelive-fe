@@ -414,7 +414,7 @@ const PatientProfileHeader = ({
             type="primary"
             className="ml10 mr20 add-button "
             icon={<PlusOutlined />}
-            style={{ backgroundColor: "#0BDA51", border: "none" }}
+            style={{ backgroundColor: "#92d04f", border: "none" }}
           >
             <span className="fs16">Recommend</span>
           </Button>
@@ -909,6 +909,16 @@ class PatientDetails extends Component {
 
     // if (showTd) {
     const response = await getPatientCarePlanDetails(patient_id);
+    if (
+      !isEmpty(scheduleAppointment) &&
+      scheduleAppointment.details.service_offering_name ===
+        "Virtual consultation"
+    ) {
+      this.openVideoScreen();
+    }
+    if (!isEmpty(scheduleAppointment)) {
+      getFlashCardByActivityId(scheduleAppointment.id);
+    }
     //AKSHAY NEW CODE IMPLEMENTATIONS START
     const responsePatientDetails = await getPatientDetailsById(patient_id);
     if (responsePatientDetails.status) {
@@ -982,16 +992,6 @@ class PatientDetails extends Component {
         //   ? patientCarePlans[0]
         //   : "",
       });
-      if (
-        !isEmpty(scheduleAppointment) &&
-        scheduleAppointment.details.service_offering_name ===
-          "Virtual consultation"
-      ) {
-        this.openVideoScreen();
-      }
-      if (!isEmpty(scheduleAppointment)) {
-        getFlashCardByActivityId(scheduleAppointment.id);
-      }
     }
 
     // getMedications(patient_id);

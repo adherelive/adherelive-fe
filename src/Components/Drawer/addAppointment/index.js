@@ -112,7 +112,9 @@ class AddAppointment extends Component {
               // },
               // AKSHAY NEW CODE IMPLEMENTAION FOR SUBSCRIPTION
               participant_two: {
-                id: !isEmpty(scheduleAppointment) ? 1 : patient_id,
+                id: !isEmpty(scheduleAppointment)
+                  ? scheduleAppointment.patient_id
+                  : patient_id,
                 category: "patient",
               },
               date,
@@ -125,10 +127,10 @@ class AddAppointment extends Component {
               provider_id: newProvider_id,
               provider_name,
               critical,
-              // treatment_id: treatment,
-              treatment_id: !isEmpty(scheduleAppointment)
-                ? appointment_careplan
-                : treatment,
+              treatment_id: treatment,
+              // treatment_id: !isEmpty(scheduleAppointment)
+              //   ? appointment_careplan
+              //   : treatment,
             }
           : {
               // todo: change participant one with patient from store
@@ -137,7 +139,9 @@ class AddAppointment extends Component {
               //   category: "patient",
               // },
               participant_two: {
-                id: !isEmpty(scheduleAppointment) ? 1 : patient_id,
+                id: !isEmpty(scheduleAppointment)
+                  ? scheduleAppointment.patient_id
+                  : patient_id,
                 category: "patient",
               },
               date,
@@ -149,10 +153,10 @@ class AddAppointment extends Component {
               type_description,
               provider_name,
               critical,
-              // treatment_id: treatment,
-              treatment_id: !isEmpty(scheduleAppointment)
-                ? appointment_careplan
-                : treatment,
+              treatment_id: treatment,
+              // treatment_id: !isEmpty(scheduleAppointment)
+              //   ? appointment_careplan
+              //   : treatment,
             };
 
         if (type === RADIOLOGY) {
@@ -219,7 +223,7 @@ class AddAppointment extends Component {
                 ) {
                   localStorage.setItem("flashcardOpen", true);
                   setFlashCard(true);
-                  history.push("patients/1");
+                  history.push(`patients/${scheduleAppointment.patient_id}`);
                 } else if (
                   updateResponse &&
                   scheduleAppointment.fromButton === "schedule"

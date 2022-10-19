@@ -12,13 +12,13 @@ export const TABLE_COLUMN = {
   },
   SERVICE: {
     key: "SERVICE",
-    width: 150,
+    width: 200,
     dataIndex: "SERVICE",
   },
 
   PATIENT: {
     key: "PATIENT",
-    width: 300,
+    width: 350,
     dataIndex: "PATIENT",
   },
   STATUS: {

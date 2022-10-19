@@ -38,7 +38,7 @@ export const TABLE_COLUMN = {
   DURATION: {
     key: "DURATION",
     dataIndex: "DURATION",
-    width: 200,
+    width: 220,
   },
   AMOUNT: {
     key: "AMOUNT",

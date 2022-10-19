@@ -348,9 +348,9 @@ class AddAppointmentForm extends Component {
     } else {
       for (let type of Object.keys(appointment_type)) {
         let { title = "" } = appointment_type[type] || {};
-        if (title !== "Consultation") {
-          finalType[type] = appointment_type[type];
-        }
+        // if (title !== "Consultation") {
+        finalType[type] = appointment_type[type];
+        // }
       }
     }
 

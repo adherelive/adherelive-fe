@@ -126,7 +126,9 @@ class EditAppointment extends Component {
               //   category: "patient",
               // },
               participant_two: {
-                id: !isEmpty(scheduleAppointment) ? 1 : pId,
+                id: !isEmpty(scheduleAppointment)
+                  ? scheduleAppointment.patient_id
+                  : pId,
                 category: "patient",
               },
               date: finalDate,
@@ -139,8 +141,8 @@ class EditAppointment extends Component {
               provider_id: newProvider_id,
               provider_name,
               critical,
-              // treatment_id: treatment,
-              treatment_id: !isEmpty(scheduleAppointment) ? 1 : treatment,
+              treatment_id: treatment,
+              // treatment_id: !isEmpty(scheduleAppointment) ? 1 : treatment,
             }
           : {
               // todo: change participant one with patient from store
@@ -150,7 +152,9 @@ class EditAppointment extends Component {
               //   category: "patient",
               // },
               participant_two: {
-                id: !isEmpty(scheduleAppointment) ? 1 : pId,
+                id: !isEmpty(scheduleAppointment)
+                  ? scheduleAppointment.patient_id
+                  : pId,
                 category: "patient",
               },
               date: finalDate,
@@ -162,8 +166,8 @@ class EditAppointment extends Component {
               type_description,
               provider_name,
               critical,
-              // treatment_id: treatment,
-              treatment_id: !isEmpty(scheduleAppointment) ? 1 : treatment,
+              treatment_id: treatment,
+              // treatment_id: !isEmpty(scheduleAppointment) ? 1 : treatment,
             };
 
         if (type === RADIOLOGY) {
