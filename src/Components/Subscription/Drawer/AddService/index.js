@@ -240,19 +240,21 @@ function AddService({ onCloseDrawer, visible, doctor_id }) {
               >
                 {getCurrencyOption()}
               </Select>
-              <div className="form-headings flex align-center justify-start">
-                {/* {this.formatMessage(messages.consultationFee)} */}
-                <span>Razorpay Link</span>
-                <div className="star-red">*</div>
-              </div>
+              <div className="mb80">
+                <div className="form-headings flex align-center justify-start">
+                  {/* {this.formatMessage(messages.consultationFee)} */}
+                  <span>Razorpay Link</span>
+                  <div className="star-red">*</div>
+                </div>
 
-              <Input
-                className={"form-inputs-ap"}
-                value={values.razorpayLink}
-                onChange={setRazorpayLink}
-                // disabled={}
-                type="string"
-              />
+                <Input
+                  className={"form-inputs-ap"}
+                  value={values.razorpayLink}
+                  onChange={setRazorpayLink}
+                  // disabled={}
+                  type="string"
+                />
+              </div>
             </div>
           ) : null}
         </div>

@@ -179,13 +179,13 @@ function Index({ onCloseDrawer, visible, patient_id }) {
           </div>
 
           <FormItem
-            className="full-width ant-date-custom"
+            className="full-width ant-date-custom mb10"
             //   label={formatMessage(messages.genericName)}
             // label={"Name of subsacription plan"}
           >
             <Input
               autoFocus
-              className="mt4"
+              className="form-inputs-ap"
               //   placeholder={formatMessage(messages.genericName)}
               placeholder={"Rs. 600"}
               value={serviceFees}
@@ -230,13 +230,13 @@ function Index({ onCloseDrawer, visible, patient_id }) {
           </div>
 
           <FormItem
-            className="full-width ant-date-custom"
+            className="full-width ant-date-custom mb10"
             //   label={formatMessage(messages.genericName)}
             // label={"Name of subsacription plan"}
           >
             <Input
               autoFocus
-              className="mt4"
+              className="form-inputs-ap"
               //   placeholder={formatMessage(messages.genericName)}
               placeholder={"Rs. 600"}
               value={netServiceFees}

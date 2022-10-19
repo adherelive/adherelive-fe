@@ -233,13 +233,13 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
           </div>
 
           <FormItem
-            className="full-width ant-date-custom"
+            className="full-width ant-date-custom mb10"
             //   label={formatMessage(messages.genericName)}
             // label={"Name of subsacription plan"}
           >
             <Input
               autoFocus
-              className="mt4"
+              className="form-inputs-ap"
               //   placeholder={formatMessage(messages.genericName)}
               placeholder={"Health lite"}
               name="subscriptionName"
@@ -297,7 +297,7 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
               );
             })
           ) : (
-            <div className="flex wp100 flex-grow-1 align-center">
+            <div className="flex wp100 flex-grow-1 align-center mb10">
               {" "}
               <div className="drawer-block">No service offering added</div>
             </div>
@@ -327,7 +327,7 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
           >
             <Input
               autoFocus
-              className="mt4"
+              className="form-inputs-ap"
               //   placeholder={formatMessage(messages.genericName)}
               name="totalSubscriptionFees"
               placeholder={"Rs. 0"}
@@ -360,23 +360,25 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
               onChange={onChangeHandler}
             />
           </FormItem>
-          <div className="form-headings flex align-center justify-start">
-            {/* {this.formatMessage(messages.consultationFee)} */}
-            <span>Razorpay Link</span>
-            <div className="star-red">*</div>
-          </div>
+          <div className="mb80">
+            <div className="form-headings flex align-center justify-start">
+              {/* {this.formatMessage(messages.consultationFee)} */}
+              <span>Razorpay Link</span>
+              <div className="star-red">*</div>
+            </div>
 
-          <Input
-            className={"form-inputs-ap"}
-            value={values.razorpayLink}
-            onChange={setRazorpayLink}
-            // disabled={}
-            type="string"
-          />
-          <h3>
-            Subscription period is always monthly please refer to T&C for
-            details
-          </h3>
+            <Input
+              className={"form-inputs-ap"}
+              value={values.razorpayLink}
+              onChange={setRazorpayLink}
+              // disabled={}
+              type="string"
+            />
+            <h3>
+              Subscription period is always monthly please refer to T&C for
+              details
+            </h3>
+          </div>
         </Form>
       </div>
     );

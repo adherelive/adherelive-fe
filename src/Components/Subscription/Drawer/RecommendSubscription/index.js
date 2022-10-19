@@ -260,13 +260,13 @@ function Index({ visible, onCloseDrawer, patient_id }) {
           </div>
 
           <FormItem
-            className="full-width ant-date-custom"
+            className="full-width ant-date-custom mb10"
             //   label={formatMessage(messages.genericName)}
             // label={"Name of subsacription plan"}
           >
             <Input
               autoFocus
-              className="mt4"
+              className="form-inputs-ap"
               //   placeholder={formatMessage(messages.genericName)}
               placeholder={"Rs. 600"}
               value={serviceFees}
@@ -312,13 +312,13 @@ function Index({ visible, onCloseDrawer, patient_id }) {
           </div>
 
           <FormItem
-            className="full-width ant-date-custom"
+            className="full-width ant-date-custom mb10"
             //   label={formatMessage(messages.genericName)}
             // label={"Name of subsacription plan"}
           >
             <Input
               autoFocus
-              className="mt4"
+              className="form-inputs-ap"
               //   placeholder={formatMessage(messages.genericName)}
               placeholder={"Rs. 600"}
               value={netSubscriptionFees}
@@ -329,26 +329,27 @@ function Index({ visible, onCloseDrawer, patient_id }) {
             {/* {this.formatMessage(messages.razorpayLink)} */}
             <span>Notes</span>
           </div>
-
-          <FormItem
-            // label={formatMessage(messages.description_text)}
-            className="full-width ant-date-custom"
-            // label={"Plan description"}
-          >
-            <TextArea
-              autoFocus
-              className="mt4"
-              maxLength={1000}
-              //   placeholder={formatMessage(messages.description_text_placeholder)}
-              placeholder={
-                "I suggest you take four month subscription until we drop some of your elevated vitals for LFT'S, CSR, etc..."
-              }
-              rows={4}
-              name="notes"
-              value={notes}
-              onChange={onChangeHandler}
-            />
-          </FormItem>
+          <div className="mb80">
+            <FormItem
+              // label={formatMessage(messages.description_text)}
+              className="full-width ant-date-custom"
+              // label={"Plan description"}
+            >
+              <TextArea
+                autoFocus
+                className="mt4"
+                maxLength={1000}
+                //   placeholder={formatMessage(messages.description_text_placeholder)}
+                placeholder={
+                  "I suggest you take four month subscription until we drop some of your elevated vitals for LFT'S, CSR, etc..."
+                }
+                rows={4}
+                name="notes"
+                value={notes}
+                onChange={onChangeHandler}
+              />
+            </FormItem>
+          </div>
         </Form>
       </div>
     );
