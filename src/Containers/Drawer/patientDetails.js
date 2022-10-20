@@ -12,6 +12,7 @@ import {
   getAppointmentsDetails,
 } from "../../modules/appointments";
 import { getPatientMissedEvents } from "../../modules/patients";
+import { setScheduleAppontmentData } from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
   const {
@@ -63,6 +64,9 @@ const mapDispatchToProps = (dispatch) => {
     getAppointmentsDetails: () => dispatch(getAppointmentsDetails()),
     getPatientMissedEvents: (patient_id) =>
       dispatch(getPatientMissedEvents(patient_id)),
+    // AKSHAY NEW CODE IMPLEMENTATIONS
+    setScheduleAppontmentData: (payload) =>
+      dispatch(setScheduleAppontmentData(payload)),
   };
 };
 

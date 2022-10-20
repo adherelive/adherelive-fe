@@ -76,7 +76,7 @@ class AddAppointment extends Component {
           description = "",
           treatment = "",
           radiology_type = "",
-          appointment_careplan,
+          appointment_careplan = {},
         } = values;
 
         // if(type === RADIOLOGY){
@@ -183,7 +183,13 @@ class AddAppointment extends Component {
         } else {
           try {
             this.setState({ submitting: true });
-            const response = await addCarePlanAppointment(data, carePlanId);
+            let finalCareplanId = !isEmpty(scheduleAppointment)
+              ? appointment_careplan
+              : carePlanId;
+            const response = await addCarePlanAppointment(
+              data,
+              finalCareplanId
+            );
             const {
               status,
               statusCode: code,

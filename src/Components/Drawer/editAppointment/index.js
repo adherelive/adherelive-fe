@@ -141,7 +141,7 @@ class EditAppointment extends Component {
               provider_id: newProvider_id,
               provider_name,
               critical,
-              treatment_id: treatment,
+              treatment_id: !isEmpty(treatment) ? treatment : 1,
               // treatment_id: !isEmpty(scheduleAppointment) ? 1 : treatment,
             }
           : {
@@ -166,7 +166,7 @@ class EditAppointment extends Component {
               type_description,
               provider_name,
               critical,
-              treatment_id: treatment,
+              treatment_id: !isEmpty(treatment) ? treatment : 1,
               // treatment_id: !isEmpty(scheduleAppointment) ? 1 : treatment,
             };
 

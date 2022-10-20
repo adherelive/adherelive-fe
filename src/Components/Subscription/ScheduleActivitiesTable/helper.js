@@ -7,7 +7,7 @@ export const TABLE_COLUMN = {
   },
   ACTIVITY: {
     key: "ACTIVITY",
-    width: 200,
+    width: 250,
     dataIndex: "ACTIVITY",
   },
   SERVICE: {

@@ -13,6 +13,7 @@ import {
 import Close from "../../../Assets/images/close.png";
 import isEmpty from "../../../Helper/is-empty";
 import { setFlashCard } from "./../../../modules/subscription/flashcard";
+import { fetchReports } from "./../../../modules/reports";
 import { useDispatch, useSelector } from "react-redux";
 import AddNotesSection from "./AddNotesSection";
 import NotesList from "./NotesList";
@@ -115,10 +116,12 @@ function FlashCard() {
         response = await dispatch(
           updateFlashcardById(flashCard.flashCardId, payload)
         );
+        dispatch(fetchReports(flashCard.patientId));
       } else {
         payload.patient_id = !isEmpty(activityData) && activityData.patient_id;
         payload.tx_activity_id = !isEmpty(activityData) && activityData.id;
         response = await dispatch(addFlashcard(payload));
+        dispatch(fetchReports(flashCard.patientId));
       }
       const { status } = response;
       if (status == true) {
@@ -165,10 +168,12 @@ function FlashCard() {
       response = await dispatch(
         updateFlashcardById(flashCard.flashCardId, payload)
       );
+      dispatch(fetchReports(flashCard.patientId));
     } else {
       payload.patient_id = !isEmpty(activityData) && activityData.patient_id;
       payload.tx_activity_id = !isEmpty(activityData) && activityData.id;
       response = await dispatch(addFlashcard(payload));
+      dispatch(fetchReports(flashCard.patientId));
     }
 
     const { status } = response;
@@ -201,10 +206,12 @@ function FlashCard() {
       response = await dispatch(
         updateFlashcardById(flashCard.flashCardId, payload)
       );
+      dispatch(fetchReports(flashCard.patientId));
     } else {
       payload.patient_id = !isEmpty(activityData) && activityData.patient_id;
       payload.tx_activity_id = !isEmpty(activityData) && activityData.id;
       response = await dispatch(addFlashcard(payload));
+      dispatch(fetchReports(flashCard.patientId));
     }
     const { status } = response;
     if (status == true) {

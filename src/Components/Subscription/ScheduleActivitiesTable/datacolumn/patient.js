@@ -33,7 +33,7 @@ export default (props) => {
       type: SET_FLASHCARD_OPEN,
       payload: true,
     });
-    history.push("patients/1");
+    history.push(`patients/${finalActivityData.patient_id}`);
   };
 
   return (

@@ -309,10 +309,15 @@ class PatientDetailsDrawer extends Component {
     // window.open(`http://localhost:3000${getPatientConsultingUrl(patient_id)}`, '_blank');
   };
 
-  handlePatientDetailsRedirect = (e) => {
+  handlePatientDetailsRedirect = async (e) => {
     e.preventDefault();
-    const { history, payload: { patient_id } = {} } = this.props;
+    const {
+      history,
+      payload: { patient_id } = {},
+      setScheduleAppontmentData,
+    } = this.props;
     this.onClose();
+    await setScheduleAppontmentData({});
     history.push(`/patients/${patient_id}`);
   };
 

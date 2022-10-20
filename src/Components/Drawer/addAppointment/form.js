@@ -69,17 +69,17 @@ class AddAppointmentForm extends Component {
       radiologyDropDownVisible: false,
       radiologyTypeSelected: null,
       typeDescValue: "",
-      carePlans: [],
+      carePlans: {},
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.scrollToTop();
     const { scheduleAppointment, getPatientCareplanByPatientId } = this.props;
     this.getMedicalTestFavourites();
     this.getRadiologyFavourites();
     if (!isEmpty(scheduleAppointment)) {
-      this.getCarePlanForPatient();
+      await this.getCarePlanForPatient();
     }
   }
 
@@ -137,7 +137,7 @@ class AddAppointmentForm extends Component {
         message.error(resp_msg);
       } else if (status) {
         this.setState({
-          carePlans: data.careplans,
+          carePlans: data.care_plans,
         });
       }
     } catch (error) {
@@ -331,6 +331,12 @@ class AddAppointmentForm extends Component {
     this.setState({ typeDescription: descArray });
   };
 
+  handleCareplanSelect = (value) => {
+    this.setState({
+      selectedCareplan: value,
+    });
+  };
+
   getTypeOption = () => {
     let {
       static_templates: { appointments: { appointment_type = {} } = {} } = {},
@@ -367,16 +373,26 @@ class AddAppointmentForm extends Component {
   };
 
   getCareplanOption = () => {
-    const { carePlans = [] } = this.state;
+    const { carePlans = {} } = this.state;
 
     let options = [];
-    carePlans.forEach((careplan) => {
+
+    for (let carePlan of Object.keys(carePlans)) {
+      let { details: { diagnosis: { description = "" } } = {} } =
+        carePlans[carePlan];
       options.push(
-        <Option key={careplan.id} value={careplan.id}>
-          {careplan.details.diagnosis.description}
+        <Option key={carePlan} value={carePlan}>
+          {description}
         </Option>
       );
-    });
+    }
+    // carePlans.forEach((carePlan) => {
+    //   options.push(
+    //     <Option key={carePlan.id} value={carePlan.id}>
+    //       {carePlan.details.diagnosis.description}
+    //     </Option>
+    //   );
+    // });
 
     return options;
   };
@@ -884,6 +900,9 @@ class AddAppointmentForm extends Component {
                   className="drawer-select"
                   placeholder={"Select Careplan"}
                   onSelect={this.handleCareplanSelect}
+                  autoComplete="off"
+                  optionFilterProp="children"
+                  notFoundContent={"Careplans not found"}
                 >
                   {this.getCareplanOption()}
                 </Select>

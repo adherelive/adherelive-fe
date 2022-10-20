@@ -3,6 +3,7 @@ import { REQUEST_TYPE } from "../../../constant";
 import {
   SET_FLASHCARD_OPEN,
   SET_FALASHCARD_DATA,
+  SET_ACTIVITY_DATA_FOR_SCHEDULE,
 } from "../../../reducer/index";
 import {
   getFlashcardByActivityIdUrl,
@@ -25,6 +26,15 @@ export const setFlashcardData = (payload) => {
     dispatch({
       type: SET_FALASHCARD_DATA,
       payload: payload,
+    });
+  };
+};
+
+export const setScheduledAppointmentData = (value) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_ACTIVITY_DATA_FOR_SCHEDULE,
+      payload: value,
     });
   };
 };
