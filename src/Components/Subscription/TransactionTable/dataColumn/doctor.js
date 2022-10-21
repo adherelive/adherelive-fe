@@ -5,9 +5,7 @@ import { Tooltip, Avatar } from "antd";
 
 export default (props) => {
   const { transactions } = props || {};
-  const {
-    doctor: { full_name = {} },
-  } = transactions;
+  const { doctor: { full_name = "" } = {} } = transactions;
 
   return (
     <div className="ellipsis wp100 flex direction-column  ">

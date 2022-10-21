@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { injectIntl } from "react-intl";
 import message from "antd/es/message";
 import Button from "antd/es/button";
+import { Dropdown } from "antd";
 import Menu from "antd/es/menu";
 
 import AddConsultationFeeDrawer from "../../../Containers/Drawer/addConsultationFee";
@@ -256,6 +257,7 @@ class ProviderDoctorPaymentProduct extends Component {
 
   renderHeader = () => {
     const { noDoctorPaymentProducts } = this.state;
+    const { services } = this.props;
     return (
       <div className="wp100 pt20  mb20 fs28 fw700 flex justify-space-between align-center">
         <div className="ml20 flex flex-start align-center">
@@ -263,18 +265,32 @@ class ProviderDoctorPaymentProduct extends Component {
           {this.formatMessage(messages.consultation_fee_header_text)}
         </div>
 
-        {!noDoctorPaymentProducts && (
+        {Object.keys(services).length !== 0 && (
           <div className="flex flex-end align-center">
-            <Button
+            {/* <Button
               type="primary"
               className="ml10 mr20 add-button "
-              icon={<PlusOutlined />}
+              icon={"plus"}
               onClick={this.displayAddDoctorPaymentProduct}
             >
               <span className="fs16">
                 {this.formatMessage(messages.addMore)}
               </span>
-            </Button>
+            </Button> */}
+            {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+            <Dropdown
+              overlay={this.getMenu()}
+              trigger={["click"]}
+              placement="bottomRight"
+            >
+              <Button
+                type="primary"
+                className="ml10 mr20 add-button "
+                icon={<PlusOutlined />}
+              >
+                <span className="fs16">Add More</span>
+              </Button>
+            </Dropdown>
           </div>
         )}
       </div>

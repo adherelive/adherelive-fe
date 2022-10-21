@@ -5,9 +5,8 @@ import Avatar from "antd/es/avatar";
 
 export default (props) => {
   const { transactions } = props || {};
-  const {
-    patient: { user_name = {}, mobile_number = {}, prefix = {} },
-  } = transactions;
+  const { patient: { user_name = "", mobile_number = "", prefix = "" } = {} } =
+    transactions;
 
   return (
     <div className="ellipsis wp100 flex direction-column  ">
