@@ -12,7 +12,11 @@ import {
   getAppointmentsDetails,
 } from "../../modules/appointments";
 import { getPatientMissedEvents } from "../../modules/patients";
-import { setScheduleAppontmentData } from "../../modules/subscription/activities";
+// AKSHAY NEW CODE FOR SUBSCRIPTION
+import {
+  setScheduleAppontmentData,
+  getPatientCareplanByPatientId,
+} from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
   const {
@@ -67,6 +71,8 @@ const mapDispatchToProps = (dispatch) => {
     // AKSHAY NEW CODE IMPLEMENTATIONS
     setScheduleAppontmentData: (payload) =>
       dispatch(setScheduleAppontmentData(payload)),
+    getPatientCareplanByPatientId: (patientId) =>
+      dispatch(getPatientCareplanByPatientId(patientId)),
   };
 };
 
