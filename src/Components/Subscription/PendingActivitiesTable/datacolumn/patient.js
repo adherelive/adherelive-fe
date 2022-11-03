@@ -8,8 +8,16 @@ import {
 import isEmpty from "../../../../Helper/is-empty";
 
 export default (props) => {
-  const { data: { activities: { patient = {}, details = {} } = {} } = {} } =
-    props || {};
+  const {
+    data: {
+      activities: {
+        patient: {
+          _data: { full_name = "" },
+        },
+        details = {},
+      } = {},
+    } = {},
+  } = props || {};
 
   const {
     data: {
@@ -26,7 +34,7 @@ export default (props) => {
       {/* <span>{`Rs ${amount}`}</span> */}
       <span>
         <span onClick={() => onPatientNameClick(props.data.activities)}>
-          {!isEmpty(patient.user_name) ? patient.user_name : "Gagneet Singh"}
+          {full_name}
         </span>
 
         {details.service_offering_name !== "Remote monitoring" && (

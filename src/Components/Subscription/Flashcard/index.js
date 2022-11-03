@@ -121,7 +121,7 @@ function FlashCard() {
         payload.patient_id = !isEmpty(activityData) && activityData.patient_id;
         payload.tx_activity_id = !isEmpty(activityData) && activityData.id;
         response = await dispatch(addFlashcard(payload));
-        dispatch(fetchReports(flashCard.patientId));
+        dispatch(fetchReports(payload.patient_id));
       }
       const { status } = response;
       if (status == true) {
@@ -173,7 +173,7 @@ function FlashCard() {
       payload.patient_id = !isEmpty(activityData) && activityData.patient_id;
       payload.tx_activity_id = !isEmpty(activityData) && activityData.id;
       response = await dispatch(addFlashcard(payload));
-      dispatch(fetchReports(flashCard.patientId));
+      dispatch(fetchReports(payload.patient_id));
     }
 
     const { status } = response;
@@ -211,7 +211,7 @@ function FlashCard() {
       payload.patient_id = !isEmpty(activityData) && activityData.patient_id;
       payload.tx_activity_id = !isEmpty(activityData) && activityData.id;
       response = await dispatch(addFlashcard(payload));
-      dispatch(fetchReports(flashCard.patientId));
+      dispatch(fetchReports(payload.patient_id));
     }
     const { status } = response;
     if (status == true) {
