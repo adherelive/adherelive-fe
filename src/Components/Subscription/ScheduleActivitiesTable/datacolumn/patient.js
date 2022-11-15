@@ -9,7 +9,14 @@ import {
 export default (props) => {
   const dispatch = useDispatch();
   const {
-    data: { activities: { _data: { full_name = "" }, details = {} } = {} } = {},
+    data: {
+      activities: {
+        patient: {
+          _data: { full_name = "" },
+        },
+        details = {},
+      } = {},
+    } = {},
   } = props || {};
 
   const {
