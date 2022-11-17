@@ -214,18 +214,16 @@ function EditRecommendService({ onCloseDrawer, visible, editData }) {
               disabled
             />
           </FormItem>
-          <div className="flex align-items-end justify-content-space-between">
+          {/* <div className="flex align-items-end justify-content-space-between">
             <div className="flex direction-row flex-grow-1">
               <label htmlFor="quantity" className="form-label" title="Quantity">
-                {/* {formatMessage(messages.quantity)} */}
+              
                 Do you want to offer discount ?
               </label>
 
-              {/* <div className="star-red">*</div> */}
-            </div>
-            {/* <div className="label-color fontsize12 mb8">
             
-            </div> */}
+            </div>
+        
             <div className="flex-grow-0">
               <RadioGroup size="small" className="flex justify-content-end">
                 <RadioButton
@@ -237,9 +235,9 @@ function EditRecommendService({ onCloseDrawer, visible, editData }) {
                 </RadioButton>
               </RadioGroup>
             </div>
-          </div>
+          </div> */}
 
-          <FormItem
+          {/* <FormItem
             className="flex-1 align-self-end"
             // validateStatus={error ? "error" : ""}
             // help={error ? error[0] : ""}
@@ -248,12 +246,12 @@ function EditRecommendService({ onCloseDrawer, visible, editData }) {
           </FormItem>
           <div className="form-headings flex align-center justify-start">
             <span>
-              {/* {this.formatMessage(messages.defaultConsultationOptions)} */}
+            
               Net Service fees after discount
             </span>
-          </div>
+          </div> */}
 
-          <FormItem
+          {/* <FormItem
             className="full-width ant-date-custom"
             //   label={formatMessage(messages.genericName)}
             // label={"Name of subsacription plan"}
@@ -266,7 +264,7 @@ function EditRecommendService({ onCloseDrawer, visible, editData }) {
               value={netServiceFees}
               disabled
             />
-          </FormItem>
+          </FormItem> */}
           <div className="form-headings flex align-center justify-start">
             {/* {this.formatMessage(messages.razorpayLink)} */}
             <span>Notes</span>

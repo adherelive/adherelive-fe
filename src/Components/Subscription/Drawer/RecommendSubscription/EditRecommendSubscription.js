@@ -321,18 +321,16 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
             />
           </FormItem>
 
-          <div className="flex align-items-end justify-content-space-between">
+          {/* <div className="flex align-items-end justify-content-space-between">
             <div className="flex direction-row flex-grow-1">
               <label htmlFor="quantity" className="form-label" title="Quantity">
-                {/* {formatMessage(messages.quantity)} */}
+              
                 Do you want to offer discount ?
               </label>
 
-              {/* <div className="star-red">*</div> */}
-            </div>
-            {/* <div className="label-color fontsize12 mb8">
             
-            </div> */}
+            </div>
+          
             <div className="flex-grow-0">
               <RadioGroup size="small" className="flex justify-content-end">
                 <RadioButton
@@ -344,36 +342,34 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
                 </RadioButton>
               </RadioGroup>
             </div>
-          </div>
+          </div> */}
 
-          <FormItem
+          {/* <FormItem
             className="flex-1 align-self-end"
-            // validateStatus={error ? "error" : ""}
-            // help={error ? error[0] : ""}
+           
           >
             <InputNumber min={0} style={{ width: "100%" }} value={discount} />
-          </FormItem>
-          <div className="form-headings flex align-center justify-start">
+          </FormItem> */}
+          {/* <div className="form-headings flex align-center justify-start">
             <span>
-              {/* {this.formatMessage(messages.defaultConsultationOptions)} */}
+             
               Net subscription fees after discount
             </span>
           </div>
 
           <FormItem
             className="full-width ant-date-custom"
-            //   label={formatMessage(messages.genericName)}
-            // label={"Name of subsacription plan"}
+           
           >
             <Input
               autoFocus
               className="mt4"
-              //   placeholder={formatMessage(messages.genericName)}
+             
               placeholder={"Rs. 600"}
               value={netSubscriptionFees}
               disabled
             />
-          </FormItem>
+          </FormItem> */}
           <div className="form-headings flex align-center justify-start">
             {/* {this.formatMessage(messages.razorpayLink)} */}
             <span>Notes</span>
