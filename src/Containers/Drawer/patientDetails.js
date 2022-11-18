@@ -12,6 +12,7 @@ import {
   getAppointmentsDetails,
 } from "../../modules/appointments";
 import { getPatientMissedEvents } from "../../modules/patients";
+import { getPatientCareplanByPatientId } from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
   const {
@@ -63,6 +64,8 @@ const mapDispatchToProps = (dispatch) => {
     getAppointmentsDetails: () => dispatch(getAppointmentsDetails()),
     getPatientMissedEvents: (patient_id) =>
       dispatch(getPatientMissedEvents(patient_id)),
+    getPatientCareplanByPatientId: (patientId) =>
+      dispatch(getPatientCareplanByPatientId(patientId)),
   };
 };
 

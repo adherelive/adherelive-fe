@@ -20,6 +20,7 @@ import message from "antd/es/message";
 import ShareIcon from "../../../Assets/images/redirect3x.png";
 import MsgIcon from "../../../Assets/images/chat.png";
 import { getName } from "../../../Helper/validation";
+import isEmpty from "../../../Helper/is-empty";
 // import config from "../../../config/config";
 
 // const { WEB_URL } = config;
@@ -38,8 +39,56 @@ class PatientDetailsDrawer extends Component {
       // AKSHAY NEW CODE IMPLEMENTATIONS
       patientDetailsData: {},
       patientUserDetails: {},
+      care_plans: {},
     };
   }
+
+  // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+  getCarePlanForPatient = async (patientId) => {
+    try {
+      const { getPatientCareplanByPatientId } = this.props;
+      const getCarePlanResponse = await getPatientCareplanByPatientId(
+        patientId
+      );
+      const {
+        status,
+        statusCode,
+        payload: { data = {}, message: resp_msg = "" } = {},
+      } = getCarePlanResponse || {};
+      if (!status) {
+        // message.error(resp_msg);
+      } else if (status) {
+        if (!isEmpty(data.care_plans)) {
+          let carePlanId = 1;
+          let carePlanMedicationIds = [];
+          let appointmentsListIds = [];
+          for (let carePlan of Object.values(data.care_plans)) {
+            let {
+              basic_info: { id = 1, patient_id = 1 },
+              medication_ids = [],
+              appointment_ids = [],
+            } = carePlan;
+            // if (parseInt(patientId) === parseInt(patient_id)) {
+            carePlanId = id;
+            carePlanMedicationIds = carePlan.carePlanMedicationIds;
+            appointmentsListIds = carePlan.carePlanAppointmentIds;
+            // }
+          }
+          this.setState({
+            carePlanId,
+            carePlanMedicationIds,
+            appointmentsListIds,
+            care_plans: data.care_plans,
+          });
+        }
+        // this.setState({
+        //   carePlans: data.care_plans,
+        // });
+      }
+    } catch (error) {
+      console.log("Patient Careplans Get errrrorrrr ===>", error);
+    }
+  };
 
   componentDidMount() {
     const {
@@ -132,6 +181,7 @@ class PatientDetailsDrawer extends Component {
 
     if (patient_id !== prev_patient_id) {
       this.handleGetPatientDetails(patient_id);
+      this.getCarePlanForPatient(patient_id);
       this.handleGetMissedEvents(patient_id);
       getMedications(patient_id);
       getAppointments(patient_id);
@@ -326,9 +376,12 @@ class PatientDetailsDrawer extends Component {
       providers,
       patients,
       payload,
-      care_plans,
+      // care_plans,
       users = {},
     } = this.props;
+
+    const { care_plans } = this.state;
+
     const { patientDetailsData, patientUserDetails } = this.state;
 
     const {
