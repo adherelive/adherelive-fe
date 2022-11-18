@@ -313,7 +313,8 @@ class AddAppointmentForm extends Component {
     return newTypes;
   };
 
-  setRadiologyTypeSelected = (id) => () => {
+  setRadiologyTypeSelected = (value, data) => {
+    let id = data.key.split("-")[0];
     this.setState({ radiologyTypeSelected: `${id}` });
   };
 
@@ -375,7 +376,7 @@ class AddAppointmentForm extends Component {
         <Option
           key={`${id}-${name}`}
           value={name}
-          onClick={setRadiologyTypeSelected(id)}
+          // onClick={setRadiologyTypeSelected(id)}
         >
           {name}
         </Option>
@@ -855,7 +856,8 @@ class AddAppointmentForm extends Component {
                 {}
               )(
                 <Select
-                  onChange={this.handleTypeDescriptionSelect}
+                  // onChange={this.handleTypeDescriptionSelect}
+                  onSelect={this.setRadiologyTypeSelected}
                   onDropdownVisibleChange={this.DescDropDownVisibleChange}
                   disabled={!appointmentType}
                   notFoundContent={"No match found"}
