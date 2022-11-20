@@ -67,6 +67,7 @@ function AddService({ onCloseDrawer, visible, doctor_id }) {
       is_active: true,
       service_charge: serviceFees,
       currency: currency,
+      payment_link: "https://razorpay.com/payment-link/plink_JXOHpsdvI7nlik",
     };
     if (doctor_id) {
       formData.doctor_id = doctor_id;

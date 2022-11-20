@@ -115,6 +115,7 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
       description: values.planDescription,
       currency: "INR",
       services: finalServiceArray,
+      payment_link: "https://razorpay.com/payment-link/plink_JXOHpsdvI7nlik",
     };
 
     if (doctor_id) {
