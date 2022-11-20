@@ -54,7 +54,8 @@ function AddService({ onCloseDrawer, visible, doctor_id }) {
   };
 
   const onSubmit = () => {
-    const { consultation, serviceType, serviceFees, currency } = values;
+    const { consultation, serviceType, serviceFees, currency, razorpayLink } =
+      values;
     setValues({
       ...values,
       submitting: true,
@@ -67,7 +68,7 @@ function AddService({ onCloseDrawer, visible, doctor_id }) {
       is_active: true,
       service_charge: serviceFees,
       currency: currency,
-      payment_link: "https://razorpay.com/payment-link/plink_JXOHpsdvI7nlik",
+      payment_link: razorpayLink,
     };
     if (doctor_id) {
       formData.doctor_id = doctor_id;

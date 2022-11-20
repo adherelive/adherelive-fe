@@ -46,7 +46,7 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
     createSubscriptionWarn: false,
     editServiceOfferingDrawer: false,
     editSubscriptionFeesWarn: false,
-    setRazorpayLink: "",
+    razorpayLink: "",
   });
 
   const [serviceOfferingsArray, setServiceOfferingArray] = useState([]);
@@ -115,7 +115,7 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
       description: values.planDescription,
       currency: "INR",
       services: finalServiceArray,
-      payment_link: "https://razorpay.com/payment-link/plink_JXOHpsdvI7nlik",
+      payment_link: values.razorpayLink,
     };
 
     if (doctor_id) {
