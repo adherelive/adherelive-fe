@@ -67,10 +67,14 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
   }, [serviceOfferingsArray]);
 
   const onSubmit = () => {
-    setValues({
-      ...values,
-      createSubscriptionWarn: true,
-    });
+    const validate = validateData();
+
+    if (validate) {
+      setValues({
+        ...values,
+        createSubscriptionWarn: true,
+      });
+    }
   };
 
   const callBack = () => {
@@ -82,7 +86,6 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
       planDescription: "",
       submitting: false,
       serviceOfferingsDrawer: false,
-      createSubscriptionWarn: false,
       editServiceOfferingDrawer: false,
     });
     setServiceOfferingArray([]);
@@ -101,10 +104,10 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
       });
     });
 
-    setValues({
-      ...values,
-      createSubscriptionWarn: false,
-    });
+    // setValues({
+    //   ...values,
+    //   createSubscriptionWarn: false,
+    // });
 
     let formData = {
       // provider_type: "doctor",
@@ -218,6 +221,23 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
       ...values,
       razorpayLink: e.target.value,
     });
+  };
+
+  const validateData = () => {
+    const { subscriptionName = "", razorpayLink = "" } = values;
+    if (!subscriptionName) {
+      message.error("Subscription name is required");
+      return false;
+    } else if (isEmpty(serviceOfferingsArray)) {
+      message.error("Please select at least one service");
+      return false;
+    }
+    // else if (!razorpayLink) {
+    //   message.error("Please add payment link");
+    //   return false;
+    // }
+
+    return true;
   };
 
   const renderAddNewSubscription = () => {
@@ -439,12 +459,12 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
           cancelComponent={null}
           submitting={submitting}
         />
+        <CreateSubscriptionWarn
+          isModalVisible={createSubscriptionWarn}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+        />
       </Drawer>
-      <CreateSubscriptionWarn
-        isModalVisible={createSubscriptionWarn}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
     </Fragment>
   );
 }

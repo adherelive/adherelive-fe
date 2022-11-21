@@ -245,6 +245,7 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
                 .toLowerCase()
                 .indexOf(input.toLowerCase()) >= 0
             }
+            disabled
           >
             {getStatusOption()}
           </Select>

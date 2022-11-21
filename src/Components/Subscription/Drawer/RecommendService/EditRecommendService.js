@@ -189,6 +189,7 @@ function EditRecommendService({ onCloseDrawer, visible, editData }) {
                 .toLowerCase()
                 .indexOf(input.toLowerCase()) >= 0
             }
+            disabled
           >
             {getStatusOption()}
           </Select>
