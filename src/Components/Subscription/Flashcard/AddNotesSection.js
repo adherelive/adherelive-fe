@@ -1,23 +1,29 @@
 import React, { useState, useEffect, Fragment } from "react";
 import TextArea from "antd/lib/input/TextArea";
 import { useSelector } from "react-redux";
+import isEmpty from "../../../Helper/is-empty";
 
 function AddNotesSection({ notesData, setNotesData }) {
   const [note, setNote] = useState("");
   const [isAddNote, setIsAddNote] = useState(false);
   const [doctorName, setDoctorName] = useState("");
 
+  const authenticated_user = useSelector(
+    (state) => state.auth.authenticated_user
+  );
   const doctors = useSelector((state) => state.doctors);
 
   useEffect(() => {
     let name = "";
-
-    for (let each in doctors) {
-      name = doctors[each].basic_info.full_name;
+    if (!isEmpty(doctors) && !isEmpty(authenticated_user)) {
+      for (let each in doctors) {
+        if (doctors[each].basic_info.user_id == authenticated_user) {
+          name = doctors[each].basic_info.full_name;
+        }
+      }
     }
-
     setDoctorName(name);
-  }, [doctors]);
+  }, [doctors, authenticated_user]);
 
   const setFlashcardNotes = (e) => {
     const value = e.target.value.trim();

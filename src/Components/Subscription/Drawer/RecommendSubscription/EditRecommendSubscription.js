@@ -45,9 +45,30 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
     status: "ACTIVE",
   });
 
+  const [loginDoctorId, setLoginDoctorId] = useState("");
+  const [editAllow, setEdit] = useState(false);
+
   const subscriptions = useSelector(
     (state) => state.subscription.subscriptions
   );
+
+  const authenticated_user = useSelector(
+    (state) => state.auth.authenticated_user
+  );
+  const doctors = useSelector((state) => state.doctors);
+
+  useEffect(() => {
+    if (!isEmpty(doctors) && !isEmpty(authenticated_user)) {
+      let doctorId = "";
+      for (let each in doctors) {
+        if (doctors[each].basic_info.user_id == authenticated_user) {
+          doctorId = each;
+        }
+      }
+      setLoginDoctorId(doctorId);
+      setEdit(doctorId == editData.doctor_id ? false : true);
+    }
+  }, [doctors, editData, authenticated_user]);
 
   useEffect(() => {
     // console.log(editData);
@@ -267,14 +288,22 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
                 <RadioButton
                   style={{ color: "#1890ff" }}
                   value={1}
-                  onClick={onRadioChange}
+                  onClick={
+                    editAllow
+                      ? () => alert("Secondary doctor not allowed to edit")
+                      : onRadioChange
+                  }
                 >
                   +1 month
                 </RadioButton>
                 <RadioButton
                   style={{ color: "#1890ff" }}
                   value={100}
-                  onClick={onRadioChange}
+                  onClick={
+                    editAllow
+                      ? () => alert("Secondary doctor not allowed to edit")
+                      : onRadioChange
+                  }
                 >
                   ongoing
                 </RadioButton>
@@ -296,7 +325,12 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
                 disabled
               />
             ) : (
-              <InputNumber min={1} style={{ width: "100%" }} value={duration} />
+              <InputNumber
+                min={1}
+                style={{ width: "100%" }}
+                value={duration}
+                disabled={editAllow}
+              />
             )}
           </FormItem>
 
@@ -399,6 +433,8 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
       </div>
     );
   };
+
+  console.log("editAllow", editAllow);
 
   const {
     submitting,
