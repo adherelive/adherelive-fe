@@ -32,7 +32,7 @@ export default (props) => {
     // console.log("9687w678687678", { paymentData });
     // openConsultationFeeDrawer(paymentData);
 
-    onOpenEditServiceDrawer();
+    onOpenEditServiceDrawer(data);
   };
 
   if (provider_id || creator_type === USER_CATEGORY.PROVIDER) {

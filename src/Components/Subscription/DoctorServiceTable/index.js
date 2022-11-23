@@ -14,6 +14,7 @@ class DoctorServiceTable extends Component {
     super(props);
     this.state = {
       editServiceDrawer: false,
+      editServiceData: {},
     };
   }
 
@@ -32,8 +33,8 @@ class DoctorServiceTable extends Component {
     this.setState({ editServiceDrawer: false });
   };
 
-  onOpenEditServiceDrawer = () => {
-    this.setState({ editServiceDrawer: true });
+  onOpenEditServiceDrawer = (data) => {
+    this.setState({ editServiceDrawer: true, editServiceData: data });
   };
 
   //   formatMessage = (data) => this.props.intl.formatMessage(data);
@@ -77,7 +78,7 @@ class DoctorServiceTable extends Component {
   };
 
   render() {
-    const { editServiceDrawer } = this.state;
+    const { editServiceDrawer, editServiceData } = this.state;
     const {
       // onRow,
       onSelectChange,
@@ -123,6 +124,7 @@ class DoctorServiceTable extends Component {
           <EditService
             visible={editServiceDrawer}
             onCloseDrawer={this.onCloseDrawer}
+            editServiceData={editServiceData}
           />
         )}
       </>

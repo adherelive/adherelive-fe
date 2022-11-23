@@ -53,7 +53,14 @@ function EditRecommendService({ onCloseDrawer, visible, editData }) {
       serviceFees: editData.serviceDetails.service_charge,
       notes: editData.notes,
       netServiceFees: editData.service_charge,
-      status: editData.patient_status === "inactive" ? "IN-ACTIVE" : "ACTIVE",
+      status:
+        editData.patient_status === "inactive"
+          ? "IN-ACTIVE"
+          : editData.patient_status === "completed"
+          ? "COMPLETED"
+          : editData.patient_status === "inprogress"
+          ? "INPROGRESS"
+          : "ACTIVE",
     });
   }, [editData]);
 
@@ -80,7 +87,14 @@ function EditRecommendService({ onCloseDrawer, visible, editData }) {
     let formData = {
       notes: values.notes,
       service_charge: values.netServiceFees,
-      patient_status: values.status === "ACTIVE" ? "active" : "inactive",
+      patient_status:
+        values.status === "ACTIVE"
+          ? "active"
+          : values.status === "COMPLETED"
+          ? "completed"
+          : values.status === "INPROGRESS"
+          ? "inprogress"
+          : "inactive",
     };
     dispatch(
       updateRecommendService(
@@ -124,6 +138,8 @@ function EditRecommendService({ onCloseDrawer, visible, editData }) {
     let statusOptions = [
       { name: "ACTIVE", id: 1 },
       { name: "IN-ACTIVE", id: 2 },
+      { name: "COMPLETED", id: 3 },
+      { name: "INPROGRESS", id: 4 },
     ];
     let options = [];
     statusOptions.forEach((status) => {
