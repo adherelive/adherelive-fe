@@ -2424,11 +2424,13 @@ class PatientDetails extends Component {
   };
 
   setActiveKey = (value) => {
-    const { getAppointments } = this.props;
+    const { getAppointments, getRecommendServiceAndSubscription } = this.props;
     let patientId = window.location.href.split("/")[4];
 
     if (value === "2") {
       getAppointments(patientId);
+    } else if (value === "8") {
+      getRecommendServiceAndSubscription(patientId);
     }
 
     this.setState({ activeKey: value });

@@ -487,27 +487,27 @@ class EditAppointmentForm extends Component {
 
       return (
         <Option key={`${index}-${name}`} value={name}>
-          <div className="pointer flex wp100  align-center justify-space-between">
-            {name}
-            {descDropDownOpen ? (
-              <Tooltip
-                placement="topLeft"
-                // title={favorite_id ? this.formatMessage(messages.markFav) : this.formatMessage(messages.unMarkFav)}
-              >
-                {favorite_id ? (
-                  <StarFilled
-                    style={{ fontSize: "20px", color: "#f9c216" }}
-                    onClick={this.handleremoveMedicalTestFavourites(index)}
-                  />
-                ) : (
-                  <StarOutlined
-                    style={{ fontSize: "20px", color: "#f9c216" }}
-                    onClick={this.handleAddMedicalTestFavourites(index)}
-                  />
-                )}
-              </Tooltip>
-            ) : null}
-          </div>
+          {/* <div className="pointer flex wp100  align-center justify-space-between"> */}
+          {name}
+          {descDropDownOpen ? (
+            <Tooltip
+              placement="topLeft"
+              // title={favorite_id ? this.formatMessage(messages.markFav) : this.formatMessage(messages.unMarkFav)}
+            >
+              {favorite_id ? (
+                <StarFilled
+                  style={{ fontSize: "20px", color: "#f9c216" }}
+                  onClick={this.handleremoveMedicalTestFavourites(index)}
+                />
+              ) : (
+                <StarOutlined
+                  style={{ fontSize: "20px", color: "#f9c216" }}
+                  onClick={this.handleAddMedicalTestFavourites(index)}
+                />
+              )}
+            </Tooltip>
+          ) : null}
+          {/* </div> */}
         </Option>
       );
     });
