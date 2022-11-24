@@ -422,29 +422,29 @@ class AddAppointmentForm extends Component {
 
       return (
         <Option key={`${index}-${name}`} value={name}>
-          <div className="pointer flex wp100  align-center justify-space-between">
-            {name}
-            {descDropDownOpen ? (
-              // <Tooltip
-              //   placement="topLeft"
-              //   // title={favorite_id ? this.formatMessage(messages.unMarkFav) : this.formatMessage(messages.markFav)}
-              // >
-              <Fragment>
-                {favorite_id ? (
-                  <StarFilled
-                    style={{ fontSize: "20px", color: "#f9c216" }}
-                    onClick={this.handleremoveMedicalTestFavourites(index)}
-                  />
-                ) : (
-                  <StarOutlined
-                    style={{ fontSize: "20px", color: "#f9c216" }}
-                    onClick={this.handleAddMedicalTestFavourites(index)}
-                  />
-                )}
-              </Fragment>
-            ) : // </Tooltip>
-            null}
-          </div>
+          {/* <div className="pointer flex wp100  align-center justify-space-between"> */}
+          {name}
+          {descDropDownOpen ? (
+            // <Tooltip
+            //   placement="topLeft"
+            //   // title={favorite_id ? this.formatMessage(messages.unMarkFav) : this.formatMessage(messages.markFav)}
+            // >
+            <Fragment>
+              {favorite_id ? (
+                <StarFilled
+                  style={{ fontSize: "20px", color: "#f9c216" }}
+                  onClick={this.handleremoveMedicalTestFavourites(index)}
+                />
+              ) : (
+                <StarOutlined
+                  style={{ fontSize: "20px", color: "#f9c216" }}
+                  onClick={this.handleAddMedicalTestFavourites(index)}
+                />
+              )}
+            </Fragment>
+          ) : // </Tooltip>
+          null}
+          {/* </div> */}
         </Option>
       );
     });
@@ -799,6 +799,7 @@ class AddAppointmentForm extends Component {
   };
 
   handleTypeDescriptionSelect = (value) => {
+    console.log(value);
     const { form: { setFieldsValue } = {} } = this.props;
 
     const { typeDescValue = "" } = this.state;
