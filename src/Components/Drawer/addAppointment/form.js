@@ -799,7 +799,6 @@ class AddAppointmentForm extends Component {
   };
 
   handleTypeDescriptionSelect = (value) => {
-    console.log(value);
     const { form: { setFieldsValue } = {} } = this.props;
 
     const { typeDescValue = "" } = this.state;
