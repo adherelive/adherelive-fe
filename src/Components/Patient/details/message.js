@@ -604,7 +604,7 @@ const messages = defineMessages({
   recommendServiceTitle: {
     id: "app.patientDetails.recommendServiceTitle",
     description: "",
-    defaultMessage: "Once-on service",
+    defaultMessage: "Once-off service",
   },
 });
 

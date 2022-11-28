@@ -62,10 +62,11 @@ function EditServiceOfferings({
 
   const onSubmit = () => {
     let finalMapping = [...serviceOfferingsArray];
+
     let newData = values.selectedServiceOffering;
     newData.noOfTimesMonthly = values.noOfTimesMonthly;
     newData.service_charge = values.serviceFees;
-    newData.service_offering_name = values.serviceOffering;
+    newData.service_offering_name = values.serviceOffering.split("-")[0];
 
     if (values.editOfferingIndex !== -1) {
       finalMapping[values.editOfferingIndex] = newData;
@@ -123,7 +124,7 @@ function EditServiceOfferings({
       options.push(
         <Option
           key={services[key].id}
-          value={services[key].service_offering_name}
+          value={`${services[key].service_offering_name}-${services[key].id}`}
         >
           {services[key].service_offering_name}
         </Option>
