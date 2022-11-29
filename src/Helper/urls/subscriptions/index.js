@@ -75,6 +75,10 @@ export const patientCareplansUrl = (patientId) => {
   return `/careplans/patient-care-plan-details/${patientId}`;
 };
 
+export const patientCareplansSecondaryDoctorUrl = (patientId) => {
+  return `/careplans/patient-care-plan-details-sec/${patientId}`;
+};
+
 export const getFlashcardByActivityIdUrl = (activityId) => {
   return `/flashcard/activity/${activityId}`;
 };

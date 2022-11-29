@@ -21,7 +21,7 @@ import {
 import { updateActivityById } from "./../../modules/subscription/activities";
 import {
   setScheduleAppontmentData,
-  getPatientCareplanByPatientId,
+  getPatientCareplanByPatientIdAndUserRoleId,
 } from "./../../modules/subscription/activities";
 import { setFlashCard } from "../../modules/subscription/flashcard";
 
@@ -72,8 +72,8 @@ const mapDispatchToProps = (dispatch) => {
     setFlashCard: (value) => dispatch(setFlashCard(value)),
     setScheduleAppontmentData: (payload) =>
       dispatch(setScheduleAppontmentData(payload)),
-    getPatientCareplanByPatientId: (patientId) =>
-      dispatch(getPatientCareplanByPatientId(patientId)),
+    getPatientCareplanByPatientIdAndUserRoleId: (patientId) =>
+      dispatch(getPatientCareplanByPatientIdAndUserRoleId(patientId)),
   };
 };
 

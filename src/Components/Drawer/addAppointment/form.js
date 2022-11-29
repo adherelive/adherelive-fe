@@ -75,7 +75,7 @@ class AddAppointmentForm extends Component {
 
   async componentDidMount() {
     this.scrollToTop();
-    const { scheduleAppointment, getPatientCareplanByPatientId } = this.props;
+    const { scheduleAppointment } = this.props;
     this.getMedicalTestFavourites();
     this.getRadiologyFavourites();
     if (!isEmpty(scheduleAppointment)) {
@@ -124,10 +124,14 @@ class AddAppointmentForm extends Component {
   // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
   getCarePlanForPatient = async () => {
     try {
-      const { getPatientCareplanByPatientId, scheduleAppointment } = this.props;
-      const getCarePlanResponse = await getPatientCareplanByPatientId(
-        scheduleAppointment.patient_id
-      );
+      const {
+        getPatientCareplanByPatientIdAndUserRoleId,
+        scheduleAppointment,
+      } = this.props;
+      const getCarePlanResponse =
+        await getPatientCareplanByPatientIdAndUserRoleId(
+          scheduleAppointment.patient_id
+        );
       const {
         status,
         statusCode,
@@ -378,10 +382,12 @@ class AddAppointmentForm extends Component {
     let options = [];
 
     for (let carePlan of Object.keys(carePlans)) {
-      let { details: { diagnosis: { description = "" } } = {} } =
-        carePlans[carePlan];
+      let {
+        details: { diagnosis: { description = "" } } = {},
+        basic_info: { id = "" } = {},
+      } = carePlans[carePlan];
       options.push(
-        <Option key={carePlan} value={carePlan}>
+        <Option key={id} value={id}>
           {description}
         </Option>
       );

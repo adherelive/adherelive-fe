@@ -126,7 +126,7 @@ function Index({ onCloseDrawer, visible, patient_id }) {
       options.push(
         <Option
           key={services[key].id}
-          value={services[key].service_offering_name}
+          value={`${services[key].service_offering_name}-${services[key].id}`}
         >
           {services[key].service_offering_name}
         </Option>
