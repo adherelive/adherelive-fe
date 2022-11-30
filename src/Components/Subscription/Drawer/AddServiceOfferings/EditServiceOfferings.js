@@ -123,10 +123,14 @@ function EditServiceOfferings({
     for (const key in services) {
       options.push(
         <Option
+          className="flex justify-content-space-between"
           key={services[key].id}
           value={`${services[key].service_offering_name}-${services[key].id}`}
         >
-          {services[key].service_offering_name}
+          <div>{services[key].service_offering_name}</div>
+          <div>
+            {services[key].currency} {services[key].service_charge}
+          </div>
         </Option>
       );
     }
