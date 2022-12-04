@@ -1206,6 +1206,7 @@ class TemplateDrawer extends Component {
 
                   <div>
                     <Checkbox
+                      className="medication_checkbox"
                       checked={this.state.medicationCheckedIds.includes(
                         medications[key].id
                       )}
