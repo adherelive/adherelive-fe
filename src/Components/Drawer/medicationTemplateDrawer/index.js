@@ -1798,6 +1798,7 @@ class TemplateDrawer extends Component {
       workouts = {},
       name = "",
       createTemplate = false,
+      medicationCheckedIds = [],
     } = this.state;
     let medicationsData = Object.values(medications);
     let appointmentsData = Object.values(appointments);
@@ -1985,51 +1986,56 @@ class TemplateDrawer extends Component {
     }
 
     // FILTER MEDICATION ACCORDING TO CHECKBOX SELECTED
-    // medicationsData = medicationsData.filter(med => med.id === medicationCheckedIds)
     let finalMedicationData = [];
     for (let med in medicationsData) {
-      if (this.state.medicationCheckedIds.includes(medicationsData[med].id)) {
+      if (medicationCheckedIds.includes(medicationsData[med].id)) {
         finalMedicationData.push(medicationsData[med]);
       }
     }
+    // CONDITION IF AT LEAST ONE MEDICATION CHECKBOX NOT SELECTED
     if (isEmpty(finalMedicationData) && !isEmpty(medicationsData)) {
-      alert("please select any medication from list");
-    }
+      message.warn("please select at least one medication from list");
+      this.setState({
+        loading: false,
+        disable: false,
+      });
 
-    console.log("afetr finalMedicationData", finalMedicationData);
-    console.log("afetr medicationCheckedIds", this.state.medicationCheckedIds);
-    console.log("afetr medicationsData", medicationsData);
-    console.log("after appointmentsData", appointmentsData);
+      console.log("afetr finalMedicationData", finalMedicationData);
+      console.log("afetr medicationCheckedIds", medicationCheckedIds);
+      console.log("afetr medicationsData", medicationsData);
+      console.log("after appointmentsData", appointmentsData);
+    } else {
+      medicationsData = finalMedicationData;
+      if (
+        authenticated_category === USER_CATEGORY.HSP &&
+        Object.keys(medications).length
+      ) {
+        message.error(this.formatMessage(messages.medicationAccessError));
+        return;
+      }
 
-    if (
-      authenticated_category === USER_CATEGORY.HSP &&
-      Object.keys(medications).length
-    ) {
-      message.error(this.formatMessage(messages.medicationAccessError));
-      return;
-    }
-
-    let validate = this.validateData(
-      medicationsData,
-      appointmentsData,
-      vitalData,
-      dietData,
-      workoutData
-    );
-    if (validate) {
-      submit({
-        carePlanId,
+      let validate = this.validateData(
         medicationsData,
         appointmentsData,
         vitalData,
         dietData,
-        workoutData,
-        name,
-        createTemplate,
-        treatment_id,
-        severity_id,
-        condition_id,
-      });
+        workoutData
+      );
+      if (validate) {
+        submit({
+          carePlanId,
+          medicationsData,
+          appointmentsData,
+          vitalData,
+          dietData,
+          workoutData,
+          name,
+          createTemplate,
+          treatment_id,
+          severity_id,
+          condition_id,
+        });
+      }
     }
   };
 
