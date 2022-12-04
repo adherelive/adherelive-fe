@@ -12,6 +12,8 @@ import {
   Spin,
 } from "antd";
 
+import { Checkbox } from "antd";
+
 import {
   WHEN_TO_TAKE_ABBR_TYPES,
   WHEN_TO_TAKE_ABBR_LABELS,
@@ -48,6 +50,7 @@ import getMinutes from "date-fns/getMinutes";
 
 import { PoweroffOutlined, EditFilled, DeleteFilled } from "@ant-design/icons";
 import Icon from "@ant-design/icons";
+import isEmpty from "../../../Helper/is-empty";
 
 const { Option } = Select;
 const BLANK_TEMPLATE = "Blank Template";
@@ -134,6 +137,7 @@ class TemplateDrawer extends Component {
       isWorkoutVisible: false,
       disable: false,
       loading: false,
+      medicationCheckedIds: [],
     };
   }
 
@@ -748,11 +752,13 @@ class TemplateDrawer extends Component {
       dietKeys = [],
       workouts = {},
       workoutKeys = [],
+      medicationCheckedIds = [],
     } = this.state;
 
     if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
       delete medications[innerFormKey];
       medicationKeys.splice(medicationKeys.indexOf(innerFormKey), 1);
+      medicationCheckedIds.splice(medicationKeys.indexOf(innerFormKey), 1);
     } else if (innerFormType == EVENT_TYPE.APPOINTMENT) {
       delete appointments[innerFormKey];
       appointmentKeys.splice(appointmentKeys.indexOf(innerFormKey), 1);
@@ -779,6 +785,21 @@ class TemplateDrawer extends Component {
       workouts,
       workoutKeys,
       templateEdited: true,
+      medicationCheckedIds,
+    });
+  };
+
+  onChangeMedicationCheckbox = (medicationId) => {
+    let checkedData = this.state.medicationCheckedIds;
+    if (checkedData.includes(medicationId)) {
+      const index = checkedData.indexOf(medicationId);
+      checkedData.splice(index, 1);
+    } else {
+      checkedData.push(medicationId);
+    }
+
+    this.setState({
+      medicationCheckedIds: checkedData,
     });
   };
 
@@ -1184,6 +1205,20 @@ class TemplateDrawer extends Component {
                   </div>
 
                   <div>
+                    <Checkbox
+                      className="medication_checkbox"
+                      checked={this.state.medicationCheckedIds.includes(
+                        medications[key].id
+                      )}
+                      // disabled={disabled}
+                      onChange={() =>
+                        this.onChangeMedicationCheckbox(medications[key].id)
+                      }
+                      // value={part.value}
+                    >
+                      {/* {part.label} */}
+                    </Checkbox>
+
                     <EditFilled
                       // type="edit"
                       className="ml20"
@@ -1764,6 +1799,7 @@ class TemplateDrawer extends Component {
       workouts = {},
       name = "",
       createTemplate = false,
+      medicationCheckedIds = [],
     } = this.state;
     let medicationsData = Object.values(medications);
     let appointmentsData = Object.values(appointments);
@@ -1949,38 +1985,59 @@ class TemplateDrawer extends Component {
         appointmentsData[appointment].schedule_data.treatment_id = cPtreat;
       }
     }
-    console.log("afetr medicationsData", medicationsData);
-    console.log("after appointmentsData", appointmentsData);
 
-    if (
-      authenticated_category === USER_CATEGORY.HSP &&
-      Object.keys(medications).length
-    ) {
-      message.error(this.formatMessage(messages.medicationAccessError));
-      return;
+    // FILTER MEDICATION ACCORDING TO CHECKBOX SELECTED
+    let finalMedicationData = [];
+    for (let med in medicationsData) {
+      if (medicationCheckedIds.includes(medicationsData[med].id)) {
+        finalMedicationData.push(medicationsData[med]);
+      }
     }
+    // CONDITION IF AT LEAST ONE MEDICATION CHECKBOX NOT SELECTED
 
-    let validate = this.validateData(
-      medicationsData,
-      appointmentsData,
-      vitalData,
-      dietData,
-      workoutData
-    );
-    if (validate) {
-      submit({
-        carePlanId,
+    if (isEmpty(finalMedicationData) && !isEmpty(medicationsData)) {
+      message.warn("please select at least one medication from list");
+      this.setState({
+        loading: false,
+        disable: false,
+      });
+
+      console.log("afetr finalMedicationData", finalMedicationData);
+      console.log("afetr medicationCheckedIds", medicationCheckedIds);
+      console.log("afetr medicationsData", medicationsData);
+      console.log("after appointmentsData", appointmentsData);
+    } else {
+      medicationsData = finalMedicationData;
+      if (
+        authenticated_category === USER_CATEGORY.HSP &&
+        Object.keys(medications).length
+      ) {
+        message.error(this.formatMessage(messages.medicationAccessError));
+        return;
+      }
+
+      let validate = this.validateData(
         medicationsData,
         appointmentsData,
         vitalData,
         dietData,
-        workoutData,
-        name,
-        createTemplate,
-        treatment_id,
-        severity_id,
-        condition_id,
-      });
+        workoutData
+      );
+      if (validate) {
+        submit({
+          carePlanId,
+          medicationsData,
+          appointmentsData,
+          vitalData,
+          dietData,
+          workoutData,
+          name,
+          createTemplate,
+          treatment_id,
+          severity_id,
+          condition_id,
+        });
+      }
     }
   };
 
