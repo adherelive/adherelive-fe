@@ -1358,7 +1358,7 @@ class TemplateDrawer extends Component {
           const { basic_info: { name: vital_name = "" } = {} } =
             vital_templates[vital_template_id];
           const repeatObj = repeat_intervals[repeat_interval_id];
-          const vital_repeat = repeatObj["text"];
+          const vital_repeat = !isEmpty(repeatObj) && repeatObj["text"];
 
           return (
             <div className="flex wp100 flex-grow-1 align-center" key={key}>
