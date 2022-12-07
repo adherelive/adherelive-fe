@@ -18,149 +18,149 @@ const TYPE = "type";
 
 const FIELDS = [NAME, TYPE];
 
-let medicine_type = {
-  1: {
-    index: "1",
-    name: "",
-    items: [
-      {
-        name: "TABLET",
-        defaultUnit: "1",
-        id: 1,
-      },
-      {
-        name: "SYRUP",
-        defaultUnit: "2",
-        id: 2,
-      },
-      {
-        name: "CAPSULE",
-        defaultUnit: "1",
-        id: 3,
-      },
-      {
-        name: "SUSPENSION",
-        defaultUnit: "1",
-        id: 4,
-      },
-      {
-        name: "GELS",
-        defaultUnit: "2",
-        id: 5,
-      },
-      {
-        name: "LOTIONS",
-        defaultUnit: "2",
-        id: 6,
-      },
-      {
-        name: "LINIMENTS",
-        defaultUnit: "2",
-        id: 7,
-      },
-      {
-        name: "LOZENGES",
-        defaultUnit: "1",
-        id: 8,
-      },
-    ],
-  },
-  2: {
-    index: "2",
-    name: "",
-    items: [
-      {
-        name: "SPRAY",
-        defaultUnit: "2",
-        id: 9,
-      },
-      {
-        name: "NEBULISER",
-        defaultUnit: "1",
-        id: 10,
-      },
-      {
-        name: "CREAM",
-        defaultUnit: "2",
-        id: 11,
-      },
-      {
-        name: "OINTMENT",
-        defaultUnit: "2",
-        id: 12,
-      },
-    ],
-  },
-  3: {
-    index: "3",
-    name: "",
-    items: [
-      {
-        name: "RECTAL SUPPOSITORY",
-        defaultUnit: "1",
-        id: 13,
-      },
-      {
-        name: "RECTAL ENEMA",
-        defaultUnit: "1",
-        id: 14,
-      },
-      {
-        name: "PESSARIES OF VAGINAL",
-        defaultUnit: "1",
-        id: 15,
-      },
-    ],
-  },
-  4: {
-    index: "4",
-    name: "",
-    items: [
-      {
-        name: "INHALER",
-        defaultUnit: "2",
-        id: 16,
-      },
-    ],
-  },
-  5: {
-    index: "5",
-    name: "INJECTION",
-    items: [
-      {
-        name: "I/D INTRDERMAL",
-        defaultUnit: "2",
-        id: 17,
-      },
-      {
-        name: "S/C SUBCUTANEOUS",
-        defaultUnit: "2",
-        id: 18,
-      },
-      {
-        name: "I/M INTRAMUSCULAR",
-        defaultUnit: "2",
-        id: 19,
-      },
-      {
-        name: "I/V INTRAVENOUS",
-        defaultUnit: "2",
-        id: 20,
-      },
-    ],
-  },
-  6: {
-    index: "6",
-    name: "OTHER",
-    items: [
-      {
-        name: "OTHER",
-        defaultUnit: null,
-        id: 21,
-      },
-    ],
-  },
-};
+// let medicine_type = {
+//   1: {
+//     index: "1",
+//     name: "",
+//     items: [
+//       {
+//         name: "TABLET",
+//         defaultUnit: "1",
+//         id: 1,
+//       },
+//       {
+//         name: "SYRUP",
+//         defaultUnit: "2",
+//         id: 2,
+//       },
+//       {
+//         name: "CAPSULE",
+//         defaultUnit: "1",
+//         id: 3,
+//       },
+//       {
+//         name: "SUSPENSION",
+//         defaultUnit: "1",
+//         id: 4,
+//       },
+//       {
+//         name: "GELS",
+//         defaultUnit: "2",
+//         id: 5,
+//       },
+//       {
+//         name: "LOTIONS",
+//         defaultUnit: "2",
+//         id: 6,
+//       },
+//       {
+//         name: "LINIMENTS",
+//         defaultUnit: "2",
+//         id: 7,
+//       },
+//       {
+//         name: "LOZENGES",
+//         defaultUnit: "1",
+//         id: 8,
+//       },
+//     ],
+//   },
+//   2: {
+//     index: "2",
+//     name: "",
+//     items: [
+//       {
+//         name: "SPRAY",
+//         defaultUnit: "2",
+//         id: 9,
+//       },
+//       {
+//         name: "NEBULISER",
+//         defaultUnit: "1",
+//         id: 10,
+//       },
+//       {
+//         name: "CREAM",
+//         defaultUnit: "2",
+//         id: 11,
+//       },
+//       {
+//         name: "OINTMENT",
+//         defaultUnit: "2",
+//         id: 12,
+//       },
+//     ],
+//   },
+//   3: {
+//     index: "3",
+//     name: "",
+//     items: [
+//       {
+//         name: "RECTAL SUPPOSITORY",
+//         defaultUnit: "1",
+//         id: 13,
+//       },
+//       {
+//         name: "RECTAL ENEMA",
+//         defaultUnit: "1",
+//         id: 14,
+//       },
+//       {
+//         name: "PESSARIES OF VAGINAL",
+//         defaultUnit: "1",
+//         id: 15,
+//       },
+//     ],
+//   },
+//   4: {
+//     index: "4",
+//     name: "",
+//     items: [
+//       {
+//         name: "INHALER",
+//         defaultUnit: "2",
+//         id: 16,
+//       },
+//     ],
+//   },
+//   5: {
+//     index: "5",
+//     name: "INJECTION",
+//     items: [
+//       {
+//         name: "I/D INTRDERMAL",
+//         defaultUnit: "2",
+//         id: 17,
+//       },
+//       {
+//         name: "S/C SUBCUTANEOUS",
+//         defaultUnit: "2",
+//         id: 18,
+//       },
+//       {
+//         name: "I/M INTRAMUSCULAR",
+//         defaultUnit: "2",
+//         id: 19,
+//       },
+//       {
+//         name: "I/V INTRAVENOUS",
+//         defaultUnit: "2",
+//         id: 20,
+//       },
+//     ],
+//   },
+//   6: {
+//     index: "6",
+//     name: "OTHER",
+//     items: [
+//       {
+//         name: "OTHER",
+//         defaultUnit: null,
+//         id: 21,
+//       },
+//     ],
+//   },
+// };
 
 class AddMedicineForm extends Component {
   constructor(props) {
@@ -209,7 +209,7 @@ class AddMedicineForm extends Component {
   };
 
   getFormulationOptions = () => {
-    // const { medication_details: { medicine_type = {} } = {} } = this.props;
+    const { medication_details: { medicine_type = {} } = {} } = this.props;
     const { getOptions, getStringFormat } = this;
 
     return Object.keys(medicine_type).map((id) => {
