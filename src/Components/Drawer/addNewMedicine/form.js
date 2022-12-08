@@ -15,8 +15,9 @@ const { Option, OptGroup } = Select;
 
 const NAME = "name";
 const TYPE = "type";
+const GENERIC_NAME = "generic_name";
 
-const FIELDS = [NAME, TYPE];
+const FIELDS = [NAME, TYPE, GENERIC_NAME];
 
 let medicine_type = {
   1: {
@@ -250,7 +251,7 @@ class AddMedicineForm extends Component {
       <Form className="fw700 wp100 pb30 Form">
         <FormItem
           className="full-width ant-date-custom"
-          label={formatMessage(messages.genericName)}
+          label={formatMessage(messages.medicineName)}
         >
           {getFieldDecorator(NAME, {
             rules: [
@@ -264,7 +265,7 @@ class AddMedicineForm extends Component {
             <Input
               autoFocus
               className="mt4"
-              placeholder={formatMessage(messages.genericName)}
+              placeholder={formatMessage(messages.medicineName)}
             />
           )}
         </FormItem>
@@ -295,6 +296,27 @@ class AddMedicineForm extends Component {
             >
               {this.getFormulationOptions()}
             </Select>
+          )}
+        </FormItem>
+
+        <FormItem
+          className="full-width ant-date-custom"
+          label={formatMessage(messages.genericName)}
+        >
+          {getFieldDecorator(GENERIC_NAME, {
+            rules: [
+              {
+                required: true,
+                message: formatMessage(messages.fillFieldsError),
+              },
+            ],
+            initialValue: input ? input : "",
+          })(
+            <Input
+              autoFocus
+              className="mt4"
+              placeholder={formatMessage(messages.genericName)}
+            />
           )}
         </FormItem>
       </Form>

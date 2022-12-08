@@ -53,7 +53,7 @@ class AddMedicine extends Component {
 
     validateFields(async (err, values) => {
       if (!err) {
-        let { type = "", name = "" } = values;
+        let { type = "", name = "", generic_name = "" } = values;
 
         const {
           addNewMedicine,
@@ -73,7 +73,7 @@ class AddMedicine extends Component {
         }
 
         this.setState({ submitting: true });
-        const response = await addMedicine({ name, type, generic_name: name });
+        const response = await addMedicine({ name, type, generic_name });
         const {
           status,
           statusCode,
