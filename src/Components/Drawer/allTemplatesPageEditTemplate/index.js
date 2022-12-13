@@ -13,6 +13,7 @@ import {
   SYRUP,
   MEDICINE_UNITS,
   USER_CATEGORY,
+  APPOINTMENT_TYPE_TITLE,
 } from "../../../constant";
 import moment from "moment";
 import message from "antd/es/message";
@@ -1387,15 +1388,26 @@ class TemplatePageCreateDrawer extends Component {
           });
           let {
             reason = "",
-            details: { description = "", date = "" } = {},
+            details: {
+              description = "",
+              date = "",
+              appointment_type = "",
+              type_description = "",
+              radiology_type = "",
+            } = {},
             time_gap = "",
           } = appointments[key];
+
+          let typeTitle = APPOINTMENT_TYPE_TITLE[appointment_type].title;
+          let typeDescription = type_description;
+          let rediologyType = radiology_type;
 
           return (
             <div className="flex wp100 flex-grow-1 align-center" key={key}>
               <div className="drawer-block">
                 <div className="flex direction-row justify-space-between align-center">
-                  <div className="form-headings-ap">{reason}</div>
+                  {/* <div className="form-headings-ap">{reason}</div> */}
+                  <div className="form-headings-ap">{typeTitle}</div>
                   <EditFilled
                     // type="edit"
                     className="ml20"
@@ -1403,6 +1415,10 @@ class TemplatePageCreateDrawer extends Component {
                     theme="filled"
                     onClick={this.showInnerForm(EVENT_TYPE.APPOINTMENT, key)}
                   />
+                </div>
+                <div className="drawer-block-description">
+                  {typeDescription}
+                  {rediologyType !== "" && ` (${rediologyType})`}
                 </div>
                 <div className="drawer-block-description">
                   {date
