@@ -1280,15 +1280,16 @@ class TemplateDrawer extends Component {
             reason = "",
             // AKSHAY NEW CODE IMPLEMENTATIONS
             // COMMENTED THIS
-            // schedule_data: {
-            //   description = "",
-            //   date = "",
-            //   start_time = "",
-            // } = {},
+            schedule_data: {
+              description = "",
+              // date = "",
+              // start_time = "",
+            } = {},
             // ADDED THIS
-            details: { description = "", date = "" } = {},
+            details: { date = "" } = {},
             time_gap = "",
           } = appointments[key];
+          console.log("appointments[key]", appointments[key]);
           // let timeToShow = date && start_time ? `${moment(date).format('ll')} ${moment(date).format('hh:mm')}` : date ? moment(date).format('ll') : '';
           return (
             <div className="flex wp100 flex-grow-1 align-center" key={key}>

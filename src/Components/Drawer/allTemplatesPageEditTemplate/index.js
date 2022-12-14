@@ -1233,8 +1233,12 @@ class TemplatePageCreateDrawer extends Component {
             newUnit = "One";
           }
 
-          const { basic_info: { name: medicine = "" } = {} } =
-            medicines[medicine_id] || {};
+          const {
+            basic_info: {
+              name: medicine = "",
+              details: { generic_name = "" },
+            } = {},
+          } = medicines[medicine_id] || {};
           console.log("3278562473254623 ===> when_to_take", {
             when_to_take,
             med: medications[key],
@@ -1351,6 +1355,11 @@ class TemplatePageCreateDrawer extends Component {
                       key
                     )}
                   />
+                </div>
+
+                <div className="drawer-block-description">
+                  {/* {medTimingsToShow} */}
+                  Generic Name: {generic_name}
                 </div>
 
                 <div className="drawer-block-description">
