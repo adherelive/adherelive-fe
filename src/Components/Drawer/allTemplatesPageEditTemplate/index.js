@@ -33,6 +33,7 @@ import uuid from "react-uuid";
 import messages from "./message";
 import Input from "antd/es/input";
 import { PoweroffOutlined, EditFilled } from "@ant-design/icons";
+import isEmpty from "../../../Helper/is-empty";
 
 class TemplatePageCreateDrawer extends Component {
   constructor(props) {
@@ -1233,12 +1234,8 @@ class TemplatePageCreateDrawer extends Component {
             newUnit = "One";
           }
 
-          const {
-            basic_info: {
-              name: medicine = "",
-              details: { generic_name = "" },
-            } = {},
-          } = medicines[medicine_id] || {};
+          const { basic_info: { name: medicine = "", details = "" } = {} } =
+            medicines[medicine_id] || {};
           console.log("3278562473254623 ===> when_to_take", {
             when_to_take,
             med: medications[key],
@@ -1359,7 +1356,8 @@ class TemplatePageCreateDrawer extends Component {
 
                 <div className="drawer-block-description">
                   {/* {medTimingsToShow} */}
-                  Generic Name: {generic_name}
+                  Generic Name:{" "}
+                  {!isEmpty(details) ? details.generic_name : "---"}
                 </div>
 
                 <div className="drawer-block-description">
