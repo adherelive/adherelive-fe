@@ -27,6 +27,7 @@ import {
   SYRUP,
   RADIOLOGY,
   USER_CATEGORY,
+  APPOINTMENT_TYPE_TITLE,
 } from "../../../constant";
 import moment from "moment";
 import EditMedicationReminder from "../../../Containers/Drawer/editMedicationReminder";
@@ -1030,6 +1031,8 @@ class TemplateDrawer extends Component {
       carePlanTemplateId,
     } = this.state;
 
+    const { medicines } = this.props;
+
     const {
       care_plan_templates = {},
       repeat_intervals = {},
@@ -1077,6 +1080,7 @@ class TemplateDrawer extends Component {
         </div>
         {medicationKeys.map((key) => {
           let {
+            medicine_id,
             medicine,
             medicineType,
             schedule_data: {
@@ -1091,6 +1095,9 @@ class TemplateDrawer extends Component {
               duration = "",
             } = {},
           } = medications[key];
+
+          const { basic_info: { details = "" } = {} } =
+            medicines[medicine_id] || {};
 
           // AKSHAY NEW CODE IMPLEMETATIONS
 
@@ -1241,6 +1248,10 @@ class TemplateDrawer extends Component {
                     />
                   </div>
                 </div>
+                <div className="drawer-block-description">
+                  Generic Name:{" "}
+                  {!isEmpty(details) ? details.generic_name : "---"}
+                </div>
                 {/* {when_to_take.map((timing, index) => {
                                     return ( */}
 
@@ -1280,21 +1291,31 @@ class TemplateDrawer extends Component {
             reason = "",
             // AKSHAY NEW CODE IMPLEMENTATIONS
             // COMMENTED THIS
-            // schedule_data: {
-            //   description = "",
-            //   date = "",
-            //   start_time = "",
-            // } = {},
+            schedule_data: {
+              // date = "",
+              // start_time = "",
+              description = "",
+              type_description = "",
+              radiology_type = "",
+              appointment_type = "",
+              type = "",
+            } = {},
             // ADDED THIS
-            details: { description = "", date = "" } = {},
+            details: { date = "" } = {},
             time_gap = "",
           } = appointments[key];
           // let timeToShow = date && start_time ? `${moment(date).format('ll')} ${moment(date).format('hh:mm')}` : date ? moment(date).format('ll') : '';
+          let typeTitle =
+            APPOINTMENT_TYPE_TITLE[!appointment_type ? type : appointment_type]
+              .title;
+          let typeDescription = type_description;
+          let rediologyType = radiology_type;
           return (
             <div className="flex wp100 flex-grow-1 align-center" key={key}>
               <div className="drawer-block">
                 <div className="flex direction-row justify-space-between align-center">
-                  <div className="form-headings-ap">{reason}</div>
+                  {/* <div className="form-headings-ap">{reason}</div> */}
+                  <div className="form-headings-ap">{typeTitle}</div>
                   <div>
                     <EditFilled
                       // type="edit"
@@ -1314,6 +1335,10 @@ class TemplateDrawer extends Component {
                       )}
                     />
                   </div>
+                </div>
+                <div className="drawer-block-description">
+                  {typeDescription}
+                  {rediologyType !== "" && ` (${rediologyType})`}
                 </div>
                 <div className="drawer-block-description">
                   {
