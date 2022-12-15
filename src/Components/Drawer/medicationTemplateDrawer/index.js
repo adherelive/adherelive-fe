@@ -1297,15 +1297,19 @@ class TemplateDrawer extends Component {
               type_description = "",
               radiology_type = "",
               appointment_type = "",
+              type = "",
             } = {},
             // ADDED THIS
             details: { date = "" } = {},
             time_gap = "",
           } = appointments[key];
           console.log("appointments[key]", appointments[key]);
+          console.log("appointment_type", appointment_type);
           // let timeToShow = date && start_time ? `${moment(date).format('ll')} ${moment(date).format('hh:mm')}` : date ? moment(date).format('ll') : '';
 
-          let typeTitle = APPOINTMENT_TYPE_TITLE[appointment_type].title;
+          let typeTitle =
+            APPOINTMENT_TYPE_TITLE[!appointment_type ? type : appointment_type]
+              .title;
           let typeDescription = type_description;
           let rediologyType = radiology_type;
 

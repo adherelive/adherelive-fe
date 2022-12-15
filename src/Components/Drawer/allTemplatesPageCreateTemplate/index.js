@@ -35,6 +35,7 @@ import { Switch } from "antd";
 import Footer from "../footer";
 import { EditFilled } from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
+import TextArea from "antd/lib/input/TextArea";
 
 class TemplatePageCreateDrawer extends Component {
   constructor(props) {
@@ -64,6 +65,7 @@ class TemplatePageCreateDrawer extends Component {
       isDietVisible: false,
       isWorkoutVisible: false,
       templateIsPrivate: false,
+      clinical_notes: "",
     };
   }
 
@@ -234,10 +236,14 @@ class TemplatePageCreateDrawer extends Component {
     vitalsData,
     dietData,
     workoutData,
-    name
+    name,
+    clinical_notes
   ) => {
     if (!name) {
       message.error(this.formatMessage(messages.giveName));
+      return false;
+    } else if (!clinical_notes) {
+      message.error(this.formatMessage(messages.addClinicalNotes));
       return false;
     }
 
@@ -391,6 +397,7 @@ class TemplatePageCreateDrawer extends Component {
       diets = {},
       workouts = {},
       name = "",
+      clinical_notes = "",
     } = this.state;
     const { createCareplanTemplate, close, authenticated_category } =
       this.props;
@@ -415,7 +422,8 @@ class TemplatePageCreateDrawer extends Component {
       vitalsData,
       dietData,
       workoutData,
-      name
+      name,
+      clinical_notes
     );
     if (validate) {
       try {
@@ -574,6 +582,25 @@ class TemplatePageCreateDrawer extends Component {
     });
   };
 
+  setPastedClinicalNotes = (e) => {
+    e.preventDefault();
+    let pastedValue = "";
+    if (typeof e.clipboardData !== "undefined") {
+      pastedValue = e.clipboardData.getData("text").trim();
+    }
+    if (pastedValue.length > 0 || pastedValue === "") {
+      this.setState({ clinical_notes: pastedValue });
+    }
+  };
+
+  setClinicalNotes = (e) => {
+    const value = e.target.value.trim();
+
+    if (value.length > 0 || value === "") {
+      this.setState({ clinical_notes: e.target.value });
+    }
+  };
+
   renderTemplateDetails = () => {
     const {
       medications = {},
@@ -615,6 +642,24 @@ class TemplatePageCreateDrawer extends Component {
             onChange={this.setTemplateName}
             style={{ width: "100%", alignSelf: "flex-start" }}
             required={true}
+          />
+        </div>
+
+        <div className="wp100 flex direction-row align-center ">
+          <div className="form-category-headings-ap mr0-I">
+            {this.formatMessage(messages.clinical_notes)}
+          </div>
+          <div className="star-red fs22">*</div>
+        </div>
+
+        <div className="wp100 flex align-center justify-space-between">
+          <TextArea
+            placeholder={this.formatMessage(messages.clinical_notes)}
+            value={this.state.clinical_notes}
+            className={"form-textarea-ap form-inputs-ap"}
+            onChange={this.setClinicalNotes}
+            onPaste={this.setPastedClinicalNotes}
+            style={{ resize: "none" }}
           />
         </div>
 

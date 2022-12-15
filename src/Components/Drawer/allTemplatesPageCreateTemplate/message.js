@@ -108,6 +108,7 @@ const messages = defineMessages({
     description: "",
     defaultMessage: "Give a name to this template",
   },
+
   saveTemplate: {
     id: "app.allTemplatesAddDrawer.saveTemplate",
     description: "",
@@ -175,6 +176,16 @@ const messages = defineMessages({
     id: "app.allTemplatesAddDrawer.nameText",
     description: "",
     defaultMessage: "Name",
+  },
+  clinical_notes: {
+    id: "app.allTemplatesAddDrawer.clinical_notes",
+    description: "",
+    defaultMessage: "Clinical Notes",
+  },
+  addClinicalNotes: {
+    id: "app.allTemplatesAddDrawer.addClinicalNotes",
+    description: "",
+    defaultMessage: "Please add clinical notes for template",
   },
   namePlaceholder: {
     id: "app.allTemplatesAddDrawer.namePlaceholder",
