@@ -436,6 +436,7 @@ class TemplatePageCreateDrawer extends Component {
           workoutData,
           name,
           is_public_in_provider,
+          clinical_notes: clinical_notes,
         });
         const {
           payload: { data = {}, message: res_msg = "" },
@@ -465,6 +466,7 @@ class TemplatePageCreateDrawer extends Component {
             showAddDietInner: false,
             showWorkoutInner: false,
             showAreYouSureModal: false,
+            clinical_notes: "",
           });
           close();
         } else {

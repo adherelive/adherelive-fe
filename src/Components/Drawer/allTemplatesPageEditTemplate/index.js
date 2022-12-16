@@ -134,6 +134,7 @@ class TemplatePageCreateDrawer extends Component {
 
       const {
         basic_info: { name: careplanTemplateName = "", id = "" } = {},
+        details = " ",
         template_appointment_ids = [],
         template_medication_ids = [],
         template_vital_ids = [],
@@ -387,6 +388,7 @@ class TemplatePageCreateDrawer extends Component {
       this.setState(
         {
           name: careplanTemplateName,
+          clinical_notes: !isEmpty(details) ? details.clinical_notes : "",
           carePlanTemplateId: careplanTemplateID,
           medications: newMedics,
           appointments: newAppoints,
@@ -961,6 +963,7 @@ class TemplatePageCreateDrawer extends Component {
           dietData,
           workoutData,
           name,
+          clinical_notes: clinical_notes,
         });
 
         const {

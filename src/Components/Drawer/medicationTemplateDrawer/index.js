@@ -139,6 +139,7 @@ class TemplateDrawer extends Component {
       disable: false,
       loading: false,
       medicationCheckedIds: [],
+      clinical_notes: "",
     };
   }
 
@@ -182,6 +183,7 @@ class TemplateDrawer extends Component {
     let templateVitalIDs = [];
     let templateDietIDs = [];
     let templateWorkoutIDs = [];
+    let clinical_notes = "";
 
     if (carePlanTemplateId) {
       let {
@@ -190,12 +192,14 @@ class TemplateDrawer extends Component {
         template_vital_ids = [],
         template_diet_ids = [],
         template_workout_ids = [],
+        details = "",
       } = care_plan_templates[carePlanTemplateId] || {};
       templateAppointmentIDs = template_appointment_ids;
       templateMedicationIDs = template_medication_ids;
       templateVitalIDs = template_vital_ids;
       templateDietIDs = template_diet_ids;
       templateWorkoutIDs = template_workout_ids;
+      clinical_notes = !isEmpty(details) ? details.clinical_notes : "";
 
       for (let aId of template_appointment_ids) {
         let newAppointment = {};
@@ -401,6 +405,7 @@ class TemplateDrawer extends Component {
       templateVitalIDs,
       templateDietIDs,
       templateWorkoutIDs,
+      clinical_notes: clinical_notes,
     });
   }
 
@@ -439,6 +444,7 @@ class TemplateDrawer extends Component {
       let newVitals = {};
       let newDiets = {};
       let newWorkouts = {};
+      let clinical_notes = "";
 
       let {
         template_appointment_ids = [],
@@ -446,11 +452,13 @@ class TemplateDrawer extends Component {
         template_vital_ids = [],
         template_diet_ids = [],
         template_workout_ids = [],
+        details = "",
       } = care_plan_templates[carePlanTemplateId] || {};
       templateAppointmentIDs = template_appointment_ids;
       templateMedicationIDs = template_medication_ids;
       templateVitalIDs = template_vital_ids;
       templateDietIDs = template_diet_ids;
+      clinical_notes = !isEmpty(details) ? details.clinical_notes : "";
 
       for (let aId of template_appointment_ids) {
         let newAppointment = {};
@@ -654,6 +662,7 @@ class TemplateDrawer extends Component {
         templateDietIDs,
         templateWorkoutIDs,
         templateEdited: false,
+        clinical_notes: clinical_notes,
       });
     }
   }
@@ -1042,6 +1051,7 @@ class TemplateDrawer extends Component {
     let { basic_info: { name = "" } = {} } =
       care_plan_templates[firstTemplateId] || {};
     let showDropDown = name === BLANK_TEMPLATE ? false : true;
+
     // console.log("32786428457523476834234532847",{l:Object.keys(carePlanTemplateIds).length,showDropDown,care_plan_templates,firstTemplateId,carePlanTemplateIds});
     return (
       <div className="template-block">
@@ -1068,6 +1078,18 @@ class TemplateDrawer extends Component {
         >
           {this.getCarePlanTemplateOptions()}
         </Select>
+
+        <div className="wp100 flex align-center justify-space-between">
+          <div className="form-category-headings-ap ">
+            {this.formatMessage(messages.clinical_notes)}
+          </div>
+        </div>
+        <div className="wp100 flex align-center justify-space-between">
+          {!isEmpty(this.state.clinical_notes)
+            ? this.state.clinical_notes
+            : "Clinical notes not added"}
+        </div>
+
         {/* ) : null} */}
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap ">
@@ -1828,6 +1850,7 @@ class TemplateDrawer extends Component {
       name = "",
       createTemplate = false,
       medicationCheckedIds = [],
+      clinical_notes = "",
     } = this.state;
     let medicationsData = Object.values(medications);
     let appointmentsData = Object.values(appointments);
@@ -2064,6 +2087,7 @@ class TemplateDrawer extends Component {
           treatment_id,
           severity_id,
           condition_id,
+          clinical_notes: clinical_notes,
         });
       }
     }

@@ -191,6 +191,11 @@ const messages = defineMessages({
     description: "",
     defaultMessage: "You are unauthorized to access medication.",
   },
+  clinical_notes: {
+    id: "app.allTemplatesAddDrawer.clinical_notes",
+    description: "",
+    defaultMessage: "Clinical Notes",
+  },
 });
 
 export default messages;
