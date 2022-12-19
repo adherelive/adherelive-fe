@@ -251,7 +251,7 @@ class AddMedicineForm extends Component {
       <Form className="fw700 wp100 pb30 Form">
         <FormItem
           className="full-width ant-date-custom"
-          label={formatMessage(messages.genericName)}
+          label={formatMessage(messages.medicineName)}
         >
           {getFieldDecorator(NAME, {
             rules: [
@@ -265,7 +265,7 @@ class AddMedicineForm extends Component {
             <Input
               autoFocus
               className="mt4"
-              placeholder={formatMessage(messages.genericName)}
+              placeholder={formatMessage(messages.medicineName)}
             />
           )}
         </FormItem>
