@@ -32,7 +32,7 @@ import SyrupIcon from "../../../Assets/images/pharmacy.png";
 import uuid from "react-uuid";
 import messages from "./message";
 import Input from "antd/es/input";
-import { PoweroffOutlined, EditFilled } from "@ant-design/icons";
+import { PoweroffOutlined, EditFilled, DeleteFilled } from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 import TextArea from "antd/lib/input/TextArea";
 
@@ -431,6 +431,58 @@ class TemplatePageCreateDrawer extends Component {
     }
 
     this.setState({ innerFormType, innerFormKey, showInner: true });
+  };
+
+  // AKSHAY NEW CODE IMPLEMENTATION
+  deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
+    console.log(innerFormType);
+    console.log(innerFormKey);
+    let {
+      appointments = {},
+      appointmentKeys = [],
+      medications = {},
+      medicationKeys = [],
+      vitals = {},
+      vitalKeys = [],
+      diets = {},
+      dietKeys = [],
+      workouts = {},
+      workoutKeys = [],
+      medicationCheckedIds = [],
+    } = this.state;
+
+    if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
+      delete medications[innerFormKey];
+      medicationKeys.splice(medicationKeys.indexOf(innerFormKey), 1);
+      medicationCheckedIds.splice(medicationKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.APPOINTMENT) {
+      delete appointments[innerFormKey];
+      appointmentKeys.splice(appointmentKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.VITALS) {
+      delete vitals[innerFormKey];
+      vitalKeys.splice(vitalKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.DIET) {
+      delete diets[innerFormKey];
+      dietKeys.splice(dietKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.WORKOUT) {
+      delete workouts[innerFormKey];
+      workoutKeys.splice(workoutKeys.indexOf(innerFormKey), 1);
+    }
+
+    this.setState({
+      appointments,
+      appointmentKeys,
+      medications,
+      medicationKeys,
+      vitals,
+      vitalKeys,
+      diets,
+      dietKeys,
+      workouts,
+      workoutKeys,
+      templateEdited: true,
+      medicationCheckedIds,
+    });
   };
 
   onCloseInner = () => {
@@ -1390,17 +1442,28 @@ class TemplatePageCreateDrawer extends Component {
                     )}
                     <div className="ml10">{`(${newStrength} ${newUnit})`}</div>
                   </div>
-
-                  <EditFilled
-                    // type="edit"
-                    className="ml20"
-                    style={{ color: "#4a90e2" }}
-                    theme="filled"
-                    onClick={this.showInnerForm(
-                      EVENT_TYPE.MEDICATION_REMINDER,
-                      key
-                    )}
-                  />
+                  <div>
+                    <EditFilled
+                      // type="edit"
+                      className="ml20"
+                      style={{ color: "#4a90e2" }}
+                      theme="filled"
+                      onClick={this.showInnerForm(
+                        EVENT_TYPE.MEDICATION_REMINDER,
+                        key
+                      )}
+                    />
+                    <DeleteFilled
+                      // type="delete"
+                      className="ml20"
+                      style={{ color: "#d12a0b" }}
+                      theme="filled"
+                      onClick={this.deleteTemplateDataHandler(
+                        EVENT_TYPE.MEDICATION_REMINDER,
+                        key
+                      )}
+                    />
+                  </div>
                 </div>
 
                 <div className="drawer-block-description">
@@ -1464,13 +1527,25 @@ class TemplatePageCreateDrawer extends Component {
                 <div className="flex direction-row justify-space-between align-center">
                   {/* <div className="form-headings-ap">{reason}</div> */}
                   <div className="form-headings-ap">{typeTitle}</div>
-                  <EditFilled
-                    // type="edit"
-                    className="ml20"
-                    style={{ color: "#4a90e2" }}
-                    theme="filled"
-                    onClick={this.showInnerForm(EVENT_TYPE.APPOINTMENT, key)}
-                  />
+                  <div>
+                    <EditFilled
+                      // type="edit"
+                      className="ml20"
+                      style={{ color: "#4a90e2" }}
+                      theme="filled"
+                      onClick={this.showInnerForm(EVENT_TYPE.APPOINTMENT, key)}
+                    />
+                    <DeleteFilled
+                      type="delete"
+                      className="ml20"
+                      style={{ color: "#d12a0b" }}
+                      theme="filled"
+                      onClick={this.deleteTemplateDataHandler(
+                        EVENT_TYPE.APPOINTMENT,
+                        key
+                      )}
+                    />
+                  </div>
                 </div>
                 <div className="drawer-block-description">
                   {typeDescription}
@@ -1524,13 +1599,25 @@ class TemplatePageCreateDrawer extends Component {
               <div className="drawer-block">
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{vital_name}</div>
-                  <EditFilled
-                    // type="edit"
-                    className="ml20"
-                    style={{ color: "#4a90e2" }}
-                    theme="filled"
-                    onClick={this.showInnerForm(EVENT_TYPE.VITALS, key)}
-                  />
+                  <div>
+                    <EditFilled
+                      // type="edit"
+                      className="ml20"
+                      style={{ color: "#4a90e2" }}
+                      theme="filled"
+                      onClick={this.showInnerForm(EVENT_TYPE.VITALS, key)}
+                    />
+                    <DeleteFilled
+                      // type="delete"
+                      className="ml20"
+                      style={{ color: "#d12a0b" }}
+                      theme="filled"
+                      onClick={this.deleteTemplateDataHandler(
+                        EVENT_TYPE.VITALS,
+                        key
+                      )}
+                    />
+                  </div>
                 </div>
                 <div className="drawer-block-description">{vital_repeat}</div>
                 <div className="drawer-block-description">{`Repeat: ${repeat_days}`}</div>
@@ -1567,13 +1654,25 @@ class TemplatePageCreateDrawer extends Component {
               <div className="drawer-block">
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{name}</div>
-                  <EditFilled
-                    // type="edit"
-                    className="ml20"
-                    style={{ color: "#4a90e2" }}
-                    theme="filled"
-                    onClick={this.showInnerForm(EVENT_TYPE.DIET, key)}
-                  />
+                  <div>
+                    <EditFilled
+                      // type="edit"
+                      className="ml20"
+                      style={{ color: "#4a90e2" }}
+                      theme="filled"
+                      onClick={this.showInnerForm(EVENT_TYPE.DIET, key)}
+                    />
+                    <DeleteFilled
+                      // type="delete"
+                      className="ml20"
+                      style={{ color: "#d12a0b" }}
+                      theme="filled"
+                      onClick={this.deleteTemplateDataHandler(
+                        EVENT_TYPE.DIET,
+                        key
+                      )}
+                    />
+                  </div>
                 </div>
                 <div className="drawer-block-description">{`${
                   total_calories ? total_calories : "--"
@@ -1613,13 +1712,25 @@ class TemplatePageCreateDrawer extends Component {
                 <div className="drawer-block">
                   <div className="flex direction-row justify-space-between align-center">
                     <div className="form-headings-ap">{name}</div>
-                    <EditFilled
-                      // type="edit"
-                      className="ml20"
-                      style={{ color: "#4a90e2" }}
-                      theme="filled"
-                      onClick={this.showInnerForm(EVENT_TYPE.WORKOUT, key)}
-                    />
+                    <div>
+                      <EditFilled
+                        // type="edit"
+                        className="ml20"
+                        style={{ color: "#4a90e2" }}
+                        theme="filled"
+                        onClick={this.showInnerForm(EVENT_TYPE.WORKOUT, key)}
+                      />
+                      <DeleteFilled
+                        // type="delete"
+                        className="ml20"
+                        style={{ color: "#d12a0b" }}
+                        theme="filled"
+                        onClick={this.deleteTemplateDataHandler(
+                          EVENT_TYPE.WORKOUT,
+                          key
+                        )}
+                      />
+                    </div>
                   </div>
                   <div className="drawer-block-description">{`${
                     total_calories ? total_calories : "--"

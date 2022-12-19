@@ -124,6 +124,11 @@ class TemplatePage extends Component {
     );
   };
 
+  onChangeHanlder = async (e) => {
+    const { getAllTemplatesForDoctorUsingQuery } = this.props;
+    const response = await getAllTemplatesForDoctorUsingQuery(e.target.value);
+  };
+
   render() {
     const { loading } = this.state;
     return (
@@ -131,6 +136,7 @@ class TemplatePage extends Component {
         <div>
           <div className="wp100 flex direction-column">
             {this.getHeader()}
+            <input type="text" onChange={this.onChangeHanlder}></input>
             <div className="wp100 pl14 pr14 flex align-center justify-center mb36">
               <TemplateTable
                 {...this.props}
