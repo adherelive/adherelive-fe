@@ -7,7 +7,10 @@ import { getVitalOccurence } from "../../../modules/vital_occurence";
 import { getAppointmentsDetails } from "../../../modules/appointments";
 import { getMedicationDetails } from "../../../modules/otherDetails";
 import { searchMedicine } from "../../../modules/medicines";
-import { getAllTemplatesForDoctor } from "../../../modules/carePlanTemplates";
+import {
+  getAllTemplatesForDoctor,
+  getAllTemplatesForDoctorUsingQuery,
+} from "../../../modules/carePlanTemplates";
 
 const mapStateToProps = (state) => {
   // console.log("3289467832482354723874792384 STATE",state);
@@ -42,6 +45,8 @@ const mapDispatchToProps = (dispatch) => {
     searchMedicine: (value) => dispatch(searchMedicine(value)),
     openEditCareplanTemplateDrawer: (payload) =>
       dispatch(open({ type: DRAWER.EDIT_CAREPLAN_TEMPLATE, payload })),
+    getAllTemplatesForDoctorUsingQuery: (query) =>
+      dispatch(getAllTemplatesForDoctorUsingQuery(query)),
   };
 };
 

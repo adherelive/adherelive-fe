@@ -698,6 +698,8 @@ const PatientTreatmentCard = ({
     finalArray = treatment_symptoms;
   }
 
+  let newClinicalNotes = treatment_clinical_notes.split("follow up advise");
+
   return (
     <div className="treatment mt20 tal bg-faint-grey">
       <div className="header-div flex align-center justify-space-between">
@@ -754,7 +756,15 @@ const PatientTreatmentCard = ({
 
         <div className="flex direction-column mb14">
           <div className="fs14">{formatMessage(messages.clinical_notes)}</div>
-          <div className="fs16 fw700">{treatment_clinical_notes}</div>
+          {/* <div className="fs16 fw700">{treatment_clinical_notes}</div> */}
+          {!isEmpty(newClinicalNotes) &&
+            newClinicalNotes.map((notes, index) => {
+              return (
+                <div key={index} className="fs16 fw700">
+                  {notes}
+                </div>
+              );
+            })}
         </div>
 
         <div className="flex direction-column mb14">
