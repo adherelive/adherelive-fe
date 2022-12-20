@@ -6,6 +6,7 @@ import Button from "antd/es/button";
 import TemplatePageCreateDrawer from "../../../Containers/Drawer/allTemplatesPageCreateTemplate";
 import TemplatePageEditDrawer from "../../../Containers/Drawer/allTemplatesPageEditTemplate";
 import messages from "./message";
+import { Input } from "antd";
 
 class TemplatePage extends Component {
   constructor(props) {
@@ -124,6 +125,11 @@ class TemplatePage extends Component {
     );
   };
 
+  onChangeHanlder = async (e) => {
+    const { getAllTemplatesForDoctorUsingQuery } = this.props;
+    const response = await getAllTemplatesForDoctorUsingQuery(e.target.value);
+  };
+
   render() {
     const { loading } = this.state;
     return (
@@ -131,6 +137,14 @@ class TemplatePage extends Component {
         <div>
           <div className="wp100 flex direction-column">
             {this.getHeader()}
+            <div className="wp30 pl14">
+              <Input
+                className={"form-inputs-ap add-patient-phone"}
+                placeholder={"Search Template"}
+                // value={mobile_number}
+                onChange={this.onChangeHanlder}
+              />
+            </div>
             <div className="wp100 pl14 pr14 flex align-center justify-center mb36">
               <TemplateTable
                 {...this.props}
