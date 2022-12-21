@@ -631,6 +631,7 @@ const PatientTreatmentCard = ({
   treatment_diagnosis_description,
   treatment_diagnosis_type,
   treatment_clinical_notes,
+  treatment_folloup_advise,
   treatment_symptoms,
   selectedCarePlanId,
   auth_role,
@@ -699,9 +700,9 @@ const PatientTreatmentCard = ({
     finalArray = treatment_symptoms;
   }
 
-  let newClinicalNotes = treatment_clinical_notes.split("follow up advise");
+  // let newClinicalNotes = treatment_clinical_notes.split("follow up advise");
 
-  console.log("newClinicalNotes", newClinicalNotes);
+  // console.log("newClinicalNotes", newClinicalNotes);
 
   return (
     <div className="treatment mt20 tal bg-faint-grey">
@@ -760,6 +761,11 @@ const PatientTreatmentCard = ({
         <div className="flex direction-column mb14">
           <div className="fs14">{formatMessage(messages.clinical_notes)}</div>
           <div className="fs16 fw700">{treatment_clinical_notes}</div>
+        </div>
+
+        <div className="flex direction-column mb14">
+          <div className="fs14">{formatMessage(messages.followup_advise)}</div>
+          <div className="fs16 fw700">{treatment_folloup_advise}</div>
         </div>
 
         <div className="flex direction-column mb14">
@@ -2624,6 +2630,7 @@ class PatientDetails extends Component {
         severity_id = "",
         condition_id = "",
         clinical_notes = "",
+        follow_up_advise = "",
         diagnosis: {
           type: d_type = "",
           description: diagnosis_description = "",
@@ -2836,6 +2843,9 @@ class PatientDetails extends Component {
                 }
                 treatment_clinical_notes={
                   clinical_notes ? clinical_notes : "--"
+                }
+                treatment_folloup_advise={
+                  follow_up_advise ? follow_up_advise : "--"
                 }
                 treatment_symptoms={
                   carePlan_symptoms ? carePlan_symptoms : "--"

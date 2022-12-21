@@ -496,6 +496,7 @@ class TemplatePageCreateDrawer extends Component {
           name,
           is_public_in_provider,
           clinical_notes: clinical_notes,
+          follow_up_advise: followup_advise,
         });
         const {
           payload: { data = {}, message: res_msg = "" },

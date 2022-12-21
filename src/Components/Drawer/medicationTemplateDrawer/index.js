@@ -185,6 +185,7 @@ class TemplateDrawer extends Component {
     let templateDietIDs = [];
     let templateWorkoutIDs = [];
     let clinical_notes = "";
+    let followup_advise = "";
 
     if (carePlanTemplateId) {
       let {
@@ -201,6 +202,7 @@ class TemplateDrawer extends Component {
       templateDietIDs = template_diet_ids;
       templateWorkoutIDs = template_workout_ids;
       clinical_notes = !isEmpty(details) ? details.clinical_notes : "";
+      followup_advise = !isEmpty(details) ? details.follow_up_advise : "";
 
       for (let aId of template_appointment_ids) {
         let newAppointment = {};
@@ -407,6 +409,7 @@ class TemplateDrawer extends Component {
       templateDietIDs,
       templateWorkoutIDs,
       clinical_notes: clinical_notes,
+      followup_advise: followup_advise,
     });
   }
 
@@ -446,6 +449,7 @@ class TemplateDrawer extends Component {
       let newDiets = {};
       let newWorkouts = {};
       let clinical_notes = "";
+      let followup_advise = "";
 
       let {
         template_appointment_ids = [],
@@ -460,6 +464,7 @@ class TemplateDrawer extends Component {
       templateVitalIDs = template_vital_ids;
       templateDietIDs = template_diet_ids;
       clinical_notes = !isEmpty(details) ? details.clinical_notes : "";
+      followup_advise = !isEmpty(details) ? details.follow_up_advise : "";
 
       for (let aId of template_appointment_ids) {
         let newAppointment = {};
@@ -664,6 +669,7 @@ class TemplateDrawer extends Component {
         templateWorkoutIDs,
         templateEdited: false,
         clinical_notes: clinical_notes,
+        followup_advise: followup_advise,
       });
     }
   }
@@ -1925,6 +1931,7 @@ class TemplateDrawer extends Component {
       createTemplate = false,
       medicationCheckedIds = [],
       clinical_notes = "",
+      followup_advise = "",
     } = this.state;
     let medicationsData = Object.values(medications);
     let appointmentsData = Object.values(appointments);
@@ -2131,6 +2138,12 @@ class TemplateDrawer extends Component {
       console.log("afetr medicationCheckedIds", medicationCheckedIds);
       console.log("afetr medicationsData", medicationsData);
       console.log("after appointmentsData", appointmentsData);
+    } else if (!clinical_notes || !followup_advise) {
+      message.error("Please fill clinical notes and follow up advise");
+      this.setState({
+        loading: false,
+        disable: false,
+      });
     } else {
       medicationsData = finalMedicationData;
       if (
@@ -2162,6 +2175,7 @@ class TemplateDrawer extends Component {
           severity_id,
           condition_id,
           clinical_notes: clinical_notes,
+          follow_up_advise: followup_advise,
         });
       }
     }

@@ -390,6 +390,7 @@ class TemplatePageCreateDrawer extends Component {
         {
           name: careplanTemplateName,
           clinical_notes: !isEmpty(details) ? details.clinical_notes : "",
+          followup_advise: !isEmpty(details) ? details.follow_up_advise : "",
           carePlanTemplateId: careplanTemplateID,
           medications: newMedics,
           appointments: newAppoints,
@@ -1023,6 +1024,7 @@ class TemplatePageCreateDrawer extends Component {
           workoutData,
           name,
           clinical_notes: clinical_notes,
+          follow_up_advise: followup_advise,
         });
 
         const {
@@ -1223,7 +1225,7 @@ class TemplatePageCreateDrawer extends Component {
       pastedValue = e.clipboardData.getData("text").trim();
     }
     if (pastedValue.length > 0 || pastedValue === "") {
-      this.setState({ clinical_notes: pastedValue });
+      this.setState({ clinical_notes: pastedValue, templateEdited: true });
     }
   };
 
@@ -1231,7 +1233,7 @@ class TemplatePageCreateDrawer extends Component {
     const value = e.target.value.trim();
 
     if (value.length > 0 || value === "") {
-      this.setState({ clinical_notes: e.target.value });
+      this.setState({ clinical_notes: e.target.value, templateEdited: true });
     }
   };
 
@@ -1242,7 +1244,7 @@ class TemplatePageCreateDrawer extends Component {
       pastedValue = e.clipboardData.getData("text").trim();
     }
     if (pastedValue.length > 0 || pastedValue === "") {
-      this.setState({ followup_advise: pastedValue });
+      this.setState({ followup_advise: pastedValue, templateEdited: true });
     }
   };
 
@@ -1250,7 +1252,7 @@ class TemplatePageCreateDrawer extends Component {
     const value = e.target.value.trim();
 
     if (value.length > 0 || value === "") {
-      this.setState({ followup_advise: e.target.value });
+      this.setState({ followup_advise: e.target.value, templateEdited: true });
     }
   };
 
