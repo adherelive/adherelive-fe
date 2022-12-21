@@ -66,6 +66,7 @@ class TemplatePageCreateDrawer extends Component {
       isWorkoutVisible: false,
       templateIsPrivate: false,
       clinical_notes: "",
+      followup_advise: "",
     };
   }
 
@@ -289,13 +290,17 @@ class TemplatePageCreateDrawer extends Component {
     dietData,
     workoutData,
     name,
-    clinical_notes
+    clinical_notes,
+    followup_advise
   ) => {
     if (!name) {
       message.error(this.formatMessage(messages.giveName));
       return false;
     } else if (!clinical_notes) {
       message.error(this.formatMessage(messages.addClinicalNotes));
+      return false;
+    } else if (!followup_advise) {
+      message.error(this.formatMessage(messages.addFollowupAdvise));
       return false;
     }
 
@@ -450,6 +455,7 @@ class TemplatePageCreateDrawer extends Component {
       workouts = {},
       name = "",
       clinical_notes = "",
+      followup_advise = "",
     } = this.state;
     const { createCareplanTemplate, close, authenticated_category } =
       this.props;
@@ -475,7 +481,8 @@ class TemplatePageCreateDrawer extends Component {
       dietData,
       workoutData,
       name,
-      clinical_notes
+      clinical_notes,
+      followup_advise
     );
     if (validate) {
       try {
@@ -519,6 +526,7 @@ class TemplatePageCreateDrawer extends Component {
             showWorkoutInner: false,
             showAreYouSureModal: false,
             clinical_notes: "",
+            followup_advise: "",
           });
           close();
         } else {
@@ -655,6 +663,25 @@ class TemplatePageCreateDrawer extends Component {
     }
   };
 
+  setPastedFollowupAdvise = (e) => {
+    e.preventDefault();
+    let pastedValue = "";
+    if (typeof e.clipboardData !== "undefined") {
+      pastedValue = e.clipboardData.getData("text").trim();
+    }
+    if (pastedValue.length > 0 || pastedValue === "") {
+      this.setState({ followup_advise: pastedValue });
+    }
+  };
+
+  setFollowupAdvise = (e) => {
+    const value = e.target.value.trim();
+
+    if (value.length > 0 || value === "") {
+      this.setState({ followup_advise: e.target.value });
+    }
+  };
+
   renderTemplateDetails = () => {
     const {
       medications = {},
@@ -688,7 +715,6 @@ class TemplatePageCreateDrawer extends Component {
           </div>
           <div className="star-red fs22">*</div>
         </div>
-
         <div className="wp100 flex align-center justify-space-between">
           <Input
             placeholder={this.formatMessage(messages.namePlaceholder)}
@@ -698,14 +724,12 @@ class TemplatePageCreateDrawer extends Component {
             required={true}
           />
         </div>
-
         <div className="wp100 flex direction-row align-center ">
           <div className="form-category-headings-ap mr0-I">
             {this.formatMessage(messages.clinical_notes)}
           </div>
           <div className="star-red fs22">*</div>
         </div>
-
         <div className="wp100 flex align-center justify-space-between">
           <TextArea
             placeholder={this.formatMessage(messages.clinical_notes)}
@@ -716,7 +740,22 @@ class TemplatePageCreateDrawer extends Component {
             style={{ resize: "none" }}
           />
         </div>
-
+        <div className="wp100 flex direction-row align-center ">
+          <div className="form-category-headings-ap mr0-I">
+            {this.formatMessage(messages.followup_advise)}
+          </div>
+          <div className="star-red fs22">*</div>
+        </div>
+        <div className="wp100 flex align-center justify-space-between">
+          <TextArea
+            placeholder={this.formatMessage(messages.followup_advise)}
+            value={this.state.followup_advise}
+            className={"form-textarea-ap form-inputs-ap"}
+            onChange={this.setFollowupAdvise}
+            onPaste={this.setPastedFollowupAdvise}
+            style={{ resize: "none" }}
+          />
+        </div>
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap ">{"Medications"}</div>
           {medicationKeys.length > 0 ? (
@@ -729,7 +768,6 @@ class TemplatePageCreateDrawer extends Component {
             </div>
           )}
         </div>
-
         {medicationKeys.map((key) => {
           let {
             medicine_id = "",
@@ -912,7 +950,6 @@ class TemplatePageCreateDrawer extends Component {
             </div>
           );
         })}
-
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap align-self-start">
             {this.formatMessage(messages.appointments)}
@@ -987,7 +1024,6 @@ class TemplatePageCreateDrawer extends Component {
             </div>
           );
         })}
-
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap align-self-start">
             {this.formatMessage(messages.actions)}
@@ -1049,7 +1085,6 @@ class TemplatePageCreateDrawer extends Component {
             </div>
           );
         })}
-
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap align-self-start">
             {this.formatMessage(messages.diets)}

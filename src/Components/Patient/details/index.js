@@ -759,16 +759,7 @@ const PatientTreatmentCard = ({
 
         <div className="flex direction-column mb14">
           <div className="fs14">{formatMessage(messages.clinical_notes)}</div>
-
-          {/* {treatment_clinical_notes} */}
-          {!isEmpty(newClinicalNotes) &&
-            newClinicalNotes.map((notes, index) => {
-              return (
-                <div key={index} className="fs16 fw700">
-                  {notes}
-                </div>
-              );
-            })}
+          <div className="fs16 fw700">{treatment_clinical_notes}</div>
         </div>
 
         <div className="flex direction-column mb14">

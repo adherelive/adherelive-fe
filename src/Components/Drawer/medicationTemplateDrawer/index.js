@@ -140,6 +140,7 @@ class TemplateDrawer extends Component {
       loading: false,
       medicationCheckedIds: [],
       clinical_notes: "",
+      followup_advise: "",
     };
   }
 
@@ -1024,6 +1025,44 @@ class TemplateDrawer extends Component {
     this.onCloseInner();
   };
 
+  setPastedClinicalNotes = (e) => {
+    e.preventDefault();
+    let pastedValue = "";
+    if (typeof e.clipboardData !== "undefined") {
+      pastedValue = e.clipboardData.getData("text").trim();
+    }
+    if (pastedValue.length > 0 || pastedValue === "") {
+      this.setState({ clinical_notes: pastedValue });
+    }
+  };
+
+  setClinicalNotes = (e) => {
+    const value = e.target.value.trim();
+
+    if (value.length > 0 || value === "") {
+      this.setState({ clinical_notes: e.target.value });
+    }
+  };
+
+  setPastedFollowupAdvise = (e) => {
+    e.preventDefault();
+    let pastedValue = "";
+    if (typeof e.clipboardData !== "undefined") {
+      pastedValue = e.clipboardData.getData("text").trim();
+    }
+    if (pastedValue.length > 0 || pastedValue === "") {
+      this.setState({ followup_advise: pastedValue });
+    }
+  };
+
+  setFollowupAdvise = (e) => {
+    const value = e.target.value.trim();
+
+    if (value.length > 0 || value === "") {
+      this.setState({ followup_advise: e.target.value });
+    }
+  };
+
   renderTemplateDetails = () => {
     const {
       medications = {},
@@ -1079,7 +1118,42 @@ class TemplateDrawer extends Component {
           {this.getCarePlanTemplateOptions()}
         </Select>
 
+        <div className="wp100 flex direction-row align-center ">
+          <div className="form-category-headings-ap mr0-I">
+            {this.formatMessage(messages.clinical_notes)}
+          </div>
+          <div className="star-red fs22">*</div>
+        </div>
+
         <div className="wp100 flex align-center justify-space-between">
+          <TextArea
+            placeholder={this.formatMessage(messages.clinical_notes)}
+            value={this.state.clinical_notes}
+            className={"form-textarea-ap form-inputs-ap"}
+            onChange={this.setClinicalNotes}
+            onPaste={this.setPastedClinicalNotes}
+            style={{ resize: "none" }}
+          />
+        </div>
+
+        <div className="wp100 flex direction-row align-center ">
+          <div className="form-category-headings-ap mr0-I">
+            {this.formatMessage(messages.followup_advise)}
+          </div>
+          <div className="star-red fs22">*</div>
+        </div>
+        <div className="wp100 flex align-center justify-space-between">
+          <TextArea
+            placeholder={this.formatMessage(messages.followup_advise)}
+            value={this.state.followup_advise}
+            className={"form-textarea-ap form-inputs-ap"}
+            onChange={this.setFollowupAdvise}
+            onPaste={this.setPastedFollowupAdvise}
+            style={{ resize: "none" }}
+          />
+        </div>
+
+        {/* <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap ">
             {this.formatMessage(messages.clinical_notes)}
           </div>
@@ -1088,7 +1162,7 @@ class TemplateDrawer extends Component {
           {!isEmpty(this.state.clinical_notes)
             ? this.state.clinical_notes
             : "Clinical notes not added"}
-        </div>
+        </div> */}
 
         {/* ) : null} */}
         <div className="wp100 flex align-center justify-space-between">
