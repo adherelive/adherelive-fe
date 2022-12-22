@@ -247,6 +247,16 @@ const messages = defineMessages({
     description: "",
     defaultMessage: "Please add clinical notes for template",
   },
+  followup_advise: {
+    id: "app.allTemplatesAddDrawer.followup_advise",
+    description: "",
+    defaultMessage: "Follow up advise",
+  },
+  addFollowupAdvise: {
+    id: "app.allTemplatesAddDrawer.addFollowupAdvise",
+    description: "",
+    defaultMessage: "Please add Follow up advise for template",
+  },
 });
 
 export default messages;

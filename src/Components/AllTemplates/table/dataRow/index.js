@@ -13,6 +13,9 @@ export default (data) => {
     [TABLE_COLUMN.CREATED_AT.dataIndex]: {
       templateData,
     },
+    [TABLE_COLUMN.UPDATED_AT.dataIndex]: {
+      templateData,
+    },
     [TABLE_COLUMN.EDIT.dataIndex]: {
       id,
       duplicateCareplanTemplate,

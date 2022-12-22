@@ -5,6 +5,7 @@ import messages from "../messages";
 import Name from "../dataColumn/name";
 import Edit from "../dataColumn/edit";
 import CreatedAt from "../dataColumn/created";
+import UpdatedAt from "../dataColumn/updatedAt";
 
 export default (props) => {
   const { formatMessage } = props || {};
@@ -24,6 +25,14 @@ export default (props) => {
       render: (data) => {
         const { templateData } = data || {};
         return <CreatedAt templateData={templateData} />;
+      },
+    },
+    {
+      title: formatMessage(messages.updatedAt),
+      ...TABLE_COLUMN.UPDATED_AT,
+      render: (data) => {
+        const { templateData } = data || {};
+        return <UpdatedAt templateData={templateData} />;
       },
     },
     {
