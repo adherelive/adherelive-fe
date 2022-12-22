@@ -9,6 +9,11 @@ export const TABLE_COLUMN = {
     width: 300,
     dataIndex: "CREATED_AT",
   },
+  UPDATED_AT: {
+    key: "UPDATED_AT",
+    width: 300,
+    dataIndex: "UPDATED_AT",
+  },
   EDIT: {
     key: "EDIT",
     dataIndex: "EDIT",

@@ -66,6 +66,7 @@ class TemplatePageCreateDrawer extends Component {
       isWorkoutVisible: false,
       templateIsPrivate: false,
       clinical_notes: "",
+      followup_advise: "",
     };
   }
 
@@ -289,13 +290,17 @@ class TemplatePageCreateDrawer extends Component {
     dietData,
     workoutData,
     name,
-    clinical_notes
+    clinical_notes,
+    followup_advise
   ) => {
     if (!name) {
       message.error(this.formatMessage(messages.giveName));
       return false;
     } else if (!clinical_notes) {
       message.error(this.formatMessage(messages.addClinicalNotes));
+      return false;
+    } else if (!followup_advise) {
+      message.error(this.formatMessage(messages.addFollowupAdvise));
       return false;
     }
 
@@ -450,6 +455,7 @@ class TemplatePageCreateDrawer extends Component {
       workouts = {},
       name = "",
       clinical_notes = "",
+      followup_advise = "",
     } = this.state;
     const { createCareplanTemplate, close, authenticated_category } =
       this.props;
@@ -475,7 +481,8 @@ class TemplatePageCreateDrawer extends Component {
       dietData,
       workoutData,
       name,
-      clinical_notes
+      clinical_notes,
+      followup_advise
     );
     if (validate) {
       try {
@@ -489,6 +496,7 @@ class TemplatePageCreateDrawer extends Component {
           name,
           is_public_in_provider,
           clinical_notes: clinical_notes,
+          follow_up_advise: followup_advise,
         });
         const {
           payload: { data = {}, message: res_msg = "" },
@@ -643,7 +651,7 @@ class TemplatePageCreateDrawer extends Component {
       pastedValue = e.clipboardData.getData("text").trim();
     }
     if (pastedValue.length > 0 || pastedValue === "") {
-      this.setState({ clinical_notes: pastedValue });
+      this.setState({ clinical_notes: pastedValue, templateEdited: true });
     }
   };
 
@@ -651,7 +659,26 @@ class TemplatePageCreateDrawer extends Component {
     const value = e.target.value.trim();
 
     if (value.length > 0 || value === "") {
-      this.setState({ clinical_notes: e.target.value });
+      this.setState({ clinical_notes: e.target.value, templateEdited: true });
+    }
+  };
+
+  setPastedFollowupAdvise = (e) => {
+    e.preventDefault();
+    let pastedValue = "";
+    if (typeof e.clipboardData !== "undefined") {
+      pastedValue = e.clipboardData.getData("text").trim();
+    }
+    if (pastedValue.length > 0 || pastedValue === "") {
+      this.setState({ followup_advise: pastedValue, templateEdited: true });
+    }
+  };
+
+  setFollowupAdvise = (e) => {
+    const value = e.target.value.trim();
+
+    if (value.length > 0 || value === "") {
+      this.setState({ followup_advise: e.target.value, templateEdited: true });
     }
   };
 
@@ -713,6 +740,23 @@ class TemplatePageCreateDrawer extends Component {
             className={"form-textarea-ap form-inputs-ap"}
             onChange={this.setClinicalNotes}
             onPaste={this.setPastedClinicalNotes}
+            style={{ resize: "none" }}
+          />
+        </div>
+
+        <div className="wp100 flex direction-row align-center ">
+          <div className="form-category-headings-ap mr0-I">
+            {this.formatMessage(messages.followup_advise)}
+          </div>
+          <div className="star-red fs22">*</div>
+        </div>
+        <div className="wp100 flex align-center justify-space-between">
+          <TextArea
+            placeholder={this.formatMessage(messages.followup_advise)}
+            value={this.state.followup_advise}
+            className={"form-textarea-ap form-inputs-ap"}
+            onChange={this.setFollowupAdvise}
+            onPaste={this.setPastedFollowupAdvise}
             style={{ resize: "none" }}
           />
         </div>

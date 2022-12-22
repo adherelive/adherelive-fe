@@ -11,6 +11,11 @@ const messages = defineMessages({
     description: "",
     defaultMessage: "Created At",
   },
+  updatedAt: {
+    id: "app.allTemplatesTable.updatedAt",
+    description: "",
+    defaultMessage: "Updated At",
+  },
   createDuplicateMessage: {
     id: "app.allTemplatesTable.createDuplicateMessage",
     description: "",

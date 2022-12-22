@@ -140,6 +140,7 @@ class TemplateDrawer extends Component {
       loading: false,
       medicationCheckedIds: [],
       clinical_notes: "",
+      followup_advise: "",
     };
   }
 
@@ -165,6 +166,7 @@ class TemplateDrawer extends Component {
     let newDiets = {};
     let newWorkouts = {};
     let clinical_notes = "";
+    let followup_advise = "";
 
     console.log("327546235423786479812742376", { template_medications });
 
@@ -200,6 +202,7 @@ class TemplateDrawer extends Component {
       templateDietIDs = template_diet_ids;
       templateWorkoutIDs = template_workout_ids;
       clinical_notes = !isEmpty(details) ? details.clinical_notes : "";
+      followup_advise = !isEmpty(details) ? details.follow_up_advise : "";
 
       for (let aId of template_appointment_ids) {
         let newAppointment = {};
@@ -406,6 +409,7 @@ class TemplateDrawer extends Component {
       templateDietIDs,
       templateWorkoutIDs,
       clinical_notes: clinical_notes,
+      followup_advise: followup_advise,
     });
   }
 
@@ -445,6 +449,7 @@ class TemplateDrawer extends Component {
       let newDiets = {};
       let newWorkouts = {};
       let clinical_notes = "";
+      let followup_advise = "";
 
       let {
         template_appointment_ids = [],
@@ -459,6 +464,7 @@ class TemplateDrawer extends Component {
       templateVitalIDs = template_vital_ids;
       templateDietIDs = template_diet_ids;
       clinical_notes = !isEmpty(details) ? details.clinical_notes : "";
+      followup_advise = !isEmpty(details) ? details.follow_up_advise : "";
 
       for (let aId of template_appointment_ids) {
         let newAppointment = {};
@@ -663,6 +669,7 @@ class TemplateDrawer extends Component {
         templateWorkoutIDs,
         templateEdited: false,
         clinical_notes: clinical_notes,
+        followup_advise: followup_advise,
       });
     }
   }
@@ -1024,6 +1031,44 @@ class TemplateDrawer extends Component {
     this.onCloseInner();
   };
 
+  setPastedClinicalNotes = (e) => {
+    e.preventDefault();
+    let pastedValue = "";
+    if (typeof e.clipboardData !== "undefined") {
+      pastedValue = e.clipboardData.getData("text").trim();
+    }
+    if (pastedValue.length > 0 || pastedValue === "") {
+      this.setState({ clinical_notes: pastedValue });
+    }
+  };
+
+  setClinicalNotes = (e) => {
+    const value = e.target.value.trim();
+
+    if (value.length > 0 || value === "") {
+      this.setState({ clinical_notes: e.target.value });
+    }
+  };
+
+  setPastedFollowupAdvise = (e) => {
+    e.preventDefault();
+    let pastedValue = "";
+    if (typeof e.clipboardData !== "undefined") {
+      pastedValue = e.clipboardData.getData("text").trim();
+    }
+    if (pastedValue.length > 0 || pastedValue === "") {
+      this.setState({ followup_advise: pastedValue });
+    }
+  };
+
+  setFollowupAdvise = (e) => {
+    const value = e.target.value.trim();
+
+    if (value.length > 0 || value === "") {
+      this.setState({ followup_advise: e.target.value });
+    }
+  };
+
   renderTemplateDetails = () => {
     const {
       medications = {},
@@ -1078,16 +1123,39 @@ class TemplateDrawer extends Component {
         >
           {this.getCarePlanTemplateOptions()}
         </Select>
-
-        <div className="wp100 flex align-center justify-space-between">
-          <div className="form-category-headings-ap ">
+        <div className="wp100 flex direction-row align-center ">
+          <div className="form-category-headings-ap mr0-I">
             {this.formatMessage(messages.clinical_notes)}
           </div>
+          <div className="star-red fs22">*</div>
+        </div>
+
+        <div className="wp100 flex align-center justify-space-between">
+          <TextArea
+            placeholder={this.formatMessage(messages.clinical_notes)}
+            value={this.state.clinical_notes}
+            className={"form-textarea-ap form-inputs-ap"}
+            onChange={this.setClinicalNotes}
+            onPaste={this.setPastedClinicalNotes}
+            style={{ resize: "none" }}
+          />
+        </div>
+
+        <div className="wp100 flex direction-row align-center ">
+          <div className="form-category-headings-ap mr0-I">
+            {this.formatMessage(messages.followup_advise)}
+          </div>
+          <div className="star-red fs22">*</div>
         </div>
         <div className="wp100 flex align-center justify-space-between">
-          {!isEmpty(this.state.clinical_notes)
-            ? this.state.clinical_notes
-            : "Clinical notes not added"}
+          <TextArea
+            placeholder={this.formatMessage(messages.followup_advise)}
+            value={this.state.followup_advise}
+            className={"form-textarea-ap form-inputs-ap"}
+            onChange={this.setFollowupAdvise}
+            onPaste={this.setPastedFollowupAdvise}
+            style={{ resize: "none" }}
+          />
         </div>
 
         {/* ) : null} */}
@@ -1847,6 +1915,7 @@ class TemplateDrawer extends Component {
       createTemplate = false,
       medicationCheckedIds = [],
       clinical_notes = "",
+      followup_advise = "",
     } = this.state;
     let medicationsData = Object.values(medications);
     let appointmentsData = Object.values(appointments);
@@ -2052,6 +2121,12 @@ class TemplateDrawer extends Component {
       console.log("afetr medicationCheckedIds", medicationCheckedIds);
       console.log("afetr medicationsData", medicationsData);
       console.log("after appointmentsData", appointmentsData);
+    } else if (!clinical_notes || !followup_advise) {
+      message.error("Please fill clinical notes and follow up advise");
+      this.setState({
+        loading: false,
+        disable: false,
+      });
     } else {
       medicationsData = finalMedicationData;
       if (
@@ -2083,6 +2158,7 @@ class TemplateDrawer extends Component {
           severity_id,
           condition_id,
           clinical_notes: clinical_notes,
+          follow_up_advise: followup_advise,
         });
       }
     }
