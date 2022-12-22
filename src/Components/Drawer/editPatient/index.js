@@ -88,6 +88,7 @@ class EditPatientDrawer extends Component {
       widgetDrawerOpen: false,
       finalSymptomData: [],
       diagnosisType: false,
+      followup_advise: "",
     };
     this.handleConditionSearch = throttle(
       this.handleConditionSearch.bind(this),
@@ -162,6 +163,7 @@ class EditPatientDrawer extends Component {
       basic_info: { id: careplan_id = "" } = {},
       details: {
         clinical_notes = "",
+        follow_up_advise = "",
         condition_id = null,
         severity_id = null,
         symptoms = null,
@@ -223,6 +225,7 @@ class EditPatientDrawer extends Component {
         address,
         finalSymptomData: symptomData,
         diagnosisType: type === "2" ? false : true,
+        followup_advise: follow_up_advise,
       });
     }
   }
@@ -669,6 +672,25 @@ class EditPatientDrawer extends Component {
     });
   };
 
+  setPastedFollowupAdvise = (e) => {
+    e.preventDefault();
+    let pastedValue = "";
+    if (typeof e.clipboardData !== "undefined") {
+      pastedValue = e.clipboardData.getData("text").trim();
+    }
+    if (pastedValue.length > 0 || pastedValue === "") {
+      this.setState({ followup_advise: pastedValue });
+    }
+  };
+
+  setFollowupAdvise = (e) => {
+    const value = e.target.value.trim();
+
+    if (value.length > 0 || value === "") {
+      this.setState({ followup_advise: e.target.value });
+    }
+  };
+
   renderEditPatient = () => {
     const {
       payload = {},
@@ -716,6 +738,7 @@ class EditPatientDrawer extends Component {
       symptoms = "",
       address = "",
       isCollapse = false,
+      followup_advise = "",
     } = this.state;
 
     let setDOB = moment(date_of_birth).format("YYYY-MM-DD");
@@ -1315,6 +1338,20 @@ class EditPatientDrawer extends Component {
               {this.getSeverityOption()}
             </Select>
           )}
+
+          <div className="form-headings-ap wp100 flex direction-row align-center ">
+            {this.formatMessage(messages.followup_advise)}
+          </div>
+          <div className="wp100 flex align-center justify-space-between">
+            <TextArea
+              placeholder={this.formatMessage(messages.followup_advise)}
+              value={this.state.followup_advise}
+              className={"form-textarea-ap form-inputs-ap"}
+              onChange={this.setFollowupAdvise}
+              onPaste={this.setPastedFollowupAdvise}
+              style={{ resize: "none" }}
+            />
+          </div>
         </div>
       </div>
     );
@@ -1463,6 +1500,7 @@ class EditPatientDrawer extends Component {
         diagnosis_type,
         comorbidities,
         clinical_notes,
+        // follow_up_advise: "asdsdsad",
         height,
         weight,
         symptoms,
