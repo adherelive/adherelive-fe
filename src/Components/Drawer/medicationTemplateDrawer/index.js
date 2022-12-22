@@ -351,6 +351,10 @@ class TemplateDrawer extends Component {
       }
 
       if (Object.keys(templateMedications).length) {
+        console.log("templateMedications", templateMedications);
+      }
+
+      if (Object.keys(templateMedications).length) {
         for (let medication of Object.values(templateMedications)) {
           let key = uuid();
           newMedics[key] = medication;
@@ -389,6 +393,7 @@ class TemplateDrawer extends Component {
         }
       }
     }
+
     this.setState({
       care_plan_templates,
       carePlanTemplateIds,

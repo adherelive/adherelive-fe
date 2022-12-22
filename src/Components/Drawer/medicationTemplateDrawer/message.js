@@ -199,7 +199,7 @@ const messages = defineMessages({
   followup_advise: {
     id: "app.allTemplatesAddDrawer.followup_advise",
     description: "",
-    defaultMessage: "Follow up advise",
+    defaultMessage: "Follow-up advise",
   },
 });
 

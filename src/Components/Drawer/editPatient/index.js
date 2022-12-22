@@ -1430,6 +1430,7 @@ class EditPatientDrawer extends Component {
       symptoms = "",
       address = "",
       diagnosisType = "",
+      followup_advise = "",
     } = this.state;
     const validate = this.validateData();
     const { submit } = this.props;
@@ -1452,6 +1453,7 @@ class EditPatientDrawer extends Component {
         diagnosis_type: diagnosisType === false ? "2" : "1",
         comorbidities,
         clinical_notes,
+        followup_advise,
         height,
         weight,
         symptoms: JSON.stringify(this.state.finalSymptomData),
@@ -1476,6 +1478,7 @@ class EditPatientDrawer extends Component {
     diagnosis_type,
     comorbidities,
     clinical_notes,
+    followup_advise,
     height,
     weight,
     symptoms,
@@ -1500,7 +1503,7 @@ class EditPatientDrawer extends Component {
         diagnosis_type,
         comorbidities,
         clinical_notes,
-        // follow_up_advise: "asdsdsad",
+        follow_up_advise: followup_advise,
         height,
         weight,
         symptoms,
