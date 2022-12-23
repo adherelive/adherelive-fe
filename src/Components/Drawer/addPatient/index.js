@@ -138,6 +138,7 @@ class PatientDetailsDrawer extends Component {
           address = "",
           full_name,
           user_id = null,
+          uid = "",
         } = {},
         dob,
         details: { allergies = "", comorbidities = "" } = {},
@@ -177,6 +178,7 @@ class PatientDetailsDrawer extends Component {
         comorbidities,
         address,
         patientSearchData: nextProps.patientSearchData,
+        patient_uid: uid,
       };
     }
     return null;
