@@ -1502,7 +1502,7 @@ class EditPatientDrawer extends Component {
         diagnosis_type,
         comorbidities,
         clinical_notes,
-        // follow_up_advise: "asdsdsad",
+        follow_up_advise: followup_advise,
         height,
         weight,
         symptoms,
