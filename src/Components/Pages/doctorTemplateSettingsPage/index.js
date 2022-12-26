@@ -7,6 +7,7 @@ import TemplatePageCreateDrawer from "../../../Containers/Drawer/allTemplatesPag
 import TemplatePageEditDrawer from "../../../Containers/Drawer/allTemplatesPageEditTemplate";
 import messages from "./message";
 import { Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
 class TemplatePage extends Component {
   constructor(props) {
@@ -139,10 +140,13 @@ class TemplatePage extends Component {
             {this.getHeader()}
             <div className="wp30 pl14">
               <Input
-                className={"form-inputs-ap add-patient-phone"}
+                className={
+                  "form-inputs-ap add-patient-phone template-setting-page-search"
+                }
                 placeholder={"Search Template"}
                 // value={mobile_number}
                 onChange={this.onChangeHanlder}
+                prefix={<SearchOutlined />}
               />
             </div>
             {/* <input type="text" onChange={this.onChangeHanlder}></input> */}
