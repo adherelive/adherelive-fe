@@ -78,7 +78,15 @@ class AddCareplanDrawer extends Component {
 
   componentDidMount() {}
 
-  componentDidUpdate(prevProps, prevState) {}
+  componentDidUpdate(prevProps, prevState) {
+    const { visible: prev_visible } = prevProps;
+    const { visible, searchSeverity } = this.props;
+
+    if (prev_visible !== visible) {
+      this.handleConditionSearch(" ");
+      searchSeverity("");
+    }
+  }
 
   formatMessage = (data) => this.props.intl.formatMessage(data);
 

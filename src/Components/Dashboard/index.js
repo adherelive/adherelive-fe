@@ -447,8 +447,9 @@ class Dashboard extends Component {
   };
 
   showAddPatientDrawer = () => {
-    const { searchCondition } = this.props;
+    const { searchCondition, searchSeverity } = this.props;
     searchCondition("");
+    searchSeverity("");
     this.setState({ visible: true });
   };
   showEditGraphModal = () => {
