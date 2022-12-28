@@ -369,7 +369,7 @@ class TemplatePageCreateDrawer extends Component {
 
       if (
         !reason ||
-        (!time_gap && time_gap !== null) ||
+        (!time_gap && time_gap !== null && time_gap !== 0) ||
         !date ||
         !appointment_type ||
         !type_description ||
@@ -1020,11 +1020,12 @@ class TemplatePageCreateDrawer extends Component {
                   {rediologyType !== "" && ` (${rediologyType})`}
                 </div>
                 <div className="drawer-block-description">
-                  {date
+                  {/* {date
                     ? `After ${moment(date).diff(moment(), "days") + 1} days`
                     : time_gap
                     ? `After ${time_gap} days`
-                    : ""}
+                    : ""} */}
+                  {time_gap === 0 ? "Today" : `After ${time_gap} days`}
                 </div>
                 <div className="drawer-block-description">{`Notes:${description}`}</div>
               </div>
@@ -1393,7 +1394,8 @@ class TemplatePageCreateDrawer extends Component {
     const today = moment();
     const selectedDate = date;
     let diff = selectedDate.diff(today, "days");
-    const time_gap = typeof diff === "number" ? diff + 1 : 0;
+    // const time_gap = typeof diff === "number" ? diff + 1 : 0;
+    const time_gap = typeof diff === "number" ? diff : 0;
 
     if (!date || !start_time || !end_time) {
       message.error(this.formatMessage(messages.appointmentError));
@@ -1558,7 +1560,8 @@ class TemplatePageCreateDrawer extends Component {
     const today = moment();
     const selectedDate = date;
     let diff = selectedDate.diff(today, "days");
-    const time_gap = typeof diff === "number" ? diff + 1 : 0;
+    // const time_gap = typeof diff === "number" ? diff + 1 : 0;
+    const time_gap = typeof diff === "number" ? diff : 0;
 
     if (!date || !start_time || !end_time) {
       message.error(this.formatMessage(messages.appointmentError));

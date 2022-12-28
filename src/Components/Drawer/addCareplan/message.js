@@ -96,6 +96,11 @@ const messages = defineMessages({
     description: "",
     defaultMessage: "Careplan created successfully",
   },
+  followup_advise: {
+    id: "app.allTemplatesAddDrawer.followup_advise",
+    description: "",
+    defaultMessage: "Follow-up advise",
+  },
 });
 
 export default messages;
