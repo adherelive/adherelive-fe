@@ -1000,7 +1000,8 @@ class EditAppointmentForm extends Component {
 
     if (!start_date) {
       // let minutesToAdd = 30 - (moment().minutes()) % 30;
-      start_date = moment().add("days", 2);
+      // start_date = moment().add("days", 2);
+      start_date = moment();
     }
 
     let fieldsError = {};

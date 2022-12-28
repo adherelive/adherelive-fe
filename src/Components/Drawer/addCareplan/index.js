@@ -56,6 +56,7 @@ class AddCareplanDrawer extends Component {
       widgetDrawerOpen: false,
       finalSymptomData: [],
       diagnosisType: false,
+      followup_advise: "",
     };
     this.handleConditionSearch = throttle(
       this.handleConditionSearch.bind(this),
@@ -77,7 +78,15 @@ class AddCareplanDrawer extends Component {
 
   componentDidMount() {}
 
-  componentDidUpdate(prevProps, prevState) {}
+  componentDidUpdate(prevProps, prevState) {
+    const { visible: prev_visible } = prevProps;
+    const { visible, searchSeverity } = this.props;
+
+    if (prev_visible !== visible) {
+      this.handleConditionSearch(" ");
+      searchSeverity("");
+    }
+  }
 
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
@@ -148,6 +157,25 @@ class AddCareplanDrawer extends Component {
 
   setSeverity = (value) => {
     this.setState({ severity: value });
+  };
+
+  setPastedFollowupAdvise = (e) => {
+    e.preventDefault();
+    let pastedValue = "";
+    if (typeof e.clipboardData !== "undefined") {
+      pastedValue = e.clipboardData.getData("text").trim();
+    }
+    if (pastedValue.length > 0 || pastedValue === "") {
+      this.setState({ followup_advise: pastedValue });
+    }
+  };
+
+  setFollowupAdvise = (e) => {
+    const value = e.target.value.trim();
+
+    if (value.length > 0 || value === "") {
+      this.setState({ followup_advise: e.target.value });
+    }
   };
 
   setCondition = async (value) => {
@@ -385,10 +413,11 @@ class AddCareplanDrawer extends Component {
       symptoms = "",
       isCollapse = false,
       finalSymptomData = [],
+      followup_advise = "",
     } = this.state;
 
     return (
-      <div className="form-block-ap ">
+      <div className="form-block-ap .add-careplan-drawer-container">
         {/* AKSHAY NEW CODE IMPLEMENTATION */}
 
         <div className="form-headings-ap flex align-center justify-space-between">
@@ -586,32 +615,51 @@ class AddCareplanDrawer extends Component {
           </div>
         </div>
 
-        {isCollapse === "severity" && (
-          <Select
-            className="form-inputs-ap drawer-select"
-            placeholder="Select Severity"
-            value={severity}
-            onChange={this.setSeverity}
-            onSearch={this.handleSeveritySearch}
-            notFoundContent={
-              this.state.fetchingSeverity ? (
-                <Spin size="small" />
-              ) : (
-                "No match found"
-              )
-            }
-            showSearch
-            autoComplete="off"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              option.props.children
-                .toLowerCase()
-                .indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            {this.getSeverityOption()}
-          </Select>
-        )}
+        <div
+          style={{ paddingBottom: "50px" }}
+          className="severity-field-container"
+        >
+          {isCollapse === "severity" && (
+            <Select
+              className="form-inputs-ap drawer-select"
+              placeholder="Select Severity"
+              value={severity}
+              onChange={this.setSeverity}
+              onSearch={this.handleSeveritySearch}
+              notFoundContent={
+                this.state.fetchingSeverity ? (
+                  <Spin size="small" />
+                ) : (
+                  "No match found"
+                )
+              }
+              showSearch
+              autoComplete="off"
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                option.props.children
+                  .toLowerCase()
+                  .indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {this.getSeverityOption()}
+            </Select>
+          )}
+
+          <div className="form-headings-ap wp100 flex direction-row align-center ">
+            {this.formatMessage(messages.followup_advise)}
+          </div>
+          <div className="wp100 flex align-center justify-space-between">
+            <TextArea
+              placeholder={this.formatMessage(messages.followup_advise)}
+              value={followup_advise}
+              className={"form-textarea-ap form-inputs-ap"}
+              onChange={this.setFollowupAdvise}
+              onPaste={this.setPastedFollowupAdvise}
+              style={{ resize: "none" }}
+            />
+          </div>
+        </div>
       </div>
     );
   };
@@ -672,6 +720,7 @@ class AddCareplanDrawer extends Component {
       clinical_notes = "",
       symptoms = "",
       diagnosisType = false,
+      followup_advise = "",
     } = this.state;
     const validate = this.validateData();
     // const { submit } = this.props;
@@ -685,6 +734,7 @@ class AddCareplanDrawer extends Component {
         diagnosis_description: String(diagnosis_description),
         diagnosis_type: diagnosisType === false ? "2" : "1",
         clinical_notes,
+        follow_up_advise: followup_advise,
         symptoms: JSON.stringify(this.state.finalSymptomData),
       };
       try {
@@ -729,6 +779,7 @@ class AddCareplanDrawer extends Component {
       diagnosis_type: "2",
       symptoms: "",
       finalSymptomData: [],
+      followup_advise: "",
     });
     close();
   };

@@ -201,8 +201,10 @@ class EditPatientDrawer extends Component {
     console.log("symptomData,symptomData,symptomData", symptomData);
 
     if (prev_visible !== visible) {
+      const { searchSeverity } = this.props;
       this.handleGetPatientDetails(patient_id);
       this.handleConditionSearch(" ");
+      searchSeverity("");
       this.setState({
         mobile_number,
         name: full_name,
