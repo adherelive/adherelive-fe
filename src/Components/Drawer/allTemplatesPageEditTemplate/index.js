@@ -1605,7 +1605,7 @@ class TemplatePageCreateDrawer extends Component {
                     ? `After ${time_gap} days`
                     : ""} */}
 
-                  {time_gap === 0 ? "Today" : `After ${time_gap} days`}
+                  {time_gap == 0 ? "Today" : `After ${time_gap} days`}
                 </div>
                 <div className="drawer-block-description">{`Notes:${description}`}</div>
               </div>
@@ -1955,9 +1955,21 @@ class TemplatePageCreateDrawer extends Component {
 
     const today = moment();
     const selectedDate = date;
+
+    let formatToday = moment(today).format("MM/DD/YYYY");
+    let formatSelected = moment(selectedDate).format("MM/DD/YYYY");
     let diff = selectedDate.diff(today, "days");
+    if (formatToday === formatSelected) {
+      diff = 0;
+    } else {
+      diff =
+        selectedDate.diff(today, "days") === 0
+          ? 1
+          : selectedDate.diff(today, "days");
+    }
+
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
-    const time_gap = typeof diff === "number" ? diff : 0;
+    let time_gap = typeof diff === "number" ? diff : 0;
     console.log("time_gap", diff);
 
     if (!date || !start_time) {
@@ -2127,7 +2139,18 @@ class TemplatePageCreateDrawer extends Component {
 
     const today = moment();
     const selectedDate = date;
+    let formatToday = moment(today).format("MM/DD/YYYY");
+    let formatSelected = moment(selectedDate).format("MM/DD/YYYY");
     let diff = selectedDate.diff(today, "days");
+    if (formatToday === formatSelected) {
+      diff = 0;
+    } else {
+      diff =
+        selectedDate.diff(today, "days") === 0
+          ? 1
+          : selectedDate.diff(today, "days");
+    }
+
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;
     console.log("time_gap", diff);
