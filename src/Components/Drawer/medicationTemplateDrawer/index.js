@@ -1442,7 +1442,7 @@ class TemplateDrawer extends Component {
                     // // ? `After ${time_gap - 1} days`
                     // // : ""
                   } */}
-                  {time_gap === 0 ? "Today" : `After ${time_gap} days`}
+                  {time_gap == 0 ? "Today" : `After ${time_gap} days`}
                 </div>
                 <div className="drawer-block-description">{`Notes:${description}`}</div>
               </div>
@@ -2398,7 +2398,15 @@ class TemplateDrawer extends Component {
 
     const today = moment();
     const selectedDate = date;
-    let diff = selectedDate.diff(today, "days");
+    // let diff = selectedDate.diff(today, "days");
+    let formatToday = moment(today).format("MM/DD/YYYY");
+    let formatSelected = moment(selectedDate).format("MM/DD/YYYY");
+
+    let diff = this.getDaysBetweenDates(
+      new Date(formatToday),
+      new Date(formatSelected)
+    );
+
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;
     console.log("time_gap", diff);
