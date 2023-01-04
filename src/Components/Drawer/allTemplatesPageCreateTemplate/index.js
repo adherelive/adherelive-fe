@@ -36,6 +36,7 @@ import Footer from "../footer";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 import TextArea from "antd/lib/input/TextArea";
+import { getDaysBetweenDates } from "../../../Helper/moment/diffranceInDays";
 
 class TemplatePageCreateDrawer extends Component {
   constructor(props) {
@@ -1392,15 +1393,11 @@ class TemplatePageCreateDrawer extends Component {
 
     let formatToday = moment(today).format("MM/DD/YYYY");
     let formatSelected = moment(selectedDate).format("MM/DD/YYYY");
-    let diff = selectedDate.diff(today, "days");
-    if (formatToday === formatSelected) {
-      diff = 0;
-    } else {
-      diff =
-        selectedDate.diff(today, "days") === 0
-          ? 1
-          : selectedDate.diff(today, "days");
-    }
+
+    let diff = getDaysBetweenDates(
+      new Date(formatToday),
+      new Date(formatSelected)
+    );
 
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;
@@ -1570,15 +1567,11 @@ class TemplatePageCreateDrawer extends Component {
     const selectedDate = date;
     let formatToday = moment(today).format("MM/DD/YYYY");
     let formatSelected = moment(selectedDate).format("MM/DD/YYYY");
-    let diff = selectedDate.diff(today, "days");
-    if (formatToday === formatSelected) {
-      diff = 0;
-    } else {
-      diff =
-        selectedDate.diff(today, "days") === 0
-          ? 1
-          : selectedDate.diff(today, "days");
-    }
+
+    let diff = getDaysBetweenDates(
+      new Date(formatToday),
+      new Date(formatSelected)
+    );
 
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;

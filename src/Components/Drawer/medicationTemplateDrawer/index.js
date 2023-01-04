@@ -2423,15 +2423,11 @@ class TemplateDrawer extends Component {
     const selectedDate = date;
     let formatToday = moment(today).format("MM/DD/YYYY");
     let formatSelected = moment(selectedDate).format("MM/DD/YYYY");
-    let diff = selectedDate.diff(today, "days");
-    if (formatToday === formatSelected) {
-      diff = 0;
-    } else {
-      diff =
-        selectedDate.diff(today, "days") === 0
-          ? 1
-          : selectedDate.diff(today, "days");
-    }
+
+    let diff = this.getDaysBetweenDates(
+      new Date(formatToday),
+      new Date(formatSelected)
+    );
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;
     console.log("time_gap", diff);
@@ -2486,15 +2482,11 @@ class TemplateDrawer extends Component {
     const selectedDate = date;
     let formatToday = moment(today).format("MM/DD/YYYY");
     let formatSelected = moment(selectedDate).format("MM/DD/YYYY");
-    let diff = selectedDate.diff(today, "days");
-    if (formatToday === formatSelected) {
-      diff = 0;
-    } else {
-      diff =
-        selectedDate.diff(today, "days") === 0
-          ? 1
-          : selectedDate.diff(today, "days");
-    }
+
+    let diff = this.getDaysBetweenDates(
+      new Date(formatToday),
+      new Date(formatSelected)
+    );
 
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;
