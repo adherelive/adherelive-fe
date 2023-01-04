@@ -99,6 +99,7 @@ class PatientDetailsDrawer extends Component {
       widgetDrawerOpen: false,
       finalSymptomData: [],
       diagnosisType: false,
+      his_id: "",
     };
     this.handleConditionSearch = throttle(
       this.handleConditionSearch.bind(this),
@@ -151,6 +152,7 @@ class PatientDetailsDrawer extends Component {
           mobile_number: user_mobile_numer = "",
           prefix: user_prefix = "",
         } = {},
+        his_id = "",
       } = nextProps.patientSearchData.users[user_id] || {};
 
       let date = new Date(dob);
@@ -179,6 +181,7 @@ class PatientDetailsDrawer extends Component {
         address,
         patientSearchData: nextProps.patientSearchData,
         patient_uid: uid,
+        his_id: his_id,
       };
     }
     return null;
@@ -259,6 +262,7 @@ class PatientDetailsDrawer extends Component {
         weight: "",
         symptoms: "",
         address: "",
+        his_id: "",
       });
     }
   }
@@ -880,6 +884,7 @@ class PatientDetailsDrawer extends Component {
       symptoms = "",
       address = "",
       isCollapse = "",
+      his_id = "",
     } = this.state;
 
     const prefixSelector = (
@@ -1119,7 +1124,7 @@ class PatientDetailsDrawer extends Component {
             value={patient_uid}
             className={"form-inputs-ap"}
             onChange={this.setPid}
-            // disabled={isdisabled}
+            disabled={!his_id ? false : true}
           />
         )}
 
