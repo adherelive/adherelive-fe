@@ -384,6 +384,21 @@ class AddCareplanDrawer extends Component {
     });
   };
 
+  translateHandler = async () => {
+    const { googleTranslate } = this.props;
+    const { followup_advise } = this.state;
+    const response = await googleTranslate(followup_advise);
+    const { data = {} } = response || {};
+    if (data) {
+      this.setState({
+        followup_advise: data.translations[0].translatedText,
+      });
+    } else {
+      alert("Something went wrong");
+    }
+    console.log("response", data.translations[0].translatedText);
+  };
+
   onDiagnosisTypeChange = (value) => {
     this.setState({
       diagnosisType: value,
@@ -648,6 +663,7 @@ class AddCareplanDrawer extends Component {
 
           <div className="form-headings-ap wp100 flex direction-row align-center ">
             {this.formatMessage(messages.followup_advise)}
+            {/* <button onClick={this.translateHandler}>Translate</button> */}
           </div>
           <div className="wp100 flex align-center justify-space-between">
             <TextArea

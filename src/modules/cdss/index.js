@@ -108,6 +108,34 @@ export const diagnosisSearch = (diagnosisName) => {
   };
 };
 
+export const googleTranslate = (textToConvert) => {
+  let fromLang = "en";
+  let toLang = "hi"; // translate to norwegian
+  let text = textToConvert;
+
+  const API_KEY = "AIzaSyBo9v7KZ_3LGCVVM-j0t8VzRUYboFafhSY";
+
+  let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+  url += "&q=" + encodeURI(text);
+  url += `&source=${fromLang}`;
+  url += `&target=${toLang}`;
+
+  let response = {};
+  return async (dispatch) => {
+    try {
+      response = await doRequest({
+        method: REQUEST_TYPE.GET,
+        url: url,
+      });
+
+      const { status, payload: { data, message = "" } = {} } = response || {};
+    } catch (error) {
+      console.log("GET CDSS DIAGNOSIS SEARCH catch error -> ", error);
+    }
+    return response;
+  };
+};
+
 export default (state = CDSS_INITIAL_STATE, action = {}) => {
   const { type, payload } = action;
   switch (type) {
