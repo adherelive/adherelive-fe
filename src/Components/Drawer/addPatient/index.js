@@ -50,10 +50,8 @@ import Icon from "@ant-design/icons";
 
 // AKSHAY NEW CODE IMPLEMENTATIONS
 
-// import CustomSymptoms from "./CustomSymptoms";
-// import CustomDiagnosis from "./CustomDiagnosis";
-import CustomDiagnosisEdit from "../editPatient/CustomDiagnosisEdit";
-import CustomSymptomsEdit from "../editPatient/CustomSymptomsEdit";
+import CustomSymptoms from "./CustomSymptoms";
+import CustomDiagnosis from "./CustomDiagnosis";
 import MultipleTreatmentAlert from "./MultipleTreatmentAlert";
 import WidgetDrawer from "./WidgetDrawer";
 
@@ -93,7 +91,7 @@ class PatientDetailsDrawer extends Component {
       addNewPatient: false,
       height: "",
       weight: "",
-      symptoms: [],
+      symptoms: "",
       address: "",
       patients: {},
       isCollapse: false,
@@ -129,101 +127,6 @@ class PatientDetailsDrawer extends Component {
 
   // AKSHAY NEW CODE IMPLEMENTATIONS
   static getDerivedStateFromProps(nextProps, nextState) {
-    // let carePlanData = {
-    //   basic_info: {
-    //     id: 6,
-    //     doctor_id: 2,
-    //     patient_id: 6,
-    //     care_plan_template_id: null,
-    //     user_role_id: 3,
-    //     doctor: {
-    //       full_name: "Vivek Asthana",
-    //       id: 2,
-    //       user_id: 3,
-    //       city: "Meerut",
-    //       speciality_id: 2,
-    //       gender: "m",
-    //       profile_pic: null,
-    //       first_name: "Vivek",
-    //       middle_name: null,
-    //       last_name: "Asthana",
-    //       activated_on: null,
-    //       signature_pic: null,
-    //       createdAt: "2023-01-05T08:13:56.000Z",
-    //       updatedAt: "2023-01-05T08:13:56.000Z",
-    //       deletedAt: null,
-    //       speciality: {
-    //         id: 2,
-    //         name: "Anatomy:",
-    //         description: null,
-    //         user_created: null,
-    //         createdAt: "2023-01-05T08:13:39.000Z",
-    //         updatedAt: "2023-01-05T08:13:39.000Z",
-    //         deletedAt: null,
-    //       },
-    //     },
-    //   },
-    //   details: {
-    //     shown: true,
-    //     symptoms:
-    //       '[{"symptomName":"Abdominal Distension","bodyParts":["Generalised","Head"],"duration":"1 Day"}]',
-    //     diagnosis: {
-    //       type: "2",
-    //       description: "Pain",
-    //     },
-    //     severity_id: 1,
-    //     condition_id: 1,
-    //     treatment_id: 1,
-    //     clinical_notes: "test clinical notes",
-    //   },
-    //   activated_on: null,
-    //   renew_on: null,
-    //   expired_on: null,
-    //   channel_id: "careplan-3-6-adherelive-demo",
-    //   appointment_ids: [],
-    //   medication_ids: [],
-    //   vital_ids: [],
-    //   diet_ids: [],
-    //   workout_ids: [],
-    //   secondary_doctor_user_role_ids: [],
-    // };
-
-    // const {
-    //   basic_info: { id: careplan_id = "" } = {},
-    //   details: {
-    //     clinical_notes = "",
-    //     follow_up_advise = "",
-    //     condition_id = null,
-    //     severity_id = null,
-    //     symptoms = null,
-    //     treatment_id = null,
-    //     diagnosis: { type = "2", description = "" } = {},
-    //   } = {},
-    // } = carePlanData || {};
-
-    // let symptomNames = [];
-    // let symptomData = [];
-    // try {
-    //   symptomData = JSON.parse(symptoms);
-    //   console.log("symptomData", symptomData);
-    //   if (!isEmpty(symptomData)) {
-    //     symptomData.forEach((ele) => {
-    //       symptomNames.push(ele.symptomName);
-    //     });
-    //   } else {
-    //     symptomData = [];
-    //   }
-    // } catch (e) {
-    //   symptomNames = symptoms;
-    //   let data = [];
-    //   let symptomObject = {
-    //     symptomName: symptoms,
-    //     bodyParts: [],
-    //     duration: "",
-    //   };
-    //   data.push(symptomObject);
-    //   symptomData = data;
-    // }
     if (nextProps.patientSearchData !== nextState.patientSearchData) {
       const {
         basic_info: {
@@ -279,16 +182,6 @@ class PatientDetailsDrawer extends Component {
         patientSearchData: nextProps.patientSearchData,
         patient_uid: uid,
         his_id: his_id,
-        // new changes for his
-        // severity: severity_id,
-        // condition: condition_id,
-        // treatment: treatment_id,
-        // clinical_notes,
-        // diagnosis_description: description,
-        // diagnosis_type: type,
-        // symptoms: symptomNames,
-        // finalSymptomData: symptomData,
-        // diagnosisType: type === "2" ? false : true,
       };
     }
     return null;
@@ -1401,13 +1294,7 @@ class PatientDetailsDrawer extends Component {
           )}
         </div>
 
-        {/* <CustomSymptoms
-          handleSymptomsChanges={this.handleSymptomsChanges}
-          handleSymptomSelect={this.handleSymptomSelect}
-          hendleSymptomDeselect={this.hendleSymptomDeselect}
-        /> */}
-        <CustomSymptomsEdit
-          symptoms={this.state.symptoms}
+        <CustomSymptoms
           handleSymptomsChanges={this.handleSymptomsChanges}
           handleSymptomSelect={this.handleSymptomSelect}
           hendleSymptomDeselect={this.hendleSymptomDeselect}
@@ -1467,16 +1354,11 @@ class PatientDetailsDrawer extends Component {
             </Select> */}
           </div>
         </div>
-        {/* <CustomDiagnosis
-          handleDiagnosisChanges={this.handleDiagnosisChanges}
-          onDiagnosisSearchHanlder={this.onDiagnosisSearchHanlder}
-        /> */}
-
-        <CustomDiagnosisEdit
-          diagnosis={String(this.state.diagnosis_description)}
+        <CustomDiagnosis
           handleDiagnosisChanges={this.handleDiagnosisChanges}
           onDiagnosisSearchHanlder={this.onDiagnosisSearchHanlder}
         />
+
         {/* <TextArea
           placeholder={this.formatMessage(messages.writeHere)}
           value={diagnosis_description}
