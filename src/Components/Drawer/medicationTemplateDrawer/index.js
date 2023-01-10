@@ -1074,6 +1074,36 @@ class TemplateDrawer extends Component {
     }
   };
 
+  translateHandler = async (translateFor) => {
+    const { googleTranslate } = this.props;
+    const { followup_advise, clinical_notes } = this.state;
+
+    let textToTranslate = "";
+
+    if (translateFor === "clinicalNotes") {
+      textToTranslate = clinical_notes;
+    } else if (translateFor === "followupAdvise") {
+      textToTranslate = followup_advise;
+    }
+
+    const response = await googleTranslate(textToTranslate);
+    const { data = {} } = response || {};
+    if (data) {
+      if (translateFor === "clinicalNotes") {
+        this.setState({
+          clinical_notes: data.translations[0].translatedText,
+        });
+      } else if (translateFor === "followupAdvise") {
+        this.setState({
+          followup_advise: data.translations[0].translatedText,
+        });
+      }
+    } else {
+      alert("Something went wrong");
+    }
+    // console.log("response", data.translations[0].translatedText);
+  };
+
   renderTemplateDetails = () => {
     const {
       medications = {},
@@ -1129,11 +1159,23 @@ class TemplateDrawer extends Component {
           {this.getCarePlanTemplateOptions()}
         </Select>
 
-        <div className="wp100 flex direction-row align-center ">
-          <div className="form-category-headings-ap mr0-I">
+        <div className="wp100 flex direction-row align-center justify-space-between">
+          <div className="flex direction-row form-category-headings-ap mr0-I">
             {this.formatMessage(messages.clinical_notes)}
+            <div className="star-red fs22">*</div>
           </div>
-          <div className="star-red fs22">*</div>
+
+          <Button
+            className="translate-btn"
+            type={"primary"}
+            onClick={() => this.translateHandler("clinicalNotes")}
+            style={{
+              backgroundColor: "#92d04f",
+              border: "none",
+            }}
+          >
+            Translate in Hindi
+          </Button>
         </div>
 
         <div className="wp100 flex align-center justify-space-between">
@@ -1147,11 +1189,23 @@ class TemplateDrawer extends Component {
           />
         </div>
 
-        <div className="wp100 flex direction-row align-center ">
-          <div className="form-category-headings-ap mr0-I">
+        <div className="wp100 flex direction-row align-center justify-space-between">
+          <div className="flex direction-row form-category-headings-ap mr0-I">
             {this.formatMessage(messages.followup_advise)}
+            <div className="star-red fs22">*</div>
           </div>
-          <div className="star-red fs22">*</div>
+
+          <Button
+            className="translate-btn"
+            type={"primary"}
+            onClick={() => this.translateHandler("followupAdvise")}
+            style={{
+              backgroundColor: "#92d04f",
+              border: "none",
+            }}
+          >
+            Translate in Hindi
+          </Button>
         </div>
         <div className="wp100 flex align-center justify-space-between">
           <TextArea

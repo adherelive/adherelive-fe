@@ -9,7 +9,11 @@ import { searchMedicine } from "../../modules/medicines";
 import { updatePatientAndCareplan } from "../../modules/doctors";
 import { getPatientDetailsById } from "../../modules/patients";
 // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
-import { getDiagnosisList, diagnosisSearch } from "../../modules/cdss";
+import {
+  getDiagnosisList,
+  diagnosisSearch,
+  googleTranslate,
+} from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
   const { auth } = state;
@@ -52,6 +56,8 @@ const mapDispatchToProps = (dispatch) => {
     // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
     getDiagnosisList: (payload) => dispatch(getDiagnosisList(payload)),
     diagnosisSearch: (payload) => dispatch(diagnosisSearch(payload)),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

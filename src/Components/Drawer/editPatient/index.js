@@ -675,6 +675,36 @@ class EditPatientDrawer extends Component {
     });
   };
 
+  translateHandler = async (translateFor) => {
+    const { googleTranslate } = this.props;
+    const { followup_advise, clinical_notes } = this.state;
+
+    let textToTranslate = "";
+
+    if (translateFor === "clinicalNotes") {
+      textToTranslate = clinical_notes;
+    } else if (translateFor === "followupAdvise") {
+      textToTranslate = followup_advise;
+    }
+
+    const response = await googleTranslate(textToTranslate);
+    const { data = {} } = response || {};
+    if (data) {
+      if (translateFor === "clinicalNotes") {
+        this.setState({
+          clinical_notes: data.translations[0].translatedText,
+        });
+      } else if (translateFor === "followupAdvise") {
+        this.setState({
+          followup_advise: data.translations[0].translatedText,
+        });
+      }
+    } else {
+      alert("Something went wrong");
+    }
+    // console.log("response", data.translations[0].translatedText);
+  };
+
   setPastedFollowupAdvise = (e) => {
     e.preventDefault();
     let pastedValue = "";
@@ -1236,7 +1266,21 @@ class EditPatientDrawer extends Component {
 
         <div className="form-headings-ap flex align-center justify-space-between mt10 mb10">
           {this.formatMessage(messages.clinicalNotes)}
+
           <div>
+            {isCollapse === "clinicalNotes" && (
+              <Button
+                className="translate-btn mr10"
+                type={"primary"}
+                onClick={() => this.translateHandler("clinicalNotes")}
+                style={{
+                  backgroundColor: "#92d04f",
+                  border: "none",
+                }}
+              >
+                Translate in Hindi
+              </Button>
+            )}
             {isCollapse === "clinicalNotes" ? (
               <MinusCircleOutlined onClick={() => this.collpaseHanlder("")} />
             ) : (
@@ -1246,6 +1290,7 @@ class EditPatientDrawer extends Component {
             )}
           </div>
         </div>
+
         {isCollapse === "clinicalNotes" && (
           <TextArea
             placeholder={this.formatMessage(messages.writeHere)}
@@ -1342,8 +1387,19 @@ class EditPatientDrawer extends Component {
             </Select>
           )}
 
-          <div className="form-headings-ap wp100 flex direction-row align-center ">
+          <div className="form-headings-ap wp100 flex direction-row align-center justify-space-between">
             {this.formatMessage(messages.followup_advise)}
+            <Button
+              className="translate-btn"
+              type={"primary"}
+              onClick={() => this.translateHandler("followupAdvise")}
+              style={{
+                backgroundColor: "#92d04f",
+                border: "none",
+              }}
+            >
+              Translate in Hindi
+            </Button>
           </div>
           <div className="wp100 flex align-center justify-space-between">
             <TextArea
