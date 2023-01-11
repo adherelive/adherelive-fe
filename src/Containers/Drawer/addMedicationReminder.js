@@ -15,6 +15,7 @@ import {
   getFavourites,
   removeFavourite,
 } from "../../modules/favouritesData/index";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
   const { auth } = state;
@@ -58,6 +59,8 @@ const mapDispatchToProps = (dispatch) => {
     getFavourites: ({ type }) => dispatch(getFavourites({ type })),
     removeFavourite: ({ typeId, type }) =>
       dispatch(removeFavourite({ typeId, type })),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

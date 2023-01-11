@@ -13,6 +13,7 @@ import {
   updateDietTotalCalories,
 } from "../../modules/diets";
 import { getPatientCarePlanDetails } from "../../modules/carePlans";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
   const { auth } = state;
@@ -61,6 +62,8 @@ const mapDispatchToProps = (dispatch) => {
           diet_id,
         })
       ),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 
