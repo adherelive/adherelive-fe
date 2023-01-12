@@ -36,6 +36,7 @@ import {
 } from "../../modules/carePlanTemplates";
 import { getPortions } from "../../modules/portions";
 // import { getWorkoutDetails } from "../../modules/workouts";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -202,6 +203,8 @@ const mapDispatchToProps = (dispatch) => {
     // AKSHAY NEW CODE IMPLEMENTATIONS
     getPortions: () => dispatch(getPortions()),
     // getWorkoutDetails: () => dispatch(getWorkoutDetails()),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

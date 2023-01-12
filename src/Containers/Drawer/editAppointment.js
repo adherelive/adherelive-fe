@@ -17,6 +17,7 @@ import {
   removeFavourite,
   removeFavouriteByRecordId,
 } from "../../modules/favouritesData/index";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
   const {
@@ -60,6 +61,8 @@ const mapDispatchToProps = (dispatch) => {
     getAppointmentsDetails: () => dispatch(getAppointmentsDetails()),
 
     // editAppointment: data => dispatch(editAppointment(data)),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

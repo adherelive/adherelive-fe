@@ -1069,6 +1069,31 @@ class TemplateDrawer extends Component {
     }
   };
 
+  // translateHandler = async () => {
+  //   const { appointments, appointmentKeys } = this.state;
+  //   const { googleTranslate } = this.props;
+  //   let appointmentData = appointments;
+  //   // for (let key in appointmentData) {
+  //   //   appointmentData[key].schedule_data.description = "test";
+  //   // }
+  //   for (let key in appointmentData) {
+  //     const response = await googleTranslate(
+  //       appointmentData[key].schedule_data.description
+  //     );
+  //     const { data = {} } = response || {};
+  //     if (data) {
+  //       appointmentData[key].schedule_data.description =
+  //         data.translations[0].translatedText;
+  //     }
+
+  //     // appointmentData[key].schedule_data.description = "test";
+  //   }
+
+  //   this.setState({
+  //     appointments: appointmentData,
+  //   });
+  // };
+
   renderTemplateDetails = () => {
     const {
       medications = {},
@@ -1370,6 +1395,7 @@ class TemplateDrawer extends Component {
           <div className="form-category-headings-ap align-self-start">
             {this.formatMessage(messages.appointments)}
           </div>
+          {/* <button onClick={this.translateHandler}>Translate</button> */}
           <div className="add-more" onClick={this.showAddAppointment}>
             {this.formatMessage(messages.addMore)}
           </div>

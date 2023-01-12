@@ -20,6 +20,7 @@ import {
   getDiagnosisList,
   addDiagnosis,
   diagnosisSearch,
+  googleTranslate,
 } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
@@ -62,6 +63,8 @@ const mapDispatchToProps = (dispatch) => {
     getDiagnosisList: (payload) => dispatch(getDiagnosisList(payload)),
     addDiagnosis: (payload) => dispatch(addDiagnosis(payload)),
     diagnosisSearch: (payload) => dispatch(diagnosisSearch(payload)),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

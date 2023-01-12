@@ -16,6 +16,7 @@ import {
   removeFavourite,
   removeFavouriteByRecordId,
 } from "../../modules/favouritesData/index";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
   const {
@@ -56,6 +57,8 @@ const mapDispatchToProps = (dispatch) => {
     removeFavourite: ({ typeId, type }) =>
       dispatch(removeFavourite({ typeId, type })),
     removeFavouriteRecord: (id) => dispatch(removeFavouriteByRecordId(id)),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

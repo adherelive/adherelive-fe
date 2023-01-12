@@ -7,6 +7,7 @@ import { DRAWER } from "../../constant";
 import { getPortions } from "../../modules/portions";
 import { addFoodItem } from "../../modules/foodItems";
 import { addDiet, getPatientPreferenceDietDetails } from "../../modules/diets";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
   const { auth } = state;
@@ -44,6 +45,8 @@ const mapDispatchToProps = (dispatch) => {
     addDiet: (data) => dispatch(addDiet(data)),
     getPatientPreferenceDietDetails: (patient_id) =>
       dispatch(getPatientPreferenceDietDetails(patient_id)),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 
