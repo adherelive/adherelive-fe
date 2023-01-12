@@ -27,23 +27,23 @@ class Formulation extends Component {
 
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
-  translateHandler = async () => {
-    const {
-      form: { setFieldsValue, getFieldValue },
-    } = this.props;
-    const currentValue = getFieldValue(FIELD_NAME);
-    const { googleTranslate } = this.props;
-    let textToTranslate = currentValue;
+  // translateHandler = async () => {
+  //   const {
+  //     form: { setFieldsValue, getFieldValue },
+  //   } = this.props;
+  //   const currentValue = getFieldValue(FIELD_NAME);
+  //   const { googleTranslate } = this.props;
+  //   let textToTranslate = currentValue;
 
-    const response = await googleTranslate(textToTranslate);
-    const { data = {} } = response || {};
-    if (data) {
-      setFieldsValue({ [FIELD_NAME]: data.translations[0].translatedText });
-    } else {
-      alert("Something went wrong");
-    }
-    // console.log("response", data.translations[0].translatedText);
-  };
+  //   const response = await googleTranslate(textToTranslate);
+  //   const { data = {} } = response || {};
+  //   if (data) {
+  //     setFieldsValue({ [FIELD_NAME]: data.translations[0].translatedText });
+  //   } else {
+  //     alert("Something went wrong");
+  //   }
+  //   // console.log("response", data.translations[0].translatedText);
+  // };
 
   render() {
     const { form } = this.props;
@@ -54,12 +54,12 @@ class Formulation extends Component {
       <div className="mb20 select-days-form-content">
         <span className="flex form-label justify-space-between">
           {this.formatMessage(messages.specialInstruction)}
-          <p
+          {/* <p
             onClick={() => this.translateHandler()}
             className="translate-text pointer mr10"
           >
             Translate in Hindi
-          </p>
+          </p> */}
         </span>
 
         <FormItem validateStatus={error ? "error" : ""} help={error || ""}>
