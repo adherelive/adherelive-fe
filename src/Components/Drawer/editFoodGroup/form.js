@@ -565,6 +565,24 @@ class EditFoodGroupForm extends Component {
     }
   };
 
+  translateHandler = async () => {
+    const {
+      form: { setFieldsValue, getFieldValue },
+    } = this.props;
+    const currentValue = getFieldValue(NOTES);
+    const { googleTranslate } = this.props;
+    let textToTranslate = currentValue;
+
+    const response = await googleTranslate(textToTranslate);
+    const { data = {} } = response || {};
+    if (data) {
+      setFieldsValue({ [NOTES]: data.translations[0].translatedText });
+    } else {
+      alert("Something went wrong");
+    }
+    // console.log("response", data.translations[0].translatedText);
+  };
+
   render() {
     const {
       form: { getFieldDecorator, isFieldTouched, getFieldError },
@@ -778,8 +796,18 @@ class EditFoodGroupForm extends Component {
           })(<Input type="number" className="mb20" disabled={!editable} />)}
         </FormItem>
         {/* note */}
+
+        <span className="flex form-label  justify-space-between">
+          {this.formatMessage(messages.note)}
+          <p
+            onClick={() => this.translateHandler()}
+            className="translate-text pointer mr10"
+          >
+            Translate in Hindi
+          </p>
+        </span>
         <FormItem
-          label={formatMessage(messages.note)}
+          // label={formatMessage(messages.note)}
           className="flex-grow-1 mt-4 "
         >
           {getFieldDecorator(NOTES, {

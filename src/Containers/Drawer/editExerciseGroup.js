@@ -10,6 +10,7 @@ import {
 } from "../../modules/exercises";
 import { searchExercise } from "../../modules/searchedExercises";
 import { clearLatestCreatedExercise } from "../../modules/latestCreatedExercise";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
   const { auth } = state;
@@ -54,6 +55,8 @@ const mapDispatchToProps = (dispatch) => {
     storeExerciseAndDetails: (data) => dispatch(storeExerciseAndDetails(data)),
     clearLatestCreatedExercise: () => dispatch(clearLatestCreatedExercise()),
     uploadExerciseContent: (data) => dispatch(uploadExerciseContent(data)),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 
