@@ -136,29 +136,37 @@ export const googleTranslate = (textToConvert) => {
   };
 };
 
-export const googleTranslateMultipleText = (textToConvert) => {
+export const googleTranslateMultipleText = (textToConvertArray) => {
   let fromLang = "en";
   let toLang = "hi"; // translate to norwegian
-  let text = textToConvert;
+  let text = textToConvertArray;
+
+  let payload = {
+    q: textToConvertArray,
+    target: toLang,
+  };
 
   const API_KEY = "AIzaSyBo9v7KZ_3LGCVVM-j0t8VzRUYboFafhSY";
 
   let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
-  url += "&q=" + encodeURI(text);
-  url += `&source=${fromLang}`;
-  url += `&target=${toLang}`;
+  // url += "&q=" + encodeURI(text);
+  // url += `&source=${fromLang}`;
+  // url += `&target=${toLang}`;
 
   let response = {};
   return async (dispatch) => {
     try {
       response = await doRequest({
-        method: REQUEST_TYPE.GET,
+        method: REQUEST_TYPE.POST,
         url: url,
+        data: payload,
       });
 
       const { status, payload: { data, message = "" } = {} } = response || {};
+
+      console.log("response", response, status);
     } catch (error) {
-      console.log("GET CDSS DIAGNOSIS SEARCH catch error -> ", error);
+      console.log("GET TRANSLATE CATCH ERROR -> ", error);
     }
     return response;
   };

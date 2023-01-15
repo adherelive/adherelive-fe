@@ -1079,7 +1079,7 @@ class TemplateDrawer extends Component {
       vitals,
       medications,
     } = this.state;
-    const { googleTranslate } = this.props;
+    const { googleTranslate, googleTranslateMultipleText } = this.props;
 
     if (translateType === "clinicalNotes") {
       const response = await googleTranslate(clinical_notes);
@@ -1100,82 +1100,205 @@ class TemplateDrawer extends Component {
     }
 
     if (translateType === "appointment") {
+      // let appointmentData = appointments;
+      // for (let key in appointmentData) {
+      //   const response = await googleTranslate(
+      //     appointmentData[key].schedule_data.description
+      //   );
+      //   const { data = {} } = response || {};
+      //   if (data) {
+      //     appointmentData[key].schedule_data.description =
+      //       data.translations[0].translatedText;
+      //   }
+      // }
+
+      // this.setState({
+      //   appointments: appointmentData,
+      // });
+      //BY USING MULTIPLE TRANSTAE API
       let appointmentData = appointments;
+      let operationData = [];
+      let textToConvertArray = [];
       for (let key in appointmentData) {
-        const response = await googleTranslate(
-          appointmentData[key].schedule_data.description
-        );
-        const { data = {} } = response || {};
-        if (data) {
+        let { schedule_data: { description = "" } = {} } = appointmentData[key];
+        operationData.push({ key: key, notes: description });
+        textToConvertArray.push(description);
+      }
+      const response = await googleTranslateMultipleText(textToConvertArray);
+      const { data = {} } = response || {};
+      if (data) {
+        let translatedArray = data.translations;
+        operationData.map((data, index) => {
+          data.notes = translatedArray[index].translatedText;
+        });
+        for (let key in appointmentData) {
+          let filteredDiet = operationData.filter((ele) => ele.key === key);
           appointmentData[key].schedule_data.description =
-            data.translations[0].translatedText;
+            filteredDiet[0].notes;
         }
+        this.setState({
+          appointments: appointmentData,
+        });
       }
-
-      this.setState({
-        appointments: appointmentData,
-      });
     } else if (translateType === "medication") {
-      let medicationData = medications;
-      for (let key in medicationData) {
-        let { schedule_data: { description = "" } = {} } = medications[key];
-        const response = await googleTranslate(description);
-        const { data = {} } = response || {};
-        if (data) {
-          medicationData[key].schedule_data.description =
-            data.translations[0].translatedText;
-        }
-      }
+      // let medicationData = medications;
+      // for (let key in medicationData) {
+      //   let { schedule_data: { description = "" } = {} } = medications[key];
+      //   const response = await googleTranslate(description);
+      //   const { data = {} } = response || {};
+      //   if (data) {
+      //     medicationData[key].schedule_data.description =
+      //       data.translations[0].translatedText;
+      //   }
+      // }
 
-      this.setState({
-        medications: medicationData,
-      });
+      // this.setState({
+      //   medications: medicationData,
+      // });
+      //BY USING MULTIPLE TRANSTAE API
+      let medicationData = medications;
+      let operationData = [];
+      let textToConvertArray = [];
+      for (let key in medicationData) {
+        let { schedule_data: { description = "" } = {} } = medicationData[key];
+        operationData.push({ key: key, notes: description });
+        textToConvertArray.push(description);
+      }
+      console.log("textToConvertArray", textToConvertArray);
+      console.log("operationData", operationData);
+      const response = await googleTranslateMultipleText(textToConvertArray);
+      const { data = {} } = response || {};
+      if (!isEmpty(data)) {
+        let translatedArray = data.translations;
+        operationData.map((data, index) => {
+          data.notes = translatedArray[index].translatedText;
+        });
+        for (let key in medicationData) {
+          let filteredDiet = operationData.filter((ele) => ele.key === key);
+          medicationData[key].schedule_data.description = filteredDiet[0].notes;
+        }
+        this.setState({
+          medications: medicationData,
+        });
+      }
     } else if (translateType === "vital") {
+      // let vitalData = vitals;
+      // for (let key in vitalData) {
+      //   const { description = "" } = vitalData[key];
+      //   const response = await googleTranslate(description);
+      //   const { data = {} } = response || {};
+      //   if (data) {
+      //     vitalData[key].description = data.translations[0].translatedText;
+      //   }
+      // }
+
+      // this.setState({
+      //   vitals: vitalData,
+      // });
+      //BY USING MULTIPLE TRANSTAE API
       let vitalData = vitals;
+      let operationData = [];
+      let textToConvertArray = [];
       for (let key in vitalData) {
         const { description = "" } = vitalData[key];
-        const response = await googleTranslate(description);
-        const { data = {} } = response || {};
-        if (data) {
-          vitalData[key].description = data.translations[0].translatedText;
-        }
+        operationData.push({ key: key, notes: description });
+        textToConvertArray.push(description);
       }
-
-      this.setState({
-        vitals: vitalData,
-      });
+      const response = await googleTranslateMultipleText(textToConvertArray);
+      const { data = {} } = response || {};
+      if (data) {
+        let translatedArray = data.translations;
+        operationData.map((data, index) => {
+          data.notes = translatedArray[index].translatedText;
+        });
+        for (let key in vitalData) {
+          let filteredDiet = operationData.filter((ele) => ele.key === key);
+          vitalData[key].description = filteredDiet[0].notes;
+        }
+        this.setState({
+          vitals: vitalData,
+        });
+      }
     } else if (translateType === "workout") {
+      // let workoutData = workouts;
+      // for (let key in workoutData) {
+      //   const { details: { not_to_do = "" } = {} } = workoutData[key] || {};
+      //   const response = await googleTranslate(not_to_do);
+      //   const { data = {} } = response || {};
+      //   if (data) {
+      //     workoutData[key].details.not_to_do =
+      //       data.translations[0].translatedText;
+      //   }
+      // }
+
+      // this.setState({
+      //   workouts: workoutData,
+      // });
+      //BY USING MULTIPLE TRANSTAE API
       let workoutData = workouts;
+      let operationData = [];
+      let textToConvertArray = [];
       for (let key in workoutData) {
         const { details: { not_to_do = "" } = {} } = workoutData[key] || {};
-        const response = await googleTranslate(not_to_do);
-        const { data = {} } = response || {};
-        if (data) {
-          workoutData[key].details.not_to_do =
-            data.translations[0].translatedText;
-        }
+        operationData.push({ key: key, notes: not_to_do });
+        textToConvertArray.push(not_to_do);
       }
-
-      this.setState({
-        workouts: workoutData,
-      });
+      const response = await googleTranslateMultipleText(textToConvertArray);
+      const { data = {} } = response || {};
+      if (data) {
+        let translatedArray = data.translations;
+        operationData.map((data, index) => {
+          data.notes = translatedArray[index].translatedText;
+        });
+        for (let key in workoutData) {
+          let filteredDiet = operationData.filter((ele) => ele.key === key);
+          workoutData[key].details.not_to_do = filteredDiet[0].notes;
+        }
+        this.setState({
+          workouts: workoutData,
+        });
+      }
     } else if (translateType === "diet") {
+      //BY USING SINGLE TRANSTAE API
+      // let dietData = diets;
+      // for (let key in dietData) {
+      //   const { details: { not_to_do = "" } = {} } = diets[key] || {};
+      //   const response = await googleTranslate(not_to_do);
+      //   const { data = {} } = response || {};
+      //   if (data) {
+      //     dietData[key].details.not_to_do = data.translations[0].translatedText;
+      //   }
+      // }
+
+      // this.setState({
+      //   diets: dietData,
+      // });
+
+      //BY USING MULTIPLE TRANSTAE API
       let dietData = diets;
+      let operationData = [];
+      let textToConvertArray = [];
       for (let key in dietData) {
-        const { details: { not_to_do = "" } = {} } = diets[key] || {};
-        const response = await googleTranslate(not_to_do);
-        const { data = {} } = response || {};
-        if (data) {
-          dietData[key].details.not_to_do = data.translations[0].translatedText;
-        }
+        const { details: { not_to_do = "" } = {} } = dietData[key] || {};
+        operationData.push({ key: key, notes: not_to_do });
+        textToConvertArray.push(not_to_do);
       }
-
-      this.setState({
-        diets: dietData,
-      });
+      const response = await googleTranslateMultipleText(textToConvertArray);
+      const { data = {} } = response || {};
+      if (data) {
+        let translatedArray = data.translations;
+        operationData.map((data, index) => {
+          data.notes = translatedArray[index].translatedText;
+        });
+        for (let key in dietData) {
+          let filteredDiet = operationData.filter((ele) => ele.key === key);
+          dietData[key].details.not_to_do = filteredDiet[0].notes;
+        }
+        this.setState({
+          diets: dietData,
+        });
+      }
     }
-
-    console.log("medications", medications);
   };
 
   renderTemplateDetails = () => {
@@ -1289,12 +1412,15 @@ class TemplateDrawer extends Component {
             {this.formatMessage(messages.medications)}
           </div>
           <div className="flex">
-            <p
-              onClick={() => this.translateHandler("medication")}
-              className="translate-text pointer mr10"
-            >
-              Translate in Hindi
-            </p>
+            {medicationKeys.length > 0 && (
+              <p
+                onClick={() => this.translateHandler("medication")}
+                className="translate-text pointer mr10"
+              >
+                Translate in Hindi
+              </p>
+            )}
+
             <div className=" add-more" onClick={this.showAddMedication}>
               {this.formatMessage(messages.addMore)}
             </div>
@@ -1507,12 +1633,15 @@ class TemplateDrawer extends Component {
           </div>
 
           <div className="flex">
-            <p
-              onClick={() => this.translateHandler("appointment")}
-              className="translate-text pointer mr10"
-            >
-              Translate in Hindi
-            </p>
+            {appointmentKeys.length > 0 && (
+              <p
+                onClick={() => this.translateHandler("appointment")}
+                className="translate-text pointer mr10"
+              >
+                Translate in Hindi
+              </p>
+            )}
+
             <div className=" add-more" onClick={this.showAddAppointment}>
               {this.formatMessage(messages.addMore)}
             </div>
@@ -1599,12 +1728,15 @@ class TemplateDrawer extends Component {
             {this.formatMessage(messages.actions)}
           </div>
           <div className="flex">
-            <p
-              onClick={() => this.translateHandler("vital")}
-              className="translate-text pointer mr10"
-            >
-              Translate in Hindi
-            </p>
+            {vitalKeys.length > 0 && (
+              <p
+                onClick={() => this.translateHandler("vital")}
+                className="translate-text pointer mr10"
+              >
+                Translate in Hindi
+              </p>
+            )}
+
             <div className="flex add-more" onClick={this.showAddVital}>
               {this.formatMessage(messages.addMore)}
             </div>
@@ -1665,12 +1797,15 @@ class TemplateDrawer extends Component {
             {this.formatMessage(messages.diets)}
           </div>
           <div className="flex">
-            <p
-              onClick={() => this.translateHandler("diet")}
-              className="translate-text pointer mr10"
-            >
-              Translate in Hindi
-            </p>
+            {dietKeys.length > 0 && (
+              <p
+                onClick={() => this.translateHandler("diet")}
+                className="translate-text pointer mr10"
+              >
+                Translate in Hindi
+              </p>
+            )}
+
             <div className="flex add-more" onClick={this.showAddDiet}>
               {this.formatMessage(messages.addMore)}
             </div>
@@ -1734,12 +1869,15 @@ class TemplateDrawer extends Component {
               {this.formatMessage(messages.workouts)}
             </div>
             <div className="flex">
-              <p
-                onClick={() => this.translateHandler("workout")}
-                className="translate-text pointer mr10"
-              >
-                Translate in Hindi
-              </p>
+              {workoutKeys.length > 0 && (
+                <p
+                  onClick={() => this.translateHandler("workout")}
+                  className="translate-text pointer mr10"
+                >
+                  Translate in Hindi
+                </p>
+              )}
+
               <div className="flex add-more" onClick={this.showAddWorkout}>
                 {this.formatMessage(messages.addMore)}
               </div>
