@@ -22,6 +22,7 @@ import message from "antd/es/message";
 // AKSHAY NEW COE FOR ANTD V4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
+import isEmpty from "../../../Helper/is-empty";
 
 const { Item: FormItem } = Form;
 const { Option, OptGroup } = Select;
@@ -908,7 +909,7 @@ class EditAppointmentForm extends Component {
     let pId = patientId ? patientId.toString() : patient_id;
     let {
       basic_info: {
-        description,
+        // description,
         start_date,
         start_time,
         end_time,
@@ -925,6 +926,14 @@ class EditAppointmentForm extends Component {
       provider_name = "",
     } = appointments[appointment_id] || {};
     provider_id = provider_name ? provider_name : provider_id;
+
+    let description = "";
+    if (
+      !isEmpty(appointments[appointment_id]) &&
+      !isEmpty(appointments[appointment_id].basic_info.details.description)
+    ) {
+      description = appointments[appointment_id].basic_info.details.description;
+    }
 
     if (Object.values(carePlan).length) {
       let { treatment_id: newTreatment = "" } = carePlan;

@@ -3,6 +3,7 @@ import { Form } from "antd";
 import { injectIntl } from "react-intl";
 import TextArea from "antd/es/input/TextArea";
 import messages from "../message";
+import isEmpty from "../../../../Helper/is-empty";
 
 const FIELD_NAME = "special_instruction";
 
@@ -55,8 +56,19 @@ class Formulation extends Component {
     const { getFieldDecorator, getFieldError, isFieldTouched } = form;
     const error = isFieldTouched(FIELD_NAME) && getFieldError(FIELD_NAME);
 
-    let { basic_info: { description = "" } = {} } =
-      medications[medication_id] || {};
+    // let { basic_info: { description = "" } = {} } =
+    //   medications[medication_id] || {};
+
+    // let { basic_info: { details: { description = "" } } = {} } =
+    //   medications[medication_id] || {};
+
+    let description = "";
+    if (
+      !isEmpty(medications[medication_id]) &&
+      !isEmpty(medications[medication_id].basic_info.details.description)
+    ) {
+      description = medications[medication_id].basic_info.details.description;
+    }
 
     const { schedule_data: { description: des = "" } = {} } = medicationData;
 
