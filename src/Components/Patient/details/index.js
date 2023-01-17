@@ -1214,11 +1214,16 @@ class PatientDetails extends Component {
           start_time,
           end_time,
           // description = "",
-          details: { description = "" },
+          details = {},
         } = {},
         organizer: { id: organizer_id, name = "" } = {},
         active_event_id = null,
       } = appointments[id] || {};
+
+      let description = "";
+      if (!isEmpty(details.description)) {
+        description = details.description;
+      }
       // const { basic_info: { user_name = "", full_name } = {} } = users[organizer_id] || {};
 
       // console.log("1230990830912 users", {organizer_id, users, full_name});
