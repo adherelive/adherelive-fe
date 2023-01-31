@@ -36,7 +36,10 @@ import {
 } from "../../modules/carePlanTemplates";
 import { getPortions } from "../../modules/portions";
 // import { getWorkoutDetails } from "../../modules/workouts";
-import { googleTranslate } from "../../modules/cdss";
+import {
+  googleTranslate,
+  googleTranslateMultipleText,
+} from "../../modules/cdss";
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -205,6 +208,8 @@ const mapDispatchToProps = (dispatch) => {
     // getWorkoutDetails: () => dispatch(getWorkoutDetails()),
     googleTranslate: (textToConvert) =>
       dispatch(googleTranslate(textToConvert)),
+    googleTranslateMultipleText: (textToConvertArray) =>
+      dispatch(googleTranslateMultipleText(textToConvertArray)),
   };
 };
 

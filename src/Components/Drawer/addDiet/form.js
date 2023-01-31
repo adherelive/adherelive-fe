@@ -76,23 +76,23 @@ class DietFieldsFrom extends Component {
     validateFields();
   };
 
-  // translateHandler = async () => {
-  //   const {
-  //     form: { setFieldsValue, getFieldValue },
-  //   } = this.props;
-  //   const currentValue = getFieldValue(WHAT_NOT_TO_DO);
-  //   const { googleTranslate } = this.props;
-  //   let textToTranslate = currentValue;
+  translateHandler = async () => {
+    const {
+      form: { setFieldsValue, getFieldValue },
+    } = this.props;
+    const currentValue = getFieldValue(WHAT_NOT_TO_DO);
+    const { googleTranslate } = this.props;
+    let textToTranslate = currentValue;
 
-  //   const response = await googleTranslate(textToTranslate);
-  //   const { data = {} } = response || {};
-  //   if (data) {
-  //     setFieldsValue({ [WHAT_NOT_TO_DO]: data.translations[0].translatedText });
-  //   } else {
-  //     alert("Something went wrong");
-  //   }
-  //   // console.log("response", data.translations[0].translatedText);
-  // };
+    const response = await googleTranslate(textToTranslate);
+    const { data = {} } = response || {};
+    if (data) {
+      setFieldsValue({ [WHAT_NOT_TO_DO]: data.translations[0].translatedText });
+    } else {
+      alert("Something went wrong");
+    }
+    // console.log("response", data.translations[0].translatedText);
+  };
 
   render() {
     const {
@@ -223,12 +223,12 @@ class DietFieldsFrom extends Component {
         </div>
         <span className="flex form-label  justify-space-between">
           {this.formatMessage(messages.what_not_to_do)}
-          {/* <p
+          <p
             onClick={() => this.translateHandler()}
             className="translate-text pointer mr10"
           >
             Translate in Hindi
-          </p> */}
+          </p>
         </span>
         <FormItem
           // label={formatMessage(messages.what_not_to_do)}

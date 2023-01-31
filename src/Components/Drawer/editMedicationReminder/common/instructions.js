@@ -3,6 +3,7 @@ import { Form } from "antd";
 import { injectIntl } from "react-intl";
 import TextArea from "antd/es/input/TextArea";
 import messages from "../message";
+import isEmpty from "../../../../Helper/is-empty";
 
 const FIELD_NAME = "special_instruction";
 
@@ -27,23 +28,23 @@ class Formulation extends Component {
 
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
-  // translateHandler = async () => {
-  //   const {
-  //     form: { setFieldsValue, getFieldValue },
-  //   } = this.props;
-  //   const currentValue = getFieldValue(FIELD_NAME);
-  //   const { googleTranslate } = this.props;
-  //   let textToTranslate = currentValue;
+  translateHandler = async () => {
+    const {
+      form: { setFieldsValue, getFieldValue },
+    } = this.props;
+    const currentValue = getFieldValue(FIELD_NAME);
+    const { googleTranslate } = this.props;
+    let textToTranslate = currentValue;
 
-  //   const response = await googleTranslate(textToTranslate);
-  //   const { data = {} } = response || {};
-  //   if (data) {
-  //     setFieldsValue({ [FIELD_NAME]: data.translations[0].translatedText });
-  //   } else {
-  //     alert("Something went wrong");
-  //   }
-  //   // console.log("response", data.translations[0].translatedText);
-  // };
+    const response = await googleTranslate(textToTranslate);
+    const { data = {} } = response || {};
+    if (data) {
+      setFieldsValue({ [FIELD_NAME]: data.translations[0].translatedText });
+    } else {
+      alert("Something went wrong");
+    }
+    // console.log("response", data.translations[0].translatedText);
+  };
 
   render() {
     const {
@@ -55,8 +56,19 @@ class Formulation extends Component {
     const { getFieldDecorator, getFieldError, isFieldTouched } = form;
     const error = isFieldTouched(FIELD_NAME) && getFieldError(FIELD_NAME);
 
-    let { basic_info: { description = "" } = {} } =
-      medications[medication_id] || {};
+    // let { basic_info: { description = "" } = {} } =
+    //   medications[medication_id] || {};
+
+    // let { basic_info: { details: { description = "" } } = {} } =
+    //   medications[medication_id] || {};
+
+    let description = "";
+    if (
+      !isEmpty(medications[medication_id]) &&
+      !isEmpty(medications[medication_id].basic_info.details.description)
+    ) {
+      description = medications[medication_id].basic_info.details.description;
+    }
 
     const { schedule_data: { description: des = "" } = {} } = medicationData;
 
@@ -68,12 +80,12 @@ class Formulation extends Component {
       <div className="mb20 select-days-form-content">
         <span className="flex form-label mb-4 justify-space-between">
           {this.formatMessage(messages.specialInstruction)}
-          {/* <p
+          <p
             onClick={() => this.translateHandler()}
             className="translate-text pointer mr10"
           >
             Translate in Hindi
-          </p> */}
+          </p>
         </span>
 
         <FormItem validateStatus={error ? "error" : ""} help={error || ""}>
