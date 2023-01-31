@@ -31,7 +31,9 @@ class Formulation extends Component {
   translateHandler = async () => {
     const {
       form: { setFieldsValue, getFieldValue },
+      enableSubmit,
     } = this.props;
+
     const currentValue = getFieldValue(FIELD_NAME);
     const { googleTranslate } = this.props;
     let textToTranslate = currentValue;
@@ -43,7 +45,16 @@ class Formulation extends Component {
     } else {
       alert("Something went wrong");
     }
+    enableSubmit();
     // console.log("response", data.translations[0].translatedText);
+  };
+
+  handleChangeInstruction = () => {
+    const {
+      form: { setFieldsValue, getFieldValue },
+      enableSubmit,
+    } = this.props;
+    enableSubmit();
   };
 
   render() {
@@ -92,6 +103,7 @@ class Formulation extends Component {
               placeholder={this.formatMessage(messages.enterInstruction)}
               rows={4}
               disabled={canViewDetails}
+              onChange={this.handleChangeInstruction}
             />
           )}
         </FormItem>
