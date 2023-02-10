@@ -1332,6 +1332,8 @@ class TemplateDrawer extends Component {
     this.vitalTranslate();
     this.dietTranslate();
     this.workoutTranslate();
+    this.workoutExcerciseItemTranslate();
+    this.dietFoodItemTranslate();
   };
 
   medicationTranslate = async () => {
@@ -1474,6 +1476,172 @@ class TemplateDrawer extends Component {
         workouts: workoutData,
       });
     }
+  };
+
+  dietFoodItemTranslate = async () => {
+    const { diets } = this.state;
+    const { googleTranslateMultipleText, googleTranslate } = this.props;
+    let dietData = diets;
+    for (let key in dietData) {
+      let { diet_food_groups = "" } = dietData[key].details;
+
+      for (let foodKey in diet_food_groups) {
+        // console.log("diet_food_groups[foodKey]", diet_food_groups[foodKey]);
+
+        let foodGroup = diet_food_groups[foodKey];
+        let operationData = [];
+        let textToConvertArray = [];
+
+        for (let key in foodGroup) {
+          const { notes = "", food_item_detail_id = "" } = foodGroup[key] || {};
+          console.log(foodGroup[key]);
+          operationData.push({ key: key, notes: notes });
+          textToConvertArray.push(notes);
+        }
+
+        const response = await googleTranslateMultipleText(textToConvertArray);
+        const { data = {} } = response || {};
+        if (data) {
+          let translatedArray = data.translations;
+          operationData.map((data, index) => {
+            data.notes = translatedArray[index].translatedText;
+          });
+          for (let key in foodGroup) {
+            let filteredFoodItem = operationData.filter(
+              (ele) => ele.key === key
+            );
+            foodGroup[key].notes = filteredFoodItem[0].notes;
+          }
+          // console.log("foodGroupOne", foodGroupOne);
+        }
+      }
+
+      // if (diet_food_groups[1] !== undefined) {
+      //   let foodGroupOne = diet_food_groups[1];
+      //   let operationData = [];
+      //   let textToConvertArray = [];
+
+      //   for (let key in foodGroupOne) {
+      //     const { notes = "", food_item_detail_id = "" } =
+      //       foodGroupOne[key] || {};
+      //     console.log(foodGroupOne[key]);
+      //     operationData.push({ key: key, notes: notes });
+      //     textToConvertArray.push(notes);
+      //   }
+
+      //   const response = await googleTranslateMultipleText(textToConvertArray);
+      //   const { data = {} } = response || {};
+      //   if (data) {
+      //     let translatedArray = data.translations;
+      //     operationData.map((data, index) => {
+      //       data.notes = translatedArray[index].translatedText;
+      //     });
+      //     for (let key in foodGroupOne) {
+      //       let filteredFoodItem = operationData.filter(
+      //         (ele) => ele.key === key
+      //       );
+      //       foodGroupOne[key].notes = filteredFoodItem[0].notes;
+      //     }
+      //     console.log("foodGroupOne", foodGroupOne);
+      //   }
+      // }
+
+      // if (diet_food_groups[2] !== undefined) {
+      //   let foodGroupOne = diet_food_groups[2];
+      //   let operationData = [];
+      //   let textToConvertArray = [];
+
+      //   for (let key in foodGroupOne) {
+      //     const { notes = "", food_item_detail_id = "" } =
+      //       foodGroupOne[key] || {};
+      //     console.log(foodGroupOne[key]);
+      //     operationData.push({ key: key, notes: notes });
+      //     textToConvertArray.push(notes);
+      //   }
+
+      //   const response = await googleTranslateMultipleText(textToConvertArray);
+      //   const { data = {} } = response || {};
+      //   if (data) {
+      //     let translatedArray = data.translations;
+      //     operationData.map((data, index) => {
+      //       data.notes = translatedArray[index].translatedText;
+      //     });
+      //     for (let key in foodGroupOne) {
+      //       let filteredFoodItem = operationData.filter(
+      //         (ele) => ele.key === key
+      //       );
+      //       foodGroupOne[key].notes = filteredFoodItem[0].notes;
+      //     }
+      //     console.log("foodGroupOne", foodGroupOne);
+      //   }
+      // }
+    }
+  };
+
+  workoutExcerciseItemTranslate = async () => {
+    const { workouts } = this.state;
+    const { googleTranslateMultipleText } = this.props;
+    let workoutData = workouts;
+
+    console.log("workoutData", workoutData);
+
+    for (let key in workoutData) {
+      let { workout_exercise_groups = "" } = workoutData[key].details;
+
+      let exerciseGroup = workout_exercise_groups;
+      let operationData = [];
+      let textToConvertArray = [];
+
+      // console.log("workout_exercise_groups", workout_exercise_groups);
+      for (let exerciseKey in exerciseGroup) {
+        const { notes = "" } = exerciseGroup[exerciseKey] || {};
+        operationData.push({ key: exerciseKey, notes: notes });
+        textToConvertArray.push(notes);
+      }
+
+      console.log("operationData", operationData);
+      console.log("textToConvertArray", textToConvertArray);
+
+      const response = await googleTranslateMultipleText(textToConvertArray);
+      const { data = {} } = response || {};
+      if (data) {
+        let translatedArray = data.translations;
+        operationData.map((data, index) => {
+          data.notes = translatedArray[index].translatedText;
+        });
+        console.log("operationData", operationData);
+        for (let key in exerciseGroup) {
+          let filteredExerciseItem = operationData.filter(
+            (ele) => ele.key === key
+          );
+          exerciseGroup[key].notes = filteredExerciseItem[0].notes;
+        }
+        console.log("exerciseGroup", exerciseGroup);
+      }
+    }
+
+    // let operationData = [];
+    // let textToConvertArray = [];
+    // for (let key in workoutData) {
+    //   const { details: { not_to_do = "" } = {} } = workoutData[key] || {};
+    //   operationData.push({ key: key, notes: not_to_do });
+    //   textToConvertArray.push(not_to_do);
+    // }
+    // const response = await googleTranslateMultipleText(textToConvertArray);
+    // const { data = {} } = response || {};
+    // if (data) {
+    //   let translatedArray = data.translations;
+    //   operationData.map((data, index) => {
+    //     data.notes = translatedArray[index].translatedText;
+    //   });
+    //   for (let key in workoutData) {
+    //     let filteredDiet = operationData.filter((ele) => ele.key === key);
+    //     workoutData[key].details.not_to_do = filteredDiet[0].notes;
+    //   }
+    //   this.setState({
+    //     workouts: workoutData,
+    //   });
+    // }
   };
 
   renderTemplateDetails = () => {
@@ -1974,7 +2142,7 @@ class TemplateDrawer extends Component {
           <div className="flex">
             {/* {dietKeys.length > 0 && (
               <p
-                onClick={() => this.translateHandler("diet")}
+                onClick={this.dietFoodItemTranslate}
                 className="translate-text pointer mr10"
               >
                 Translate in Hindi
@@ -2046,7 +2214,7 @@ class TemplateDrawer extends Component {
             <div className="flex">
               {/* {workoutKeys.length > 0 && (
                 <p
-                  onClick={() => this.translateHandler("workout")}
+                  onClick={this.workoutExcerciseItemTranslate}
                   className="translate-text pointer mr10"
                 >
                   Translate in Hindi
