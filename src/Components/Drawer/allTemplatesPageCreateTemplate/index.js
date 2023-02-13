@@ -169,6 +169,9 @@ class TemplatePageCreateDrawer extends Component {
   };
 
   showAddDiet = () => {
+    const { getPortions } = this.props;
+    const response = getPortions();
+
     this.setState({
       showAddDietInner: true,
       isDietVisible: true,

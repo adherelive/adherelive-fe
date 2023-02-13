@@ -8,7 +8,7 @@ import {
   updateCareplanTemplate,
 } from "../../modules/carePlanTemplates";
 import { getAllTemplatesForDoctor } from "../../modules/carePlanTemplates";
-
+import { getPortions } from "../../modules/portions";
 // import { createReminder, updateReminder } from "../../modules/reminder"; // write to add to database
 const mapStateToProps = (state) => {
   const {
@@ -74,6 +74,7 @@ const mapDispatchToProps = (dispatch) => {
     updateCareplanTemplate: (id, payload) =>
       dispatch(updateCareplanTemplate(id, payload)),
     getAllTemplatesForDoctor: () => dispatch(getAllTemplatesForDoctor()),
+    getPortions: () => dispatch(getPortions()),
   };
 };
 
