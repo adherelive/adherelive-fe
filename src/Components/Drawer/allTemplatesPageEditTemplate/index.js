@@ -427,7 +427,10 @@ class TemplatePageCreateDrawer extends Component {
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
   showInnerForm = (innerFormType, innerFormKey) => () => {
+    const { getPortions } = this.props;
+
     if (innerFormType === EVENT_TYPE.DIET) {
+      const response = getPortions();
       this.setState({ isDietVisible: true });
     } else if (innerFormType === EVENT_TYPE.WORKOUT) {
       this.setState({ isWorkoutVisible: true });
@@ -521,6 +524,8 @@ class TemplatePageCreateDrawer extends Component {
   };
 
   showAddDiet = () => {
+    const { getPortions } = this.props;
+    const response = getPortions();
     this.setState({
       showAddDietInner: true,
       isDietVisible: true,
