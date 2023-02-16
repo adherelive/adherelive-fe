@@ -67,7 +67,7 @@ class AddMedicine extends Component {
             ? addAdminMedicine
             : addNewMedicine;
 
-        if (name === "" || type === "") {
+        if (name === "" || type === "" || generic_name === "") {
           message.error(formatMessage(messages.fillFieldsError));
           return;
         }

@@ -16,6 +16,7 @@ import {
   removeFavourite,
   removeFavouriteByRecordId,
 } from "../../modules/favouritesData/index";
+import { googleTranslate } from "../../modules/cdss";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import { updateActivityById } from "./../../modules/subscription/activities";
@@ -74,6 +75,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setScheduleAppontmentData(payload)),
     getPatientCareplanByPatientIdAndUserRoleId: (patientId) =>
       dispatch(getPatientCareplanByPatientIdAndUserRoleId(patientId)),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

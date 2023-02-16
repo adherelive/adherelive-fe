@@ -427,7 +427,10 @@ class TemplatePageCreateDrawer extends Component {
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
   showInnerForm = (innerFormType, innerFormKey) => () => {
+    const { getPortions } = this.props;
+
     if (innerFormType === EVENT_TYPE.DIET) {
+      const response = getPortions();
       this.setState({ isDietVisible: true });
     } else if (innerFormType === EVENT_TYPE.WORKOUT) {
       this.setState({ isWorkoutVisible: true });
@@ -496,6 +499,58 @@ class TemplatePageCreateDrawer extends Component {
     });
   };
 
+  // AKSHAY NEW CODE IMPLEMENTATION
+  deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
+    console.log(innerFormType);
+    console.log(innerFormKey);
+    let {
+      appointments = {},
+      appointmentKeys = [],
+      medications = {},
+      medicationKeys = [],
+      vitals = {},
+      vitalKeys = [],
+      diets = {},
+      dietKeys = [],
+      workouts = {},
+      workoutKeys = [],
+      medicationCheckedIds = [],
+    } = this.state;
+
+    if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
+      delete medications[innerFormKey];
+      medicationKeys.splice(medicationKeys.indexOf(innerFormKey), 1);
+      medicationCheckedIds.splice(medicationKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.APPOINTMENT) {
+      delete appointments[innerFormKey];
+      appointmentKeys.splice(appointmentKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.VITALS) {
+      delete vitals[innerFormKey];
+      vitalKeys.splice(vitalKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.DIET) {
+      delete diets[innerFormKey];
+      dietKeys.splice(dietKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.WORKOUT) {
+      delete workouts[innerFormKey];
+      workoutKeys.splice(workoutKeys.indexOf(innerFormKey), 1);
+    }
+
+    this.setState({
+      appointments,
+      appointmentKeys,
+      medications,
+      medicationKeys,
+      vitals,
+      vitalKeys,
+      diets,
+      dietKeys,
+      workouts,
+      workoutKeys,
+      templateEdited: true,
+      medicationCheckedIds,
+    });
+  };
+
   showAddMedication = () => {
     this.setState({ showAddMedicationInner: true });
   };
@@ -521,6 +576,8 @@ class TemplatePageCreateDrawer extends Component {
   };
 
   showAddDiet = () => {
+    const { getPortions } = this.props;
+    const response = getPortions();
     this.setState({
       showAddDietInner: true,
       isDietVisible: true,
@@ -1088,6 +1145,8 @@ class TemplatePageCreateDrawer extends Component {
             deleteDietKeys: [],
             deleteWorkoutKeys: [],
             templateEdited: false,
+            clinical_notes: "",
+            followup_advise: "",
           });
           await getAllTemplatesForDoctor();
           close();
@@ -1511,7 +1570,6 @@ class TemplatePageCreateDrawer extends Component {
                     />
                   </div>
                 </div>
-
                 <div className="drawer-block-description">
                   {/* {medTimingsToShow} */}
                   Generic Name:{" "}
@@ -1605,7 +1663,6 @@ class TemplatePageCreateDrawer extends Component {
                     : time_gap
                     ? `After ${time_gap} days`
                     : ""} */}
-
                   {time_gap == 0 ? "Today" : `After ${time_gap} days`}
                 </div>
                 <div className="drawer-block-description">{`Notes:${description}`}</div>

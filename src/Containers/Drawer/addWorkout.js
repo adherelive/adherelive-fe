@@ -6,6 +6,7 @@ import { open } from "../../modules/drawer";
 import { DRAWER } from "../../constant";
 import { getWorkoutDetails, addWorkout } from "../../modules/workouts";
 import { addExercise } from "../../modules/exercises";
+import { googleTranslate } from "../../modules/cdss";
 
 // import { addDiet } from "../../modules/diets";
 
@@ -46,6 +47,8 @@ const mapDispatchToProps = (dispatch) => {
     getWorkoutDetails: () => dispatch(getWorkoutDetails()),
     addExercise: (data) => dispatch(addExercise(data)),
     addWorkout: (data) => dispatch(addWorkout(data)),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

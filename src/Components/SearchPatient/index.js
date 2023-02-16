@@ -70,7 +70,7 @@ class SearchPatient extends Component {
 
     this.setState({ searchInput: value });
 
-    if (value.length === 10) {
+    if (value.length >= 10) {
       {
         // this.handlePatientSearch(value);
         this.handlePatientSearch(value);

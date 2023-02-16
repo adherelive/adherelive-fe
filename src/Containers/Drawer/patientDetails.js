@@ -17,6 +17,7 @@ import {
   setScheduleAppontmentData,
   getPatientCareplanByPatientId,
 } from "../../modules/subscription/activities";
+// import { getPatientCareplanByPatientId } from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
   const {

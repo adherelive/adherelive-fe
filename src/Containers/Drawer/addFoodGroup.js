@@ -9,7 +9,7 @@ import {
 } from "../../modules/foodItems";
 import { searchFood } from "../../modules/searchedFoodItems";
 import { clearLatestCreatedFoodItem } from "../../modules/latestCreatedFood";
-
+import { googleTranslate } from "../../modules/cdss";
 const mapStateToProps = (state) => {
   const { auth } = state;
   const { authenticated_user, authenticated_category } = auth;
@@ -50,6 +50,8 @@ const mapDispatchToProps = (dispatch) => {
     searchFood: (value) => dispatch(searchFood(value)),
     storeFoodItemAndDetails: (data) => dispatch(storeFoodItemAndDetails(data)),
     clearLatestCreatedFoodItem: () => dispatch(clearLatestCreatedFoodItem()),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

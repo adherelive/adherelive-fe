@@ -12,6 +12,7 @@ import {
   updateWorkoutTotalCalories,
 } from "../../modules/workouts";
 import { getPatientCarePlanDetails } from "../../modules/carePlans";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
   const { auth } = state;
@@ -61,6 +62,8 @@ const mapDispatchToProps = (dispatch) => {
           total_calories,
         })
       ),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

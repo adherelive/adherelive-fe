@@ -420,6 +420,36 @@ class AddCareplanDrawer extends Component {
     });
   };
 
+  translateHandler = async (translateFor) => {
+    const { googleTranslate } = this.props;
+    const { followup_advise, clinical_notes } = this.state;
+
+    let textToTranslate = "";
+
+    if (translateFor === "clinicalNotes") {
+      textToTranslate = clinical_notes;
+    } else if (translateFor === "followupAdvise") {
+      textToTranslate = followup_advise;
+    }
+
+    const response = await googleTranslate(textToTranslate);
+    const { data = {} } = response || {};
+    if (data) {
+      if (translateFor === "clinicalNotes") {
+        this.setState({
+          clinical_notes: data.translations[0].translatedText,
+        });
+      } else if (translateFor === "followupAdvise") {
+        this.setState({
+          followup_advise: data.translations[0].translatedText,
+        });
+      }
+    } else {
+      alert("Something went wrong");
+    }
+    // console.log("response", data.translations[0].translatedText);
+  };
+
   renderAddCareplan = () => {
     let dtToday = new Date();
 

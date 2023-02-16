@@ -17,6 +17,7 @@ import {
   removeFavourite,
   removeFavouriteByRecordId,
 } from "../../modules/favouritesData/index";
+import { googleTranslate } from "../../modules/cdss";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import { updateActivityById } from "./../../modules/subscription/activities";
@@ -68,6 +69,8 @@ const mapDispatchToProps = (dispatch) => {
     // AKSHAY NEW CODE FRO SUBSCRIPTION
     updateActivityById: (id, payload) =>
       dispatch(updateActivityById(id, payload)),
+    googleTranslate: (textToConvert) =>
+      dispatch(googleTranslate(textToConvert)),
   };
 };
 

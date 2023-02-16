@@ -144,6 +144,58 @@ class TemplatePageCreateDrawer extends Component {
     });
   };
 
+  // AKSHAY NEW CODE IMPLEMENTATION
+  deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
+    console.log(innerFormType);
+    console.log(innerFormKey);
+    let {
+      appointments = {},
+      appointmentKeys = [],
+      medications = {},
+      medicationKeys = [],
+      vitals = {},
+      vitalKeys = [],
+      diets = {},
+      dietKeys = [],
+      workouts = {},
+      workoutKeys = [],
+      medicationCheckedIds = [],
+    } = this.state;
+
+    if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
+      delete medications[innerFormKey];
+      medicationKeys.splice(medicationKeys.indexOf(innerFormKey), 1);
+      medicationCheckedIds.splice(medicationKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.APPOINTMENT) {
+      delete appointments[innerFormKey];
+      appointmentKeys.splice(appointmentKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.VITALS) {
+      delete vitals[innerFormKey];
+      vitalKeys.splice(vitalKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.DIET) {
+      delete diets[innerFormKey];
+      dietKeys.splice(dietKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.WORKOUT) {
+      delete workouts[innerFormKey];
+      workoutKeys.splice(workoutKeys.indexOf(innerFormKey), 1);
+    }
+
+    this.setState({
+      appointments,
+      appointmentKeys,
+      medications,
+      medicationKeys,
+      vitals,
+      vitalKeys,
+      diets,
+      dietKeys,
+      workouts,
+      workoutKeys,
+      templateEdited: true,
+      medicationCheckedIds,
+    });
+  };
+
   showAddMedication = () => {
     this.setState({ showAddMedicationInner: true });
   };
@@ -169,6 +221,9 @@ class TemplatePageCreateDrawer extends Component {
   };
 
   showAddDiet = () => {
+    const { getPortions } = this.props;
+    const response = getPortions();
+
     this.setState({
       showAddDietInner: true,
       isDietVisible: true,
@@ -528,7 +583,6 @@ class TemplatePageCreateDrawer extends Component {
             showWorkoutInner: false,
             showAreYouSureModal: false,
             clinical_notes: "",
-            followup_advise: "",
           });
           close();
         } else {
@@ -653,7 +707,7 @@ class TemplatePageCreateDrawer extends Component {
       pastedValue = e.clipboardData.getData("text").trim();
     }
     if (pastedValue.length > 0 || pastedValue === "") {
-      this.setState({ clinical_notes: pastedValue });
+      this.setState({ clinical_notes: pastedValue, templateEdited: true });
     }
   };
 
@@ -661,7 +715,7 @@ class TemplatePageCreateDrawer extends Component {
     const value = e.target.value.trim();
 
     if (value.length > 0 || value === "") {
-      this.setState({ clinical_notes: e.target.value });
+      this.setState({ clinical_notes: e.target.value, templateEdited: true });
     }
   };
 
@@ -672,7 +726,7 @@ class TemplatePageCreateDrawer extends Component {
       pastedValue = e.clipboardData.getData("text").trim();
     }
     if (pastedValue.length > 0 || pastedValue === "") {
-      this.setState({ followup_advise: pastedValue });
+      this.setState({ followup_advise: pastedValue, templateEdited: true });
     }
   };
 
@@ -680,7 +734,7 @@ class TemplatePageCreateDrawer extends Component {
     const value = e.target.value.trim();
 
     if (value.length > 0 || value === "") {
-      this.setState({ followup_advise: e.target.value });
+      this.setState({ followup_advise: e.target.value, templateEdited: true });
     }
   };
 
@@ -1022,7 +1076,6 @@ class TemplatePageCreateDrawer extends Component {
                     : time_gap
                     ? `After ${time_gap} days`
                     : ""} */}
-
                   {time_gap == 0 ? "Today" : `After ${time_gap} days`}
                 </div>
                 <div className="drawer-block-description">{`Notes:${description}`}</div>
@@ -1390,7 +1443,6 @@ class TemplatePageCreateDrawer extends Component {
 
     const today = moment();
     const selectedDate = date;
-
     let formatToday = moment(today).format("MM/DD/YYYY");
     let formatSelected = moment(selectedDate).format("MM/DD/YYYY");
 

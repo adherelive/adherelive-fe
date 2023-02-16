@@ -816,6 +816,24 @@ class AddAppointmentForm extends Component {
     this.setState({ typeDescValue: value });
   };
 
+  translateHandler = async () => {
+    const {
+      form: { setFieldsValue, getFieldValue },
+    } = this.props;
+    const currentValue = getFieldValue(DESCRIPTION);
+    const { googleTranslate } = this.props;
+    let textToTranslate = currentValue;
+
+    const response = await googleTranslate(textToTranslate);
+    const { data = {} } = response || {};
+    if (data) {
+      setFieldsValue({ [DESCRIPTION]: data.translations[0].translatedText });
+    } else {
+      alert("Something went wrong");
+    }
+    // console.log("response", data.translations[0].translatedText);
+  };
+
   render() {
     const {
       form: { getFieldDecorator, isFieldTouched, getFieldError, getFieldValue },
@@ -1242,7 +1260,7 @@ class AddAppointmentForm extends Component {
           )}
         </FormItem>
 
-        <div className="flex mt24 direction-row flex-grow-1">
+        <div className="flex mt24 direction-row flex-grow-1 justify-space-between">
           <label
             htmlFor="notes"
             className="form-label"
@@ -1250,6 +1268,12 @@ class AddAppointmentForm extends Component {
           >
             {formatMessage(messages.description_text)}
           </label>
+          <p
+            onClick={() => this.translateHandler()}
+            className="translate-text pointer mr10"
+          >
+            Translate in Hindi
+          </p>
         </div>
         <FormItem
           // label={formatMessage(messages.description_text)}

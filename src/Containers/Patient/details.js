@@ -43,7 +43,11 @@ import { setFlashCard } from "../../modules/subscription/flashcard";
 import { getRecommendServiceAndSubscription } from "../../modules/subscription/recommend";
 import { setScheduleAppontmentData } from "../../modules/subscription/activities";
 import { getFlashCardByActivityId } from "../../modules/subscription/flashcard";
-import { googleTranslate } from "../../modules/cdss";
+// import { googleTranslate } from "../../modules/cdss";
+import {
+  googleTranslate,
+  googleTranslateMultipleText,
+} from "../../modules/cdss";
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -232,6 +236,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getRecommendServiceAndSubscription(patientId)),
     googleTranslate: (textToConvert) =>
       dispatch(googleTranslate(textToConvert)),
+    googleTranslateMultipleText: (textToConvertArray) =>
+      dispatch(googleTranslateMultipleText(textToConvertArray)),
   };
 };
 

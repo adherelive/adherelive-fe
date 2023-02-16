@@ -1358,6 +1358,7 @@ class PatientDetailsDrawer extends Component {
           handleDiagnosisChanges={this.handleDiagnosisChanges}
           onDiagnosisSearchHanlder={this.onDiagnosisSearchHanlder}
         />
+
         {/* <TextArea
           placeholder={this.formatMessage(messages.writeHere)}
           value={diagnosis_description}

@@ -165,6 +165,8 @@ class TemplateDrawer extends Component {
     let newVitals = {};
     let newDiets = {};
     let newWorkouts = {};
+    // let clinical_notes = "";
+    // let followup_advise = "";
 
     console.log("327546235423786479812742376", { template_medications });
 
@@ -1074,6 +1076,581 @@ class TemplateDrawer extends Component {
     }
   };
 
+  translateClinicalNotes = async () => {
+    const { clinical_notes } = this.state;
+    const { googleTranslate } = this.props;
+    const response = await googleTranslate(clinical_notes);
+    const { data = {} } = response || {};
+    if (data) {
+      this.setState({
+        clinical_notes: data.translations[0].translatedText,
+      });
+    }
+  };
+  translateFollowupAdvise = async () => {
+    const { followup_advise } = this.state;
+    const { googleTranslate } = this.props;
+    const response = await googleTranslate(followup_advise);
+    const { data = {} } = response || {};
+    if (data) {
+      this.setState({
+        followup_advise: data.translations[0].translatedText,
+      });
+    }
+  };
+
+  // translateHandler = async (translateType) => {
+  //   const {
+  //     followup_advise,
+  //     clinical_notes,
+  //     appointments,
+  //     workouts,
+  //     diets,
+  //     vitals,
+  //     medications,
+  //   } = this.state;
+  //   const { googleTranslate, googleTranslateMultipleText } = this.props;
+
+  //   if (translateType === "clinicalNotes") {
+  //     const response = await googleTranslate(clinical_notes);
+  //     const { data = {} } = response || {};
+  //     if (data) {
+  //       this.setState({
+  //         clinical_notes: data.translations[0].translatedText,
+  //       });
+  //     }
+  //   } else if (translateType === "followupAdvise") {
+  //     const response = await googleTranslate(followup_advise);
+  //     const { data = {} } = response || {};
+  //     if (data) {
+  //       this.setState({
+  //         followup_advise: data.translations[0].translatedText,
+  //       });
+  //     }
+  //   }
+
+  //   if (translateType === "appointment") {
+  //     // let appointmentData = appointments;
+  //     // for (let key in appointmentData) {
+  //     //   const response = await googleTranslate(
+  //     //     appointmentData[key].schedule_data.description
+  //     //   );
+  //     //   const { data = {} } = response || {};
+  //     //   if (data) {
+  //     //     appointmentData[key].schedule_data.description =
+  //     //       data.translations[0].translatedText;
+  //     //   }
+  //     // }
+
+  //     // this.setState({
+  //     //   appointments: appointmentData,
+  //     // });
+  //     //BY USING MULTIPLE TRANSTAE API
+  //     let appointmentData = appointments;
+  //     let operationData = [];
+  //     let textToConvertArray = [];
+  //     for (let key in appointmentData) {
+  //       let { schedule_data: { description = "" } = {} } = appointmentData[key];
+  //       operationData.push({ key: key, notes: description });
+  //       textToConvertArray.push(description);
+  //     }
+  //     const response = await googleTranslateMultipleText(textToConvertArray);
+  //     const { data = {} } = response || {};
+  //     if (data) {
+  //       let translatedArray = data.translations;
+  //       operationData.map((data, index) => {
+  //         data.notes = translatedArray[index].translatedText;
+  //       });
+  //       for (let key in appointmentData) {
+  //         let filteredDiet = operationData.filter((ele) => ele.key === key);
+  //         appointmentData[key].schedule_data.description =
+  //           filteredDiet[0].notes;
+  //       }
+  //       this.setState({
+  //         appointments: appointmentData,
+  //       });
+  //     }
+  //   } else if (translateType === "medication") {
+  //     // let medicationData = medications;
+  //     // for (let key in medicationData) {
+  //     //   let { schedule_data: { description = "" } = {} } = medications[key];
+  //     //   const response = await googleTranslate(description);
+  //     //   const { data = {} } = response || {};
+  //     //   if (data) {
+  //     //     medicationData[key].schedule_data.description =
+  //     //       data.translations[0].translatedText;
+  //     //   }
+  //     // }
+
+  //     // this.setState({
+  //     //   medications: medicationData,
+  //     // });
+  //     //BY USING MULTIPLE TRANSTAE API
+  //     let medicationData = medications;
+  //     let operationData = [];
+  //     let textToConvertArray = [];
+  //     for (let key in medicationData) {
+  //       let { schedule_data: { description = "" } = {} } = medicationData[key];
+  //       operationData.push({ key: key, notes: description });
+  //       textToConvertArray.push(description);
+  //     }
+  //     console.log("textToConvertArray", textToConvertArray);
+  //     console.log("operationData", operationData);
+  //     const response = await googleTranslateMultipleText(textToConvertArray);
+  //     const { data = {} } = response || {};
+  //     if (!isEmpty(data)) {
+  //       let translatedArray = data.translations;
+  //       operationData.map((data, index) => {
+  //         data.notes = translatedArray[index].translatedText;
+  //       });
+  //       for (let key in medicationData) {
+  //         let filteredDiet = operationData.filter((ele) => ele.key === key);
+  //         medicationData[key].schedule_data.description = filteredDiet[0].notes;
+  //       }
+  //       this.setState({
+  //         medications: medicationData,
+  //       });
+  //     }
+  //   } else if (translateType === "vital") {
+  //     // let vitalData = vitals;
+  //     // for (let key in vitalData) {
+  //     //   const { description = "" } = vitalData[key];
+  //     //   const response = await googleTranslate(description);
+  //     //   const { data = {} } = response || {};
+  //     //   if (data) {
+  //     //     vitalData[key].description = data.translations[0].translatedText;
+  //     //   }
+  //     // }
+
+  //     // this.setState({
+  //     //   vitals: vitalData,
+  //     // });
+  //     //BY USING MULTIPLE TRANSTAE API
+  //     let vitalData = vitals;
+  //     let operationData = [];
+  //     let textToConvertArray = [];
+  //     for (let key in vitalData) {
+  //       const { description = "" } = vitalData[key];
+  //       operationData.push({ key: key, notes: description });
+  //       textToConvertArray.push(description);
+  //     }
+  //     const response = await googleTranslateMultipleText(textToConvertArray);
+  //     const { data = {} } = response || {};
+  //     if (data) {
+  //       let translatedArray = data.translations;
+  //       operationData.map((data, index) => {
+  //         data.notes = translatedArray[index].translatedText;
+  //       });
+  //       for (let key in vitalData) {
+  //         let filteredDiet = operationData.filter((ele) => ele.key === key);
+  //         vitalData[key].description = filteredDiet[0].notes;
+  //       }
+  //       this.setState({
+  //         vitals: vitalData,
+  //       });
+  //     }
+  //   } else if (translateType === "workout") {
+  //     // let workoutData = workouts;
+  //     // for (let key in workoutData) {
+  //     //   const { details: { not_to_do = "" } = {} } = workoutData[key] || {};
+  //     //   const response = await googleTranslate(not_to_do);
+  //     //   const { data = {} } = response || {};
+  //     //   if (data) {
+  //     //     workoutData[key].details.not_to_do =
+  //     //       data.translations[0].translatedText;
+  //     //   }
+  //     // }
+
+  //     // this.setState({
+  //     //   workouts: workoutData,
+  //     // });
+  //     //BY USING MULTIPLE TRANSTAE API
+  //     let workoutData = workouts;
+  //     let operationData = [];
+  //     let textToConvertArray = [];
+  //     for (let key in workoutData) {
+  //       const { details: { not_to_do = "" } = {} } = workoutData[key] || {};
+  //       operationData.push({ key: key, notes: not_to_do });
+  //       textToConvertArray.push(not_to_do);
+  //     }
+  //     const response = await googleTranslateMultipleText(textToConvertArray);
+  //     const { data = {} } = response || {};
+  //     if (data) {
+  //       let translatedArray = data.translations;
+  //       operationData.map((data, index) => {
+  //         data.notes = translatedArray[index].translatedText;
+  //       });
+  //       for (let key in workoutData) {
+  //         let filteredDiet = operationData.filter((ele) => ele.key === key);
+  //         workoutData[key].details.not_to_do = filteredDiet[0].notes;
+  //       }
+  //       this.setState({
+  //         workouts: workoutData,
+  //       });
+  //     }
+  //   } else if (translateType === "diet") {
+  //     //BY USING SINGLE TRANSTAE API
+  //     // let dietData = diets;
+  //     // for (let key in dietData) {
+  //     //   const { details: { not_to_do = "" } = {} } = diets[key] || {};
+  //     //   const response = await googleTranslate(not_to_do);
+  //     //   const { data = {} } = response || {};
+  //     //   if (data) {
+  //     //     dietData[key].details.not_to_do = data.translations[0].translatedText;
+  //     //   }
+  //     // }
+
+  //     // this.setState({
+  //     //   diets: dietData,
+  //     // });
+
+  //     //BY USING MULTIPLE TRANSTAE API
+  //     let dietData = diets;
+  //     let operationData = [];
+  //     let textToConvertArray = [];
+  //     for (let key in dietData) {
+  //       const { details: { not_to_do = "" } = {} } = dietData[key] || {};
+  //       operationData.push({ key: key, notes: not_to_do });
+  //       textToConvertArray.push(not_to_do);
+  //     }
+  //     const response = await googleTranslateMultipleText(textToConvertArray);
+  //     const { data = {} } = response || {};
+  //     if (data) {
+  //       let translatedArray = data.translations;
+  //       operationData.map((data, index) => {
+  //         data.notes = translatedArray[index].translatedText;
+  //       });
+  //       for (let key in dietData) {
+  //         let filteredDiet = operationData.filter((ele) => ele.key === key);
+  //         dietData[key].details.not_to_do = filteredDiet[0].notes;
+  //       }
+  //       this.setState({
+  //         diets: dietData,
+  //       });
+  //     }
+  //   }
+  // };
+
+  translateCommonHandler = () => {
+    this.translateClinicalNotes();
+    this.translateFollowupAdvise();
+    this.medicationTranslate();
+    this.appoitnmentTranslate();
+    this.vitalTranslate();
+    this.dietTranslate();
+    this.workoutTranslate();
+    this.workoutExcerciseItemTranslate();
+    this.dietFoodItemTranslate();
+  };
+
+  medicationTranslate = async () => {
+    const { medications } = this.state;
+    const { googleTranslateMultipleText } = this.props;
+    let medicationData = medications;
+    let operationData = [];
+    let textToConvertArray = [];
+    for (let key in medicationData) {
+      let { schedule_data: { description = "" } = {} } = medicationData[key];
+      operationData.push({ key: key, notes: description });
+      textToConvertArray.push(description);
+    }
+    console.log("textToConvertArray", textToConvertArray);
+    console.log("operationData", operationData);
+    const response = await googleTranslateMultipleText(textToConvertArray);
+    const { data = {} } = response || {};
+    if (!isEmpty(data)) {
+      let translatedArray = data.translations;
+      operationData.map((data, index) => {
+        data.notes = translatedArray[index].translatedText;
+      });
+      for (let key in medicationData) {
+        let filteredDiet = operationData.filter((ele) => ele.key === key);
+        medicationData[key].schedule_data.description = filteredDiet[0].notes;
+      }
+      this.setState({
+        medications: medicationData,
+      });
+    }
+  };
+
+  appoitnmentTranslate = async () => {
+    const { appointments } = this.state;
+    const { googleTranslateMultipleText } = this.props;
+    let appointmentData = appointments;
+    let operationData = [];
+    let textToConvertArray = [];
+    for (let key in appointmentData) {
+      let { schedule_data: { description = "" } = {} } = appointmentData[key];
+      operationData.push({ key: key, notes: description });
+      textToConvertArray.push(description);
+    }
+    const response = await googleTranslateMultipleText(textToConvertArray);
+    const { data = {} } = response || {};
+    if (data) {
+      let translatedArray = data.translations;
+      operationData.map((data, index) => {
+        data.notes = translatedArray[index].translatedText;
+      });
+      for (let key in appointmentData) {
+        let filteredDiet = operationData.filter((ele) => ele.key === key);
+        appointmentData[key].schedule_data.description = filteredDiet[0].notes;
+      }
+      this.setState({
+        appointments: appointmentData,
+      });
+    }
+  };
+
+  vitalTranslate = async () => {
+    const { vitals } = this.state;
+    const { googleTranslateMultipleText } = this.props;
+    let vitalData = vitals;
+    let operationData = [];
+    let textToConvertArray = [];
+    for (let key in vitalData) {
+      const { description = "" } = vitalData[key];
+      operationData.push({ key: key, notes: description });
+      textToConvertArray.push(description);
+    }
+    const response = await googleTranslateMultipleText(textToConvertArray);
+    const { data = {} } = response || {};
+    if (data) {
+      let translatedArray = data.translations;
+      operationData.map((data, index) => {
+        data.notes = translatedArray[index].translatedText;
+      });
+      for (let key in vitalData) {
+        let filteredDiet = operationData.filter((ele) => ele.key === key);
+        vitalData[key].description = filteredDiet[0].notes;
+      }
+      this.setState({
+        vitals: vitalData,
+      });
+    }
+  };
+
+  dietTranslate = async () => {
+    const { diets } = this.state;
+    const { googleTranslateMultipleText } = this.props;
+    let dietData = diets;
+    let operationData = [];
+    let textToConvertArray = [];
+    for (let key in dietData) {
+      const { details: { not_to_do = "" } = {} } = dietData[key] || {};
+      operationData.push({ key: key, notes: not_to_do });
+      textToConvertArray.push(not_to_do);
+    }
+    const response = await googleTranslateMultipleText(textToConvertArray);
+    const { data = {} } = response || {};
+    if (data) {
+      let translatedArray = data.translations;
+      operationData.map((data, index) => {
+        data.notes = translatedArray[index].translatedText;
+      });
+      for (let key in dietData) {
+        let filteredDiet = operationData.filter((ele) => ele.key === key);
+        dietData[key].details.not_to_do = filteredDiet[0].notes;
+      }
+      this.setState({
+        diets: dietData,
+      });
+    }
+  };
+
+  workoutTranslate = async () => {
+    const { workouts } = this.state;
+    const { googleTranslateMultipleText } = this.props;
+    let workoutData = workouts;
+    let operationData = [];
+    let textToConvertArray = [];
+    for (let key in workoutData) {
+      const { details: { not_to_do = "" } = {} } = workoutData[key] || {};
+      operationData.push({ key: key, notes: not_to_do });
+      textToConvertArray.push(not_to_do);
+    }
+    const response = await googleTranslateMultipleText(textToConvertArray);
+    const { data = {} } = response || {};
+    if (data) {
+      let translatedArray = data.translations;
+      operationData.map((data, index) => {
+        data.notes = translatedArray[index].translatedText;
+      });
+      for (let key in workoutData) {
+        let filteredDiet = operationData.filter((ele) => ele.key === key);
+        workoutData[key].details.not_to_do = filteredDiet[0].notes;
+      }
+      this.setState({
+        workouts: workoutData,
+      });
+    }
+  };
+
+  dietFoodItemTranslate = async () => {
+    const { diets } = this.state;
+    const { googleTranslateMultipleText, googleTranslate } = this.props;
+    let dietData = diets;
+    for (let key in dietData) {
+      let { diet_food_groups = "" } = dietData[key].details;
+
+      for (let foodKey in diet_food_groups) {
+        // console.log("diet_food_groups[foodKey]", diet_food_groups[foodKey]);
+
+        let foodGroup = diet_food_groups[foodKey];
+        let operationData = [];
+        let textToConvertArray = [];
+
+        for (let key in foodGroup) {
+          const { notes = "", food_item_detail_id = "" } = foodGroup[key] || {};
+          console.log(foodGroup[key]);
+          operationData.push({ key: key, notes: notes });
+          textToConvertArray.push(notes);
+        }
+
+        const response = await googleTranslateMultipleText(textToConvertArray);
+        const { data = {} } = response || {};
+        if (data) {
+          let translatedArray = data.translations;
+          operationData.map((data, index) => {
+            data.notes = translatedArray[index].translatedText;
+          });
+          for (let key in foodGroup) {
+            let filteredFoodItem = operationData.filter(
+              (ele) => ele.key === key
+            );
+            foodGroup[key].notes = filteredFoodItem[0].notes;
+          }
+          // console.log("foodGroupOne", foodGroupOne);
+        }
+      }
+
+      // if (diet_food_groups[1] !== undefined) {
+      //   let foodGroupOne = diet_food_groups[1];
+      //   let operationData = [];
+      //   let textToConvertArray = [];
+
+      //   for (let key in foodGroupOne) {
+      //     const { notes = "", food_item_detail_id = "" } =
+      //       foodGroupOne[key] || {};
+      //     console.log(foodGroupOne[key]);
+      //     operationData.push({ key: key, notes: notes });
+      //     textToConvertArray.push(notes);
+      //   }
+
+      //   const response = await googleTranslateMultipleText(textToConvertArray);
+      //   const { data = {} } = response || {};
+      //   if (data) {
+      //     let translatedArray = data.translations;
+      //     operationData.map((data, index) => {
+      //       data.notes = translatedArray[index].translatedText;
+      //     });
+      //     for (let key in foodGroupOne) {
+      //       let filteredFoodItem = operationData.filter(
+      //         (ele) => ele.key === key
+      //       );
+      //       foodGroupOne[key].notes = filteredFoodItem[0].notes;
+      //     }
+      //     console.log("foodGroupOne", foodGroupOne);
+      //   }
+      // }
+
+      // if (diet_food_groups[2] !== undefined) {
+      //   let foodGroupOne = diet_food_groups[2];
+      //   let operationData = [];
+      //   let textToConvertArray = [];
+
+      //   for (let key in foodGroupOne) {
+      //     const { notes = "", food_item_detail_id = "" } =
+      //       foodGroupOne[key] || {};
+      //     console.log(foodGroupOne[key]);
+      //     operationData.push({ key: key, notes: notes });
+      //     textToConvertArray.push(notes);
+      //   }
+
+      //   const response = await googleTranslateMultipleText(textToConvertArray);
+      //   const { data = {} } = response || {};
+      //   if (data) {
+      //     let translatedArray = data.translations;
+      //     operationData.map((data, index) => {
+      //       data.notes = translatedArray[index].translatedText;
+      //     });
+      //     for (let key in foodGroupOne) {
+      //       let filteredFoodItem = operationData.filter(
+      //         (ele) => ele.key === key
+      //       );
+      //       foodGroupOne[key].notes = filteredFoodItem[0].notes;
+      //     }
+      //     console.log("foodGroupOne", foodGroupOne);
+      //   }
+      // }
+    }
+  };
+
+  workoutExcerciseItemTranslate = async () => {
+    const { workouts } = this.state;
+    const { googleTranslateMultipleText } = this.props;
+    let workoutData = workouts;
+
+    console.log("workoutData", workoutData);
+
+    for (let key in workoutData) {
+      let { workout_exercise_groups = "" } = workoutData[key].details;
+
+      let exerciseGroup = workout_exercise_groups;
+      let operationData = [];
+      let textToConvertArray = [];
+
+      // console.log("workout_exercise_groups", workout_exercise_groups);
+      for (let exerciseKey in exerciseGroup) {
+        const { notes = "" } = exerciseGroup[exerciseKey] || {};
+        operationData.push({ key: exerciseKey, notes: notes });
+        textToConvertArray.push(notes);
+      }
+
+      console.log("operationData", operationData);
+      console.log("textToConvertArray", textToConvertArray);
+
+      const response = await googleTranslateMultipleText(textToConvertArray);
+      const { data = {} } = response || {};
+      if (data) {
+        let translatedArray = data.translations;
+        operationData.map((data, index) => {
+          data.notes = translatedArray[index].translatedText;
+        });
+        console.log("operationData", operationData);
+        for (let key in exerciseGroup) {
+          let filteredExerciseItem = operationData.filter(
+            (ele) => ele.key === key
+          );
+          exerciseGroup[key].notes = filteredExerciseItem[0].notes;
+        }
+        console.log("exerciseGroup", exerciseGroup);
+      }
+    }
+
+    // let operationData = [];
+    // let textToConvertArray = [];
+    // for (let key in workoutData) {
+    //   const { details: { not_to_do = "" } = {} } = workoutData[key] || {};
+    //   operationData.push({ key: key, notes: not_to_do });
+    //   textToConvertArray.push(not_to_do);
+    // }
+    // const response = await googleTranslateMultipleText(textToConvertArray);
+    // const { data = {} } = response || {};
+    // if (data) {
+    //   let translatedArray = data.translations;
+    //   operationData.map((data, index) => {
+    //     data.notes = translatedArray[index].translatedText;
+    //   });
+    //   for (let key in workoutData) {
+    //     let filteredDiet = operationData.filter((ele) => ele.key === key);
+    //     workoutData[key].details.not_to_do = filteredDiet[0].notes;
+    //   }
+    //   this.setState({
+    //     workouts: workoutData,
+    //   });
+    // }
+  };
+
   renderTemplateDetails = () => {
     const {
       medications = {},
@@ -1090,6 +1667,8 @@ class TemplateDrawer extends Component {
       carePlanTemplateId,
     } = this.state;
     const { medicines } = this.props;
+
+    // const { medicines } = this.props;
 
     const {
       care_plan_templates = {},
@@ -1128,11 +1707,18 @@ class TemplateDrawer extends Component {
         >
           {this.getCarePlanTemplateOptions()}
         </Select>
-
         <div className="wp100 flex direction-row align-center justify-space-between">
-          <div className="flex direction-row form-category-headings-ap mr0-I">
+          <div className="flex form-category-headings-ap mr0-I">
             {this.formatMessage(messages.clinical_notes)}
             <div className="star-red fs22">*</div>
+          </div>
+          <div>
+            <p
+              onClick={this.translateCommonHandler}
+              className="translate-text pointer mr10"
+            >
+              Translate in Hindi
+            </p>
           </div>
         </div>
 
@@ -1148,10 +1734,18 @@ class TemplateDrawer extends Component {
         </div>
 
         <div className="wp100 flex direction-row align-center justify-space-between">
-          <div className="flex direction-row form-category-headings-ap mr0-I">
+          <div className="flex form-category-headings-ap mr0-I">
             {this.formatMessage(messages.followup_advise)}
             <div className="star-red fs22">*</div>
           </div>
+          {/* <div>
+            <p
+              onClick={() => this.translateHandler("followupAdvise")}
+              className="translate-text pointer mr10"
+            >
+              Translate in Hindi
+            </p>
+          </div> */}
         </div>
         <div className="wp100 flex align-center justify-space-between">
           <TextArea
@@ -1164,24 +1758,24 @@ class TemplateDrawer extends Component {
           />
         </div>
 
-        {/* <div className="wp100 flex align-center justify-space-between">
-          <div className="form-category-headings-ap ">
-            {this.formatMessage(messages.clinical_notes)}
-          </div>
-        </div>
-        <div className="wp100 flex align-center justify-space-between">
-          {!isEmpty(this.state.clinical_notes)
-            ? this.state.clinical_notes
-            : "Clinical notes not added"}
-        </div> */}
-
         {/* ) : null} */}
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap ">
             {this.formatMessage(messages.medications)}
           </div>
-          <div className="add-more" onClick={this.showAddMedication}>
-            {this.formatMessage(messages.addMore)}
+          <div className="flex">
+            {/* {medicationKeys.length > 0 && (
+              <p
+                onClick={() => this.translateHandler("medication")}
+                className="translate-text pointer mr10"
+              >
+                Translate in Hindi
+              </p>
+            )} */}
+
+            <div className=" add-more" onClick={this.showAddMedication}>
+              {this.formatMessage(messages.addMore)}
+            </div>
           </div>
         </div>
         {medicationKeys.map((key) => {
@@ -1190,6 +1784,7 @@ class TemplateDrawer extends Component {
             medicine,
             medicineType,
             schedule_data: {
+              description = "",
               when_to_take = "",
               start_date = moment(),
               medicine_type = "1",
@@ -1355,6 +1950,10 @@ class TemplateDrawer extends Component {
                     />
                   </div>
                 </div>
+                <div className="drawer-block-description">
+                  Generic Name:{" "}
+                  {!isEmpty(details) ? details.generic_name : "---"}
+                </div>
                 {/* {when_to_take.map((timing, index) => {
                                     return ( */}
                 <div className="drawer-block-description">
@@ -1373,6 +1972,7 @@ class TemplateDrawer extends Component {
                   duration + 1
                 } Days`}</div>
                 <div className="drawer-block-description">{`Quantity: ${quantity}`}</div>
+                <div className="drawer-block-description">{`Special Instruction:${description}`}</div>
               </div>
               {/* <DeleteTwoTone
                                 className={"mr8"}
@@ -1387,8 +1987,20 @@ class TemplateDrawer extends Component {
           <div className="form-category-headings-ap align-self-start">
             {this.formatMessage(messages.appointments)}
           </div>
-          <div className="add-more" onClick={this.showAddAppointment}>
-            {this.formatMessage(messages.addMore)}
+
+          <div className="flex">
+            {/* {appointmentKeys.length > 0 && (
+              <p
+                onClick={() => this.translateHandler("appointment")}
+                className="translate-text pointer mr10"
+              >
+                Translate in Hindi
+              </p>
+            )} */}
+
+            <div className=" add-more" onClick={this.showAddAppointment}>
+              {this.formatMessage(messages.addMore)}
+            </div>
           </div>
         </div>
         {appointmentKeys.map((key) => {
@@ -1398,9 +2010,9 @@ class TemplateDrawer extends Component {
             // AKSHAY NEW CODE IMPLEMENTATIONS
             // COMMENTED THIS
             schedule_data: {
-              description = "",
               // date = "",
               // start_time = "",
+              description = "",
               type_description = "",
               radiology_type = "",
               appointment_type = "",
@@ -1413,13 +2025,11 @@ class TemplateDrawer extends Component {
           console.log("appointments[key]", appointments[key]);
           console.log("appointment_type", appointment_type);
           // let timeToShow = date && start_time ? `${moment(date).format('ll')} ${moment(date).format('hh:mm')}` : date ? moment(date).format('ll') : '';
-
           let typeTitle =
             APPOINTMENT_TYPE_TITLE[!appointment_type ? type : appointment_type]
               .title;
           let typeDescription = type_description;
           let rediologyType = radiology_type;
-
           return (
             <div className="flex wp100 flex-grow-1 align-center" key={key}>
               <div className="drawer-block">
@@ -1475,8 +2085,19 @@ class TemplateDrawer extends Component {
           <div className="form-category-headings-ap align-self-start">
             {this.formatMessage(messages.actions)}
           </div>
-          <div className="add-more" onClick={this.showAddVital}>
-            {this.formatMessage(messages.addMore)}
+          <div className="flex">
+            {/* {vitalKeys.length > 0 && (
+              <p
+                onClick={() => this.translateHandler("vital")}
+                className="translate-text pointer mr10"
+              >
+                Translate in Hindi
+              </p>
+            )} */}
+
+            <div className="flex add-more" onClick={this.showAddVital}>
+              {this.formatMessage(messages.addMore)}
+            </div>
           </div>
         </div>
         {vitalKeys.map((key) => {
@@ -1523,6 +2144,7 @@ class TemplateDrawer extends Component {
                 </div>
                 <div className="drawer-block-description">{vital_repeat}</div>
                 <div className="drawer-block-description">{`Repeat: ${repeat_days}`}</div>
+                <div className="drawer-block-description">{`Special Instruction:${description}`}</div>
               </div>
             </div>
           );
@@ -1532,8 +2154,19 @@ class TemplateDrawer extends Component {
           <div className="form-category-headings-ap align-self-start">
             {this.formatMessage(messages.diets)}
           </div>
-          <div className="add-more" onClick={this.showAddDiet}>
-            {this.formatMessage(messages.addMore)}
+          <div className="flex">
+            {/* {dietKeys.length > 0 && (
+              <p
+                onClick={this.dietFoodItemTranslate}
+                className="translate-text pointer mr10"
+              >
+                Translate in Hindi
+              </p>
+            )} */}
+
+            <div className="flex add-more" onClick={this.showAddDiet}>
+              {this.formatMessage(messages.addMore)}
+            </div>
           </div>
         </div>
         {dietKeys.map((key) => {
@@ -1582,6 +2215,7 @@ class TemplateDrawer extends Component {
                   total_calories ? total_calories : "--"
                 }${" "}Cal`}</div>
                 <div className="drawer-block-description">{`Repeat: ${repeat}`}</div>
+                <div className="drawer-block-description">{`What not to do:${not_to_do}`}</div>
               </div>
             </div>
           );
@@ -1592,8 +2226,19 @@ class TemplateDrawer extends Component {
             <div className="form-category-headings-ap align-self-start">
               {this.formatMessage(messages.workouts)}
             </div>
-            <div className="add-more" onClick={this.showAddWorkout}>
-              {this.formatMessage(messages.addMore)}
+            <div className="flex">
+              {/* {workoutKeys.length > 0 && (
+                <p
+                  onClick={this.workoutExcerciseItemTranslate}
+                  className="translate-text pointer mr10"
+                >
+                  Translate in Hindi
+                </p>
+              )} */}
+
+              <div className="flex add-more" onClick={this.showAddWorkout}>
+                {this.formatMessage(messages.addMore)}
+              </div>
             </div>
           </div>
           {workoutKeys.map((key) => {
@@ -1638,6 +2283,7 @@ class TemplateDrawer extends Component {
                     total_calories ? total_calories : "--"
                   }${" "}Cal`}</div>
                   <div className="drawer-block-description">{`Repeat: ${repeat}`}</div>
+                  <div className="drawer-block-description">{`What not to do:${not_to_do}`}</div>
                 </div>
               </div>
             );
@@ -2132,7 +2778,6 @@ class TemplateDrawer extends Component {
       }
     }
     // CONDITION IF AT LEAST ONE MEDICATION CHECKBOX NOT SELECTED
-
     if (isEmpty(finalMedicationData) && !isEmpty(medicationsData)) {
       message.warn("please select at least one medication from list");
       this.setState({
@@ -2505,7 +3150,6 @@ class TemplateDrawer extends Component {
 
     newAppointment.reason = reason;
     newAppointment.time_gap = time_gap;
-
     if (provider_id) {
       newAppointment.provider_id = provider_id;
     }

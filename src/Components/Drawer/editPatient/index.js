@@ -205,7 +205,6 @@ class EditPatientDrawer extends Component {
       this.handleGetPatientDetails(patient_id);
       this.handleConditionSearch(" ");
       searchSeverity("");
-
       this.setState({
         mobile_number,
         name: full_name,
@@ -1517,6 +1516,7 @@ class EditPatientDrawer extends Component {
         weight,
         symptoms: JSON.stringify(this.state.finalSymptomData),
         address,
+        followup_advise,
       });
       // submit({ mobile_number, name, gender, date_of_birth, treatment_id: treatment, severity_id: severity, condition_id: condition, prefix ,allergies,diagnosis_description,diagnosis_type,comorbidities,clinical_notes,height,weight, symptoms})
     }
@@ -1542,6 +1542,7 @@ class EditPatientDrawer extends Component {
     weight,
     symptoms,
     address,
+    // followup_advise,
   }) {
     try {
       const { updatePatientAndCareplan } = this.props;
