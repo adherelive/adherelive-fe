@@ -22,7 +22,7 @@ function SubscriptionCard({ data }) {
               <span>{data.notes}</span>
             </div>
           </div>
-          <div className="wp50">
+          <div className="wp50 subscription-description">
             <p>{data.description}</p>
           </div>
         </div>
