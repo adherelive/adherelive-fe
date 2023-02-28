@@ -20,6 +20,14 @@ export default (props) => {
   //   alert("asd");
   // };
 
+  // `${
+  //   start_time
+  //     ? moment(start_time).format("LT")
+  //     : TABLE_DEFAULT_BLANK_FIELD
+  // } - ${
+  //   end_time ? moment(end_time).format("LT") : TABLE_DEFAULT_BLANK_FIELD
+  // }`
+
   return (
     <div>
       {/* <span> {CONSULTATION_FEE_TYPE_TEXT[type]}</span> */}
@@ -27,7 +35,7 @@ export default (props) => {
       <span>
         {" "}
         Appointment <br></br> On {moment(appointment_time).format("Do MMM")} -{" "}
-        {moment(appointment_time).format("H:MM A")}
+        {moment(appointment_time).format("LT")}
         <Tooltip placement={"bottom"} title={"Edit Appointment"}>
           <EditOutlined
             className={"pointer align-self-end ml10"}

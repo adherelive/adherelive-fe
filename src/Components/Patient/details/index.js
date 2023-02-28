@@ -32,6 +32,7 @@ import {
   TYPE_VITALS,
   TYPE_DIETS,
   TYPE_WORKOUTS,
+  APPOINTMENT_TYPE_TITLE,
 } from "../../../constant";
 import { Tabs, Table, Dropdown, Spin, message, Button } from "antd";
 import Modal from "antd/es/modal";
@@ -231,7 +232,7 @@ const columns_appointments = [
     title: "Description",
     dataIndex: "description",
     key: "description",
-    width: "30%",
+    width: "50%",
     ellipsis: true,
   },
   {
@@ -1249,11 +1250,28 @@ class PatientDetails extends Component {
         organizer: { id: organizer_id, name = "" } = {},
         active_event_id = null,
       } = appointments[id] || {};
-
+      let typeTitle = "";
       let description = "";
-      if (!isEmpty(details.description)) {
-        description = details.description;
+
+      if (!isEmpty(appointments[id])) {
+        typeTitle = APPOINTMENT_TYPE_TITLE[details.type].title;
+
+        description = "";
+        if (details.type === "3") {
+          if (!isEmpty(details.radiology_type)) {
+            description = details.radiology_type;
+          }
+        } else {
+          if (!isEmpty(details.type_description)) {
+            description = details.type_description;
+          }
+        }
       }
+
+      // let description = "";
+      // if (!isEmpty(details.description)) {
+      //   description = details.description;
+      // }
       // const { basic_info: { user_name = "", full_name } = {} } = users[organizer_id] || {};
 
       // console.log("1230990830912 users", {organizer_id, users, full_name});
@@ -1269,7 +1287,7 @@ class PatientDetails extends Component {
         } - ${
           end_time ? moment(end_time).format("LT") : TABLE_DEFAULT_BLANK_FIELD
         }`,
-        description: description ? description : "--",
+        description: description ? `${description} (${typeTitle})` : "--",
         markComplete: {
           id,
           end_time,

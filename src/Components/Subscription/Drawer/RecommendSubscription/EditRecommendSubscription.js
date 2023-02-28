@@ -71,12 +71,12 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
   }, [doctors, editData, authenticated_user]);
 
   useEffect(() => {
-    // console.log(editData);
+    console.log(editData);
     setValues({
       ...values,
-      subscriptionName: editData.notes,
+      subscriptionName: editData.subscriptions.notes,
       serviceFees: editData.service_charge_per_month,
-      notes: editData.description,
+      notes: editData.notes,
       netSubscriptionFees: editData.details.service_charge,
       duration: editData.details.durations,
       status:

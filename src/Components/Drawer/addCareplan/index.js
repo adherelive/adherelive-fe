@@ -420,35 +420,35 @@ class AddCareplanDrawer extends Component {
     });
   };
 
-  translateHandler = async (translateFor) => {
-    const { googleTranslate } = this.props;
-    const { followup_advise, clinical_notes } = this.state;
+  // translateHandler = async (translateFor) => {
+  //   const { googleTranslate } = this.props;
+  //   const { followup_advise, clinical_notes } = this.state;
 
-    let textToTranslate = "";
+  //   let textToTranslate = "";
 
-    if (translateFor === "clinicalNotes") {
-      textToTranslate = clinical_notes;
-    } else if (translateFor === "followupAdvise") {
-      textToTranslate = followup_advise;
-    }
+  //   if (translateFor === "clinicalNotes") {
+  //     textToTranslate = clinical_notes;
+  //   } else if (translateFor === "followupAdvise") {
+  //     textToTranslate = followup_advise;
+  //   }
 
-    const response = await googleTranslate(textToTranslate);
-    const { data = {} } = response || {};
-    if (data) {
-      if (translateFor === "clinicalNotes") {
-        this.setState({
-          clinical_notes: data.translations[0].translatedText,
-        });
-      } else if (translateFor === "followupAdvise") {
-        this.setState({
-          followup_advise: data.translations[0].translatedText,
-        });
-      }
-    } else {
-      alert("Something went wrong");
-    }
-    // console.log("response", data.translations[0].translatedText);
-  };
+  //   const response = await googleTranslate(textToTranslate);
+  //   const { data = {} } = response || {};
+  //   if (data) {
+  //     if (translateFor === "clinicalNotes") {
+  //       this.setState({
+  //         clinical_notes: data.translations[0].translatedText,
+  //       });
+  //     } else if (translateFor === "followupAdvise") {
+  //       this.setState({
+  //         followup_advise: data.translations[0].translatedText,
+  //       });
+  //     }
+  //   } else {
+  //     alert("Something went wrong");
+  //   }
+  //   // console.log("response", data.translations[0].translatedText);
+  // };
 
   renderAddCareplan = () => {
     let dtToday = new Date();
@@ -603,17 +603,15 @@ class AddCareplanDrawer extends Component {
           {this.formatMessage(messages.clinicalNotes)}
           <div>
             {isCollapse === "clinicalNotes" && (
-              <Button
-                className="translate-btn mr10"
-                type={"primary"}
-                onClick={() => this.translateHandler("clinicalNotes")}
-                style={{
-                  backgroundColor: "#92d04f",
-                  border: "none",
-                }}
-              >
-                Translate in Hindi
-              </Button>
+              <span className="flex form-label justify-space-between">
+                {this.formatMessage(messages.specialInstruction)}
+                <p
+                  onClick={() => this.translateHandler("clinicalNotes")}
+                  className="translate-text pointer mr10"
+                >
+                  Translate in Hindi
+                </p>
+              </span>
             )}
             {isCollapse === "clinicalNotes" ? (
               <MinusCircleOutlined onClick={() => this.collpaseHanlder("")} />
