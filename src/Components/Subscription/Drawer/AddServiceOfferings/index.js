@@ -112,6 +112,16 @@ function Index({
     });
   };
 
+  const onNumberOfTimes = (value) => {
+    console.log(value);
+    if (value !== null) {
+      setValues({
+        ...values,
+        noOfTimesMonthly: parseInt(value),
+      });
+    }
+  };
+
   // formatMessage = (data) => this.props.intl.formatMessage(data);
 
   const onClose = () => {};
@@ -203,6 +213,7 @@ function Index({
               min={1}
               style={{ width: "100%" }}
               value={noOfTimesMonthly}
+              onChange={onNumberOfTimes}
             />
           </FormItem>
           <div className="form-headings flex align-center justify-start">

@@ -190,6 +190,9 @@ class AddAppointment extends Component {
               data,
               finalCareplanId
             );
+            if (!isEmpty(response.payload.error)) {
+              message.error(response.payload.message);
+            }
             const {
               status,
               statusCode: code,

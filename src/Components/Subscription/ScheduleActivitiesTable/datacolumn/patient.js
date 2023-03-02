@@ -48,7 +48,9 @@ export default (props) => {
     <div>
       {/* <span>{`Rs ${amount}`}</span> */}
       <span>
-        <span onClick={() => onPatientNameClick()}>{full_name}</span>
+        <span onClick={() => onPatientNameClick(props.data.activities)}>
+          {full_name}
+        </span>
         <Button
           type="primary"
           className="ml10 add-button p10"

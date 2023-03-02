@@ -93,6 +93,11 @@ class EditAppointmentForm extends Component {
       } = {},
     } = appointments[appointment_id] || {};
 
+    // console.log("appointments[appointment_id]", appointments[appointment_id]);
+    // console.log("appointmentData", appointmentData);
+    // console.log("appointments", appointments);
+    // console.log("appointment_id", appointment_id);
+
     const {
       schedule_data: {
         appointment_type = "",

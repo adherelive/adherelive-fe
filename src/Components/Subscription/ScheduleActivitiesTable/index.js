@@ -50,23 +50,28 @@ class ScheduledActivitiesTable extends Component {
     this.setState({ myTasksDrawer: true });
   };
 
-  handleEdit = (activityData) => {
-    const { openEditAppointmentDrawer, setScheduleAppontmentData } = this.props;
+  handleEdit = async (activityData) => {
+    const {
+      openEditAppointmentDrawer,
+      setScheduleAppontmentData,
+      // getAppointments,
+    } = this.props;
 
     let finalActivityData = activityData;
     finalActivityData.fromButton = "edit";
     setScheduleAppontmentData(finalActivityData);
 
-    const patient_id = 1;
+    const patient_id = activityData.patient_id;
     const id = activityData.appointment_id;
     const canViewDetails = false;
+    // const response = await getAppointments(patient_id);
 
     openEditAppointmentDrawer({ id, patient_id, canViewDetails });
   };
 
-  onPatientNameClick = () => {
+  onPatientNameClick = (activityData) => {
     const { openPatientDetailsDrawer } = this.props;
-    openPatientDetailsDrawer({ patient_id: 1 });
+    openPatientDetailsDrawer({ patient_id: activityData.patient_id });
   };
 
   formatMessage = (data) => this.props.intl.formatMessage(data);

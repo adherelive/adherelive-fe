@@ -4,7 +4,10 @@ import { withRouter } from "react-router-dom";
 import { getAllActivities } from "./../../modules/subscription/activities";
 import { DRAWER } from "../../constant";
 import { open, close } from "../../modules/drawer";
-import { getAppointmentsDetails } from "../../modules/appointments";
+import {
+  getAppointmentsDetails,
+  getAppointments,
+} from "../../modules/appointments";
 import { setScheduleAppontmentData } from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
@@ -17,6 +20,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getAppointmentsDetails: () => dispatch(getAppointmentsDetails()),
+    getAppointments: (id) => dispatch(getAppointments(id)),
     getAllActivities: () => dispatch(getAllActivities()),
     openEditAppointmentDrawer: (payload) =>
       dispatch(open({ type: DRAWER.EDIT_APPOINTMENT, payload })),

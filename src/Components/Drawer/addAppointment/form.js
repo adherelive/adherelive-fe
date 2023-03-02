@@ -1165,12 +1165,12 @@ class AddAppointmentForm extends Component {
               )(
                 <Dropdown
                   overlay={getTimePicker(START_TIME)}
-                  disabled={
-                    !isEmpty(scheduleAppointment) &&
-                    scheduleAppointment.fromButton === "start"
-                      ? true
-                      : false
-                  }
+                  // disabled={
+                  //   !isEmpty(scheduleAppointment) &&
+                  //   scheduleAppointment.fromButton === "start"
+                  //     ? true
+                  //     : false
+                  // }
                 >
                   <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
                     <div>{getStartTime()}</div>
@@ -1205,12 +1205,12 @@ class AddAppointmentForm extends Component {
               )(
                 <Dropdown
                   overlay={getTimePicker(END_TIME)}
-                  disabled={
-                    !isEmpty(scheduleAppointment) &&
-                    scheduleAppointment.fromButton === "start"
-                      ? true
-                      : false
-                  }
+                  // disabled={
+                  //   !isEmpty(scheduleAppointment) &&
+                  //   scheduleAppointment.fromButton === "start"
+                  //     ? true
+                  //     : false
+                  // }
                 >
                   <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
                     <div>{getEndTime()}</div>
