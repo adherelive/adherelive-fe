@@ -278,7 +278,7 @@ class PendingActivitiesTable extends Component {
           scroll={{ x: "100%" }}
           pagination={{
             position: "bottom",
-            pageSize: 3,
+            pageSize: 10,
           }}
           locale={locale}
         />
