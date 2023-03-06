@@ -601,10 +601,9 @@ class AddCareplanDrawer extends Component {
 
         <div className="form-headings-ap flex align-center justify-space-between mt10 mb10">
           {this.formatMessage(messages.clinicalNotes)}
-          <div>
+          <div className="flex">
             {isCollapse === "clinicalNotes" && (
               <span className="flex form-label justify-space-between">
-                {this.formatMessage(messages.specialInstruction)}
                 <p
                   onClick={() => this.translateHandler("clinicalNotes")}
                   className="translate-text pointer mr10"
@@ -719,17 +718,14 @@ class AddCareplanDrawer extends Component {
 
           <div className="form-headings-ap wp100 flex direction-row align-center justify-space-between">
             {this.formatMessage(messages.followup_advise)}
-            <Button
-              className="translate-btn"
-              type={"primary"}
-              onClick={() => this.translateHandler("followupAdvise")}
-              style={{
-                backgroundColor: "#92d04f",
-                border: "none",
-              }}
-            >
-              Translate in Hindi
-            </Button>
+            <span className="flex form-label justify-space-between">
+              <p
+                onClick={() => this.translateHandler("followupAdvise")}
+                className="translate-text pointer mr10"
+              >
+                Translate in Hindi
+              </p>
+            </span>
           </div>
           <div className="wp100 flex align-center justify-space-between">
             <TextArea

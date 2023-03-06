@@ -449,9 +449,29 @@ class EditAppointmentForm extends Component {
   getTypeOption = () => {
     let {
       static_templates: { appointments: { appointment_type = {} } = {} } = {},
+      scheduleAppointment = {},
     } = this.props;
+
+    // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+    let finalType = {};
+    if (!isEmpty(scheduleAppointment)) {
+      for (let type of Object.keys(appointment_type)) {
+        let { title = "" } = appointment_type[type] || {};
+        if (title === "Consultation") {
+          finalType[type] = appointment_type[type];
+        }
+      }
+    } else {
+      for (let type of Object.keys(appointment_type)) {
+        let { title = "" } = appointment_type[type] || {};
+        // if (title !== "Consultation") {
+        finalType[type] = appointment_type[type];
+        // }
+      }
+    }
+
     let newTypes = [];
-    for (let type of Object.keys(appointment_type)) {
+    for (let type of Object.keys(finalType)) {
       let { title = "" } = appointment_type[type] || {};
       newTypes.push(
         <Option key={type} value={type}>
