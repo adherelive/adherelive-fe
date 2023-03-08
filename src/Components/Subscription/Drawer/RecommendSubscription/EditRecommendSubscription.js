@@ -75,7 +75,7 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
     setValues({
       ...values,
       subscriptionName: editData.subscriptions.notes,
-      serviceFees: editData.service_charge_per_month,
+      serviceFees: editData.subscriptions.service_charge_per_month,
       notes: editData.notes,
       netSubscriptionFees: editData.details.service_charge,
       duration: editData.details.durations,
@@ -118,7 +118,9 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
       durations: duration,
       service_charge: netSubscriptionFees,
       patient_status: status === "ACTIVE" ? "active" : "inactive",
+      startDate: editData.details.service_date,
     };
+
     dispatch(
       updateRecommendSubscription(
         editData.id,
@@ -135,6 +137,15 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
 
   const onChangeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const onDurationChangeHandler = (value) => {
+    if (value !== null) {
+      setValues({
+        ...values,
+        duration: parseInt(value),
+      });
+    }
   };
 
   const setSubscriptionName = (value, keyData) => {
@@ -330,6 +341,7 @@ function EditRecommendSubscription({ visible, onCloseDrawer, editData }) {
                 style={{ width: "100%" }}
                 value={duration}
                 disabled={editAllow}
+                onChange={onDurationChangeHandler}
               />
             )}
           </FormItem>
