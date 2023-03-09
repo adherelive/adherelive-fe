@@ -20,16 +20,17 @@ export const recommendSubscription = (payload, callBack) => {
         data: payload,
       });
 
-      const { status, payload: { data } = {} } = response || {};
+      const { status, payload: { data,message } = {} } = response || {};
 
       if (status === true) {
         dispatch(getRecommendServiceAndSubscription(payload.patient_id));
-        callBack();
+        callBack(status,message);
         //   dispatch({
         //     type: SET_SERVICES,
         //     payload: data,
         //   });
       } else {
+        callBack(status,message);
         //   dispatch({
         //     type: GET_PATIENT_MISSED_EVENTS_FAILED,
         //   });

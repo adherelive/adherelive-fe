@@ -48,7 +48,7 @@ function Index({ visible, onCloseDrawer, patient_id }) {
     (state) => state.subscription.subscriptions
   );
 
-  const callBack = () => {
+  const callBack = (status, apiMessage) => {
     setValues({
       subscriptionName: "",
       serviceFees: "",
@@ -60,7 +60,11 @@ function Index({ visible, onCloseDrawer, patient_id }) {
       selectedSubscription: {},
     });
     onCloseDrawer();
-    message.success("Subscription recommended sucessfully");
+    if (status === true) {
+      message.success("Subscription recommended sucessfully");
+    } else if (status === false) {
+      message.error(apiMessage);
+    }
   };
 
   const onSubmit = () => {
