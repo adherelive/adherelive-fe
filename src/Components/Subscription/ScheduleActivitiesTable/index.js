@@ -57,16 +57,20 @@ class ScheduledActivitiesTable extends Component {
       // getAppointments,
     } = this.props;
 
-    let finalActivityData = activityData;
-    finalActivityData.fromButton = "edit";
-    setScheduleAppontmentData(finalActivityData);
+    if (activityData.activity_status === "completed") {
+      message.warn("Appointment for the completed activity can't be edited");
+    } else {
+      let finalActivityData = activityData;
+      finalActivityData.fromButton = "edit";
+      setScheduleAppontmentData(finalActivityData);
 
-    const patient_id = activityData.patient_id;
-    const id = activityData.appointment_id;
-    const canViewDetails = false;
-    // const response = await getAppointments(patient_id);
+      const patient_id = activityData.patient_id;
+      const id = activityData.appointment_id;
+      const canViewDetails = false;
+      // const response = await getAppointments(patient_id);
 
-    openEditAppointmentDrawer({ id, patient_id, canViewDetails });
+      openEditAppointmentDrawer({ id, patient_id, canViewDetails });
+    }
   };
 
   onPatientNameClick = (activityData) => {

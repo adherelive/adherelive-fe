@@ -98,6 +98,15 @@ function Index({ visible, onCloseDrawer, patient_id }) {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const onDurationChangeHandler = (value) => {
+    if (value !== null) {
+      setValues({
+        ...values,
+        duration: parseInt(value),
+      });
+    }
+  };
+
   const setSubscriptionName = (value, keyData) => {
     let selectedSubscription = {};
     for (const key in subscriptions) {
@@ -252,7 +261,12 @@ function Index({ visible, onCloseDrawer, patient_id }) {
                 disabled
               />
             ) : (
-              <InputNumber min={1} style={{ width: "100%" }} value={duration} />
+              <InputNumber
+                min={1}
+                style={{ width: "100%" }}
+                value={duration}
+                onChange={onDurationChangeHandler}
+              />
             )}
           </FormItem>
 
