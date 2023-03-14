@@ -514,8 +514,33 @@ class TemplatePageCreateDrawer extends Component {
       dietKeys = [],
       workouts = {},
       workoutKeys = [],
+      // innerFormType = "",
+      // innerFormKey = "",
+      medicationIds = {},
+      appointmentIds = {},
+      vitalIds = {},
+      dietIds = {},
+      workoutIds = {},
+      deleteMedicationKeys = [],
+      deleteAppointmentKeys = [],
+      deleteVitalKeys = [],
+      deleteDietKeys = [],
+      deleteWorkoutKeys = [],
       medicationCheckedIds = [],
     } = this.state;
+
+    const key = innerFormKey;
+    if (medicationIds[key]) {
+      deleteMedicationKeys.push(key);
+    } else if (appointmentIds[key]) {
+      deleteAppointmentKeys.push(key);
+    } else if (vitalIds[key]) {
+      deleteVitalKeys.push(key);
+    } else if (dietIds[key]) {
+      deleteDietKeys.push(key);
+    } else if (workoutIds[key]) {
+      deleteWorkoutKeys.push(key);
+    }
 
     if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
       delete medications[innerFormKey];
