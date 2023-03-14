@@ -48,7 +48,19 @@ class SubscriptionTable extends Component {
       this.setState({ editSubscriptionDrawer: true, editData: data });
     }
   };
-  onOpenMyTasksDrawer = () => {
+
+  onOpenMyTasksDrawer = async (patientId, serviceOrSubscriptionId, type) => {
+    console.log("patientId", patientId);
+    console.log("serviceOrSubscriptionId", serviceOrSubscriptionId);
+    console.log("type", type);
+    const { getMyTaskOfServiceOrSubscription } = this.props;
+
+    const response = await getMyTaskOfServiceOrSubscription(
+      patientId,
+      serviceOrSubscriptionId,
+      type
+    );
+    console.log("response", response);
     this.setState({ myTasksDrawer: true });
   };
 

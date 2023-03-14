@@ -40,7 +40,10 @@ import { getPortions } from "../../modules/portions";
 import { getServices } from "../../modules/subscription/services";
 import { getSubscriptions } from "../../modules/subscription/subscriptions";
 import { setFlashCard } from "../../modules/subscription/flashcard";
-import { getRecommendServiceAndSubscription } from "../../modules/subscription/recommend";
+import {
+  getRecommendServiceAndSubscription,
+  getMyTaskOfServiceOrSubscription,
+} from "../../modules/subscription/recommend";
 import { setScheduleAppontmentData } from "../../modules/subscription/activities";
 import { getFlashCardByActivityId } from "../../modules/subscription/flashcard";
 // import { googleTranslate } from "../../modules/cdss";
@@ -234,6 +237,19 @@ const mapDispatchToProps = (dispatch) => {
     getSubscriptions: () => dispatch(getSubscriptions()),
     getRecommendServiceAndSubscription: (patientId) =>
       dispatch(getRecommendServiceAndSubscription(patientId)),
+    getMyTaskOfServiceOrSubscription: (
+      patientId,
+      service_offering_id_subscription_id,
+      type
+    ) =>
+      dispatch(
+        getMyTaskOfServiceOrSubscription(
+          patientId,
+          service_offering_id_subscription_id,
+          type
+        )
+      ),
+
     googleTranslate: (textToConvert) =>
       dispatch(googleTranslate(textToConvert)),
     googleTranslateMultipleText: (textToConvertArray) =>

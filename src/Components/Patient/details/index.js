@@ -3069,6 +3069,9 @@ class PatientDetails extends Component {
                       >
                         <SubscriptionTable
                           recommendServices={this.props.recommendServices}
+                          getMyTaskOfServiceOrSubscription={
+                            this.props.getMyTaskOfServiceOrSubscription
+                          }
                         />
                       </TabPane>
                     </Tabs>
