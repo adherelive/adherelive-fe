@@ -2,7 +2,7 @@ import { TABLE_COLUMN } from "../helper";
 
 export default (data) => {
   const { basic_info: { id = null } = {}, formatMessage } = data;
-  console.log("data in datarow", data);
+  // console.log("data in datarow", data);
 
   return {
     key: data.newId,

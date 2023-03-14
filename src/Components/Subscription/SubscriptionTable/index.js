@@ -19,6 +19,7 @@ class SubscriptionTable extends Component {
       editServiceDrawer: false,
       myTasksDrawer: false,
       editData: {},
+      myTaskData: {},
     };
   }
 
@@ -50,9 +51,6 @@ class SubscriptionTable extends Component {
   };
 
   onOpenMyTasksDrawer = async (patientId, serviceOrSubscriptionId, type) => {
-    console.log("patientId", patientId);
-    console.log("serviceOrSubscriptionId", serviceOrSubscriptionId);
-    console.log("type", type);
     const { getMyTaskOfServiceOrSubscription } = this.props;
 
     const response = await getMyTaskOfServiceOrSubscription(
@@ -60,7 +58,16 @@ class SubscriptionTable extends Component {
       serviceOrSubscriptionId,
       type
     );
-    console.log("response", response);
+
+    const { status, payload: { data } = {} } = response || {};
+    if (status === true) {
+      this.setState({
+        myTaskData: data,
+      });
+    } else {
+      message.warn("Something went wrong while fetching my tasks");
+    }
+
     this.setState({ myTasksDrawer: true });
   };
 
@@ -99,7 +106,7 @@ class SubscriptionTable extends Component {
       // }
     }
 
-    console.log(options);
+    // console.log(options);
 
     return options;
   };
@@ -128,6 +135,7 @@ class SubscriptionTable extends Component {
       authPermissions = [],
       intl: { formatMessage } = {},
     } = this.props;
+    const { myTaskData } = this.state;
 
     const locale = {
       //   emptyText: this.formatMessage(messages.emptyConsultationTable),
@@ -167,7 +175,11 @@ class SubscriptionTable extends Component {
           />
         )}
         {myTasksDrawer === true && (
-          <MyTasks visible={myTasksDrawer} onCloseDrawer={this.onCloseDrawer} />
+          <MyTasks
+            myTaskData={myTaskData}
+            visible={myTasksDrawer}
+            onCloseDrawer={this.onCloseDrawer}
+          />
         )}
       </>
     );

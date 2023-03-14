@@ -16,7 +16,7 @@ export default (props) => {
     } = {},
   } = props || {};
 
-  console.log("props.data", props.data);
+  // console.log("props.data", props.data);
 
   let patientId = "";
   let serviceOrSubscriptionId = "";
