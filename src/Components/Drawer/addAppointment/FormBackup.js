@@ -22,6 +22,7 @@
 // // AKSHAY NEW COE FOR ANTD V4
 // import { Form, Mention } from "@ant-design/compatible";
 // import "@ant-design/compatible/assets/index.css";
+// import isEmpty from "../../../Helper/is-empty";
 
 // const { Item: FormItem } = Form;
 // const { Option, OptGroup } = Select;
@@ -38,6 +39,8 @@
 // const PROVIDER_ID = "provider_id";
 // const REASON = "reason";
 // const RADIOLOGY_TYPE = "radiology_type";
+// // AKSHAY NEW CODE IMPLEMENTATION
+// const APPOINTMENT_CAREPLAN = "appointment_careplan";
 
 // const FIELDS = [
 //   PATIENT,
@@ -50,6 +53,8 @@
 //   APPOINTMENT_TYPE_DESCRIPTION,
 //   PROVIDER_ID,
 //   RADIOLOGY_TYPE,
+//   // AKSHAY NEW CODE IMPLEMENTATION
+//   APPOINTMENT_CAREPLAN,
 // ];
 
 // class AddAppointmentForm extends Component {
@@ -64,13 +69,18 @@
 //       radiologyDropDownVisible: false,
 //       radiologyTypeSelected: null,
 //       typeDescValue: "",
+//       carePlans: {},
 //     };
 //   }
 
-//   componentDidMount() {
+//   async componentDidMount() {
 //     this.scrollToTop();
+//     const { scheduleAppointment } = this.props;
 //     this.getMedicalTestFavourites();
 //     this.getRadiologyFavourites();
+//     if (!isEmpty(scheduleAppointment)) {
+//       await this.getCarePlanForPatient();
+//     }
 //   }
 
 //   getMedicalTestFavourites = async () => {
@@ -107,6 +117,33 @@
 //       }
 //     } catch (error) {
 //       console.log("RadiologyResponse Get errrrorrrr ===>", error);
+//     }
+//   };
+//   // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+//   getCarePlanForPatient = async () => {
+//     try {
+//       const {
+//         getPatientCareplanByPatientIdAndUserRoleId,
+//         scheduleAppointment,
+//       } = this.props;
+//       const getCarePlanResponse =
+//         await getPatientCareplanByPatientIdAndUserRoleId(
+//           scheduleAppointment.patient_id
+//         );
+//       const {
+//         status,
+//         statusCode,
+//         payload: { data = {}, message: resp_msg = "" } = {},
+//       } = getCarePlanResponse || {};
+//       if (!status) {
+//         message.error(resp_msg);
+//       } else if (status) {
+//         this.setState({
+//           carePlans: data.care_plans,
+//         });
+//       }
+//     } catch (error) {
+//       console.log("Patient Careplans Get errrrorrrr ===>", error);
 //     }
 //   };
 //   scrollToTop = () => {
@@ -285,12 +322,37 @@
 //     this.setState({ typeDescription: descArray });
 //   };
 
+//   handleCareplanSelect = (value) => {
+//     this.setState({
+//       selectedCareplan: value,
+//     });
+//   };
+
 //   getTypeOption = () => {
 //     let {
 //       static_templates: { appointments: { appointment_type = {} } = {} } = {},
+//       scheduleAppointment = {},
 //     } = this.props;
+//     // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+//     let finalType = {};
+//     if (!isEmpty(scheduleAppointment)) {
+//       for (let type of Object.keys(appointment_type)) {
+//         let { title = "" } = appointment_type[type] || {};
+//         if (title === "Consultation") {
+//           finalType[type] = appointment_type[type];
+//         }
+//       }
+//     } else {
+//       for (let type of Object.keys(appointment_type)) {
+//         let { title = "" } = appointment_type[type] || {};
+//         // if (title !== "Consultation") {
+//         finalType[type] = appointment_type[type];
+//         // }
+//       }
+//     }
+
 //     let newTypes = [];
-//     for (let type of Object.keys(appointment_type)) {
+//     for (let type of Object.keys(finalType)) {
 //       let { title = "" } = appointment_type[type] || {};
 //       newTypes.push(
 //         <Option key={type} value={type}>
@@ -301,7 +363,35 @@
 //     return newTypes;
 //   };
 
-//   setRadiologyTypeSelected = (id) => () => {
+//   getCareplanOption = () => {
+//     const { carePlans = {} } = this.state;
+
+//     let options = [];
+
+//     for (let carePlan of Object.keys(carePlans)) {
+//       let {
+//         details: { diagnosis: { description = "" } } = {},
+//         basic_info: { id = "" } = {},
+//       } = carePlans[carePlan];
+//       options.push(
+//         <Option key={id} value={id}>
+//           {description}
+//         </Option>
+//       );
+//     }
+//     // carePlans.forEach((carePlan) => {
+//     //   options.push(
+//     //     <Option key={carePlan.id} value={carePlan.id}>
+//     //       {carePlan.details.diagnosis.description}
+//     //     </Option>
+//     //   );
+//     // });
+
+//     return options;
+//   };
+
+//   setRadiologyTypeSelected = (value, data) => {
+//     let id = data.key.split("-")[0];
 //     this.setState({ radiologyTypeSelected: `${id}` });
 //   };
 
@@ -325,29 +415,29 @@
 
 //       return (
 //         <Option key={`${index}-${name}`} value={name}>
-//           <div className="pointer flex wp100  align-center justify-space-between">
-//             {name}
-//             {descDropDownOpen ? (
-//               // <Tooltip
-//               //   placement="topLeft"
-//               //   // title={favorite_id ? this.formatMessage(messages.unMarkFav) : this.formatMessage(messages.markFav)}
-//               // >
-//               <Fragment>
-//                 {favorite_id ? (
-//                   <StarFilled
-//                     style={{ fontSize: "20px", color: "#f9c216" }}
-//                     onClick={this.handleremoveMedicalTestFavourites(index)}
-//                   />
-//                 ) : (
-//                   <StarOutlined
-//                     style={{ fontSize: "20px", color: "#f9c216" }}
-//                     onClick={this.handleAddMedicalTestFavourites(index)}
-//                   />
-//                 )}
-//               </Fragment>
-//             ) : // </Tooltip>
-//             null}
-//           </div>
+//           {/* <div className="pointer flex wp100  align-center justify-space-between"> */}
+//           {name}
+//           {descDropDownOpen ? (
+//             // <Tooltip
+//             //   placement="topLeft"
+//             //   // title={favorite_id ? this.formatMessage(messages.unMarkFav) : this.formatMessage(messages.markFav)}
+//             // >
+//             <Fragment>
+//               {favorite_id ? (
+//                 <StarFilled
+//                   style={{ fontSize: "20px", color: "#f9c216" }}
+//                   onClick={this.handleremoveMedicalTestFavourites(index)}
+//                 />
+//               ) : (
+//                 <StarOutlined
+//                   style={{ fontSize: "20px", color: "#f9c216" }}
+//                   onClick={this.handleAddMedicalTestFavourites(index)}
+//                 />
+//               )}
+//             </Fragment>
+//           ) : // </Tooltip>
+//           null}
+//           {/* </div> */}
 //         </Option>
 //       );
 //     });
@@ -363,7 +453,7 @@
 //         <Option
 //           key={`${id}-${name}`}
 //           value={name}
-//           onClick={setRadiologyTypeSelected(id)}
+//           // onClick={setRadiologyTypeSelected(id)}
 //         >
 //           {name}
 //         </Option>
@@ -705,9 +795,27 @@
 //     }
 //     this.setState({ typeDescValue: value });
 //   };
+//   translateHandler = async () => {
+//     const {
+//       form: { setFieldsValue, getFieldValue },
+//     } = this.props;
+//     const currentValue = getFieldValue(DESCRIPTION);
+//     const { googleTranslate } = this.props;
+//     let textToTranslate = currentValue;
+//     const response = await googleTranslate(textToTranslate);
+//     const { data = {} } = response || {};
+//     if (data) {
+//       setFieldsValue({ [DESCRIPTION]: data.translations[0].translatedText });
+//     } else {
+//       alert("Something went wrong");
+//     }
+//     // console.log("response", data.translations[0].translatedText);
+//   };
+
 //   render() {
 //     const {
 //       form: { getFieldDecorator, isFieldTouched, getFieldError, getFieldValue },
+//       scheduleAppointment,
 //     } = this.props;
 //     const { radiologyTypeSelected = null } = this.state;
 //     const {
@@ -720,14 +828,18 @@
 //       getEndTime,
 //       getTimePicker,
 //     } = this;
+
 //     const currentDate = moment(getFieldValue(DATE));
 //     let appointmentType = getFieldValue(APPOINTMENT_TYPE) || null;
+
 //     let fieldsError = {};
 //     FIELDS.forEach((value) => {
 //       const error = isFieldTouched(value) && getFieldError(value);
 //       fieldsError = { ...fieldsError, [value]: error };
 //     });
+
 //     const typeValue = getFieldValue(APPOINTMENT_TYPE) || null;
+
 //     return (
 //       <Form className="fw700 wp100 pb30 Form">
 //         <FormItem
@@ -738,6 +850,7 @@
 //             initialValue: getInitialValue(),
 //           })(<div />)}
 //         </FormItem>
+
 //         <div className="flex mt24 direction-row flex-grow-1">
 //           <label
 //             htmlFor="type"
@@ -746,8 +859,10 @@
 //           >
 //             {formatMessage(messages.appointmentType)}
 //           </label>
+
 //           <div className="star-red">*</div>
 //         </div>
+
 //         <FormItem>
 //           {getFieldDecorator(
 //             APPOINTMENT_TYPE,
@@ -762,6 +877,43 @@
 //             </Select>
 //           )}
 //         </FormItem>
+
+//         {/* AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION */}
+
+//         {!isEmpty(scheduleAppointment) && (
+//           <>
+//             <div className="flex mt24 direction-row flex-grow-1">
+//               <label
+//                 htmlFor="type"
+//                 className="form-label"
+//                 title={"Select treatment"}
+//               >
+//                 {/* {formatMessage(messages.appointmentType)} */}
+//                 Select treatment
+//               </label>
+
+//               <div className="star-red">*</div>
+//             </div>
+
+//             <FormItem>
+//               {getFieldDecorator(APPOINTMENT_CAREPLAN, {
+//                 rules: [{ required: true, message: "Please Select Careplan" }],
+//               })(
+//                 <Select
+//                   className="drawer-select"
+//                   placeholder={"Select Careplan"}
+//                   onSelect={this.handleCareplanSelect}
+//                   autoComplete="off"
+//                   optionFilterProp="children"
+//                   notFoundContent={"Careplans not found"}
+//                 >
+//                   {this.getCareplanOption()}
+//                 </Select>
+//               )}
+//             </FormItem>
+//           </>
+//         )}
+
 //         {typeValue !== RADIOLOGY && (
 //           <Fragment>
 //             <div className="flex mt24 direction-row flex-grow-1">
@@ -827,7 +979,8 @@
 //                 {}
 //               )(
 //                 <Select
-//                   onChange={this.handleTypeDescriptionSelect}
+//                   // onChange={this.handleTypeDescriptionSelect}
+//                   onSelect={this.setRadiologyTypeSelected}
 //                   onDropdownVisibleChange={this.DescDropDownVisibleChange}
 //                   disabled={!appointmentType}
 //                   notFoundContent={"No match found"}
@@ -954,6 +1107,12 @@
 //               onBlur={handleDateSelect(currentDate)}
 //               // suffixIcon={calendarComp()}
 //               disabledDate={disabledDate}
+//               disabled={
+//                 !isEmpty(scheduleAppointment) &&
+//                 scheduleAppointment.fromButton === "start"
+//                   ? true
+//                   : false
+//               }
 //               // getCalendarContainer={this.getParentNode}
 //             />
 //           )}
@@ -982,7 +1141,15 @@
 //                 START_TIME,
 //                 {}
 //               )(
-//                 <Dropdown overlay={getTimePicker(START_TIME)}>
+//                 <Dropdown
+//                   overlay={getTimePicker(START_TIME)}
+//                   // disabled={
+//                   //   !isEmpty(scheduleAppointment) &&
+//                   //   scheduleAppointment.fromButton === "start"
+//                   //     ? true
+//                   //     : false
+//                   // }
+//                 >
 //                   <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
 //                     <div>{getStartTime()}</div>
 //                     <ClockCircleOutlined />
@@ -1014,7 +1181,15 @@
 //                 END_TIME,
 //                 {}
 //               )(
-//                 <Dropdown overlay={getTimePicker(END_TIME)}>
+//                 <Dropdown
+//                   overlay={getTimePicker(END_TIME)}
+//                   // disabled={
+//                   //   !isEmpty(scheduleAppointment) &&
+//                   //   scheduleAppointment.fromButton === "start"
+//                   //     ? true
+//                   //     : false
+//                   // }
+//                 >
 //                   <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
 //                     <div>{getEndTime()}</div>
 //                     <ClockCircleOutlined />
@@ -1063,7 +1238,7 @@
 //           )}
 //         </FormItem>
 
-//         <div className="flex mt24 direction-row flex-grow-1">
+//         <div className="flex mt24 direction-row flex-grow-1 justify-space-between">
 //           <label
 //             htmlFor="notes"
 //             className="form-label"
@@ -1071,6 +1246,12 @@
 //           >
 //             {formatMessage(messages.description_text)}
 //           </label>
+//           <p
+//             onClick={() => this.translateHandler()}
+//             className="translate-text pointer mr10"
+//           >
+//             Translate in Hindi
+//           </p>
 //         </div>
 //         <FormItem
 //           // label={formatMessage(messages.description_text)}

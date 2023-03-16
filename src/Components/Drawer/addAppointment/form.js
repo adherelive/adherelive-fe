@@ -323,9 +323,12 @@ class AddAppointmentForm extends Component {
     const {
       form: { setFieldsValue } = {},
       static_templates: { appointments: { type_description = {} } = {} } = {},
+      scheduleAppointment,
     } = this.props;
+    if (isEmpty(scheduleAppointment)) {
+      setFieldsValue({ [APPOINTMENT_TYPE_DESCRIPTION]: null });
+    }
 
-    setFieldsValue({ [APPOINTMENT_TYPE_DESCRIPTION]: null });
     let descArray = type_description[value] ? type_description[value] : [];
 
     if (value !== RADIOLOGY) {
@@ -339,6 +342,15 @@ class AddAppointmentForm extends Component {
     this.setState({
       selectedCareplan: value,
     });
+  };
+
+  getInitialAppointmentTypeValue = () => {
+    const { scheduleAppointment } = this.props;
+    if (!isEmpty(scheduleAppointment)) {
+      return "2";
+    } else {
+      return null;
+    }
   };
 
   getTypeOption = () => {
@@ -406,6 +418,26 @@ class AddAppointmentForm extends Component {
   setRadiologyTypeSelected = (value, data) => {
     let id = data.key.split("-")[0];
     this.setState({ radiologyTypeSelected: `${id}` });
+  };
+
+  getInitialTypeDescriptionValue = () => {
+    const { typeDescription = [] } = this.state;
+    const { scheduleAppointment } = this.props;
+
+    // console.log("typeDescription", typeDescription);
+    // console.log("scheduleAppointment", scheduleAppointment);
+    if (!isEmpty(scheduleAppointment)) {
+      const {
+        details: { service_offering_name = "" },
+      } = scheduleAppointment;
+      return service_offering_name === "At clinic physical consultation"
+        ? "At Clinic"
+        : service_offering_name === "At home physical consultation"
+        ? "At Home"
+        : "Telephone";
+    } else {
+      return null;
+    }
   };
 
   getOtherOptions = () => {
@@ -504,12 +536,17 @@ class AddAppointmentForm extends Component {
     }
   };
 
+  getInitialProviderValue = () => {
+    return 5;
+  };
+
   getProviderOption = () => {
     let { static_templates: { appointments: { providers = {} } = {} } = {} } =
       this.props;
     //AKSHAY NEW CODE IMPLEMENTATION
 
     let newTypes = [];
+    console.log("providers", providers);
     for (let provider of Object.values(providers)) {
       let { basic_info: { id = "0", name = "" } = {} } = provider;
       if (
@@ -886,10 +923,9 @@ class AddAppointmentForm extends Component {
         </div>
 
         <FormItem>
-          {getFieldDecorator(
-            APPOINTMENT_TYPE,
-            {}
-          )(
+          {getFieldDecorator(APPOINTMENT_TYPE, {
+            initialValue: this.getInitialAppointmentTypeValue(),
+          })(
             <Select
               className="drawer-select"
               placeholder={formatMessage(messages.placeholderAppointmentType)}
@@ -950,19 +986,18 @@ class AddAppointmentForm extends Component {
               <div className="star-red">*</div>
             </div>
             <FormItem>
-              {getFieldDecorator(
-                APPOINTMENT_TYPE_DESCRIPTION,
-                {}
-              )(
+              {getFieldDecorator(APPOINTMENT_TYPE_DESCRIPTION, {
+                initialValue: this.getInitialTypeDescriptionValue(),
+              })(
                 <Select
                   onChange={this.handleTypeDescriptionSelect}
                   onDropdownVisibleChange={this.DescDropDownVisibleChange}
-                  disabled={!appointmentType}
+                  disabled={!appointmentType || !isEmpty(scheduleAppointment)}
                   notFoundContent={"No match found"}
                   className="drawer-select"
                   placeholder={formatMessage(messages.placeholderTypeDesc)}
                   showSearch
-                  defaultActiveFirstOption={true}
+                  // defaultActiveFirstOption={true}
                   autoComplete="off"
                   optionFilterProp="children"
                   // filterOption={(input, option) =>
@@ -1074,10 +1109,9 @@ class AddAppointmentForm extends Component {
         // label={formatMessage(messages.provider)}
         // className='mt24'
         >
-          {getFieldDecorator(
-            PROVIDER_ID,
-            {}
-          )(
+          {getFieldDecorator(PROVIDER_ID, {
+            initialValue: this.getInitialProviderValue(),
+          })(
             <Select
               notFoundContent={null}
               className="drawer-select"
