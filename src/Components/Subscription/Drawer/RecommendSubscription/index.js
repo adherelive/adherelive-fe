@@ -24,6 +24,7 @@ import InputNumber from "antd/es/input-number";
 import { useDispatch, useSelector } from "react-redux";
 import { recommendSubscription } from "../../../../modules/subscription/recommend";
 import isEmpty from "../../../../Helper/is-empty";
+import Tooltip from "antd/es/tooltip";
 
 const { Option } = Select;
 
@@ -167,12 +168,48 @@ function Index({ visible, onCloseDrawer, patient_id }) {
     const newScore = Object.fromEntries(filteredArr);
 
     let options = [];
-
     for (const key in newScore) {
+      console.log("newScore[key]", newScore[key]);
+      let services = newScore[key].services;
+
+      let servicesArray = [];
+
+      for (const service in services) {
+        servicesArray.push(services[service]);
+      }
+      console.log("servicesArray", servicesArray);
+
       options.push(
-        <Option key={newScore[key].id} value={newScore[key].notes}>
-          {newScore[key].notes}
+        <Option
+          key={newScore[key].id}
+          value={newScore[key].notes}
+          className="pointer flex wp100  align-center justify-space-between"
+        >
+          <Tooltip
+            title={servicesArray.map((ele, index) => {
+              return (
+                <span key={index} className="block mt10">
+                  {ele.serviceDetails.service_offering_name}
+                </span>
+              );
+            })}
+          >
+            {/* Title */}
+            {/* <div>
+              <span className="block fs16">{newScore[key].notes}</span>
+              {servicesArray.map((ele, index) => {
+                return (
+                  <span key={index} className="block mt10 fs12">
+                    {ele.serviceDetails.service_offering_name}
+                  </span>
+                );
+              })}
+            </div> */}
+          </Tooltip>
         </Option>
+        // <Option key={newScore[key].id} value={newScore[key].notes}>
+        //   {newScore[key].notes}
+        // </Option>
       );
     }
 
