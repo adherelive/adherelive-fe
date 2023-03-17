@@ -115,10 +115,7 @@ function Index({ onCloseDrawer, visible, myTaskData }) {
 
     let filteredTasks =
       !isEmpty(mysTaskArray) &&
-      mysTaskArray.filter(
-        (task) =>
-          task.service_subscription_id === taskData.service_subscription_id
-      );
+      mysTaskArray.filter((task) => task.details.id === taskData.details.id);
 
     if (!isEmpty(filteredTasks)) {
       return filteredTasks.map((data, index) => {
@@ -163,14 +160,28 @@ function Index({ onCloseDrawer, visible, myTaskData }) {
       subscriptionName = myTask[task].serviceSubscriptionDetails.notes;
     }
 
-    // console.log("myTask", myTaskArray);
+    console.log("myTask", myTaskArray);
 
     //getting common task from all tasks
-    let commonTask = myTaskArray.reduce(
-      (c, n) => (c.find((el) => el.Text == n.Text) ? c : [...c, n]),
-      []
-    );
+
+    const idArr = myTaskArray.map((obj) => obj.details.id); // Extract the id values
+    const idCounts = idArr.reduce((acc, id) => {
+      acc[id] = (acc[id] || 0) + 1; // Increment the count for each id
+      return acc;
+    }, {});
+    const commonIds = Object.keys(idCounts).filter((id) => idCounts[id] > 1); // Filter for ids that appear more than once
+
+    // console.log("commonIds", commonIds);
+
+    const commonTask = myTaskArray.filter((obj) =>
+      commonIds.includes(`${obj.details.id}`)
+    ); // Filter for objects with common ids
+
+    console.log("commonTask", commonTask); // Output: [{ id: 1, name: "John" }, { id: 2, name: "Jane" }, { id: 2, name: "Alice" }]
+
     // console.log(commonTask);
+
+    let notCommonTask = [];
 
     // removing common tasks and making final array of tasks for mapping
     myTaskArray.forEach((element) => {
@@ -178,35 +189,40 @@ function Index({ onCloseDrawer, visible, myTaskData }) {
         (ele) => ele.service_subscription_id === element.service_subscription_id
       );
       if (isEmpty(filterTask)) {
-        commonTask.push(element);
+        notCommonTask.push(element);
       }
     });
 
-    // console.log(commonTask);
+    if (isEmpty(notCommonTask)) {
+      notCommonTask.push(commonTask[0]);
+    }
+
+    console.log("notCommonTask", notCommonTask);
 
     return (
       <div className="wp100">
         <h3 style={{ fontWeight: "bold" }}>
           {subscriptionName} subscription plan
         </h3>
-        {commonTask.map((task, index) => {
-          return (
-            <div
-              key={index}
-              className="p18 mb10"
-              style={{ border: "1px solid lightgrey", height: "250px" }}
-            >
-              {" "}
-              <h3 style={{ fontWeight: "bold" }}>
-                {task.details.service_offering_name}
-              </h3>
-              <h4>Sessions and Timings</h4>
-              <ul style={{ listStyle: "auto" }}>
-                {renderSubscriptionSessions(task)}
-              </ul>
-            </div>
-          );
-        })}
+        {!isEmpty(notCommonTask) &&
+          notCommonTask.map((task, index) => {
+            return (
+              <div
+                key={index}
+                className="p18 mb10"
+                style={{ border: "1px solid lightgrey", height: "250px" }}
+              >
+                {" "}
+                <h3 style={{ fontWeight: "bold" }}>
+                  {task.details.service_offering_name}
+                </h3>
+                <h4>Sessions and Timings</h4>
+                <ul style={{ listStyle: "auto" }}>
+                  {renderSubscriptionSessions(task)}
+                </ul>
+              </div>
+            );
+          })}
       </div>
     );
   };
