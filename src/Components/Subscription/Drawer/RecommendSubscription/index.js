@@ -195,16 +195,16 @@ function Index({ visible, onCloseDrawer, patient_id }) {
             })}
           >
             {/* Title */}
-            {/* <div>
+            <div>
               <span className="block fs16">{newScore[key].notes}</span>
-              {servicesArray.map((ele, index) => {
+              {/* {servicesArray.map((ele, index) => {
                 return (
                   <span key={index} className="block mt10 fs12">
                     {ele.serviceDetails.service_offering_name}
                   </span>
                 );
-              })}
-            </div> */}
+              })} */}
+            </div>
           </Tooltip>
         </Option>
         // <Option key={newScore[key].id} value={newScore[key].notes}>
