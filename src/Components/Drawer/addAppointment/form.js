@@ -434,7 +434,7 @@ class AddAppointmentForm extends Component {
         ? "At Clinic"
         : service_offering_name === "At home physical consultation"
         ? "At Home"
-        : "Telephone";
+        : "Virtual - Telehealth";
     } else {
       return null;
     }

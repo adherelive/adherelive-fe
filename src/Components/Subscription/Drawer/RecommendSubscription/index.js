@@ -189,7 +189,7 @@ function Index({ visible, onCloseDrawer, patient_id }) {
             title={servicesArray.map((ele, index) => {
               return (
                 <span key={index} className="block mt10">
-                  {ele.serviceDetails.service_offering_name}
+                  {`${ele.service_frequency} - ${ele.serviceDetails.service_offering_name}`}
                 </span>
               );
             })}
