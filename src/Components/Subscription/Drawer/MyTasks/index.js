@@ -165,47 +165,63 @@ function Index({ onCloseDrawer, visible, myTaskData }) {
     //getting common task from all tasks
 
     const idArr = myTaskArray.map((obj) => obj.details.id); // Extract the id values
-    const idCounts = idArr.reduce((acc, id) => {
-      acc[id] = (acc[id] || 0) + 1; // Increment the count for each id
-      return acc;
-    }, {});
-    const commonIds = Object.keys(idCounts).filter((id) => idCounts[id] > 1); // Filter for ids that appear more than once
+    console.log("idArr", idArr);
+
+    let uniqueIdArr = [...new Set(idArr)];
+
+    console.log("uniqueIdArr", uniqueIdArr);
+
+    // const idCounts = idArr.reduce((acc, id) => {
+    //   acc[id] = (acc[id] || 0) + 1; // Increment the count for each id
+    //   return acc;
+    // }, {});
+    // const commonIds = Object.keys(idCounts).filter((id) => idCounts[id] > 1); // Filter for ids that appear more than once
 
     // console.log("commonIds", commonIds);
-
-    const commonTask = myTaskArray.filter((obj) =>
-      commonIds.includes(`${obj.details.id}`)
-    ); // Filter for objects with common ids
-
-    console.log("commonTask", commonTask); // Output: [{ id: 1, name: "John" }, { id: 2, name: "Jane" }, { id: 2, name: "Alice" }]
-
-    // console.log(commonTask);
-
-    let notCommonTask = [];
-
-    // removing common tasks and making final array of tasks for mapping
-    myTaskArray.forEach((element) => {
-      let filterTask = commonTask.filter(
-        (ele) => ele.service_subscription_id === element.service_subscription_id
-      );
-      if (isEmpty(filterTask)) {
-        notCommonTask.push(element);
-      }
+    let finalTasks = [];
+    uniqueIdArr.forEach((ele) => {
+      let filteredElement = myTaskArray.filter((el) => el.details.id === ele);
+      finalTasks.push(filteredElement[0]);
     });
 
-    if (isEmpty(notCommonTask)) {
-      notCommonTask.push(commonTask[0]);
-    }
+    // finalTasks = myTaskArray.filter((obj) =>
+    //   uniqueIdArr.includes(obj.details.id)
+    // ); // Filter for objects with common ids
 
-    console.log("notCommonTask", notCommonTask);
+    console.log("finalTasks", finalTasks); // Output: [{ id: 1, name: "John" }, { id: 2, name: "Jane" }, { id: 2, name: "Alice" }]
+
+    // const nonCommonTask = myTaskArray.filter((obj) =>
+    //   commonIds.includes(`${obj.details.id}`)
+    // ); // Filter for objects with common ids
+
+    // console.log("nonCommonTask", nonCommonTask);
+
+    // let notCommonTask = [];
+
+    // // removing common tasks and making final array of tasks for mapping
+    // myTaskArray.forEach((element) => {
+    //   let filterTask = commonTask.filter(
+    //     (ele) => ele.service_subscription_id === element.service_subscription_id
+    //   );
+    //   console.log("filterTask", filterTask);
+    //   // if (isEmpty(filterTask)) {
+    //   //   notCommonTask.push(element);
+    //   // }
+    // });
+
+    // if (isEmpty(notCommonTask)) {
+    //   notCommonTask.push(commonTask[0]);
+    // }
+
+    // console.log("notCommonTask", notCommonTask);
 
     return (
       <div className="wp100">
         <h3 style={{ fontWeight: "bold" }}>
           {subscriptionName} subscription plan
         </h3>
-        {!isEmpty(notCommonTask) &&
-          notCommonTask.map((task, index) => {
+        {!isEmpty(finalTasks) &&
+          finalTasks.map((task, index) => {
             return (
               <div
                 key={index}
