@@ -6,7 +6,7 @@ import Select from "antd/es/select";
 import DatePicker from "antd/es/date-picker";
 import Input from "antd/es/input";
 import TextArea from "antd/es/input/TextArea";
-import { Checkbox } from "antd";
+import { Checkbox, TimePicker } from "antd";
 import messages from "./message";
 import moment from "moment";
 import calendar from "../../../Assets/images/calendar1.svg";
@@ -270,6 +270,62 @@ class AddAppointmentForm extends Component {
       [START_TIME]: newEventStartTime,
       [END_TIME]: newEventEndTime,
     });
+  };
+
+  handleStartTimeChange = (time, str) => {
+    const { form: { setFieldsValue, getFieldValue } = {} } = this.props;
+    const startTime = getFieldValue(START_TIME);
+    const startDate = getFieldValue(DATE);
+    if (startDate) {
+      const newMonth = startDate.get("month");
+      const newDate = startDate.get("date");
+      const newYear = startDate.get("year");
+      let newEventStartTime;
+      let newEventEndTime;
+      newEventStartTime = time
+        ? moment(time)
+            .clone()
+            .set({ month: newMonth, year: newYear, date: newDate })
+        : null;
+      newEventEndTime = newEventStartTime
+        ? moment(newEventStartTime).add("minutes", 30)
+        : null;
+      setFieldsValue({
+        [START_TIME]: newEventStartTime,
+        [END_TIME]: newEventEndTime,
+      });
+    } else {
+      setFieldsValue({
+        [END_TIME]: time ? moment(time).add("minutes", 30) : null,
+      });
+    }
+  };
+
+  handleEndTimeChange = (time, str) => {
+    const { form: { setFieldsValue, getFieldValue } = {} } = this.props;
+    const startTime = getFieldValue(START_TIME);
+    const startDate = getFieldValue(DATE);
+    if (startDate) {
+      const newMonth = startDate.get("month");
+      const newDate = startDate.get("date");
+      const newYear = startDate.get("year");
+      let newEventStartTime;
+      let newEventEndTime;
+      newEventStartTime = startTime
+        ? moment(startTime)
+            .clone()
+            .set({ month: newMonth, year: newYear, date: newDate })
+        : null;
+      newEventEndTime = time
+        ? time.clone().set({ month: newMonth, year: newYear, date: newDate })
+        : null;
+      setFieldsValue({
+        [START_TIME]: newEventStartTime,
+        [END_TIME]: newEventEndTime,
+      });
+    } else {
+      setFieldsValue({ [END_TIME]: moment(time) });
+    }
   };
 
   getPatientName = () => {
@@ -1113,6 +1169,7 @@ class AddAppointmentForm extends Component {
             initialValue: this.getInitialProviderValue(),
           })(
             <Select
+              disabled={!isEmpty(scheduleAppointment)}
               notFoundContent={null}
               className="drawer-select"
               placeholder={formatMessage(messages.placeholderProvider)}
@@ -1197,20 +1254,28 @@ class AddAppointmentForm extends Component {
                 START_TIME,
                 {}
               )(
-                <Dropdown
-                  overlay={getTimePicker(START_TIME)}
-                  // disabled={
-                  //   !isEmpty(scheduleAppointment) &&
-                  //   scheduleAppointment.fromButton === "start"
-                  //     ? true
-                  //     : false
-                  // }
-                >
-                  <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
-                    <div>{getStartTime()}</div>
-                    <ClockCircleOutlined />
-                  </div>
-                </Dropdown>
+                <TimePicker
+                  use12Hours
+                  onChange={this.handleStartTimeChange}
+                  // minuteStep={15}
+                  format="h:mm a"
+                  className="wp100 ant-time-custom"
+                  // getPopupContainer={this.getParentNode}
+                />
+                // <Dropdown
+                //   overlay={getTimePicker(START_TIME)}
+                //   // disabled={
+                //   //   !isEmpty(scheduleAppointment) &&
+                //   //   scheduleAppointment.fromButton === "start"
+                //   //     ? true
+                //   //     : false
+                //   // }
+                // >
+                //   <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
+                //     <div>{getStartTime()}</div>
+                //     <ClockCircleOutlined />
+                //   </div>
+                // </Dropdown>
               )}
             </FormItem>
           </div>
@@ -1237,20 +1302,28 @@ class AddAppointmentForm extends Component {
                 END_TIME,
                 {}
               )(
-                <Dropdown
-                  overlay={getTimePicker(END_TIME)}
-                  // disabled={
-                  //   !isEmpty(scheduleAppointment) &&
-                  //   scheduleAppointment.fromButton === "start"
-                  //     ? true
-                  //     : false
-                  // }
-                >
-                  <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
-                    <div>{getEndTime()}</div>
-                    <ClockCircleOutlined />
-                  </div>
-                </Dropdown>
+                <TimePicker
+                  use12Hours
+                  // minuteStep={15}
+                  onChange={this.handleEndTimeChange}
+                  format="h:mm a"
+                  className="wp100 ant-time-custom"
+                  // getPopupContainer={this.getParentNode}
+                />
+                // <Dropdown
+                //   overlay={getTimePicker(END_TIME)}
+                //   // disabled={
+                //   //   !isEmpty(scheduleAppointment) &&
+                //   //   scheduleAppointment.fromButton === "start"
+                //   //     ? true
+                //   //     : false
+                //   // }
+                // >
+                //   <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
+                //     <div>{getEndTime()}</div>
+                //     <ClockCircleOutlined />
+                //   </div>
+                // </Dropdown>
               )}
             </FormItem>
           </div>
