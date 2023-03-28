@@ -21,7 +21,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAppointmentsDetails: () => dispatch(getAppointmentsDetails()),
     getAppointments: (id) => dispatch(getAppointments(id)),
-    getAllActivities: () => dispatch(getAllActivities()),
+    getAllActivities: (activityStatus) =>
+      dispatch(getAllActivities(activityStatus)),
     openEditAppointmentDrawer: (payload) =>
       dispatch(open({ type: DRAWER.EDIT_APPOINTMENT, payload })),
     setScheduleAppontmentData: (payload) =>

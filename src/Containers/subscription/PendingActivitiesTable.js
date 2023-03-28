@@ -23,7 +23,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(open({ type: DRAWER.ADD_APPOINTMENT, payload })),
     openEditAppointmentDrawer: (payload) =>
       dispatch(open({ type: DRAWER.EDIT_APPOINTMENT, payload })),
-    getAllActivities: () => dispatch(getAllActivities()),
+    getAllActivities: (activityStatus) =>
+      dispatch(getAllActivities(activityStatus)),
     setFlashCard: (value) => dispatch(setFlashCard(value)),
     setScheduleAppontmentData: (payload) =>
       dispatch(setScheduleAppontmentData(payload)),

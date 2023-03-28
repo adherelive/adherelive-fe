@@ -26,7 +26,7 @@ class ScheduledActivitiesTable extends Component {
 
   componentDidMount() {
     const { getAllActivities, getAppointmentsDetails } = this.props;
-    getAllActivities();
+    getAllActivities("scheduled");
     getAppointmentsDetails();
   }
 

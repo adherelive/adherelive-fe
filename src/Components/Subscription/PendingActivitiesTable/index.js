@@ -26,7 +26,7 @@ class PendingActivitiesTable extends Component {
 
   componentDidMount() {
     const { getAllActivities, getAppointmentsDetails } = this.props;
-    getAllActivities();
+    getAllActivities("pending");
     getAppointmentsDetails();
   }
 
@@ -118,12 +118,12 @@ class PendingActivitiesTable extends Component {
       history,
     } = this.props;
 
-    let finalObject = {};
-    let filteredArray = Object.keys(activities).forEach(function (key) {
-      if (activities[key].status === "pending") {
-        finalObject[key] = activities[key];
-      }
-    });
+    let finalObject = activities;
+    // let filteredArray = Object.keys(activities).forEach(function (key) {
+    //   if (activities[key].status === "pending") {
+    //     finalObject[key] = activities[key];
+    //   }
+    // });
 
     let options = [];
 
@@ -236,6 +236,68 @@ class PendingActivitiesTable extends Component {
     },
   });
 
+  onChange = (pagination, filters, sorter, extra) => {
+    const { columnKey, order } = sorter;
+    console.log("columnKey", columnKey);
+
+    console.log("order", order);
+
+    // const {
+    //   currentTab = CURRENT_TAB.ALL_PATIENTS,
+    //   tabState = {},
+    //   sortByName,
+    //   sortByCreatedAt,
+    //   changeTabState,
+    // } = this.props;
+
+    // const { searchTreatmentText = "", searchDiagnosisText = "" } = this.state;
+
+    // if (
+    //   (columnKey !== TABLE_COLUMN.CREATED_AT.key &&
+    //     columnKey !== TABLE_COLUMN.PID.key) ||
+    //   searchTreatmentText.length > 0 ||
+    //   searchDiagnosisText.length > 0
+    // ) {
+    //   return;
+    // }
+
+    // if (columnKey === TABLE_COLUMN.CREATED_AT.key) {
+    //   if (!order) {
+    //     // sort by createdAt  asc
+    //     sortByCreatedAt({ currentTab });
+    //     changeTabState({ currentTab, type: SORT_CREATEDAT, value: 1 });
+    //   } else {
+    //     // sort by created at asc or desc
+
+    //     sortByCreatedAt({ currentTab });
+
+    //     if (order === ASCEND) {
+    //       changeTabState({ currentTab, type: SORT_CREATEDAT, value: 1 });
+    //     } else if (order === DESCEND) {
+    //       changeTabState({ currentTab, type: SORT_CREATEDAT, value: 0 });
+    //     }
+    //   }
+    // } else if (columnKey === TABLE_COLUMN.PID.key) {
+    //   if (!order) {
+    //     // sort by name ascending
+
+    //     sortByName({ currentTab });
+    //     changeTabState({ currentTab, type: SORT_NAME, value: 0 });
+    //   } else {
+    //     // sort ascending or descending
+    //     sortByName({ currentTab });
+
+    //     if (order === ASCEND) {
+    //       changeTabState({ currentTab, type: SORT_NAME, value: 0 });
+    //     } else if (order === DESCEND) {
+    //       changeTabState({ currentTab, type: SORT_NAME, value: 1 });
+    //     }
+    //   }
+    // }
+
+    // this.handleGetPatients();
+  };
+
   render() {
     const { editServiceDrawer, myTasksDrawer } = this.state;
     const {
@@ -281,6 +343,7 @@ class PendingActivitiesTable extends Component {
             pageSize: 10,
           }}
           locale={locale}
+          onChange={this.onChange}
         />
         {editServiceDrawer === true && (
           <EditRecommendSubscription

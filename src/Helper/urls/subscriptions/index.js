@@ -63,8 +63,8 @@ export const activateTransactionUrl = () => {
 
 // ACTIVITIES URL
 
-export const activitiesUrl = () => {
-  return `/txactivities`;
+export const activitiesUrl = (activityStatus) => {
+  return `/txactivities?status=${activityStatus}`;
 };
 
 export const updateActivityUrl = (activityId) => {

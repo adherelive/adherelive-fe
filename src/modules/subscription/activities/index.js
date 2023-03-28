@@ -11,13 +11,13 @@ import {
   SET_ACTIVITY_DATA_FOR_SCHEDULE,
 } from "../../../reducer/index";
 
-export const getAllActivities = () => {
+export const getAllActivities = (activityStatus) => {
   let response = {};
   return async (dispatch) => {
     try {
       response = await doRequest({
         method: REQUEST_TYPE.GET,
-        url: activitiesUrl(),
+        url: activitiesUrl(activityStatus),
       });
 
       const { status, payload: { data } = {} } = response || {};
