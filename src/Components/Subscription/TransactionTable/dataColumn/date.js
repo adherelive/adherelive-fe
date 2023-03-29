@@ -17,7 +17,7 @@ export default (props) => {
     <div className="fs16 fw700 tab-color">
       {/* {moment(updated_at).format("Do MMM, hh:mm A")} */}
       {moment(
-        type === "service" ? services[0].createdAt : subplan[0].createdAt
+        type === "service" ? services[0].due_date : subplan[0].due_date
       ).format("DD-MMM-YY")}{" "}
     </div>
   );
