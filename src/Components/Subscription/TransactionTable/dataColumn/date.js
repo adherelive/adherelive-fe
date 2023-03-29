@@ -13,11 +13,13 @@ export default (props) => {
     type = "service";
   }
 
+  console.log("transactions", transactions);
+
   return (
     <div className="fs16 fw700 tab-color">
       {/* {moment(updated_at).format("Do MMM, hh:mm A")} */}
       {moment(
-        type === "service" ? services[0].due_date : subplan[0].due_date
+        type === "service" ? transactions.due_date : transactions.due_date
       ).format("DD-MMM-YY")}{" "}
     </div>
   );
