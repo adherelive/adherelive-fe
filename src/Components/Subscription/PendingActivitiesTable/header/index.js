@@ -1,6 +1,7 @@
 import React from "react";
 
 import { TABLE_COLUMN } from "../helper";
+import { ASCEND, DESCEND } from "../../../../constant";
 // import messages from "../messages";
 import Service from "../datacolumn/service";
 import Date from "../datacolumn/date";
@@ -12,7 +13,8 @@ import ActivityStatus from "../datacolumn/activityStatus";
 
 export default (props) => {
   // const { formatMessage } = props || {};
-  const { formatMessage, getColumnSearchProps } = props || {};
+  const { formatMessage, getColumnSearchProps, sortState } = props || {};
+  console.log("sortState", sortState);
 
   return [
     {
@@ -23,7 +25,7 @@ export default (props) => {
         return <Date {...data} />;
       },
       sorter: () => null,
-      // sortOrder:  ASCEND : DESCEND,
+      sortOrder: sortState === null ? null : sortState === 0 ? ASCEND : DESCEND,
     },
     {
       title: "Activity",

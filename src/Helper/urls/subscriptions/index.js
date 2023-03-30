@@ -63,8 +63,12 @@ export const activateTransactionUrl = () => {
 
 // ACTIVITIES URL
 
-export const activitiesUrl = (activityStatus) => {
-  return `/txactivities?status=${activityStatus}`;
+export const activitiesUrl = (activityStatus, dueDateSort) => {
+  if (dueDateSort) {
+    return `/txactivities?status=${activityStatus}&sort_duedate=${dueDateSort}`;
+  } else {
+    return `/txactivities?status=${activityStatus}`;
+  }
 };
 
 export const updateActivityUrl = (activityId) => {

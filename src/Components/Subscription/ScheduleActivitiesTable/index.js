@@ -21,6 +21,7 @@ class ScheduledActivitiesTable extends Component {
     this.state = {
       editServiceDrawer: false,
       myTasksDrawer: false,
+      sortState: 0,
     };
   }
 
@@ -209,6 +210,80 @@ class ScheduledActivitiesTable extends Component {
     },
   });
 
+  onChange = (pagination, filters, sorter, extra) => {
+    const { getAllActivities } = this.props;
+    const { columnKey, order } = sorter;
+    console.log("columnKey", columnKey);
+
+    console.log("order", order);
+    if (order === "descend") {
+      getAllActivities("scheduled", "ASC");
+      this.setState({
+        sortState: 1,
+      });
+    } else {
+      getAllActivities("scheduled", "DESC");
+      this.setState({
+        sortState: 0,
+      });
+    }
+
+    // const {
+    //   currentTab = CURRENT_TAB.ALL_PATIENTS,
+    //   tabState = {},
+    //   sortByName,
+    //   sortByCreatedAt,
+    //   changeTabState,
+    // } = this.props;
+
+    // const { searchTreatmentText = "", searchDiagnosisText = "" } = this.state;
+
+    // if (
+    //   (columnKey !== TABLE_COLUMN.CREATED_AT.key &&
+    //     columnKey !== TABLE_COLUMN.PID.key) ||
+    //   searchTreatmentText.length > 0 ||
+    //   searchDiagnosisText.length > 0
+    // ) {
+    //   return;
+    // }
+
+    // if (columnKey === TABLE_COLUMN.CREATED_AT.key) {
+    //   if (!order) {
+    //     // sort by createdAt  asc
+    //     sortByCreatedAt({ currentTab });
+    //     changeTabState({ currentTab, type: SORT_CREATEDAT, value: 1 });
+    //   } else {
+    //     // sort by created at asc or desc
+
+    //     sortByCreatedAt({ currentTab });
+
+    //     if (order === ASCEND) {
+    //       changeTabState({ currentTab, type: SORT_CREATEDAT, value: 1 });
+    //     } else if (order === DESCEND) {
+    //       changeTabState({ currentTab, type: SORT_CREATEDAT, value: 0 });
+    //     }
+    //   }
+    // } else if (columnKey === TABLE_COLUMN.PID.key) {
+    //   if (!order) {
+    //     // sort by name ascending
+
+    //     sortByName({ currentTab });
+    //     changeTabState({ currentTab, type: SORT_NAME, value: 0 });
+    //   } else {
+    //     // sort ascending or descending
+    //     sortByName({ currentTab });
+
+    //     if (order === ASCEND) {
+    //       changeTabState({ currentTab, type: SORT_NAME, value: 0 });
+    //     } else if (order === DESCEND) {
+    //       changeTabState({ currentTab, type: SORT_NAME, value: 1 });
+    //     }
+    //   }
+    // }
+
+    // this.handleGetPatients();
+  };
+
   render() {
     const { editServiceDrawer, myTasksDrawer } = this.state;
     const {
@@ -242,6 +317,7 @@ class ScheduledActivitiesTable extends Component {
           // loading={loading === true ? getLoadingComponent() : false}
           columns={getColumn({
             //   formatMessage,
+            sortState: this.state.sortState,
             className: "pointer",
             getColumnSearchProps: this.getColumnSearchProps,
           })}
@@ -252,6 +328,7 @@ class ScheduledActivitiesTable extends Component {
             pageSize: 10,
           }}
           locale={locale}
+          onChange={this.onChange}
         />
         {editServiceDrawer === true && (
           <EditRecommendSubscription

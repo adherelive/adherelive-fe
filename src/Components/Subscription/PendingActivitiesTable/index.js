@@ -21,6 +21,7 @@ class PendingActivitiesTable extends Component {
     this.state = {
       editServiceDrawer: false,
       myTasksDrawer: false,
+      sortState: 0,
     };
   }
 
@@ -153,6 +154,10 @@ class PendingActivitiesTable extends Component {
   // SEARCH PATIENTS HANDLER
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
+    console.log("selectedKeys", selectedKeys);
+    console.log("dataIndex", dataIndex);
+    console.log("confirm", confirm);
+    alert(JSON.stringify(selectedKeys[0]));
     confirm();
     // this.setState({
     //   searchText: selectedKeys[0],
@@ -161,6 +166,7 @@ class PendingActivitiesTable extends Component {
   };
 
   handleReset = (clearFilters) => {
+    alert("asdsd");
     clearFilters();
     // this.setState({ searchText: "" });
   };
@@ -237,10 +243,22 @@ class PendingActivitiesTable extends Component {
   });
 
   onChange = (pagination, filters, sorter, extra) => {
+    const { getAllActivities } = this.props;
     const { columnKey, order } = sorter;
     console.log("columnKey", columnKey);
 
     console.log("order", order);
+    if (order === "descend") {
+      getAllActivities("pending", "ASC");
+      this.setState({
+        sortState: 1,
+      });
+    } else {
+      getAllActivities("pending", "DESC");
+      this.setState({
+        sortState: 0,
+      });
+    }
 
     // const {
     //   currentTab = CURRENT_TAB.ALL_PATIENTS,
@@ -333,6 +351,7 @@ class PendingActivitiesTable extends Component {
           // loading={loading === true ? getLoadingComponent() : false}
           columns={getColumn({
             //   formatMessage,
+            sortState: this.state.sortState,
             className: "pointer",
             getColumnSearchProps: this.getColumnSearchProps,
           })}
