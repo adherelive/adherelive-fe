@@ -30,37 +30,41 @@ export default (props) => {
   } = props || {};
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
       {/* <span>{`Rs ${amount}`}</span> */}
-      <span>
-        <span onClick={() => onPatientNameClick(props.data.activities)}>
-          {full_name}
-        </span>
+      <span onClick={() => onPatientNameClick(props.data.activities)}>
+        {full_name}
+      </span>
 
-        {details.service_offering_name !== "Remote monitoring" && (
-          <Button
-            type="primary"
-            className="ml10 add-button "
-            // icon={"plus"}
-            style={{ backgroundColor: "#92d04f", border: "none" }}
-            size={"small"}
-            onClick={() => scheduleHanlder(props.data.activities)}
-          >
-            <span className="fs16">Schedule</span>
-          </Button>
-        )}
-
+      {details.service_offering_name !== "Remote monitoring" && (
         <Button
           type="primary"
           className="ml10 add-button "
           // icon={"plus"}
           style={{ backgroundColor: "#92d04f", border: "none" }}
           size={"small"}
-          onClick={() => startHandler(props.data.activities)}
+          onClick={() => scheduleHanlder(props.data.activities)}
         >
-          <span className="fs16">Start now</span>
+          <span className="fs16">Schedule</span>
         </Button>
-      </span>
+      )}
+
+      <Button
+        type="primary"
+        className="ml10 add-button "
+        // icon={"plus"}
+        style={{ backgroundColor: "#92d04f", border: "none" }}
+        size={"small"}
+        onClick={() => startHandler(props.data.activities)}
+      >
+        <span className="fs16">Start now</span>
+      </Button>
     </div>
   );
 };

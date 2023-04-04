@@ -45,23 +45,28 @@ export default (props) => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
       {/* <span>{`Rs ${amount}`}</span> */}
-      <span>
-        <span onClick={() => onPatientNameClick(props.data.activities)}>
-          {full_name}
-        </span>
-        <Button
-          type="primary"
-          className="ml10 add-button p10"
-          // icon={"plus"}
-          style={{ backgroundColor: "#92d04f", border: "none" }}
-          size={"small"}
-          onClick={startHandler}
-        >
-          <span className="fs16">Start</span>
-        </Button>
+
+      <span onClick={() => onPatientNameClick(props.data.activities)}>
+        {full_name}
       </span>
+      <Button
+        type="primary"
+        className="ml10 add-button p10"
+        // icon={"plus"}
+        style={{ backgroundColor: "#92d04f", border: "none" }}
+        size={"small"}
+        onClick={startHandler}
+      >
+        <span className="fs16">Start</span>
+      </Button>
     </div>
   );
 };
