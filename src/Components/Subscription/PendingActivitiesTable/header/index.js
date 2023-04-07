@@ -14,7 +14,7 @@ import ActivityStatus from "../datacolumn/activityStatus";
 export default (props) => {
   // const { formatMessage } = props || {};
   const { formatMessage, getColumnSearchProps, sortState } = props || {};
-  console.log("sortState", sortState);
+  // console.log("sortState", sortState);
 
   return [
     {

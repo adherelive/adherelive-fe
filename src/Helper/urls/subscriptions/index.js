@@ -94,3 +94,7 @@ export const addFlashCardUrl = () => {
 export const updateFlashcardUrl = (flashcardId) => {
   return `/flashcard/${flashcardId}`;
 };
+
+export const searchActivites = (query) => {
+  return `/patients/namesearch?value=${query}`;
+};

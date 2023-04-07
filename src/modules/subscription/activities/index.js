@@ -5,6 +5,7 @@ import {
   updateActivityUrl,
   patientCareplansUrl,
   patientCareplansSecondaryDoctorUrl,
+  searchActivites,
 } from "../../../Helper/urls/subscriptions";
 import {
   SET_PENDING_ACTIVITIES_TABLE_DATA,
@@ -117,6 +118,40 @@ export const getPatientCareplanByPatientIdAndUserRoleId = (patientId) => {
     } catch (err) {
       // console.log("GET_PATIENT_MISSED_EVENTS_START err consentVerify", err);
       throw err;
+    }
+
+    return response;
+  };
+};
+
+export const searchTxActivites = (patientName) => {
+  let response = {};
+  return async (dispatch) => {
+    try {
+      // dispatch({ type: SEARCH_PATIENT_FOR_DOCTOR });
+
+      response = await doRequest({
+        method: REQUEST_TYPE.GET,
+        url: searchActivites(patientName),
+      });
+
+      const { status, payload: { error = "", data = {} } = {} } =
+        response || {};
+
+      if (status === false) {
+        // dispatch({
+        //   type: SEARCH_PATIENT_FOR_DOCTOR_FAILED,
+        //   payload: { error },
+        // });
+      } else if (status === true) {
+        // dispatch({
+        //   type: SEARCH_PATIENT_FOR_DOCTOR_COMPLETE,
+        //   data: data,
+        // });
+      }
+    } catch (error) {
+      console.log("error search patient", error);
+      throw error;
     }
 
     return response;

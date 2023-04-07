@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { injectIntl } from "react-intl";
-import { Table, Icon, Empty } from "antd";
+import { Table, Icon, Empty, Select } from "antd";
 import generateRow from "./datarow";
 // import { USER_PERMISSIONS } from '../../../constant'
 import getColumn from "./header";
@@ -14,6 +14,7 @@ import SearchOutlined from "@ant-design/icons/SearchOutlined";
 import { TABLE_COLUMN } from "./helper";
 import EditAppointmentDrawer from "./../../../Containers/Drawer/editAppointment";
 import { LoadingOutlined } from "@ant-design/icons";
+import isEmpty from "../../../Helper/is-empty";
 
 class ScheduledActivitiesTable extends Component {
   constructor(props) {
@@ -22,6 +23,9 @@ class ScheduledActivitiesTable extends Component {
       editServiceDrawer: false,
       myTasksDrawer: false,
       sortState: 0,
+      searchPatient: "",
+      patientOptions: [],
+      searchPatientId: "",
     };
   }
 
@@ -127,6 +131,17 @@ class ScheduledActivitiesTable extends Component {
   // SEARCH PATIENTS HANDLER
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
+    const { searchPatientId } = this.state;
+
+    if (isEmpty(searchPatientId)) {
+      alert("Please select patient");
+    } else {
+      alert(JSON.stringify(searchPatientId));
+    }
+    // console.log("searchPatient", this.state.searchPatient);
+    // console.log("selectedKeys", selectedKeys);
+    // console.log("dataIndex", dataIndex);
+    // console.log("confirm", confirm);
     confirm();
     // this.setState({
     //   searchText: selectedKeys[0],
@@ -139,6 +154,43 @@ class ScheduledActivitiesTable extends Component {
     // this.setState({ searchText: "" });
   };
 
+  handlePatientSelect = (value, data) => {
+    this.setState({
+      searchPatient: data.value,
+      searchPatientId: data.id,
+    });
+  };
+  handlePatientChange = async (value) => {
+    const { searchTxActivites } = this.props;
+    const response = await searchTxActivites(value);
+    const {
+      payload: {
+        data: { patients = [] },
+      },
+    } = response;
+    this.setState({ patientOptions: patients });
+  };
+
+  getPatientNameOptions = () => {
+    const { patientOptions } = this.state;
+    const { Option } = Select;
+
+    const children = [];
+
+    for (let each in patientOptions) {
+      children.push(
+        <Option
+          key={patientOptions[each].full_name}
+          id={patientOptions[each].id}
+        >
+          {patientOptions[each].full_name}
+        </Option>
+      );
+    }
+
+    return children;
+  };
+
   getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -146,8 +198,8 @@ class ScheduledActivitiesTable extends Component {
       confirm,
       clearFilters,
     }) => (
-      <div style={{ padding: 8 }}>
-        <Input
+      <div style={{ padding: 8, width: "300px" }}>
+        {/* <Input
           ref={(node) => {
             this.searchInput = node;
           }}
@@ -160,7 +212,24 @@ class ScheduledActivitiesTable extends Component {
             this.handleSearch(selectedKeys, confirm, dataIndex)
           }
           style={{ width: "100%", marginBottom: 8, display: "block" }}
-        />
+        /> */}
+
+        <div className="mt10 mb10  cdss-select">
+          <Select
+            showSearch={true}
+            // mode="tags"
+            style={{ width: "100%" }}
+            // tokenSeparators={[","]}
+            placeholder="Search for patient"
+            onSearch={this.handlePatientChange}
+            onChange={this.handlePatientSelect}
+            value={this.state.searchPatient}
+            // onDeselect={hendleSymptomDeselect}
+          >
+            {/* {children} */}
+            {this.getPatientNameOptions()}
+          </Select>
+        </div>
 
         <Button
           type="primary"
@@ -203,11 +272,11 @@ class ScheduledActivitiesTable extends Component {
         //   : "";
       }
     },
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100);
-      }
-    },
+    // onFilterDropdownVisibleChange: (visible) => {
+    //   if (visible) {
+    //     setTimeout(() => this.searchInput.select(), 100);
+    //   }
+    // },
   });
 
   onChange = (pagination, filters, sorter, extra) => {

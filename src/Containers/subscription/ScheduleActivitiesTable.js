@@ -8,7 +8,10 @@ import {
   getAppointmentsDetails,
   getAppointments,
 } from "../../modules/appointments";
-import { setScheduleAppontmentData } from "../../modules/subscription/activities";
+import {
+  setScheduleAppontmentData,
+  searchTxActivites,
+} from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
   const { subscription: { activities = {} } = {} } = state;
@@ -29,6 +32,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setScheduleAppontmentData(payload)),
     openPatientDetailsDrawer: (payload) =>
       dispatch(open({ type: DRAWER.PATIENT_DETAILS, payload })),
+    searchTxActivites: (query) => dispatch(searchTxActivites(query)),
   };
 };
 
