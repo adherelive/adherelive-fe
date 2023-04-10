@@ -47,6 +47,7 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
     editServiceOfferingDrawer: false,
     editSubscriptionFeesWarn: false,
     razorpayLink: "",
+    loading: false,
   });
 
   const [serviceOfferingsArray, setServiceOfferingArray] = useState([]);
@@ -95,6 +96,10 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
   };
 
   const handleOk = () => {
+    setValues({
+      ...values,
+      loading: true,
+    });
     let finalServiceArray = [];
 
     serviceOfferingsArray.forEach((ele) => {
@@ -463,6 +468,7 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
           isModalVisible={createSubscriptionWarn}
           handleOk={handleOk}
           handleCancel={handleCancel}
+          loading={values.loading}
         />
       </Drawer>
     </Fragment>

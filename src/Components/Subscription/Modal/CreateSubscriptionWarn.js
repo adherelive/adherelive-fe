@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Modal, Button } from "antd";
 
-function CreateSubscriptionWarn({ isModalVisible, handleOk, handleCancel }) {
+function CreateSubscriptionWarn({
+  isModalVisible,
+  handleOk,
+  handleCancel,
+  loading,
+}) {
   return (
     <>
       <Modal
@@ -9,6 +14,7 @@ function CreateSubscriptionWarn({ isModalVisible, handleOk, handleCancel }) {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        confirmLoading={loading}
       >
         <p>Created subscription can't be edited</p>
       </Modal>
