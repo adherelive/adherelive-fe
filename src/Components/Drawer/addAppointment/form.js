@@ -235,7 +235,7 @@ class AddAppointmentForm extends Component {
   handleDateSelect = (date) => {
     const { openScheduleHandler } = this.props;
     console.log("this.props", this.props);
-    openScheduleHandler(date);
+    // openScheduleHandler(date);
     // const {
     //   form: { setFieldsValue, getFieldValue } = {},
     //   openScheduleHandler,
