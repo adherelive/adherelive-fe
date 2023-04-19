@@ -10,11 +10,20 @@ import {
 import { open } from "../../../modules/drawer";
 import { DRAWER } from "../../../constant";
 
+// AKSHAY NEW CODE FOR SUBSCRIPTION
+
+import { getProviderServices } from "../../../modules/subscription/services";
+import { getProviderSubscriptions } from "../../../modules/subscription/subscriptions";
+
 const mapStateToProps = (state) => {
-  const { users = {} } = state;
+  const {
+    users = {}, // AKSHAY NEW CODE FOR SUBSCRIPTION
+    subscription: { services = {} },
+  } = state;
 
   return {
     users,
+    services,
   };
 };
 
@@ -27,6 +36,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(open({ type: DRAWER.ADD_CONSULTATION_FEE, payload })),
     deleteDoctorPaymentProduct: (data) =>
       dispatch(deleteDoctorPaymentProduct(data)),
+    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    getProviderServices: (doctorId) => dispatch(getProviderServices(doctorId)),
+    getProviderSubscriptions: (doctorId) =>
+      dispatch(getProviderSubscriptions(doctorId)),
   };
 };
 

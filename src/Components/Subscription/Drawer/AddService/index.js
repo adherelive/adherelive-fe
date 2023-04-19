@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState } from "react";
 import { injectIntl } from "react-intl";
 import {
   Drawer,
   Icon,
   Select,
   Input,
-  message,
+  // message,
   Button,
   Spin,
   Radio,
@@ -18,80 +18,106 @@ import throttle from "lodash-es/throttle";
 
 // import messages from "./message";
 import Footer from "../../../Drawer/footer";
+import { PoweroffOutlined } from "@ant-design/icons";
+
+import { useDispatch } from "react-redux";
+import { addServices } from "./../../../../modules/subscription/services/index";
+import message from "antd/es/message";
 
 const { Option } = Select;
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
-class AddService extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+function AddService({ onCloseDrawer, visible, doctor_id }) {
+  const dispatch = useDispatch();
+  const [values, setValues] = useState({
+    consultation: "",
+    serviceType: "Digital",
+    serviceFees: "",
+    submitting: false,
+    currency: "INR",
+    razorpayLink: "",
+  });
+
+  const callBack = () => {
+    setValues({
+      ...values,
       consultation: "",
       serviceType: "Digital",
       serviceFees: "",
       submitting: false,
       currency: "INR",
+    });
+    onCloseDrawer();
+    message.success("Service added sucessfully");
+  };
+
+  const onSubmit = () => {
+    const { consultation, serviceType, serviceFees, currency, razorpayLink } =
+      values;
+    setValues({
+      ...values,
+      submitting: true,
+    });
+    let formData = {
+      // provider_type: "doctor",
+      // provider_id: 2,
+      service_offering_name: consultation,
+      description: serviceType,
+      is_active: true,
+      service_charge: serviceFees,
+      currency: currency,
+      payment_link: razorpayLink,
     };
-  }
-
-  componentDidMount() {}
-
-  onSubmit = () => {
-    const { consultation, serviceType, serviceFees, currency } = this.state;
-    // this.setState({
-    //   submitting: true,
-    // });
-    alert(
-      `Consultation: ${JSON.stringify(
-        consultation
-      )},ServiceType: ${JSON.stringify(
-        serviceType
-      )},ServiceFees: ${JSON.stringify(serviceFees)},Currency: ${JSON.stringify(
-        currency
-      )}`
-    );
-
-    this.props.onCloseDrawer();
-    this.setState({
-      consultation: "",
-      serviceType: "Digital",
-      serviceFees: "",
-      submitting: false,
-      currency: "INR",
-    });
+    if (doctor_id) {
+      formData.doctor_id = doctor_id;
+    }
+    dispatch(addServices(formData, callBack));
   };
 
-  formatMessage = (data) => this.props.intl.formatMessage(data);
+  // const formatMessage = (data) => this.props.intl.formatMessage(data);
 
-  onClose = () => {};
+  const onClose = () => {};
 
-  setConsultation = (value) => {
-    this.setState({
+  const setConsultation = (value) => {
+    setValues({
+      ...values,
       consultation: value,
+      serviceType:
+        value === "Virtual consultation" || value === "Remote monitoring"
+          ? "Digital"
+          : "Physical",
     });
   };
 
-  setCurrency = (value) => {
-    this.setState({
+  const setCurrency = (value) => {
+    setValues({
+      ...values,
       currency: value,
     });
   };
 
-  onCurrencySearch = (value) => {
+  const setRazorpayLink = (e) => {
+    setValues({
+      ...values,
+      razorpayLink: e.target.value,
+    });
+  };
+
+  const onCurrencySearch = (value) => {
     console.log(value);
   };
 
-  setServiceFee = (e) => {
+  const setServiceFee = (e) => {
     const { value } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
     if ((!isNaN(value) && reg.test(value)) || value === "") {
-      this.setState({ serviceFees: e.target.value });
+      setValues({ ...values, serviceFees: e.target.value });
     }
   };
 
-  getConsultationOption = () => {
+  const getConsultationOption = () => {
     let serviceOfferingOptions = [
       { name: "Virtual consultation", id: 1 },
       { name: "Remote monitoring", id: 2 },
@@ -110,11 +136,11 @@ class AddService extends Component {
     return options;
   };
 
-  getCurrencyOption = () => {
+  const getCurrencyOption = () => {
     let currencyOptions = [
       { name: "INR", id: 1 },
-      { name: "EUR", id: 2 },
-      { name: "USD", id: 3 },
+      // { name: "EUR", id: 2 },
+      // { name: "USD", id: 3 },
     ];
     let options = [];
     currencyOptions.forEach((currency) => {
@@ -128,13 +154,13 @@ class AddService extends Component {
     return options;
   };
 
-  renderAddNewConsultationFee = () => {
+  const renderAddNewConsultationFee = () => {
     const {
       consultation = "",
       serviceType = "",
       serviceFees = "",
       currency,
-    } = this.state;
+    } = values;
 
     return (
       <div className="form-block-ap">
@@ -153,7 +179,7 @@ class AddService extends Component {
           className="form-inputs-ap drawer-select"
           placeholder="Select Consultation Type"
           value={consultation}
-          onChange={this.setConsultation}
+          onChange={setConsultation}
           autoComplete="off"
           optionFilterProp="children"
           filterOption={(input, option) =>
@@ -161,33 +187,23 @@ class AddService extends Component {
             0
           }
         >
-          {this.getConsultationOption()}
+          {getConsultationOption()}
         </Select>
 
         <div>
           {consultation !== "" ? (
             <div>
-              {/* <div className="form-headings flex align-center justify-start">
-                {this.formatMessage(messages.consultationFeeName)}
-                <div className="star-red">*</div>
-              </div>
-              
-              <Input
-                className={"form-inputs-ap"}
-                value={newConsultationName}
-                onChange={this.setConsultationName}
-              />
-               */}
               <div className="form-headings flex align-center justify-start">
                 {/* {this.formatMessage(messages.consultationFeeType)} */}
                 <span>Service Type</span>
-                <div className="star-red">*</div>
+                {/* <div className="star-red">*</div> */}
               </div>
 
               <Input
                 className={"form-inputs-ap"}
                 value={serviceType}
                 // onChange={this.setConsultationName}
+                disabled
               />
 
               <div className="form-headings flex align-center justify-start">
@@ -199,7 +215,7 @@ class AddService extends Component {
               <Input
                 className={"form-inputs-ap"}
                 value={serviceFees}
-                onChange={this.setServiceFee}
+                onChange={setServiceFee}
                 // disabled={provider_id}
               />
 
@@ -213,9 +229,9 @@ class AddService extends Component {
                 className="form-inputs-ap drawer-select"
                 placeholder="Select Currency"
                 showSearch
-                onSearch={this.onCurrencySearch}
+                onSearch={onCurrencySearch}
                 value={currency}
-                onChange={this.setCurrency}
+                onChange={setCurrency}
                 autoComplete="off"
                 optionFilterProp="children"
                 filterOption={(input, option) =>
@@ -224,20 +240,23 @@ class AddService extends Component {
                     .indexOf(input.toLowerCase()) >= 0
                 }
               >
-                {this.getCurrencyOption()}
+                {getCurrencyOption()}
               </Select>
+              <div className="mb80">
+                <div className="form-headings flex align-center justify-start">
+                  {/* {this.formatMessage(messages.consultationFee)} */}
+                  <span>Razorpay Link</span>
+                  <div className="star-red">*</div>
+                </div>
 
-              {/* <div className="form-headings flex align-center justify-start">
-                {this.formatMessage(messages.razorpayLink)}
+                <Input
+                  className={"form-inputs-ap"}
+                  value={values.razorpayLink}
+                  onChange={setRazorpayLink}
+                  // disabled={}
+                  type="string"
+                />
               </div>
-              
-              <Input
-                className={"form-inputs-ap"}
-                value={razorpay_link}
-                onChange={this.setRazorpayLink}
-                disabled={provider_id}
-                type="string"
-              /> */}
             </div>
           ) : null}
         </div>
@@ -245,49 +264,45 @@ class AddService extends Component {
     );
   };
 
-  render() {
-    const { visible, onCloseDrawer } = this.props;
-    const { consultation, submitting } = this.state;
-    return (
-      <Fragment>
-        <Drawer
-          title={"Add New Service Offering"}
-          placement="right"
-          maskClosable={false}
-          headerStyle={{
-            position: "sticky",
-            zIndex: "9999",
-            top: "0px",
-          }}
-          destroyOnClose={true}
-          onClose={onCloseDrawer}
-          visible={visible} // todo: change as per state, -- WIP --
-          width={400}
-        >
-          {this.renderAddNewConsultationFee()}
-          {consultation !== "" ? (
-            <Footer
-              onSubmit={this.onSubmit}
-              onClose={this.onClose}
-              // submitText={this.formatMessage(messages.submit)}
-              submitText={"Submit"}
-              submitButtonProps={{}}
-              cancelComponent={null}
-              submitting={submitting}
-            />
-          ) : // <div className="add-patient-footer">
-          //   <Button onClick={this.onClose} style={{ marginRight: 8 }}>
-          //     {this.formatMessage(messages.cancel)}
-          //   </Button>
-          //   <Button onClick={this.onSubmit} type="primary">
-          //     {this.formatMessage(messages.submit)}
-          //   </Button>
-          // </div>
-          null}
-        </Drawer>
-      </Fragment>
-    );
-  }
+  const { consultation, submitting } = values;
+
+  return (
+    <Fragment>
+      <Drawer
+        title={"Add New Service Offering"}
+        placement="right"
+        maskClosable={false}
+        headerStyle={{
+          position: "sticky",
+          zIndex: "9999",
+          top: "0px",
+        }}
+        destroyOnClose={true}
+        onClose={onCloseDrawer}
+        visible={visible} // todo: change as per state, -- WIP --
+        width={400}
+      >
+        {renderAddNewConsultationFee()}
+        {consultation !== "" ? (
+          <div className="add-patient-footer">
+            <Button onClick={onCloseDrawer} style={{ marginRight: 8 }}>
+              {/* {this.formatMessage(messages.cancel)} */}
+              Cancel
+            </Button>
+            <Button
+              onClick={onSubmit}
+              type="primary"
+              // icon={submitting ? <PoweroffOutlined /> : null}
+              loading={submitting}
+            >
+              {/* {this.formatMessage(messages.submit)} */}
+              Submit
+            </Button>
+          </div>
+        ) : null}
+      </Drawer>
+    </Fragment>
+  );
 }
 
-export default injectIntl(AddService);
+export default AddService;

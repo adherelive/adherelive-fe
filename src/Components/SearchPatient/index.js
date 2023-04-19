@@ -89,8 +89,8 @@ class SearchPatient extends Component {
     // email,
     profile_pic,
     patient_id,
-    user_mobile_numer
-    // user_prefix
+    user_mobile_numer,
+    user_prefix
   ) => {
     let initials = `${first_name ? first_name[0] : ""}${
       last_name ? last_name[0] : ""
@@ -106,7 +106,7 @@ class SearchPatient extends Component {
         className="flex direction-row  justify-space-between"
         onClick={() => this.handlePatientDetailsRedirect(patient_id)}
       >
-        <div className=" wp10 flex direction-column align-center justify-center">
+        <div className="wp20 mr10 flex direction-column align-center justify-center">
           <Tooltip placement="right">
             {initials ? (
               <Avatar src={profile_pic}>{initials}</Avatar>
@@ -119,6 +119,11 @@ class SearchPatient extends Component {
           <span className="fs16 fw700 ellipsis ">
             {" "}
             {`${first_name}  ${getName(middle_name)} ${getName(last_name)}`}
+          </span>
+          <span className="flex direction-row justify-space-between">
+            <span>
+              +{user_prefix}-{user_mobile_numer}
+            </span>
           </span>
           {isPatientAvailableForDoctor !== true && (
             <span className="flex direction-row justify-space-between">

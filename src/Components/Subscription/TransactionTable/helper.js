@@ -19,12 +19,12 @@ export const TABLE_COLUMN = {
   DOCTOR: {
     key: "DOCTOR",
     dataIndex: "DOCTOR",
-    width: 200,
+    width: 220,
   },
   PATIENT: {
     key: "PATIENT",
     dataIndex: "PATIENT",
-    width: 200,
+    width: 250,
   },
   // PAYMENT_PRODUCT: {
   //   key: "PAYMENT_PRODUCT",
@@ -38,7 +38,7 @@ export const TABLE_COLUMN = {
   DURATION: {
     key: "DURATION",
     dataIndex: "DURATION",
-    width: 200,
+    width: 220,
   },
   AMOUNT: {
     key: "AMOUNT",
@@ -63,7 +63,7 @@ export const TABLE_COLUMN = {
   PAYMENT: {
     key: "PAYMENT",
     dataIndex: "PAYMENT",
-    width: 200,
+    width: 350,
   },
 };
 

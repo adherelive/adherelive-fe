@@ -6,7 +6,7 @@ import Select from "antd/es/select";
 import DatePicker from "antd/es/date-picker";
 import Input from "antd/es/input";
 import TextArea from "antd/es/input/TextArea";
-import { Checkbox } from "antd";
+import { Checkbox, TimePicker } from "antd";
 import messages from "./message";
 import moment from "moment";
 import calendar from "../../../Assets/images/calendar1.svg";
@@ -22,6 +22,7 @@ import message from "antd/es/message";
 // AKSHAY NEW COE FOR ANTD V4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
+import isEmpty from "../../../Helper/is-empty";
 
 const { Item: FormItem } = Form;
 const { Option, OptGroup } = Select;
@@ -38,6 +39,8 @@ const APPOINTMENT_TYPE_DESCRIPTION = "type_description";
 const PROVIDER_ID = "provider_id";
 const REASON = "reason";
 const RADIOLOGY_TYPE = "radiology_type";
+// AKSHAY NEW CODE IMPLEMENTATION
+const APPOINTMENT_CAREPLAN = "appointment_careplan";
 
 const FIELDS = [
   PATIENT,
@@ -50,6 +53,8 @@ const FIELDS = [
   APPOINTMENT_TYPE_DESCRIPTION,
   PROVIDER_ID,
   RADIOLOGY_TYPE,
+  // AKSHAY NEW CODE IMPLEMENTATION
+  APPOINTMENT_CAREPLAN,
 ];
 
 class AddAppointmentForm extends Component {
@@ -64,13 +69,18 @@ class AddAppointmentForm extends Component {
       radiologyDropDownVisible: false,
       radiologyTypeSelected: null,
       typeDescValue: "",
+      carePlans: {},
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.scrollToTop();
+    const { scheduleAppointment } = this.props;
     this.getMedicalTestFavourites();
     this.getRadiologyFavourites();
+    if (!isEmpty(scheduleAppointment)) {
+      await this.getCarePlanForPatient();
+    }
   }
 
   getMedicalTestFavourites = async () => {
@@ -108,6 +118,34 @@ class AddAppointmentForm extends Component {
       }
     } catch (error) {
       console.log("RadiologyResponse Get errrrorrrr ===>", error);
+    }
+  };
+
+  // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+  getCarePlanForPatient = async () => {
+    try {
+      const {
+        getPatientCareplanByPatientIdAndUserRoleId,
+        scheduleAppointment,
+      } = this.props;
+      const getCarePlanResponse =
+        await getPatientCareplanByPatientIdAndUserRoleId(
+          scheduleAppointment.patient_id
+        );
+      const {
+        status,
+        statusCode,
+        payload: { data = {}, message: resp_msg = "" } = {},
+      } = getCarePlanResponse || {};
+      if (!status) {
+        message.error(resp_msg);
+      } else if (status) {
+        this.setState({
+          carePlans: data.care_plans,
+        });
+      }
+    } catch (error) {
+      console.log("Patient Careplans Get errrrorrrr ===>", error);
     }
   };
 
@@ -194,44 +232,108 @@ class AddAppointmentForm extends Component {
   //   this.adjustEventOnStartDateChange(date);
   // };
 
-  handleDateSelect = (date) => () => {
+  handleDateSelect = (date) => {
+    const { openScheduleHandler } = this.props;
+    console.log("this.props", this.props);
+    // openScheduleHandler(date);
+    // const {
+    //   form: { setFieldsValue, getFieldValue } = {},
+    //   openScheduleHandler,
+    // } = this.props;
+    // console.log("this.props", this.props);
+    // openScheduleHandler();
+    // const startDate = getFieldValue(DATE);
+
+    // if (!date || !startDate) {
+    //   return;
+    // }
+
+    // const eventStartTime = getFieldValue(START_TIME);
+    // if (date.isSame(eventStartTime, "date")) {
+    //   return;
+    // }
+
+    // const eventEndTime = getFieldValue(END_TIME);
+
+    // const newMonth = startDate.get("month");
+    // const newDate = startDate.get("date");
+    // const newYear = startDate.get("year");
+
+    // let newEventStartTime;
+    // let newEventEndTime;
+
+    // if (eventStartTime) {
+    //   newEventStartTime = eventStartTime
+    //     .clone()
+    //     .set({ month: newMonth, year: newYear, date: newDate });
+    // }
+
+    // if (eventEndTime) {
+    //   newEventEndTime = eventEndTime
+    //     .clone()
+    //     .set({ month: newMonth, year: newYear, date: newDate });
+    // }
+
+    // setFieldsValue({
+    //   [START_TIME]: newEventStartTime,
+    //   [END_TIME]: newEventEndTime,
+    // });
+  };
+
+  handleStartTimeChange = (time, str) => {
     const { form: { setFieldsValue, getFieldValue } = {} } = this.props;
+    const startTime = getFieldValue(START_TIME);
     const startDate = getFieldValue(DATE);
-
-    if (!date || !startDate) {
-      return;
+    if (startDate) {
+      const newMonth = startDate.get("month");
+      const newDate = startDate.get("date");
+      const newYear = startDate.get("year");
+      let newEventStartTime;
+      let newEventEndTime;
+      newEventStartTime = time
+        ? moment(time)
+            .clone()
+            .set({ month: newMonth, year: newYear, date: newDate })
+        : null;
+      newEventEndTime = newEventStartTime
+        ? moment(newEventStartTime).add("minutes", 30)
+        : null;
+      setFieldsValue({
+        [START_TIME]: newEventStartTime,
+        [END_TIME]: newEventEndTime,
+      });
+    } else {
+      setFieldsValue({
+        [END_TIME]: time ? moment(time).add("minutes", 30) : null,
+      });
     }
+  };
 
-    const eventStartTime = getFieldValue(START_TIME);
-    if (date.isSame(eventStartTime, "date")) {
-      return;
+  handleEndTimeChange = (time, str) => {
+    const { form: { setFieldsValue, getFieldValue } = {} } = this.props;
+    const startTime = getFieldValue(START_TIME);
+    const startDate = getFieldValue(DATE);
+    if (startDate) {
+      const newMonth = startDate.get("month");
+      const newDate = startDate.get("date");
+      const newYear = startDate.get("year");
+      let newEventStartTime;
+      let newEventEndTime;
+      newEventStartTime = startTime
+        ? moment(startTime)
+            .clone()
+            .set({ month: newMonth, year: newYear, date: newDate })
+        : null;
+      newEventEndTime = time
+        ? time.clone().set({ month: newMonth, year: newYear, date: newDate })
+        : null;
+      setFieldsValue({
+        [START_TIME]: newEventStartTime,
+        [END_TIME]: newEventEndTime,
+      });
+    } else {
+      setFieldsValue({ [END_TIME]: moment(time) });
     }
-
-    const eventEndTime = getFieldValue(END_TIME);
-
-    const newMonth = startDate.get("month");
-    const newDate = startDate.get("date");
-    const newYear = startDate.get("year");
-
-    let newEventStartTime;
-    let newEventEndTime;
-
-    if (eventStartTime) {
-      newEventStartTime = eventStartTime
-        .clone()
-        .set({ month: newMonth, year: newYear, date: newDate });
-    }
-
-    if (eventEndTime) {
-      newEventEndTime = eventEndTime
-        .clone()
-        .set({ month: newMonth, year: newYear, date: newDate });
-    }
-
-    setFieldsValue({
-      [START_TIME]: newEventStartTime,
-      [END_TIME]: newEventEndTime,
-    });
   };
 
   getPatientName = () => {
@@ -285,9 +387,12 @@ class AddAppointmentForm extends Component {
     const {
       form: { setFieldsValue } = {},
       static_templates: { appointments: { type_description = {} } = {} } = {},
+      scheduleAppointment,
     } = this.props;
+    if (isEmpty(scheduleAppointment)) {
+      setFieldsValue({ [APPOINTMENT_TYPE_DESCRIPTION]: null });
+    }
 
-    setFieldsValue({ [APPOINTMENT_TYPE_DESCRIPTION]: null });
     let descArray = type_description[value] ? type_description[value] : [];
 
     if (value !== RADIOLOGY) {
@@ -297,12 +402,46 @@ class AddAppointmentForm extends Component {
     this.setState({ typeDescription: descArray });
   };
 
+  handleCareplanSelect = (value) => {
+    this.setState({
+      selectedCareplan: value,
+    });
+  };
+
+  getInitialAppointmentTypeValue = () => {
+    const { scheduleAppointment } = this.props;
+    if (!isEmpty(scheduleAppointment)) {
+      return "2";
+    } else {
+      return null;
+    }
+  };
+
   getTypeOption = () => {
     let {
       static_templates: { appointments: { appointment_type = {} } = {} } = {},
+      scheduleAppointment = {},
     } = this.props;
+    // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+    let finalType = {};
+    if (!isEmpty(scheduleAppointment)) {
+      for (let type of Object.keys(appointment_type)) {
+        let { title = "" } = appointment_type[type] || {};
+        if (title === "Consultation") {
+          finalType[type] = appointment_type[type];
+        }
+      }
+    } else {
+      for (let type of Object.keys(appointment_type)) {
+        let { title = "" } = appointment_type[type] || {};
+        // if (title !== "Consultation") {
+        finalType[type] = appointment_type[type];
+        // }
+      }
+    }
+
     let newTypes = [];
-    for (let type of Object.keys(appointment_type)) {
+    for (let type of Object.keys(finalType)) {
       let { title = "" } = appointment_type[type] || {};
       newTypes.push(
         <Option key={type} value={type}>
@@ -313,9 +452,56 @@ class AddAppointmentForm extends Component {
     return newTypes;
   };
 
+  getCareplanOption = () => {
+    const { carePlans = {} } = this.state;
+
+    let options = [];
+
+    for (let carePlan of Object.keys(carePlans)) {
+      let {
+        details: { diagnosis: { description = "" } } = {},
+        basic_info: { id = "" } = {},
+      } = carePlans[carePlan];
+      options.push(
+        <Option key={id} value={id}>
+          {description}
+        </Option>
+      );
+    }
+    // carePlans.forEach((carePlan) => {
+    //   options.push(
+    //     <Option key={carePlan.id} value={carePlan.id}>
+    //       {carePlan.details.diagnosis.description}
+    //     </Option>
+    //   );
+    // });
+
+    return options;
+  };
+
   setRadiologyTypeSelected = (value, data) => {
     let id = data.key.split("-")[0];
     this.setState({ radiologyTypeSelected: `${id}` });
+  };
+
+  getInitialTypeDescriptionValue = () => {
+    const { typeDescription = [] } = this.state;
+    const { scheduleAppointment } = this.props;
+
+    // console.log("typeDescription", typeDescription);
+    // console.log("scheduleAppointment", scheduleAppointment);
+    if (!isEmpty(scheduleAppointment)) {
+      const {
+        details: { service_offering_name = "" },
+      } = scheduleAppointment;
+      return service_offering_name === "At clinic physical consultation"
+        ? "At Clinic"
+        : service_offering_name === "At home physical consultation"
+        ? "At Home"
+        : "Virtual - Telehealth";
+    } else {
+      return null;
+    }
   };
 
   getOtherOptions = () => {
@@ -414,12 +600,17 @@ class AddAppointmentForm extends Component {
     }
   };
 
+  getInitialProviderValue = () => {
+    return 5;
+  };
+
   getProviderOption = () => {
     let { static_templates: { appointments: { providers = {} } = {} } = {} } =
       this.props;
     //AKSHAY NEW CODE IMPLEMENTATION
 
     let newTypes = [];
+    console.log("providers", providers);
     for (let provider of Object.values(providers)) {
       let { basic_info: { id = "0", name = "" } = {} } = provider;
       if (
@@ -747,6 +938,7 @@ class AddAppointmentForm extends Component {
   render() {
     const {
       form: { getFieldDecorator, isFieldTouched, getFieldError, getFieldValue },
+      scheduleAppointment,
     } = this.props;
     const { radiologyTypeSelected = null } = this.state;
     const {
@@ -795,10 +987,9 @@ class AddAppointmentForm extends Component {
         </div>
 
         <FormItem>
-          {getFieldDecorator(
-            APPOINTMENT_TYPE,
-            {}
-          )(
+          {getFieldDecorator(APPOINTMENT_TYPE, {
+            initialValue: this.getInitialAppointmentTypeValue(),
+          })(
             <Select
               className="drawer-select"
               placeholder={formatMessage(messages.placeholderAppointmentType)}
@@ -808,6 +999,42 @@ class AddAppointmentForm extends Component {
             </Select>
           )}
         </FormItem>
+
+        {/* AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION */}
+
+        {!isEmpty(scheduleAppointment) && (
+          <>
+            <div className="flex mt24 direction-row flex-grow-1">
+              <label
+                htmlFor="type"
+                className="form-label"
+                title={"Select treatment"}
+              >
+                {/* {formatMessage(messages.appointmentType)} */}
+                Select treatment
+              </label>
+
+              <div className="star-red">*</div>
+            </div>
+
+            <FormItem>
+              {getFieldDecorator(APPOINTMENT_CAREPLAN, {
+                rules: [{ required: true, message: "Please Select Careplan" }],
+              })(
+                <Select
+                  className="drawer-select"
+                  placeholder={"Select Careplan"}
+                  onSelect={this.handleCareplanSelect}
+                  autoComplete="off"
+                  optionFilterProp="children"
+                  notFoundContent={"Careplans not found"}
+                >
+                  {this.getCareplanOption()}
+                </Select>
+              )}
+            </FormItem>
+          </>
+        )}
 
         {typeValue !== RADIOLOGY && (
           <Fragment>
@@ -823,19 +1050,18 @@ class AddAppointmentForm extends Component {
               <div className="star-red">*</div>
             </div>
             <FormItem>
-              {getFieldDecorator(
-                APPOINTMENT_TYPE_DESCRIPTION,
-                {}
-              )(
+              {getFieldDecorator(APPOINTMENT_TYPE_DESCRIPTION, {
+                initialValue: this.getInitialTypeDescriptionValue(),
+              })(
                 <Select
                   onChange={this.handleTypeDescriptionSelect}
                   onDropdownVisibleChange={this.DescDropDownVisibleChange}
-                  disabled={!appointmentType}
+                  disabled={!appointmentType || !isEmpty(scheduleAppointment)}
                   notFoundContent={"No match found"}
                   className="drawer-select"
                   placeholder={formatMessage(messages.placeholderTypeDesc)}
                   showSearch
-                  defaultActiveFirstOption={true}
+                  // defaultActiveFirstOption={true}
                   autoComplete="off"
                   optionFilterProp="children"
                   // filterOption={(input, option) =>
@@ -947,11 +1173,11 @@ class AddAppointmentForm extends Component {
         // label={formatMessage(messages.provider)}
         // className='mt24'
         >
-          {getFieldDecorator(
-            PROVIDER_ID,
-            {}
-          )(
+          {getFieldDecorator(PROVIDER_ID, {
+            initialValue: this.getInitialProviderValue(),
+          })(
             <Select
+              disabled={!isEmpty(scheduleAppointment)}
               notFoundContent={null}
               className="drawer-select"
               placeholder={formatMessage(messages.placeholderProvider)}
@@ -999,9 +1225,16 @@ class AddAppointmentForm extends Component {
           })(
             <DatePicker
               className="wp100 h53"
-              onBlur={handleDateSelect(currentDate)}
+              // onBlur={handleDateSelect(currentDate)}
               // suffixIcon={calendarComp()}
               disabledDate={disabledDate}
+              disabled={
+                !isEmpty(scheduleAppointment) &&
+                scheduleAppointment.fromButton === "start"
+                  ? true
+                  : false
+              }
+              onChange={this.handleDateSelect}
               // getCalendarContainer={this.getParentNode}
             />
           )}
@@ -1030,12 +1263,28 @@ class AddAppointmentForm extends Component {
                 START_TIME,
                 {}
               )(
-                <Dropdown overlay={getTimePicker(START_TIME)}>
-                  <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
-                    <div>{getStartTime()}</div>
-                    <ClockCircleOutlined />
-                  </div>
-                </Dropdown>
+                <TimePicker
+                  use12Hours
+                  onChange={this.handleStartTimeChange}
+                  // minuteStep={15}
+                  format="h:mm a"
+                  className="wp100 ant-time-custom"
+                  // getPopupContainer={this.getParentNode}
+                />
+                // <Dropdown
+                //   overlay={getTimePicker(START_TIME)}
+                //   // disabled={
+                //   //   !isEmpty(scheduleAppointment) &&
+                //   //   scheduleAppointment.fromButton === "start"
+                //   //     ? true
+                //   //     : false
+                //   // }
+                // >
+                //   <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
+                //     <div>{getStartTime()}</div>
+                //     <ClockCircleOutlined />
+                //   </div>
+                // </Dropdown>
               )}
             </FormItem>
           </div>
@@ -1062,12 +1311,28 @@ class AddAppointmentForm extends Component {
                 END_TIME,
                 {}
               )(
-                <Dropdown overlay={getTimePicker(END_TIME)}>
-                  <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
-                    <div>{getEndTime()}</div>
-                    <ClockCircleOutlined />
-                  </div>
-                </Dropdown>
+                <TimePicker
+                  use12Hours
+                  // minuteStep={15}
+                  onChange={this.handleEndTimeChange}
+                  format="h:mm a"
+                  className="wp100 ant-time-custom"
+                  // getPopupContainer={this.getParentNode}
+                />
+                // <Dropdown
+                //   overlay={getTimePicker(END_TIME)}
+                //   // disabled={
+                //   //   !isEmpty(scheduleAppointment) &&
+                //   //   scheduleAppointment.fromButton === "start"
+                //   //     ? true
+                //   //     : false
+                //   // }
+                // >
+                //   <div className="p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer">
+                //     <div>{getEndTime()}</div>
+                //     <ClockCircleOutlined />
+                //   </div>
+                // </Dropdown>
               )}
             </FormItem>
           </div>

@@ -17,6 +17,7 @@ import { RADIOLOGY } from "../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
+import isEmpty from "./../../../Helper/is-empty";
 
 class EditAppointment extends Component {
   constructor(props) {
@@ -61,6 +62,8 @@ class EditAppointment extends Component {
       editAppointment,
       addAppointment,
       payload: { patient_id } = {},
+      updateActivityById,
+      scheduleAppointment,
     } = this.props;
     const { formRef = {}, formatMessage } = this;
     const {
@@ -118,8 +121,14 @@ class EditAppointment extends Component {
           ? {
               // todo: change participant one with patient from store
               id,
+              // participant_two: {
+              //   id: pId,
+              //   category: "patient",
+              // },
               participant_two: {
-                id: pId,
+                id: !isEmpty(scheduleAppointment)
+                  ? scheduleAppointment.patient_id
+                  : pId,
                 category: "patient",
               },
               date: finalDate,
@@ -132,13 +141,20 @@ class EditAppointment extends Component {
               provider_id: newProvider_id,
               provider_name,
               critical,
-              treatment_id: treatment,
+              treatment_id: !isEmpty(treatment) ? treatment : 1,
+              // treatment_id: !isEmpty(scheduleAppointment) ? 1 : treatment,
             }
           : {
               // todo: change participant one with patient from store
               id,
+              // participant_two: {
+              //   id: pId,
+              //   category: "patient",
+              // },
               participant_two: {
-                id: pId,
+                id: !isEmpty(scheduleAppointment)
+                  ? scheduleAppointment.patient_id
+                  : pId,
                 category: "patient",
               },
               date: finalDate,
@@ -150,7 +166,8 @@ class EditAppointment extends Component {
               type_description,
               provider_name,
               critical,
-              treatment_id: treatment,
+              treatment_id: !isEmpty(treatment) ? treatment : 1,
+              // treatment_id: !isEmpty(scheduleAppointment) ? 1 : treatment,
             };
 
         if (type === RADIOLOGY) {
@@ -190,6 +207,7 @@ class EditAppointment extends Component {
               status,
               statusCode: code,
               payload: {
+                data: { appointment_id = "" },
                 message: errorMessage = "",
                 error: { error_type = "" } = {},
               },
@@ -205,6 +223,18 @@ class EditAppointment extends Component {
               this.setState({ disabledSubmit: true });
               message.success(formatMessage(messages.edit_appointment_success));
               getAppointments(pId);
+
+              // AKSHAY NEW CODE FOR SUBSCRIPTION
+
+              if (!isEmpty(scheduleAppointment)) {
+                const formData = {
+                  appointment_id: appointment_id,
+                  appointment_time: newEventStartTime,
+                  status: "scheduled",
+                  // provider_id: newProvider_id,
+                };
+                updateActivityById(scheduleAppointment.id, formData);
+              }
             } else {
               message.warn(formatMessage(messages.somethingWentWrong));
             }

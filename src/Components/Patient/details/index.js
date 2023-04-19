@@ -32,6 +32,7 @@ import {
   TYPE_VITALS,
   TYPE_DIETS,
   TYPE_WORKOUTS,
+  APPOINTMENT_TYPE_TITLE,
 } from "../../../constant";
 import { Tabs, Table, Dropdown, Spin, message, Button } from "antd";
 import Modal from "antd/es/modal";
@@ -94,12 +95,13 @@ import SymptomTabs from "../../../Containers/Symptoms";
 import { getRoomId } from "../../../Helper/twilio";
 import { getFullName } from "../../../Helper/common";
 import Tooltip from "antd/es/tooltip";
+import { PlusOutlined } from "@ant-design/icons";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscription";
 import RecommendService from "../../Subscription/Drawer/RecommendService";
 import SubscriptionTable from "../../Subscription/SubscriptionTable";
-import { PlusOutlined } from "@ant-design/icons";
+import FlashCard from "../../Subscription/Flashcard";
 
 const BLANK_TEMPLATE = "Blank Template";
 const { TabPane } = Tabs;
@@ -230,7 +232,7 @@ const columns_appointments = [
     title: "Description",
     dataIndex: "description",
     key: "description",
-    width: "30%",
+    width: "50%",
     ellipsis: true,
   },
   {
@@ -404,7 +406,7 @@ const PatientProfileHeader = ({
         </div>
       </div>
       <div className="flex-grow-1 tar">
-        {/* <Dropdown
+        <Dropdown
           overlay={getRecommendMenu()}
           trigger={["click"]}
           placement="bottomRight"
@@ -412,12 +414,12 @@ const PatientProfileHeader = ({
           <Button
             type="primary"
             className="ml10 mr20 add-button "
-            icon={<PlusOutlined/>}
-            style={{ backgroundColor: "#98FB98", border: "none" }}
+            icon={<PlusOutlined />}
+            style={{ backgroundColor: "#92d04f", border: "none" }}
           >
             <span className="fs16">Recommend</span>
           </Button>
-        </Dropdown> */}
+        </Dropdown>
         {(showAddButton ||
           user_role_id.toString() === auth_role.toString() ||
           secondary_doctor_user_role_ids.includes(auth_role) === true) && (
@@ -701,6 +703,8 @@ const PatientTreatmentCard = ({
 
   // let newClinicalNotes = treatment_clinical_notes.split("follow up advise");
 
+  // console.log("newClinicalNotes", newClinicalNotes);
+
   return (
     <div className="treatment mt20 tal bg-faint-grey">
       <div className="header-div flex align-center justify-space-between">
@@ -885,6 +889,10 @@ class PatientDetails extends Component {
       notification_redirect = {},
       authenticated_category,
       medicines = {},
+      // AKSHAY NEW CODE IMPLEMENTATIONS
+      flashcardOpen,
+      scheduleAppointment,
+      getFlashCardByActivityId,
     } = this.props;
 
     if (redirect_patient_id) {
@@ -905,8 +913,14 @@ class PatientDetails extends Component {
     // this.fetchReportData();
     // this.fetchVitalDetails();
 
+    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    this.props.getServices();
+    this.props.getSubscriptions();
+    this.props.getRecommendServiceAndSubscription(patient_id);
+
     // if (showTd) {
     const response = await getPatientCarePlanDetails(patient_id);
+
     //AKSHAY NEW CODE IMPLEMENTATIONS START
     const responsePatientDetails = await getPatientDetailsById(patient_id);
     if (responsePatientDetails.status) {
@@ -980,6 +994,16 @@ class PatientDetails extends Component {
         //   ? patientCarePlans[0]
         //   : "",
       });
+      if (
+        !isEmpty(scheduleAppointment) &&
+        scheduleAppointment.details.service_offering_name ===
+          "Virtual consultation"
+      ) {
+        this.openVideoScreen();
+      }
+      if (!isEmpty(scheduleAppointment)) {
+        getFlashCardByActivityId(scheduleAppointment.id);
+      }
     }
 
     // getMedications(patient_id);
@@ -1040,6 +1064,13 @@ class PatientDetails extends Component {
     if (Object.keys(notification_redirect).length) {
       resetNotificationRedirect();
     }
+  }
+
+  componentWillUnmount() {
+    // AKSHAY NEW CODE IMPLEMENTATIONS FOR SUBSCRIPTION
+    const { setFlashCard, setScheduleAppontmentData } = this.props;
+    setFlashCard(false);
+    setScheduleAppontmentData({});
   }
 
   componentDidUpdate = async (prevProps, prevState) => {
@@ -1219,11 +1250,28 @@ class PatientDetails extends Component {
         organizer: { id: organizer_id, name = "" } = {},
         active_event_id = null,
       } = appointments[id] || {};
-
+      let typeTitle = "";
       let description = "";
-      if (!isEmpty(details.description)) {
-        description = details.description;
+
+      if (!isEmpty(appointments[id])) {
+        typeTitle = APPOINTMENT_TYPE_TITLE[details.type].title;
+
+        description = "";
+        if (details.type === "3") {
+          if (!isEmpty(details.radiology_type)) {
+            description = details.radiology_type;
+          }
+        } else {
+          if (!isEmpty(details.type_description)) {
+            description = details.type_description;
+          }
+        }
       }
+
+      // let description = "";
+      // if (!isEmpty(details.description)) {
+      //   description = details.description;
+      // }
       // const { basic_info: { user_name = "", full_name } = {} } = users[organizer_id] || {};
 
       // console.log("1230990830912 users", {organizer_id, users, full_name});
@@ -1239,7 +1287,7 @@ class PatientDetails extends Component {
         } - ${
           end_time ? moment(end_time).format("LT") : TABLE_DEFAULT_BLANK_FIELD
         }`,
-        description: description ? description : "--",
+        description: description ? `${description} (${typeTitle})` : "--",
         markComplete: {
           id,
           end_time,
@@ -2410,11 +2458,13 @@ class PatientDetails extends Component {
   };
 
   setActiveKey = (value) => {
-    const { getAppointments } = this.props;
+    const { getAppointments, getRecommendServiceAndSubscription } = this.props;
     let patientId = window.location.href.split("/")[4];
 
     if (value === "2") {
       getAppointments(patientId);
+    } else if (value === "8") {
+      getRecommendServiceAndSubscription(patientId);
     }
 
     this.setState({ activeKey: value });
@@ -2483,6 +2533,7 @@ class PatientDetails extends Component {
       authenticated_category,
       providers = {},
       user_roles = {},
+      flashcardOpen = false,
     } = this.props;
 
     const {
@@ -3012,12 +3063,17 @@ class PatientDetails extends Component {
                         )}
                       </TabPane>
                       {/* AKSHAY NEW CODE FOR SUBSCRIPTIONS */}
-                      {/* <TabPane
+                      <TabPane
                         tab={PATIENT_TABS.SUBSCRIPTIONS["name"]}
                         key={PATIENT_TABS.SUBSCRIPTIONS["key"]}
                       >
-                        <SubscriptionTable />
-                      </TabPane> */}
+                        <SubscriptionTable
+                          recommendServices={this.props.recommendServices}
+                          getMyTaskOfServiceOrSubscription={
+                            this.props.getMyTaskOfServiceOrSubscription
+                          }
+                        />
+                      </TabPane>
                     </Tabs>
                   </div>
                 </div>
@@ -3083,6 +3139,10 @@ class PatientDetails extends Component {
               />
             </div>
           )}
+
+          {/* AKSHAY NEW CODE IMPLEMENTATIONS FOR SUBSCRIPTION */}
+          {flashcardOpen === true && <FlashCard />}
+
           <SymptomsDrawer />
           <VitalTimelineDrawer />
           <MedicationTimelineDrawer />
@@ -3127,12 +3187,14 @@ class PatientDetails extends Component {
           <RecommendSubscription
             visible={recommendSubscription}
             onCloseDrawer={this.onCloseDrawer}
+            patient_id={patient_id}
           />
         )}
         {recommendService === true && (
           <RecommendService
             visible={recommendService}
             onCloseDrawer={this.onCloseDrawer}
+            patient_id={patient_id}
           />
         )}
       </Fragment>

@@ -3,13 +3,23 @@ import DoctorTransactionPage from "../../../Components/Pages/doctorTransactionPa
 import { withRouter } from "react-router-dom";
 import { open } from "../../../modules/drawer";
 import { DRAWER } from "../../../constant";
+// AKSHAY NEW CODE FOR SUBSCRIPTION
+import { getAllTransactions } from "../../../modules/subscription/transactions/index";
 
 const mapStateToProps = (state) => {
-  return {};
+  const {
+    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    subscription: { transactions = {} },
+  } = state;
+  return {
+    transactions: transactions,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getAllTransactions: () => dispatch(getAllTransactions()),
+  };
 };
 
 export default withRouter(

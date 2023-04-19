@@ -77,8 +77,16 @@
     "reselect": "^4.0.0",
     "showdown": "^1.9.1",
     "twilio-chat": "^5.0.2",
-    "web-vitals": "^2.1.4"
-
+    "web-vitals": "^2.1.4",
+    "@devexpress/dx-react-core": "3.0.4",
+    "@devexpress/dx-react-scheduler": "3.0.4",
+    "@devexpress/dx-react-scheduler-material-ui": "3.0.4",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.4",
+    "@mui/lab": "^5.0.0-alpha.51",
+    "@mui/material": "^5.0.4",
+    "@mui/x-date-pickers": "^5.0.0-alpha.7"
   },
   "eslintConfig":{
     "extends":[

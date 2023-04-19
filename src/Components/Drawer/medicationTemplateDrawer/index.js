@@ -165,8 +165,8 @@ class TemplateDrawer extends Component {
     let newVitals = {};
     let newDiets = {};
     let newWorkouts = {};
-    let clinical_notes = "";
-    let followup_advise = "";
+    // let clinical_notes = "";
+    // let followup_advise = "";
 
     console.log("327546235423786479812742376", { template_medications });
 
@@ -186,6 +186,8 @@ class TemplateDrawer extends Component {
     let templateVitalIDs = [];
     let templateDietIDs = [];
     let templateWorkoutIDs = [];
+    let clinical_notes = "";
+    let followup_advise = "";
 
     if (carePlanTemplateId) {
       let {
@@ -351,6 +353,10 @@ class TemplateDrawer extends Component {
       }
 
       if (Object.keys(templateMedications).length) {
+        console.log("templateMedications", templateMedications);
+      }
+
+      if (Object.keys(templateMedications).length) {
         for (let medication of Object.values(templateMedications)) {
           let key = uuid();
           newMedics[key] = medication;
@@ -389,6 +395,7 @@ class TemplateDrawer extends Component {
         }
       }
     }
+
     this.setState({
       care_plan_templates,
       carePlanTemplateIds,
@@ -1659,8 +1666,9 @@ class TemplateDrawer extends Component {
       carePlanTemplateIds = [],
       carePlanTemplateId,
     } = this.state;
-
     const { medicines } = this.props;
+
+    // const { medicines } = this.props;
 
     const {
       care_plan_templates = {},
@@ -1672,6 +1680,7 @@ class TemplateDrawer extends Component {
     let { basic_info: { name = "" } = {} } =
       care_plan_templates[firstTemplateId] || {};
     let showDropDown = name === BLANK_TEMPLATE ? false : true;
+
     // console.log("32786428457523476834234532847",{l:Object.keys(carePlanTemplateIds).length,showDropDown,care_plan_templates,firstTemplateId,carePlanTemplateIds});
     return (
       <div className="template-block">
@@ -1888,6 +1897,7 @@ class TemplateDrawer extends Component {
                     <div className="form-headings-ap">
                       {medicine ? medicine : "MEDICINE"}
                     </div>
+
                     {medicineType && (
                       <img
                         src={
@@ -1946,7 +1956,10 @@ class TemplateDrawer extends Component {
                 </div>
                 {/* {when_to_take.map((timing, index) => {
                                     return ( */}
-
+                <div className="drawer-block-description">
+                  Generic Name:{" "}
+                  {!isEmpty(details) ? details.generic_name : "---"}
+                </div>
                 <div className="drawer-block-description">
                   {/* {medTimingsToShow} ({" "} */}
                   When to take: ({WHEN_TO_TAKE_ABBR_LABELS[when_to_take_abbr]})
@@ -2009,6 +2022,8 @@ class TemplateDrawer extends Component {
             details: { date = "" } = {},
             time_gap = "",
           } = appointments[key];
+          console.log("appointments[key]", appointments[key]);
+          console.log("appointment_type", appointment_type);
           // let timeToShow = date && start_time ? `${moment(date).format('ll')} ${moment(date).format('hh:mm')}` : date ? moment(date).format('ll') : '';
           let typeTitle =
             APPOINTMENT_TYPE_TITLE[!appointment_type ? type : appointment_type]
@@ -2944,6 +2959,7 @@ class TemplateDrawer extends Component {
     newMedication.medicine_id = medicine_id;
     newMedication.medicine = name;
     newMedication.medicineType = type;
+
     newMedication.schedule_data = {
       end_date: moment(end_date),
       start_date: moment(start_date),
@@ -3050,7 +3066,6 @@ class TemplateDrawer extends Component {
 
     const today = moment();
     const selectedDate = date;
-    // let diff = selectedDate.diff(today, "days");
     let formatToday = moment(today).format("MM/DD/YYYY");
     let formatSelected = moment(selectedDate).format("MM/DD/YYYY");
 
@@ -3058,7 +3073,6 @@ class TemplateDrawer extends Component {
       new Date(formatToday),
       new Date(formatSelected)
     );
-
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;
     console.log("time_gap", diff);
@@ -3111,7 +3125,14 @@ class TemplateDrawer extends Component {
     // NEW CODE FOR TIME_GAP
     const today = moment();
     const selectedDate = date;
-    let diff = selectedDate.diff(today, "days");
+    let formatToday = moment(today).format("MM/DD/YYYY");
+    let formatSelected = moment(selectedDate).format("MM/DD/YYYY");
+
+    let diff = this.getDaysBetweenDates(
+      new Date(formatToday),
+      new Date(formatSelected)
+    );
+
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;
     console.log("time_gap", diff);

@@ -46,6 +46,11 @@ const messages = defineMessages({
     description: "",
     defaultMessage: "Generic Name",
   },
+  medicineName: {
+    id: "app.addMedicine.drawer.medicineName",
+    description: "",
+    defaultMessage: "Medicine Name",
+  },
   submit_text: {
     id: "app.addMedicine.drawer.submit",
     description: "",

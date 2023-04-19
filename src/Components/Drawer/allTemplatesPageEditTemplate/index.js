@@ -439,6 +439,58 @@ class TemplatePageCreateDrawer extends Component {
     this.setState({ innerFormType, innerFormKey, showInner: true });
   };
 
+  // AKSHAY NEW CODE IMPLEMENTATION
+  deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
+    console.log(innerFormType);
+    console.log(innerFormKey);
+    let {
+      appointments = {},
+      appointmentKeys = [],
+      medications = {},
+      medicationKeys = [],
+      vitals = {},
+      vitalKeys = [],
+      diets = {},
+      dietKeys = [],
+      workouts = {},
+      workoutKeys = [],
+      medicationCheckedIds = [],
+    } = this.state;
+
+    if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
+      delete medications[innerFormKey];
+      medicationKeys.splice(medicationKeys.indexOf(innerFormKey), 1);
+      medicationCheckedIds.splice(medicationKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.APPOINTMENT) {
+      delete appointments[innerFormKey];
+      appointmentKeys.splice(appointmentKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.VITALS) {
+      delete vitals[innerFormKey];
+      vitalKeys.splice(vitalKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.DIET) {
+      delete diets[innerFormKey];
+      dietKeys.splice(dietKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.WORKOUT) {
+      delete workouts[innerFormKey];
+      workoutKeys.splice(workoutKeys.indexOf(innerFormKey), 1);
+    }
+
+    this.setState({
+      appointments,
+      appointmentKeys,
+      medications,
+      medicationKeys,
+      vitals,
+      vitalKeys,
+      diets,
+      dietKeys,
+      workouts,
+      workoutKeys,
+      templateEdited: true,
+      medicationCheckedIds,
+    });
+  };
+
   onCloseInner = () => {
     this.setState({
       showInner: false,
@@ -462,8 +514,33 @@ class TemplatePageCreateDrawer extends Component {
       dietKeys = [],
       workouts = {},
       workoutKeys = [],
+      // innerFormType = "",
+      // innerFormKey = "",
+      medicationIds = {},
+      appointmentIds = {},
+      vitalIds = {},
+      dietIds = {},
+      workoutIds = {},
+      deleteMedicationKeys = [],
+      deleteAppointmentKeys = [],
+      deleteVitalKeys = [],
+      deleteDietKeys = [],
+      deleteWorkoutKeys = [],
       medicationCheckedIds = [],
     } = this.state;
+
+    const key = innerFormKey;
+    if (medicationIds[key]) {
+      deleteMedicationKeys.push(key);
+    } else if (appointmentIds[key]) {
+      deleteAppointmentKeys.push(key);
+    } else if (vitalIds[key]) {
+      deleteVitalKeys.push(key);
+    } else if (dietIds[key]) {
+      deleteDietKeys.push(key);
+    } else if (workoutIds[key]) {
+      deleteWorkoutKeys.push(key);
+    }
 
     if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
       delete medications[innerFormKey];
@@ -1569,6 +1646,8 @@ class TemplatePageCreateDrawer extends Component {
             time_gap = "",
           } = appointments[key];
 
+          console.log("appointments[key]", appointments[key]);
+
           let typeTitle = APPOINTMENT_TYPE_TITLE[appointment_type].title;
           let typeDescription = type_description;
           let rediologyType = radiology_type;
@@ -1969,7 +2048,8 @@ class TemplatePageCreateDrawer extends Component {
     );
 
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
-    const time_gap = typeof diff === "number" ? diff : 0;
+    let time_gap = typeof diff === "number" ? diff : 0;
+    console.log("time_gap", diff);
 
     if (!date || !start_time) {
       message.error(this.formatMessage(messages.appointmentError));
@@ -2145,8 +2225,10 @@ class TemplatePageCreateDrawer extends Component {
       new Date(formatToday),
       new Date(formatSelected)
     );
+
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;
+    console.log("time_gap", diff);
 
     if (!date || !start_time) {
       message.error(this.formatMessage(messages.appointmentError));

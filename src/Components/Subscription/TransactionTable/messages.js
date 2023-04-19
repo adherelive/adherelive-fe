@@ -42,7 +42,7 @@ const messages = defineMessages({
     defaultMessage: "Status",
   },
   date_header: {
-    id: "app.transaction.table.date.header",
+    id: "app.transaction.table.due.date.header",
     description: "",
     defaultMessage: "Due date",
   },

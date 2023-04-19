@@ -149,6 +149,7 @@ class TemplatePage extends Component {
                 prefix={<SearchOutlined />}
               />
             </div>
+            {/* <input type="text" onChange={this.onChangeHanlder}></input> */}
             <div className="wp100 pl14 pr14 flex align-center justify-center mb36">
               <TemplateTable
                 {...this.props}

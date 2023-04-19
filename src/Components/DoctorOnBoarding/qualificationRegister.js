@@ -1173,6 +1173,33 @@ class QualificationRegister extends Component {
     }
   };
 
+  handleSpecialitySearchOnFocus = async (data = "") => {
+    try {
+      // if (data) {
+      const { searchSpecialities } = this.props;
+      this.setState({ fetchingSpeciality: true });
+      const response = await searchSpecialities("");
+      const { status } = response;
+      if (status) {
+        this.setState({ fetchingSpeciality: false });
+      } else {
+        this.setState({ fetchingSpeciality: false });
+      }
+      // } else {
+      //   this.setState({ fetchingSpeciality: false });
+      // }
+      if (data.length) {
+        this.setState({ searchSpecialityText: data });
+
+        await this.setCustomSpeciality();
+      }
+    } catch (err) {
+      console.log("err", err);
+      message.warn("Something wen't wrong. Please try again later");
+      this.setState({ fetchingSpeciality: false });
+    }
+  };
+
   setCustomSpeciality = () => {
     const { searchSpecialityText: value = "" } = this.state;
 
@@ -1875,7 +1902,7 @@ class QualificationRegister extends Component {
         </div>
 
         <Select
-          onFocus={this.handleSpecialitySearch}
+          onFocus={this.handleSpecialitySearchOnFocus}
           onSearch={this.handleSpecialitySearch}
           notFoundContent={
             this.state.fetchingSpeciality ? (

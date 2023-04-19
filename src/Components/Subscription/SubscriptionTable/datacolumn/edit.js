@@ -28,12 +28,12 @@ export default (props) => {
     e.preventDefault();
     const { data = {} } = props;
     const { openConsultationFeeDrawer, onOpenEditServiceDrawer } = data || {};
-    let paymentData = {};
-    paymentData["basic_info"] = { ...basic_info, razorpay_link };
-    console.log("9687w678687678", { paymentData });
+    // let paymentData = {};
+    // paymentData["basic_info"] = { ...basic_info, razorpay_link };
+    // console.log("9687w678687678", { paymentData });
     // openConsultationFeeDrawer(paymentData);
 
-    onOpenEditServiceDrawer();
+    onOpenEditServiceDrawer(data);
   };
 
   if (provider_id || creator_type === USER_CATEGORY.PROVIDER) {
