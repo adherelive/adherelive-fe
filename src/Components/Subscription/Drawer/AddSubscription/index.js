@@ -68,14 +68,16 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
   }, [serviceOfferingsArray]);
 
   const onSubmit = () => {
-    const validate = validateData();
+    setTimeout(() => {
+      const validate = validateData();
 
-    if (validate) {
-      setValues({
-        ...values,
-        createSubscriptionWarn: true,
-      });
-    }
+      if (validate) {
+        setValues({
+          ...values,
+          createSubscriptionWarn: true,
+        });
+      }
+    }, 500);
   };
 
   const callBack = () => {
@@ -153,7 +155,6 @@ function Index({ onCloseDrawer, visible, doctor_id }) {
       planDescription: "",
       submitting: false,
       serviceOfferingsDrawer: false,
-      createSubscriptionWarn: false,
       editServiceOfferingDrawer: false,
     });
     setServiceOfferingArray([]);

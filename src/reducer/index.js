@@ -15,6 +15,7 @@ const initialState = {
     flashCardNotes: [],
     is_published: "",
   },
+  addSubscriptionDrawer: false,
 };
 
 export const SET_SERVICES = "SET_SERVICES";
@@ -27,6 +28,7 @@ export const SET_ACTIVITY_DATA_FOR_SCHEDULE = "SET_ACTIVITY_DATA_FOR_SCHEDULE";
 export const SET_PENDING_ACTIVITIES_TABLE_DATA =
   "SET_PENDING_ACTIVITIES_TABLE_DATA";
 export const SET_FALASHCARD_DATA = "SET_FALASHCARD_DATA";
+export const SET_ADD_SUBSCRIPTION_DRAWER = "SET_ADD_SUBSCRIPTION_DRAWER";
 
 export default function (state = initialState, action) {
   const { type, payload = {} } = action;
@@ -73,6 +75,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         flashCardData: action.payload,
+      };
+    case SET_ADD_SUBSCRIPTION_DRAWER:
+      return {
+        ...state,
+        addSubscriptionDrawer: action.payload,
       };
     default:
       return state;

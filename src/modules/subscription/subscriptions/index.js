@@ -6,7 +6,10 @@ import {
   updateSubscription,
   getProviderSubscriptionUrl,
 } from "../../../Helper/urls/subscriptions";
-import { SET_SUBSCRIPTIONS } from "../../../reducer/index";
+import {
+  SET_SUBSCRIPTIONS,
+  SET_ADD_SUBSCRIPTION_DRAWER,
+} from "../../../reducer/index";
 
 export const getSubscriptions = () => {
   let response = {};
@@ -136,5 +139,14 @@ export const getProviderSubscriptions = (doctorId) => {
     }
 
     return response;
+  };
+};
+
+export const setSubscriptionDrawer = (value) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_ADD_SUBSCRIPTION_DRAWER,
+      payload: value,
+    });
   };
 };
