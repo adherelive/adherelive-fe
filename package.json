@@ -86,7 +86,7 @@
     "@mui/icons-material": "^5.0.4",
     "@mui/lab": "^5.0.0-alpha.51",
     "@mui/material": "^5.0.4",
-    "@mui/x-date-pickers": "^5.0.0-alpha.7"
+    "@mui/x-date-pickers": "^6.0.0"
   },
   "eslintConfig":{
     "extends":[
