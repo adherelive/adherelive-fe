@@ -51,7 +51,7 @@
     "chart.js": "^2.9.3",
     "craco-less": "^2.0.0",
     "firebase": "^8.5.0",
-    "getstream": "^5.0.5",
+    "getstream": "^8.0.0",
     "lodash-es": "^4.17.21",
     "moment-timezone": "^0.5.33",
     "querystring-es3": "^0.2.1",
