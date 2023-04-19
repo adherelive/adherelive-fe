@@ -9,6 +9,11 @@ class doctorTransactionPage extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    const { getAllTransactions } = this.props;
+    this.props.getAllTransactions();
+  }
+
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
   render() {
@@ -18,7 +23,7 @@ class doctorTransactionPage extends Component {
           {this.formatMessage(messages.transaction_table_header)}
         </div>
         <div className="wp100 pl14 pr14 flex align-center justify-center transaction_table">
-          <TransactionTable />
+          <TransactionTable transactions={this.props.transactions} />
         </div>
       </div>
     );

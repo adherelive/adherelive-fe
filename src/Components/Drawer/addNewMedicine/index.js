@@ -73,7 +73,11 @@ class AddMedicine extends Component {
         }
 
         this.setState({ submitting: true });
-        const response = await addMedicine({ name, type, generic_name });
+        const response = await addMedicine({
+          name,
+          type,
+          generic_name: generic_name,
+        });
         const {
           status,
           statusCode,

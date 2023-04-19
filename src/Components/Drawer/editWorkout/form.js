@@ -8,6 +8,7 @@ import DatePicker from "antd/es/date-picker";
 import TextArea from "antd/es/input/TextArea";
 import Input from "antd/es/input";
 import Tag from "antd/es/tag";
+import { TimePicker } from "antd";
 import TimeKeeper from "react-timekeeper";
 import edit_image from "../../../Assets/images/edit.svg";
 // AKSHAY NEW COE FOR ANTD V4
@@ -120,16 +121,36 @@ class WorkoutFieldsFrom extends Component {
     validateFields();
   };
 
+  handleTimeChange = (time, str) => {
+    console.log("time", time, str);
+
+    const { setTime } = this.props;
+    // const { formatted24 = null } = value;
+    const finalTime = time.toISOString();
+    console.log("time.toISOString();", time.toISOString());
+    // console.log("time", time.toISOString());
+    setTime(finalTime);
+  };
+
   getTimePicker = () => {
     const { time: state_time = "" } = this.props;
     return (
-      <TimeKeeper
-        time={moment(state_time).format("hh:mm A")}
-        switchToMinuteOnHourSelect={true}
-        closeOnMinuteSelect={false}
-        onChange={this.onDoneClick}
-        doneButton={null}
-        coarseMinutes={15}
+      // <TimeKeeper
+      //   time={moment(state_time).format("hh:mm A")}
+      //   switchToMinuteOnHourSelect={true}
+      //   closeOnMinuteSelect={false}
+      //   onChange={this.onDoneClick}
+      //   doneButton={null}
+      //   coarseMinutes={15}
+      // />
+      <TimePicker
+        use12Hours
+        onChange={this.handleTimeChange}
+        // minuteStep={15}
+        format="h:mm a"
+        className="wp100 ant-time-custom"
+        defaultValue={moment(state_time)}
+        // getPopupContainer={this.getParentNode}
       />
     );
   };
@@ -143,7 +164,7 @@ class WorkoutFieldsFrom extends Component {
 
     return (
       <div className="fs14 fw700 mb20 ">
-        {!showTimeKeeper ? (
+        {/* {!showTimeKeeper ? (
           <div className="flex align-start wp100 mt20 mb20 ">
             <div className="flex direction-column align-center justify-center fs14 ml8">
               {formattedTime}
@@ -158,9 +179,9 @@ class WorkoutFieldsFrom extends Component {
               )}
             </div>
           </div>
-        ) : (
-          this.getTimePicker()
-        )}
+        ) : ( */}
+        {this.getTimePicker()}
+        {/* )} */}
       </div>
     );
   };

@@ -1,16 +1,16 @@
 import React from "react";
 
 export default (props) => {
-  const {
-    data: {
-      basic_info: { id = null, name = "", type = "", amount = "" } = {},
-    } = {},
-  } = props || {};
+  const { data: { type = "", service_charge = "", details = {} } = {} } =
+    props || {};
 
   return (
     <div>
       {/* <span>{`Rs ${amount}`}</span> */}
-      <span>Rs 600/month</span>
+      <span>
+        {`Rs ${type === "service" ? service_charge : details.service_charge}
+        /month`}
+      </span>
     </div>
   );
 };

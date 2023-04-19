@@ -6,6 +6,7 @@ import Table from "antd/es/table";
 
 import ReportDocumentModal from "../../Modal/reportDocuments";
 import messages from "./message";
+import isEmpty from "../../../Helper/is-empty";
 
 class ReportTable extends Component {
   constructor(props) {
@@ -50,7 +51,22 @@ class ReportTable extends Component {
 
   openEditDrawer = (payload) => () => {
     const { openEditReport } = this.props;
-    openEditReport(payload);
+    //AKSHAY NEW CODE IMPLEMENTATIONS
+    const { flashCard } = payload;
+    if (!isEmpty(flashCard)) {
+      let flashCardData = {
+        activityId: flashCard[0].tx_activity_id,
+        patientId: flashCard[0].patient_id,
+        flashCardId: flashCard[0].id,
+        flashCardQue: flashCard[0].data.flashCardData,
+        flashCardNotes: flashCard[0].notes,
+        is_published: flashCard[0].is_published,
+      };
+      this.props.setFlashcardData(flashCardData);
+      this.props.setFlashCard(true);
+    } else {
+      openEditReport(payload);
+    }
   };
 
   openModal = (documentData) => () => {

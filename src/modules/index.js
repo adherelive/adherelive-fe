@@ -80,6 +80,7 @@ import workout_exercise_groups from "./workoutExerciseGroups";
 // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
 import cdss from "./cdss";
 import commonReducer from "./commonReducer";
+import subscription from "../reducer/index";
 
 const rootReducer = combineReducers({
   auth,
@@ -161,6 +162,7 @@ const rootReducer = combineReducers({
   // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
   cdss,
   commonReducer,
+  subscription,
 });
 
 export default (state, action) => {

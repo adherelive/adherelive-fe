@@ -2,8 +2,7 @@ import React from "react";
 import { TABLE_DEFAULT_BLANK_FIELD } from "../../../../constant";
 
 export default (props) => {
-  // const { transactionData } = props || {};
-  // const { basic_info: { amount } = {} } = transactionData || {};
+  const { transactions } = props || {};
 
   return (
     <div className="ellipsis wp100  ">
@@ -11,7 +10,7 @@ export default (props) => {
         {/* {amount
           ? `Rs ${parseFloat(amount).toFixed(2)}`
           : TABLE_DEFAULT_BLANK_FIELD} */}
-        Rs 600/ month
+        {`Rs ${transactions.amount}/ month`}
       </div>
     </div>
   );

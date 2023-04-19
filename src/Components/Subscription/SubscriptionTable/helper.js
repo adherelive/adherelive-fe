@@ -7,7 +7,7 @@ export const TABLE_COLUMN = {
   },
   STATUS: {
     key: "STATUS",
-    width: 100,
+    width: 150,
     dataIndex: "STATUS",
   },
   DURATION: {

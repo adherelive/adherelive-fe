@@ -108,6 +108,7 @@ const messages = defineMessages({
     description: "",
     defaultMessage: "Give a name to this template",
   },
+
   saveTemplate: {
     id: "app.allTemplatesAddDrawer.saveTemplate",
     description: "",

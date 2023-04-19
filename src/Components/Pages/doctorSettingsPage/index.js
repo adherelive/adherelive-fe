@@ -41,6 +41,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import AddService from "../../../Components/Subscription/Drawer/AddService";
 import AddSubscription from "../../../Components/Subscription/Drawer/AddSubscription";
 import DoctorServiceTable from "../../../Components/Subscription/DoctorServiceTable";
+import MySubscriptionList from "../../../Components/Subscription/MySubscriptionList";
 
 const { Option } = Select;
 
@@ -69,6 +70,9 @@ class DoctorSettingsPage extends Component {
     this.handleGetDoctorPaymentProduct();
     this.handleGetAdminPaymentProduct();
     this.handleGetAccountDetails();
+    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    this.props.getServices();
+    this.props.getSubscriptions();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -214,28 +218,68 @@ class DoctorSettingsPage extends Component {
   noConsultationFeeDisplay = () => {
     const provider_id = this.isDoctorRoleAssociatedWithProvider() || null;
     console.log("provider_id", provider_id);
+    const { auth, providers, services } = this.props;
 
     return (
+      // <div className="w700 mb20 flex direction-column align-center justify-center">
+      //   <div className="br-lightgrey h200 w200 br4"></div>
+      //   <div className="mt20 fs25 fw700 black-85">
+      //     {this.formatMessage(messages.noConsultationFeeAdded)}
+      //   </div>
+      //   <div className="mt20 fs18 fw600 ">
+      //     {this.formatMessage(messages.notAddedFeesYet)}
+      //   </div>
+
+      //   {provider_id === null ? (
+      //     <div className=" mt20">
+      //       <Button
+      //         type="primary"
+      //         onClick={this.displayAddDoctorPaymentProduct}
+      //       >
+      //         <span className="w200 fs20">
+      //           {this.formatMessage(messages.addFee)}
+      //         </span>
+      //         {/* Add */}
+      //       </Button>
+      //     </div>
+      //   ) : null}
+      // </div>
       <div className="w700 mb20 flex direction-column align-center justify-center">
         <div className="br-lightgrey h200 w200 br4"></div>
         <div className="mt20 fs25 fw700 black-85">
-          {this.formatMessage(messages.noConsultationFeeAdded)}
+          {/* {this.formatMessage(messages.noConsultationFeeAdded)} */}
+          No Service Added
         </div>
-        <div className="mt20 fs18 fw600 ">
-          {this.formatMessage(messages.notAddedFeesYet)}
-        </div>
+        {/* <div className="mt20 fs18 fw600 ">
+        {this.formatMessage(messages.notAddedFeesYet)}
+      </div> */}
 
-        {provider_id === null ? (
+        {auth.doctor_provider_id === null &&
+        Object.keys(services).length === 0 ? (
           <div className=" mt20">
-            <Button
-              type="primary"
-              onClick={this.displayAddDoctorPaymentProduct}
+            {/* <Button
+          type="primary"
+          onClick={this.displayAddDoctorPaymentProduct}
+        >
+          <span className="w200 fs20">
+            {this.formatMessage(messages.addFee)}
+          </span>
+         
+        </Button> */}
+            {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+            <Dropdown
+              overlay={this.getMenu()}
+              trigger={["click"]}
+              placement="bottomRight"
             >
-              <span className="w200 fs20">
-                {this.formatMessage(messages.addFee)}
-              </span>
-              {/* Add */}
-            </Button>
+              <Button
+                type="primary"
+                className="ml10 mr20 add-button "
+                icon={<PlusOutlined />}
+              >
+                <span className="fs16">Add More</span>
+              </Button>
+            </Dropdown>
           </div>
         ) : null}
       </div>
@@ -428,11 +472,12 @@ class DoctorSettingsPage extends Component {
       this.state;
 
     const { displayEditDoctorPaymentProduct } = this;
+    const { services } = this.props;
 
     return (
       <div className="wp100 flex direction-column justify-space-between">
         <div>
-          {noDoctorPaymentProducts ? (
+          {Object.keys(services).length === 0 ? (
             <div className="flex align-center justify-center ">
               {this.noConsultationFeeDisplay()}
             </div>
@@ -440,7 +485,9 @@ class DoctorSettingsPage extends Component {
             <div className="flex direction-column align-center justify-center">
               {/* {this.displayDoctorPaymentProducts()} */}
 
-              <DoctorConsultationFeeTable />
+              {/* <DoctorConsultationFeeTable /> */}
+              {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+              <DoctorServiceTable services={services} />
             </div>
           )}
         </div>
@@ -769,6 +816,7 @@ class DoctorSettingsPage extends Component {
 
   render() {
     const { selectedKey } = this.state;
+    const { services, auth, providers } = this.props;
     const { sidebar } = this;
     const { noDoctorPaymentProducts } = this.state;
     const provider_id = this.isDoctorRoleAssociatedWithProvider();
@@ -785,22 +833,43 @@ class DoctorSettingsPage extends Component {
             {this.formatMessage(messages.doctor_settings_header_text)}
           </div>
 
-          {!noDoctorPaymentProducts &&
-            selectedKey === CONSULTATION_FEE &&
-            !provider_id && (
+          {
+            // (!noDoctorPaymentProducts &&
+            //   selectedKey === CONSULTATION_FEE &&
+            //   !provider_id) ||
+
+            auth.doctor_provider_id === null &&
+            Object.keys(services).length !== 0 ? (
               <div className="flex flex-end align-center">
-                <Button
+                {/* <Button
                   type="primary"
                   className="ml10 mr20 add-button "
-                  icon={<PlusOutlined />}
+                  icon={"plus"}
                   onClick={this.displayAddDoctorPaymentProduct}
                 >
                   <span className="fs16">
                     {this.formatMessage(messages.addMore)}
                   </span>
-                </Button>
+                </Button> */}
+                {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                <Dropdown
+                  overlay={this.getMenu()}
+                  trigger={["click"]}
+                  placement="bottomRight"
+                >
+                  <Button
+                    type="primary"
+                    className="ml10 mr20 add-button "
+                    icon={<PlusOutlined />}
+                  >
+                    <span className="fs16">Add More</span>
+                  </Button>
+                </Dropdown>
               </div>
-            )}
+            ) : (
+              ""
+            )
+          }
         </div>
 
         <div className="wp100 p20 flex flex-wrap">
@@ -810,6 +879,10 @@ class DoctorSettingsPage extends Component {
 
           {/************************* SIDEBAR RELATED CONTENTS *************************/}
           <div className="wp70">{this.sidebarRelatedContent()}</div>
+        </div>
+
+        <div className="wp100 ml20">
+          <MySubscriptionList />
         </div>
 
         <AddConsultationFeeDrawer

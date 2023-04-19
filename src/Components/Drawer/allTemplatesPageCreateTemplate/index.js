@@ -84,6 +84,58 @@ class TemplatePageCreateDrawer extends Component {
     this.setState({ innerFormType, innerFormKey, showInner: true });
   };
 
+  // AKSHAY NEW CODE IMPLEMENTATION
+  deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
+    console.log(innerFormType);
+    console.log(innerFormKey);
+    let {
+      appointments = {},
+      appointmentKeys = [],
+      medications = {},
+      medicationKeys = [],
+      vitals = {},
+      vitalKeys = [],
+      diets = {},
+      dietKeys = [],
+      workouts = {},
+      workoutKeys = [],
+      medicationCheckedIds = [],
+    } = this.state;
+
+    if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
+      delete medications[innerFormKey];
+      medicationKeys.splice(medicationKeys.indexOf(innerFormKey), 1);
+      medicationCheckedIds.splice(medicationKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.APPOINTMENT) {
+      delete appointments[innerFormKey];
+      appointmentKeys.splice(appointmentKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.VITALS) {
+      delete vitals[innerFormKey];
+      vitalKeys.splice(vitalKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.DIET) {
+      delete diets[innerFormKey];
+      dietKeys.splice(dietKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.WORKOUT) {
+      delete workouts[innerFormKey];
+      workoutKeys.splice(workoutKeys.indexOf(innerFormKey), 1);
+    }
+
+    this.setState({
+      appointments,
+      appointmentKeys,
+      medications,
+      medicationKeys,
+      vitals,
+      vitalKeys,
+      diets,
+      dietKeys,
+      workouts,
+      workoutKeys,
+      templateEdited: true,
+      medicationCheckedIds,
+    });
+  };
+
   onCloseInner = () => {
     this.setState({
       showInner: false,
@@ -719,7 +771,6 @@ class TemplatePageCreateDrawer extends Component {
           </div>
           <div className="star-red fs22">*</div>
         </div>
-
         <div className="wp100 flex align-center justify-space-between">
           <Input
             placeholder={this.formatMessage(messages.namePlaceholder)}
@@ -729,14 +780,12 @@ class TemplatePageCreateDrawer extends Component {
             required={true}
           />
         </div>
-
         <div className="wp100 flex direction-row align-center ">
           <div className="form-category-headings-ap mr0-I">
             {this.formatMessage(messages.clinical_notes)}
           </div>
           <div className="star-red fs22">*</div>
         </div>
-
         <div className="wp100 flex align-center justify-space-between">
           <TextArea
             placeholder={this.formatMessage(messages.clinical_notes)}
@@ -747,7 +796,6 @@ class TemplatePageCreateDrawer extends Component {
             style={{ resize: "none" }}
           />
         </div>
-
         <div className="wp100 flex direction-row align-center ">
           <div className="form-category-headings-ap mr0-I">
             {this.formatMessage(messages.followup_advise)}
@@ -764,7 +812,6 @@ class TemplatePageCreateDrawer extends Component {
             style={{ resize: "none" }}
           />
         </div>
-
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap ">{"Medications"}</div>
           {medicationKeys.length > 0 ? (
@@ -777,7 +824,6 @@ class TemplatePageCreateDrawer extends Component {
             </div>
           )}
         </div>
-
         {medicationKeys.map((key) => {
           let {
             medicine_id = "",
@@ -941,7 +987,6 @@ class TemplatePageCreateDrawer extends Component {
                     />
                   </div>
                 </div>
-
                 <div className="drawer-block-description">
                   {/* {medTimingsToShow} */}
                   Generic Name:{" "}
@@ -961,7 +1006,6 @@ class TemplatePageCreateDrawer extends Component {
             </div>
           );
         })}
-
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap align-self-start">
             {this.formatMessage(messages.appointments)}
@@ -988,6 +1032,8 @@ class TemplatePageCreateDrawer extends Component {
             } = {},
             time_gap = "",
           } = appointments[key];
+
+          console.log("appointments[key]", appointments[key]);
 
           let typeTitle = APPOINTMENT_TYPE_TITLE[appointment_type].title;
           let typeDescription = type_description;
@@ -1023,6 +1069,7 @@ class TemplatePageCreateDrawer extends Component {
                   {typeDescription}
                   {rediologyType !== "" && ` (${rediologyType})`}
                 </div>
+
                 <div className="drawer-block-description">
                   {/* {date
                     ? `After ${moment(date).diff(moment(), "days") + 1} days`
@@ -1036,7 +1083,6 @@ class TemplatePageCreateDrawer extends Component {
             </div>
           );
         })}
-
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap align-self-start">
             {this.formatMessage(messages.actions)}
@@ -1098,7 +1144,6 @@ class TemplatePageCreateDrawer extends Component {
             </div>
           );
         })}
-
         <div className="wp100 flex align-center justify-space-between">
           <div className="form-category-headings-ap align-self-start">
             {this.formatMessage(messages.diets)}
@@ -1129,6 +1174,7 @@ class TemplatePageCreateDrawer extends Component {
                 <div className="flex direction-row justify-space-between align-center">
                   <div className="form-headings-ap">{name}</div>
                   <div>
+                    {" "}
                     <EditFilled
                       // type="edit"
                       className="ml20"
@@ -1404,8 +1450,10 @@ class TemplatePageCreateDrawer extends Component {
       new Date(formatToday),
       new Date(formatSelected)
     );
+
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;
+    console.log("time_gap", diff);
 
     if (!date || !start_time || !end_time) {
       message.error(this.formatMessage(messages.appointmentError));
@@ -1576,8 +1624,10 @@ class TemplatePageCreateDrawer extends Component {
       new Date(formatToday),
       new Date(formatSelected)
     );
+
     // const time_gap = typeof diff === "number" ? diff + 1 : 0;
     const time_gap = typeof diff === "number" ? diff : 0;
+    console.log("time_gap", diff);
 
     if (!date || !start_time || !end_time) {
       message.error(this.formatMessage(messages.appointmentError));

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { injectIntl } from "react-intl";
 import { Table, Empty } from "antd";
 import generateRow from "./datarow";
@@ -7,7 +7,6 @@ import getColumn from "./header";
 import messages from "./messages";
 import message from "antd/es/message";
 import EditService from "../Drawer/AddService/EditService";
-import Icon from "@ant-design/icons";
 import { LoadingOutlined } from "@ant-design/icons";
 
 class DoctorServiceTable extends Component {
@@ -15,6 +14,7 @@ class DoctorServiceTable extends Component {
     super(props);
     this.state = {
       editServiceDrawer: false,
+      editServiceData: {},
     };
   }
 
@@ -33,8 +33,8 @@ class DoctorServiceTable extends Component {
     this.setState({ editServiceDrawer: false });
   };
 
-  onOpenEditServiceDrawer = () => {
-    this.setState({ editServiceDrawer: true });
+  onOpenEditServiceDrawer = (data) => {
+    this.setState({ editServiceDrawer: true, editServiceData: data });
   };
 
   //   formatMessage = (data) => this.props.intl.formatMessage(data);
@@ -47,70 +47,38 @@ class DoctorServiceTable extends Component {
       openConsultationFeeDrawer,
       intl: { formatMessage } = {},
       payment_products = {},
+      services,
     } = this.props;
-    const dummyProducts = {
-      7: {
-        basic_info: {
-          id: 7,
-          name: "Remote monitoring",
-          type: "Physical",
-          amount: 200,
-        },
-        creator_role_id: 10,
-        creator_type: "doctor",
-        for_user_role_id: 10,
-        for_user_type: "doctor",
-        product_user_type: "patient",
-        details: null,
-        razorpay_link: "",
-      },
-      14: {
-        basic_info: {
-          id: 14,
-          name: "At clinic physical consultation",
-          type: "Digital",
-          amount: 300,
-        },
-        creator_role_id: 10,
-        creator_type: "doctor",
-        for_user_role_id: 10,
-        for_user_type: "doctor",
-        product_user_type: "patient",
-        details: null,
-        razorpay_link: "",
-      },
-    };
-
-    console.log(doctors);
 
     // const {onRowClick} = this;
     let options = [];
 
-    for (let each in dummyProducts) {
-      const { creator_role_id = null, for_user_role_id = null } =
-        dummyProducts[each] || {};
-      if (creator_role_id !== null) {
-        options.push(
-          generateRow({
-            ...dummyProducts[each],
-            deleteDoctorProduct: deleteDoctorPaymentProduct,
-            openConsultationFeeDrawer,
-            onOpenEditServiceDrawer: this.onOpenEditServiceDrawer,
-            formatMessage,
-            doctors,
-            editable: creator_role_id === for_user_role_id ? true : false,
-          })
-        );
-      }
+    for (let each in services) {
+      // const { creator_role_id = null, for_user_role_id = null } =
+      //   dummyProducts[each] || {};
+      // if (creator_role_id !== null) {
+      options.push(
+        generateRow({
+          id: services[each].id,
+          services: services[each],
+          deleteDoctorProduct: deleteDoctorPaymentProduct,
+          // openConsultationFeeDrawer,
+          onOpenEditServiceDrawer: this.onOpenEditServiceDrawer,
+          formatMessage,
+          // doctors,
+          // editable: creator_role_id === for_user_role_id ? true : false,
+        })
+      );
+      // }
     }
 
-    console.log(options);
+    // console.log(options);
 
     return options;
   };
 
   render() {
-    const { editServiceDrawer } = this.state;
+    const { editServiceDrawer, editServiceData } = this.state;
     const {
       // onRow,
       onSelectChange,
@@ -135,7 +103,7 @@ class DoctorServiceTable extends Component {
     };
 
     return (
-      <Fragment>
+      <>
         <Table
           // onRow={authPermissions.includes(USER_PERMISSIONS.PATIENTS.VIEW) ? onRow : null}
           rowClassName={() => "pointer"}
@@ -156,9 +124,10 @@ class DoctorServiceTable extends Component {
           <EditService
             visible={editServiceDrawer}
             onCloseDrawer={this.onCloseDrawer}
+            editServiceData={editServiceData}
           />
         )}
-      </Fragment>
+      </>
     );
   }
 }

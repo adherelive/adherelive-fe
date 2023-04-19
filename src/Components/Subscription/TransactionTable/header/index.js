@@ -22,40 +22,35 @@ export default (props) => {
       title: formatMessage(messages.transaction_id),
       ...TABLE_COLUMN.ID,
       render: (data) => {
-        // const { transactionData } = data || {};
-        return <TransactionId />;
+        return <TransactionId {...data} />;
       },
     },
     {
       title: formatMessage(messages.doctor_header),
       ...TABLE_COLUMN.DOCTOR,
       render: (data) => {
-        // const { transactionData } = data || {};
-        return <Doctor />;
+        return <Doctor {...data} />;
       },
     },
     {
       title: formatMessage(messages.patient_header),
       ...TABLE_COLUMN.PATIENT,
       render: (data) => {
-        const { patientData } = data || {};
-        return <Patient />;
+        return <Patient {...data} />;
       },
     },
     {
       title: formatMessage(messages.subscription_header),
       ...TABLE_COLUMN.SUBSCRIPTION,
       render: (data) => {
-        const { patientData } = data || {};
-        return <Subscription />;
+        return <Subscription {...data} />;
       },
     },
     {
       title: formatMessage(messages.duration_header),
       ...TABLE_COLUMN.DURATION,
       render: (data) => {
-        const { patientData } = data || {};
-        return <Duration />;
+        return <Duration {...data} />;
       },
     },
     // {
@@ -70,26 +65,14 @@ export default (props) => {
       title: formatMessage(messages.amount_header),
       ...TABLE_COLUMN.AMOUNT,
       render: (data) => {
-        const { transactionData, transaction_ids } = data;
-        return (
-          <Amount
-          // transactionData={transactionData}
-          // transaction_ids={transaction_ids}
-          />
-        );
+        return <Amount {...data} />;
       },
     },
     {
       title: formatMessage(messages.status_header),
       ...TABLE_COLUMN.STATUS,
       render: (data) => {
-        // const { transactionData, transaction_ids } = data;
-        return (
-          <Status
-          // transactionData={transactionData}
-          // transaction_ids={transaction_ids}
-          />
-        );
+        return <Status {...data} />;
       },
 
       filters: getTransactionFilters() || [],
@@ -103,26 +86,14 @@ export default (props) => {
       title: formatMessage(messages.date_header),
       ...TABLE_COLUMN.DATE,
       render: (data) => {
-        // const { transactionData, transaction_ids } = data;
-        return (
-          <Date
-          // transactionData={transactionData}
-          // transaction_ids={transaction_ids}
-          />
-        );
+        return <Date {...data} />;
       },
     },
     {
       title: formatMessage(messages.payment_header),
       ...TABLE_COLUMN.PAYMENT,
       render: (data) => {
-        // const { transactionData, transaction_ids } = data;
-        return (
-          <Payment
-          // transactionData={transactionData}
-          // transaction_ids={transaction_ids}
-          />
-        );
+        return <Payment {...data} />;
       },
     },
   ];

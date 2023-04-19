@@ -6,7 +6,7 @@ import Select from "antd/es/select";
 import DatePicker from "antd/es/date-picker";
 import Input from "antd/es/input";
 import TextArea from "antd/es/input/TextArea";
-import { Checkbox } from "antd";
+import { Checkbox, TimePicker } from "antd";
 
 import messages from "./message";
 import moment from "moment";
@@ -92,6 +92,11 @@ class EditAppointmentForm extends Component {
         details: { type = "", type_description: type_desc_initial = "" } = {},
       } = {},
     } = appointments[appointment_id] || {};
+
+    // console.log("appointments[appointment_id]", appointments[appointment_id]);
+    // console.log("appointmentData", appointmentData);
+    // console.log("appointments", appointments);
+    // console.log("appointment_id", appointment_id);
 
     const {
       schedule_data: {
@@ -444,9 +449,29 @@ class EditAppointmentForm extends Component {
   getTypeOption = () => {
     let {
       static_templates: { appointments: { appointment_type = {} } = {} } = {},
+      scheduleAppointment = {},
     } = this.props;
+
+    // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+    let finalType = {};
+    if (!isEmpty(scheduleAppointment)) {
+      for (let type of Object.keys(appointment_type)) {
+        let { title = "" } = appointment_type[type] || {};
+        if (title === "Consultation") {
+          finalType[type] = appointment_type[type];
+        }
+      }
+    } else {
+      for (let type of Object.keys(appointment_type)) {
+        let { title = "" } = appointment_type[type] || {};
+        // if (title !== "Consultation") {
+        finalType[type] = appointment_type[type];
+        // }
+      }
+    }
+
     let newTypes = [];
-    for (let type of Object.keys(appointment_type)) {
+    for (let type of Object.keys(finalType)) {
       let { title = "" } = appointment_type[type] || {};
       newTypes.push(
         <Option key={type} value={type}>
@@ -893,6 +918,7 @@ class EditAppointmentForm extends Component {
       patientId,
       carePlan = {},
       payload: { id: appointment_id, patient_id, canViewDetails = false } = {},
+      scheduleAppointment,
     } = this.props;
     const { radiologyTypeSelected = null } = this.state;
     // const { fetchingPatients, typeDescription } = this.state;
@@ -1255,6 +1281,7 @@ class EditAppointmentForm extends Component {
             initialValue: provider_id ? provider_id : null,
           })(
             <Select
+              disabled={!isEmpty(scheduleAppointment)}
               notFoundContent={null}
               className="drawer-select"
               placeholder={formatMessage(messages.placeholderProvider)}
@@ -1268,7 +1295,7 @@ class EditAppointmentForm extends Component {
                   .toLowerCase()
                   .indexOf(input.toLowerCase()) >= 0
               }
-              disabled={canViewDetails}
+              // disabled={canViewDetails}
             >
               {this.getProviderOption()}
             </Select>
@@ -1338,27 +1365,27 @@ class EditAppointmentForm extends Component {
               {getFieldDecorator(START_TIME, {
                 initialValue: moment(start_time),
               })(
-                // <TimePicker
-                //   use12Hours
-                //   onChange={handleStartTimeChange}
-                //   minuteStep={15}
-                //   format="h:mm a"
-                //   className="wp100 ant-time-custom"
-                // // getPopupContainer={this.getParentNode}
-                // />
-                <Dropdown
-                  overlay={getTimePicker(START_TIME)}
-                  disabled={canViewDetails}
-                >
-                  <div
-                    className={`p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer ${
-                      canViewDetails ? "disabled-field-form" : null
-                    } `}
-                  >
-                    <div>{getStartTime()}</div>
-                    <ClockCircleOutlined />
-                  </div>
-                </Dropdown>
+                <TimePicker
+                  use12Hours
+                  onChange={handleStartTimeChange}
+                  // minuteStep={15}
+                  format="h:mm a"
+                  className="wp100 ant-time-custom"
+                  // getPopupContainer={this.getParentNode}
+                />
+                // <Dropdown
+                //   overlay={getTimePicker(START_TIME)}
+                //   disabled={canViewDetails}
+                // >
+                //   <div
+                //     className={`p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer ${
+                //       canViewDetails ? "disabled-field-form" : null
+                //     } `}
+                //   >
+                //     <div>{getStartTime()}</div>
+                //     <ClockCircleOutlined />
+                //   </div>
+                // </Dropdown>
               )}
             </FormItem>
           </div>
@@ -1384,27 +1411,27 @@ class EditAppointmentForm extends Component {
               {getFieldDecorator(END_TIME, {
                 initialValue: moment(end_time),
               })(
-                // <TimePicker
-                //   use12Hours
-                //   minuteStep={15}
-                //   onChange={handleEndTimeChange}
-                //   format="h:mm a"
-                //   className="wp100 ant-time-custom"
-                // // getPopupContainer={this.getParentNode}
-                // />
-                <Dropdown
-                  overlay={getTimePicker(END_TIME)}
-                  disabled={canViewDetails}
-                >
-                  <div
-                    className={`p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer ${
-                      canViewDetails ? "disabled-field-form" : null
-                    } `}
-                  >
-                    <div>{getEndTime()}</div>
-                    <ClockCircleOutlined />
-                  </div>
-                </Dropdown>
+                <TimePicker
+                  use12Hours
+                  // minuteStep={15}
+                  onChange={handleEndTimeChange}
+                  format="h:mm a"
+                  className="wp100 ant-time-custom"
+                  // getPopupContainer={this.getParentNode}
+                />
+                // <Dropdown
+                //   overlay={getTimePicker(END_TIME)}
+                //   disabled={canViewDetails}
+                // >
+                //   <div
+                //     className={`p10 br-brown-grey br5 wp100 h50 flex align-center justify-space-between pointer ${
+                //       canViewDetails ? "disabled-field-form" : null
+                //     } `}
+                //   >
+                //     <div>{getEndTime()}</div>
+                //     <ClockCircleOutlined />
+                //   </div>
+                // </Dropdown>
               )}
             </FormItem>
           </div>

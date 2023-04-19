@@ -674,25 +674,6 @@ class EditPatientDrawer extends Component {
     });
   };
 
-  setPastedFollowupAdvise = (e) => {
-    e.preventDefault();
-    let pastedValue = "";
-    if (typeof e.clipboardData !== "undefined") {
-      pastedValue = e.clipboardData.getData("text").trim();
-    }
-    if (pastedValue.length > 0 || pastedValue === "") {
-      this.setState({ followup_advise: pastedValue });
-    }
-  };
-
-  setFollowupAdvise = (e) => {
-    const value = e.target.value.trim();
-
-    if (value.length > 0 || value === "") {
-      this.setState({ followup_advise: e.target.value });
-    }
-  };
-
   translateHandler = async (translateFor) => {
     const { googleTranslate } = this.props;
     const { followup_advise, clinical_notes } = this.state;
@@ -721,6 +702,25 @@ class EditPatientDrawer extends Component {
       alert("Something went wrong");
     }
     // console.log("response", data.translations[0].translatedText);
+  };
+
+  setPastedFollowupAdvise = (e) => {
+    e.preventDefault();
+    let pastedValue = "";
+    if (typeof e.clipboardData !== "undefined") {
+      pastedValue = e.clipboardData.getData("text").trim();
+    }
+    if (pastedValue.length > 0 || pastedValue === "") {
+      this.setState({ followup_advise: pastedValue });
+    }
+  };
+
+  setFollowupAdvise = (e) => {
+    const value = e.target.value.trim();
+
+    if (value.length > 0 || value === "") {
+      this.setState({ followup_advise: e.target.value });
+    }
   };
 
   renderEditPatient = () => {
@@ -1266,14 +1266,16 @@ class EditPatientDrawer extends Component {
         <div className="form-headings-ap flex align-center justify-space-between mt10 mb10">
           {this.formatMessage(messages.clinicalNotes)}
 
-          <div className="flex">
+          <div className="flex direction-row">
             {isCollapse === "clinicalNotes" && (
-              <p
-                onClick={() => this.translateHandler("clinicalNotes")}
-                className="translate-text pointer mr10"
-              >
-                Translate in Hindi
-              </p>
+              <span className="flex form-label justify-space-between">
+                <p
+                  onClick={() => this.translateHandler("clinicalNotes")}
+                  className="translate-text pointer mr10"
+                >
+                  Translate in Hindi
+                </p>
+              </span>
             )}
             {isCollapse === "clinicalNotes" ? (
               <MinusCircleOutlined onClick={() => this.collpaseHanlder("")} />
@@ -1284,6 +1286,7 @@ class EditPatientDrawer extends Component {
             )}
           </div>
         </div>
+
         {isCollapse === "clinicalNotes" && (
           <TextArea
             placeholder={this.formatMessage(messages.writeHere)}
@@ -1379,14 +1382,17 @@ class EditPatientDrawer extends Component {
               {this.getSeverityOption()}
             </Select>
           )}
+
           <div className="form-headings-ap wp100 flex direction-row align-center justify-space-between">
             {this.formatMessage(messages.followup_advise)}
-            <p
-              onClick={() => this.translateHandler("followupAdvise")}
-              className="translate-text pointer"
-            >
-              Translate in Hindi
-            </p>
+            <span className="flex form-label justify-space-between">
+              <p
+                onClick={() => this.translateHandler("followupAdvise")}
+                className="translate-text pointer mr10"
+              >
+                Translate in Hindi
+              </p>
+            </span>
           </div>
           <div className="wp100 flex align-center justify-space-between">
             <TextArea
@@ -1499,6 +1505,7 @@ class EditPatientDrawer extends Component {
         diagnosis_type: diagnosisType === false ? "2" : "1",
         comorbidities,
         clinical_notes,
+        followup_advise,
         height,
         weight,
         symptoms: JSON.stringify(this.state.finalSymptomData),
@@ -1524,11 +1531,12 @@ class EditPatientDrawer extends Component {
     diagnosis_type,
     comorbidities,
     clinical_notes,
+    followup_advise,
     height,
     weight,
     symptoms,
     address,
-    followup_advise,
+    // followup_advise,
   }) {
     try {
       const { updatePatientAndCareplan } = this.props;
