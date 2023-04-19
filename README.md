@@ -1,4 +1,4 @@
-# adherelive-fe
+# adherelive-frontend
 
 For the frontend code of the AdhereLive Website
 

@@ -27,46 +27,46 @@ services:
   node:
     build:
       context: .
-      #dockerfile: ./docker/DockerfileProd
-    #image: gagneet/adherelive:portal-fe
+      #dockerfile: ./docker/DockerfileDemo
+    #image: gagneet/adherelive:portal-fe-demo
     #env_file:
-      #- ./env-files/.env_prod
+      #- ./env-files/.env_demo
     restart: always
     command:
       - npm
       - run
-      - start
+      - dev
     ports:
-      - ${WEB_SERVER_PORT}:5000
-      - ${REACT_SERVER_PORT}:3000
-    logging:
-      options:
-        max-size: 150m
-        max-file: "3"
-    #tty: true
+      - "${WEB_SERVER_PORT}:5000"
+      - "${REACT_SERVER_PORT}:3000"
+    #logging:
+      #options:
+        #max-size: 150m
+        #max-file: '3'
+    tty: true
     volumes:
       - ./:/usr/src/app
       - ./.node_env:/usr/src/app/.env
     links:
-      #- mysql
+      - mysql
       - minio1
       - minio2
       - minio3
       - minio4
 
-  #mysql:
-    #image: mysql:latest
-    #ports:
-      #- "3306:3306"
-    #expose:
-      #- 3306
-    #volumes:
-      #- mysql:/var/lib/mysql
-    #environment:
-      #- MYSQL_ROOT_PASSWORD=adherelive
-      #- MYSQL_DATABASE=adhere
-      #- MYSQL_USER=adherelive
-      #- MYSQL_PASSWORD=eK7tz4s3CBkYPjUaSBAl
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=adherelive
+      - MYSQL_DATABASE=adhere
+      - MYSQL_USER=adherelive
+      - MYSQL_PASSWORD=password
 
   #mongo:
     #image: mongo:latest
@@ -123,8 +123,8 @@ services:
 ## By default, this config uses default local driver,
 ## For custom volumes replace with volume driver configuration.
 volumes:
-  #mysql:
-    #driver: local
+  mysql:
+    driver: local
   adhere_storage_stack1: null
   adhere_storage_stack2: null
   adhere_storage_stack3: null

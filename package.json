@@ -1,5 +1,5 @@
 {
-  "name":"adherelive-client",
+  "name":"adherelive-fe",
   "version":"3.0.0",
   "description":"All packages for the adhere.live web frontend application",
   "repository":{
