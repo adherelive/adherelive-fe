@@ -41,7 +41,7 @@
 
   },
   "dependencies":{
-    "@ant-design/compatible": "^1.1.2",
+    "@ant-design/compatible": "^5.0.0",
     "@ant-design/icons": "^4.7.0",
     "@craco/craco": "^6.4.5",
     "agora-rtc-sdk-ng": "^4.7.1",
