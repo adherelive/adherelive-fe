@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { injectIntl } from "react-intl";
 import message from "antd/es/message";
 import Button from "antd/es/button";
+import { Dropdown } from "antd";
+import Menu from "antd/es/menu";
 
 import AddConsultationFeeDrawer from "../../../Containers/Drawer/addConsultationFee";
 import ConsultationFeeTable from "../../../Containers/ConsultationFees";
@@ -13,6 +15,12 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import Loading from "../../Common/Loading";
 import { PlusOutlined } from "@ant-design/icons";
 
+// AKSHAY NEW CODE FOR SUBSCRIPTION
+import AddService from "../../../Components/Subscription/Drawer/AddService";
+import AddSubscription from "../../../Components/Subscription/Drawer/AddSubscription";
+import DoctorServiceTable from "../../../Components/Subscription/DoctorServiceTable";
+import MySubscriptionList from "../../../Components/Subscription/MySubscriptionList";
+
 class ProviderDoctorPaymentProduct extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +31,9 @@ class ProviderDoctorPaymentProduct extends Component {
       noDoctorPaymentProducts: true,
       isUpdated: false,
       loading: false,
+      // AKSHAY NEW CODE FOR SUBSCRIPTION
+      addServiceDrawer: false,
+      addSubscriptionDrawer: false,
     };
   }
 
@@ -30,6 +41,11 @@ class ProviderDoctorPaymentProduct extends Component {
     const { match: { params: { id = null } = {} } = {} } = this.props;
     this.handleGetDoctorPaymentProduct(id);
     this.handleGetAdminPaymentProduct();
+    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    // this.props.getServices();
+    // this.props.getSubscriptions();
+    this.props.getProviderServices(id);
+    this.props.getProviderSubscriptions(id);
   }
 
   async handleGetDoctorPaymentProduct(id) {
@@ -88,6 +104,26 @@ class ProviderDoctorPaymentProduct extends Component {
     }
   }
 
+  // AKSHAY NEW CODE FOR SUBSCRIPTION
+
+  handleServiceDrawer = () => {
+    this.setState({
+      addServiceDrawer: true,
+    });
+  };
+  handleSubscriptionDrawer = () => {
+    this.setState({
+      addSubscriptionDrawer: true,
+    });
+  };
+
+  onCloseDrawer = () => {
+    this.setState({
+      addServiceDrawer: false,
+      addSubscriptionDrawer: false,
+    });
+  };
+
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
   setIsUpdated = () => {
@@ -107,10 +143,17 @@ class ProviderDoctorPaymentProduct extends Component {
           {this.formatMessage(messages.notAddedFeesYet)}
         </div>
 
-        <div className=" mt20">
-          <Button type="primary" onClick={this.displayAddDoctorPaymentProduct}>
+        <div className="mt20">
+          {/* <Button type="primary" onClick={this.displayAddDoctorPaymentProduct}>
             <span className="w200 fs20">
               {this.formatMessage(messages.addFee)}
+            </span>
+          </Button> */}
+          {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+          <Button type="primary" onClick={this.handleServiceDrawer}>
+            <span className="w200 fs20">
+              {/* {this.formatMessage(messages.addFee)} */}
+              Add Service
             </span>
           </Button>
         </div>
@@ -126,6 +169,7 @@ class ProviderDoctorPaymentProduct extends Component {
     } = this.state;
     const { match: { params: { id: doctor_id = null } = {} } = {} } =
       this.props;
+    const { services } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -134,21 +178,23 @@ class ProviderDoctorPaymentProduct extends Component {
     return (
       <div className="wp100 flex p10 direction-column justify-space-between">
         <div className="wp100">
-          {noDoctorPaymentProducts ? (
+          {Object.keys(services).length === 0 ? (
             <div className="wp100 justify-center align-center">
               {this.noConsultationFeeDisplay()}
             </div>
           ) : (
             <div className="wp100 flex direction-column align-center justify-center">
-              <ConsultationFeeTable
+              {/* <ConsultationFeeTable
                 doctorPaymentProducts={doctorPaymentProducts}
                 deleteDoctorProduct={this.deleteDoctorProduct}
                 editDoctorProduct={this.displayEditDoctorPaymentProduct}
-              />
+              /> */}
 
               {/* <DoctorConsultationFeeTable
                 doctor_id={doctor_id}
               /> */}
+              {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+              <DoctorServiceTable services={services} />
             </div>
           )}
         </div>
@@ -195,8 +241,23 @@ class ProviderDoctorPaymentProduct extends Component {
     }
   }
 
+  getMenu = () => {
+    return (
+      <Menu>
+        <Menu.Item onClick={this.handleServiceDrawer}>
+          <div>{this.formatMessage(messages.menuTitleService)}</div>
+        </Menu.Item>
+
+        <Menu.Item onClick={this.handleSubscriptionDrawer}>
+          <div>{this.formatMessage(messages.menuTitleSubscription)}</div>
+        </Menu.Item>
+      </Menu>
+    );
+  };
+
   renderHeader = () => {
     const { noDoctorPaymentProducts } = this.state;
+    const { services } = this.props;
     return (
       <div className="wp100 pt20  mb20 fs28 fw700 flex justify-space-between align-center">
         <div className="ml20 flex flex-start align-center">
@@ -204,18 +265,32 @@ class ProviderDoctorPaymentProduct extends Component {
           {this.formatMessage(messages.consultation_fee_header_text)}
         </div>
 
-        {!noDoctorPaymentProducts && (
+        {Object.keys(services).length !== 0 && (
           <div className="flex flex-end align-center">
-            <Button
+            {/* <Button
               type="primary"
               className="ml10 mr20 add-button "
-              icon={<PlusOutlined />}
+              icon={"plus"}
               onClick={this.displayAddDoctorPaymentProduct}
             >
               <span className="fs16">
                 {this.formatMessage(messages.addMore)}
               </span>
-            </Button>
+            </Button> */}
+            {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+            <Dropdown
+              overlay={this.getMenu()}
+              trigger={["click"]}
+              placement="bottomRight"
+            >
+              <Button
+                type="primary"
+                className="ml10 mr20 add-button "
+                icon={<PlusOutlined />}
+              >
+                <span className="fs16">Add More</span>
+              </Button>
+            </Dropdown>
           </div>
         )}
       </div>
@@ -235,9 +310,23 @@ class ProviderDoctorPaymentProduct extends Component {
       <Fragment>
         {this.renderHeader()}
         {this.consultationFeeDisplay()}
+        <div className="wp100 ml20 mt20">
+          <MySubscriptionList />
+        </div>
         <AddConsultationFeeDrawer
           defaultPaymentsProducts={this.state.defaultPaymentsProducts}
           setIsUpdated={this.setIsUpdated}
+          doctor_id={id}
+        />
+        {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+        <AddService
+          visible={this.state.addServiceDrawer}
+          onCloseDrawer={this.onCloseDrawer}
+          doctor_id={id}
+        />
+        <AddSubscription
+          visible={this.state.addSubscriptionDrawer}
+          onCloseDrawer={this.onCloseDrawer}
           doctor_id={id}
         />
       </Fragment>

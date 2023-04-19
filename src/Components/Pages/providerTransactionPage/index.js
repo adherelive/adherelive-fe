@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import { injectIntl } from "react-intl";
-import TransactionTable from "../../../Containers/Transaction/table/index";
+// import TransactionTable from "../../../Containers/Transaction/table/index";
+import TransactionTable from "../../../Components/Subscription/TransactionTable";
 import messages from "./messages";
 
 class providerTransactionPage extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    const { getAllTransactions } = this.props;
+    this.props.getAllTransactions();
   }
 
   formatMessage = (data) => this.props.intl.formatMessage(data);
@@ -17,7 +23,7 @@ class providerTransactionPage extends Component {
           {this.formatMessage(messages.transaction_table_header)}
         </div>
         <div className="wp100 pl14 pr14 flex align-center justify-center">
-          <TransactionTable />
+          <TransactionTable transactions={this.props.transactions} />
         </div>
       </div>
     );

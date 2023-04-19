@@ -36,7 +36,15 @@ class EditService extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const { editServiceData } = this.props;
+
+    console.log("editServiceData", editServiceData);
+    this.setState({
+      consultation: editServiceData.services.service_offering_name,
+      serviceFees: editServiceData.services.service_charge,
+    });
+  }
 
   onSubmit = () => {
     const { consultation, serviceType, serviceFees, currency } = this.state;
@@ -68,6 +76,7 @@ class EditService extends Component {
   onClose = () => {};
 
   setConsultation = (value) => {
+    console.log("value", value);
     this.setState({
       consultation: value,
     });
@@ -177,6 +186,7 @@ class EditService extends Component {
                 className={"form-inputs-ap"}
                 value={serviceType}
                 // onChange={this.setConsultationName}
+                disabled
               />
 
               <div className="form-headings flex align-center justify-start">

@@ -22,6 +22,7 @@ import MsgIcon from "../../../Assets/images/chat.png";
 import { getName } from "../../../Helper/validation";
 import isEmpty from "../../../Helper/is-empty";
 // import config from "../../../config/config";
+// import isEmpty from "../../../Helper/is-empty";
 
 // const { WEB_URL } = config;
 
@@ -134,6 +135,53 @@ class PatientDetailsDrawer extends Component {
       getAppointments(patient_id);
     }
   }
+
+  // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+  getCarePlanForPatient = async (patientId) => {
+    try {
+      const { getPatientCareplanByPatientId } = this.props;
+      const getCarePlanResponse = await getPatientCareplanByPatientId(
+        patientId
+      );
+      const {
+        status,
+        statusCode,
+        payload: { data = {}, message: resp_msg = "" } = {},
+      } = getCarePlanResponse || {};
+      if (!status) {
+        // message.error(resp_msg);
+      } else if (status) {
+        if (!isEmpty(data.care_plans)) {
+          let carePlanId = 1;
+          let carePlanMedicationIds = [];
+          let appointmentsListIds = [];
+          for (let carePlan of Object.values(data.care_plans)) {
+            let {
+              basic_info: { id = 1, patient_id = 1 },
+              medication_ids = [],
+              appointment_ids = [],
+            } = carePlan;
+            // if (parseInt(patientId) === parseInt(patient_id)) {
+            carePlanId = id;
+            carePlanMedicationIds = carePlan.carePlanMedicationIds;
+            appointmentsListIds = carePlan.carePlanAppointmentIds;
+            // }
+          }
+          this.setState({
+            carePlanId,
+            carePlanMedicationIds,
+            appointmentsListIds,
+            care_plans: data.care_plans,
+          });
+        }
+        // this.setState({
+        //   carePlans: data.care_plans,
+        // });
+      }
+    } catch (error) {
+      console.log("Patient Careplans Get errrrorrrr ===>", error);
+    }
+  };
 
   componentDidUpdate(prevProps) {
     const {
@@ -359,10 +407,15 @@ class PatientDetailsDrawer extends Component {
     // window.open(`http://localhost:3000${getPatientConsultingUrl(patient_id)}`, '_blank');
   };
 
-  handlePatientDetailsRedirect = (e) => {
+  handlePatientDetailsRedirect = async (e) => {
     e.preventDefault();
-    const { history, payload: { patient_id } = {} } = this.props;
+    const {
+      history,
+      payload: { patient_id } = {},
+      setScheduleAppontmentData,
+    } = this.props;
     this.onClose();
+    await setScheduleAppontmentData({});
     history.push(`/patients/${patient_id}`);
   };
 
@@ -379,9 +432,7 @@ class PatientDetailsDrawer extends Component {
       // care_plans,
       users = {},
     } = this.props;
-
     const { care_plans } = this.state;
-
     const { patientDetailsData, patientUserDetails } = this.state;
 
     const {

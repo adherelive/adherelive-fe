@@ -3,21 +3,18 @@ import TableStatus from "../../../../Helper/TableStatus";
 import { TABLE_STATUS } from "../../../../constant";
 
 export default (props) => {
-  // const { transactionData } = props || {};
-  // const { status = "" } = transactionData || {};
-
-  // const type = TABLE_STATUS.TRANSACTION_TABLE;
-  // const displayProps = {
-  //   status,
-  //   type,
-  // };
+  const { transactions } = props || {};
+  const { patient_status = {} } = transactions;
 
   return (
-    <div className="ellipsis wp100  ">
-      <div className="wp100 ">
-        {/* <TableStatus displayProps={displayProps} /> */}
-        ACTIVE
-      </div>
+    <div className="ellipsis wp100 fw700">
+      {patient_status === "active" ? (
+        <div className="wp100 tab-color">ACTIVE</div>
+      ) : (
+        <div style={{ color: "gray" }} className="wp100">
+          IN-ACTIVE
+        </div>
+      )}
     </div>
   );
 };

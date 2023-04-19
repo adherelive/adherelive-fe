@@ -19,6 +19,9 @@ import {
 } from "../../modules/favouritesData/index";
 import { googleTranslate } from "../../modules/cdss";
 
+// AKSHAY NEW CODE FOR SUBSCRIPTION
+import { updateActivityById } from "./../../modules/subscription/activities";
+
 const mapStateToProps = (state) => {
   const {
     drawer: { visible, loading, data: { type, payload = {} } = {} },
@@ -29,6 +32,7 @@ const mapStateToProps = (state) => {
     providers,
     favourites_data = {},
     pages: { favourite_medical_test_ids = [] } = {},
+    subscription: { scheduleAppointment = {} },
   } = state;
   return {
     visible: visible && type === DRAWER.EDIT_APPOINTMENT,
@@ -41,6 +45,7 @@ const mapStateToProps = (state) => {
     providers,
     favourites_data,
     favourite_medical_test_ids,
+    scheduleAppointment,
   };
 };
 
@@ -61,6 +66,9 @@ const mapDispatchToProps = (dispatch) => {
     getAppointmentsDetails: () => dispatch(getAppointmentsDetails()),
 
     // editAppointment: data => dispatch(editAppointment(data)),
+    // AKSHAY NEW CODE FRO SUBSCRIPTION
+    updateActivityById: (id, payload) =>
+      dispatch(updateActivityById(id, payload)),
     googleTranslate: (textToConvert) =>
       dispatch(googleTranslate(textToConvert)),
   };

@@ -517,7 +517,7 @@ const messages = defineMessages({
   followup_advise: {
     id: "app.patient_profile.clinical.notes.followup_advise",
     description: "",
-    defaultMessage: "Follow-up Advise",
+    defaultMessage: "Follow-Up Advise",
   },
   diagnosis_type: {
     id: "app.patient_profile.diagnosis.type",
@@ -609,7 +609,7 @@ const messages = defineMessages({
   recommendServiceTitle: {
     id: "app.patientDetails.recommendServiceTitle",
     description: "",
-    defaultMessage: "Once-on service",
+    defaultMessage: "Once-off service",
   },
 });
 

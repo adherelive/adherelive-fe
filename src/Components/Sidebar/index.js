@@ -792,7 +792,14 @@ class SideMenu extends Component {
           </MenuItem>
         ) : null}
 
+        {/* {authenticated_category === USER_CATEGORY.PROVIDER ||
+        ((authenticated_category === USER_CATEGORY.DOCTOR ||
+          authenticated_category === USER_CATEGORY.HSP) &&
+          linked_id === null &&
+          Object.keys(doctors).length > 0) ? ( */}
         {authenticated_category === USER_CATEGORY.PROVIDER ||
+        (authenticated_category === USER_CATEGORY.DOCTOR &&
+          doctor_provider_id === null) ||
         ((authenticated_category === USER_CATEGORY.DOCTOR ||
           authenticated_category === USER_CATEGORY.HSP) &&
           linked_id === null &&

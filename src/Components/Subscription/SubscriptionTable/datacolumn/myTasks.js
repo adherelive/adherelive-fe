@@ -8,42 +8,59 @@ import message from "antd/es/message";
 export default (props) => {
   const {
     data: {
-      basic_info: { id = null, name = "", type = "", amount = "" } = {},
-      deleteDoctorProduct,
-      formatMessage,
+      serviceDetails = {},
+      type = "",
+      // notes = "",
+      subscriptions = "",
       onOpenMyTasksDrawer,
     } = {},
   } = props || {};
 
-  const handleDelete = (id) => async (e) => {
-    e.preventDefault();
-    alert("delete");
-    // try {
-    //   const {data = {}} = props;
-    //   const {deleteDoctorProduct} = data || {};
-    //   const response = await deleteDoctorProduct({id});
-    //   const {
-    //     status,
-    //     statusCode,
-    //     payload: {data: resp_data = {}, message: resp_msg = ""} = {},
-    //   } = response || {};
+  // console.log("props.data", props.data);
 
-    //   if (status) {
-    //     message.success(resp_msg);
-    //   } else {
-    //     message.warn(resp_msg);
-    //   }
-    // } catch (error) {
-    //   console.log("error ==>", error);
-    // }
-  };
+  let patientId = "";
+  let serviceOrSubscriptionId = "";
+  if (type === "service") {
+    serviceOrSubscriptionId = props.data.service_plan_id;
+    patientId = props.data.patient_id;
+    // console.log("service", serviceDetails);
+    // subscriptionOrServiceData = serviceDetails;
+  } else {
+    serviceOrSubscriptionId = props.data.service_subscription_plan_id;
+    patientId = props.data.patient_id;
+    // subscriptionOrServiceData = subscriptions;
+    // console.log("subscription", subscriptions);
+  }
 
-  const { data: { editable } = {} } = props;
+  // const handleDelete = (id) => async (e) => {
+  //   e.preventDefault();
+  //   alert("delete");
+  //   // try {
+  //   //   const {data = {}} = props;
+  //   //   const {deleteDoctorProduct} = data || {};
+  //   //   const response = await deleteDoctorProduct({id});
+  //   //   const {
+  //   //     status,
+  //   //     statusCode,
+  //   //     payload: {data: resp_data = {}, message: resp_msg = ""} = {},
+  //   //   } = response || {};
+
+  //   //   if (status) {
+  //   //     message.success(resp_msg);
+  //   //   } else {
+  //   //     message.warn(resp_msg);
+  //   //   }
+  //   // } catch (error) {
+  //   //   console.log("error ==>", error);
+  //   // }
+  // };
+
+  // const { data: { editable } = {} } = props;
   // console.log("5464564564645654",provider_id);
 
-  if (!editable) {
-    return null;
-  }
+  // if (!editable) {
+  //   return null;
+  // }
 
   return (
     <Tooltip
@@ -51,7 +68,12 @@ export default (props) => {
       // title={formatMessage(messages.deleteConsultationFee)}
       title={"My Tasks"}
     >
-      <div className="p10" onClick={onOpenMyTasksDrawer}>
+      <div
+        className="p10"
+        onClick={() =>
+          onOpenMyTasksDrawer(patientId, serviceOrSubscriptionId, type)
+        }
+      >
         <FieldTimeOutlined className="flex align-center justify-center" />
       </div>
     </Tooltip>

@@ -1,16 +1,29 @@
 import React from "react";
+import isEmpty from "../../../../Helper/is-empty";
 
 export default (props) => {
   const {
     data: {
-      basic_info: { id = null, name = "", type = "", amount = "" } = {},
+      serviceDetails: { service_offering_name = "" } = {},
+      type = "",
+      // notes = "",
+      subscriptions = "",
     } = {},
   } = props || {};
 
   return (
     <div>
       {/* <span> {name}</span> */}
-      <span> Health lite (plan)</span>
+      <div className="flex direction-column">
+        <span>
+          {type === "service"
+            ? service_offering_name
+            : !isEmpty(subscriptions) && subscriptions.notes}{" "}
+        </span>
+        <span className="flex justify-space-between ellipsis tab-color">
+          ({type === "service" ? "ad-hoc" : "plan"})
+        </span>
+      </div>
     </div>
   );
 };

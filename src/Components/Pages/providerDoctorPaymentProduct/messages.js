@@ -36,6 +36,18 @@ const messages = defineMessages({
     description: "",
     defaultMessage: "Something went wrong.",
   },
+  // AKSHAY NEW CODE FOR SUBSCRIPTION STARTED
+  menuTitleService: {
+    id: "app.provider.paymentProduct.menuTitleService",
+    description: "",
+    defaultMessage: "Service",
+  },
+  menuTitleSubscription: {
+    id: "app.provider.paymentProduct.menuTitleSubscription",
+    description: "",
+    defaultMessage: "Subscription",
+  },
+  // AKSHAY NEW CODE FOR SUBSCRIPTION ENDED
 });
 
 export default messages;
