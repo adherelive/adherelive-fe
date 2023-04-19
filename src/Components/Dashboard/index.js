@@ -36,7 +36,7 @@ import MissedDietsDrawer from "../../Containers/Drawer/missedDiet";
 import MissedWorkoutsDrawer from "../../Containers/Drawer/missedWorkout";
 import isEmpty from "../../Helper/is-empty";
 import { PlusOutlined } from "@ant-design/icons";
-// AKSHAY NEW CODE FOR SUBSCRIPTION
+// New Code for Subscription
 import ScheduledActivitiesTable from "../../Containers/subscription/ScheduleActivitiesTable";
 import PendingActivitiesTable from "../../Containers/subscription/PendingActivitiesTable";
 
