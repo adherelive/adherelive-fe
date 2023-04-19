@@ -75,7 +75,7 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "showdown": "^1.9.1",
+    "showdown": "^2.0.0",
     "twilio-chat": "^5.0.2",
     "web-vitals": "^2.1.4",
     "@devexpress/dx-react-core": "3.0.4",
