@@ -44,13 +44,16 @@ const RadioGroup = Radio.Group;
 const { Item: FormItem } = Form;
 
 const appointments = [
-  { title: "Medical test", startDate: "2023-04-23T10:00" },
+  {
+    title: "Medical test",
+    startDate: new Date("2023-05-24T11:40:29.000Z"),
+    endDate: new Date("2023-05-24T12:10:29.000Z"),
+  },
   {
     title: "Blood Test",
-    startDate: "2023-04-23T10:30",
-    endDate: "2023-04-23T11:30",
+    startDate: "2023-05-23T10:30",
+    endDate: "2023-05-23T11:30",
   },
-  { title: "Consultation", startDate: "2023-04-23T12:35" },
 ];
 
 function Index({
@@ -60,14 +63,11 @@ function Index({
   setTimeHandlerOnClick,
 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [appointmentData, setAppointmentData] = useState([
-    { title: "Medical test", startDate: "2023-04-23T10:00" },
-    {
-      title: "Blood Test",
-      startDate: "2023-04-23T10:30",
-      endDate: "2023-04-23T11:30",
-    },
-  ]);
+  const allAppointments = useSelector(
+    (state) => state.subscription.appointmentsForDay
+  );
+
+  const [appointmentData, setAppointmentData] = useState([]);
   //   const currentDate = "2019-06-23";
 
   useEffect(() => {
@@ -82,6 +82,29 @@ function Index({
       setCurrentDate(new Date(scheduleDate));
     }
   }, [scheduleDate]);
+
+  useEffect(() => {
+    // alert("asdsd");
+    if (!isEmpty(allAppointments)) {
+      console.log("allAppointments", allAppointments);
+      let newArray = [];
+
+      for (const key in allAppointments) {
+        if (allAppointments.hasOwnProperty(key)) {
+          // console.log(`${key}: ${allAppointments[key]}`);
+
+          let obj = {
+            title: allAppointments[key].basic_info.details.type_description,
+            startDate: new Date(allAppointments[key].basic_info.start_time),
+            endDate: new Date(allAppointments[key].basic_info.end_time),
+          };
+          newArray.push(obj);
+        }
+      }
+
+      setAppointmentData(newArray);
+    }
+  }, [allAppointments]);
 
   const onCellClick = (data) => {
     setTimeHandlerOnClick(data);

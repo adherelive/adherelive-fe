@@ -232,10 +232,15 @@ class AddAppointmentForm extends Component {
   //   this.adjustEventOnStartDateChange(date);
   // };
 
-  handleDateSelect = (date) => {
-    const { openScheduleHandler } = this.props;
+  handleDateSelect = async (date) => {
+    const { openScheduleHandler, getAppointmentsDataForDay } = this.props;
+    let formatDate = moment(date).format("DD-MM-YYYY");
+    const response = await getAppointmentsDataForDay(formatDate);
     console.log("this.props", this.props);
-    // openScheduleHandler(date);
+    console.log("date", date);
+
+    console.log("formatDate", formatDate);
+    openScheduleHandler(date);
     // const {
     //   form: { setFieldsValue, getFieldValue } = {},
     //   openScheduleHandler,

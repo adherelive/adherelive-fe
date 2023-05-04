@@ -327,6 +327,7 @@ class AddAppointment extends Component {
       appointmentVisible,
       editAppointment,
       scheduleAppointment,
+      getAppointmentsDataForDay,
     } = this.props;
     const { disabledSubmit, submitting = false } = this.state;
 

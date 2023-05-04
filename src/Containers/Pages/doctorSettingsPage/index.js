@@ -20,10 +20,7 @@ import { DRAWER } from "../../../constant";
 // AKSHAY NEW CODE FOR SUBSCRIPTIONS
 
 import { getServices } from "../../../modules/subscription/services";
-import {
-  getSubscriptions,
-  setSubscriptionDrawer,
-} from "../../../modules/subscription/subscriptions";
+import { getSubscriptions } from "../../../modules/subscription/subscriptions";
 
 const mapStateToProps = (state) => {
   const {
@@ -38,7 +35,7 @@ const mapStateToProps = (state) => {
     } = {},
     account_details = {},
     // AKSHAY NEW CODE FOR SUBSCRIPTION
-    subscription: { services = {}, addSubscriptionDrawer = false },
+    subscription: { services = {} },
     providers,
   } = state;
 
@@ -53,7 +50,6 @@ const mapStateToProps = (state) => {
     user_roles,
     services,
     providers,
-    addSubscriptionDrawer,
   };
 };
 
@@ -80,7 +76,6 @@ const mapDispatchToProps = (dispatch) => {
     // AKSHAY NEW CODE FOR SUBSCRIPTION
     getServices: () => dispatch(getServices()),
     getSubscriptions: () => dispatch(getSubscriptions()),
-    setSubscriptionDrawer: (value) => dispatch(setSubscriptionDrawer(value)),
   };
 };
 
