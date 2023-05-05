@@ -29,3 +29,7 @@ export const getUploadAppointmentDocumentUrl = (appointment_id) => {
 export const getDeleteAppointmentDocumentUrl = (document_id) => {
   return `/appointments/${document_id}/delete-doc`;
 };
+
+export const getAppointmentForDateUrl = (date) => {
+  return `/appointments/date?date=${date}`;
+};

@@ -1,5 +1,6 @@
 // AKSHAY NEW CODE IMPLEMENTATION
 const initialState = {
+  appointmentsForDay: {},
   services: {},
   subscriptions: {},
   recommendServices: {},
@@ -15,7 +16,6 @@ const initialState = {
     flashCardNotes: [],
     is_published: "",
   },
-  addSubscriptionDrawer: false,
 };
 
 export const SET_SERVICES = "SET_SERVICES";
@@ -28,7 +28,7 @@ export const SET_ACTIVITY_DATA_FOR_SCHEDULE = "SET_ACTIVITY_DATA_FOR_SCHEDULE";
 export const SET_PENDING_ACTIVITIES_TABLE_DATA =
   "SET_PENDING_ACTIVITIES_TABLE_DATA";
 export const SET_FALASHCARD_DATA = "SET_FALASHCARD_DATA";
-export const SET_ADD_SUBSCRIPTION_DRAWER = "SET_ADD_SUBSCRIPTION_DRAWER";
+export const SET_APPOINTMENT_FOR_DAY = "SET_APPOINTMENT_FOR_DAY";
 
 export default function (state = initialState, action) {
   const { type, payload = {} } = action;
@@ -76,10 +76,10 @@ export default function (state = initialState, action) {
         ...state,
         flashCardData: action.payload,
       };
-    case SET_ADD_SUBSCRIPTION_DRAWER:
+    case SET_APPOINTMENT_FOR_DAY:
       return {
         ...state,
-        addSubscriptionDrawer: action.payload,
+        appointmentsForDay: action.payload,
       };
     default:
       return state;

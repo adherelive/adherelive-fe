@@ -7,7 +7,9 @@ import {
   updateAppointmentUrl,
   deleteAppointmentUrl,
   getAppointmentsDetailsUrl,
+  getAppointmentForDateUrl,
 } from "../../Helper/urls/appointments";
+import { SET_APPOINTMENT_FOR_DAY } from "../../reducer/index";
 
 export const ADD_APPOINTMENT_START = "ADD_APPOINTMENT_START";
 export const ADD_APPOINTMENT_COMPLETE = "ADD_APPOINTMENT_COMPLETE";
@@ -217,6 +219,75 @@ export const deleteAppointment = (id) => {
       }
     } catch (error) {
       console.log("DELETE APPOINTMENTS ERROR", error);
+    }
+    return response;
+  };
+};
+
+export const getAppointmentsDataForDay = (date) => {
+  let appointments = {
+    422: {
+      basic_info: {
+        id: 422,
+        description: null,
+        details: {
+          type: "2",
+          reason: "Follow-up",
+          critical: false,
+          description: "",
+          treatment_id: 1,
+          radiology_type: "",
+          type_description: "Telephone",
+        },
+        start_date: "2023-04-24",
+        end_date: "2023-04-24",
+        start_time: "2023-05-24T11:40:29.000Z",
+        end_time: "2023-05-24T12:10:29.000Z",
+      },
+      participant_one: {
+        id: 7,
+        category: "doctor",
+      },
+      participant_two: {
+        id: 11475,
+        category: "patient",
+      },
+      organizer: {
+        id: 7,
+        category: "doctor",
+        name: "Subharti Test",
+      },
+      rr_rule: null,
+      provider_id: 5,
+      provider_name: "",
+      active_event_id: null,
+      appointment_document_ids: [],
+      care_plan_id: 12515,
+    },
+  };
+  let response = {};
+  return async (dispatch) => {
+    try {
+      dispatch({ type: GET_APPOINTMENTS_START });
+      response = await doRequest({
+        method: REQUEST_TYPE.GET,
+        url: getAppointmentForDateUrl(date),
+      });
+
+      const { status, payload: { data, error } = {} } = response || {};
+      if (status === true) {
+        dispatch({
+          type: SET_APPOINTMENT_FOR_DAY,
+          payload: data.appointments,
+        });
+      } else {
+        // dispatch({
+        //   type: GET_APPOINTMENTS_FAILED,
+        //   error,
+        // });
+      }
+    } catch (error) {
+      console.log("GET APPOINTMENTS FOR PATIENT ERROR", error);
     }
     return response;
   };

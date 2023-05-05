@@ -70,6 +70,7 @@ class AddAppointmentForm extends Component {
       radiologyTypeSelected: null,
       typeDescValue: "",
       carePlans: {},
+      pageUrl: window.location.pathname.split("/"),
     };
   }
 
@@ -232,9 +233,14 @@ class AddAppointmentForm extends Component {
   //   this.adjustEventOnStartDateChange(date);
   // };
 
-  handleDateSelect = (date) => {
-    const { openScheduleHandler } = this.props;
+  handleDateSelect = async (date) => {
+    const { openScheduleHandler, getAppointmentsDataForDay } = this.props;
+    let formatDate = moment(date).format("DD-MM-YYYY");
+    const response = await getAppointmentsDataForDay(formatDate);
     console.log("this.props", this.props);
+    console.log("date", date);
+
+    console.log("formatDate", formatDate);
     // openScheduleHandler(date);
     // const {
     //   form: { setFieldsValue, getFieldValue } = {},
@@ -389,7 +395,7 @@ class AddAppointmentForm extends Component {
       static_templates: { appointments: { type_description = {} } = {} } = {},
       scheduleAppointment,
     } = this.props;
-    if (isEmpty(scheduleAppointment)) {
+    if (isEmpty(scheduleAppointment) && this.state.pageUrl[1] === "") {
       setFieldsValue({ [APPOINTMENT_TYPE_DESCRIPTION]: null });
     }
 
@@ -410,7 +416,7 @@ class AddAppointmentForm extends Component {
 
   getInitialAppointmentTypeValue = () => {
     const { scheduleAppointment } = this.props;
-    if (!isEmpty(scheduleAppointment)) {
+    if (!isEmpty(scheduleAppointment) && this.state.pageUrl[1] === "") {
       return "2";
     } else {
       return null;
@@ -424,7 +430,7 @@ class AddAppointmentForm extends Component {
     } = this.props;
     // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
     let finalType = {};
-    if (!isEmpty(scheduleAppointment)) {
+    if (!isEmpty(scheduleAppointment) && this.state.pageUrl[1] === "") {
       for (let type of Object.keys(appointment_type)) {
         let { title = "" } = appointment_type[type] || {};
         if (title === "Consultation") {
@@ -490,7 +496,7 @@ class AddAppointmentForm extends Component {
 
     // console.log("typeDescription", typeDescription);
     // console.log("scheduleAppointment", scheduleAppointment);
-    if (!isEmpty(scheduleAppointment)) {
+    if (!isEmpty(scheduleAppointment) && this.state.pageUrl[1] === "") {
       const {
         details: { service_offering_name = "" },
       } = scheduleAppointment;
@@ -1002,7 +1008,7 @@ class AddAppointmentForm extends Component {
 
         {/* AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION */}
 
-        {!isEmpty(scheduleAppointment) && (
+        {!isEmpty(scheduleAppointment) && this.state.pageUrl[1] === "" && (
           <>
             <div className="flex mt24 direction-row flex-grow-1">
               <label
@@ -1056,7 +1062,11 @@ class AddAppointmentForm extends Component {
                 <Select
                   onChange={this.handleTypeDescriptionSelect}
                   onDropdownVisibleChange={this.DescDropDownVisibleChange}
-                  disabled={!appointmentType || !isEmpty(scheduleAppointment)}
+                  disabled={
+                    !appointmentType ||
+                    (!isEmpty(scheduleAppointment) &&
+                      this.state.pageUrl[1] === "")
+                  }
                   notFoundContent={"No match found"}
                   className="drawer-select"
                   placeholder={formatMessage(messages.placeholderTypeDesc)}
@@ -1177,7 +1187,9 @@ class AddAppointmentForm extends Component {
             initialValue: this.getInitialProviderValue(),
           })(
             <Select
-              disabled={!isEmpty(scheduleAppointment)}
+              disabled={
+                !isEmpty(scheduleAppointment) && this.state.pageUrl[1] === ""
+              }
               notFoundContent={null}
               className="drawer-select"
               placeholder={formatMessage(messages.placeholderProvider)}
@@ -1230,7 +1242,8 @@ class AddAppointmentForm extends Component {
               disabledDate={disabledDate}
               disabled={
                 !isEmpty(scheduleAppointment) &&
-                scheduleAppointment.fromButton === "start"
+                scheduleAppointment.fromButton === "start" &&
+                this.state.pageUrl[1] === ""
                   ? true
                   : false
               }

@@ -9,6 +9,7 @@ import {
   addAppointment,
   addCarePlanAppointment,
   getAppointmentsDetails,
+  getAppointmentsDataForDay,
 } from "../../modules/appointments";
 import {
   markFavourite,
@@ -77,6 +78,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getPatientCareplanByPatientIdAndUserRoleId(patientId)),
     googleTranslate: (textToConvert) =>
       dispatch(googleTranslate(textToConvert)),
+    getAppointmentsDataForDay: (date) =>
+      dispatch(getAppointmentsDataForDay(date)),
   };
 };
 

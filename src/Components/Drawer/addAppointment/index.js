@@ -26,6 +26,7 @@ class AddAppointment extends Component {
       submitting: false,
       scheduleDrawer: false,
       scheduleDate: "",
+      pageUrl: window.location.pathname.split("/"),
     };
 
     this.FormWrapper = Form.create({ onFieldsChange: this.onFormFieldChanges })(
@@ -115,9 +116,11 @@ class AddAppointment extends Component {
               // },
               // AKSHAY NEW CODE IMPLEMENTAION FOR SUBSCRIPTION
               participant_two: {
-                id: !isEmpty(scheduleAppointment)
-                  ? scheduleAppointment.patient_id
-                  : patient_id,
+                id:
+                  !isEmpty(scheduleAppointment) &&
+                  this.state.pageUrl[1] !== "patients"
+                    ? scheduleAppointment.patient_id
+                    : patient_id,
                 category: "patient",
               },
               date,
@@ -142,9 +145,11 @@ class AddAppointment extends Component {
               //   category: "patient",
               // },
               participant_two: {
-                id: !isEmpty(scheduleAppointment)
-                  ? scheduleAppointment.patient_id
-                  : patient_id,
+                id:
+                  !isEmpty(scheduleAppointment) &&
+                  this.state.pageUrl[1] !== "patients"
+                    ? scheduleAppointment.patient_id
+                    : patient_id,
                 category: "patient",
               },
               date,
@@ -186,9 +191,11 @@ class AddAppointment extends Component {
         } else {
           try {
             this.setState({ submitting: true });
-            let finalCareplanId = !isEmpty(scheduleAppointment)
-              ? appointment_careplan
-              : carePlanId;
+            let finalCareplanId =
+              !isEmpty(scheduleAppointment) &&
+              this.state.pageUrl[1] !== "patients"
+                ? appointment_careplan
+                : carePlanId;
             const response = await addCarePlanAppointment(
               data,
               finalCareplanId
@@ -218,7 +225,10 @@ class AddAppointment extends Component {
 
               // AKSHAY NEW CODE FOR SUBSCRIPTION
 
-              if (!isEmpty(scheduleAppointment)) {
+              if (
+                !isEmpty(scheduleAppointment) &&
+                this.state.pageUrl[1] !== "patients"
+              ) {
                 const formData = {
                   appointment_id: appointment_id,
                   appointment_time: newEventStartTime,
@@ -310,7 +320,9 @@ class AddAppointment extends Component {
     resetFields();
     close();
     // AKSHAY NEW CODE FOR SUBSCRIPTION
-    setScheduleAppontmentData({});
+    if (this.state.pageUrl[1] !== "patients") {
+      setScheduleAppontmentData({});
+    }
   };
 
   setFormRef = (formRef) => {
@@ -327,6 +339,7 @@ class AddAppointment extends Component {
       appointmentVisible,
       editAppointment,
       scheduleAppointment,
+      getAppointmentsDataForDay,
     } = this.props;
     const { disabledSubmit, submitting = false } = this.state;
 
@@ -384,7 +397,8 @@ class AddAppointment extends Component {
             onClose={onClose}
             submitText={
               !isEmpty(scheduleAppointment) &&
-              scheduleAppointment.fromButton === "start"
+              scheduleAppointment.fromButton === "start" &&
+              this.state.pageUrl[1] !== "patients"
                 ? "Submit and start"
                 : formatMessage(messages.submit_text)
             }
