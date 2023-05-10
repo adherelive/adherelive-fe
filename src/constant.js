@@ -54,6 +54,7 @@ export const PATH = {
   PRIVACY_POLICY: "/privacy-policy",
   TEMPLATES: "/templates",
   CONSENT: "/consent",
+  TERMS_OF_PAYMENT_NEW: "/terms-of-payment-new",
 };
 
 export const AGORA_CALL_NOTIFICATION_TYPES = {
