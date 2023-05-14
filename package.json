@@ -1,6 +1,6 @@
 {
   "name":"adherelive-fe",
-  "version":"3.0.0",
+  "version":"3.0.3",
   "description":"All packages for the adhere.live web frontend application",
   "repository":{
     "type":"git",
