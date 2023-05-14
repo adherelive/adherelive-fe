@@ -33,7 +33,11 @@ function DeactivateSubscriptionWarn({ data }) {
         type="primary"
         className="ml10 add-button "
         // icon={"plus"}
-        style={{ backgroundColor: "#1890ff", border: "none" }}
+        style={{
+          backgroundColor:
+            data.is_active_for_doctor === 0 ? "lightgray" : "#1890ff",
+          border: "none",
+        }}
         onClick={openModelHandler}
         disabled={data.is_active_for_doctor === 0 ? true : false}
       >

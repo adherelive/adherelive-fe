@@ -241,7 +241,7 @@ class AddAppointmentForm extends Component {
     console.log("date", date);
 
     console.log("formatDate", formatDate);
-    // openScheduleHandler(date);
+    openScheduleHandler(date);
     // const {
     //   form: { setFieldsValue, getFieldValue } = {},
     //   openScheduleHandler,

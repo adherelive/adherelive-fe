@@ -87,6 +87,12 @@ const PrivacyPolicy = lazy(() =>
   )
 );
 
+const TermsOfPaymentNew = lazy(() =>
+  import(
+    /* webpackChunkName: "PrivacyPolicyPage" */ "../../Containers/Pages/termsOfPaymentNew"
+  )
+);
+
 const TemplatePage = lazy(() =>
   import(
     /* webpackChunkName: "TemplatePage" */ "../../Containers/Pages/doctorTemplateSettingsPage"
@@ -336,6 +342,12 @@ class Doctors extends Component {
                   exact
                   path={PATH.PRIVACY_POLICY}
                   component={PrivacyPolicyComp}
+                />
+
+                <Route
+                  exact
+                  path={PATH.TERMS_OF_PAYMENT_NEW}
+                  component={TermsOfPaymentNew}
                 />
 
                 <Route

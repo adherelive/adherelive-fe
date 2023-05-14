@@ -31,6 +31,12 @@ const PrivacyPolicy = lazy(() =>
   )
 );
 
+const TermsOfPaymentNew = lazy(() =>
+  import(
+    /* webpackChunkName: "PrivacyPolicyPage" */ "../../Containers/Pages/termsOfPaymentNew"
+  )
+);
+
 export default class Global extends Component {
   constructor(props) {
     super(props);
@@ -91,6 +97,11 @@ export default class Global extends Component {
           />
 
           <Route exact path={PATH.PRIVACY_POLICY} component={PrivacyPolicy} />
+          <Route
+            exact
+            path={PATH.TERMS_OF_PAYMENT_NEW}
+            component={TermsOfPaymentNew}
+          />
           <Route path={PATH.VALIDATION_PAGE} component={Validation} />
           <Route path={PATH.FORGOT_PASSWORD} component={ForgotPassword} />
           <Route path={PATH.RESET_PASSWORD} component={ResetPassword} />
