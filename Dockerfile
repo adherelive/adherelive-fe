@@ -6,6 +6,7 @@ WORKDIR /code
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN cp .env_prod .env
 RUN npm run build
 # stage 2
 FROM nginx
