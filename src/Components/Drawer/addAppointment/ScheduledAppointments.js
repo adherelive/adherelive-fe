@@ -36,6 +36,7 @@ import {
   TodayButton,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { ViewState } from "@devexpress/dx-react-scheduler";
+import { getAppointmentsDataForDay } from "../../../modules/appointments/index";
 
 const { Option } = Select;
 
@@ -132,6 +133,8 @@ function Index({
 
   const currentDateChange = (currentData) => {
     // console.log("currentData", currentData);
+    let formatDate = moment(currentData).format("DD-MM-YYYY");
+    const response = dispatch(getAppointmentsDataForDay(formatDate));
     setCurrentDate(new Date(currentData));
   };
 
