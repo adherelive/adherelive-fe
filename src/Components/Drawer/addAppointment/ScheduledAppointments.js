@@ -64,6 +64,7 @@ function Index({
   scheduleDate,
   setTimeHandlerOnClick,
   loading,
+  loadingHandler,
 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [appointmentData, setAppointmentData] = useState([]);
@@ -134,9 +135,13 @@ function Index({
 
   const currentDateChange = (currentData) => {
     // console.log("currentData", currentData);
+    loadingHandler(true);
     let formatDate = moment(currentData).format("DD-MM-YYYY");
     const response = dispatch(getAppointmentsDataForDay(formatDate));
     setCurrentDate(new Date(currentData));
+    if (response) {
+      loadingHandler(false);
+    }
   };
 
   return (
@@ -157,7 +162,7 @@ function Index({
       >
         <div className="App">
           <Space direction="vertical" style={{ width: "100%" }}>
-            <Spin tip="Loading..." spinning={loading}>
+            <Spin tip="Fetching Appointments..." spinning={loading}>
               <Paper>
                 <Scheduler data={appointmentData}>
                   <ViewState

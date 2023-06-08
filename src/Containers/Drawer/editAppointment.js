@@ -10,6 +10,7 @@ import {
   updateAppointment,
   deleteAppointment,
   getAppointmentsDetails,
+  getAppointmentsDataForDay,
 } from "../../modules/appointments";
 import {
   markFavourite,
@@ -71,6 +72,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateActivityById(id, payload)),
     googleTranslate: (textToConvert) =>
       dispatch(googleTranslate(textToConvert)),
+    getAppointmentsDataForDay: (date) =>
+      dispatch(getAppointmentsDataForDay(date)),
   };
 };
 
