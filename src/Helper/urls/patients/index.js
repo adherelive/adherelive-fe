@@ -31,7 +31,8 @@ export const addCareplanForPatientUrl = (id) => {
 };
 
 export const generatePrescriptionUrl = (careplan_id) => {
-  return `/api/patients/generate_prescription/${careplan_id}`;
+  // return `/api/patients/generate_prescription/${careplan_id}`;
+  return `/api/prescription/detailss/${careplan_id}`;
 };
 
 export const getPatientsPaginatedUrl = (data) => {
