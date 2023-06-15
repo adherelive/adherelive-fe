@@ -268,44 +268,54 @@ class EditAppointmentForm extends Component {
   //   this.adjustEventOnStartDateChange(date);
   // };
 
-  handleDateSelect = (date) => () => {
-    const { form: { setFieldsValue, getFieldValue } = {} } = this.props;
-    const startDate = getFieldValue(DATE);
-
-    if (!date || !startDate) {
-      return;
+  handleDateSelect = async (date) => {
+    const { openScheduleHandler, getAppointmentsDataForDay, loadingHandler } =
+      this.props;
+    loadingHandler(true);
+    openScheduleHandler(date);
+    let formatDate = moment(date).format("DD-MM-YYYY");
+    const response = await getAppointmentsDataForDay(formatDate);
+    if (response) {
+      loadingHandler(false);
     }
 
-    const eventStartTime = getFieldValue(START_TIME);
-    if (date.isSame(eventStartTime, "date")) {
-      return;
-    }
+    // const { form: { setFieldsValue, getFieldValue } = {} } = this.props;
+    // const startDate = getFieldValue(DATE);
 
-    const eventEndTime = getFieldValue(END_TIME);
+    // if (!date || !startDate) {
+    //   return;
+    // }
 
-    const newMonth = startDate.get("month");
-    const newDate = startDate.get("date");
-    const newYear = startDate.get("year");
+    // const eventStartTime = getFieldValue(START_TIME);
+    // if (date.isSame(eventStartTime, "date")) {
+    //   return;
+    // }
 
-    let newEventStartTime;
-    let newEventEndTime;
+    // const eventEndTime = getFieldValue(END_TIME);
 
-    if (eventStartTime) {
-      newEventStartTime = eventStartTime
-        .clone()
-        .set({ month: newMonth, year: newYear, date: newDate });
-    }
+    // const newMonth = startDate.get("month");
+    // const newDate = startDate.get("date");
+    // const newYear = startDate.get("year");
 
-    if (eventEndTime) {
-      newEventEndTime = eventEndTime
-        .clone()
-        .set({ month: newMonth, year: newYear, date: newDate });
-    }
+    // let newEventStartTime;
+    // let newEventEndTime;
 
-    setFieldsValue({
-      [START_TIME]: newEventStartTime,
-      [END_TIME]: newEventEndTime,
-    });
+    // if (eventStartTime) {
+    //   newEventStartTime = eventStartTime
+    //     .clone()
+    //     .set({ month: newMonth, year: newYear, date: newDate });
+    // }
+
+    // if (eventEndTime) {
+    //   newEventEndTime = eventEndTime
+    //     .clone()
+    //     .set({ month: newMonth, year: newYear, date: newDate });
+    // }
+
+    // setFieldsValue({
+    //   [START_TIME]: newEventStartTime,
+    //   [END_TIME]: newEventEndTime,
+    // });
   };
 
   handleStartTimeChange = (time, str) => {
@@ -1334,11 +1344,12 @@ class EditAppointmentForm extends Component {
           })(
             <DatePicker
               className="wp100"
-              onBlur={handleDateSelect(currentDate)}
+              // onBlur={handleDateSelect(currentDate)}
               // suffixIcon={calendarComp()}
               disabledDate={disabledDate}
               disabled={canViewDetails}
               // getCalendarContainer={this.getParentNode}
+              onChange={this.handleDateSelect}
             />
           )}
         </FormItem>

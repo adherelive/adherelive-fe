@@ -27,6 +27,7 @@ class AddAppointment extends Component {
       scheduleDrawer: false,
       scheduleDate: "",
       pageUrl: window.location.pathname.split("/"),
+      loading: false,
     };
 
     this.FormWrapper = Form.create({ onFieldsChange: this.onFormFieldChanges })(
@@ -281,6 +282,13 @@ class AddAppointment extends Component {
       scheduleDate: data,
     });
   };
+
+  loadingHandler = (value) => {
+    this.setState({
+      loading: value,
+    });
+  };
+
   closeScheduleHanlder = () => {
     this.setState({
       scheduleDrawer: false,
@@ -386,6 +394,7 @@ class AddAppointment extends Component {
             wrappedComponentRef={setFormRef}
             {...this.props}
             openScheduleHandler={this.openScheduleHandler}
+            loadingHandler={this.loadingHandler}
           />
           {/* <CalendarTimeSelection
                 className="calendar-section wp60"
@@ -411,6 +420,8 @@ class AddAppointment extends Component {
             onCloseDrawer={this.closeScheduleHanlder}
             scheduleDate={this.state.scheduleDate}
             setTimeHandlerOnClick={this.setTimeHandlerOnClick}
+            loading={this.state.loading}
+            loadingHandler={this.loadingHandler}
           />
         </Drawer>
       </Fragment>

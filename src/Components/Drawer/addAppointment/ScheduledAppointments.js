@@ -10,6 +10,7 @@ import {
   Spin,
   Radio,
   DatePicker,
+  Space,
 } from "antd";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
 
@@ -36,6 +37,7 @@ import {
   TodayButton,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { ViewState } from "@devexpress/dx-react-scheduler";
+import { getAppointmentsDataForDay } from "../../../modules/appointments/index";
 
 const { Option } = Select;
 
@@ -61,13 +63,14 @@ function Index({
   onCloseDrawer,
   scheduleDate,
   setTimeHandlerOnClick,
+  loading,
+  loadingHandler,
 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [appointmentData, setAppointmentData] = useState([]);
   const allAppointments = useSelector(
     (state) => state.subscription.appointmentsForDay
   );
-
-  const [appointmentData, setAppointmentData] = useState([]);
   //   const currentDate = "2019-06-23";
 
   useEffect(() => {
@@ -132,7 +135,13 @@ function Index({
 
   const currentDateChange = (currentData) => {
     // console.log("currentData", currentData);
+    loadingHandler(true);
+    let formatDate = moment(currentData).format("DD-MM-YYYY");
+    const response = dispatch(getAppointmentsDataForDay(formatDate));
     setCurrentDate(new Date(currentData));
+    if (response) {
+      loadingHandler(false);
+    }
   };
 
   return (
@@ -152,26 +161,30 @@ function Index({
         width={700}
       >
         <div className="App">
-          <Paper>
-            <Scheduler data={appointmentData}>
-              <ViewState
-                currentDate={currentDate}
-                onCurrentDateChange={currentDateChange}
-              />
-              <DayView startDayHour={7.5} endDayHour={22.5} />
-              {/* <WeekView startDayHour={7.5} endDayHour={22.5} />
+          <Space direction="vertical" style={{ width: "100%" }}>
+            <Spin tip="Fetching Appointments..." spinning={loading}>
+              <Paper>
+                <Scheduler data={appointmentData}>
+                  <ViewState
+                    currentDate={currentDate}
+                    onCurrentDateChange={currentDateChange}
+                  />
+                  <DayView startDayHour={7.5} endDayHour={22.5} />
+                  {/* <WeekView startDayHour={7.5} endDayHour={22.5} />
               <MonthView /> */}
-              <Appointments />
-              <AppointmentForm
-                visible={false}
-                onAppointmentDataChange={onCellClick}
-              />
-              <Toolbar />
-              {/* <ViewSwitcher /> */}
-              <DateNavigator />
-              <TodayButton />
-            </Scheduler>
-          </Paper>
+                  <Appointments />
+                  <AppointmentForm
+                    visible={false}
+                    onAppointmentDataChange={onCellClick}
+                  />
+                  <Toolbar />
+                  {/* <ViewSwitcher /> */}
+                  <DateNavigator />
+                  <TodayButton />
+                </Scheduler>
+              </Paper>
+            </Spin>
+          </Space>
         </div>
         <div className="add-patient-footer">
           <Button onClick={onCloseDrawer} style={{ marginRight: 8 }}>

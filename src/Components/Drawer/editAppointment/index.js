@@ -18,6 +18,7 @@ import { RADIOLOGY } from "../../../constant";
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "./../../../Helper/is-empty";
+import ScheduledAppointments from "../addAppointment/ScheduledAppointments";
 
 class EditAppointment extends Component {
   constructor(props) {
@@ -26,6 +27,10 @@ class EditAppointment extends Component {
       visible: true,
       disabledSubmit: true,
       submitting: false,
+      scheduleDrawer: false,
+      scheduleDate: "",
+      // pageUrl: window.location.pathname.split("/"),
+      loading: true,
     };
 
     this.FormWrapper = Form.create({ onFieldsChange: this.onFormFieldChanges })(
@@ -251,6 +256,50 @@ class EditAppointment extends Component {
 
   formatMessage = (data) => this.props.intl.formatMessage(data);
 
+  // SCHEDULE COMPONENT HANDLER
+
+  openScheduleHandler = (data) => {
+    console.log(data);
+    this.setState({
+      scheduleDrawer: true,
+      scheduleDate: data,
+    });
+  };
+
+  loadingHandler = (value) => {
+    this.setState({
+      loading: value,
+    });
+  };
+
+  closeScheduleHanlder = () => {
+    this.setState({
+      scheduleDrawer: false,
+    });
+  };
+
+  setTimeHandlerOnClick = (timeData) => {
+    const { formRef } = this;
+    const {
+      props: {
+        form: { setFieldsValue },
+      },
+    } = formRef;
+    // console.log("timeData", timeData);
+    let startTime = timeData.startDate.toISOString();
+    let endTime = timeData.endDate.toISOString();
+    // console.log("startTime", startTime);
+    // console.log("endTime", endTime);
+    this.setState({
+      scheduleDrawer: false,
+    });
+    setFieldsValue({
+      ["start_time"]: moment(startTime),
+      ["end_time"]: moment(endTime),
+      ["date"]: moment(startTime),
+    });
+  };
+
   onClose = () => {
     const { close } = this.props;
     this.setState({ disabledSubmit: true });
@@ -407,6 +456,8 @@ class EditAppointment extends Component {
             wrappedComponentRef={setFormRef}
             enableSubmit={this.enableSubmit}
             {...this.props}
+            openScheduleHandler={this.openScheduleHandler}
+            loadingHandler={this.loadingHandler}
           />
           {/* <CalendarTimeSelection
                 className="calendar-section wp60"
@@ -426,6 +477,14 @@ class EditAppointment extends Component {
               submitting={submitting}
             />
           )}
+          <ScheduledAppointments
+            visible={this.state.scheduleDrawer}
+            onCloseDrawer={this.closeScheduleHanlder}
+            scheduleDate={this.state.scheduleDate}
+            setTimeHandlerOnClick={this.setTimeHandlerOnClick}
+            loading={this.state.loading}
+            loadingHandler={this.loadingHandler}
+          />
         </Drawer>
       </Fragment>
     );
