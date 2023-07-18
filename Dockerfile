@@ -3,7 +3,7 @@ FROM node:16.10.0 as builder
 #RUN useradd -d /home/azureuser -m -s /bin/bash azureuser
 LABEL application="adhere-live-frontend"
 LABEL owner="Akshay Nagargoje"
-RUN mkdir -p /code
+RUN mkdir /code
 WORKDIR /code
 COPY package.json ./
 COPY package-lock.json ./
@@ -16,4 +16,4 @@ FROM nginx
 EXPOSE 80
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /code/build/ /usr/share/nginx/html
-HEALTHCHECK NONE
+#HEALTHCHECK NONE
