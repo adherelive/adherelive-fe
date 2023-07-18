@@ -8,6 +8,7 @@ emails
 public
 .env
 .node_env
+.dockerignore
 docker-compose.yaml
 docker-compose.prod.yaml
 docker-compose.demo.yaml

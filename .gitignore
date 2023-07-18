@@ -3,6 +3,11 @@
 # npm related
 node_modules
 
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
 # testing
 /coverage
 
@@ -10,7 +15,7 @@ node_modules
 /build
 
 # misc
-.DS_store
+.DS_Store
 /public
 .idea
 dump
@@ -106,6 +111,9 @@ typings/
 .env.development.local
 .env.test.local
 .env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
