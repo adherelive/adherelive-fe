@@ -6,8 +6,6 @@ dump
 emails
 !public/.gitkeep
 public
-.env
-.node_env
 .dockerignore
 docker-compose.yaml
 docker-compose.prod.yaml
