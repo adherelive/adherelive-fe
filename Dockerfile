@@ -8,7 +8,7 @@ COPY package.json ./
 COPY package-lock.json ./
 RUN npm install && npm cache clean --force --loglevel=error
 COPY . .
-RUN cp .env_prod .env
+RUN cp ./env_files/.env_prod .env
 RUN npm run build
 # Stage 2
 FROM nginx
