@@ -1,1 +1,16 @@
+node_modules
+build
+dump
+.idea
+.git
+emails
+!public/.gitkeep
+public
+.env
+.node_env
 .dockerignore
+docker-compose.yaml
+docker-compose.prod.yaml
+docker-compose.demo.yaml
+output.log
+README.md
