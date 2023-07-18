@@ -17,6 +17,7 @@ function ActivateTransactionInfo({ transactionData }) {
   }
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const openModelHandler = () => {
     setIsModalVisible(true);
@@ -28,6 +29,8 @@ function ActivateTransactionInfo({ transactionData }) {
   };
 
   const handleOk = () => {
+    setLoading(true);
+
     const { subplan = {}, services = {} } = transactionData || {};
     let type = {};
 
@@ -94,6 +97,7 @@ function ActivateTransactionInfo({ transactionData }) {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        confirmLoading={loading}
       >
         <p>Are you sure ?</p>
       </Modal>
