@@ -1,5 +1,5 @@
 FROM node:16.10.0 as builder
-RUN useradd -d /home/azureuser -m -s /bin/bash azureuser
+#RUN useradd -d /home/azureuser -m -s /bin/bash azureuser
 LABEL application="adherelive-frontend"
 LABEL owner="Akshay Nagargoje"
 RUN mkdir -p /code && mkdir -p /code/public
