@@ -1,6 +1,25 @@
 {
   "name": "adherelive-client",
-  "version": "3.1.0",
+  "version":"3.1.0",
+  "description":"All packages for the adhere.live web frontend application",
+  "repository":{
+    "type":"git",
+    "url":"git+https://github.com/adherelive/adherelive-fe.git"
+  },
+  "keywords":[
+    "adherelive",
+    "web",
+    "react",
+    "mobile",
+    "android",
+    "ios"
+  ],
+  "author":"gagneet.singh@adhere.live",
+  "license":"ISC",
+  "bugs":{
+    "url":"https://github.com/adherelive/adherelive-fe/issues"
+  },
+  "homepage":"https://github.com/adherelive/adherelive-fe#readme",
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
