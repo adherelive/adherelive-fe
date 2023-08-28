@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Tabs, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setPerformaTabsId } from "../../../modules/performa";
+import ObsGyane from "../PerformaTabs/ObsGyane/ObsGyane";
 
 const { TabPane } = Tabs;
 
@@ -27,17 +28,7 @@ function PerformaTabs() {
   return (
     <div className="performa_tabs_container">
       {performaTabId !== 0 && (
-        <button
-          style={{
-            position: "absolute",
-            right: 36,
-            margin: "12px",
-            zIndex: "99999999",
-          }}
-          onClick={handleBack}
-        >
-          Back to Treatment plan
-        </button>
+        <button onClick={handleBack}>Back to Treatment plan</button>
       )}
 
       <Tabs
@@ -48,7 +39,7 @@ function PerformaTabs() {
         {performaTabs?.map((data) => {
           return (
             <TabPane tab={`${data.tabName}`} key={`${data.key}`}>
-              hello
+              <ObsGyane />
             </TabPane>
           );
         })}
