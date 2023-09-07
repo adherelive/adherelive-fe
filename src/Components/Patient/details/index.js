@@ -921,7 +921,11 @@ class PatientDetails extends Component {
     this.props.getServices();
     this.props.getSubscriptions();
     this.props.getRecommendServiceAndSubscription(patient_id);
-    this.props.setPerformaTabs([{ tabName: "Obs gyne", key: "1" }]);
+    this.props.setPerformaTabs([
+      { tabName: "Basic Profile", key: "1" },
+      { tabName: "Obs gyne", key: "2" },
+      { tabName: "Mental Health", key: "3" },
+    ]);
 
     // if (showTd) {
     const response = await getPatientCarePlanDetails(patient_id);
@@ -2135,15 +2139,15 @@ class PatientDetails extends Component {
     }
 
     this.setState({ selectedCarePlanId: id, isOtherCarePlan });
-    this.props.setPerformaTabsId(0);
-    if (id === 8) {
-      this.props.setPerformaTabs([{ tabName: "Obs gyne", key: "1" }]);
-    } else {
-      this.props.setPerformaTabs([
-        { tabName: "Obs gyne", key: "1" },
-        { tabName: "Mental Health", key: "2" },
-      ]);
-    }
+    // this.props.setPerformaTabsId(0);
+    // if (id === 8) {
+    //   this.props.setPerformaTabs([{ tabName: "Obs gyne", key: "1" }]);
+    // } else {
+    //   this.props.setPerformaTabs([
+    //     { tabName: "Obs gyne", key: "1" },
+    //     { tabName: "Mental Health", key: "2" },
+    //   ]);
+    // }
   };
 
   getOtpModalFooter = () => {

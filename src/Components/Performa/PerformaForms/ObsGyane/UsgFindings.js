@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import UsgFindingsOption from "./Dropdowns/UsgFindingsOption";
-import { PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
+import {
+  PlusCircleOutlined,
+  MinusCircleOutlined,
+  CloseCircleOutlined,
+} from "@ant-design/icons";
 import isEmpty from "../../../../Helper/is-empty";
 import moment from "moment";
-import { Select } from "antd";
+import { Select, message } from "antd";
 
 const { Option } = Select;
 
@@ -26,27 +30,32 @@ function UsgFindings() {
 
   const addFields = (reportName) => {
     let allData = inputFields;
-    let filterData =
-      !isEmpty(allData) &&
-      allData.filter((ele) => ele.reportName === reportName);
-    // if (isEmpty(filterData)) {
-    let newfield = {
-      contentBlock: "Lab Report",
-      reportName: `${reportName}`,
-      reportValues: [
-        {
-          value: "",
-          date: new Date().toDateString(),
-          doctorName: "Akshay Nagargoje",
-          reportId: 1,
-        },
-      ],
-    };
-    setCollapse(reportName);
-    setInputFields([...inputFields, newfield]);
-    // } else {
-    //   alert(`${reportName} is already added`);
-    // }
+    let filterData = allData.filter((ele) => ele.reportName === reportName);
+
+    if (isEmpty(filterData) || isEmpty(inputFields)) {
+      let newfield = {
+        contentBlock: "Lab Report",
+        reportName: `${reportName}`,
+        reportValues: [
+          {
+            value: "",
+            date: new Date().toDateString(),
+            doctorName: "Akshay Nagargoje",
+            reportId: 1,
+          },
+        ],
+      };
+      setCollapse(reportName);
+      setInputFields([...inputFields, newfield]);
+    } else if (!isEmpty(filterData)) {
+      message.info(`${reportName} is already added`);
+    }
+  };
+
+  const removeReportHandler = (reportIndex) => {
+    let data = [...inputFields];
+    data.splice(reportIndex, 1);
+    setInputFields(data);
   };
 
   const addValueHandler = (index, label) => {
@@ -107,22 +116,35 @@ function UsgFindings() {
           return (
             <div key={reportIndex}>
               <div className="heading">
-                {isCollapse === report.reportName ? (
-                  <MinusCircleOutlined onClick={() => collapseHanlder("")} />
-                ) : (
-                  <PlusCircleOutlined
-                    onClick={() => collapseHanlder(report.reportName)}
-                  />
-                )}
-                <h3>{report.reportName}</h3>
-                <p
-                  onClick={() =>
-                    addValueHandler(reportIndex, report.reportName)
-                  }
-                  className="translate-text pointer mr10"
-                >
-                  Add Value
-                </p>
+                <div className="flex align-baseline">
+                  {" "}
+                  {isCollapse === report.reportName ? (
+                    <MinusCircleOutlined onClick={() => collapseHanlder("")} />
+                  ) : (
+                    <PlusCircleOutlined
+                      onClick={() => collapseHanlder(report.reportName)}
+                    />
+                  )}
+                  <h3>{report.reportName}</h3>
+                </div>
+
+                <div className="flex">
+                  {" "}
+                  <p
+                    onClick={() =>
+                      addValueHandler(reportIndex, report.reportName)
+                    }
+                    className="translate-text pointer mr10"
+                  >
+                    Add Value
+                  </p>
+                  <p
+                    onClick={() => removeReportHandler(reportIndex)}
+                    className="translate-text pointer mr10"
+                  >
+                    Remove {report.reportName}
+                  </p>
+                </div>
               </div>
               {isCollapse === report.reportName && (
                 <ul className="values-container">
@@ -161,8 +183,8 @@ function UsgFindings() {
                           />
 
                           <Select
-                            className="form-inputs-ap drawer-select"
-                            placeholder="Select Condition"
+                            className="performa-report-select drawer-select"
+                            placeholder="Select Report"
                             value={input.reportId}
                             onChange={(e) =>
                               handleReportChange(e, reportIndex, index)
@@ -187,11 +209,12 @@ function UsgFindings() {
                             {getConditionOption()}
                           </Select>
 
-                          <button
+                          <p
                             onClick={() => removeFields(reportIndex, index)}
+                            className="translate-text pointer mr10"
                           >
-                            Remove
-                          </button>
+                            Remove value
+                          </p>
                         </li>
                       );
                     })

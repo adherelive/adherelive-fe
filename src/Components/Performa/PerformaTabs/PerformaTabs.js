@@ -3,6 +3,8 @@ import { Tabs, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { setPerformaTabsId } from "../../../modules/performa";
 import ObsGyane from "../PerformaTabs/ObsGyane/ObsGyane";
+import BasicInfo from "../PerformaTabs/BasicInfo/BasicInfo";
+import MentalHealth from "../PerformaTabs/MentalHealth/MentalHealth";
 
 const { TabPane } = Tabs;
 
@@ -28,7 +30,9 @@ function PerformaTabs() {
   return (
     <div className="performa_tabs_container">
       {performaTabId !== 0 && (
-        <button onClick={handleBack}>Back to Treatment plan</button>
+        <p onClick={handleBack} className="translate-text pointer mr10">
+          Back to Treatment plan
+        </p>
       )}
 
       <Tabs
@@ -39,7 +43,15 @@ function PerformaTabs() {
         {performaTabs?.map((data) => {
           return (
             <TabPane tab={`${data.tabName}`} key={`${data.key}`}>
-              <ObsGyane />
+              {data.tabName === "Basic Profile" ? (
+                <BasicInfo />
+              ) : data.tabName === "Obs gyne" ? (
+                <ObsGyane />
+              ) : data.tabName === "Mental Health" ? (
+                <MentalHealth />
+              ) : (
+                ""
+              )}
             </TabPane>
           );
         })}
