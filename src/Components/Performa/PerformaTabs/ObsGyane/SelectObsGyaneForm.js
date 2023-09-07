@@ -15,6 +15,10 @@ const formOptions = [
     id: 3,
     name: "Clinical Notes",
   },
+  {
+    id: 4,
+    name: "Antenatal Card",
+  },
 ];
 
 const { Option } = Select;

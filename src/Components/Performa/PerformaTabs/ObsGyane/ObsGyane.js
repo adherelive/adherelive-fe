@@ -4,6 +4,7 @@ import isEmpty from "../../../../Helper/is-empty";
 import LabReports from "../../PerformaForms/ObsGyane/LabReports";
 import UsgFindings from "../../PerformaForms/ObsGyane/UsgFindings";
 import ClinicalNotes from "../../PerformaForms/ObsGyane/ClinicalNotes";
+import ObstctricHistorySection from "../BasicInfo/ObstctricHistorySection";
 
 function ObsGyane() {
   const [finalSelectedForms, setSelectedForms] = useState([]);
@@ -48,6 +49,8 @@ function ObsGyane() {
           return <UsgFindings key={index} />;
         } else if (form.formName === "Clinical Notes") {
           return <ClinicalNotes key={index} />;
+        } else if (form.formName === "Antenatal Card") {
+          return <ObstctricHistorySection key={index} />;
         }
       })}
     </div>

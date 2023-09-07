@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import isEmpty from "../../../../Helper/is-empty";
 import moment from "moment";
-import { Select, message } from "antd";
+import { Select, message, Input } from "antd";
 
 const { Option } = Select;
 
@@ -152,35 +152,51 @@ function LabReports() {
                     report.reportValues.map((input, index) => {
                       return (
                         <li style={{ marginBottom: "10px" }} key={index}>
-                          <input
-                            name="value"
-                            placeholder="value"
-                            value={input.value}
-                            onChange={(event) =>
-                              handleFormChange(reportIndex, index, event)
-                            }
-                          />
+                          <div className="mr20 wp20 mb20">
+                            <Input
+                              className={"ant-legacy-form-item-children"}
+                              value={input.value}
+                              onChange={(event) =>
+                                handleFormChange(reportIndex, index, event)
+                              }
+                              placeholder="value"
+                              name="value"
+                              // disabled={provider_id}
+                            />
+                          </div>
 
-                          <input
-                            name="value"
-                            placeholder="value"
-                            value={`unit`}
-                            disabled
-                          />
+                          <div className="mr20 wp20 mb20">
+                            {" "}
+                            <Input
+                              className={"ant-legacy-form-item-children"}
+                              name="value"
+                              placeholder="value"
+                              value={`unit`}
+                              disabled
+                            />
+                          </div>
 
-                          <input
-                            name="value"
-                            placeholder="value"
-                            value={`Dr ${input.doctorName}`}
-                            disabled
-                          />
+                          <div className="mr20 wp20 mb20">
+                            {" "}
+                            <Input
+                              className={"ant-legacy-form-item-children"}
+                              name="value"
+                              placeholder="value"
+                              value={`Dr ${input.doctorName}`}
+                              disabled
+                            />
+                          </div>
 
-                          <input
-                            name="value"
-                            placeholder="value"
-                            value={moment(input.date).format("YYYY-MM-DD")}
-                            disabled
-                          />
+                          <div className="mr20 wp20 mb20">
+                            {" "}
+                            <Input
+                              className={"ant-legacy-form-item-children"}
+                              name="value"
+                              placeholder="value"
+                              value={moment(input.date).format("YYYY-MM-DD")}
+                              disabled
+                            />
+                          </div>
 
                           <Select
                             className="performa-report-select drawer-select"

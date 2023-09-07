@@ -3,7 +3,7 @@ import { Input, Checkbox } from "antd";
 import ObstctricHistorytable from "./ObstctricHistorytable";
 import MiddleTable from "./MiddleTable";
 
-function BasicInfo() {
+function ObstctricHistorySection() {
   const [values, setValues] = useState({
     fatherName: "",
     education: "",
@@ -163,42 +163,44 @@ function BasicInfo() {
     return (
       <div style={{ marginTop: "60px" }}>
         <h3>Obstetric History</h3>
-        <div className="mr20 mb18 wp50">
+        <div className="mr20 mb18">
           <ObstctricHistorytable />
         </div>
+        <div className="flex">
+          <div className="mr20 wp50 mb20">
+            {" "}
+            <div className="form-headings flex align-center justify-start">
+              {/* {this.formatMessage(messages.consultationFee)} */}
+              <h3>Risk Factors</h3>
+              {/* <div className="star-red">*</div> */}
+            </div>
+            <Input
+              className={"ant-legacy-form-item-children"}
+              value={values.riskFactors}
+              onChange={onChangeHandler}
+              placeholder="Add Risk Factors"
+              name="riskFactors"
+              // disabled={provider_id}
+            />
+          </div>
+          <div className="mr20 wp50 mb20">
+            {" "}
+            <div className="form-headings flex align-center justify-start">
+              {/* {this.formatMessage(messages.consultationFee)} */}
+              <h3>Drug allergies</h3>
+              {/* <div className="star-red">*</div> */}
+            </div>
+            <Input
+              className={"ant-legacy-form-item-children"}
+              value={values.drugAllergies}
+              onChange={onChangeHandler}
+              placeholder="Add Drug Allergies"
+              name="drugAllergies"
+              // disabled={provider_id}
+            />
+          </div>
+        </div>
 
-        <div className="mr20 wp50 mb20">
-          {" "}
-          <div className="form-headings flex align-center justify-start">
-            {/* {this.formatMessage(messages.consultationFee)} */}
-            <h3>Risk Factors</h3>
-            {/* <div className="star-red">*</div> */}
-          </div>
-          <Input
-            className={"ant-legacy-form-item-children"}
-            value={values.riskFactors}
-            onChange={onChangeHandler}
-            placeholder="Add Risk Factors"
-            name="riskFactors"
-            // disabled={provider_id}
-          />
-        </div>
-        <div className="mr20 wp50 mb20">
-          {" "}
-          <div className="form-headings flex align-center justify-start">
-            {/* {this.formatMessage(messages.consultationFee)} */}
-            <h3>Drug allergies</h3>
-            {/* <div className="star-red">*</div> */}
-          </div>
-          <Input
-            className={"ant-legacy-form-item-children"}
-            value={values.drugAllergies}
-            onChange={onChangeHandler}
-            placeholder="Add Drug Allergies"
-            name="drugAllergies"
-            // disabled={provider_id}
-          />
-        </div>
         <div>
           <h3>Immunization Status</h3>
           <Checkbox.Group onChange={handleCheckboxChange} value={checkedList}>
@@ -206,16 +208,16 @@ function BasicInfo() {
             <Checkbox value="TT2">TT2</Checkbox>
           </Checkbox.Group>
         </div>
-        {/* <div>
+        <div>
           <MiddleTable />
-        </div> */}
+        </div>
       </div>
     );
   };
 
   const thirdSection = () => {
     return (
-      <div style={{ marginTop: "60px" }}>
+      <div className="flex" style={{ marginTop: "60px" }}>
         <div className="mr20 wp50 mb20">
           {" "}
           <div className="form-headings flex align-center justify-start">
@@ -223,7 +225,8 @@ function BasicInfo() {
             <h3>Menstrual History</h3>
             {/* <div className="star-red">*</div> */}
           </div>
-          <Input
+          <Input.TextArea
+            rows={4}
             className={"ant-legacy-form-item-children"}
             value={values.menstrualHistory}
             onChange={onChangeHandler}
@@ -239,7 +242,8 @@ function BasicInfo() {
             <h3>Past History</h3>
             {/* <div className="star-red">*</div> */}
           </div>
-          <Input
+          <Input.TextArea
+            rows={4}
             className={"ant-legacy-form-item-children"}
             value={values.pastHistory}
             onChange={onChangeHandler}
@@ -255,7 +259,8 @@ function BasicInfo() {
             <h3>Family History</h3>
             {/* <div className="star-red">*</div> */}
           </div>
-          <Input
+          <Input.TextArea
+            rows={4}
             className={"ant-legacy-form-item-children"}
             value={values.familyHistory}
             onChange={onChangeHandler}
@@ -363,12 +368,12 @@ function BasicInfo() {
 
   return (
     <div className="performa-basic-profile-container">
-      {firstSection()}
-      {/* {secondSection()}
+      {/* {firstSection()} */}
+      {secondSection()}
       {thirdSection()}
-      {fourthSection()} */}
+      {fourthSection()}
     </div>
   );
 }
 
-export default BasicInfo;
+export default ObstctricHistorySection;
