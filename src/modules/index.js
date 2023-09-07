@@ -81,6 +81,7 @@ import workout_exercise_groups from "./workoutExerciseGroups";
 import cdss from "./cdss";
 import commonReducer from "./commonReducer";
 import subscription from "../reducer/index";
+import performa from "./performa";
 
 const rootReducer = combineReducers({
   auth,
@@ -163,6 +164,7 @@ const rootReducer = combineReducers({
   cdss,
   commonReducer,
   subscription,
+  performa,
 });
 
 export default (state, action) => {
