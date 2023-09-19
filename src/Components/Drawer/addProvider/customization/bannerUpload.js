@@ -9,6 +9,10 @@ import messages from "../message";
 import Modal from "antd/es/modal";
 import Button from "antd/es/button";
 import { UploadOutlined } from "@ant-design/icons";
+import { doRequest } from "../../../../Helper/network";
+import { getUploadURL } from "../../../../Helper/urls/user";
+import { REQUEST_TYPE } from "../../../../constant";
+import { message } from "antd";
 
 const { Item: FormItem } = Form;
 
@@ -66,24 +70,43 @@ class Field extends Component {
     return error;
   };
 
-  handleUpload = async ({ file }) => {
+  handleUpload = async (file) => {
     const { uploadDocument, form: { setFieldsValue } = {} } = this.props;
-    const data = new FormData();
-    data.set("files", file);
-
-    try {
-      this.setState({ loading: true });
-      const response = await uploadDocument(data);
-      const { status, payload: { data: { files } = {} } = {} } = response || {};
-      if (status === true) {
-        this.setState({ loading: false });
+    // const data = new FormData();
+    // // data.set("files", file);
+    // data.append("files", file, file.name);
+    // try {
+    //   this.setState({ loading: true });
+    //   const response = await uploadDocument(data);
+    //   const { status, payload: { data: { files } = {} } = {} } = response || {};
+    //   console.log("response", response);
+    //   alert("asdsd");
+    //   console.log("files[0]", files[0]);
+    //   if (status === true) {
+    //     alert("asdds");
+    //     console.log("files[0]", files[0]);
+    //     this.setState({ loading: false });
+    //     setFieldsValue({ [FIELD_NAME]: files[0] });
+    //   } else {
+    //     this.setState({ loading: false });
+    //   }
+    // } catch (error) {
+    //   this.setState({ loading: false });
+    // }
+    let data = new FormData();
+    data.append("files", file, file.name);
+    doRequest({
+      method: REQUEST_TYPE.POST,
+      data: data,
+      url: getUploadURL(),
+    }).then((response) => {
+      if (response.status) {
+        let { files = [] } = response.payload.data;
         setFieldsValue({ [FIELD_NAME]: files[0] });
       } else {
-        this.setState({ loading: false });
+        message.error(this.formatMessage(messages.somethingWentWrong));
       }
-    } catch (error) {
-      this.setState({ loading: false });
-    }
+    });
   };
 
   handleUploadChange = ({ file }) => {
@@ -105,7 +128,7 @@ class Field extends Component {
         style={{ width: 128, height: 128, margin: 6 }}
         showUploadList={false}
         listType="picture-card"
-        customRequest={handleUpload}
+        action={handleUpload}
         onChange={handleUploadChange}
       >
         <div className="flex direction-column align-center">
