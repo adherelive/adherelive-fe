@@ -921,11 +921,11 @@ class PatientDetails extends Component {
     this.props.getServices();
     this.props.getSubscriptions();
     this.props.getRecommendServiceAndSubscription(patient_id);
-    this.props.setPerformaTabs([
-      { tabName: "Basic Profile", key: "1" },
-      { tabName: "Obs gyne", key: "2" },
-      { tabName: "Mental Health", key: "3" },
-    ]);
+    // this.props.setPerformaTabs([
+    //   { tabName: "Basic Profile", key: "1" },
+    //   { tabName: "Obs gyne", key: "2" },
+    //   { tabName: "Mental Health", key: "3" },
+    // ]);
 
     // if (showTd) {
     const response = await getPatientCarePlanDetails(patient_id);
@@ -1485,11 +1485,11 @@ class PatientDetails extends Component {
           </Menu.Item>
         )}
 
-        {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
+        {/* {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
           <Menu.Item onClick={handleAddPerforma}>
             <div>Add Performa</div>
           </Menu.Item>
-        )}
+        )} */}
       </Menu>
     );
   };
@@ -2918,7 +2918,7 @@ class PatientDetails extends Component {
             </div>
 
             <div className="wp80 direction-column align-center pt10 pr24 pb20 pl24 ">
-              <PerformaTabs />
+              {/* <PerformaTabs /> */}
               {performaTabId === 0 && (
                 <div>
                   {!isOtherCarePlan &&
