@@ -15,6 +15,7 @@ import { TABLE_COLUMN } from "./helper";
 import AddAppointmentDrawer from "./../../../Containers/Drawer/addAppointment";
 import { LoadingOutlined } from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
+import Reassignment from "../../Subscription/Drawer/Reassignment/Reassignment";
 
 class PendingActivitiesTable extends Component {
   constructor(props) {
@@ -26,6 +27,9 @@ class PendingActivitiesTable extends Component {
       searchPatient: "",
       patientOptions: [],
       searchPatientId: "",
+      reassignmentDrawer: false,
+      patientId: "",
+      activityData: "",
     };
   }
 
@@ -45,7 +49,11 @@ class PendingActivitiesTable extends Component {
   };
 
   onCloseDrawer = () => {
-    this.setState({ editServiceDrawer: false, myTasksDrawer: false });
+    this.setState({
+      editServiceDrawer: false,
+      myTasksDrawer: false,
+      reassignmentDrawer: false,
+    });
   };
 
   onOpenEditServiceDrawer = () => {
@@ -70,6 +78,16 @@ class PendingActivitiesTable extends Component {
         last_name: "patient",
       },
       patientId,
+    });
+  };
+
+  reassignmentHandler = (activityData) => {
+    console.log("activityData", activityData);
+    let patientId = activityData.patient_id;
+    this.setState({
+      reassignmentDrawer: true,
+      patientId: patientId,
+      activityData: activityData,
     });
   };
 
@@ -141,6 +159,7 @@ class PendingActivitiesTable extends Component {
           scheduleHanlder: this.scheduleHanlder,
           startHandler: this.startHandler,
           onPatientNameClick: this.onPatientNameClick,
+          reassignmentHandler: this.reassignmentHandler,
           // transaction_ids,
           // payment_products,
           // patients,
@@ -384,7 +403,7 @@ class PendingActivitiesTable extends Component {
   };
 
   render() {
-    const { editServiceDrawer, myTasksDrawer } = this.state;
+    const { editServiceDrawer, myTasksDrawer, reassignmentDrawer } = this.state;
     const {
       // onRow,
       onSelectChange,
@@ -439,6 +458,13 @@ class PendingActivitiesTable extends Component {
         )}
         {myTasksDrawer === true && (
           <MyTasks visible={myTasksDrawer} onCloseDrawer={this.onCloseDrawer} />
+        )}
+        {reassignmentDrawer === true && (
+          <Reassignment
+            visible={reassignmentDrawer}
+            onCloseDrawer={this.onCloseDrawer}
+            activityData={this.state.activityData}
+          />
         )}
         <AddAppointmentDrawer carePlanId={careplanId} />
       </>
