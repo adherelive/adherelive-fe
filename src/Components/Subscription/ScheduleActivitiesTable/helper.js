@@ -31,6 +31,11 @@ export const TABLE_COLUMN = {
     width: 200,
     dataIndex: "SUBSCRIPTION",
   },
+  REASSIGNMENT: {
+    key: "REASSIGNMENT",
+    width: 200,
+    dataIndex: "REASSIGNMENT",
+  },
   // EDIT: {
   //   key: "EDIT",
   //   // width: 100,
