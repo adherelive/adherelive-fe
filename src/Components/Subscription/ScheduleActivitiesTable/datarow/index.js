@@ -24,6 +24,10 @@ export default (data) => {
       data,
       formatMessage,
     },
+    [TABLE_COLUMN.REASSIGNMENT.dataIndex]: {
+      data,
+      formatMessage,
+    },
     // [TABLE_COLUMN.EDIT.dataIndex]: {
     //   data,
     //   formatMessage,

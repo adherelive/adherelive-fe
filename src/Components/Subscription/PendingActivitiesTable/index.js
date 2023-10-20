@@ -464,6 +464,7 @@ class PendingActivitiesTable extends Component {
             visible={reassignmentDrawer}
             onCloseDrawer={this.onCloseDrawer}
             activityData={this.state.activityData}
+            status={"pending"}
           />
         )}
         <AddAppointmentDrawer carePlanId={careplanId} />

@@ -20,7 +20,7 @@ import throttle from "lodash-es/throttle";
 import Footer from "../../../Drawer/footer";
 import { PoweroffOutlined } from "@ant-design/icons";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getPatientCareplanByPatientIdAndUserRoleId,
   getPatientSecondaryDoctorByCareplanId,
@@ -29,13 +29,14 @@ import {
 } from "./../../../../modules/subscription/activities";
 import message from "antd/es/message";
 import TextArea from "antd/es/input/TextArea";
+import isEmpty from "../../../../Helper/is-empty";
 
 const { Option } = Select;
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
-function Reassignment({ onCloseDrawer, visible, activityData }) {
+function Reassignment({ onCloseDrawer, visible, activityData, status }) {
   const dispatch = useDispatch();
   const [values, setValues] = useState({
     careplan: "",
@@ -44,6 +45,25 @@ function Reassignment({ onCloseDrawer, visible, activityData }) {
   });
   const [careplanList, setCareplanList] = useState([]);
   const [doctorlist, setDoctorList] = useState([]);
+  const [assignByDoctor, setDoctorId] = useState("");
+
+  const authenticated_user = useSelector(
+    (state) => state.auth.authenticated_user
+  );
+
+  const doctors = useSelector((state) => state.doctors);
+
+  useEffect(() => {
+    let id = "";
+    if (!isEmpty(doctors) && !isEmpty(authenticated_user)) {
+      for (let each in doctors) {
+        if (doctors[each].basic_info.user_id == authenticated_user) {
+          id = doctors[each].basic_info.id;
+        }
+      }
+    }
+    setDoctorId(id);
+  }, [doctors, authenticated_user]);
 
   useEffect(() => {
     getCarePlanForPatient();
@@ -225,33 +245,18 @@ function Reassignment({ onCloseDrawer, visible, activityData }) {
   };
 
   const onSubmit = async () => {
-    const formData = {
-      doctor_id: values.doctor,
-      // appointment_id: appointment_id,
-      // appointment_time: newEventStartTime,
-      // status: "scheduled",
-      // provider_id: newProvider_id,
-      status: "pending",
-    };
-
     const updateData = {
-      assignedBy: 1,
-      assignedTo: 2,
+      assignedBy: assignByDoctor,
+      assignedTo: values.doctor,
       reason: values.reason,
-      doctor_id: 2,
-      status: "pending",
+      doctor_id: values.doctor,
+      status: status,
     };
-
-    // let updateResponse = await dispatch(
-    //   updateActivityById(activityData.id, formData)
-    // );
 
     let reasonUpdate = await dispatch(
       updateReasonForReassignment(activityData.id, updateData)
     );
-
     if (reasonUpdate) {
-      // console.log(updateResponse, reasonUpdate);
       onCloseDrawer();
     }
   };

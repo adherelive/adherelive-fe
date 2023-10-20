@@ -15,6 +15,7 @@ import { TABLE_COLUMN } from "./helper";
 import EditAppointmentDrawer from "./../../../Containers/Drawer/editAppointment";
 import { LoadingOutlined } from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
+import Reassignment from "../../Subscription/Drawer/Reassignment/Reassignment";
 
 class ScheduledActivitiesTable extends Component {
   constructor(props) {
@@ -26,6 +27,9 @@ class ScheduledActivitiesTable extends Component {
       searchPatient: "",
       patientOptions: [],
       searchPatientId: "",
+      reassignmentDrawer: false,
+      patientId: "",
+      activityData: "",
     };
   }
 
@@ -78,6 +82,16 @@ class ScheduledActivitiesTable extends Component {
     }
   };
 
+  reassignmentHandler = (activityData) => {
+    console.log("activityData", activityData);
+    let patientId = activityData.patient_id;
+    this.setState({
+      reassignmentDrawer: true,
+      patientId: patientId,
+      activityData: activityData,
+    });
+  };
+
   onPatientNameClick = (activityData) => {
     const { openPatientDetailsDrawer } = this.props;
     openPatientDetailsDrawer({ patient_id: activityData.patient_id });
@@ -114,6 +128,7 @@ class ScheduledActivitiesTable extends Component {
           history,
           handleEdit: this.handleEdit,
           onPatientNameClick: this.onPatientNameClick,
+          reassignmentHandler: this.reassignmentHandler,
           // transaction_ids,
           // payment_products,
           // patients,
@@ -354,7 +369,7 @@ class ScheduledActivitiesTable extends Component {
   };
 
   render() {
-    const { editServiceDrawer, myTasksDrawer } = this.state;
+    const { editServiceDrawer, myTasksDrawer, reassignmentDrawer } = this.state;
     const {
       // onRow,
       onSelectChange,
@@ -403,6 +418,14 @@ class ScheduledActivitiesTable extends Component {
           <EditRecommendSubscription
             visible={editServiceDrawer}
             onCloseDrawer={this.onCloseDrawer}
+          />
+        )}
+        {reassignmentDrawer === true && (
+          <Reassignment
+            visible={reassignmentDrawer}
+            onCloseDrawer={this.onCloseDrawer}
+            activityData={this.state.activityData}
+            status={"scheduled"}
           />
         )}
         {myTasksDrawer === true && (
