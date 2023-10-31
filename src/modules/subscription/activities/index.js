@@ -8,6 +8,7 @@ import {
   searchActivites,
   getSecondaryDoctorUrl,
   updateReasonForReassignement,
+  reassignmentAuditUrl,
 } from "../../../Helper/urls/subscriptions";
 import {
   SET_PENDING_ACTIVITIES_TABLE_DATA,
@@ -86,6 +87,29 @@ export const updateReasonForReassignment = (activityId, payload) => {
       if (status === true) {
         // callBack();
         dispatch(getAllActivities(payload.status));
+      } else {
+      }
+    } catch (err) {
+      // console.log("GET_PATIENT_MISSED_EVENTS_START err consentVerify", err);
+      throw err;
+    }
+
+    return response;
+  };
+};
+
+export const getReassignmentAudit = (activityId) => {
+  let response = {};
+  return async (dispatch) => {
+    try {
+      response = await doRequest({
+        method: REQUEST_TYPE.GET,
+        url: reassignmentAuditUrl(activityId),
+      });
+
+      const { status, payload: { data } = {} } = response || {};
+
+      if (status === true) {
       } else {
       }
     } catch (err) {
