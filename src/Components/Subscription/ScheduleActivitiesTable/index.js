@@ -16,6 +16,7 @@ import EditAppointmentDrawer from "./../../../Containers/Drawer/editAppointment"
 import { LoadingOutlined } from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 import Reassignment from "../../Subscription/Drawer/Reassignment/Reassignment";
+import Reason from "../../Subscription/Drawer/Reassignment/Reason";
 
 class ScheduledActivitiesTable extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class ScheduledActivitiesTable extends Component {
       patientOptions: [],
       searchPatientId: "",
       reassignmentDrawer: false,
+      reasonDrawer: false,
       patientId: "",
       activityData: "",
     };
@@ -49,7 +51,12 @@ class ScheduledActivitiesTable extends Component {
   };
 
   onCloseDrawer = () => {
-    this.setState({ editServiceDrawer: false, myTasksDrawer: false });
+    this.setState({
+      editServiceDrawer: false,
+      myTasksDrawer: false,
+      reasonDrawer: false,
+      reassignmentDrawer: false,
+    });
   };
 
   onOpenEditServiceDrawer = () => {
@@ -92,6 +99,16 @@ class ScheduledActivitiesTable extends Component {
     });
   };
 
+  reasonHandler = (activityData) => {
+    console.log("activityData", activityData);
+    let patientId = activityData.patient_id;
+    this.setState({
+      reasonDrawer: true,
+      patientId: patientId,
+      activityData: activityData,
+    });
+  };
+
   onPatientNameClick = (activityData) => {
     const { openPatientDetailsDrawer } = this.props;
     openPatientDetailsDrawer({ patient_id: activityData.patient_id });
@@ -129,6 +146,7 @@ class ScheduledActivitiesTable extends Component {
           handleEdit: this.handleEdit,
           onPatientNameClick: this.onPatientNameClick,
           reassignmentHandler: this.reassignmentHandler,
+          reasonHandler: this.reasonHandler,
           // transaction_ids,
           // payment_products,
           // patients,
@@ -369,7 +387,12 @@ class ScheduledActivitiesTable extends Component {
   };
 
   render() {
-    const { editServiceDrawer, myTasksDrawer, reassignmentDrawer } = this.state;
+    const {
+      editServiceDrawer,
+      myTasksDrawer,
+      reassignmentDrawer,
+      reasonDrawer,
+    } = this.state;
     const {
       // onRow,
       onSelectChange,
@@ -430,6 +453,13 @@ class ScheduledActivitiesTable extends Component {
         )}
         {myTasksDrawer === true && (
           <MyTasks visible={myTasksDrawer} onCloseDrawer={this.onCloseDrawer} />
+        )}
+        {reasonDrawer === true && (
+          <Reason
+            visible={reasonDrawer}
+            onCloseDrawer={this.onCloseDrawer}
+            activityData={this.state.activityData}
+          />
         )}
         <EditAppointmentDrawer carePlan={{}} carePlanId={"1"} />
       </>

@@ -108,3 +108,7 @@ export const searchActivites = (query) => {
 export const getSecondaryDoctorUrl = (careplanId) => {
   return `patients/${careplanId}/careplan-details-sec-doc`;
 };
+
+export const reassignmentAuditUrl = (activityId) => {
+  return `/reassignaudit/?activity_id=${activityId}`;
+};

@@ -16,6 +16,7 @@ import AddAppointmentDrawer from "./../../../Containers/Drawer/addAppointment";
 import { LoadingOutlined } from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 import Reassignment from "../../Subscription/Drawer/Reassignment/Reassignment";
+import Reason from "../../Subscription/Drawer/Reassignment/Reason";
 
 class PendingActivitiesTable extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class PendingActivitiesTable extends Component {
       patientOptions: [],
       searchPatientId: "",
       reassignmentDrawer: false,
+      reasonDrawer: false,
       patientId: "",
       activityData: "",
     };
@@ -53,6 +55,7 @@ class PendingActivitiesTable extends Component {
       editServiceDrawer: false,
       myTasksDrawer: false,
       reassignmentDrawer: false,
+      reasonDrawer: false,
     });
   };
 
@@ -86,6 +89,16 @@ class PendingActivitiesTable extends Component {
     let patientId = activityData.patient_id;
     this.setState({
       reassignmentDrawer: true,
+      patientId: patientId,
+      activityData: activityData,
+    });
+  };
+
+  reasonHandler = (activityData) => {
+    console.log("activityData", activityData);
+    let patientId = activityData.patient_id;
+    this.setState({
+      reasonDrawer: true,
       patientId: patientId,
       activityData: activityData,
     });
@@ -160,6 +173,7 @@ class PendingActivitiesTable extends Component {
           startHandler: this.startHandler,
           onPatientNameClick: this.onPatientNameClick,
           reassignmentHandler: this.reassignmentHandler,
+          reasonHandler: this.reasonHandler,
           // transaction_ids,
           // payment_products,
           // patients,
@@ -403,7 +417,12 @@ class PendingActivitiesTable extends Component {
   };
 
   render() {
-    const { editServiceDrawer, myTasksDrawer, reassignmentDrawer } = this.state;
+    const {
+      editServiceDrawer,
+      myTasksDrawer,
+      reassignmentDrawer,
+      reasonDrawer,
+    } = this.state;
     const {
       // onRow,
       onSelectChange,
@@ -465,6 +484,13 @@ class PendingActivitiesTable extends Component {
             onCloseDrawer={this.onCloseDrawer}
             activityData={this.state.activityData}
             status={"pending"}
+          />
+        )}
+        {reasonDrawer === true && (
+          <Reason
+            visible={reasonDrawer}
+            onCloseDrawer={this.onCloseDrawer}
+            activityData={this.state.activityData}
           />
         )}
         <AddAppointmentDrawer carePlanId={careplanId} />
