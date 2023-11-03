@@ -439,7 +439,8 @@ class WhenToTakeMedication extends Component {
     }
 
     getFieldDecorator("keys", {
-      initialValue: when_to_take.map((id, index) => parseInt(id) - 1),
+      // initialValue: when_to_take.map((id, index) => parseInt(id) - 1),
+      initialValue: when_to_take.map((id, index) => parseInt(id)),
     });
     let keys = getFieldValue("keys");
 

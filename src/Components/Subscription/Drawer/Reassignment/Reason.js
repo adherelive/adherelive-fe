@@ -217,15 +217,15 @@ function Reason({ onCloseDrawer, visible, activityData, status }) {
             {/* {this.formatMessage(messages.cancel)} */}
             Cancel
           </Button>
-          <Button
+          {/* <Button
             onClick={onSubmit}
             type="primary"
-            // icon={submitting ? <PoweroffOutlined /> : null}
+          
             loading={submitting}
           >
-            {/* {this.formatMessage(messages.submit)} */}
+           
             Submit
-          </Button>
+          </Button> */}
         </div>
       </Drawer>
     </Fragment>

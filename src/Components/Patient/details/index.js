@@ -1485,11 +1485,11 @@ class PatientDetails extends Component {
           </Menu.Item>
         )}
 
-        {/* {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
+        {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
           <Menu.Item onClick={handleAddPerforma}>
             <div>Add Performa</div>
           </Menu.Item>
-        )} */}
+        )}
       </Menu>
     );
   };
