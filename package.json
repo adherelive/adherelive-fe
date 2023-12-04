@@ -72,7 +72,7 @@
     "react-uuid": "^1.0.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.5",
-    "redux-thunk": "^2.3.0",
+    "redux-thunk": "^3.0.0",
     "reselect": "^4.0.0",
     "showdown": "^1.9.1",
     "twilio-chat": "^5.0.2",
