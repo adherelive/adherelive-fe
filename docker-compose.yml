@@ -4,7 +4,7 @@ services:
   nginx:
     build:
       context: ./nginx
-      #restart: unless-stopped
+      restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
@@ -28,7 +28,7 @@ services:
     build:
       context: .
       #dockerfile: ./docker/DockerfileProd
-    #image: gagneet/adherelive:portal-fe
+    #image: gagneet/adherelive-fe:prod
     #env_file:
       #- ./env-files/.env_prod
     restart: always
@@ -42,17 +42,18 @@ services:
     logging:
       options:
         max-size: 150m
-        max-file: "3"
+        max-file: '3'
     #tty: true
     volumes:
       - ./:/usr/src/app
       - ./.node_env:/usr/src/app/.env
-#    links:
+    links:
       #- mysql
-#      - minio1
-#      - minio2
-#      - minio3
-#      - minio4
+      #- mongo
+      - minio1
+      - minio2
+      - minio3
+      - minio4
 
   #mysql:
     #image: mysql:latest
@@ -61,7 +62,7 @@ services:
     #expose:
       #- 3306
     #volumes:
-      #- mysql:/var/lib/mysql
+      #- adhere_mysql:/var/lib/mysql
     #environment:
       #- MYSQL_ROOT_PASSWORD=adherelive
       #- MYSQL_DATABASE=adhere
@@ -76,57 +77,58 @@ services:
     #volumes:
       #- adhere_mongo:/data/db
 
-#  minio1:
-#    image: minio/minio
-#    volumes:
-#      - adhere_storage_stack1:/export
-#    ports:
-#      - "9001:9000"
-#    environment:
-#      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
-#      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
-#    command: server http://minio{1...4}/export
-#
-#  minio2:
-#    image: minio/minio
-#    volumes:
-#      - adhere_storage_stack2:/export
-#    ports:
-#      - "9002:9000"
-#    environment:
-#      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
-#      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
-#    command: server http://minio{1...4}/export
-#
-#  minio3:
-#    image: minio/minio
-#    volumes:
-#      - adhere_storage_stack3:/export
-#    ports:
-#      - "9003:9000"
-#    environment:
-#      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
-#      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
-#    command: server http://minio{1...4}/export
-#
-#  minio4:
-#    image: minio/minio
-#    volumes:
-#      - adhere_storage_stack4:/export
-#    ports:
-#      - "9004:9000"
-#    environment:
-#      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
-#      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
-#    command: server http://minio{1...4}/export
+  minio1:
+    image: minio/minio
+    volumes:
+      - adhere_storage_stack1:/export
+    ports:
+      - "9001:9000"
+    environment:
+      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
+      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
+    command: server http://minio{1...4}/export
+
+  minio2:
+    image: minio/minio
+    volumes:
+      - adhere_storage_stack2:/export
+    ports:
+      - "9002:9000"
+    environment:
+      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
+      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
+    command: server http://minio{1...4}/export
+
+  minio3:
+    image: minio/minio
+    volumes:
+      - adhere_storage_stack3:/export
+    ports:
+      - "9003:9000"
+    environment:
+      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
+      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
+    command: server http://minio{1...4}/export
+
+  minio4:
+    image: minio/minio
+    volumes:
+      - adhere_storage_stack4:/export
+    ports:
+      - "9004:9000"
+    environment:
+      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
+      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
+    command: server http://minio{1...4}/export
 
 ## By default, this config uses default local driver,
 ## For custom volumes replace with volume driver configuration.
 volumes:
-  #mysql:
+  #adhere_mysql:
     #driver: local
-#  adhere_storage_stack1: null
-#  adhere_storage_stack2: null
-#  adhere_storage_stack3: null
-#  adhere_storage_stack4: null
-  adhere_mongo:
+  adhere_storage_stack1: null
+  adhere_storage_stack2: null
+  adhere_storage_stack3: null
+  adhere_storage_stack4: null
+  #adhere_mongo:
+    #driver: local

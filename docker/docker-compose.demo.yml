@@ -28,7 +28,7 @@ services:
     build:
       context: .
       #dockerfile: ./docker/DockerfileDemo
-    #image: gagneet/adherelive:portal-fe-demo
+    #image: gagneet/adherelive-fe:demo
     #env_file:
       #- ./env-files/.env_demo
     restart: always
@@ -37,18 +37,19 @@ services:
       - run
       - dev
     ports:
-      - "${WEB_SERVER_PORT}:5000"
-      - "${REACT_SERVER_PORT}:3000"
-    #logging:
-      #options:
-        #max-size: 150m
-        #max-file: '3'
+      - ${WEB_SERVER_PORT}:5000
+      - ${REACT_SERVER_PORT}:3000
+    logging:
+      options:
+        max-size: 150m
+        max-file: '3'
     tty: true
     volumes:
       - ./:/usr/src/app
       - ./.node_env:/usr/src/app/.env
     links:
       - mysql
+      - mongo
       - minio1
       - minio2
       - minio3
@@ -61,20 +62,20 @@ services:
     expose:
       - 3306
     volumes:
-      - mysql:/var/lib/mysql
+      - adhere_mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=adherelive
       - MYSQL_DATABASE=adhere
       - MYSQL_USER=adherelive
       - MYSQL_PASSWORD=password
 
-  #mongo:
-    #image: mongo:latest
-    #restart: always
-    #ports:
-      #- "27017:27017"
-    #volumes:
-      #- adhere_mongo:/data/db
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - adhere_mongo:/data/db
 
   minio1:
     image: minio/minio
@@ -123,10 +124,11 @@ services:
 ## By default, this config uses default local driver,
 ## For custom volumes replace with volume driver configuration.
 volumes:
-  mysql:
+  adhere_mysql:
     driver: local
   adhere_storage_stack1: null
   adhere_storage_stack2: null
   adhere_storage_stack3: null
   adhere_storage_stack4: null
   adhere_mongo:
+    driver: local
