@@ -6,6 +6,9 @@ import {
   patientCareplansUrl,
   patientCareplansSecondaryDoctorUrl,
   searchActivites,
+  getSecondaryDoctorUrl,
+  updateReasonForReassignement,
+  reassignmentAuditUrl,
 } from "../../../Helper/urls/subscriptions";
 import {
   SET_PENDING_ACTIVITIES_TABLE_DATA,
@@ -57,7 +60,56 @@ export const updateActivityById = (activityId, payload) => {
 
       if (status === true) {
         // callBack();
-        dispatch(getAllActivities());
+        dispatch(getAllActivities(payload.status));
+      } else {
+      }
+    } catch (err) {
+      // console.log("GET_PATIENT_MISSED_EVENTS_START err consentVerify", err);
+      throw err;
+    }
+
+    return response;
+  };
+};
+
+export const updateReasonForReassignment = (activityId, payload) => {
+  let response = {};
+  return async (dispatch) => {
+    try {
+      response = await doRequest({
+        method: REQUEST_TYPE.PUT,
+        url: updateReasonForReassignement(activityId),
+        data: payload,
+      });
+
+      const { status, payload: { data } = {} } = response || {};
+
+      if (status === true) {
+        // callBack();
+        dispatch(getAllActivities(payload.status));
+      } else {
+      }
+    } catch (err) {
+      // console.log("GET_PATIENT_MISSED_EVENTS_START err consentVerify", err);
+      throw err;
+    }
+
+    return response;
+  };
+};
+
+export const getReassignmentAudit = (activityId) => {
+  let response = {};
+  return async (dispatch) => {
+    try {
+      response = await doRequest({
+        method: REQUEST_TYPE.GET,
+        url: reassignmentAuditUrl(activityId),
+      });
+
+      const { status, payload: { data } = {} } = response || {};
+
+      if (status === true) {
       } else {
       }
     } catch (err) {
@@ -108,6 +160,29 @@ export const getPatientCareplanByPatientIdAndUserRoleId = (patientId) => {
       response = await doRequest({
         method: REQUEST_TYPE.GET,
         url: patientCareplansSecondaryDoctorUrl(patientId),
+      });
+
+      const { status, payload: { data } = {} } = response || {};
+
+      if (status === true) {
+      } else {
+      }
+    } catch (err) {
+      // console.log("GET_PATIENT_MISSED_EVENTS_START err consentVerify", err);
+      throw err;
+    }
+
+    return response;
+  };
+};
+
+export const getPatientSecondaryDoctorByCareplanId = (careplanId) => {
+  let response = {};
+  return async (dispatch) => {
+    try {
+      response = await doRequest({
+        method: REQUEST_TYPE.GET,
+        url: getSecondaryDoctorUrl(careplanId),
       });
 
       const { status, payload: { data } = {} } = response || {};

@@ -9,6 +9,7 @@ import Activity from "../datacolumn/activity";
 import Patient from "../datacolumn/patient";
 import Subscription from "../datacolumn/subscription";
 import ActivityStatus from "../datacolumn/activityStatus";
+import Reassignment from "../datacolumn/reassignment";
 // import Edit from "../datacolumn/edit";
 
 export default (props) => {
@@ -52,6 +53,11 @@ export default (props) => {
       title: "Subscription Plan",
       ...TABLE_COLUMN.SUBSCRIPTION,
       render: (data) => <Subscription {...data} />,
+    },
+    {
+      title: "Reassignment",
+      ...TABLE_COLUMN.REASSIGNMENT,
+      render: (data) => <Reassignment {...data} />,
     },
     // {
     //   title: "Edit/Renew",

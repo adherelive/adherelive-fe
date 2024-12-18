@@ -102,6 +102,8 @@ import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscripti
 import RecommendService from "../../Subscription/Drawer/RecommendService";
 import SubscriptionTable from "../../Subscription/SubscriptionTable";
 import FlashCard from "../../Subscription/Flashcard";
+import AddPerforma from "../../Performa/Drawer/AddPerforma";
+import PerformaTabs from "../../Performa/PerformaTabs/PerformaTabs";
 
 const BLANK_TEMPLATE = "Blank Template";
 const { TabPane } = Tabs;
@@ -865,6 +867,7 @@ class PatientDetails extends Component {
       // AKSHAY NEW CODE IMPLEMENTATIONS
       patientDetailsData: {},
       patientUserDetails: {},
+      addPerforma: false,
     };
   }
 
@@ -893,6 +896,7 @@ class PatientDetails extends Component {
       flashcardOpen,
       scheduleAppointment,
       getFlashCardByActivityId,
+      setPerformaTabs,
     } = this.props;
 
     if (redirect_patient_id) {
@@ -917,6 +921,11 @@ class PatientDetails extends Component {
     this.props.getServices();
     this.props.getSubscriptions();
     this.props.getRecommendServiceAndSubscription(patient_id);
+    this.props.setPerformaTabs([
+      { tabName: "Basic Profile", key: "1" },
+      { tabName: "Obs gyne", key: "2" },
+      { tabName: "Mental Health", key: "3" },
+    ]);
 
     // if (showTd) {
     const response = await getPatientCarePlanDetails(patient_id);
@@ -1419,6 +1428,7 @@ class PatientDetails extends Component {
       handleAddReports,
       handleAddDiet,
       handleAddWorkout,
+      handleAddPerforma,
     } = this;
     const { authPermissions = [], authenticated_category } = this.props;
     return (
@@ -1474,6 +1484,12 @@ class PatientDetails extends Component {
             <div>{this.formatMessage(messages.secondary_doctor)}</div>
           </Menu.Item>
         )}
+
+        {/* {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
+          <Menu.Item onClick={handleAddPerforma}>
+            <div>Add Performa</div>
+          </Menu.Item>
+        )} */}
       </Menu>
     );
   };
@@ -1527,6 +1543,12 @@ class PatientDetails extends Component {
       //   last_name: "patient"
       // },
       // patient_id
+    });
+  };
+
+  handleAddPerforma = (e) => {
+    this.setState({
+      addPerforma: true,
     });
   };
 
@@ -2117,6 +2139,15 @@ class PatientDetails extends Component {
     }
 
     this.setState({ selectedCarePlanId: id, isOtherCarePlan });
+    this.props.setPerformaTabsId(0);
+    if (id === 8) {
+      this.props.setPerformaTabs([{ tabName: "Obs gyne", key: "1" }]);
+    } else {
+      this.props.setPerformaTabs([
+        { tabName: "Obs gyne", key: "1" },
+        { tabName: "Mental Health", key: "2" },
+      ]);
+    }
   };
 
   getOtpModalFooter = () => {
@@ -2505,6 +2536,7 @@ class PatientDetails extends Component {
     this.setState({
       recommendSubscription: false,
       recommendService: false,
+      addPerforma: false,
     });
   };
 
@@ -2534,6 +2566,7 @@ class PatientDetails extends Component {
       providers = {},
       user_roles = {},
       flashcardOpen = false,
+      performaTabId = 0,
     } = this.props;
 
     const {
@@ -2779,7 +2812,7 @@ class PatientDetails extends Component {
 
     // let defaultActiveKeyValue = "1";
     const { activeKey = "1" } = this.state;
-    const { recommendService, recommendSubscription } = this.state;
+    const { recommendService, recommendSubscription, addPerforma } = this.state;
 
     return (
       <Fragment>
@@ -2885,197 +2918,198 @@ class PatientDetails extends Component {
             </div>
 
             <div className="wp80 direction-column align-center pt10 pr24 pb20 pl24 ">
-              {!isOtherCarePlan &&
-                user_role_id.toString() === auth_role.toString() && (
-                  <PatientAlerts patientId={patient_id} />
-                )}
+              <PerformaTabs />
+              {performaTabId === 0 && (
+                <div>
+                  {!isOtherCarePlan &&
+                    user_role_id.toString() === auth_role.toString() && (
+                      <PatientAlerts patientId={patient_id} />
+                    )}
 
-              {/* <div className="last-visit-alerts" >*/}
-              {/*   <div className="last-visit-h-container" >*/}
-              {/*     <span >Alerts from last visit</span>  */}
-              {/*   </div>*/}
-              {/*   */}
-              {/*   <div className="last-visit-details">*/}
-              {/*    */}
-              {/*   </div>*/}
-              {/*       */}
-              {/*</div>*/}
+                  <div className="mt40">
+                    {!showTabs &&
+                      getUseTemplateComponent({
+                        isOtherCarePlan,
+                        noMedication,
+                        firstTemplateName,
+                        user_role_id,
+                        auth_role,
+                        message: this.formatMessage(messages.no_show),
+                      })}
+                  </div>
+                  {showTabs && (
+                    <div className="flex-grow-1 direction-column align-center">
+                      <div className="patient-tab mt20">
+                        <Tabs
+                          //  defaultActiveKey={defaultActiveKeyValue}
+                          onChange={this.setActiveKey}
+                          activeKey={activeKey}
+                        >
+                          {(authenticated_category === USER_CATEGORY.DOCTOR ||
+                            authenticated_category === USER_CATEGORY.HSP) && (
+                            //AKSHAY NEW CODE IMPLEMENTATION
+                            // BELOW CODE COMMENTED BY AKSHAY
+                            // &&
+                            // isOtherCarePlan
+                            <TabPane tab="Medication" key="1">
+                              {cPMedicationIds.length > 0 ? (
+                                <MedicationTable
+                                  patientId={patient_id}
+                                  carePlanId={carePlanId}
+                                  isOtherCarePlan={isOtherCarePlan}
+                                  secondary_doctor_user_role_ids={
+                                    secondary_doctor_user_role_ids
+                                  }
+                                />
+                              ) : (
+                                <div className="mt20">
+                                  {getUseTemplateComponent({
+                                    isOtherCarePlan,
+                                    noMedication,
+                                    firstTemplateName,
+                                    user_role_id,
+                                    auth_role,
+                                    message: this.formatMessage(
+                                      messages.no_medication
+                                    ),
+                                  })}
+                                </div>
+                              )}
+                            </TabPane>
+                          )}
 
-              <div className="mt40">
-                {!showTabs &&
-                  getUseTemplateComponent({
-                    isOtherCarePlan,
-                    noMedication,
-                    firstTemplateName,
-                    user_role_id,
-                    auth_role,
-                    message: this.formatMessage(messages.no_show),
-                  })}
-              </div>
-              {showTabs && (
-                <div className="flex-grow-1 direction-column align-center">
-                  <div className="patient-tab mt20">
-                    <Tabs
-                      //  defaultActiveKey={defaultActiveKeyValue}
-                      onChange={this.setActiveKey}
-                      activeKey={activeKey}
-                    >
-                      {(authenticated_category === USER_CATEGORY.DOCTOR ||
-                        authenticated_category === USER_CATEGORY.HSP) && (
-                        //AKSHAY NEW CODE IMPLEMENTATION
-                        // BELOW CODE COMMENTED BY AKSHAY
-                        // &&
-                        // isOtherCarePlan
-                        <TabPane tab="Medication" key="1">
-                          {cPMedicationIds.length > 0 ? (
-                            <MedicationTable
-                              patientId={patient_id}
-                              carePlanId={carePlanId}
-                              isOtherCarePlan={isOtherCarePlan}
-                              secondary_doctor_user_role_ids={
-                                secondary_doctor_user_role_ids
+                          <TabPane tab="Appointments" key="2">
+                            {cPAppointmentIds.length > 0 ? (
+                              <Table
+                                columns={
+                                  // !isOtherCarePlan &&
+                                  // authPermissions.includes(
+                                  // USER_PERMISSIONS.APPOINTMENTS.UPDATE
+                                  // )
+                                  // ?
+                                  columns_appointments
+                                  // : columns_appointments_non_editable
+                                }
+                                dataSource={getAppointmentsData(
+                                  carePlan,
+                                  docName
+                                )}
+                              />
+                            ) : (
+                              <div className="mt20">
+                                {getUseTemplateComponent({
+                                  isOtherCarePlan,
+                                  noMedication,
+                                  firstTemplateName,
+                                  user_role_id,
+                                  auth_role,
+                                  message: this.formatMessage(
+                                    messages.no_appointment
+                                  ),
+                                })}
+                              </div>
+                            )}
+                          </TabPane>
+
+                          <TabPane tab="Symptoms" key="3">
+                            <SymptomTabs patientId={patient_id} />
+                          </TabPane>
+                          <TabPane
+                            tab={PATIENT_TABS.ACTIONS["name"]}
+                            key={PATIENT_TABS.ACTIONS["key"]}
+                          >
+                            {vitalIds.length > 0 ? (
+                              <VitalTable
+                                patientId={patient_id}
+                                carePlanId={carePlanId}
+                                isOtherCarePlan={isOtherCarePlan}
+                              />
+                            ) : (
+                              <div className="mt20">
+                                {getUseTemplateComponent({
+                                  isOtherCarePlan,
+                                  noMedication,
+                                  firstTemplateName,
+                                  user_role_id,
+                                  auth_role,
+                                  message: this.formatMessage(
+                                    messages.no_vital
+                                  ),
+                                })}
+                              </div>
+                            )}
+                          </TabPane>
+                          <TabPane
+                            tab={PATIENT_TABS.REPORTS["name"]}
+                            key={PATIENT_TABS.REPORTS["key"]}
+                          >
+                            <ReportTable patientId={patient_id} />
+                          </TabPane>
+                          <TabPane
+                            tab={PATIENT_TABS.DIETS["name"]}
+                            key={PATIENT_TABS.DIETS["key"]}
+                          >
+                            {dietIds.length > 0 ? (
+                              <DietTable
+                                patientId={patient_id}
+                                carePlanId={carePlanId}
+                                isOtherCarePlan={isOtherCarePlan}
+                              />
+                            ) : (
+                              <div className="mt20">
+                                {getUseTemplateComponent({
+                                  isOtherCarePlan,
+                                  noMedication,
+                                  firstTemplateName,
+                                  user_role_id,
+                                  auth_role,
+                                  message: this.formatMessage(messages.no_diet),
+                                })}
+                              </div>
+                            )}
+                          </TabPane>
+
+                          <TabPane
+                            tab={PATIENT_TABS.WORKOUTS["name"]}
+                            key={PATIENT_TABS.WORKOUTS["key"]}
+                          >
+                            {workoutIds.length > 0 ? (
+                              <WorkoutTable
+                                patientId={patient_id}
+                                carePlanId={carePlanId}
+                                isOtherCarePlan={isOtherCarePlan}
+                              />
+                            ) : (
+                              <div className="mt20">
+                                {getUseTemplateComponent({
+                                  isOtherCarePlan,
+                                  noMedication,
+                                  firstTemplateName,
+                                  user_role_id,
+                                  auth_role,
+                                  message: this.formatMessage(
+                                    messages.no_workout
+                                  ),
+                                })}
+                              </div>
+                            )}
+                          </TabPane>
+                          {/* AKSHAY NEW CODE FOR SUBSCRIPTIONS */}
+                          <TabPane
+                            tab={PATIENT_TABS.SUBSCRIPTIONS["name"]}
+                            key={PATIENT_TABS.SUBSCRIPTIONS["key"]}
+                          >
+                            <SubscriptionTable
+                              recommendServices={this.props.recommendServices}
+                              getMyTaskOfServiceOrSubscription={
+                                this.props.getMyTaskOfServiceOrSubscription
                               }
                             />
-                          ) : (
-                            <div className="mt20">
-                              {getUseTemplateComponent({
-                                isOtherCarePlan,
-                                noMedication,
-                                firstTemplateName,
-                                user_role_id,
-                                auth_role,
-                                message: this.formatMessage(
-                                  messages.no_medication
-                                ),
-                              })}
-                            </div>
-                          )}
-                        </TabPane>
-                      )}
-
-                      <TabPane tab="Appointments" key="2">
-                        {cPAppointmentIds.length > 0 ? (
-                          <Table
-                            columns={
-                              // !isOtherCarePlan &&
-                              // authPermissions.includes(
-                              // USER_PERMISSIONS.APPOINTMENTS.UPDATE
-                              // )
-                              // ?
-                              columns_appointments
-                              // : columns_appointments_non_editable
-                            }
-                            dataSource={getAppointmentsData(carePlan, docName)}
-                          />
-                        ) : (
-                          <div className="mt20">
-                            {getUseTemplateComponent({
-                              isOtherCarePlan,
-                              noMedication,
-                              firstTemplateName,
-                              user_role_id,
-                              auth_role,
-                              message: this.formatMessage(
-                                messages.no_appointment
-                              ),
-                            })}
-                          </div>
-                        )}
-                      </TabPane>
-
-                      <TabPane tab="Symptoms" key="3">
-                        <SymptomTabs patientId={patient_id} />
-                      </TabPane>
-                      <TabPane
-                        tab={PATIENT_TABS.ACTIONS["name"]}
-                        key={PATIENT_TABS.ACTIONS["key"]}
-                      >
-                        {vitalIds.length > 0 ? (
-                          <VitalTable
-                            patientId={patient_id}
-                            carePlanId={carePlanId}
-                            isOtherCarePlan={isOtherCarePlan}
-                          />
-                        ) : (
-                          <div className="mt20">
-                            {getUseTemplateComponent({
-                              isOtherCarePlan,
-                              noMedication,
-                              firstTemplateName,
-                              user_role_id,
-                              auth_role,
-                              message: this.formatMessage(messages.no_vital),
-                            })}
-                          </div>
-                        )}
-                      </TabPane>
-                      <TabPane
-                        tab={PATIENT_TABS.REPORTS["name"]}
-                        key={PATIENT_TABS.REPORTS["key"]}
-                      >
-                        <ReportTable patientId={patient_id} />
-                      </TabPane>
-                      <TabPane
-                        tab={PATIENT_TABS.DIETS["name"]}
-                        key={PATIENT_TABS.DIETS["key"]}
-                      >
-                        {dietIds.length > 0 ? (
-                          <DietTable
-                            patientId={patient_id}
-                            carePlanId={carePlanId}
-                            isOtherCarePlan={isOtherCarePlan}
-                          />
-                        ) : (
-                          <div className="mt20">
-                            {getUseTemplateComponent({
-                              isOtherCarePlan,
-                              noMedication,
-                              firstTemplateName,
-                              user_role_id,
-                              auth_role,
-                              message: this.formatMessage(messages.no_diet),
-                            })}
-                          </div>
-                        )}
-                      </TabPane>
-
-                      <TabPane
-                        tab={PATIENT_TABS.WORKOUTS["name"]}
-                        key={PATIENT_TABS.WORKOUTS["key"]}
-                      >
-                        {workoutIds.length > 0 ? (
-                          <WorkoutTable
-                            patientId={patient_id}
-                            carePlanId={carePlanId}
-                            isOtherCarePlan={isOtherCarePlan}
-                          />
-                        ) : (
-                          <div className="mt20">
-                            {getUseTemplateComponent({
-                              isOtherCarePlan,
-                              noMedication,
-                              firstTemplateName,
-                              user_role_id,
-                              auth_role,
-                              message: this.formatMessage(messages.no_workout),
-                            })}
-                          </div>
-                        )}
-                      </TabPane>
-                      {/* AKSHAY NEW CODE FOR SUBSCRIPTIONS */}
-                      <TabPane
-                        tab={PATIENT_TABS.SUBSCRIPTIONS["name"]}
-                        key={PATIENT_TABS.SUBSCRIPTIONS["key"]}
-                      >
-                        <SubscriptionTable
-                          recommendServices={this.props.recommendServices}
-                          getMyTaskOfServiceOrSubscription={
-                            this.props.getMyTaskOfServiceOrSubscription
-                          }
-                        />
-                      </TabPane>
-                    </Tabs>
-                  </div>
+                          </TabPane>
+                        </Tabs>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -3195,6 +3229,12 @@ class PatientDetails extends Component {
             visible={recommendService}
             onCloseDrawer={this.onCloseDrawer}
             patient_id={patient_id}
+          />
+        )}
+        {addPerforma === true && (
+          <AddPerforma
+            visible={addPerforma}
+            onCloseDrawer={this.onCloseDrawer}
           />
         )}
       </Fragment>

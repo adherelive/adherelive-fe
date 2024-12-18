@@ -113,7 +113,7 @@ export const googleTranslate = (textToConvert) => {
   let toLang = "hi"; // translate to norwegian
   let text = textToConvert;
 
-  const API_KEY = "AIzaSyBo9v7KZ_3LGCVVM-j0t8VzRUYboFafhSY";
+  const API_KEY = "AIzaSyC1QGwEYH7MUx1mTYgRMYPJDp5HfgK3Ybg";
 
   let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
   url += "&q=" + encodeURI(text);
@@ -146,7 +146,7 @@ export const googleTranslateMultipleText = (textToConvertArray) => {
     target: toLang,
   };
 
-  const API_KEY = "AIzaSyBo9v7KZ_3LGCVVM-j0t8VzRUYboFafhSY";
+  const API_KEY = "AIzaSyC1QGwEYH7MUx1mTYgRMYPJDp5HfgK3Ybg";
 
   let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
   // url += "&q=" + encodeURI(text);

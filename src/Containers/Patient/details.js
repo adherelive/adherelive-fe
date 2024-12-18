@@ -51,6 +51,7 @@ import {
   googleTranslate,
   googleTranslateMultipleText,
 } from "../../modules/cdss";
+import { setPerformaTabs, setPerformaTabsId } from "../../modules/performa";
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -101,6 +102,7 @@ const mapStateToProps = (state, ownProps) => {
       flashcardOpen = false,
       scheduleAppointment = {},
     },
+    performa: { performaTabId = 0 },
   } = state;
 
   // const { id } = ownprops;
@@ -159,6 +161,7 @@ const mapStateToProps = (state, ownProps) => {
     recommendServices,
     flashcardOpen,
     scheduleAppointment,
+    performaTabId,
   };
 };
 
@@ -254,6 +257,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(googleTranslate(textToConvert)),
     googleTranslateMultipleText: (textToConvertArray) =>
       dispatch(googleTranslateMultipleText(textToConvertArray)),
+    setPerformaTabs: (value) => dispatch(setPerformaTabs(value)),
+    setPerformaTabsId: (value) => dispatch(setPerformaTabsId(value)),
   };
 };
 
