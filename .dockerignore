@@ -5,7 +5,6 @@ dump
 .git
 emails
 !public/.gitkeep
-public
 .dockerignore
 docker-compose.yaml
 docker-compose.prod.yaml
