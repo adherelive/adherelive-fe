@@ -2643,7 +2643,7 @@ class PatientDetails extends Component {
         let {basic_info: {name: firstTemplateName = ""} = {}} =
         care_plan_templates[care_plan_template_ids[0]] || {};
 
-        // todo: dummy careplan
+        // TODO: dummy care plan
         let carePlanId = selectedCarePlanId;
         let cPAppointmentIds = [];
         let cPMedicationIds = [];

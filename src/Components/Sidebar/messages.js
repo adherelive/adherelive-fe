@@ -64,7 +64,7 @@ export default defineMessages({
     templates: {
         id: "app.dashboard.sidebar.menu.templatesText",
         description: "",
-        defaultMessage: "Treatment plan Templates",
+        defaultMessage: "Treatment Plan Templates",
     },
     medicineText: {
         id: "app.dashboard.sidebar.menu.medicine.text",
