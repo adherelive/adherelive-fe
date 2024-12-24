@@ -73,7 +73,7 @@ export const getScheduleEvents = (payload) => {
         });
       }
     } catch (error) {
-      console.log("GET SCHEDULE EVENTS error ----> ", error);
+      console.log("GET SCHEDULE EVENTS error ---> ", error);
     }
     return response;
   };
@@ -104,7 +104,7 @@ export const getCalenderDataCountForDay = (date) => {
         });
       }
     } catch (error) {
-      console.log("GET_CALENDER_DATA_COUNT error ----> ", error);
+      console.log("GET_CALENDER_DATA_COUNT error ---> ", error);
     }
     return response;
   };
@@ -136,7 +136,7 @@ export const getCalenderDataForDay = (date, type) => {
         });
       }
     } catch (error) {
-      console.log("GET_CALENDER_DATA_FOR_DAY error ----> ", error);
+      console.log("GET_CALENDER_DATA_FOR_DAY error ---> ", error);
     }
     return response;
   };
@@ -169,7 +169,7 @@ export const getDoctorsCalenderDataForDay = (date, type) => {
         });
       }
     } catch (error) {
-      console.log("GET_CALENDER_DATA_FOR_DAY error ----> ", error);
+      console.log("GET_CALENDER_DATA_FOR_DAY error ---> ", error);
     }
     return response;
   };
@@ -258,7 +258,7 @@ export const getAllMissedScheduleEvents = () => {
         });
       }
     } catch (error) {
-      console.log("GetAllMissedScheduleEvents Error --->", error);
+      console.log("GetAllMissedScheduleEvents Error ---> ", error);
     }
     return response;
   };
@@ -291,7 +291,7 @@ export const getAllMissedEventDataByQuery = (type) => {
         dispatch({ type: SET_MISSED_CHART_DRAWER_LOADING, payload: false });
       }
     } catch (error) {
-      console.log("GetAllMissedScheduleEvents Error --->", error);
+      console.log("GetAllMissedScheduleEvents Error ---> ", error);
     }
     return response;
   };
@@ -321,7 +321,7 @@ export const getAllMissedEventChartCount = () => {
         });
       }
     } catch (error) {
-      console.log("GetAllMissedScheduleEvents Error --->", error);
+      console.log("GetAllMissedScheduleEvents Error ---> ", error);
     }
     return response;
   };

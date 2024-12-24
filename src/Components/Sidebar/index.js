@@ -97,7 +97,7 @@ class SideMenu extends Component {
         onCancel() {},
       });
     } catch (error) {
-      console.log("err --->", error);
+      console.log("err ---> ", error);
     }
   };
 

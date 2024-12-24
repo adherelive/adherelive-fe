@@ -102,7 +102,7 @@ class TemplatePage extends Component {
 
       searchMedicine(""); // to display medicine name of new med inside templateDrawer after editing med
     } catch (error) {
-      console.log("error --->", error);
+      console.log("error ---> ", error);
       message.warn(error);
     }
   }

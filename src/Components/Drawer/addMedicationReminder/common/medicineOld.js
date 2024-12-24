@@ -362,7 +362,7 @@ class Medicine extends Component {
         });
       }
     } catch (error) {
-      console.log("err --->", error);
+      console.log("err ---> ", error);
     }
   }
 

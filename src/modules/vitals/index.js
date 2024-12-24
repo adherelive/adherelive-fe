@@ -58,7 +58,7 @@ export const addVital = (payload) => {
         dispatch({ type: ADD_VITAL_FAILED, payload: error });
       }
     } catch (error) {
-      console.log("ADD vital error ----> ", error);
+      console.log("ADD vital error ---> ", error);
       dispatch({ type: ADD_VITAL_FAILED });
     }
     return response;
@@ -85,7 +85,7 @@ export const getVitals = (carePlanId) => {
         dispatch({ type: GET_VITALS_FAILED, payload: error });
       }
     } catch (error) {
-      console.log("getVitals error ----> ", error);
+      console.log("getVitals error ---> ", error);
       dispatch({ type: GET_VITALS_FAILED });
     }
     return response;
@@ -111,7 +111,7 @@ export const getVitalTimeline = (vitalId) => {
         dispatch({ type: GET_VITALS_TIMELINE_FAILED, payload: error });
       }
     } catch (error) {
-      console.log("getVitalTimeline error ----> ", error);
+      console.log("getVitalTimeline error ---> ", error);
       dispatch({ type: GET_VITALS_TIMELINE_FAILED });
     }
     return response;
@@ -139,7 +139,7 @@ export const updateVital = (payload) => {
         dispatch({ type: UPDATE_VITAL_FAILED, payload: error });
       }
     } catch (error) {
-      console.log("updateVital error ----> ", error);
+      console.log("updateVital error ---> ", error);
       dispatch({ type: UPDATE_VITAL_FAILED });
     }
     return response;
@@ -168,7 +168,7 @@ export const editVitalResponse = ({ id, index, value }) => {
         dispatch({ type: EDIT_VITAL_RESPONSE_FAILED, payload: error });
       }
     } catch (error) {
-      console.log("editVitalResponse error ----> ", error);
+      console.log("editVitalResponse error ---> ", error);
       dispatch({ type: EDIT_VITAL_RESPONSE_FAILED });
     }
     return response;
@@ -200,7 +200,7 @@ export const deleteVitalResponse = ({ id, index }) => {
         dispatch({ type: DELETE_VITAL_RESPONSE_FAILED, payload: error });
       }
     } catch (error) {
-      console.log("deleteVitalResponse error ----> ", error);
+      console.log("deleteVitalResponse error ---> ", error);
       dispatch({ type: DELETE_VITAL_RESPONSE_FAILED });
     }
     return response;

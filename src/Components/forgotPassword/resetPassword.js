@@ -80,7 +80,7 @@ class ResetPassword extends Component {
           }
         }
       } catch (err) {
-        console.log("298293 err ----> ", err);
+        console.log("298293 err ---> ", err);
         this.setState({ loading: false });
         message.error("Something went wrong, Please try again", 4);
       }
@@ -118,7 +118,7 @@ class ResetPassword extends Component {
     //                 }
     //             }
     //         } catch (err) {
-    //             console.log("298293 err ----> ", err);
+    //             console.log("298293 err ---> ", err);
     //             this.setState({ loading: false });
     //             message.error("Something went wrong, Please try again", 4);
     //         }

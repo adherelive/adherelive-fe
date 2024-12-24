@@ -326,7 +326,7 @@ class editReportDrawer extends Component {
       const { name } = document || {};
       return name === file.name;
     });
-    console.log("287423 Existing --->", existing);
+    console.log("287423 Existing ---> ", existing);
     if (existing.length === 0) {
       newDocuments.push({
         name: file.name,
@@ -605,7 +605,7 @@ class editReportDrawer extends Component {
       submitting = false,
     } = this.state;
     console.log(
-      "786578326427348234762427394823 enableModal  --->",
+      "786578326427348234762427394823 enableModal  ---> ",
       viewModalVisible && enableModal
     );
 

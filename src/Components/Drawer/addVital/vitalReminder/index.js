@@ -141,7 +141,7 @@ class AddVitals extends Component {
             }
             this.setState({ submitting: false });
           } catch (error) {
-            console.log("add vital ui error -----> ", error);
+            console.log("add vital ui error ---> ", error);
             this.setState({ submitting: false });
           }
         }

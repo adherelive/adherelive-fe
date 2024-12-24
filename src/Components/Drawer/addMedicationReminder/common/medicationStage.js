@@ -47,7 +47,7 @@ class MedicationStage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log("PREV PROPS =====>", prevProps);
-    console.log("Prosssssssssss ----->", this.props);
+    console.log("Prosssssssssss ---> ", this.props);
   }
 
   Hits = ({ hits }) => {
@@ -108,12 +108,12 @@ class MedicationStage extends Component {
 
         <Select
           onSearch={(value) => {
-            console.log("5464564524354654634  Search--->", value);
+            console.log("5464564524354654634  Search---> ", value);
             refine(value);
             // this.setListVisible(value);
           }}
           onChange={(value) => {
-            console.log("5464564524354654634 --->", value);
+            console.log("5464564524354654634 ---> ", value);
             // refine(value);
           }}
           className="form-inputs"

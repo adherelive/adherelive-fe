@@ -1170,7 +1170,7 @@ class PatientDetails extends Component {
         this.setState({ symptom_dates });
       }
     } catch (error) {
-      console.log("errrrrr--->", error);
+      console.log("errrrrr---> ", error);
       message.warn(error);
     }
   };
@@ -1193,7 +1193,7 @@ class PatientDetails extends Component {
       const response = await fetchPatientReports(patient_id);
       const { status, payload: { data: { report_ids = [] } = {} } = {} } =
         response || {};
-      // console.log("43243234728323492 REPORTS ------>", response);
+      // console.log("43243234728323492 REPORTS ---> ", response);
       if (status === true) {
         this.setState({ report_ids, loading: false });
       }

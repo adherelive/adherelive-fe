@@ -36,7 +36,7 @@ class editReportDrawer extends Component {
 
   // componentDidMount(){
   //     const {payload : {report_id},patient_id} = this.props;
-  //   //   console.log("786578326427348234762427394823 --->",this.props);
+  //   //   console.log("786578326427348234762427394823 ---> ",this.props);
   //     // this.getAllReportsData();
 
   // }
@@ -80,7 +80,7 @@ class editReportDrawer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log("786578326427348234762427394823 --->",this.props);
+    // console.log("786578326427348234762427394823 ---> ",this.props);
   }
 
   getUploadButton = () => {
@@ -224,7 +224,7 @@ class editReportDrawer extends Component {
       const { name } = document || {};
       return name === file.name;
     });
-    console.log("287423 Existing --->", existing);
+    console.log("287423 Existing ---> ", existing);
     if (existing.length === 0) {
       newDocuments.push({
         name: file.name,
@@ -421,7 +421,7 @@ class editReportDrawer extends Component {
   render() {
     const { visible } = this.props;
     const { name, new_documents } = this.state;
-    // console.log("786578326427348234762427394823 Render new_documents ----->",this.props);
+    // console.log("786578326427348234762427394823 Render new_documents ---> ",this.props);
 
     const {
       onClose,

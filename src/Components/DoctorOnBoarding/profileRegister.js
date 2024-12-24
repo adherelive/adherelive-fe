@@ -262,7 +262,7 @@ class Profileregister extends Component {
         });
       }
     } catch (error) {
-      console.log("err --->", error);
+      console.log("err ---> ", error);
       message.warn("Something went wrong. Please try again later");
     }
   }

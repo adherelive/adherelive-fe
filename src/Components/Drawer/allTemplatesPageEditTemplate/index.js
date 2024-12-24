@@ -2508,7 +2508,7 @@ class TemplatePageCreateDrawer extends Component {
             message.warn(msg);
           }
         } catch (error) {
-          console.log("Delete Template Error --->", error);
+          console.log("Delete Template Error ---> ", error);
           message.warn(error);
         }
 

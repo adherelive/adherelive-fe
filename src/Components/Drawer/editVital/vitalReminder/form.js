@@ -347,7 +347,7 @@ class EditVitalForm extends Component {
             message.error(msg);
           }
         } catch (error) {
-          console.log("add medication reminder ui error -----> ", error);
+          console.log("add medication reminder ui error ---> ", error);
         }
       }
     });

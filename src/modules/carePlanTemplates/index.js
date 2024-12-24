@@ -105,7 +105,7 @@ export const getAllTemplatesForDoctor = () => {
         });
       }
     } catch (error) {
-      console.log("GET ALL TEMPLATES FOR DOC error --->", error);
+      console.log("GET ALL TEMPLATES FOR DOC error ---> ", error);
     }
     return response;
   };
@@ -137,7 +137,7 @@ export const getAllTemplatesForDoctorUsingQuery = (text) => {
         });
       }
     } catch (error) {
-      console.log("GET ALL TEMPLATES FOR DOC error --->", error);
+      console.log("GET ALL TEMPLATES FOR DOC error ---> ", error);
     }
     return response;
   };

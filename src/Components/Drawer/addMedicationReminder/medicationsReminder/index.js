@@ -231,7 +231,7 @@ class AddMedicationReminder extends Component {
             }
           } catch (error) {
             this.setState({ submitting: false });
-            console.log("add medication reminder ui error -----> ", error);
+            console.log("add medication reminder ui error ---> ", error);
           }
         }
       } else {

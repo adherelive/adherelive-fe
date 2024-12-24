@@ -34,7 +34,7 @@ export const getAllProviders = () => {
         url: getAllProvidersUrl(),
       });
 
-      // console.log("78654546576877653546576654565768 --------->",response);
+      // console.log("78654546576877653546576654565768 ---> ",response);
 
       const { status, payload: { data, error } = {} } = response || {};
       if (status === true) {
@@ -66,7 +66,7 @@ export const getAllTransactions = () => {
         url: getAllTransactionsUrl(),
       });
 
-      // console.log("78654546576877653546576654565768 --------->",response);
+      // console.log("78654546576877653546576654565768 ---> ",response);
 
       const { status, payload: { data, error } = {} } = response || {};
       if (status === true) {

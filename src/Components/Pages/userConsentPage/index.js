@@ -24,7 +24,7 @@ class UserConsent extends Component {
     const { getTermsAndPolicy } = this.props;
     try {
       const response = await getTermsAndPolicy(TERMS_OF_SERVICE);
-      // console.log("37825412761907858734 RESPONSE --->",response);
+      // console.log("37825412761907858734 RESPONSE ---> ",response);
       const { status, payload: { data } = {} } = response;
       if (status === true) {
         const { [TERMS_OF_SERVICE]: { content } = {} } = data || {};
@@ -65,7 +65,7 @@ class UserConsent extends Component {
       }
     } catch (error) {
       message.warn(error);
-      console.log("err --->", error);
+      console.log("err ---> ", error);
     }
   };
 

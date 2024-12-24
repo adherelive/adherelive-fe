@@ -48,7 +48,7 @@ class SignIn extends Component {
             message.error("Username or Password incorrect", 4);
           }
         } catch (err) {
-          console.log("298293 err ----> ", err);
+          console.log("298293 err ---> ", err);
           this.setState({ loading: false });
           message.error("Something went wrong, Please try again", 4);
         }
