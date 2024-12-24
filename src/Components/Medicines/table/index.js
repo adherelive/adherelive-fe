@@ -37,9 +37,7 @@ class MedicineTable extends Component {
   componentDidMount() {}
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(
-      "782657387923785623789233 CD UPDATEEEEEEEEEEEEEEEEEeeeeeeeeeeeeeee"
-    );
+    console.log("componentDidUpdate function");
     const { searchPublicText: prev_searchPublicText = "" } = prevState;
     const { searchPublicText = "" } = this.state;
     const { searchPrivateText: prev_searchPrivateText = "" } = prevState;
@@ -71,7 +69,7 @@ class MedicineTable extends Component {
       const { getPublicMedicines } = this.props;
       this.setState({ loading: true });
       const response = await getPublicMedicines({ value, offset });
-      console.log("3275437847237845324625347879198371293712945216", {
+      console.log("handleSearchPublicMedicine function", {
         response,
         value,
         offset,
@@ -101,7 +99,7 @@ class MedicineTable extends Component {
       } = response || {};
       this.setState({ searchPrivateCount: total_count, loading: false });
     } catch (error) {
-      console.log("error ===>", error);
+      console.log("handleSearchPrivateMedicine error ---> ", error);
     }
   }
 
@@ -119,7 +117,7 @@ class MedicineTable extends Component {
       this.setState({ loading: false });
     } catch (error) {
       this.setState({ loading: false });
-      console.log("89368754234 error ===>", error);
+      console.log("handleGetPublicMedicines error ---> ", error);
     }
   }
 
@@ -140,7 +138,7 @@ class MedicineTable extends Component {
       this.setState({ loading: false });
     } catch (error) {
       this.setState({ loading: false });
-      console.log("89368754234 error ===>", error);
+      console.log("handleGetPrivateMedicines error ---> ", error);
     }
   }
 
@@ -175,7 +173,7 @@ class MedicineTable extends Component {
     const key = parseInt(currentPage) - 1 || 0;
     const { searchPrivateText = "", searchPublicText = "" } = this.state;
 
-    console.log("9817231287 currentPage", {
+    console.log("getDataSource currentPage ---> ", {
       currentPage,
       key,
       props_public_medicines,
@@ -208,7 +206,7 @@ class MedicineTable extends Component {
     const { loading = true } = this.state;
     const { changeLoading } = this;
 
-    console.log("272391872398 currentTab", {
+    console.log("getDataSource currentTab ---> ", {
       currentTab,
       public_medicines,
       private_medicines,
@@ -411,7 +409,7 @@ class MedicineTable extends Component {
       ),
       onFilter: (value, record) => {
         if (dataIndex === TABLE_COLUMN.MEDICINE_NAME.dataIndex) {
-          console.log("09810912 records: ", { value, record });
+          console.log("getColumnSearchProps records: ", { value, record });
           // const {searchResults} = this.state;
           const { medicineData = {} } = record[dataIndex] || {};
           let status = false;
@@ -445,7 +443,7 @@ class MedicineTable extends Component {
   };
 
   handleTableChange = (props) => {
-    console.log("1083791238172 props", { props });
+    console.log("handleTableChange props: ", { props });
   };
 
   render() {
@@ -491,7 +489,7 @@ class MedicineTable extends Component {
         ? totalPrivateMedicinesCount
         : searchPrivateCount;
 
-    console.log("3785463254729847923864832");
+    console.log("render function");
 
     return (
       <Table
