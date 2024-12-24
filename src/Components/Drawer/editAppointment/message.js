@@ -179,7 +179,7 @@ const message = defineMessages({
         defaultMessage: "Reminder Title",
     },
     alongWithPlaceHolder: {
-        id: "app.event.reminderalongwith",
+        id: "app.event.reminderAlongWith",
         description: "",
         defaultMessage: "Tag a patient or a doctor",
     },

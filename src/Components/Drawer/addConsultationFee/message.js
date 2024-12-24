@@ -21,8 +21,8 @@ const messages = defineMessages({
         description: "",
         defaultMessage: "Something went wrong",
     },
-    validdobError: {
-        id: "app.addConsultationFee.validdobError",
+    validDobError: {
+        id: "app.addConsultationFee.validDobError",
         description: "",
         defaultMessage: "Please enter a valid Date of Birth .",
     },

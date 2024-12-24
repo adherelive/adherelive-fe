@@ -32,7 +32,7 @@ const messages = defineMessages({
         defaultMessage: "Date",
     },
     critical: {
-        id: "app.missedAppointments.ciritical",
+        id: "app.missedAppointments.critical",
         description: "",
         defaultMessage: "Critical",
     },

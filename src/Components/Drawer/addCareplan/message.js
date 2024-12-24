@@ -39,7 +39,7 @@ const messages = defineMessages({
     somethingWentWrong: {
         id: "app.addCareplan.somethingWentWrong",
         description: "",
-        defaultMessage: "Something wen't wrong.",
+        defaultMessage: "Something has gone wrong.",
     },
     prefixError: {
         id: "app.addCareplan.prefixError",

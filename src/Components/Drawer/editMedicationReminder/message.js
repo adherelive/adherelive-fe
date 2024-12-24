@@ -77,7 +77,7 @@ export default defineMessages({
         defaultMessage: "Reminder Title",
     },
     alongWithPlaceHolder: {
-        id: "app.event.reminderalongwith",
+        id: "app.event.reminderAlongWith",
         description: "",
         defaultMessage: "Tag a patient or a doctor",
     },
@@ -303,7 +303,7 @@ export default defineMessages({
     },
 
     update_button_text: {
-        id: "medication_reminder.drawer.edit.buttom.text",
+        id: "medication_reminder.drawer.edit.button.text",
         description: "",
         defaultMessage: "Submit",
     },

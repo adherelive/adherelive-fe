@@ -61,7 +61,7 @@ class VitalName extends Component {
             }
         } catch (err) {
             console.log("err", err);
-            message.warn("Something wen't wrong. Please try again later");
+            message.warn("Something has gone wrong. Please try again later");
             this.setState({fetchingVitals: false});
         }
     }
@@ -84,7 +84,7 @@ class VitalName extends Component {
             // }
         } catch (err) {
             console.log("err", err);
-            message.warn("Something wen't wrong. Please try again later");
+            message.warn("Something has gone wrong. Please try again later");
             this.setState({fetchingVitals: false});
         }
     }

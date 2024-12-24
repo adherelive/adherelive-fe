@@ -12,7 +12,7 @@ const messages = defineMessages({
         defaultMessage: "Consultation Fees",
     },
     doctorBillingHeader: {
-        id: "app.admin.doctors.settings.billig.header",
+        id: "app.admin.doctors.settings.billing.header",
         description: "",
         defaultMessage: "Billing",
     },

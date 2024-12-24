@@ -86,8 +86,8 @@ const messages = defineMessages({
         description: "",
         defaultMessage: "Please enter  Date of Birth .",
     },
-    validdobError: {
-        id: "app.editPatient.validdobError",
+    validDobError: {
+        id: "app.editPatient.validDobError",
         description: "",
         defaultMessage: "Please enter a valid Date of Birth .",
     },

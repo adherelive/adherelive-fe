@@ -1445,7 +1445,7 @@ class EditPatientDrawer extends Component {
         ) {
             //handle case of newBorn
 
-            message.error(this.formatMessage(messages.validdobError));
+            message.error(this.formatMessage(messages.validDobError));
             return false;
         } else if (!treatment) {
             message.error(this.formatMessage(messages.treatmentError));
@@ -1512,7 +1512,7 @@ class EditPatientDrawer extends Component {
                 weight,
                 symptoms: JSON.stringify(this.state.finalSymptomData),
                 address,
-                followup_advise,
+                //followup_advise,
             });
             // submit({ mobile_number, name, gender, date_of_birth, treatment_id: treatment, severity_id: severity, condition_id: condition, prefix ,allergies,diagnosis_description,diagnosis_type,comorbidities,clinical_notes,height,weight, symptoms})
         }

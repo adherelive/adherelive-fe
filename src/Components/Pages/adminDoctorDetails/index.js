@@ -114,7 +114,7 @@ class AdminDoctorDetails extends Component {
             this.setState({
                 loading: false,
             });
-            message.warn("Somthing wen't wrong, please try again later");
+            message.warn("Somthing has gone wrong, please try again later");
         }
     };
 

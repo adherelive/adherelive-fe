@@ -52,7 +52,7 @@ const messages = defineMessages({
         defaultMessage: "Date",
     },
     critical: {
-        id: "app.providerDoctorCalender.appointment.ciritical",
+        id: "app.providerDoctorCalender.appointment.critical",
         description: "",
         defaultMessage: "Critical",
     },

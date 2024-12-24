@@ -7,7 +7,7 @@ export default defineMessages({
         defaultMessage: "Schedule New",
     },
     update_button_text: {
-        id: "app.vital.edit.drawer.edit.buttom.text",
+        id: "app.vital.edit.drawer.edit.button.text",
         description: "",
         defaultMessage: "Submit",
     },
@@ -77,7 +77,7 @@ export default defineMessages({
         defaultMessage: "Reminder Title",
     },
     alongWithPlaceHolder: {
-        id: "app.vital.edit.drawer.reminderalongwith",
+        id: "app.vital.edit.drawer.reminderAlongWith",
         description: "",
         defaultMessage: "Tag a patient or a doctor",
     },
@@ -312,12 +312,12 @@ export default defineMessages({
         defaultMessage: "Medication",
     },
     add_button_text: {
-        id: "app.vital.edit.drawer.add.buttom.text",
+        id: "app.vital.edit.drawer.add.button.text",
         description: "",
         defaultMessage: "Add",
     },
     submit_button_text: {
-        id: "app.vital.edit.drawer.submit.buttom.text",
+        id: "app.vital.edit.drawer.submit.button.text",
         description: "",
         defaultMessage: "Submit",
     },

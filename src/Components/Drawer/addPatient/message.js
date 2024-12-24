@@ -79,7 +79,7 @@ const messages = defineMessages({
     somethingWentWrong: {
         id: "app.addPatient.somethingWentWrong",
         description: "",
-        defaultMessage: "Something wen't wrong.",
+        defaultMessage: "Something has gone wrong.",
     },
     prefixError: {
         id: "app.addPatient.prefixError",
@@ -96,8 +96,8 @@ const messages = defineMessages({
         description: "",
         defaultMessage: "Please enter  Date of Birth .",
     },
-    validdobError: {
-        id: "app.addPatient.validdobError",
+    validDobError: {
+        id: "app.addPatient.validDobError",
         description: "",
         defaultMessage: "Please enter a valid Date of Birth .",
     },
