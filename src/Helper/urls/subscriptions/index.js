@@ -79,6 +79,10 @@ export const updateReasonForReassignement = (activityId) => {
     return `/txactivities/reassign/${activityId}`;
 };
 
+export const updateReasonForReassignement = (activityId) => {
+  return `/txactivities/reassign/${activityId}`;
+};
+
 export const patientCareplansUrl = (patientId) => {
     return `/careplans/patient-care-plan-details/${patientId}`;
 };
@@ -111,4 +115,14 @@ export const getSecondaryDoctorUrl = (careplanId) => {
 
 export const reassignmentAuditUrl = (activityId) => {
     return `/reassignaudit/?activity_id=${activityId}`;
+};
+
+// REASSIGNMENT URL
+
+export const getSecondaryDoctorUrl = (careplanId) => {
+  return `patients/${careplanId}/careplan-details-sec-doc`;
+};
+
+export const reassignmentAuditUrl = (activityId) => {
+  return `/reassignaudit/?activity_id=${activityId}`;
 };
