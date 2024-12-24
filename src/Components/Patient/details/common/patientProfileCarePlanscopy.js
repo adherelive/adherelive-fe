@@ -19,7 +19,7 @@ class patientCarePlans extends Component {
 
         this.state = {
             care_plans: {},
-            current_careplan_id: null,
+            current_care_plan_id: null,
         };
     }
 
@@ -34,14 +34,14 @@ class patientCarePlans extends Component {
             );
             if (status) {
                 let {
-                    data: {show = false, care_plans = {}, current_careplan_id} = {},
+                    data: {show = false, care_plans = {}, current_care_plan_id} = {},
                 } = payload;
 
-                console.log("Cureent careplan ====>", care_plans, current_careplan_id);
+                console.log("Cureent careplan ====>", care_plans, current_care_plan_id);
 
                 this.setState({
                     care_plans,
-                    current_careplan_id,
+                    current_care_plan_id,
                 });
             }
         });
@@ -61,28 +61,28 @@ class patientCarePlans extends Component {
         }
     };
 
-    getAllCarePlans = (care_plans, current_careplan_id) => {
+    getAllCarePlans = (care_plans, current_care_plan_id) => {
         let allCarePlans = [];
         let currentCarePlan = this.getCurrentCarePlan(
             care_plans,
-            current_careplan_id
+            current_care_plan_id
         );
         allCarePlans.push(currentCarePlan);
 
-        let allOtherCarePlans = this.getCarePlans(care_plans, current_careplan_id);
+        let allOtherCarePlans = this.getCarePlans(care_plans, current_care_plan_id);
         allCarePlans.push(allOtherCarePlans);
         return allCarePlans;
     };
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    getCurrentCarePlan = (care_plans, current_careplan_id) => {
+    getCurrentCarePlan = (care_plans, current_care_plan_id) => {
         const {treatments, doctors} = this.props;
         const {basic_info: {first_name = "", last_name = ""} = {}} =
         Object.values(doctors)[0] || {};
 
         const {details: {treatment_id} = {}} =
-        care_plans[current_careplan_id] || {};
+        care_plans[current_care_plan_id] || {};
         const {basic_info: {name = ""} = {}} = treatments[treatment_id] || {};
         return (
             <div className="careplanListOption">
@@ -95,14 +95,14 @@ class patientCarePlans extends Component {
         );
     };
 
-    getCarePlans = (care_plans, current_careplan_id) => {
+    getCarePlans = (care_plans, current_care_plan_id) => {
         const {treatments} = this.props;
 
         const nonCurrentCareplans = [];
         for (let eachId in care_plans) {
             const {details: {treatment_id} = {}} = care_plans[eachId] || {};
             const {basic_info: {name = ""} = {}} = treatments[treatment_id] || {};
-            if (eachId !== JSON.stringify(current_careplan_id)) {
+            if (eachId !== JSON.stringify(current_care_plan_id)) {
                 nonCurrentCareplans.push(
                     <div className="careplanListOption">
                         <div>
@@ -118,8 +118,8 @@ class patientCarePlans extends Component {
     };
 
     render() {
-        const {care_plans, current_careplan_id} = this.state;
-        const allCarePlans = this.getAllCarePlans(care_plans, current_careplan_id);
+        const {care_plans, current_care_plan_id} = this.state;
+        const allCarePlans = this.getAllCarePlans(care_plans, current_care_plan_id);
 
         return <div className="careplanList">{allCarePlans}</div>;
     }

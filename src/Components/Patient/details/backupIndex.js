@@ -860,7 +860,7 @@
 //           care_plan_templates = {},
 //           care_plan_template_ids = [],
 //           care_plan_ids = [],
-//           current_careplan_id = null,
+//           current_care_plan_id = null,
 //         } = {},
 //       } = payload;
 //       // AKSHAY NEW CODE IMPLEMENTATION START
@@ -882,10 +882,10 @@
 //         this.props;
 //       console.log("32486238476283746823648236487236", {
 //         care_plan_id,
-//         current_careplan_id,
+//         current_care_plan_id,
 //       });
 //       if (care_plan_id) {
-//         current_careplan_id = care_plan_id;
+//         current_care_plan_id = care_plan_id;
 //       }
 //       // const { basic_info: { id: carePlanTemplateId = 0 } } = care_plan_templates[Object.keys(care_plan_templates)[0]];
 //       let carePlanTemplateExists =
@@ -897,9 +897,9 @@
 //         carePlanTemplateExists,
 //         loading: false,
 //         patientCarePlanIds: care_plan_ids,
-//         current_careplan_id,
+//         current_care_plan_id,
 //         isOtherCarePlan: false,
-//         // selectedCarePlanId: current_careplan_id,
+//         // selectedCarePlanId: current_care_plan_id,
 //         // AKSHAY NEW CODE IMPLEMENTATION END
 //         selectedCarePlanId: !isEmpty(patientCarePlans)
 //           ? patientCarePlans[0]
@@ -2343,7 +2343,7 @@
 //       patientCarePlanIds = [],
 //       showOtpModal,
 //       selectedCarePlanId,
-//       // current_careplan_id,
+//       // current_care_plan_id,
 //       isOtherCarePlan,
 //       symptom_dates = [],
 //       report_ids = [],
