@@ -1,70 +1,70 @@
-import { USER_CATEGORY, TRANSACTION_STATUS } from "../../../constant";
+import {USER_CATEGORY, TRANSACTION_STATUS} from "../../../constant";
 
 export const getTransactionFilters = () => {
-  return Object.keys(TRANSACTION_STATUS).map((key) => {
-    return {
-      text: TRANSACTION_STATUS[key],
-      value: TRANSACTION_STATUS[key],
-    };
-  });
+    return Object.keys(TRANSACTION_STATUS).map((key) => {
+        return {
+            text: TRANSACTION_STATUS[key],
+            value: TRANSACTION_STATUS[key],
+        };
+    });
 };
 
 export const TABLE_COLUMN = {
-  ID: {
-    key: "ID",
-    dataIndex: "ID",
-    // fixed: "left",
-    width: 150,
-  },
-  DOCTOR: {
-    key: "DOCTOR",
-    dataIndex: "DOCTOR",
-    width: 220,
-  },
-  PATIENT: {
-    key: "PATIENT",
-    dataIndex: "PATIENT",
-    width: 250,
-  },
-  // PAYMENT_PRODUCT: {
-  //   key: "PAYMENT_PRODUCT",
-  //   dataIndex: "PAYMENT_PRODUCT",
-  // },
-  SUBSCRIPTION: {
-    key: "SUBSCRIPTION",
-    dataIndex: "SUBSCRIPTION",
-    width: 200,
-  },
-  DURATION: {
-    key: "DURATION",
-    dataIndex: "DURATION",
-    width: 220,
-  },
-  AMOUNT: {
-    key: "AMOUNT",
-    dataIndex: "AMOUNT",
-    width: 200,
-  },
-  STATUS: {
-    key: "STATUS",
-    dataIndex: "STATUS",
-    onFilter: (value, record) => {
-      // console.log("874657483294723463792",{record,value,recordStatus:record.STATUS});
-      const { transactionData: { status = "" } = {} } = record.STATUS || {};
-      return status === value;
+    ID: {
+        key: "ID",
+        dataIndex: "ID",
+        // fixed: "left",
+        width: 150,
     },
-    width: 200,
-  },
-  DATE: {
-    key: "DATE",
-    dataIndex: "DATE",
-    width: 200,
-  },
-  PAYMENT: {
-    key: "PAYMENT",
-    dataIndex: "PAYMENT",
-    width: 350,
-  },
+    DOCTOR: {
+        key: "DOCTOR",
+        dataIndex: "DOCTOR",
+        width: 220,
+    },
+    PATIENT: {
+        key: "PATIENT",
+        dataIndex: "PATIENT",
+        width: 250,
+    },
+    // PAYMENT_PRODUCT: {
+    //   key: "PAYMENT_PRODUCT",
+    //   dataIndex: "PAYMENT_PRODUCT",
+    // },
+    SUBSCRIPTION: {
+        key: "SUBSCRIPTION",
+        dataIndex: "SUBSCRIPTION",
+        width: 200,
+    },
+    DURATION: {
+        key: "DURATION",
+        dataIndex: "DURATION",
+        width: 220,
+    },
+    AMOUNT: {
+        key: "AMOUNT",
+        dataIndex: "AMOUNT",
+        width: 200,
+    },
+    STATUS: {
+        key: "STATUS",
+        dataIndex: "STATUS",
+        onFilter: (value, record) => {
+            // console.log("874657483294723463792",{record,value,recordStatus:record.STATUS});
+            const {transactionData: {status = ""} = {}} = record.STATUS || {};
+            return status === value;
+        },
+        width: 200,
+    },
+    DATE: {
+        key: "DATE",
+        dataIndex: "DATE",
+        width: 200,
+    },
+    PAYMENT: {
+        key: "PAYMENT",
+        dataIndex: "PAYMENT",
+        width: 350,
+    },
 };
 
 // export const formatTransactionTableData = (data) => {

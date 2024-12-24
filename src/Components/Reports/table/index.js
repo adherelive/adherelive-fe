@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { injectIntl } from "react-intl";
+import React, {Component, Fragment} from "react";
+import {injectIntl} from "react-intl";
 import generateRow from "./dataRow";
 import getColumn from "./header";
 import Table from "antd/es/table";
@@ -9,143 +9,143 @@ import messages from "./message";
 import isEmpty from "../../../Helper/is-empty";
 
 class ReportTable extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      loading: true,
-      report_ids: [],
-      documentData: {},
-    };
-  }
-
-  componentDidMount() {
-    this.getReports();
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    const { report_ids } = this.props;
-    const { report_ids: prev_report_ids } = prevProps;
-
-    if (report_ids !== prev_report_ids) {
-      this.setState({ report_ids });
+        this.state = {
+            loading: true,
+            report_ids: [],
+            documentData: {},
+        };
     }
-  }
 
-  formatMessage = (message) => this.props.intl.formatMessage(message);
-
-  getReports = async () => {
-    try {
-      const { fetchPatientReports } = this.props;
-      const { loading } = this.state;
-      const response = await fetchPatientReports();
-      const { status, payload: { data: { report_ids = [] } = {} } = {} } =
-        response || {};
-      if (status === true) {
-        this.setState({ report_ids, loading: false });
-      }
-    } catch (error) {
-      this.setState({ loading: false });
+    componentDidMount() {
+        this.getReports();
     }
-  };
 
-  openEditDrawer = (payload) => () => {
-    const { openEditReport } = this.props;
-    //AKSHAY NEW CODE IMPLEMENTATIONS
-    const { flashCard } = payload;
-    if (!isEmpty(flashCard)) {
-      let flashCardData = {
-        activityId: flashCard[0].tx_activity_id,
-        patientId: flashCard[0].patient_id,
-        flashCardId: flashCard[0].id,
-        flashCardQue: flashCard[0].data.flashCardData,
-        flashCardNotes: flashCard[0].notes,
-        is_published: flashCard[0].is_published,
-      };
-      this.props.setFlashcardData(flashCardData);
-      this.props.setFlashCard(true);
-    } else {
-      openEditReport(payload);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const {report_ids} = this.props;
+        const {report_ids: prev_report_ids} = prevProps;
+
+        if (report_ids !== prev_report_ids) {
+            this.setState({report_ids});
+        }
     }
-  };
 
-  openModal = (documentData) => () => {
-    this.setState({ documentData, modalVisible: true });
-  };
+    formatMessage = (message) => this.props.intl.formatMessage(message);
 
-  closeModal = () => {
-    this.setState({ modalVisible: false });
-  };
-
-  getDataSource = () => {
-    const { reports, patients, doctors, upload_documents } = this.props;
-    const { report_ids } = this.state;
-    const { formatMessage, openModal, openEditDrawer } = this;
-
-    return report_ids.map((id) => {
-      return generateRow({
-        formatMessage,
-        id,
-        reports,
-        patients,
-        doctors,
-        upload_documents,
-        openEditDrawer,
-        openModal,
-      });
-    });
-  };
-
-  // openResponseDrawer = (id) => (e) => {
-  //     e.preventDefault();
-  //     const {vitalResponseDrawer} = this.props;
-  //     vitalResponseDrawer({id, loading: true});
-  // };
-
-  // openEditDrawer = (id) => (e) => {
-  //     e.preventDefault();
-  //     const {editVitalDrawer, isOtherCarePlan} = this.props;
-  //     if(!isOtherCarePlan) {
-  //         editVitalDrawer({id, loading: true});
-  //     }
-  // };
-
-  formatMessage = (data) => this.props.intl.formatMessage(data);
-
-  render() {
-    const { intl: { formatMessage } = {} } = this.props;
-    const { modalVisible, documentData } = this.state;
-    const { getDataSource, closeModal } = this;
-
-    const reportLocale = {
-      emptyText: this.formatMessage(messages.emptyReports),
+    getReports = async () => {
+        try {
+            const {fetchPatientReports} = this.props;
+            const {loading} = this.state;
+            const response = await fetchPatientReports();
+            const {status, payload: {data: {report_ids = []} = {}} = {}} =
+            response || {};
+            if (status === true) {
+                this.setState({report_ids, loading: false});
+            }
+        } catch (error) {
+            this.setState({loading: false});
+        }
     };
 
-    return (
-      <Fragment>
-        <Table
-          rowClassName={() => "pointer"}
-          // loading={loading === true ? getLoadingComponent() : false}
-          columns={getColumn({
-            formatMessage,
-            className: "pointer",
-          })}
-          dataSource={getDataSource()}
-          scroll={{ x: "100%" }}
-          pagination={{
-            position: "bottom",
-          }}
-          locale={reportLocale}
-        />
-        <ReportDocumentModal
-          visible={modalVisible}
-          documentData={documentData}
-          onClose={closeModal}
-          formatMessage={formatMessage}
-        />
-      </Fragment>
-    );
-  }
+    openEditDrawer = (payload) => () => {
+        const {openEditReport} = this.props;
+        //AKSHAY NEW CODE IMPLEMENTATIONS
+        const {flashCard} = payload;
+        if (!isEmpty(flashCard)) {
+            let flashCardData = {
+                activityId: flashCard[0].tx_activity_id,
+                patientId: flashCard[0].patient_id,
+                flashCardId: flashCard[0].id,
+                flashCardQue: flashCard[0].data.flashCardData,
+                flashCardNotes: flashCard[0].notes,
+                is_published: flashCard[0].is_published,
+            };
+            this.props.setFlashcardData(flashCardData);
+            this.props.setFlashCard(true);
+        } else {
+            openEditReport(payload);
+        }
+    };
+
+    openModal = (documentData) => () => {
+        this.setState({documentData, modalVisible: true});
+    };
+
+    closeModal = () => {
+        this.setState({modalVisible: false});
+    };
+
+    getDataSource = () => {
+        const {reports, patients, doctors, upload_documents} = this.props;
+        const {report_ids} = this.state;
+        const {formatMessage, openModal, openEditDrawer} = this;
+
+        return report_ids.map((id) => {
+            return generateRow({
+                formatMessage,
+                id,
+                reports,
+                patients,
+                doctors,
+                upload_documents,
+                openEditDrawer,
+                openModal,
+            });
+        });
+    };
+
+    // openResponseDrawer = (id) => (e) => {
+    //     e.preventDefault();
+    //     const {vitalResponseDrawer} = this.props;
+    //     vitalResponseDrawer({id, loading: true});
+    // };
+
+    // openEditDrawer = (id) => (e) => {
+    //     e.preventDefault();
+    //     const {editVitalDrawer, isOtherCarePlan} = this.props;
+    //     if(!isOtherCarePlan) {
+    //         editVitalDrawer({id, loading: true});
+    //     }
+    // };
+
+    formatMessage = (data) => this.props.intl.formatMessage(data);
+
+    render() {
+        const {intl: {formatMessage} = {}} = this.props;
+        const {modalVisible, documentData} = this.state;
+        const {getDataSource, closeModal} = this;
+
+        const reportLocale = {
+            emptyText: this.formatMessage(messages.emptyReports),
+        };
+
+        return (
+            <Fragment>
+                <Table
+                    rowClassName={() => "pointer"}
+                    // loading={loading === true ? getLoadingComponent() : false}
+                    columns={getColumn({
+                        formatMessage,
+                        className: "pointer",
+                    })}
+                    dataSource={getDataSource()}
+                    scroll={{x: "100%"}}
+                    pagination={{
+                        position: "bottom",
+                    }}
+                    locale={reportLocale}
+                />
+                <ReportDocumentModal
+                    visible={modalVisible}
+                    documentData={documentData}
+                    onClose={closeModal}
+                    formatMessage={formatMessage}
+                />
+            </Fragment>
+        );
+    }
 }
 
 export default injectIntl(ReportTable);
