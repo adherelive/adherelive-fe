@@ -1,149 +1,149 @@
-import { getName } from "../../../../Helper/validation";
-import React, { Component } from "react";
-import { injectIntl } from "react-intl";
+import {getName} from "../../../../Helper/validation";
+import React, {Component} from "react";
+import {injectIntl} from "react-intl";
 import message from "antd/es/message";
-import { getFullName } from "../../../../Helper/common";
+import {getFullName} from "../../../../Helper/common";
 // import { Icon } from "antd";
 import messages from "../messages";
-import { Tooltip } from "antd";
-import { TABLE_DEFAULT_BLANK_FIELD } from "../../../../constant";
+import {Tooltip} from "antd";
+import {TABLE_DEFAULT_BLANK_FIELD} from "../../../../constant";
 import Icon from "@ant-design/icons";
-import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
+import {EyeFilled, EyeInvisibleFilled} from "@ant-design/icons";
 
 class Watchlist extends Component {
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  componentDidMount() {
-    const { currentTab, handleGetPatients, tabChanged } = this.props;
-  }
+    componentDidMount() {
+        const {currentTab, handleGetPatients, tabChanged} = this.props;
+    }
 
-  formatMessage = (data) => this.props.intl.formatMessage(data);
+    formatMessage = (data) => this.props.intl.formatMessage(data);
 
-  addThisToWatchlist = (e) => {
-    e.preventDefault();
-    const {
-      patientData: { id, first_name, middle_name, last_name } = {},
-      addToWatchlist,
-      handleGetPatients,
-    } = this.props || {};
+    addThisToWatchlist = (e) => {
+        e.preventDefault();
+        const {
+            patientData: {id, first_name, middle_name, last_name} = {},
+            addToWatchlist,
+            handleGetPatients,
+        } = this.props || {};
 
-    addToWatchlist(id).then((response) => {
-      const { status, message: errMessage } = response || {};
-      if (status === true) {
-        message.success(
-          `${getFullName({
-            first_name,
-            middle_name,
-            last_name,
-          })} ${this.formatMessage(messages.addedToWatchlist)}`
-        );
-      } else {
-        message.warn(errMessage);
-      }
-    });
+        addToWatchlist(id).then((response) => {
+            const {status, message: errMessage} = response || {};
+            if (status === true) {
+                message.success(
+                    `${getFullName({
+                        first_name,
+                        middle_name,
+                        last_name,
+                    })} ${this.formatMessage(messages.addedToWatchlist)}`
+                );
+            } else {
+                message.warn(errMessage);
+            }
+        });
 
-    handleGetPatients();
-  };
+        handleGetPatients();
+    };
 
-  removeFromWatchlist = (e) => {
-    e.preventDefault();
-    const {
-      patientData: { id, first_name, middle_name, last_name } = {},
-      removePatientFromWatchlist,
-      handleGetPatients,
-    } = this.props || {};
+    removeFromWatchlist = (e) => {
+        e.preventDefault();
+        const {
+            patientData: {id, first_name, middle_name, last_name} = {},
+            removePatientFromWatchlist,
+            handleGetPatients,
+        } = this.props || {};
 
-    removePatientFromWatchlist(id).then((response) => {
-      const { status, message: errMessage } = response || {};
-      if (status === true) {
-        message.success(
-          `${getFullName({
-            first_name,
-            middle_name,
-            last_name,
-          })} ${this.formatMessage(messages.removedFromWatchlist)}`
-        );
-      } else {
-        message.warn(errMessage);
-      }
-    });
+        removePatientFromWatchlist(id).then((response) => {
+            const {status, message: errMessage} = response || {};
+            if (status === true) {
+                message.success(
+                    `${getFullName({
+                        first_name,
+                        middle_name,
+                        last_name,
+                    })} ${this.formatMessage(messages.removedFromWatchlist)}`
+                );
+            } else {
+                message.warn(errMessage);
+            }
+        });
 
-    handleGetPatients();
-  };
+        handleGetPatients();
+    };
 
-  stopEventBubbling = (e) => {
-    e.stopPropagation();
-  };
+    stopEventBubbling = (e) => {
+        e.stopPropagation();
+    };
 
-  render() {
-    const { formatMessage } = this;
+    render() {
+        const {formatMessage} = this;
 
-    const {
-      patientData: { first_name, middle_name, last_name, id } = {},
-      onRowClick,
-      doctorData: { watchlist_ids = [] } = {},
-    } = this.props || {};
+        const {
+            patientData: {first_name, middle_name, last_name, id} = {},
+            onRowClick,
+            doctorData: {watchlist_ids = []} = {},
+        } = this.props || {};
 
-    const { patientData: { age, gender = "" } = {}, auth_role = null } =
-      this.props || {};
+        const {patientData: {age, gender = ""} = {}, auth_role = null} =
+        this.props || {};
 
-    const watchlist_patient_ids =
-      (auth_role && watchlist_ids[auth_role.toString()]) || [];
+        const watchlist_patient_ids =
+            (auth_role && watchlist_ids[auth_role.toString()]) || [];
 
-    const isAdded = watchlist_patient_ids.includes(id);
+        const isAdded = watchlist_patient_ids.includes(id);
 
-    return (
-      <div
-        className="wp100 p10 flex align-center justify-space-between"
-        onClick={onRowClick(id)}
-      >
-        <div className="wp100 p10 flex direction-column align-left ">
-          <div className="fw600 tab-color ">
-            {`${getName(first_name)}  ${getName(middle_name)} ${getName(
-              last_name
-            )}`}
-          </div>
-          <div className="flex direction-row  align-left">
-            <div>{age ? `${age}` : TABLE_DEFAULT_BLANK_FIELD}</div>
+        return (
+            <div
+                className="wp100 p10 flex align-center justify-space-between"
+                onClick={onRowClick(id)}
+            >
+                <div className="wp100 p10 flex direction-column align-left ">
+                    <div className="fw600 tab-color ">
+                        {`${getName(first_name)}  ${getName(middle_name)} ${getName(
+                            last_name
+                        )}`}
+                    </div>
+                    <div className="flex direction-row  align-left">
+                        <div>{age ? `${age}` : TABLE_DEFAULT_BLANK_FIELD}</div>
 
-            <div>
-              {gender
-                ? `, ${gender.toUpperCase()}`
-                : `, ${TABLE_DEFAULT_BLANK_FIELD}`}
+                        <div>
+                            {gender
+                                ? `, ${gender.toUpperCase()}`
+                                : `, ${TABLE_DEFAULT_BLANK_FIELD}`}
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    className=" flex align-center justify-space-between"
+                    onClick={this.stopEventBubbling}
+                >
+                    {isAdded ? (
+                        <Tooltip title={formatMessage(messages.removeFromWatchlist)}>
+                            <EyeFilled
+                                // type="eye"
+                                className="fs20"
+                                value={isAdded}
+                                onClick={this.removeFromWatchlist}
+                            />
+                        </Tooltip>
+                    ) : (
+                        <Tooltip title={formatMessage(messages.addToWatchlist)}>
+                            <EyeInvisibleFilled
+                                // type="eye-invisible"
+                                theme="filled"
+                                className="fs20"
+                                value={isAdded}
+                                onClick={this.addThisToWatchlist}
+                            />
+                        </Tooltip>
+                    )}
+                </div>
             </div>
-          </div>
-        </div>
-
-        <div
-          className=" flex align-center justify-space-between"
-          onClick={this.stopEventBubbling}
-        >
-          {isAdded ? (
-            <Tooltip title={formatMessage(messages.removeFromWatchlist)}>
-              <EyeFilled
-                // type="eye"
-                className="fs20"
-                value={isAdded}
-                onClick={this.removeFromWatchlist}
-              />
-            </Tooltip>
-          ) : (
-            <Tooltip title={formatMessage(messages.addToWatchlist)}>
-              <EyeInvisibleFilled
-                // type="eye-invisible"
-                theme="filled"
-                className="fs20"
-                value={isAdded}
-                onClick={this.addThisToWatchlist}
-              />
-            </Tooltip>
-          )}
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default injectIntl(Watchlist);

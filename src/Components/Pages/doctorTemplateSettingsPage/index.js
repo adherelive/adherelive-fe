@@ -1,170 +1,170 @@
-import React, { Component } from "react";
-import { injectIntl } from "react-intl";
+import React, {Component} from "react";
+import {injectIntl} from "react-intl";
 import TemplateTable from "../../../Containers/allTemplates/index";
 import message from "antd/es/message";
 import Button from "antd/es/button";
 import TemplatePageCreateDrawer from "../../../Containers/Drawer/allTemplatesPageCreateTemplate";
 import TemplatePageEditDrawer from "../../../Containers/Drawer/allTemplatesPageEditTemplate";
 import messages from "./message";
-import { Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import {Input} from "antd";
+import {SearchOutlined} from "@ant-design/icons";
 
 class TemplatePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-    };
-  }
-
-  componentDidMount() {
-    this.handleGetAllTemplates();
-    const { getVitalOccurence } = this.props;
-    getVitalOccurence().then((res) => {
-      const { status = false } = res;
-      if (status) {
-      }
-    });
-    this.handleGetMedicationDetails("0");
-    this.handleGetAllData();
-  }
-
-  async handleGetAllTemplates() {
-    const { getAllTemplatesForDoctor } = this.props;
-    try {
-      this.setState({ loading: true });
-      const response = await getAllTemplatesForDoctor();
-      const { status, payload: { data = {}, message: msg = "" } = {} } =
-        response || {};
-      if (!status) {
-        message.warn(msg);
-        this.setState({ loading: false });
-      } else {
-        this.setState({ loading: false });
-      }
-    } catch (error) {
-      console.log("error ===>", error);
-      message.warn(error);
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+        };
     }
-  }
 
-  componentDidUpdate() {
-    // console.log("3289467832482354723874792384 UPDATEEEEEEEEEEEEEEEEEE");
-  }
-
-  formatMessage = (data) => this.props.intl.formatMessage(data);
-
-  async handleGetMedicationDetails(patientId = "0") {
-    try {
-      const { getMedicationDetails } = this.props;
-      const response = await getMedicationDetails(patientId);
-      const {
-        status,
-        statusCode,
-        payload: { data = {}, message: msg = "" } = {},
-      } = response;
-
-      if (!status) {
-        message.error(msg);
-      }
-    } catch (error) {
-      console.log("err ===>", error);
+    componentDidMount() {
+        this.handleGetAllTemplates();
+        const {getVitalOccurence} = this.props;
+        getVitalOccurence().then((res) => {
+            const {status = false} = res;
+            if (status) {
+            }
+        });
+        this.handleGetMedicationDetails("0");
+        this.handleGetAllData();
     }
-  }
 
-  handleOpenCreateDrawer = () => {
-    const { openCreateCareplanTemplateDrawer } = this.props || {};
-    openCreateCareplanTemplateDrawer({});
-  };
+    async handleGetAllTemplates() {
+        const {getAllTemplatesForDoctor} = this.props;
+        try {
+            this.setState({loading: true});
+            const response = await getAllTemplatesForDoctor();
+            const {status, payload: {data = {}, message: msg = ""} = {}} =
+            response || {};
+            if (!status) {
+                message.warn(msg);
+                this.setState({loading: false});
+            } else {
+                this.setState({loading: false});
+            }
+        } catch (error) {
+            console.log("error ===>", error);
+            message.warn(error);
+        }
+    }
 
-  handleOpenEditDrawer =
-    ({ id }) =>
-    (e) => {
-      e.preventDefault();
-      const { openEditCareplanTemplateDrawer } = this.props;
-      openEditCareplanTemplateDrawer({ id });
+    componentDidUpdate() {
+        // console.log("3289467832482354723874792384 UPDATEEEEEEEEEEEEEEEEEE");
+    }
+
+    formatMessage = (data) => this.props.intl.formatMessage(data);
+
+    async handleGetMedicationDetails(patientId = "0") {
+        try {
+            const {getMedicationDetails} = this.props;
+            const response = await getMedicationDetails(patientId);
+            const {
+                status,
+                statusCode,
+                payload: {data = {}, message: msg = ""} = {},
+            } = response;
+
+            if (!status) {
+                message.error(msg);
+            }
+        } catch (error) {
+            console.log("err ===>", error);
+        }
+    }
+
+    handleOpenCreateDrawer = () => {
+        const {openCreateCareplanTemplateDrawer} = this.props || {};
+        openCreateCareplanTemplateDrawer({});
     };
 
-  async handleGetAllData() {
-    const { getAppointmentsDetails, searchMedicine } = this.props || {};
-    try {
-      const apptResponse = await getAppointmentsDetails();
+    handleOpenEditDrawer =
+        ({id}) =>
+            (e) => {
+                e.preventDefault();
+                const {openEditCareplanTemplateDrawer} = this.props;
+                openEditCareplanTemplateDrawer({id});
+            };
 
-      const {
-        payload: { data: apptData = {}, message: apptMessage = "" } = {},
-        status: apptStatus = "",
-        statusCode: apptStatusCode = "",
-      } = apptResponse || {};
+    async handleGetAllData() {
+        const {getAppointmentsDetails, searchMedicine} = this.props || {};
+        try {
+            const apptResponse = await getAppointmentsDetails();
 
-      if (!apptStatus) {
-        message.error(apptMessage);
-      }
+            const {
+                payload: {data: apptData = {}, message: apptMessage = ""} = {},
+                status: apptStatus = "",
+                statusCode: apptStatusCode = "",
+            } = apptResponse || {};
 
-      searchMedicine(""); // to display medicine name of new med inside templateDrawer after editing med
-    } catch (error) {
-      console.log("error --->", error);
-      message.warn(error);
+            if (!apptStatus) {
+                message.error(apptMessage);
+            }
+
+            searchMedicine(""); // to display medicine name of new med inside templateDrawer after editing med
+        } catch (error) {
+            console.log("error ---> ", error);
+            message.warn(error);
+        }
     }
-  }
 
-  getHeader = () => {
-    const { handleOpenCreateDrawer } = this;
+    getHeader = () => {
+        const {handleOpenCreateDrawer} = this;
 
-    return (
-      <div className="flex pt20  pb10 pl24 pr16">
-        <div className="patient-profile-header flex-grow-0">
-          <div className="fs28 fw700">
-            {this.formatMessage(messages.templates)}
-          </div>
-        </div>
-        <div className="flex-grow-1 tar">
-          <Button type={"primary"} onClick={handleOpenCreateDrawer}>
-            {this.formatMessage(messages.createText)}
-          </Button>
-        </div>
-      </div>
-    );
-  };
-
-  onChangeHanlder = async (e) => {
-    const { getAllTemplatesForDoctorUsingQuery } = this.props;
-    const response = await getAllTemplatesForDoctorUsingQuery(e.target.value);
-  };
-
-  render() {
-    const { loading } = this.state;
-    return (
-      <div>
-        <div>
-          <div className="wp100 flex direction-column">
-            {this.getHeader()}
-            <div className="wp30 pl14">
-              <Input
-                className={
-                  "form-inputs-ap add-patient-phone template-setting-page-search"
-                }
-                placeholder={"Search Template"}
-                // value={mobile_number}
-                onChange={this.onChangeHanlder}
-                prefix={<SearchOutlined />}
-              />
+        return (
+            <div className="flex pt20  pb10 pl24 pr16">
+                <div className="patient-profile-header flex-grow-0">
+                    <div className="fs28 fw700">
+                        {this.formatMessage(messages.templates)}
+                    </div>
+                </div>
+                <div className="flex-grow-1 tar">
+                    <Button type={"primary"} onClick={handleOpenCreateDrawer}>
+                        {this.formatMessage(messages.createText)}
+                    </Button>
+                </div>
             </div>
-            {/* <input type="text" onChange={this.onChangeHanlder}></input> */}
-            <div className="wp100 pl14 pr14 flex align-center justify-center mb36">
-              <TemplateTable
-                {...this.props}
-                loading={loading}
-                handleOpenEditDrawer={this.handleOpenEditDrawer}
-              />
-            </div>
-          </div>
-        </div>
+        );
+    };
 
-        <TemplatePageCreateDrawer {...this.props} />
-        <TemplatePageEditDrawer {...this.props} />
-      </div>
-    );
-  }
+    onChangeHanlder = async (e) => {
+        const {getAllTemplatesForDoctorUsingQuery} = this.props;
+        const response = await getAllTemplatesForDoctorUsingQuery(e.target.value);
+    };
+
+    render() {
+        const {loading} = this.state;
+        return (
+            <div>
+                <div>
+                    <div className="wp100 flex direction-column">
+                        {this.getHeader()}
+                        <div className="wp30 pl14">
+                            <Input
+                                className={
+                                    "form-inputs-ap add-patient-phone template-setting-page-search"
+                                }
+                                placeholder={"Search Template"}
+                                // value={mobile_number}
+                                onChange={this.onChangeHanlder}
+                                prefix={<SearchOutlined/>}
+                            />
+                        </div>
+                        {/* <input type="text" onChange={this.onChangeHanlder}></input> */}
+                        <div className="wp100 pl14 pr14 flex align-center justify-center mb36">
+                            <TemplateTable
+                                {...this.props}
+                                loading={loading}
+                                handleOpenEditDrawer={this.handleOpenEditDrawer}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <TemplatePageCreateDrawer {...this.props} />
+                <TemplatePageEditDrawer {...this.props} />
+            </div>
+        );
+    }
 }
 
 export default injectIntl(TemplatePage);

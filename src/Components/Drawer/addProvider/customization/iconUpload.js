@@ -1,217 +1,217 @@
-import React, { Component, Fragment } from "react";
+import React, {Component, Fragment} from "react";
 import Form from "antd/es/form";
 import Upload from "antd/es/upload";
 import Icon from "antd/es/icon";
 
-import { DeleteTwoTone, EyeTwoTone } from "@ant-design/icons";
+import {DeleteTwoTone, EyeTwoTone} from "@ant-design/icons";
 import LoadingStatus from "../../../Common/Loading";
 import messages from "../message";
 import Modal from "antd/es/modal";
 import Button from "antd/es/button";
-import { UploadOutlined } from "@ant-design/icons";
-import { doRequest } from "../../../../Helper/network";
-import { getUploadURL } from "../../../../Helper/urls/user";
-import { REQUEST_TYPE } from "../../../../constant";
-import { message } from "antd";
+import {UploadOutlined} from "@ant-design/icons";
+import {doRequest} from "../../../../Helper/network";
+import {getUploadURL} from "../../../../Helper/urls/user";
+import {REQUEST_TYPE} from "../../../../constant";
+import {message} from "antd";
 
-const { Item: FormItem } = Form;
+const {Item: FormItem} = Form;
 
 const FIELD_NAME = "icon";
 
 class Field extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageUrl: null,
-      viewModalVisible: false,
-      viewModalSrc: "",
-    };
-  }
-
-  componentDidMount() {
-    this.getInitial();
-  }
-
-  handleDocumentViewClose = () => {
-    this.setState({
-      viewModalVisible: false,
-      viewModalSrc: "",
-    });
-  };
-
-  handleDocumentViewOpen = (src) => () => {
-    this.setState({
-      viewModalVisible: true,
-      viewModalSrc: src,
-    });
-  };
-
-  getInitial = () => {
-    const {
-      provider_id,
-      providers = {},
-      form: { setFieldsValue } = {},
-    } = this.props;
-    const { details: { icon = null } = {} } = providers[provider_id] || {};
-
-    if (provider_id) {
-      this.setState({ imageUrl: icon });
-      setFieldsValue({ [FIELD_NAME]: icon });
+    constructor(props) {
+        super(props);
+        this.state = {
+            imageUrl: null,
+            viewModalVisible: false,
+            viewModalSrc: "",
+        };
     }
-  };
 
-  formatMessage = (message, data = {}) =>
-    this.props.intl.formatMessage(message, data);
+    componentDidMount() {
+        this.getInitial();
+    }
 
-  fieldsError = (FIELD_NAME) => {
-    const { form: { isFieldTouched, getFieldError } = {} } = this.props;
-    const error = isFieldTouched(FIELD_NAME) && getFieldError(FIELD_NAME);
-    return error;
-  };
+    handleDocumentViewClose = () => {
+        this.setState({
+            viewModalVisible: false,
+            viewModalSrc: "",
+        });
+    };
 
-  handleUpload = async (file) => {
-    const { uploadDocument, form: { setFieldsValue } = {} } = this.props;
-    // const data = new FormData();
-    // data.set("files", file);
+    handleDocumentViewOpen = (src) => () => {
+        this.setState({
+            viewModalVisible: true,
+            viewModalSrc: src,
+        });
+    };
 
-    // try {
-    //   this.setState({ loading: true });
-    //   const response = await uploadDocument(data);
-    //   const { status, payload: { data: { files } = {} } = {} } = response || {};
-    //   if (status === true) {
-    //     this.setState({ loading: false });
-    //     setFieldsValue({ [FIELD_NAME]: files[0] });
-    //   } else {
-    //     this.setState({ loading: false });
-    //   }
-    // } catch (error) {
-    //   this.setState({ loading: false });
-    // }
-    let data = new FormData();
-    data.append("files", file, file.name);
-    doRequest({
-      method: REQUEST_TYPE.POST,
-      data: data,
-      url: getUploadURL(),
-    }).then((response) => {
-      if (response.status) {
-        let { files = [] } = response.payload.data;
-        setFieldsValue({ [FIELD_NAME]: files[0] });
-      } else {
-        message.error(this.formatMessage(messages.somethingWentWrong));
-      }
-    });
-  };
+    getInitial = () => {
+        const {
+            provider_id,
+            providers = {},
+            form: {setFieldsValue} = {},
+        } = this.props;
+        const {details: {icon = null} = {}} = providers[provider_id] || {};
 
-  handleUploadChange = ({ file }) => {
-    const fileUrl = URL.createObjectURL(file.originFileObj);
-    this.setState({ imageUrl: fileUrl });
-  };
+        if (provider_id) {
+            this.setState({imageUrl: icon});
+            setFieldsValue({[FIELD_NAME]: icon});
+        }
+    };
 
-  handleIconRemove = (file) => {
-    const { form: { setFieldsValue } = {} } = this.props;
-    this.setState({ imageUrl: null });
-    setFieldsValue({ [FIELD_NAME]: null });
-  };
+    formatMessage = (message, data = {}) =>
+        this.props.intl.formatMessage(message, data);
 
-  getFormContent = () => {
-    const { loading } = this.state;
-    const { handleUpload, handleUploadChange, formatMessage } = this;
-    return (
-      <Upload
-        style={{ width: 128, height: 128, margin: 6 }}
-        showUploadList={false}
-        listType="picture-card"
-        action={handleUpload}
-        onChange={handleUploadChange}
-      >
-        <div className="flex direction-column align-center">
-          {loading ? (
-            <LoadingStatus />
-          ) : (
-            <UploadOutlined style={{ width: 20, height: 20 }} />
-          )}
-          <span>{formatMessage(messages.iconUploadText)}</span>
-        </div>
-      </Upload>
-    );
-  };
+    fieldsError = (FIELD_NAME) => {
+        const {form: {isFieldTouched, getFieldError} = {}} = this.props;
+        const error = isFieldTouched(FIELD_NAME) && getFieldError(FIELD_NAME);
+        return error;
+    };
 
-  getLogo = () => {
-    const { imageUrl } = this.state;
-    const { handleIconRemove } = this;
-    return (
-      <div className={"qualification-avatar-uploader "}>
-        <img src={imageUrl} alt={"provider-icon"} className="wp100 hp100 br4" />
-        <div className="overlay"></div>
-        <div className="button absolute tp45 l0 wp100 flex justify-center align-space-evenly doc-container">
-          {" "}
-          <DeleteTwoTone
-            className={"del doc-opt"}
-            onClick={handleIconRemove}
-            twoToneColor="#fff"
-          />{" "}
-          <EyeTwoTone
-            className="w20"
-            className={"del doc-opt ml16"}
-            onClick={this.handleDocumentViewOpen(imageUrl)}
-            twoToneColor="#fff"
-          />
-        </div>
-      </div>
-    );
-  };
+    handleUpload = async (file) => {
+        const {uploadDocument, form: {setFieldsValue} = {}} = this.props;
+        // const data = new FormData();
+        // data.set("files", file);
 
-  render() {
-    const { form } = this.props;
-    const {
-      imageUrl,
-      viewModalVisible = false,
-      viewModalSrc = "",
-    } = this.state;
-    const { formatMessage, fieldsError, getLogo, getFormContent } = this;
+        // try {
+        //   this.setState({ loading: true });
+        //   const response = await uploadDocument(data);
+        //   const { status, payload: { data: { files } = {} } = {} } = response || {};
+        //   if (status === true) {
+        //     this.setState({ loading: false });
+        //     setFieldsValue({ [FIELD_NAME]: files[0] });
+        //   } else {
+        //     this.setState({ loading: false });
+        //   }
+        // } catch (error) {
+        //   this.setState({ loading: false });
+        // }
+        let data = new FormData();
+        data.append("files", file, file.name);
+        doRequest({
+            method: REQUEST_TYPE.POST,
+            data: data,
+            url: getUploadURL(),
+        }).then((response) => {
+            if (response.status) {
+                let {files = []} = response.payload.data;
+                setFieldsValue({[FIELD_NAME]: files[0]});
+            } else {
+                message.error(this.formatMessage(messages.somethingWentWrong));
+            }
+        });
+    };
 
-    const { getFieldDecorator, getFieldValue } = form || {};
+    handleUploadChange = ({file}) => {
+        const fileUrl = URL.createObjectURL(file.originFileObj);
+        this.setState({imageUrl: fileUrl});
+    };
 
-    console.log("03712839217 getFieldValue", getFieldValue(FIELD_NAME));
-    return (
-      <Fragment>
-        <FormItem
-          validateStatus={fieldsError[FIELD_NAME] ? "error" : ""}
-          help={fieldsError[FIELD_NAME] || ""}
-          label={formatMessage(messages.iconUpload)}
-          className="mb0I"
-        >
-          {getFieldDecorator(
-            FIELD_NAME,
-            {}
-          )(imageUrl ? getLogo() : getFormContent())}
-        </FormItem>
-        <Modal
-          visible={viewModalVisible}
-          closable
-          mask
-          maskClosable
-          onCancel={this.handleDocumentViewClose}
-          width={`50%`}
-          footer={[
-            <Button key="back" onClick={this.handleDocumentViewClose}>
-              Close
-            </Button>,
-          ]}
-        >
-          <img
-            src={viewModalSrc}
-            alt="qualification document"
-            className="wp100"
-          />
-        </Modal>
-      </Fragment>
-    );
-  }
+    handleIconRemove = (file) => {
+        const {form: {setFieldsValue} = {}} = this.props;
+        this.setState({imageUrl: null});
+        setFieldsValue({[FIELD_NAME]: null});
+    };
+
+    getFormContent = () => {
+        const {loading} = this.state;
+        const {handleUpload, handleUploadChange, formatMessage} = this;
+        return (
+            <Upload
+                style={{width: 128, height: 128, margin: 6}}
+                showUploadList={false}
+                listType="picture-card"
+                action={handleUpload}
+                onChange={handleUploadChange}
+            >
+                <div className="flex direction-column align-center">
+                    {loading ? (
+                        <LoadingStatus/>
+                    ) : (
+                        <UploadOutlined style={{width: 20, height: 20}}/>
+                    )}
+                    <span>{formatMessage(messages.iconUploadText)}</span>
+                </div>
+            </Upload>
+        );
+    };
+
+    getLogo = () => {
+        const {imageUrl} = this.state;
+        const {handleIconRemove} = this;
+        return (
+            <div className={"qualification-avatar-uploader "}>
+                <img src={imageUrl} alt={"provider-icon"} className="wp100 hp100 br4"/>
+                <div className="overlay"></div>
+                <div className="button absolute tp45 l0 wp100 flex justify-center align-space-evenly doc-container">
+                    {" "}
+                    <DeleteTwoTone
+                        className={"del doc-opt"}
+                        onClick={handleIconRemove}
+                        twoToneColor="#fff"
+                    />{" "}
+                    <EyeTwoTone
+                        className="w20"
+                        className={"del doc-opt ml16"}
+                        onClick={this.handleDocumentViewOpen(imageUrl)}
+                        twoToneColor="#fff"
+                    />
+                </div>
+            </div>
+        );
+    };
+
+    render() {
+        const {form} = this.props;
+        const {
+            imageUrl,
+            viewModalVisible = false,
+            viewModalSrc = "",
+        } = this.state;
+        const {formatMessage, fieldsError, getLogo, getFormContent} = this;
+
+        const {getFieldDecorator, getFieldValue} = form || {};
+
+        console.log("03712839217 getFieldValue", getFieldValue(FIELD_NAME));
+        return (
+            <Fragment>
+                <FormItem
+                    validateStatus={fieldsError[FIELD_NAME] ? "error" : ""}
+                    help={fieldsError[FIELD_NAME] || ""}
+                    label={formatMessage(messages.iconUpload)}
+                    className="mb0I"
+                >
+                    {getFieldDecorator(
+                        FIELD_NAME,
+                        {}
+                    )(imageUrl ? getLogo() : getFormContent())}
+                </FormItem>
+                <Modal
+                    visible={viewModalVisible}
+                    closable
+                    mask
+                    maskClosable
+                    onCancel={this.handleDocumentViewClose}
+                    width={`50%`}
+                    footer={[
+                        <Button key="back" onClick={this.handleDocumentViewClose}>
+                            Close
+                        </Button>,
+                    ]}
+                >
+                    <img
+                        src={viewModalSrc}
+                        alt="qualification document"
+                        className="wp100"
+                    />
+                </Modal>
+            </Fragment>
+        );
+    }
 }
 
 export default {
-  field_name: FIELD_NAME,
-  render: (props) => <Field {...props} />,
+    field_name: FIELD_NAME,
+    render: (props) => <Field {...props} />,
 };

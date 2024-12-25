@@ -1,66 +1,66 @@
-import { doRequest } from "../../../Helper/network";
-import { REQUEST_TYPE } from "../../../constant";
+import {doRequest} from "../../../Helper/network";
+import {REQUEST_TYPE} from "../../../constant";
 import {
-  getTransactionsUrl,
-  activateTransactionUrl,
+    getTransactionsUrl,
+    activateTransactionUrl,
 } from "../../../Helper/urls/subscriptions";
-import { SET_TRANSACTION_TABLE_DATA } from "../../../reducer/index";
+import {SET_TRANSACTION_TABLE_DATA} from "../../../reducer/index";
 
 export const getAllTransactions = () => {
-  let response = {};
-  return async (dispatch) => {
-    try {
-      response = await doRequest({
-        method: REQUEST_TYPE.GET,
-        url: getTransactionsUrl(),
-      });
+    let response = {};
+    return async (dispatch) => {
+        try {
+            response = await doRequest({
+                method: REQUEST_TYPE.GET,
+                url: getTransactionsUrl(),
+            });
 
-      const { status, payload: { data } = {} } = response || {};
+            const {status, payload: {data} = {}} = response || {};
 
-      if (status === true) {
-        dispatch({
-          type: SET_TRANSACTION_TABLE_DATA,
-          payload: data,
-        });
-      } else {
-        //   dispatch({
-        //     type: GET_PATIENT_MISSED_EVENTS_FAILED,
-        //   });
-      }
-    } catch (err) {
-      // console.log("GET_PATIENT_MISSED_EVENTS_START err consentVerify", err);
-      throw err;
-    }
+            if (status === true) {
+                dispatch({
+                    type: SET_TRANSACTION_TABLE_DATA,
+                    payload: data,
+                });
+            } else {
+                //   dispatch({
+                //     type: GET_PATIENT_MISSED_EVENTS_FAILED,
+                //   });
+            }
+        } catch (err) {
+            // console.log("GET_PATIENT_MISSED_EVENTS_START err consentVerify", err);
+            throw err;
+        }
 
-    return response;
-  };
+        return response;
+    };
 };
 
 export const activateTransaction = (payload, callBack) => {
-  let response = {};
-  return async (dispatch) => {
-    try {
-      response = await doRequest({
-        method: REQUEST_TYPE.POST,
-        url: activateTransactionUrl(),
-        data: payload,
-      });
+    let response = {};
+    return async (dispatch) => {
+        try {
+            response = await doRequest({
+                method: REQUEST_TYPE.POST,
+                url: activateTransactionUrl(),
+                data: payload,
+            });
 
-      const { status, payload: { data } = {} } = response || {};
-      console.log(payload);
+            const {status, payload: {data} = {}} = response || {};
+            console.log(payload);
 
-      if (status === true) {
-        callBack();
-        dispatch(getAllTransactions());
-      } else {
-      }
-    } catch (err) {
-      // console.log("GET_PATIENT_MISSED_EVENTS_START err consentVerify", err);
-      throw err;
-    }
+            if (status === true) {
+                callBack();
+                dispatch(getAllTransactions());
+            } else {
+            }
+        } catch (err) {
+            // console.log("GET_PATIENT_MISSED_EVENTS_START err consentVerify", err);
+            throw err;
+        }
 
-    return response;
-  };
+        return response;
+    };
 };
 
 // export const addSubscriptions = (payload, callBack) => {

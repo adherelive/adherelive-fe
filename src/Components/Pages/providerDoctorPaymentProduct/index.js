@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from "react";
-import { injectIntl } from "react-intl";
+import React, {Component, Fragment} from "react";
+import {injectIntl} from "react-intl";
 import message from "antd/es/message";
 import Button from "antd/es/button";
-import { Dropdown } from "antd";
+import {Dropdown} from "antd";
 import Menu from "antd/es/menu";
 
 import AddConsultationFeeDrawer from "../../../Containers/Drawer/addConsultationFee";
@@ -11,9 +11,9 @@ import ConsultationFeeTable from "../../../Containers/ConsultationFees";
 // import DoctorConsultationFeeTable from "../../../Containers/DoctorConsultationFee";
 
 import messages from "./messages";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import {ArrowLeftOutlined} from "@ant-design/icons";
 import Loading from "../../Common/Loading";
-import { PlusOutlined } from "@ant-design/icons";
+import {PlusOutlined} from "@ant-design/icons";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import AddService from "../../../Components/Subscription/Drawer/AddService";
@@ -22,252 +22,252 @@ import DoctorServiceTable from "../../../Components/Subscription/DoctorServiceTa
 import MySubscriptionList from "../../../Components/Subscription/MySubscriptionList";
 
 class ProviderDoctorPaymentProduct extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fetchingDoctorPayments: false,
-      defaultPaymentsProducts: {},
-      doctorPaymentProducts: {},
-      noDoctorPaymentProducts: true,
-      isUpdated: false,
-      loading: false,
-      // AKSHAY NEW CODE FOR SUBSCRIPTION
-      addServiceDrawer: false,
-      addSubscriptionDrawer: false,
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            fetchingDoctorPayments: false,
+            defaultPaymentsProducts: {},
+            doctorPaymentProducts: {},
+            noDoctorPaymentProducts: true,
+            isUpdated: false,
+            loading: false,
+            // AKSHAY NEW CODE FOR SUBSCRIPTION
+            addServiceDrawer: false,
+            addSubscriptionDrawer: false,
+        };
+    }
 
-  componentDidMount() {
-    const { match: { params: { id = null } = {} } = {} } = this.props;
-    this.handleGetDoctorPaymentProduct(id);
-    this.handleGetAdminPaymentProduct();
+    componentDidMount() {
+        const {match: {params: {id = null} = {}} = {}} = this.props;
+        this.handleGetDoctorPaymentProduct(id);
+        this.handleGetAdminPaymentProduct();
+        // AKSHAY NEW CODE FOR SUBSCRIPTION
+        // this.props.getServices();
+        // this.props.getSubscriptions();
+        this.props.getProviderServices(id);
+        this.props.getProviderSubscriptions(id);
+    }
+
+    async handleGetDoctorPaymentProduct(id) {
+        try {
+            this.setState({fetchingDoctorPayments: true, loading: true});
+            const {getDoctorPaymentProduct} = this.props;
+            const response = await getDoctorPaymentProduct({doctor_id: id});
+            const {
+                status,
+                payload: {data: {payment_products = {}} = {}} = {},
+                statusCode,
+            } = response || {};
+            if (status && statusCode === 200) {
+                this.setState({
+                    fetchingDoctorPayments: false,
+                    doctorPaymentProducts: payment_products,
+                    noDoctorPaymentProducts: false,
+                    loading: false,
+                });
+            } else if (!status && statusCode === 201) {
+                this.setState({
+                    fetchingDoctorPayments: false,
+                    doctorPaymentProducts: {},
+                    noDoctorPaymentProducts: true,
+                    loading: false,
+                });
+            } else {
+                this.setState({fetchingDoctorPayments: false});
+            }
+        } catch (err) {
+            console.log("err ", err);
+            message.warn(this.formatMessage(messages.somethingWentWrong));
+            this.setState({fetchingDoctorPayments: false});
+        }
+    }
+
+    async handleGetAdminPaymentProduct() {
+        try {
+            this.setState({fetchingAdminPayments: true});
+            const {getAdminPaymentProduct} = this.props;
+            const response = await getAdminPaymentProduct();
+            const {status, payload: {data: {payment_products = {}} = {}} = {}} =
+            response || {};
+            if (status) {
+                this.setState({
+                    fetchingAdminPayments: false,
+                    defaultPaymentsProducts: payment_products,
+                });
+            } else {
+                this.setState({fetchingAdminPayments: false});
+            }
+        } catch (err) {
+            console.log("err ", err);
+            message.warn(this.formatMessage(messages.somethingWentWrong));
+            this.setState({fetchingAdminPayments: false});
+        }
+    }
+
     // AKSHAY NEW CODE FOR SUBSCRIPTION
-    // this.props.getServices();
-    // this.props.getSubscriptions();
-    this.props.getProviderServices(id);
-    this.props.getProviderSubscriptions(id);
-  }
 
-  async handleGetDoctorPaymentProduct(id) {
-    try {
-      this.setState({ fetchingDoctorPayments: true, loading: true });
-      const { getDoctorPaymentProduct } = this.props;
-      const response = await getDoctorPaymentProduct({ doctor_id: id });
-      const {
-        status,
-        payload: { data: { payment_products = {} } = {} } = {},
-        statusCode,
-      } = response || {};
-      if (status && statusCode === 200) {
+    handleServiceDrawer = () => {
         this.setState({
-          fetchingDoctorPayments: false,
-          doctorPaymentProducts: payment_products,
-          noDoctorPaymentProducts: false,
-          loading: false,
+            addServiceDrawer: true,
         });
-      } else if (!status && statusCode === 201) {
+    };
+    handleSubscriptionDrawer = () => {
         this.setState({
-          fetchingDoctorPayments: false,
-          doctorPaymentProducts: {},
-          noDoctorPaymentProducts: true,
-          loading: false,
+            addSubscriptionDrawer: true,
         });
-      } else {
-        this.setState({ fetchingDoctorPayments: false });
-      }
-    } catch (err) {
-      console.log("err ", err);
-      message.warn(this.formatMessage(messages.somethingWentWrong));
-      this.setState({ fetchingDoctorPayments: false });
-    }
-  }
+    };
 
-  async handleGetAdminPaymentProduct() {
-    try {
-      this.setState({ fetchingAdminPayments: true });
-      const { getAdminPaymentProduct } = this.props;
-      const response = await getAdminPaymentProduct();
-      const { status, payload: { data: { payment_products = {} } = {} } = {} } =
-        response || {};
-      if (status) {
+    onCloseDrawer = () => {
         this.setState({
-          fetchingAdminPayments: false,
-          defaultPaymentsProducts: payment_products,
+            addServiceDrawer: false,
+            addSubscriptionDrawer: false,
         });
-      } else {
-        this.setState({ fetchingAdminPayments: false });
-      }
-    } catch (err) {
-      console.log("err ", err);
-      message.warn(this.formatMessage(messages.somethingWentWrong));
-      this.setState({ fetchingAdminPayments: false });
-    }
-  }
+    };
 
-  // AKSHAY NEW CODE FOR SUBSCRIPTION
+    formatMessage = (data) => this.props.intl.formatMessage(data);
 
-  handleServiceDrawer = () => {
-    this.setState({
-      addServiceDrawer: true,
-    });
-  };
-  handleSubscriptionDrawer = () => {
-    this.setState({
-      addSubscriptionDrawer: true,
-    });
-  };
+    setIsUpdated = () => {
+        this.setState({isUpdated: true});
+        const {match: {params: {id = null} = {}} = {}} = this.props;
+        this.handleGetDoctorPaymentProduct(id);
+    };
 
-  onCloseDrawer = () => {
-    this.setState({
-      addServiceDrawer: false,
-      addSubscriptionDrawer: false,
-    });
-  };
+    noConsultationFeeDisplay = () => {
+        return (
+            <div className="wp100 mb20 flex direction-column align-center justify-center">
+                <div className="br-lightgrey h200 w200 br4"></div>
+                <div className="mt20 fs25 fw700 black-85">
+                    {this.formatMessage(messages.noConsultationFeeAdded)}
+                </div>
+                <div className="mt20 fs18 fw600 ">
+                    {this.formatMessage(messages.notAddedFeesYet)}
+                </div>
 
-  formatMessage = (data) => this.props.intl.formatMessage(data);
-
-  setIsUpdated = () => {
-    this.setState({ isUpdated: true });
-    const { match: { params: { id = null } = {} } = {} } = this.props;
-    this.handleGetDoctorPaymentProduct(id);
-  };
-
-  noConsultationFeeDisplay = () => {
-    return (
-      <div className="wp100 mb20 flex direction-column align-center justify-center">
-        <div className="br-lightgrey h200 w200 br4"></div>
-        <div className="mt20 fs25 fw700 black-85">
-          {this.formatMessage(messages.noConsultationFeeAdded)}
-        </div>
-        <div className="mt20 fs18 fw600 ">
-          {this.formatMessage(messages.notAddedFeesYet)}
-        </div>
-
-        <div className="mt20">
-          {/* <Button type="primary" onClick={this.displayAddDoctorPaymentProduct}>
+                <div className="mt20">
+                    {/* <Button type="primary" onClick={this.displayAddDoctorPaymentProduct}>
             <span className="w200 fs20">
               {this.formatMessage(messages.addFee)}
             </span>
           </Button> */}
-          {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
-          <Button type="primary" onClick={this.handleServiceDrawer}>
+                    {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                    <Button type="primary" onClick={this.handleServiceDrawer}>
             <span className="w200 fs20">
               {/* {this.formatMessage(messages.addFee)} */}
-              Add Service
+                Add Service
             </span>
-          </Button>
-        </div>
-      </div>
-    );
-  };
-
-  consultationFeeDisplay = () => {
-    const {
-      noDoctorPaymentProducts,
-      doctorPaymentProducts,
-      loading = false,
-    } = this.state;
-    const { match: { params: { id: doctor_id = null } = {} } = {} } =
-      this.props;
-    const { services } = this.props;
-
-    if (loading) {
-      return <Loading />;
-    }
-
-    return (
-      <div className="wp100 flex p10 direction-column justify-space-between">
-        <div className="wp100">
-          {Object.keys(services).length === 0 ? (
-            <div className="wp100 justify-center align-center">
-              {this.noConsultationFeeDisplay()}
+                    </Button>
+                </div>
             </div>
-          ) : (
-            <div className="wp100 flex direction-column align-center justify-center">
-              {/* <ConsultationFeeTable
+        );
+    };
+
+    consultationFeeDisplay = () => {
+        const {
+            noDoctorPaymentProducts,
+            doctorPaymentProducts,
+            loading = false,
+        } = this.state;
+        const {match: {params: {id: doctor_id = null} = {}} = {}} =
+            this.props;
+        const {services} = this.props;
+
+        if (loading) {
+            return <Loading/>;
+        }
+
+        return (
+            <div className="wp100 flex p10 direction-column justify-space-between">
+                <div className="wp100">
+                    {Object.keys(services).length === 0 ? (
+                        <div className="wp100 justify-center align-center">
+                            {this.noConsultationFeeDisplay()}
+                        </div>
+                    ) : (
+                        <div className="wp100 flex direction-column align-center justify-center">
+                            {/* <ConsultationFeeTable
                 doctorPaymentProducts={doctorPaymentProducts}
                 deleteDoctorProduct={this.deleteDoctorProduct}
                 editDoctorProduct={this.displayEditDoctorPaymentProduct}
               /> */}
 
-              {/* <DoctorConsultationFeeTable
+                            {/* <DoctorConsultationFeeTable
                 doctor_id={doctor_id}
               /> */}
-              {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
-              <DoctorServiceTable services={services} />
+                            {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                            <DoctorServiceTable services={services}/>
+                        </div>
+                    )}
+                </div>
             </div>
-          )}
-        </div>
-      </div>
-    );
-  };
-
-  displayAddDoctorPaymentProduct = () => {
-    const { openConsultationFeeDrawer } = this.props;
-    openConsultationFeeDrawer();
-  };
-
-  displayEditDoctorPaymentProduct = (id) => () => {
-    const { openConsultationFeeDrawer } = this.props;
-    const { doctorPaymentProducts } = this.state;
-    const { [id]: paymentData } = doctorPaymentProducts;
-    openConsultationFeeDrawer(paymentData);
-  };
-
-  deleteDoctorProduct = (id, name, type, amount) => () => {
-    this.handleDeleteDoctorPaymentProduct(id, name, type, amount);
-  };
-
-  async handleDeleteDoctorPaymentProduct(id, name, type, amount) {
-    try {
-      const { deleteDoctorPaymentProduct } = this.props;
-      const payload = { id, name, type, amount };
-      const response = await deleteDoctorPaymentProduct(payload);
-      const {
-        status,
-        payload: { data: { payment_products = {} } = {} } = {},
-        statusCode,
-      } = response || {};
-
-      if (status) {
-        this.setIsUpdated();
-        message.success(
-          this.formatMessage(messages.deleteDoctorProductSuccess)
         );
-      }
-    } catch (err) {
-      console.log("err ", err);
-      message.warn(this.formatMessage(messages.somethingWentWrong));
+    };
+
+    displayAddDoctorPaymentProduct = () => {
+        const {openConsultationFeeDrawer} = this.props;
+        openConsultationFeeDrawer();
+    };
+
+    displayEditDoctorPaymentProduct = (id) => () => {
+        const {openConsultationFeeDrawer} = this.props;
+        const {doctorPaymentProducts} = this.state;
+        const {[id]: paymentData} = doctorPaymentProducts;
+        openConsultationFeeDrawer(paymentData);
+    };
+
+    deleteDoctorProduct = (id, name, type, amount) => () => {
+        this.handleDeleteDoctorPaymentProduct(id, name, type, amount);
+    };
+
+    async handleDeleteDoctorPaymentProduct(id, name, type, amount) {
+        try {
+            const {deleteDoctorPaymentProduct} = this.props;
+            const payload = {id, name, type, amount};
+            const response = await deleteDoctorPaymentProduct(payload);
+            const {
+                status,
+                payload: {data: {payment_products = {}} = {}} = {},
+                statusCode,
+            } = response || {};
+
+            if (status) {
+                this.setIsUpdated();
+                message.success(
+                    this.formatMessage(messages.deleteDoctorProductSuccess)
+                );
+            }
+        } catch (err) {
+            console.log("err ", err);
+            message.warn(this.formatMessage(messages.somethingWentWrong));
+        }
     }
-  }
 
-  getMenu = () => {
-    return (
-      <Menu>
-        <Menu.Item onClick={this.handleServiceDrawer}>
-          <div>{this.formatMessage(messages.menuTitleService)}</div>
-        </Menu.Item>
+    getMenu = () => {
+        return (
+            <Menu>
+                <Menu.Item onClick={this.handleServiceDrawer}>
+                    <div>{this.formatMessage(messages.menuTitleService)}</div>
+                </Menu.Item>
 
-        <Menu.Item onClick={this.handleSubscriptionDrawer}>
-          <div>{this.formatMessage(messages.menuTitleSubscription)}</div>
-        </Menu.Item>
-      </Menu>
-    );
-  };
+                <Menu.Item onClick={this.handleSubscriptionDrawer}>
+                    <div>{this.formatMessage(messages.menuTitleSubscription)}</div>
+                </Menu.Item>
+            </Menu>
+        );
+    };
 
-  renderHeader = () => {
-    const { noDoctorPaymentProducts } = this.state;
-    const { services } = this.props;
-    return (
-      <div className="wp100 pt20  mb20 fs28 fw700 flex justify-space-between align-center">
-        <div className="ml20 flex flex-start align-center">
-          <ArrowLeftOutlined onClick={this.handleBack} className="mr10" />
-          {this.formatMessage(messages.consultation_fee_header_text)}
-        </div>
+    renderHeader = () => {
+        const {noDoctorPaymentProducts} = this.state;
+        const {services} = this.props;
+        return (
+            <div className="wp100 pt20  mb20 fs28 fw700 flex justify-space-between align-center">
+                <div className="ml20 flex flex-start align-center">
+                    <ArrowLeftOutlined onClick={this.handleBack} className="mr10"/>
+                    {this.formatMessage(messages.consultation_fee_header_text)}
+                </div>
 
-        {Object.keys(services).length !== 0 && (
-          <div className="flex flex-end align-center">
-            {/* <Button
+                {Object.keys(services).length !== 0 && (
+                    <div className="flex flex-end align-center">
+                        {/* <Button
               type="primary"
               className="ml10 mr20 add-button "
               icon={"plus"}
@@ -277,61 +277,61 @@ class ProviderDoctorPaymentProduct extends Component {
                 {this.formatMessage(messages.addMore)}
               </span>
             </Button> */}
-            {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
-            <Dropdown
-              overlay={this.getMenu()}
-              trigger={["click"]}
-              placement="bottomRight"
-            >
-              <Button
-                type="primary"
-                className="ml10 mr20 add-button "
-                icon={<PlusOutlined />}
-              >
-                <span className="fs16">Add More</span>
-              </Button>
-            </Dropdown>
-          </div>
-        )}
-      </div>
-    );
-  };
+                        {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                        <Dropdown
+                            overlay={this.getMenu()}
+                            trigger={["click"]}
+                            placement="bottomRight"
+                        >
+                            <Button
+                                type="primary"
+                                className="ml10 mr20 add-button "
+                                icon={<PlusOutlined/>}
+                            >
+                                <span className="fs16">Add More</span>
+                            </Button>
+                        </Dropdown>
+                    </div>
+                )}
+            </div>
+        );
+    };
 
-  handleBack = (e) => {
-    e.preventDefault();
-    const { history } = this.props;
-    history.goBack();
-  };
+    handleBack = (e) => {
+        e.preventDefault();
+        const {history} = this.props;
+        history.goBack();
+    };
 
-  render() {
-    const { match: { params: { id = null } = {} } = {} } = this.props;
+    render() {
+        const {match: {params: {id = null} = {}} = {}} = this.props;
 
-    return (
-      <Fragment>
-        {this.renderHeader()}
-        {this.consultationFeeDisplay()}
-        <div className="wp100 ml20 mt20">
-          <MySubscriptionList />
-        </div>
-        <AddConsultationFeeDrawer
-          defaultPaymentsProducts={this.state.defaultPaymentsProducts}
-          setIsUpdated={this.setIsUpdated}
-          doctor_id={id}
-        />
-        {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
-        <AddService
-          visible={this.state.addServiceDrawer}
-          onCloseDrawer={this.onCloseDrawer}
-          doctor_id={id}
-        />
-        <AddSubscription
-          visible={this.state.addSubscriptionDrawer}
-          onCloseDrawer={this.onCloseDrawer}
-          doctor_id={id}
-        />
-      </Fragment>
-    );
-  }
+        return (
+            <Fragment>
+                {this.renderHeader()}
+                {this.consultationFeeDisplay()}
+                <div className="wp100 ml20 mt20">
+                    <MySubscriptionList/>
+                </div>
+                <AddConsultationFeeDrawer
+                    defaultPaymentsProducts={this.state.defaultPaymentsProducts}
+                    setIsUpdated={this.setIsUpdated}
+                    doctor_id={id}
+                />
+                {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                <AddService
+                    visible={this.state.addServiceDrawer}
+                    onCloseDrawer={this.onCloseDrawer}
+                    doctor_id={id}
+                />
+                <AddSubscription
+                    visible={this.state.addSubscriptionDrawer}
+                    onCloseDrawer={this.onCloseDrawer}
+                    doctor_id={id}
+                />
+            </Fragment>
+        );
+    }
 }
 
 export default injectIntl(ProviderDoctorPaymentProduct);

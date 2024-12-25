@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { injectIntl } from "react-intl";
+import React, {Component} from "react";
+import {injectIntl} from "react-intl";
 
 // import Form from "antd/es/form";
 import messages from "./messages";
@@ -8,13 +8,13 @@ import DatePicker from "antd/es/date-picker";
 import TextArea from "antd/es/input/TextArea";
 import Input from "antd/es/input";
 import Tag from "antd/es/tag";
-import { DAYS } from "../../../constant";
+import {DAYS} from "../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import { Form, Mention } from "@ant-design/compatible";
+import {Form, Mention} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
-const { Item: FormItem } = Form;
-const { CheckableTag } = Tag;
+const {Item: FormItem} = Form;
+const {CheckableTag} = Tag;
 
 const NAME = "name";
 const REPEAT_DAYS = "repeat_days";
@@ -25,289 +25,289 @@ const WHAT_NOT_TO_DO = "what_not_to_do";
 const FIELDS = [NAME, START_DATE, END_DATE, WHAT_NOT_TO_DO, REPEAT_DAYS];
 
 class DietFieldsFrom extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedDays: [],
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedDays: [],
+        };
+    }
+
+    componentDidMount() {
+        const {payload = {}} = this.props;
+        const {repeat_days = []} = payload || {};
+        const {dietData = {}, editTemplateDiet = null} = this.props;
+        this.setState({selectedDays: repeat_days});
+        if (editTemplateDiet) {
+            const {details: {repeat_days: template_r_days = []} = {}} =
+            dietData || {};
+            this.setState({selectedDays: template_r_days});
+        }
+    }
+
+    getParentNode = (t) => t.parentNode;
+
+    formatMessage = (data) => this.props.intl.formatMessage(data);
+
+    disabledStartDate = (current) => {
+        return current && current <= moment().subtract({day: 1});
     };
-  }
 
-  componentDidMount() {
-    const { payload = {} } = this.props;
-    const { repeat_days = [] } = payload || {};
-    const { dietData = {}, editTemplateDiet = null } = this.props;
-    this.setState({ selectedDays: repeat_days });
-    if (editTemplateDiet) {
-      const { details: { repeat_days: template_r_days = [] } = {} } =
-        dietData || {};
-      this.setState({ selectedDays: template_r_days });
-    }
-  }
+    handleCheckDays = (tag, checked) => {
+        const {selectedDays} = this.state;
+        const nextSelectedTags = checked
+            ? [...selectedDays, tag]
+            : selectedDays.filter((t) => t !== tag);
 
-  getParentNode = (t) => t.parentNode;
+        const newSelectedTags = checked
+            ? [...selectedDays, tag]
+            : selectedDays.filter((t) => t !== tag);
 
-  formatMessage = (data) => this.props.intl.formatMessage(data);
+        this.setState({selectedDays: newSelectedTags});
+        const {
+            form: {setFieldsValue, validateFields},
+        } = this.props;
+        setFieldsValue({[REPEAT_DAYS]: newSelectedTags});
+        validateFields();
+    };
 
-  disabledStartDate = (current) => {
-    return current && current <= moment().subtract({ day: 1 });
-  };
+    setSameForAllDays = () => {
+        const {
+            form: {setFieldsValue, validateFields},
+        } = this.props;
+        this.setState({selectedDays: DAYS});
+        setFieldsValue({[REPEAT_DAYS]: DAYS});
+        validateFields();
+    };
 
-  handleCheckDays = (tag, checked) => {
-    const { selectedDays } = this.state;
-    const nextSelectedTags = checked
-      ? [...selectedDays, tag]
-      : selectedDays.filter((t) => t !== tag);
+    unSetSameForAllDays = () => {
+        const {
+            form: {setFieldsValue, validateFields},
+        } = this.props;
+        this.setState({selectedDays: []});
+        setFieldsValue({[REPEAT_DAYS]: []});
+        validateFields();
+    };
 
-    const newSelectedTags = checked
-      ? [...selectedDays, tag]
-      : selectedDays.filter((t) => t !== tag);
+    translateHandler = async () => {
+        const {
+            form: {setFieldsValue, getFieldValue},
+        } = this.props;
+        const currentValue = getFieldValue(WHAT_NOT_TO_DO);
+        const {googleTranslate} = this.props;
+        let textToTranslate = currentValue;
 
-    this.setState({ selectedDays: newSelectedTags });
-    const {
-      form: { setFieldsValue, validateFields },
-    } = this.props;
-    setFieldsValue({ [REPEAT_DAYS]: newSelectedTags });
-    validateFields();
-  };
+        const response = await googleTranslate(textToTranslate);
+        const {data = {}} = response || {};
+        if (data) {
+            setFieldsValue({[WHAT_NOT_TO_DO]: data.translations[0].translatedText});
+        } else {
+            alert("Something went wrong");
+        }
+        // console.log("response", data.translations[0].translatedText);
+    };
 
-  setSameForAllDays = () => {
-    const {
-      form: { setFieldsValue, validateFields },
-    } = this.props;
-    this.setState({ selectedDays: DAYS });
-    setFieldsValue({ [REPEAT_DAYS]: DAYS });
-    validateFields();
-  };
+    render() {
+        const {
+            form: {getFieldDecorator, isFieldTouched, getFieldError},
+            getDietComponent,
+            dietData,
+        } = this.props;
 
-  unSetSameForAllDays = () => {
-    const {
-      form: { setFieldsValue, validateFields },
-    } = this.props;
-    this.setState({ selectedDays: [] });
-    setFieldsValue({ [REPEAT_DAYS]: [] });
-    validateFields();
-  };
+        const {selectedDays = []} = this.state;
 
-  translateHandler = async () => {
-    const {
-      form: { setFieldsValue, getFieldValue },
-    } = this.props;
-    const currentValue = getFieldValue(WHAT_NOT_TO_DO);
-    const { googleTranslate } = this.props;
-    let textToTranslate = currentValue;
+        const {formatMessage, handleCheckDays} = this;
 
-    const response = await googleTranslate(textToTranslate);
-    const { data = {} } = response || {};
-    if (data) {
-      setFieldsValue({ [WHAT_NOT_TO_DO]: data.translations[0].translatedText });
-    } else {
-      alert("Something went wrong");
-    }
-    // console.log("response", data.translations[0].translatedText);
-  };
+        let disabled = false;
 
-  render() {
-    const {
-      form: { getFieldDecorator, isFieldTouched, getFieldError },
-      getDietComponent,
-      dietData,
-    } = this.props;
+        const {
+            initialFormData = {},
+            editTemplateDiet = null,
+            canOnlyView = false,
+        } = this.props;
+        let {
+            name = "",
+            start_date: str_start_date = "",
+            end_date: str_end_date = null,
+            not_to_do = "",
+        } = initialFormData || {};
+        let start_date = str_start_date ? moment(str_start_date) : moment();
+        let end_date = str_end_date ? moment(str_end_date) : null;
 
-    const { selectedDays = [] } = this.state;
+        let fieldsError = {};
+        FIELDS.forEach((value) => {
+            const error = isFieldTouched(value) && getFieldError(value);
+            fieldsError = {...fieldsError, [value]: error};
+        });
 
-    const { formatMessage, handleCheckDays } = this;
+        if (editTemplateDiet !== null) {
+            const {
+                name: template_name = "",
+                total_calories: template_total_calories = 0,
+                duration = null,
+                start_date: temp_start_date = null,
+                end_date: temp_end_date = null,
+                details: {not_to_do: template_not_to_do = ""} = {},
+            } = dietData || {};
 
-    let disabled = false;
+            name = template_name;
+            start_date = moment();
+            if (duration) {
+                end_date = moment().add(parseInt(duration), "days");
+            } else {
+                start_date = temp_start_date ? moment(temp_start_date) : moment();
+                end_date = temp_end_date ? moment(temp_end_date) : null;
+            }
+            not_to_do = template_not_to_do;
+        }
 
-    const {
-      initialFormData = {},
-      editTemplateDiet = null,
-      canOnlyView = false,
-    } = this.props;
-    let {
-      name = "",
-      start_date: str_start_date = "",
-      end_date: str_end_date = null,
-      not_to_do = "",
-    } = initialFormData || {};
-    let start_date = str_start_date ? moment(str_start_date) : moment();
-    let end_date = str_end_date ? moment(str_end_date) : null;
+        if (canOnlyView) {
+            disabled = true;
+        }
 
-    let fieldsError = {};
-    FIELDS.forEach((value) => {
-      const error = isFieldTouched(value) && getFieldError(value);
-      fieldsError = { ...fieldsError, [value]: error };
-    });
+        return (
+            <Form className="fw700 wp100 pb30 Form">
+                <FormItem
+                    label={formatMessage(messages.name)}
+                    className="full-width mt10 ant-date-custom-ap-date "
+                >
+                    {getFieldDecorator(NAME, {
+                        rules: [
+                            {
+                                required: true,
+                                message: formatMessage(messages.requiredName),
+                            },
+                        ],
+                        initialValue: name ? name : null,
+                    })(
+                        <Input
+                            placeholder={this.formatMessage(messages.addDietName)}
+                            className={"form-inputs"}
+                            disabled={disabled}
+                        />
+                    )}
+                </FormItem>
 
-    if (editTemplateDiet !== null) {
-      const {
-        name: template_name = "",
-        total_calories: template_total_calories = 0,
-        duration = null,
-        start_date: temp_start_date = null,
-        end_date: temp_end_date = null,
-        details: { not_to_do: template_not_to_do = "" } = {},
-      } = dietData || {};
-
-      name = template_name;
-      start_date = moment();
-      if (duration) {
-        end_date = moment().add(parseInt(duration), "days");
-      } else {
-        start_date = temp_start_date ? moment(temp_start_date) : moment();
-        end_date = temp_end_date ? moment(temp_end_date) : null;
-      }
-      not_to_do = template_not_to_do;
-    }
-
-    if (canOnlyView) {
-      disabled = true;
-    }
-
-    return (
-      <Form className="fw700 wp100 pb30 Form">
-        <FormItem
-          label={formatMessage(messages.name)}
-          className="full-width mt10 ant-date-custom-ap-date "
-        >
-          {getFieldDecorator(NAME, {
-            rules: [
-              {
-                required: true,
-                message: formatMessage(messages.requiredName),
-              },
-            ],
-            initialValue: name ? name : null,
-          })(
-            <Input
-              placeholder={this.formatMessage(messages.addDietName)}
-              className={"form-inputs"}
-              disabled={disabled}
-            />
-          )}
-        </FormItem>
-
-        <div className="select-days-wrapper flex align-items-center justify-content-space-between wp100">
-          <div className="repeats wp100">
-            <div className="mb20 select-days-form-content">
-              <div className="flex justify-space-between">
-                <div className="flex">
-                  <div className="star-red">*</div>
-                  <span className="fs14">
+                <div className="select-days-wrapper flex align-items-center justify-content-space-between wp100">
+                    <div className="repeats wp100">
+                        <div className="mb20 select-days-form-content">
+                            <div className="flex justify-space-between">
+                                <div className="flex">
+                                    <div className="star-red">*</div>
+                                    <span className="fs14">
                     {this.formatMessage(messages.dayOftheWeek)}
                   </span>
+                                </div>
+                                <div
+                                    className={`pointer ${
+                                        selectedDays.length === 7 ? "tab-color" : "null"
+                                    }`}
+                                    onClick={
+                                        !disabled
+                                            ? selectedDays.length === 7
+                                                ? this.unSetSameForAllDays
+                                                : this.setSameForAllDays
+                                            : null
+                                    }
+                                >
+                                    Same for all days
+                                </div>
+                            </div>
+                            <FormItem style={{display: "none"}}>
+                                {getFieldDecorator(REPEAT_DAYS, {
+                                    initialValue: selectedDays.length ? selectedDays : [],
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: this.formatMessage(messages.requiredRepeatDays),
+                                        },
+                                    ],
+                                })(<Input disabled={disabled}/>)}
+                            </FormItem>
+                            <div className="flex-shrink-1 flex justify-space-evenly select-days mt10">
+                                {DAYS.map((tag) => (
+                                    <CheckableTag
+                                        key={tag}
+                                        checked={selectedDays.indexOf(tag) > -1}
+                                        onChange={
+                                            !disabled
+                                                ? (checked) => handleCheckDays(tag, checked)
+                                                : null
+                                        }
+                                    >
+                                        {tag}
+                                    </CheckableTag>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div
-                  className={`pointer ${
-                    selectedDays.length === 7 ? "tab-color" : "null"
-                  }`}
-                  onClick={
-                    !disabled
-                      ? selectedDays.length === 7
-                        ? this.unSetSameForAllDays
-                        : this.setSameForAllDays
-                      : null
-                  }
-                >
-                  Same for all days
+
+                {getDietComponent()}
+
+                <div className="flex justify-space-between align-center flex-1">
+                    <div className="wp45">
+                        <FormItem
+                            label={formatMessage(messages.start_date)}
+                            className="flex-grow-1 full-width mt10 ant-date-custom-ap-date "
+                        >
+                            {getFieldDecorator(START_DATE, {
+                                // TODO: Check why moment() was used here
+                                //initialValue: moment(),
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: formatMessage(messages.requiredStartDate),
+                                    },
+                                ],
+                                // TODO: Added moment() for all dates
+                                initialValue: moment(start_date) ? moment(start_date) : null,
+                            })(
+                                <DatePicker
+                                    className="wp100 h53"
+                                    disabledDate={this.disabledStartDate}
+                                    disabled={disabled}
+                                />
+                            )}
+                        </FormItem>
+                    </div>
+
+                    <div className="wp45">
+                        <FormItem
+                            label={formatMessage(messages.end_date)}
+                            className="flex-grow-1 full-width mt10 ant-date-custom-ap-date  "
+                        >
+                            {getFieldDecorator(END_DATE, {
+                                initialValue: end_date ? end_date : null,
+                            })(
+                                <DatePicker
+                                    className="wp100 h53"
+                                    disabledDate={this.disabledStartDate}
+                                    disabled={disabled}
+                                />
+                            )}
+                        </FormItem>
+                    </div>
                 </div>
-              </div>
-              <FormItem style={{ display: "none" }}>
-                {getFieldDecorator(REPEAT_DAYS, {
-                  initialValue: selectedDays.length ? selectedDays : [],
-                  rules: [
-                    {
-                      required: true,
-                      message: this.formatMessage(messages.requiredRepeatDays),
-                    },
-                  ],
-                })(<Input disabled={disabled} />)}
-              </FormItem>
-              <div className="flex-shrink-1 flex justify-space-evenly select-days mt10">
-                {DAYS.map((tag) => (
-                  <CheckableTag
-                    key={tag}
-                    checked={selectedDays.indexOf(tag) > -1}
-                    onChange={
-                      !disabled
-                        ? (checked) => handleCheckDays(tag, checked)
-                        : null
-                    }
-                  >
-                    {tag}
-                  </CheckableTag>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {getDietComponent()}
-
-        <div className="flex justify-space-between align-center flex-1">
-          <div className="wp45">
-            <FormItem
-              label={formatMessage(messages.start_date)}
-              className="flex-grow-1 full-width mt10 ant-date-custom-ap-date "
-            >
-              {getFieldDecorator(START_DATE, {
-                // TODO: Check why moment() was used here
-                //initialValue: moment(),
-                rules: [
-                  {
-                    required: true,
-                    message: formatMessage(messages.requiredStartDate),
-                  },
-                ],
-                // TODO: Added moment() for all dates
-                initialValue: moment(start_date) ? moment(start_date) : null,
-              })(
-                <DatePicker
-                  className="wp100 h53"
-                  disabledDate={this.disabledStartDate}
-                  disabled={disabled}
-                />
-              )}
-            </FormItem>
-          </div>
-
-          <div className="wp45">
-            <FormItem
-              label={formatMessage(messages.end_date)}
-              className="flex-grow-1 full-width mt10 ant-date-custom-ap-date  "
-            >
-              {getFieldDecorator(END_DATE, {
-                initialValue: end_date ? end_date : null,
-              })(
-                <DatePicker
-                  className="wp100 h53"
-                  disabledDate={this.disabledStartDate}
-                  disabled={disabled}
-                />
-              )}
-            </FormItem>
-          </div>
-        </div>
-        <span className="flex form-label  justify-space-between">
+                <span className="flex form-label  justify-space-between">
           {this.formatMessage(messages.what_not_to_do)}
-          <p
-            onClick={() => this.translateHandler()}
-            className="translate-text pointer mr10"
-          >
+                    <p
+                        onClick={() => this.translateHandler()}
+                        className="translate-text pointer mr10"
+                    >
             Translate in Hindi
           </p>
         </span>
-        <FormItem
-          // label={formatMessage(messages.what_not_to_do)}
-          className="full-width mt10 ant-date-custom-ap-date  "
-        >
-          {getFieldDecorator(WHAT_NOT_TO_DO, {
-            initialValue: not_to_do ? not_to_do : null,
-          })(<TextArea className="mb20" disabled={disabled} />)}
-        </FormItem>
-      </Form>
-    );
-  }
+                <FormItem
+                    // label={formatMessage(messages.what_not_to_do)}
+                    className="full-width mt10 ant-date-custom-ap-date  "
+                >
+                    {getFieldDecorator(WHAT_NOT_TO_DO, {
+                        initialValue: not_to_do ? not_to_do : null,
+                    })(<TextArea className="mb20" disabled={disabled}/>)}
+                </FormItem>
+            </Form>
+        );
+    }
 }
 
 export default injectIntl(DietFieldsFrom);

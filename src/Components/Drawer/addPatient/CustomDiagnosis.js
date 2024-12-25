@@ -1,44 +1,44 @@
-import React, { useState } from "react";
-import { Select } from "antd";
+import React, {useState} from "react";
+import {Select} from "antd";
 // import { diagnosisList } from "./diagnosisList.json";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 
-const { Option } = Select;
+const {Option} = Select;
 
-function CustomDiagnosis({ handleDiagnosisChanges, onDiagnosisSearchHanlder }) {
-  const { diagnosisList = [] } = useSelector((state) => state.cdss);
+function CustomDiagnosis({handleDiagnosisChanges, onDiagnosisSearchHanlder}) {
+    const {diagnosisList = []} = useSelector((state) => state.cdss);
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
+    const handleChange = (value) => {
+        console.log(`selected ${value}`);
+    };
 
-  const handleSelect = (value) => {
-    console.log(`selected ${value}`);
-  };
+    const handleSelect = (value) => {
+        console.log(`selected ${value}`);
+    };
 
-  const children = [];
+    const children = [];
 
-  for (let each in diagnosisList) {
-    children.push(
-      <Option key={diagnosisList[each]}>{diagnosisList[each]}</Option>
+    for (let each in diagnosisList) {
+        children.push(
+            <Option key={diagnosisList[each]}>{diagnosisList[each]}</Option>
+        );
+    }
+
+    return (
+        <div className="mt10 mb10 cdss-select">
+            <Select
+                mode="tags"
+                style={{width: "100%"}}
+                onChange={handleDiagnosisChanges}
+                tokenSeparators={[","]}
+                placeholder="Search for diagnosis"
+                onSelect={handleSelect}
+                onSearch={onDiagnosisSearchHanlder}
+            >
+                {children}
+            </Select>
+        </div>
     );
-  }
-
-  return (
-    <div className="mt10 mb10 cdss-select">
-      <Select
-        mode="tags"
-        style={{ width: "100%" }}
-        onChange={handleDiagnosisChanges}
-        tokenSeparators={[","]}
-        placeholder="Search for diagnosis"
-        onSelect={handleSelect}
-        onSearch={onDiagnosisSearchHanlder}
-      >
-        {children}
-      </Select>
-    </div>
-  );
 }
 
 export default CustomDiagnosis;

@@ -1,11 +1,11 @@
 export const getCdssDiagnosisList = () => {
-  return "/cdss/get";
+    return "/cdss/get";
 };
 
 export const addCdssDiagnosisList = () => {
-  return "/cdss";
+    return "/cdss";
 };
 
 export const getDiagnosisSearchUrl = (diagnosisName) => {
-  return `cdss/?dia=${diagnosisName}`;
+    return `cdss/?dia=${diagnosisName}`;
 };
