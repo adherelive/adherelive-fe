@@ -55,7 +55,7 @@ export const getDoctorAccountDetails = (id) => {
         dispatch({ type: GET_DOCTOR_ACCOUNT_DETAILS_FAILED, payload: error });
       }
     } catch (error) {
-      console.log("getDoctorAccountDetails catch error ----> ", error);
+      console.log("getDoctorAccountDetails catch error ---> ", error);
       dispatch({ type: GET_DOCTOR_ACCOUNT_DETAILS_FAILED });
     }
     return response;

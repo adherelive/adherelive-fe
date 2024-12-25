@@ -48,7 +48,7 @@ class SignIn extends Component {
             message.error("Username or Password incorrect", 4);
           }
         } catch (err) {
-          console.log("298293 err ----> ", err);
+          console.log("handleSingin err ---> ", err);
           this.setState({ loading: false });
           message.error("Something went wrong, Please try again", 4);
         }
@@ -137,7 +137,8 @@ class SignIn extends Component {
                         >
                           Log in
                         </Button>
-                        <div className="flex justify-space-between direction-column mt10 align-end">
+                        <div 
+                          className="flex justify-space-between direction-column mt10 align-end">
                           {/* <span className="login-form-forgot inline-flex">
                                     <Link to="/forgot-password">Forgot password?</Link>
                                     </span> */}
@@ -210,7 +211,8 @@ class SignIn extends Component {
                         >
                           Log in
                         </Button>
-                        <div className="flex justify-space-between direction-column mt10 align-end">
+                        <div
+                          className="flex justify-space-between direction-column mt10 align-end">
                           {/* <span className="login-form-forgot inline-flex">
                   <Link to="/forgot-password">Forgot password?</Link>
                 </span> */}

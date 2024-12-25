@@ -28,8 +28,8 @@ services:
     build:
       context: .
       #dockerfile: ./docker/DockerfileProd
-    #image: gagneet/adherelive-fe:prod
-    #env_file:
+      #image: gagneet/adherelive-fe:prod
+      #env_file:
       #- ./env-files/.env_prod
     restart: always
     command:

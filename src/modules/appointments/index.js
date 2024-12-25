@@ -66,7 +66,7 @@ export const addAppointment = (payload) => {
         });
       }
     } catch (error) {
-      console.log("ADD APPOINTMENT MODULE error ----> ", error);
+      console.log("ADD APPOINTMENT MODULE error ---> ", error);
     }
     return response;
   };
@@ -98,7 +98,7 @@ export const addCarePlanAppointment = (payload, carePlanId) => {
         });
       }
     } catch (error) {
-      console.log("ADD APPOINTMENT MODULE error ----> ", error);
+      console.log("ADD APPOINTMENT MODULE error ---> ", error);
     }
     return response;
   };
@@ -131,7 +131,7 @@ export const updateAppointment = (payload) => {
         });
       }
     } catch (error) {
-      console.log("UPDATE APPOINTMENT MODULE error ----> ", error);
+      console.log("UPDATE APPOINTMENT MODULE error ---> ", error);
     }
     return response;
   };

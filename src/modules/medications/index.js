@@ -109,7 +109,7 @@ export const addCarePlanMedicationReminder = (payload, carePlanId) => {
         });
       }
     } catch (error) {
-      console.log("ADD medication reminder error ----> ", error);
+      console.log("ADD medication reminder error ---> ", error);
       dispatch({ type: ADD_CARE_PLAN_MEDICATION_REMINDER_FAILED });
     }
     return response;
@@ -137,7 +137,7 @@ export const addMedicationReminder = (payload) => {
         dispatch({ type: ADD_MEDICATION_REMINDER_FAILED, payload: error });
       }
     } catch (error) {
-      console.log("ADD medication reminder error ----> ", error);
+      console.log("ADD medication reminder error ---> ", error);
       dispatch({ type: ADD_MEDICATION_REMINDER_FAILED });
     }
     return response;
@@ -165,7 +165,7 @@ export const updateMedication = (payload) => {
         dispatch({ type: UPDATE_MEDICATION_FAILED, payload: error });
       }
     } catch (error) {
-      console.log("ADD medication reminder error ----> ", error);
+      console.log("ADD medication reminder error ---> ", error);
       dispatch({ type: UPDATE_MEDICATION_FAILED });
     }
     return response;
@@ -227,7 +227,7 @@ export const getMedicationTimeline = (medicationId) => {
         dispatch({ type: GET_MEDICATIONS_TIMELINE_FAILED, payload: error });
       }
     } catch (error) {
-      console.log("getMedicationTimeline error ----> ", error);
+      console.log("getMedicationTimeline error ---> ", error);
       dispatch({ type: GET_MEDICATIONS_TIMELINE_FAILED });
     }
     return response;
