@@ -46,10 +46,10 @@
     "@devexpress/dx-react-scheduler-material-ui": "3.0.4",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "@mui/icons-material": "^5.0.4",
+    "@mui/icons-material": "^6.0.0",
     "@mui/lab": "^5.0.0-alpha.51",
-    "@mui/material": "^5.0.4",
-    "@mui/x-date-pickers": "^5.0.0-alpha.7"
+    "@mui/material": "^6.0.0",
+    "@mui/x-date-pickers": "^7.0.0"
   },
   "scripts": {
     "start": "craco start",
