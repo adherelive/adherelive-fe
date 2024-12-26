@@ -3,5 +3,5 @@ export const getNotifications = () => {
 };
 
 export const fetchRaiseChatNotificationUrl = () => {
-    return "/notifications/chat-notfication";
+    return "/notifications/chat-notification";
 };

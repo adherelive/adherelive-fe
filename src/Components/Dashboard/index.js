@@ -215,15 +215,20 @@ class Dashboard extends Component {
         const {updateUnseenNotificationData} = this;
 
         if (notificationToken || feedId) {
+            try {
             let clientFeed = connect(
                 config.GETSTREAM_API_KEY,
                 notificationToken,
                 config.GETSTREAM_APP_ID
             );
-
             this.client = clientFeed;
+            Log.debug("Client connected successfully");
+        } catch(error) {
+                Log.error("Error connecting to GetStream:", err);
+            }
         }
-
+        // TODO: Check where this leads to
+        // updateUnseenNotificationData().then(r => );
         updateUnseenNotificationData();
     };
 
