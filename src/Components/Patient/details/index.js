@@ -1126,21 +1126,30 @@ class PatientDetails extends Component {
         // }
     };
 
-    initiateInAppNotificationObj = () => {
+    initiateInAppNotificationObj = async () => {
         const {notificationToken, feedId} = this.props;
         const {updateUnseenNotificationData} = this;
 
         if (notificationToken || feedId) {
-            let clientFeed = connect(
-                config.GETSTREAM_API_KEY,
-                notificationToken,
-                config.GETSTREAM_APP_ID
-            );
-
-            this.client = clientFeed;
+            try {
+                let clientFeed = connect(
+                    config.GETSTREAM_API_KEY,
+                    notificationToken,
+                    config.GETSTREAM_APP_ID
+                );
+                this.client = clientFeed;
+                console.log("Client connected successfully");
+            } catch (err) {
+                console.log("Error connecting to GetStream: ", err);
+            }
         }
-
-        updateUnseenNotificationData();
+        // TODO: Check where this leads to
+        try {
+            await updateUnseenNotificationData(); // Wait for the Promise to resolve
+        } catch (err) {
+            console.error("Error updating notifications:", err);
+            // Handle the error appropriately (e.g., display an error message)
+        }
     };
 
     getFeedData = async () => {
