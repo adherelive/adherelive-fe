@@ -222,9 +222,9 @@ class Dashboard extends Component {
                 config.GETSTREAM_APP_ID
             );
             this.client = clientFeed;
-            Log.debug("Client connected successfully");
+            console.log("Client connected successfully");
         } catch(error) {
-                Log.error("Error connecting to GetStream:", err);
+                console.log("Error connecting to GetStream: ", err);
             }
         }
         // TODO: Check where this leads to
