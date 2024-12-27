@@ -107,54 +107,59 @@ class NotificationDrawer extends Component {
         } = this.props;
 
         if (notificationToken || feedId) {
-            this.client = connect(
-                GETSTREAM_API_KEY,
-                notificationToken,
-                GETSTREAM_APP_ID
-            );
-
-            this.clientFeed = this.client.feed("notification", feedId);
-
-            let offset = 0;
-            if (loadMore) {
-                this.setState({loadMore});
-                offset = Object.keys(notifications).length;
-            } else {
-                this.setState({loading: true});
+            try {
+                this.client = connect(
+                    GETSTREAM_API_KEY,
+                    notificationToken,
+                    GETSTREAM_APP_ID
+                );
+                this.clientFeed = this.client.feed("notification", feedId);
+                console.log("Client connected successfully");
+            } catch (err) {
+                console.log("Error connecting to GetStream: ", err);
             }
-
-            await this.clientFeed.get().then(async (data) => {
-                const {results = []} = data || {};
-                console.log("8687263876128631321", {data, results});
-                if (results.length) {
-                    await this.getNotificationFromActivities(data);
-                    this.setMissedCallNoti();
-
-                    if (visible) {
-                        await this.clientFeed.get({mark_seen: true}).then((data) => {
-                            this.clientFeed.get({limit}).then((data) => {
-                                // this.getNotificationFromActivities(data);
-                            });
-                        });
-
-                        // await this.markAllMissedCallRead();
-                    }
-
-                    this.setState({
-                        loading: false,
-                        loadMore: false,
-                        no_notification_remaining: false,
-                    });
-                } else {
-                    this.setState({
-                        loading: false,
-                        loadMore: false,
-                        no_notification_remaining: true,
-                    });
-                }
-            });
         }
-    };
+
+        let offset = 0;
+        if (loadMore) {
+            this.setState({loadMore});
+            offset = Object.keys(notifications).length;
+        } else {
+            this.setState({loading: true});
+        }
+
+        await this.clientFeed.get().then(async (data) => {
+            const {results = []} = data || {};
+            console.log("getNotificationData data and results: ", {data, results});
+            if (results.length) {
+                await this.getNotificationFromActivities(data);
+                this.setMissedCallNoti();
+
+                if (visible) {
+                    await this.clientFeed.get({mark_seen: true}).then((data) => {
+                        this.clientFeed.get({limit}).then((data) => {
+                            // this.getNotificationFromActivities(data);
+                        });
+                    });
+
+                    // await this.markAllMissedCallRead();
+                }
+
+                this.setState({
+                    loading: false,
+                    loadMore: false,
+                    no_notification_remaining: false,
+                });
+            } else {
+                this.setState({
+                    loading: false,
+                    loadMore: false,
+                    no_notification_remaining: true,
+                });
+            }
+        });
+    }
+
 
     handleScroll = async (event) => {
         const target = event.target;
@@ -346,30 +351,29 @@ class NotificationDrawer extends Component {
         // }
     };
 
-    // handlePatientDetailsRedirect = (patient_id) => () => {
-    //   const { history, close } = this.props;
-    //   history.push(`/patients/${patient_id}`);
-    //   close();
-    // };
+// handlePatientDetailsRedirect = (patient_id) => () => {
+//   const { history, close } = this.props;
+//   history.push(`/patients/${patient_id}`);
+//   close();
+// };
 
-    handlePatientDetailsRedirectSymptoms =
-        (patient_id, care_plan_id, notification_id) => async () => {
-            const intCPId = parseInt(care_plan_id);
-            const intPatientId = parseInt(patient_id);
-            const {history, close, doNotificationRedirect} = this.props;
-            const resp = await doNotificationRedirect({
-                type: TYPE_SYMPTOMS,
-                patient_id: intPatientId,
-                care_plan_id: intCPId,
-            });
-            const {activityGroupId = {}} = this.state;
-            const groupId = activityGroupId[notification_id] || null;
-            if (patient_id) {
-                this.readNotification(groupId, notification_id);
-                history.push(`/patients/${patient_id}`);
-                close();
-            }
-        };
+    handlePatientDetailsRedirectSymptoms = (patient_id, care_plan_id, notification_id) => async () => {
+        const intCPId = parseInt(care_plan_id);
+        const intPatientId = parseInt(patient_id);
+        const {history, close, doNotificationRedirect} = this.props;
+        const resp = await doNotificationRedirect({
+            type: TYPE_SYMPTOMS,
+            patient_id: intPatientId,
+            care_plan_id: intCPId,
+        });
+        const {activityGroupId = {}} = this.state;
+        const groupId = activityGroupId[notification_id] || null;
+        if (patient_id) {
+            this.readNotification(groupId, notification_id);
+            history.push(`/patients/${patient_id}`);
+            close();
+        }
+    };
 
     // handleMissedCallClick = async (notification_id) => {
     //   // console.log("2934y98237498238423 ^^^^^^^^^^^^",{notification_id,state:this.state});
@@ -533,7 +537,7 @@ class NotificationDrawer extends Component {
 
         for (let each in notifications) {
             const notification = notifications[each] || {};
-            console.log("876876238682368762782782", {notification});
+            console.log("get All Notification: ", {notification});
             const {
                 time: date = "",
                 is_read = false,

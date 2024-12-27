@@ -216,14 +216,14 @@ class Dashboard extends Component {
 
         if (notificationToken || feedId) {
             try {
-            let clientFeed = connect(
-                config.GETSTREAM_API_KEY,
-                notificationToken,
-                config.GETSTREAM_APP_ID
-            );
-            this.client = clientFeed;
-            console.log("Client connected successfully");
-        } catch(err) {
+                let clientFeed = connect(
+                    config.GETSTREAM_API_KEY,
+                    notificationToken,
+                    config.GETSTREAM_APP_ID
+                );
+                this.client = clientFeed;
+                console.log("Client connected successfully");
+            } catch (err) {
                 console.log("Error connecting to GetStream: ", err);
             }
         }
