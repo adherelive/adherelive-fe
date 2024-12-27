@@ -223,7 +223,7 @@ class Dashboard extends Component {
             );
             this.client = clientFeed;
             console.log("Client connected successfully");
-        } catch(error) {
+        } catch(err) {
                 console.log("Error connecting to GetStream: ", err);
             }
         }
