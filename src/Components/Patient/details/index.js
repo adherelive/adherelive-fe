@@ -1138,7 +1138,7 @@ class PatientDetails extends Component {
                     config.GETSTREAM_APP_ID
                 );
                 this.client = clientFeed;
-                console.log("Client connected successfully");
+                console.log("Client connected successfully", clientFeed);
             } catch (err) {
                 console.log("Error connecting to GetStream: ", err);
             }

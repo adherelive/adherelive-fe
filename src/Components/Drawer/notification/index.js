@@ -114,7 +114,7 @@ class NotificationDrawer extends Component {
                     GETSTREAM_APP_ID
                 );
                 this.clientFeed = this.client.feed("notification", feedId);
-                console.log("Client connected successfully");
+                console.log("Client connected successfully", this.clientFeed);
             } catch (err) {
                 console.log("Error connecting to GetStream: ", err);
             }
