@@ -18,12 +18,12 @@
     ]
   },
   "dependencies": {
-    "@ant-design/compatible": "^5.1.1",
-    "@ant-design/icons": "^5.2.6",
+    "@ant-design/compatible": "^1.1.2",
+    "@ant-design/icons": "^4.7.0",
     "@craco/craco": "^7.1.0",
     "agora-rtc-sdk-ng": "^4.19.3",
     "algoliasearch": "^4.22.1",
-    "antd": "^5.12.5",
+    "antd": "^4.22.4",
     "axios": "^1.6.2",
     "chart.js": "^4.4.1",
     "craco-less": "^3.0.1",
