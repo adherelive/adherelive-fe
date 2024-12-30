@@ -107,59 +107,58 @@ class NotificationDrawer extends Component {
         } = this.props;
 
         if (notificationToken || feedId) {
-            try {
+            // try {
                 this.client = connect(
                     GETSTREAM_API_KEY,
                     notificationToken,
                     GETSTREAM_APP_ID
                 );
                 this.clientFeed = this.client.feed("notification", feedId);
-                console.log("Client connected successfully", this.clientFeed);
-            } catch (err) {
-                console.log("Error connecting to GetStream: ", err);
-            }
-        }
+                console.log("Client connected successfully: ", this.clientFeed);
+            // } catch (err) {
+            //     console.log("Error connecting to GetStream: ", err);
+            // }
 
-        let offset = 0;
-        if (loadMore) {
-            this.setState({loadMore});
-            offset = Object.keys(notifications).length;
-        } else {
-            this.setState({loading: true});
-        }
-
-        await this.clientFeed.get().then(async (data) => {
-            const {results = []} = data || {};
-            console.log("getNotificationData data and results: ", {data, results});
-            if (results.length) {
-                await this.getNotificationFromActivities(data);
-                this.setMissedCallNoti();
-
-                if (visible) {
-                    await this.clientFeed.get({mark_seen: true}).then((data) => {
-                        this.clientFeed.get({limit}).then((data) => {
-                            // this.getNotificationFromActivities(data);
-                        });
-                    });
-
-                    // await this.markAllMissedCallRead();
-                }
-
-                this.setState({
-                    loading: false,
-                    loadMore: false,
-                    no_notification_remaining: false,
-                });
+            let offset = 0;
+            if (loadMore) {
+                this.setState({loadMore});
+                offset = Object.keys(notifications).length;
             } else {
-                this.setState({
-                    loading: false,
-                    loadMore: false,
-                    no_notification_remaining: true,
-                });
+                this.setState({loading: true});
             }
-        });
-    }
 
+            await this.clientFeed.get().then(async (data) => {
+                const {results = []} = data || {};
+                console.log("getNotificationData data and results: ", {data, results});
+                if (results.length) {
+                    await this.getNotificationFromActivities(data);
+                    this.setMissedCallNoti();
+
+                    if (visible) {
+                        await this.clientFeed.get({mark_seen: true}).then((data) => {
+                            this.clientFeed.get({limit}).then((data) => {
+                                // this.getNotificationFromActivities(data);
+                            });
+                        });
+
+                        // await this.markAllMissedCallRead();
+                    }
+
+                    this.setState({
+                        loading: false,
+                        loadMore: false,
+                        no_notification_remaining: false,
+                    });
+                } else {
+                    this.setState({
+                        loading: false,
+                        loadMore: false,
+                        no_notification_remaining: true,
+                    });
+                }
+            });
+        }
+    };
 
     handleScroll = async (event) => {
         const target = event.target;
@@ -351,13 +350,14 @@ class NotificationDrawer extends Component {
         // }
     };
 
-// handlePatientDetailsRedirect = (patient_id) => () => {
-//   const { history, close } = this.props;
-//   history.push(`/patients/${patient_id}`);
-//   close();
-// };
+    // handlePatientDetailsRedirect = (patient_id) => () => {
+    //   const { history, close } = this.props;
+    //   history.push(`/patients/${patient_id}`);
+    //   close();
+    // };
 
-    handlePatientDetailsRedirectSymptoms = (patient_id, care_plan_id, notification_id) => async () => {
+    handlePatientDetailsRedirectSymptoms = 
+      (patient_id, care_plan_id, notification_id) => async () => {
         const intCPId = parseInt(care_plan_id);
         const intPatientId = parseInt(patient_id);
         const {history, close, doNotificationRedirect} = this.props;

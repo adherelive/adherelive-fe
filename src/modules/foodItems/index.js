@@ -2,7 +2,7 @@ import {doRequest} from "../../Helper/network";
 import {REQUEST_TYPE} from "../../constant";
 import {addFoodItemUrl, updateFoodItemUrl} from "../../Helper/urls/foodItems";
 
-import {GET_SINGLE_DIET_DETAILS_COMPLETED} from "../diets";
+import {GET_SINGLE_DIET_DETAILS_COMPLETED} from "../../modules/diets";
 
 export const ADD_FOOD_ITEM_START = "ADD_FOOD_ITEM_START";
 export const ADD_FOOD_ITEM_COMPLETED = "ADD_FOOD_ITEM_COMPLETED";

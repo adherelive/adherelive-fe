@@ -3,7 +3,7 @@ import {
     STORE_FOOD_ITEM_AND_DETAILS,
     EDIT_FOOD_ITEM_COMPLETED,
 } from "../foodItems";
-import {GET_SINGLE_DIET_DETAILS_COMPLETED} from "../diets";
+import {GET_SINGLE_DIET_DETAILS_COMPLETED} from "../../modules/diets";
 
 function foodItemDetailsReducer(state, data) {
     const {food_items, food_item_details} = data || {};

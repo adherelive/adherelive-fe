@@ -4,7 +4,7 @@ import {
     EDIT_FOOD_ITEM_COMPLETED,
 } from "../foodItems";
 
-function searchFoodItemDetaisReducer(state, data) {
+function searchFoodItemDetailsReducer(state, data) {
     let {food_items = {}, food_item_details = {}} = data || {};
     if (food_items && food_item_details) {
         return {
@@ -31,7 +31,7 @@ export default (state = {}, action) => {
     const {type, data} = action || {};
     switch (type) {
         case SEARCH_FOOD_COMPLETED:
-            return searchFoodItemDetaisReducer(state, data);
+            return searchFoodItemDetailsReducer(state, data);
         case ADD_FOOD_ITEM_COMPLETED:
             return addedNewItemReducer(state, data);
         case EDIT_FOOD_ITEM_COMPLETED:

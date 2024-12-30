@@ -1131,25 +1131,25 @@ class PatientDetails extends Component {
         const {updateUnseenNotificationData} = this;
 
         if (notificationToken || feedId) {
-            try {
+            // try {
                 let clientFeed = connect(
                     config.GETSTREAM_API_KEY,
                     notificationToken,
                     config.GETSTREAM_APP_ID
                 );
                 this.client = clientFeed;
-                console.log("Client connected successfully", clientFeed);
-            } catch (err) {
-                console.log("Error connecting to GetStream: ", err);
-            }
+            //     console.log("Client connected successfully: ", clientFeed);
+            // } catch (err) {
+            //     console.log("Error connecting to GetStream: ", err);
+            // }
         }
         // TODO: Check where this leads to
-        try {
+        // try {
             await updateUnseenNotificationData(); // Wait for the Promise to resolve
-        } catch (err) {
-            console.error("Error updating notifications:", err);
+        // } catch (err) {
+        //     console.error("Error updating notifications: ", err);
             // Handle the error appropriately (e.g., display an error message)
-        }
+        // }
     };
 
     getFeedData = async () => {
