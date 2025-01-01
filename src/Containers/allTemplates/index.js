@@ -3,9 +3,9 @@ import {withRouter} from "react-router-dom";
 import AllTemplates from "../../Components/AllTemplates/table";
 import {getAllTemplatesForDoctor} from "../../modules/carePlanTemplates";
 import {
-    createCareplanTemplate,
-    updateCareplanTemplate,
-    duplicateCareplanTemplate,
+    createCarePlanTemplate,
+    updateCarePlanTemplate,
+    duplicateCarePlanTemplate,
 } from "../../modules/carePlanTemplates";
 
 const mapStateToProps = (state) => {
@@ -48,12 +48,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllTemplatesForDoctor: () => dispatch(getAllTemplatesForDoctor()),
-        createCareplanTemplate: (payload) =>
-            dispatch(createCareplanTemplate(payload)),
-        updateCareplanTemplate: (id, payload) =>
-            dispatch(updateCareplanTemplate(id, payload)),
-        duplicateCareplanTemplate: (careplan_template_id) =>
-            dispatch(duplicateCareplanTemplate(careplan_template_id)),
+        createCarePlanTemplate: (payload) =>
+            dispatch(createCarePlanTemplate(payload)),
+        updateCarePlanTemplate: (id, payload) =>
+            dispatch(updateCarePlanTemplate(id, payload)),
+        duplicateCarePlanTemplate: (careplan_template_id) =>
+            dispatch(duplicateCarePlanTemplate(careplan_template_id)),
     };
 };
 

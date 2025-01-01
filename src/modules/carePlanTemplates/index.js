@@ -49,7 +49,7 @@ export const GET_ALL_TEMPLATES_FOR_DOC_COMPLETE =
 export const GET_ALL_TEMPLATES_FOR_DOC_FAILED =
   "GET_ALL_TEMPLATES_FOR_DOC_FAILED";
 
-export const createCareplanTemplate = (payload) => {
+export const createCarePlanTemplate = (payload) => {
   let response = {};
   return async (dispatch) => {
     try {
@@ -111,7 +111,7 @@ export const getAllTemplatesForDoctor = () => {
   };
 };
 
-// AKSHAY NEW CODE IMPLEMETATIONS
+// AKSHAY NEW CODE IMPLEMENTATIONS
 
 export const getAllTemplatesForDoctorUsingQuery = (text) => {
   let response;
@@ -143,7 +143,7 @@ export const getAllTemplatesForDoctorUsingQuery = (text) => {
   };
 };
 
-export const updateCareplanTemplate = (id, payload) => {
+export const updateCarePlanTemplate = (id, payload) => {
   let response = {};
   return async (dispatch) => {
     try {
@@ -175,7 +175,7 @@ export const updateCareplanTemplate = (id, payload) => {
   };
 };
 
-export const duplicateCareplanTemplate = (careplan_template_id) => {
+export const duplicateCarePlanTemplate = (careplan_template_id) => {
   let response = {};
   return async (dispatch) => {
     try {
@@ -205,7 +205,7 @@ export const duplicateCareplanTemplate = (careplan_template_id) => {
   };
 };
 
-export const deleteCareplanTemplateRelated = ({
+export const deleteCarePlanTemplateRelated = ({
   careplan_template_id,
   other_id,
   other_type,

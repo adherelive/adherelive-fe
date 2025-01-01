@@ -1,7 +1,7 @@
 import {TABLE_COLUMN, formatTemplateTableData} from "../helper";
 
 export default (data) => {
-    const {id, duplicateCareplanTemplate, handleOpenEditDrawer} = data;
+    const {id, duplicateCarePlanTemplate, handleOpenEditDrawer} = data;
     const formattedData = formatTemplateTableData(data);
     const {templateData} = formattedData || {};
 
@@ -18,7 +18,7 @@ export default (data) => {
         },
         [TABLE_COLUMN.EDIT.dataIndex]: {
             id,
-            duplicateCareplanTemplate,
+            duplicateCarePlanTemplate,
             handleOpenEditDrawer,
             templateData,
         },

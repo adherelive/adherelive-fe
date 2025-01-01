@@ -41,7 +41,7 @@ export default (props) => {
             render: (data) => {
                 const {
                     id,
-                    duplicateCareplanTemplate,
+                    duplicateCarePlanTemplate,
                     handleOpenEditDrawer,
                     templateData,
                 } = data;
@@ -49,7 +49,7 @@ export default (props) => {
                 return (
                     <Edit
                         id={id}
-                        duplicateCareplanTemplate={duplicateCareplanTemplate}
+                        duplicateCarePlanTemplate={duplicateCarePlanTemplate}
                         handleOpenEditDrawer={handleOpenEditDrawer}
                         templateData={templateData}
                     />

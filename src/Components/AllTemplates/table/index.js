@@ -49,7 +49,7 @@ class TemplateTable extends Component {
             authenticated_user = "",
             care_plan_template_ids = [],
             care_plan_templates = {},
-            createCareplanTemplate,
+            createCarePlanTemplate,
             doctors = {},
             getAllTemplatesForDoctor,
             medicines = {},
@@ -59,7 +59,7 @@ class TemplateTable extends Component {
             template_vitals = {},
             vital_templates = {},
             repeat_intervals = {},
-            duplicateCareplanTemplate,
+            duplicateCarePlanTemplate,
             handleOpenEditDrawer,
         } = this.props;
 
@@ -72,7 +72,7 @@ class TemplateTable extends Component {
                 authenticated_user,
                 care_plan_template_ids,
                 care_plan_templates,
-                createCareplanTemplate,
+                createCarePlanTemplate,
                 doctors,
                 getAllTemplatesForDoctor,
                 medicines,
@@ -82,7 +82,7 @@ class TemplateTable extends Component {
                 template_vitals,
                 vital_templates,
                 repeat_intervals,
-                duplicateCareplanTemplate,
+                duplicateCarePlanTemplate,
                 handleOpenEditDrawer,
             });
         });

@@ -1418,7 +1418,7 @@
 //             APPOINTMENT_TYPE_TITLE[!appointment_type ? type : appointment_type]
 //               .title;
 //           let typeDescription = type_description;
-//           let rediologyType = radiology_type;
+//           let radiologyType = radiology_type;
 
 //           return (
 //             <div className="flex wp100 flex-grow-1 align-center" key={key}>
@@ -1448,7 +1448,7 @@
 //                 </div>
 //                 <div className="drawer-block-description">
 //                   {typeDescription}
-//                   {rediologyType !== "" && ` (${rediologyType})`}
+//                   {radiologyType !== "" && ` (${radiologyType})`}
 //                 </div>
 //                 <div className="drawer-block-description">
 //                   {/* {

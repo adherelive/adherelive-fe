@@ -3,7 +3,7 @@ import TemplatePageCreateDrawer from "../../Components/Drawer/allTemplatesPageCr
 import {DRAWER} from "../../constant";
 import {close} from "../../modules/drawer";
 import {
-    createCareplanTemplate,
+    createCarePlanTemplate,
     getAllTemplatesForDoctor,
 } from "../../modules/carePlanTemplates";
 import {getPortions} from "../../modules/portions";
@@ -33,8 +33,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         close: () => dispatch(close()),
-        createCareplanTemplate: (payload) =>
-            dispatch(createCareplanTemplate(payload)),
+        createCarePlanTemplate: (payload) =>
+            dispatch(createCarePlanTemplate(payload)),
         getAllTemplatesForDoctor: () => dispatch(getAllTemplatesForDoctor()),
         getPortions: () => dispatch(getPortions()),
     };

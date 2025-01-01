@@ -5,12 +5,12 @@ import {CopyOutlined} from "@ant-design/icons";
 import Tooltip from "antd/es/tooltip";
 
 export default (props) => {
-    const {id, duplicateCareplanTemplate} = props || {};
+    const {id, duplicateCarePlanTemplate} = props || {};
 
     const handleCreateDuplicate = async (e) => {
         e.preventDefault();
         try {
-            const response = await duplicateCareplanTemplate(id);
+            const response = await duplicateCarePlanTemplate(id);
             const {
                 payload: {data = {}, message: resp_message = ""} = {},
                 status,
