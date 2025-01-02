@@ -28,6 +28,7 @@ class AddvitalsForm extends Component {
 
     componentDidMount() {
         this.scrollToTop();
+        console.log("AddvitalsForm", this.props.form);
         const {
             form: {validateFields},
             // currentUser: {
@@ -67,6 +68,7 @@ class AddvitalsForm extends Component {
     }
 
     scrollToTop = () => {
+        console.log("scrollToTop", this.props.form);
         let antForm = document.getElementsByClassName("Form")[0];
         let antDrawerBody = antForm.parentNode;
         let antDrawerWrapperBody = antDrawerBody.parentNode;

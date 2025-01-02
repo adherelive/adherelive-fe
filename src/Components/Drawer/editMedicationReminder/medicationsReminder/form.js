@@ -45,6 +45,7 @@ class EditMedicationReminderForm extends Component {
 
     componentDidMount() {
         this.scrollToTop();
+        console.log("componentDidMount", this.props.form);
         const {
             form: {validateFields},
             // currentUser: {

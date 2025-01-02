@@ -143,11 +143,12 @@ class AddAppointmentForm extends Component {
                 });
             }
         } catch (error) {
-            console.log("Patient Careplans Get errrrorrrr ===>", error);
+            console.log("Patient Careplans Get error ===> ", error);
         }
     };
 
     scrollToTop = () => {
+        console.log("I am in the Scroll to Top");
         let antForm = document.getElementsByClassName("Form")[0];
         let antDrawerBody = antForm.parentNode;
         let antDrawerWrapperBody = antDrawerBody.parentNode;
