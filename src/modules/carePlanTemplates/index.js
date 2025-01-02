@@ -1,15 +1,15 @@
 import { doRequest } from "../../Helper/network";
 import { REQUEST_TYPE, DELETE_TEMPLATE_RELATED_TYPE } from "../../constant";
 import {
-  createCareplanTemplateUrl,
-  duplicateCareplanTemplateUrl,
-  deleteCareplanTemplate,
-  deleteCareplanTemplateMedication,
+  createCarePlanTemplateUrl,
+  duplicateCarePlanTemplateUrl,
+  deleteCarePlanTemplate,
+  deleteCarePlanTemplateMedication,
   deleteCareplanTemplateAppointment,
-  deleteCareplanTemplateVital,
-  deleteCareplanTemplateDiet,
-  updateCareplanTemplateUrl,
-  deleteCareplanTemplateWorkout,
+  deleteCarePlanTemplateVital,
+  deleteCarePlanTemplateDiet,
+  updateCarePlanTemplateUrl,
+  deleteCarePlanTemplateWorkout,
 } from "../../Helper/urls/carePlanTemplates";
 
 import {
@@ -57,7 +57,7 @@ export const createCarePlanTemplate = (payload) => {
 
       response = await doRequest({
         method: REQUEST_TYPE.POST,
-        url: createCareplanTemplateUrl(),
+        url: createCarePlanTemplateUrl(),
         data: payload,
       });
 
@@ -151,7 +151,7 @@ export const updateCarePlanTemplate = (id, payload) => {
 
       response = await doRequest({
         method: REQUEST_TYPE.POST,
-        url: updateCareplanTemplateUrl(id),
+        url: updateCarePlanTemplateUrl(id),
         data: payload,
       });
 
@@ -182,7 +182,7 @@ export const duplicateCarePlanTemplate = (careplan_template_id) => {
       dispatch({ type: DUPLICATE_CAREPLAN_TEMPLATE_START });
       response = await doRequest({
         method: REQUEST_TYPE.POST,
-        url: duplicateCareplanTemplateUrl(careplan_template_id),
+        url: duplicateCarePlanTemplateUrl(careplan_template_id),
       });
 
       const { status, payload: { data, message = "" } = {} } = response || {};
@@ -216,17 +216,17 @@ export const deleteCarePlanTemplateRelated = ({
       let url = "/";
 
       if (!other_type) {
-        url = deleteCareplanTemplate(careplan_template_id);
+        url = deleteCarePlanTemplate(careplan_template_id);
       } else if (other_type === DELETE_TEMPLATE_RELATED_TYPE.MEDICATION) {
-        url = deleteCareplanTemplateMedication(careplan_template_id, other_id);
+        url = deleteCarePlanTemplateMedication(careplan_template_id, other_id);
       } else if (other_type === DELETE_TEMPLATE_RELATED_TYPE.APPOINTMENT) {
         url = deleteCareplanTemplateAppointment(careplan_template_id, other_id);
       } else if (other_type === DELETE_TEMPLATE_RELATED_TYPE.VITAL) {
-        url = deleteCareplanTemplateVital(careplan_template_id, other_id);
+        url = deleteCarePlanTemplateVital(careplan_template_id, other_id);
       } else if (other_type === DELETE_TEMPLATE_RELATED_TYPE.DIET) {
-        url = deleteCareplanTemplateDiet(careplan_template_id, other_id);
+        url = deleteCarePlanTemplateDiet(careplan_template_id, other_id);
       } else if (other_type === DELETE_TEMPLATE_RELATED_TYPE.WORKOUT) {
-        url = deleteCareplanTemplateWorkout(careplan_template_id, other_id);
+        url = deleteCarePlanTemplateWorkout(careplan_template_id, other_id);
       }
 
       dispatch({ type: DELETE_CAREPLAN_TEMPLATE_RELATED_START });

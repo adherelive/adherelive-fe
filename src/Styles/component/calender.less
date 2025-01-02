@@ -58,15 +58,14 @@
   }
 
   .fc-event {
-    //need important here because fullcalendar apply inline styling at run time
+    // TODO: need important here because fullcalendar apply inline styling at run time
     left: 0 !important;
     right: 0 !important;
     margin-right: 0 !important;
-    border-color: none;
+    border-color: gray;
 
     &.current {
-      border: 1px solid;
-      border-color: @deep-sea-blue;
+      border: 1px solid @deep-sea-blue;
       z-index: 4 !important;
 
       .fc-bg {
@@ -75,8 +74,7 @@
     }
 
     &.booked {
-      border: 1px solid;
-      border-color: @silver;
+      border: 1px solid @silver;
 
       .fc-bg {
         background: repeating-linear-gradient(45deg,
