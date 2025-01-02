@@ -1070,11 +1070,13 @@ class TemplatePageCreateDrawer extends Component {
                                 </div>
 
                                 <div className="drawer-block-description">
-                                    {/* {date
-                    ? `After ${moment(date).diff(moment(), "days") + 1} days`
-                    : time_gap
-                    ? `After ${time_gap} days`
-                    : ""} */}
+                                    {
+                                        /* {date
+                                        ? `After ${moment(date).diff(moment(), "days") + 1} days`
+                                        : time_gap
+                                        ? `After ${time_gap} days`
+                                        : ""} */
+                                    }
                                     {time_gap == 0 ? "Today" : `After ${time_gap} days`}
                                 </div>
                                 <div className="drawer-block-description">{`Notes:${description}`}</div>

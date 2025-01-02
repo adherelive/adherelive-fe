@@ -440,7 +440,9 @@ class TemplatePageCreateDrawer extends Component {
     };
 
     // AKSHAY NEW CODE IMPLEMENTATION
-    deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
+    // TODO: Check where this duplicate function has come from
+    /*
+        deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
         console.log(innerFormType);
         console.log(innerFormKey);
         let {
@@ -490,6 +492,7 @@ class TemplatePageCreateDrawer extends Component {
             medicationCheckedIds,
         });
     };
+    */
 
     onCloseInner = () => {
         this.setState({
