@@ -43,7 +43,7 @@ import OtpInput from "react-otp-input";
 // DRAWERS
 import VitalTimelineDrawer from "../../../Containers/Drawer/vitalTimeline";
 import MedicationTimelineDrawer from "../../../Containers/Drawer/medicationTimeline";
-import AddCareplanDrawer from "../../../Containers/Drawer/addCareplan";
+import AddCarePlanDrawer from "../../../Containers/Drawer/addCareplan";
 import AddMedicationReminder from "../../../Containers/Drawer/addMedicationReminder";
 import AddVitals from "../../../Containers/Drawer/addVitals";
 import AddAppointmentDrawer from "../../../Containers/Drawer/addAppointment";
@@ -389,7 +389,7 @@ const PatientProfileHeader = ({
                                   user_role_id,
                                   secondary_doctor_user_role_ids,
                               }) => {
-    console.log("3287642547652342", {selectedCarePlanId});
+    console.log("Selected Care Plan, in Patient Profile Header: ", {selectedCarePlanId});
     console.log("AKSHAY NEW CHANGES");
 
     console.log("showAddButton", showAddButton);
@@ -3133,7 +3133,7 @@ class PatientDetails extends Component {
 
                         <AddVitals carePlanId={carePlanId}/>
                         <AddAppointmentDrawer carePlanId={carePlanId}/>
-                        <AddCareplanDrawer patientId={patient_id}/>
+                        <AddCarePlanDrawer patientId={patient_id}/>
                         <AddReportDrawer/>
                         <AddFoodItem/>
                         <AddDietDrawer carePlanId={carePlanId}/>

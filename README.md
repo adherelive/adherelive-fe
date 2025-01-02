@@ -452,7 +452,7 @@ https://www.linode.com/docs/guides/how-to-install-and-use-nginx-on-ubuntu-20-04/
 
 Use the following to create a file - /etc/nginx/sites-enabled/portal.adhere.live
 
-```json lines
+```yaml
 server {
         client_max_body_size 10M;
         server_name portal.adhere.live;

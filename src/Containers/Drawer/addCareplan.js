@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import AddCareplanDrawer from "../../Components/Drawer/addCareplan";
+import AddCarePlanDrawer from "../../Components/Drawer/addCareplan";
 import {close} from "../../modules/drawer";
 import {DRAWER} from "../../constant";
 import {getInitialData} from "../../modules/auth";
@@ -69,5 +69,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(AddCareplanDrawer)
+    connect(mapStateToProps, mapDispatchToProps)(AddCarePlanDrawer)
 );
