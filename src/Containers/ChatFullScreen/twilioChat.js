@@ -5,16 +5,9 @@ import {getDoctorPaymentProduct} from "../../modules/doctors";
 import {getVitalOccurence} from "../../modules/vital_occurence";
 
 import {fetchChatAccessToken} from "../../modules/twilio";
-import {
-    addMessageOfChat,
-    raiseChatNotification,
-} from "../../modules/chatMessages";
+import {addMessageOfChat, raiseChatNotification,} from "../../modules/chatMessages";
 
-import {
-    toggleChatPermission,
-    toggleVideoPermission,
-    getAllFeatures,
-} from "../../modules/featuresMappings";
+import {getAllFeatures, toggleChatPermission, toggleVideoPermission,} from "../../modules/featuresMappings";
 
 const mapStateToProps = (state) => {
     const {

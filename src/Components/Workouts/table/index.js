@@ -4,7 +4,6 @@ import generateRow from "./dataRow";
 import getColumn from "./header";
 import message from "antd/es/message";
 import Table from "antd/es/table";
-import Icon from "antd/es/icon";
 
 import messages from "./messages";
 import isEmpty from "../../../Helper/is-empty";

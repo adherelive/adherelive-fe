@@ -6,15 +6,15 @@ import {DRAWER} from "../../constant";
 import {getMedications} from "../../modules/medications";
 import {getPatientCarePlanDetails} from "../../modules/carePlans";
 import {
-    getAppointments,
-    updateAppointment,
     deleteAppointment,
-    getAppointmentsDetails,
+    getAppointments,
     getAppointmentsDataForDay,
+    getAppointmentsDetails,
+    updateAppointment,
 } from "../../modules/appointments";
 import {
-    markFavourite,
     getFavourites,
+    markFavourite,
     removeFavourite,
     removeFavouriteByRecordId,
 } from "../../modules/favouritesData/index";

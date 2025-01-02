@@ -15,7 +15,7 @@ import Footer from "../footer";
 
 import {RADIOLOGY} from "../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import {Form} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "./../../../Helper/is-empty";
 import ScheduledAppointments from "../addAppointment/ScheduledAppointments";

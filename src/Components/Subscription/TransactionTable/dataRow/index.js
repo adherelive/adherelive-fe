@@ -1,5 +1,4 @@
-import {TABLE_COLUMN, formatTransactionTableData} from "../helper";
-import {USER_CATEGORY} from "../../../../constant";
+import {TABLE_COLUMN} from "../helper";
 
 export default (data) => {
     const {id, transactions} = data;

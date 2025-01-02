@@ -7,11 +7,7 @@ import {open} from "../../modules/drawer";
 import {DRAWER} from "../../constant";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTIONS
-
-import {
-    setFlashCard,
-    setFlashcardData,
-} from "../../modules/subscription/flashcard";
+import {setFlashCard, setFlashcardData,} from "../../modules/subscription/flashcard";
 
 const mapStateToProps = (state) => {
     const {

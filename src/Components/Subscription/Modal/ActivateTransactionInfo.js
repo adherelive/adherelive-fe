@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Modal, Button} from "antd";
+import {Button, Modal} from "antd";
 import message from "antd/es/message";
 import {useDispatch} from "react-redux";
 import {activateTransaction} from "../../../modules/subscription/transactions";

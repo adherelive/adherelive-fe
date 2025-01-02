@@ -4,19 +4,12 @@ import PatientDetailsDrawer from "../../Components/Drawer/PatientDetails";
 import {DRAWER} from "../../constant";
 import {close} from "../../modules/drawer";
 import {getMedications} from "../../modules/medications";
-import {getPatientDetailsById} from "../../modules/patients";
-import {setPatientForChat, setCareplanForChat} from "../../modules/twilio";
+import {getPatientDetailsById, getPatientMissedEvents} from "../../modules/patients";
+import {setCareplanForChat, setPatientForChat} from "../../modules/twilio";
 import {openPopUp} from "../../modules/chat";
-import {
-    getAppointments,
-    getAppointmentsDetails,
-} from "../../modules/appointments";
-import {getPatientMissedEvents} from "../../modules/patients";
+import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
 // AKSHAY NEW CODE FOR SUBSCRIPTION
-import {
-    setScheduleAppontmentData,
-    getPatientCareplanByPatientId,
-} from "../../modules/subscription/activities";
+import {getPatientCareplanByPatientId, setScheduleAppontmentData,} from "../../modules/subscription/activities";
 // import { getPatientCareplanByPatientId } from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {

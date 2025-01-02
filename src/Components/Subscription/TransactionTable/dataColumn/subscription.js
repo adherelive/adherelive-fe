@@ -1,8 +1,4 @@
 import React from "react";
-import {
-    TABLE_DEFAULT_BLANK_FIELD,
-    CONSULTATION_FEE_TYPE_TEXT,
-} from "../../../../constant";
 import isEmpty from "../../../../Helper/is-empty";
 
 export default (props) => {

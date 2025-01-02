@@ -5,9 +5,8 @@ import {injectIntl} from "react-intl";
 import Select from "antd/es/select";
 import Input from "antd/es/input";
 import messages from "./messages";
-import message from "antd/es/message";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import {Form} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;

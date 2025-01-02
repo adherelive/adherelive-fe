@@ -2,11 +2,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import AddFoodGroupDrawer from "../../Components/Drawer/addFoodGroup";
 import {close} from "../../modules/drawer";
-import {
-    addFoodItem,
-    storeFoodItemAndDetails,
-    updateFoodItem,
-} from "../../modules/foodItems";
+import {addFoodItem, storeFoodItemAndDetails, updateFoodItem,} from "../../modules/foodItems";
 import {searchFood} from "../../modules/searchedFoodItems";
 import {clearLatestCreatedFoodItem} from "../../modules/latestCreatedFood";
 import {googleTranslate} from "../../modules/cdss";

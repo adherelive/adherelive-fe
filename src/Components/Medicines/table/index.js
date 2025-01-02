@@ -8,12 +8,9 @@ import moment from "moment";
 import generateRow from "./dataRow";
 import getColumn from "./header";
 import config from "../../../config";
-
-import message from "antd/es/message";
 import {TABLE_COLUMN} from "./helper";
 
 import messages from "./messages";
-import Icon from "@ant-design/icons";
 import {LoadingOutlined, SearchOutlined} from "@ant-design/icons";
 
 const ALL_TABS = {

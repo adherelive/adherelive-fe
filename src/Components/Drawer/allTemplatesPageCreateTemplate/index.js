@@ -1,23 +1,21 @@
-import {Drawer} from "antd";
+import {Drawer, Switch} from "antd";
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import {
-    WHEN_TO_TAKE_ABBR_LABELS,
-    MEDICATION_TIMING,
+    APPOINTMENT_TYPE_TITLE,
     DAYS_TEXT_NUM_SHORT,
     EVENT_TYPE,
+    MEDICATION_TIMING,
     MEDICATION_TIMING_HOURS,
     MEDICATION_TIMING_MINUTES,
-    TABLET,
-    SYRUP,
     MEDICINE_UNITS,
+    SYRUP,
+    TABLET,
     USER_CATEGORY,
-    APPOINTMENT_TYPE_TITLE,
+    WHEN_TO_TAKE_ABBR_LABELS,
 } from "../../../constant";
 import moment from "moment";
 import message from "antd/es/message";
-import Icon from "antd/es/icon";
-import Button from "antd/es/button";
 import EditMedicationReminder from "../../../Containers/Drawer/editMedicationReminder";
 import EditAppointmentDrawer from "../../../Containers/Drawer/editAppointment";
 import EditVitalDrawer from "../../../Containers/Drawer/editVitals";
@@ -31,9 +29,8 @@ import SyrupIcon from "../../../Assets/images/pharmacy.png";
 import uuid from "react-uuid";
 import messages from "./message";
 import Input from "antd/es/input";
-import {Switch} from "antd";
 import Footer from "../footer";
-import {EditFilled, DeleteFilled} from "@ant-design/icons";
+import {DeleteFilled, EditFilled} from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 import TextArea from "antd/lib/input/TextArea";
 import {getDaysBetweenDates} from "../../../Helper/moment/diffranceInDays";

@@ -1,33 +1,20 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {
-    Drawer,
-    // Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    TimePicker,
-    Modal,
-    Spin,
-} from "antd";
-
-import {Checkbox} from "antd";
+import {Button, Checkbox, Drawer, Input, message, Modal, Select, Spin, TimePicker,} from "antd";
 
 import {
-    WHEN_TO_TAKE_ABBR_TYPES,
-    WHEN_TO_TAKE_ABBR_LABELS,
-    MEDICATION_TIMING,
-    DAYS,
+    APPOINTMENT_TYPE_TITLE,
     DAYS_TEXT_NUM_SHORT,
     EVENT_TYPE,
+    MEDICATION_TIMING,
     MEDICATION_TIMING_HOURS,
     MEDICATION_TIMING_MINUTES,
-    TABLET,
-    SYRUP,
     RADIOLOGY,
+    SYRUP,
+    TABLET,
     USER_CATEGORY,
-    APPOINTMENT_TYPE_TITLE,
+    WHEN_TO_TAKE_ABBR_LABELS,
+    WHEN_TO_TAKE_ABBR_TYPES,
 } from "../../../constant";
 import moment from "moment";
 import EditMedicationReminder from "../../../Containers/Drawer/editMedicationReminder";
@@ -43,14 +30,8 @@ import SyrupIcon from "../../../Assets/images/pharmacy.png";
 import uuid from "react-uuid";
 import messages from "./message";
 import addDays from "date-fns/addDays";
-import getDay from "date-fns/getDay";
-import getYear from "date-fns/getYear";
-import getMonth from "date-fns/getMonth";
-import getHours from "date-fns/getHours";
-import getMinutes from "date-fns/getMinutes";
 
-import {PoweroffOutlined, EditFilled, DeleteFilled} from "@ant-design/icons";
-import Icon from "@ant-design/icons";
+import {DeleteFilled, EditFilled, PoweroffOutlined} from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 
 const {Option} = Select;

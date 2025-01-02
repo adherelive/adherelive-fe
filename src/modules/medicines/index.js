@@ -1,13 +1,13 @@
 import {doRequest} from "../../Helper/network";
 import {REQUEST_TYPE} from "../../constant";
 import {
-    searchMedicines,
-    addMedicineUrl,
     addAdminMedicineUrl,
-    getPublicMedicinesUrl,
-    getPrivateMedicinesUrl,
-    makeMedicinePublicUrl,
+    addMedicineUrl,
     deleteMedicineUrl,
+    getPrivateMedicinesUrl,
+    getPublicMedicinesUrl,
+    makeMedicinePublicUrl,
+    searchMedicines,
 } from "../../Helper/urls/medicines";
 
 export const SEARCH_MEDICINE_START = "SEARCH_MEDICINE_START";

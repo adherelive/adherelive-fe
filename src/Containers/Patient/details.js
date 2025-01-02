@@ -1,28 +1,16 @@
 import PatientDetails from "../../Components/Patient/details";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import {open, close} from "../../modules/drawer";
+import {close, open} from "../../modules/drawer";
 import {getMedications} from "../../modules/medications";
-import {
-    getAppointments,
-    getAppointmentsDetails,
-} from "../../modules/appointments";
-import {
-    requestConsent,
-    consentVerify,
-    getPatientDetailsById,
-} from "../../modules/patients";
+import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
+import {addCareplanForPatient, consentVerify, getPatientDetailsById, requestConsent,} from "../../modules/patients";
 import {searchMedicine} from "../../modules/medicines";
-import {getPatientCarePlanDetails} from "../../modules/carePlans";
-import {addCarePlanMedicationsAndAppointments} from "../../modules/carePlans";
+import {addCarePlanMedicationsAndAppointments, getPatientCarePlanDetails} from "../../modules/carePlans";
 import {DRAWER} from "../../constant";
-import {openPopUp, closePopUp} from "../../modules/chat";
+import {closePopUp, openPopUp} from "../../modules/chat";
 import {fetchChatAccessToken} from "../../modules/twilio";
-import {
-    getLastVisitAlerts,
-    markAppointmentComplete,
-} from "../../modules/scheduleEvents/index";
-import {addCareplanForPatient} from "../../modules/patients";
+import {getLastVisitAlerts, markAppointmentComplete,} from "../../modules/scheduleEvents/index";
 import {storeAppointmentDocuments} from "../../modules/uploadDocuments";
 import {getSymptomTimeLine} from "../../modules/symptoms";
 import {fetchReports} from "../../modules/reports";
@@ -30,27 +18,20 @@ import {getVitalOccurence} from "../../modules/vital_occurence";
 import {searchVital} from "../../modules/vital_templates";
 import {setUnseenNotificationCount} from "../../modules/pages/NotificationCount";
 import {resetNotificationRedirect} from "../../modules/notificationRedirect";
-import {
-    getAllTemplatesForDoctor,
-    getAllTemplatesForDoctorUsingQuery,
-} from "../../modules/carePlanTemplates";
+import {getAllTemplatesForDoctor, getAllTemplatesForDoctorUsingQuery,} from "../../modules/carePlanTemplates";
 import {getPortions} from "../../modules/portions";
 // import { getWorkoutDetails } from "../../modules/workouts";
 // AKSHAY NEW CODE FOR SUBSCRIPTIONS
 import {getServices} from "../../modules/subscription/services";
 import {getSubscriptions} from "../../modules/subscription/subscriptions";
-import {setFlashCard} from "../../modules/subscription/flashcard";
+import {getFlashCardByActivityId, setFlashCard} from "../../modules/subscription/flashcard";
 import {
-    getRecommendServiceAndSubscription,
     getMyTaskOfServiceOrSubscription,
+    getRecommendServiceAndSubscription,
 } from "../../modules/subscription/recommend";
 import {setScheduleAppontmentData} from "../../modules/subscription/activities";
-import {getFlashCardByActivityId} from "../../modules/subscription/flashcard";
 // import { googleTranslate } from "../../modules/cdss";
-import {
-    googleTranslate,
-    googleTranslateMultipleText,
-} from "../../modules/cdss";
+import {googleTranslate, googleTranslateMultipleText,} from "../../modules/cdss";
 import {setPerformaTabs, setPerformaTabsId} from "../../modules/performa";
 
 const mapStateToProps = (state, ownProps) => {

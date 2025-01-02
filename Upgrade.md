@@ -77,12 +77,15 @@ Checking \adherelive-fe\package.json
 ## Phase 1: Environment and Dependency Analysis (2-3 days)
 
 ### 1.1 Setup Testing Environment
+
 - Create a new git branch for Node 18 migration
 - Set up parallel CI/CD pipeline for testing Node 18 builds
 - Create a staging environment running Node 18
 
 ### 1.2 Dependency Audit
+
 Critical packages requiring updates:
+
 - `react-mde` (blocking React 17+ upgrade)
 - `react` and `react-dom` (currently at 16.x)
 - `@ant-design/compatible` (needs version alignment)
@@ -92,6 +95,7 @@ Critical packages requiring updates:
 ## Phase 2: React Ecosystem Upgrade (1-2 weeks)
 
 ### 2.1 React 16 to 17 Migration
+
 1. Replace `react-mde` with modern alternatives:
    ```json
    {
@@ -99,8 +103,8 @@ Critical packages requiring updates:
        "@uiw/react-md-editor": "^3.6.0"     }
    }
    ```
-   
-    Or use the below compatible package
+
+   Or use the below compatible package
    ```json
    {
      "dependencies": {
@@ -126,6 +130,7 @@ Critical packages requiring updates:
    ```
 
 ### 2.2 React 17 to 18 Migration
+
 1. Update React packages:
    ```json
    {
@@ -155,6 +160,7 @@ Critical packages requiring updates:
 ## Phase 3: UI Library Updates (1 week)
 
 ### 3.1 Material UI
+
 ```json
 {
   "dependencies": {
@@ -168,6 +174,7 @@ Critical packages requiring updates:
 ```
 
 ### 3.2 Ant Design
+
 ```json
 {
   "dependencies": {
@@ -181,6 +188,7 @@ Critical packages requiring updates:
 ## Phase 4: Third-party Package Updates (1 week)
 
 ### 4.1 Development Tools
+
 ```json
 {
   "dependencies": {
@@ -192,6 +200,7 @@ Critical packages requiring updates:
 ```
 
 ### 4.2 Feature-specific Packages
+
 ```json
 {
   "dependencies": {
@@ -206,6 +215,7 @@ Critical packages requiring updates:
 ## Phase 5: Node 18 Specific Updates (2-3 days)
 
 ### 5.1 Update package.json
+
 ```json
 {
   "engines": {
@@ -216,6 +226,7 @@ Critical packages requiring updates:
 ```
 
 ### 5.2 Update Build Scripts
+
 - Review and update npm scripts
 - Update CI/CD configurations
 - Update Docker configurations if applicable
@@ -223,6 +234,7 @@ Critical packages requiring updates:
 ## Phase 6: Testing and Validation (1-2 weeks)
 
 ### 6.1 Test Strategy
+
 1. Unit Tests
     - Update test runners
     - Update testing libraries
@@ -239,6 +251,7 @@ Critical packages requiring updates:
     - Performance benchmarking
 
 ### 6.2 Performance Monitoring
+
 - Set up metrics for:
     - Build times
     - Runtime performance
@@ -248,12 +261,14 @@ Critical packages requiring updates:
 ## Phase 7: Deployment (2-3 days)
 
 ### 7.1 Deployment Strategy
+
 1. Update deployment scripts
 2. Configure Node 18 in production environment
 3. Plan rollback strategy
 4. Update monitoring and logging
 
 ### 7.2 Rollout Plan
+
 1. Deploy to development environment
 2. Test in staging environment
 3. Gradual rollout to production
@@ -262,23 +277,27 @@ Critical packages requiring updates:
 ## Timeline and Resources
 
 ### Estimated Timeline
+
 - Total duration: 4-6 weeks
 - Critical path: React ecosystem updates
 - Parallel tracks: UI library updates and third-party package updates
 
 ### Required Resources
+
 - Frontend developers
 - QA engineers
 - DevOps support
 - Product owner for feature validation
 
 ### Risk Mitigation
+
 1. Maintain comprehensive test coverage
 2. Keep detailed documentation of changes
 3. Prepare rollback procedures
 4. Set up feature flags for gradual rollout
 
 ## Success Criteria
+
 - All tests passing
 - Build time within acceptable range
 - Runtime performance metrics meeting targets
@@ -286,6 +305,7 @@ Critical packages requiring updates:
 - All features functioning as expected
 
 ## Post-Migration Tasks
+
 1. Document all changes and updates
 2. Update development guidelines
 3. Clean up deprecated code

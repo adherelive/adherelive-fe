@@ -5,7 +5,7 @@ const exec = util.promisify(require('child_process').exec);
 async function checkDependencyCompatibility() {
     // Read package.json
     const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-    const dependencies = { ...packageJson.dependencies, ...packageJson.devDependencies };
+    const dependencies = {...packageJson.dependencies, ...packageJson.devDependencies};
 
     const results = {
         compatible: [],
@@ -18,7 +18,7 @@ async function checkDependencyCompatibility() {
             console.log(`Checking ${pkg}...`);
 
             // Get package info
-            const { stdout } = await exec(`npm view ${pkg} versions peerDependencies`);
+            const {stdout} = await exec(`npm view ${pkg} versions peerDependencies`);
             const info = JSON.parse(stdout);
 
             // Check peer dependencies
@@ -75,14 +75,14 @@ checkDependencyCompatibility()
         console.log(results.compatible.join('\n'));
 
         console.log('\nIncompatible Packages:', results.incompatible.length);
-        results.incompatible.forEach(({ package, peer, required, current }) => {
+        results.incompatible.forEach(({package, peer, required, current}) => {
             console.log(`\n${package}:`);
             console.log(`  Requires ${peer}@${required}`);
             console.log(`  Current version: ${current}`);
         });
 
         console.log('\nErrors:', results.errors.length);
-        results.errors.forEach(({ package, error }) => {
+        results.errors.forEach(({package, error}) => {
             console.log(`\n${package}:`);
             console.log(`  ${error}`);
         });

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 
 import {Provider} from "react-redux";
-import {IntlProvider, addLocaleData} from "react-intl";
+import {addLocaleData, IntlProvider} from "react-intl";
 import arLocaleData from "react-intl/locale-data/ar";
 import esLocaleData from "react-intl/locale-data/es";
 import hiLocalData from "react-intl/locale-data/hi";

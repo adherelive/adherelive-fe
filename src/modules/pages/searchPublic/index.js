@@ -1,8 +1,4 @@
-import {
-    DELETE_MEDICINE_COMPLETED,
-    GET_PUBLIC_MEDICINES_COMPLETED,
-    RESET_SEARCH_PUBLIC,
-} from "../../medicines";
+import {DELETE_MEDICINE_COMPLETED, GET_PUBLIC_MEDICINES_COMPLETED, RESET_SEARCH_PUBLIC,} from "../../medicines";
 
 const PUBLIC = "public";
 

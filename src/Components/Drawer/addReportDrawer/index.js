@@ -8,17 +8,16 @@ import Modal from "antd/es/modal";
 import Button from "antd/es/button";
 import Footer from "../footer";
 import confirm from "antd/es/modal/confirm";
-import Icon from "antd/es/icon";
 import moment from "moment";
 import DatePicker from "antd/es/date-picker";
 
 import {
     DeleteTwoTone,
-    PlusOutlined,
-    EyeTwoTone,
     DownloadOutlined,
+    EyeTwoTone,
     LoadingOutlined,
     PaperClipOutlined,
+    PlusOutlined,
 } from "@ant-design/icons";
 
 import messages from "./message";
