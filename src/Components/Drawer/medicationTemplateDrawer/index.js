@@ -1746,14 +1746,16 @@ class TemplateDrawer extends Component {
                         {this.formatMessage(messages.medications)}
                     </div>
                     <div className="flex">
-                        {/* {medicationKeys.length > 0 && (
-              <p
-                onClick={() => this.translateHandler("medication")}
-                className="translate-text pointer mr10"
-              >
-                Translate in Hindi
-              </p>
-            )} */}
+                        {
+                            /* {medicationKeys.length > 0 && (
+                              <p
+                                onClick={() => this.translateHandler("medication")}
+                                className="translate-text pointer mr10"
+                              >
+                                Translate in Hindi
+                              </p>
+                            )} */
+                        }
 
                         <div className=" add-more" onClick={this.showAddMedication}>
                             {this.formatMessage(messages.addMore)}
@@ -2043,18 +2045,20 @@ class TemplateDrawer extends Component {
                                     {radiologyType !== "" && ` (${radiologyType})`}
                                 </div>
                                 <div className="drawer-block-description">
-                                    {/* {
-                    date
-                      ? `After ${moment(date).diff(moment(), "days") + 1} days`
-                      : time_gap
-                      ? `After ${time_gap} days`
-                      : ""
+                                    {
+                                        /* {
+                                            date
+                                              ? `After ${moment(date).diff(moment(), "days") + 1} days`
+                                              : time_gap
+                                              ? `After ${time_gap} days`
+                                              : ""
 
-                    // date && `After ${moment(date).diff(moment(), "days")} days`
-                    // // : time_gap
-                    // // ? `After ${time_gap - 1} days`
-                    // // : ""
-                  } */}
+                                            // date && `After ${moment(date).diff(moment(), "days")} days`
+                                            // // : time_gap
+                                            // // ? `After ${time_gap - 1} days`
+                                            // // : ""
+                                          } */
+                                    }
                                     {time_gap == 0 ? "Today" : `After ${time_gap} days`}
                                 </div>
                                 <div className="drawer-block-description">{`Notes:${description}`}</div>
@@ -2068,14 +2072,16 @@ class TemplateDrawer extends Component {
                         {this.formatMessage(messages.actions)}
                     </div>
                     <div className="flex">
-                        {/* {vitalKeys.length > 0 && (
-              <p
-                onClick={() => this.translateHandler("vital")}
-                className="translate-text pointer mr10"
-              >
-                Translate in Hindi
-              </p>
-            )} */}
+                        {
+                            /* {vitalKeys.length > 0 && (
+                              <p
+                                onClick={() => this.translateHandler("vital")}
+                                className="translate-text pointer mr10"
+                              >
+                                Translate in Hindi
+                              </p>
+                            )} */
+                        }
 
                         <div className="flex add-more" onClick={this.showAddVital}>
                             {this.formatMessage(messages.addMore)}
