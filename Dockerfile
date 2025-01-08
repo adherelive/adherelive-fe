@@ -1,4 +1,4 @@
-FROM node:16.10.0 AS builder
+FROM node:22.13.0 AS builder
 #RUN useradd -d /home/azureuser -m -s /bin/bash azureuser
 LABEL application="adherelive-frontend"
 LABEL owner="Akshay Nagargoje"
