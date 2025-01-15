@@ -1451,48 +1451,415 @@ class PatientDetails extends Component {
             <div>{this.formatMessage(messages.actions)}</div>
           </Menu.Item>
         )} */}
-                {authPermissions.includes(USER_PERMISSIONS.VITALS.ADD) && (
-                    <Menu.Item onClick={handleVitals}>
-                        <div>{this.formatMessage(messages.vitals)}</div>
-                    </Menu.Item>
-                )}
-                {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
-                    <Menu.Item onClick={handleAddCareplan}>
-                        <div>{this.formatMessage(messages.newTreatmentPlan)}</div>
-                    </Menu.Item>
-                )}
-                {authPermissions.includes(USER_PERMISSIONS.REPORTS.ADD) && (
-                    <Menu.Item onClick={handleAddReports}>
-                        <div>{this.formatMessage(messages.reports)}</div>
-                    </Menu.Item>
-                )}
 
-                {authPermissions.includes(USER_PERMISSIONS.DIETS.ADD) && (
-                    <Menu.Item onClick={handleAddDiet}>
-                        <div>{this.formatMessage(messages.diet)}</div>
-                    </Menu.Item>
-                )}
+      
+        {authPermissions.includes(USER_PERMISSIONS.VITALS.ADD) && (
+          <Menu.Item onClick={handleVitals}>
+            <div>{this.formatMessage(messages.vitals)}</div>
+          </Menu.Item>
+        )}
+        {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
+          <Menu.Item onClick={handleAddCareplan}>
+            <div>{this.formatMessage(messages.newTreatmentPlan)}</div>
+          </Menu.Item>
+        )}
+        {authPermissions.includes(USER_PERMISSIONS.REPORTS.ADD) && (
+          <Menu.Item onClick={handleAddReports}>
+            <div>{this.formatMessage(messages.reports)}</div>
+          </Menu.Item>
+        )}
 
-                {authPermissions.includes(USER_PERMISSIONS.WORKOUTS.ADD) && (
-                    <Menu.Item onClick={this.handleAddWorkout}>
-                        <div>{this.formatMessage(messages.workout)}</div>
-                    </Menu.Item>
-                )}
+        {authPermissions.includes(USER_PERMISSIONS.DIETS.ADD) && (
+          <Menu.Item onClick={handleAddDiet}>
+            <div>{this.formatMessage(messages.diet)}</div>
+          </Menu.Item>
+        )}
 
-                {authPermissions.includes(USER_PERMISSIONS.DOCTORS.ADD) && (
-                    <Menu.Item onClick={this.handleAddDoctorToCareplan}>
-                        <div>{this.formatMessage(messages.secondary_doctor)}</div>
-                    </Menu.Item>
-                )}
+        {authPermissions.includes(USER_PERMISSIONS.WORKOUTS.ADD) && (
+          <Menu.Item onClick={this.handleAddWorkout}>
+            <div>{this.formatMessage(messages.workout)}</div>
+          </Menu.Item>
+        )}
 
-                {/* {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
+        {authPermissions.includes(USER_PERMISSIONS.DOCTORS.ADD) && (
+          <Menu.Item onClick={this.handleAddDoctorToCareplan}>
+            <div>{this.formatMessage(messages.secondary_doctor)}</div>
+          </Menu.Item>
+        )}
+
+        {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
           <Menu.Item onClick={handleAddPerforma}>
             <div>Add Performa</div>
           </Menu.Item>
-        )} */}
-            </Menu>
-        );
+        )}
+      </Menu>
+    );
+  };
+
+  handleAppointment = (e) => {
+    // e.preventDefault();
+    const { openAppointmentDrawer, patient_id, getAppointmentsDetails } =
+      this.props;
+    getAppointmentsDetails();
+    openAppointmentDrawer({
+      patients: {
+        id: patient_id,
+        first_name: "test",
+        last_name: "patient",
+      },
+      patient_id,
+    });
+  };
+
+  handleAddDiet = (e) => {
+    const { openAddDietDrawer, patient_id } = this.props;
+
+    openAddDietDrawer({
+      patient_id,
+    });
+  };
+
+  handleAddWorkout = (e) => {
+    const { openAddWorkoutDrawer, patient_id } = this.props;
+
+    openAddWorkoutDrawer({
+      patient_id,
+    });
+  };
+
+  handleAddDoctorToCareplan = (e) => {
+    const { openAddSecondaryDoctorDrawer } = this.props;
+    const { selectedCarePlanId = null } = this.state;
+
+    openAddSecondaryDoctorDrawer({
+      selectedCarePlanId,
+    });
+  };
+
+  handleAddCareplan = (e) => {
+    const { openAddCareplanDrawer, patient_id } = this.props;
+    openAddCareplanDrawer({
+      // patients: {
+      //   id: patient_id,
+      //   first_name: "test",
+      //   last_name: "patient"
+      // },
+      // patient_id
+    });
+  };
+
+  handleAddPerforma = (e) => {
+    this.setState({
+      addPerforma: true,
+    });
+  };
+
+  handleAddReports = (e) => {
+    const { openAddReportsDrawer } = this.props;
+    const { patient_id } = this.props;
+
+    openAddReportsDrawer({
+      patient_id,
+    });
+  };
+
+  handleMedicationReminder = (e) => {
+    const { openMReminderDrawer, patient_id } = this.props;
+    openMReminderDrawer({
+      patient_id,
+    });
+  };
+
+  handleVitals = (e) => {
+    const { openVitalsDrawer, patient_id } = this.props;
+    openVitalsDrawer({
+      patient_id,
+    });
+  };
+
+  handleSymptoms = (e) => {
+    const { openSymptomsDrawer, patient_id } = this.props;
+    openSymptomsDrawer({
+      patient_id,
+    });
+  };
+
+  getBodyPartName = (selected_part) => {
+    const { formatMessage } = this;
+    if (selected_part === PART_LIST_CODES.HEAD) {
+      return formatMessage(messages.head);
+    } else if (selected_part === PART_LIST_CODES.LEFT_EYE) {
+      return formatMessage(messages.leftEye);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_EYE) {
+      return formatMessage(messages.rightEye);
+    } else if (selected_part === PART_LIST_CODES.LEFT_EAR) {
+      return formatMessage(messages.leftEar);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_EAR) {
+      return formatMessage(messages.rightEar);
+    } else if (selected_part === PART_LIST_CODES.NOSE) {
+      return formatMessage(messages.nose);
+    } else if (selected_part === PART_LIST_CODES.MOUTH) {
+      return formatMessage(messages.mouth);
+    } else if (selected_part === PART_LIST_CODES.NECK) {
+      return formatMessage(messages.neck);
+    } else if (selected_part === PART_LIST_CODES.LEFT_SHOULDER) {
+      return formatMessage(messages.leftShoulder);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_SHOULDER) {
+      return formatMessage(messages.rightShoulder);
+    } else if (selected_part === PART_LIST_CODES.CHEST) {
+      return formatMessage(messages.chest);
+    } else if (selected_part === PART_LIST_CODES.LEFT_ARM) {
+      return formatMessage(messages.leftArm);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_ARM) {
+      return formatMessage(messages.rightArm);
+    } else if (selected_part === PART_LIST_CODES.LEFT_ELBOW) {
+      return formatMessage(messages.leftElbow);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_ELBOW) {
+      return formatMessage(messages.rightElbow);
+    } else if (selected_part === PART_LIST_CODES.STOMACH) {
+      return formatMessage(messages.stomach);
+    } else if (selected_part === PART_LIST_CODES.ABDOMEN) {
+      return formatMessage(messages.abdomen);
+    } else if (selected_part === PART_LIST_CODES.LEFT_FOREARM) {
+      return formatMessage(messages.leftForearm);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_FOREARM) {
+      return formatMessage(messages.rightForearm);
+    } else if (selected_part === PART_LIST_CODES.LEFT_WRIST) {
+      return formatMessage(messages.leftWrist);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_WRIST) {
+      return formatMessage(messages.rightWrist);
+    } else if (selected_part === PART_LIST_CODES.LEFT_HAND) {
+      return formatMessage(messages.leftHand);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_HAND) {
+      return formatMessage(messages.rightHand);
+    } else if (selected_part === PART_LIST_CODES.LEFT_HAND_FINGER) {
+      return formatMessage(messages.leftHandFingers);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_HAND_FINGER) {
+      return formatMessage(messages.rightHandFingers);
+    } else if (selected_part === PART_LIST_CODES.LEFT_HIP) {
+      return formatMessage(messages.leftHip);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_HIP) {
+      return formatMessage(messages.rightHip);
+    } else if (selected_part === PART_LIST_CODES.LEFT_THIGH) {
+      return formatMessage(messages.leftThigh);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_THIGH) {
+      return formatMessage(messages.rightThigh);
+    } else if (selected_part === PART_LIST_CODES.LEFT_KNEE) {
+      return formatMessage(messages.leftKnee);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_KNEE) {
+      return formatMessage(messages.rightKnee);
+    } else if (selected_part === PART_LIST_CODES.LEFT_SHIN) {
+      return formatMessage(messages.leftShin);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_SHIN) {
+      return formatMessage(messages.rightShin);
+    } else if (selected_part === PART_LIST_CODES.LEFT_ANKLE) {
+      return formatMessage(messages.leftAnkle);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_ANKLE) {
+      return formatMessage(messages.rightAnkle);
+    } else if (selected_part === PART_LIST_CODES.LEFT_FOOT) {
+      return formatMessage(messages.leftFoot);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_FOOT) {
+      return formatMessage(messages.rightFoot);
+    } else if (selected_part === PART_LIST_CODES.LEFT_TOE) {
+      return formatMessage(messages.leftToe);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_TOE) {
+      return formatMessage(messages.rightToe);
+    } else if (selected_part === PART_LIST_CODES.RECTUM) {
+      return formatMessage(messages.rectum);
+    } else if (selected_part === PART_LIST_CODES.URINARY_BLADDER) {
+      return formatMessage(messages.urinary);
+    } else if (selected_part === PART_LIST_CODES.HEAD_BACK) {
+      return formatMessage(messages.head);
+    } else if (selected_part === PART_LIST_CODES.NECK_BACK) {
+      return formatMessage(messages.neck);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_SHOULDER_BACK) {
+      return formatMessage(messages.rightShoulder);
+    } else if (selected_part === PART_LIST_CODES.LEFT_SHOULDER_BACK) {
+      return formatMessage(messages.leftShoulder);
+    } else if (selected_part === PART_LIST_CODES.BACK) {
+      return formatMessage(messages.back);
+    } else if (selected_part === PART_LIST_CODES.LOWER_BACK) {
+      return formatMessage(messages.lowerBack);
+    } else if (selected_part === PART_LIST_CODES.LEFT_TRICEP) {
+      return formatMessage(messages.leftTricep);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_TRICEP) {
+      return formatMessage(messages.rightTricep);
+    } else if (selected_part === PART_LIST_CODES.LEFT_FOREARM_BACK) {
+      return formatMessage(messages.leftForearm);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_FOREARM_BACK) {
+      return formatMessage(messages.rightForearm);
+    } else if (selected_part === PART_LIST_CODES.LEFT_HAMSTRING) {
+      return formatMessage(messages.leftHamString);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_HAMSTRING) {
+      return formatMessage(messages.rightHamString);
+    } else if (selected_part === PART_LIST_CODES.LEFT_CALF) {
+      return formatMessage(messages.leftCalf);
+    } else if (selected_part === PART_LIST_CODES.RIGHT_CALF) {
+      return formatMessage(messages.rightCalf);
+    }
+  };
+
+  showTemplateDrawer = () => {
+    this.setState({ templateDrawerVisible: true });
+  };
+
+  // onRowAppointment = ({id,carePlan}) => () => {
+  //   console.log("38248274826384628423");
+  //   const { onRowClickAppointment } = this;
+  //   return {
+  //     onClick: onRowClickAppointment({id,carePlan})
+  //   };
+  // };
+
+  onRowAppointment =
+    ({ id, carePlan }) =>
+    () => {
+      console.log("38248274826384628423");
+
+      const {
+        openEditAppointmentDrawer,
+        patient_id,
+        auth_role = null,
+        getAppointmentsDetails,
+      } = this.props;
+      const { isOtherCarePlan = false } = this.state;
+      const { basic_info: { user_role_id = null } = {} } = carePlan || {};
+      let canViewDetails = true;
+      if (
+        (!isOtherCarePlan &&
+          user_role_id.toString() === auth_role.toString()) ||
+        // AKSHAY NEW CODE IMPLEMENTATIONS
+        (!isEmpty(carePlan) &&
+          carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true)
+      ) {
+        canViewDetails = false;
+      }
+      getAppointmentsDetails();
+      openEditAppointmentDrawer({ id, patient_id, canViewDetails });
     };
+
+  onRowClickMedication = (key) => (event) => {
+    const { openEditMedicationDrawer, patient_id } = this.props;
+    openEditMedicationDrawer({ id: key, patient_id });
+    //this.props.history.push(getGetFacilitiesUrl(key));
+  };
+
+  onRowMedication = (record, rowIndex) => {
+    const { onRowClickMedication } = this;
+    const { key } = record;
+    return {
+      onClick: onRowClickMedication(key),
+    };
+  };
+
+  onRowClickSymptoms = (record) => (event) => {
+    const { openSymptomsDrawer, patient_id } = this.props;
+    openSymptomsDrawer({ data: record, patient_id });
+    //this.props.history.push(getGetFacilitiesUrl(key));
+  };
+
+  onRowSymptoms = (record, rowIndex) => {
+    const { onRowClickSymptoms } = this;
+    // const { key } = record;
+    return {
+      onClick: onRowClickSymptoms(record),
+    };
+  };
+
+  handlePatientLastVisitAlert = () => {
+    const { getLastVisitAlerts, patient_id } = this.props;
+
+    getLastVisitAlerts(patient_id).then((response) => {
+      const {
+        status = false,
+        statusCode,
+        payload: {
+          error: { error_type = "" } = {},
+          message: errorMessage = "",
+        } = {},
+      } = response;
+
+      if (status) {
+        let data = response.payload.data;
+      } else {
+        message.error(this.formatMessage(messages.somethingWentWrong));
+      }
+    });
+  };
+
+  // handleSubmitTemplate = data => {
+  //   const {
+  //     addCarePlanMedicationsAndAppointments,
+  //     getMedications,
+  //     getAppointments,
+  //     care_plans,
+  //     patient_id,
+  //     getPatientCarePlanDetails
+  //   } = this.props;
+  //
+  //   let carePlanId = 1;
+  //   for (let carePlan of Object.values(care_plans)) {
+  //     let {
+  //       basic_info: { id = 1, patient_id: patientId = 1 }
+  //     } = carePlan;
+  //     if (patient_id == patientId) {
+  //       carePlanId = id;
+  //     }
+  //   }
+  //   addCarePlanMedicationsAndAppointments(data, carePlanId).then(response => {
+  //     const {
+  //       status = false,
+  //       statusCode,
+  //       payload: {
+  //         error: { error_type = "" } = {},
+  //         message: errorMessage = ""
+  //       } = {}
+  //     } = response;
+  //     if (status) {
+  //       this.onCloseTemplate();
+  //
+  //       message.success(this.formatMessage(messages.carePlanUpdated));
+  //       getMedications(patient_id).then(() => {
+  //         getAppointments(patient_id).then(() => {
+  //           getPatientCarePlanDetails(patient_id);
+  //         });
+  //       });
+  //     } else {
+  //       if (statusCode === 422 && error_type == "slot_present") {
+  //         message.error(this.formatMessage(messages.slotPresent));
+  //       } else if (statusCode === 422) {
+  //         message.error(errorMessage);
+  //       } else {
+  //         message.error(this.formatMessage(messages.somethingWentWrong));
+  //       }
+  //     }
+  //   });
+  // };
+  openVideoChatTab = (roomId) => () => {
+    const videoCallBlocked = this.checkVideoCallIsBlocked();
+
+    if (videoCallBlocked) {
+      message.error(this.formatMessage(messages.videoCallBlocked));
+      return;
+    }
+    window.open(
+      `${config.WEB_URL}/test${getPatientConsultingVideoUrl(roomId)}`,
+      "_blank"
+    );
+  };
+
+  checkVideoCallIsBlocked = () => {
+    const { features_mappings = {} } = this.props;
+    let videoCallBlocked = false;
+    const videoCallFeatureId = this.getFeatureId(FEATURES.VIDEO_CALL);
+    const otherUserCategoryId = this.getOtherUserCategoryId();
+    const { [otherUserCategoryId]: mappingsData = [] } = features_mappings;
+
+    if (mappingsData.indexOf(videoCallFeatureId) >= 0) {
+      videoCallBlocked = false;
+    } else {
+      videoCallBlocked = true;
+    }
 
     handleAppointment = (e) => {
         // e.preventDefault();

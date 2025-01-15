@@ -232,6 +232,47 @@ function Reason({onCloseDrawer, visible, activityData, status}) {
             </Drawer>
         </Fragment>
     );
+  };
+
+  const onSubmit = async () => {};
+
+  const { consultation, submitting } = values;
+
+  return (
+    <Fragment>
+      <Drawer
+        title={"Reassignment Audit"}
+        placement="right"
+        maskClosable={false}
+        headerStyle={{
+          position: "sticky",
+          zIndex: "9999",
+          top: "0px",
+        }}
+        destroyOnClose={true}
+        onClose={onCloseDrawer}
+        visible={visible} // todo: change as per state, -- WIP --
+        width={400}
+      >
+        {renderReasonDrawer()}
+        <div className="add-patient-footer">
+          <Button onClick={onCloseDrawer} style={{ marginRight: 8 }}>
+            {/* {this.formatMessage(messages.cancel)} */}
+            Cancel
+          </Button>
+          {/* <Button
+            onClick={onSubmit}
+            type="primary"
+          
+            loading={submitting}
+          >
+           
+            Submit
+          </Button> */}
+        </div>
+      </Drawer>
+    </Fragment>
+  );
 }
 
 export default Reason;
