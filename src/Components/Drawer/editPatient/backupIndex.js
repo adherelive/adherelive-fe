@@ -1054,7 +1054,7 @@
 //     ) {
 //       //handle case of newBorn
 
-//       message.error(this.formatMessage(messages.validdobError));
+//       message.error(this.formatMessage(messages.validDobError));
 //       return false;
 //     } else if (!treatment) {
 //       message.error(this.formatMessage(messages.treatmentError));

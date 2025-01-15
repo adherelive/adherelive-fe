@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { injectIntl } from "react-intl";
-import { Table, Icon, Empty, Select } from "antd";
+import React, {Component} from "react";
+import {injectIntl} from "react-intl";
+import {Table, Icon, Empty, Select} from "antd";
 import generateRow from "./datarow";
 // import { USER_PERMISSIONS } from '../../../constant'
 import getColumn from "./header";
@@ -11,258 +11,259 @@ import MyTasks from "../Drawer/MyTasks/index";
 import Button from "antd/es/button";
 import Input from "antd/es/input";
 import SearchOutlined from "@ant-design/icons/SearchOutlined";
-import { TABLE_COLUMN } from "./helper";
+import {TABLE_COLUMN} from "./helper";
 import AddAppointmentDrawer from "./../../../Containers/Drawer/addAppointment";
-import { LoadingOutlined } from "@ant-design/icons";
+import {LoadingOutlined} from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 import Reassignment from "../../Subscription/Drawer/Reassignment/Reassignment";
 import Reason from "../../Subscription/Drawer/Reassignment/Reason";
 
 class PendingActivitiesTable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editServiceDrawer: false,
-      myTasksDrawer: false,
-      sortState: 0,
-      searchPatient: "",
-      patientOptions: [],
-      searchPatientId: "",
-      reassignmentDrawer: false,
-      reasonDrawer: false,
-      patientId: "",
-      activityData: "",
+    constructor(props) {
+        super(props);
+        this.state = {
+            editServiceDrawer: false,
+            myTasksDrawer: false,
+            sortState: 0,
+            searchPatient: "",
+            patientOptions: [],
+            searchPatientId: "",
+            reassignmentDrawer: false,
+            reasonDrawer: false,
+            patientId: "",
+            activityData: "",
+        };
+    }
+
+    componentDidMount() {
+        const {getAllActivities, getAppointmentsDetails} = this.props;
+        getAllActivities("pending");
+        getAppointmentsDetails();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+    }
+
+    getLoadingComponent = () => {
+        const antIcon = <LoadingOutlined style={{fontSize: 24}} spin/>;
+        return {
+            indicator: antIcon,
+        };
     };
-  }
 
-  componentDidMount() {
-    const { getAllActivities, getAppointmentsDetails } = this.props;
-    getAllActivities("pending");
-    getAppointmentsDetails();
-  }
-
-  componentDidUpdate(prevProps, prevState) {}
-
-  getLoadingComponent = () => {
-    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-    return {
-      indicator: antIcon,
+    onCloseDrawer = () => {
+        this.setState({
+            editServiceDrawer: false,
+            myTasksDrawer: false,
+            reassignmentDrawer: false,
+            reasonDrawer: false,
+        });
     };
-  };
 
-  onCloseDrawer = () => {
-    this.setState({
-      editServiceDrawer: false,
-      myTasksDrawer: false,
-      reassignmentDrawer: false,
-      reasonDrawer: false,
-    });
-  };
+    onOpenEditServiceDrawer = () => {
+        this.setState({editServiceDrawer: true});
+    };
+    onOpenMyTasksDrawer = () => {
+        this.setState({myTasksDrawer: true});
+    };
 
-  onOpenEditServiceDrawer = () => {
-    this.setState({ editServiceDrawer: true });
-  };
-  onOpenMyTasksDrawer = () => {
-    this.setState({ myTasksDrawer: true });
-  };
+    scheduleHanlder = (activityData) => {
+        const {openAppointmentDrawer, setScheduleAppontmentData} = this.props;
 
-  scheduleHanlder = (activityData) => {
-    const { openAppointmentDrawer, setScheduleAppontmentData } = this.props;
+        let finalActivityData = activityData;
+        let patientId = activityData.patient_id;
+        finalActivityData.fromButton = "schedule";
+        setScheduleAppontmentData(finalActivityData);
 
-    let finalActivityData = activityData;
-    let patientId = activityData.patient_id;
-    finalActivityData.fromButton = "schedule";
-    setScheduleAppontmentData(finalActivityData);
+        openAppointmentDrawer({
+            patients: {
+                id: patientId,
+                first_name: "test",
+                last_name: "patient",
+            },
+            patientId,
+        });
+    };
 
-    openAppointmentDrawer({
-      patients: {
-        id: patientId,
-        first_name: "test",
-        last_name: "patient",
-      },
-      patientId,
-    });
-  };
+    reassignmentHandler = (activityData) => {
+        console.log("activityData", activityData);
+        let patientId = activityData.patient_id;
+        this.setState({
+            reassignmentDrawer: true,
+            patientId: patientId,
+            activityData: activityData,
+        });
+    };
 
-  reassignmentHandler = (activityData) => {
-    console.log("activityData", activityData);
-    let patientId = activityData.patient_id;
-    this.setState({
-      reassignmentDrawer: true,
-      patientId: patientId,
-      activityData: activityData,
-    });
-  };
+    reasonHandler = (activityData) => {
+        console.log("activityData", activityData);
+        let patientId = activityData.patient_id;
+        this.setState({
+            reasonDrawer: true,
+            patientId: patientId,
+            activityData: activityData,
+        });
+    };
 
-  reasonHandler = (activityData) => {
-    console.log("activityData", activityData);
-    let patientId = activityData.patient_id;
-    this.setState({
-      reasonDrawer: true,
-      patientId: patientId,
-      activityData: activityData,
-    });
-  };
+    startHandler = (activityData) => {
+        const {
+            openAppointmentDrawer,
+            history,
+            setFlashCard,
+            setScheduleAppontmentData,
+        } = this.props;
+        if (activityData.details.service_offering_name === "Remote monitoring") {
+            let finalActivityData = activityData;
+            finalActivityData.fromButton = "start";
+            localStorage.setItem("flashcardOpen", true);
+            setFlashCard(true);
+            setScheduleAppontmentData(finalActivityData);
+            history.push(`patients/${activityData.patient_id}`);
+        } else {
+            let patientId = activityData.patient_id;
+            let finalActivityData = activityData;
+            finalActivityData.fromButton = "start";
+            setScheduleAppontmentData(finalActivityData);
 
-  startHandler = (activityData) => {
-    const {
-      openAppointmentDrawer,
-      history,
-      setFlashCard,
-      setScheduleAppontmentData,
-    } = this.props;
-    if (activityData.details.service_offering_name === "Remote monitoring") {
-      let finalActivityData = activityData;
-      finalActivityData.fromButton = "start";
-      localStorage.setItem("flashcardOpen", true);
-      setFlashCard(true);
-      setScheduleAppontmentData(finalActivityData);
-      history.push(`patients/${activityData.patient_id}`);
-    } else {
-      let patientId = activityData.patient_id;
-      let finalActivityData = activityData;
-      finalActivityData.fromButton = "start";
-      setScheduleAppontmentData(finalActivityData);
+            openAppointmentDrawer({
+                patients: {
+                    id: patientId,
+                    first_name: "test",
+                    last_name: "patient",
+                },
+                patientId,
+            });
+        }
+    };
 
-      openAppointmentDrawer({
-        patients: {
-          id: patientId,
-          first_name: "test",
-          last_name: "patient",
-        },
-        patientId,
-      });
-    }
-  };
+    onPatientNameClick = (activityData) => {
+        const {openPatientDetailsDrawer} = this.props;
+        openPatientDetailsDrawer({patient_id: activityData.patient_id});
+    };
 
-  onPatientNameClick = (activityData) => {
-    const { openPatientDetailsDrawer } = this.props;
-    openPatientDetailsDrawer({ patient_id: activityData.patient_id });
-  };
+    formatMessage = (data) => this.props.intl.formatMessage(data);
 
-  formatMessage = (data) => this.props.intl.formatMessage(data);
+    getDataSource = () => {
+        const {
+            activities,
+            // doctors = {},
+            // doctorPaymentProducts={},
+            // deleteDoctorPaymentProduct,
+            // openConsultationFeeDrawer,
+            // intl: { formatMessage } = {},
+            // payment_products = {},
+            history,
+        } = this.props;
 
-  getDataSource = () => {
-    const {
-      activities,
-      // doctors = {},
-      // doctorPaymentProducts={},
-      // deleteDoctorPaymentProduct,
-      // openConsultationFeeDrawer,
-      // intl: { formatMessage } = {},
-      // payment_products = {},
-      history,
-    } = this.props;
+        let finalObject = activities;
+        // let filteredArray = Object.keys(activities).forEach(function (key) {
+        //   if (activities[key].status === "pending") {
+        //     finalObject[key] = activities[key];
+        //   }
+        // });
 
-    let finalObject = activities;
-    // let filteredArray = Object.keys(activities).forEach(function (key) {
-    //   if (activities[key].status === "pending") {
-    //     finalObject[key] = activities[key];
-    //   }
-    // });
+        let options = [];
 
-    let options = [];
+        for (let each in finalObject) {
+            options.push(
+                generateRow({
+                    id: finalObject[each].id,
+                    activities: finalObject[each],
+                    history,
+                    scheduleHanlder: this.scheduleHanlder,
+                    startHandler: this.startHandler,
+                    onPatientNameClick: this.onPatientNameClick,
+                    reassignmentHandler: this.reassignmentHandler,
+                    reasonHandler: this.reasonHandler,
+                    // transaction_ids,
+                    // payment_products,
+                    // patients,
+                    // doctors,
+                    // users,
+                    // authenticated_category,
+                    // user_roles,
+                })
+            );
+        }
 
-    for (let each in finalObject) {
-      options.push(
-        generateRow({
-          id: finalObject[each].id,
-          activities: finalObject[each],
-          history,
-          scheduleHanlder: this.scheduleHanlder,
-          startHandler: this.startHandler,
-          onPatientNameClick: this.onPatientNameClick,
-          reassignmentHandler: this.reassignmentHandler,
-          reasonHandler: this.reasonHandler,
-          // transaction_ids,
-          // payment_products,
-          // patients,
-          // doctors,
-          // users,
-          // authenticated_category,
-          // user_roles,
-        })
-      );
-    }
+        return options;
+    };
 
-    return options;
-  };
+    // SEARCH PATIENTS HANDLER
 
-  // SEARCH PATIENTS HANDLER
+    handleSearch = (selectedKeys, confirm, dataIndex) => {
+        const {searchPatientId} = this.state;
 
-  handleSearch = (selectedKeys, confirm, dataIndex) => {
-    const { searchPatientId } = this.state;
+        if (isEmpty(searchPatientId)) {
+            alert("Please select patient");
+        } else {
+            alert(JSON.stringify(searchPatientId));
+        }
+        // console.log("searchPatient", this.state.searchPatient);
+        // console.log("selectedKeys", selectedKeys);
+        // console.log("dataIndex", dataIndex);
+        // console.log("confirm", confirm);
+        // alert(JSON.stringify(selectedKeys[0]));
+        confirm();
+        // this.setState({
+        //   searchText: selectedKeys[0],
+        //   searchedColumn: dataIndex,
+        // });
+    };
 
-    if (isEmpty(searchPatientId)) {
-      alert("Please select patient");
-    } else {
-      alert(JSON.stringify(searchPatientId));
-    }
-    // console.log("searchPatient", this.state.searchPatient);
-    // console.log("selectedKeys", selectedKeys);
-    // console.log("dataIndex", dataIndex);
-    // console.log("confirm", confirm);
-    // alert(JSON.stringify(selectedKeys[0]));
-    confirm();
-    // this.setState({
-    //   searchText: selectedKeys[0],
-    //   searchedColumn: dataIndex,
-    // });
-  };
+    handleReset = (clearFilters) => {
+        clearFilters();
+        this.setState({searchPatient: ""});
+    };
 
-  handleReset = (clearFilters) => {
-    clearFilters();
-    this.setState({ searchPatient: "" });
-  };
+    handlePatientSelect = (value, data) => {
+        this.setState({
+            searchPatient: data.value,
+            searchPatientId: data.id,
+        });
+    };
+    handlePatientChange = async (value) => {
+        const {searchTxActivites} = this.props;
+        const response = await searchTxActivites(value);
 
-  handlePatientSelect = (value, data) => {
-    this.setState({
-      searchPatient: data.value,
-      searchPatientId: data.id,
-    });
-  };
-  handlePatientChange = async (value) => {
-    const { searchTxActivites } = this.props;
-    const response = await searchTxActivites(value);
+        const {
+            payload: {
+                data: {patients = []},
+            },
+        } = response;
 
-    const {
-      payload: {
-        data: { patients = [] },
-      },
-    } = response;
+        this.setState({patientOptions: patients});
+    };
 
-    this.setState({ patientOptions: patients });
-  };
+    getPatientNameOptions = () => {
+        const {patientOptions} = this.state;
+        const {Option} = Select;
 
-  getPatientNameOptions = () => {
-    const { patientOptions } = this.state;
-    const { Option } = Select;
+        const children = [];
 
-    const children = [];
+        for (let each in patientOptions) {
+            children.push(
+                <Option
+                    key={patientOptions[each].full_name}
+                    id={patientOptions[each].id}
+                >
+                    {patientOptions[each].full_name}
+                </Option>
+            );
+        }
 
-    for (let each in patientOptions) {
-      children.push(
-        <Option
-          key={patientOptions[each].full_name}
-          id={patientOptions[each].id}
-        >
-          {patientOptions[each].full_name}
-        </Option>
-      );
-    }
+        return children;
+    };
 
-    return children;
-  };
-
-  getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8, width: "300px" }}>
-        {/* <Input
+    getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({
+                             setSelectedKeys,
+                             selectedKeys,
+                             confirm,
+                             clearFilters,
+                         }) => (
+            <div style={{padding: 8, width: "300px"}}>
+                {/* <Input
           ref={(node) => {
             this.searchInput = node;
           }}
@@ -277,226 +278,226 @@ class PendingActivitiesTable extends Component {
           style={{ width: "100%", marginBottom: 8, display: "block" }}
         /> */}
 
-        <div className="mt10 mb10  cdss-select">
-          <Select
-            showSearch={true}
-            // mode="tags"
-            style={{ width: "100%" }}
-            // tokenSeparators={[","]}
-            placeholder="Search for patient"
-            onSearch={this.handlePatientChange}
-            onChange={this.handlePatientSelect}
-            value={this.state.searchPatient}
-            // onDeselect={hendleSymptomDeselect}
-          >
-            {/* {children} */}
-            {this.getPatientNameOptions()}
-          </Select>
-        </div>
+                <div className="mt10 mb10  cdss-select">
+                    <Select
+                        showSearch={true}
+                        // mode="tags"
+                        style={{width: "100%"}}
+                        // tokenSeparators={[","]}
+                        placeholder="Search for patient"
+                        onSearch={this.handlePatientChange}
+                        onChange={this.handlePatientSelect}
+                        value={this.state.searchPatient}
+                        // onDeselect={hendleSymptomDeselect}
+                    >
+                        {/* {children} */}
+                        {this.getPatientNameOptions()}
+                    </Select>
+                </div>
 
-        <Button
-          type="primary"
-          onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          icon={<SearchOutlined />}
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-          {this.formatMessage(messages.searchText)}
-        </Button>
-        <Button
-          onClick={() => this.handleReset(clearFilters)}
-          size="small"
-          style={{ width: 90 }}
-        >
-          {this.formatMessage(messages.resetText)}
-        </Button>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-    ),
-    onFilter: (value, record) => {
-      if (dataIndex === TABLE_COLUMN.PATIENT.dataIndex) {
-        // const { carePlanData = {} } = record[dataIndex] || {};
-        // const { treatment = "" } = carePlanData;
-        // return treatment
-        //   ? treatment.toString().toLowerCase().includes(value.toLowerCase())
-        //   : "";
-      } else if (dataIndex === TABLE_COLUMN.PATIENT.dataIndex) {
-        // const { patientData = {} } = record[dataIndex] || {};
-        // const { carePlanData = {} } = patientData;
-        // const { details: { diagnosis = {} } = {} } = carePlanData;
-        // const { type = "1", description = "" } = diagnosis || {};
-        // const diagnosisType = DIAGNOSIS_TYPE[type];
-        // const diagnosisTypeValue = diagnosisType["value"] || "";
-        // const recordText = `${diagnosisTypeValue} ${description}`;
-        // return recordText
-        //   ? recordText.toString().toLowerCase().includes(value.toLowerCase())
-        //   : "";
-      }
-    },
-    // onFilterDropdownVisibleChange: (visible) => {
-    //   if (visible) {
-    //     setTimeout(() => this.searchInput.select(), 100);
-    //   }
-    // },
-  });
+                <Button
+                    type="primary"
+                    onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+                    icon={<SearchOutlined/>}
+                    size="small"
+                    style={{width: 90, marginRight: 8}}
+                >
+                    {this.formatMessage(messages.searchText)}
+                </Button>
+                <Button
+                    onClick={() => this.handleReset(clearFilters)}
+                    size="small"
+                    style={{width: 90}}
+                >
+                    {this.formatMessage(messages.resetText)}
+                </Button>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined style={{color: filtered ? "#1890ff" : undefined}}/>
+        ),
+        onFilter: (value, record) => {
+            if (dataIndex === TABLE_COLUMN.PATIENT.dataIndex) {
+                // const { carePlanData = {} } = record[dataIndex] || {};
+                // const { treatment = "" } = carePlanData;
+                // return treatment
+                //   ? treatment.toString().toLowerCase().includes(value.toLowerCase())
+                //   : "";
+            } else if (dataIndex === TABLE_COLUMN.PATIENT.dataIndex) {
+                // const { patientData = {} } = record[dataIndex] || {};
+                // const { carePlanData = {} } = patientData;
+                // const { details: { diagnosis = {} } = {} } = carePlanData;
+                // const { type = "1", description = "" } = diagnosis || {};
+                // const diagnosisType = DIAGNOSIS_TYPE[type];
+                // const diagnosisTypeValue = diagnosisType["value"] || "";
+                // const recordText = `${diagnosisTypeValue} ${description}`;
+                // return recordText
+                //   ? recordText.toString().toLowerCase().includes(value.toLowerCase())
+                //   : "";
+            }
+        },
+        // onFilterDropdownVisibleChange: (visible) => {
+        //   if (visible) {
+        //     setTimeout(() => this.searchInput.select(), 100);
+        //   }
+        // },
+    });
 
-  onChange = (pagination, filters, sorter, extra) => {
-    const { getAllActivities } = this.props;
-    const { columnKey, order } = sorter;
-    console.log("columnKey", columnKey);
+    onChange = (pagination, filters, sorter, extra) => {
+        const {getAllActivities} = this.props;
+        const {columnKey, order} = sorter;
+        console.log("columnKey", columnKey);
 
-    console.log("order", order);
-    if (order === "descend") {
-      getAllActivities("pending", "ASC");
-      this.setState({
-        sortState: 1,
-      });
-    } else {
-      getAllActivities("pending", "DESC");
-      this.setState({
-        sortState: 0,
-      });
+        console.log("order", order);
+        if (order === "descend") {
+            getAllActivities("pending", "ASC");
+            this.setState({
+                sortState: 1,
+            });
+        } else {
+            getAllActivities("pending", "DESC");
+            this.setState({
+                sortState: 0,
+            });
+        }
+
+        // const {
+        //   currentTab = CURRENT_TAB.ALL_PATIENTS,
+        //   tabState = {},
+        //   sortByName,
+        //   sortByCreatedAt,
+        //   changeTabState,
+        // } = this.props;
+
+        // const { searchTreatmentText = "", searchDiagnosisText = "" } = this.state;
+
+        // if (
+        //   (columnKey !== TABLE_COLUMN.CREATED_AT.key &&
+        //     columnKey !== TABLE_COLUMN.PID.key) ||
+        //   searchTreatmentText.length > 0 ||
+        //   searchDiagnosisText.length > 0
+        // ) {
+        //   return;
+        // }
+
+        // if (columnKey === TABLE_COLUMN.CREATED_AT.key) {
+        //   if (!order) {
+        //     // sort by createdAt  asc
+        //     sortByCreatedAt({ currentTab });
+        //     changeTabState({ currentTab, type: SORT_CREATEDAT, value: 1 });
+        //   } else {
+        //     // sort by created at asc or desc
+
+        //     sortByCreatedAt({ currentTab });
+
+        //     if (order === ASCEND) {
+        //       changeTabState({ currentTab, type: SORT_CREATEDAT, value: 1 });
+        //     } else if (order === DESCEND) {
+        //       changeTabState({ currentTab, type: SORT_CREATEDAT, value: 0 });
+        //     }
+        //   }
+        // } else if (columnKey === TABLE_COLUMN.PID.key) {
+        //   if (!order) {
+        //     // sort by name ascending
+
+        //     sortByName({ currentTab });
+        //     changeTabState({ currentTab, type: SORT_NAME, value: 0 });
+        //   } else {
+        //     // sort ascending or descending
+        //     sortByName({ currentTab });
+
+        //     if (order === ASCEND) {
+        //       changeTabState({ currentTab, type: SORT_NAME, value: 0 });
+        //     } else if (order === DESCEND) {
+        //       changeTabState({ currentTab, type: SORT_NAME, value: 1 });
+        //     }
+        //   }
+        // }
+
+        // this.handleGetPatients();
+    };
+
+    render() {
+        const {
+            editServiceDrawer,
+            myTasksDrawer,
+            reassignmentDrawer,
+            reasonDrawer,
+        } = this.state;
+        const {
+            // onRow,
+            onSelectChange,
+            // getLoadingComponent,
+            getDataSource,
+        } = this;
+
+        const rowSelection = {
+            onChange: onSelectChange,
+        };
+
+        const {
+            loading,
+            pagination_bottom,
+            authPermissions = [],
+            intl: {formatMessage} = {},
+        } = this.props;
+
+        const locale = {
+            //   emptyText: this.formatMessage(messages.emptyConsultationTable),
+            emptyText: "No consultation fee to display yet",
+        };
+
+        const careplanId = 1;
+
+        return (
+            <>
+                <Table
+                    // onRow={authPermissions.includes(USER_PERMISSIONS.PATIENTS.VIEW) ? onRow : null}
+                    rowClassName={() => "pointer"}
+                    // loading={loading === true ? getLoadingComponent() : false}
+                    columns={getColumn({
+                        //   formatMessage,
+                        sortState: this.state.sortState,
+                        className: "pointer",
+                        getColumnSearchProps: this.getColumnSearchProps,
+                    })}
+                    dataSource={getDataSource()}
+                    scroll={{x: "100%"}}
+                    pagination={{
+                        position: "bottom",
+                        pageSize: 10,
+                    }}
+                    locale={locale}
+                    onChange={this.onChange}
+                />
+                {editServiceDrawer === true && (
+                    <EditRecommendSubscription
+                        visible={editServiceDrawer}
+                        onCloseDrawer={this.onCloseDrawer}
+                    />
+                )}
+                {myTasksDrawer === true && (
+                    <MyTasks visible={myTasksDrawer} onCloseDrawer={this.onCloseDrawer}/>
+                )}
+                {reassignmentDrawer === true && (
+                    <Reassignment
+                        visible={reassignmentDrawer}
+                        onCloseDrawer={this.onCloseDrawer}
+                        activityData={this.state.activityData}
+                        status={"pending"}
+                    />
+                )}
+                {reasonDrawer === true && (
+                    <Reason
+                        visible={reasonDrawer}
+                        onCloseDrawer={this.onCloseDrawer}
+                        activityData={this.state.activityData}
+                    />
+                )}
+                <AddAppointmentDrawer carePlanId={careplanId}/>
+            </>
+        );
     }
-
-    // const {
-    //   currentTab = CURRENT_TAB.ALL_PATIENTS,
-    //   tabState = {},
-    //   sortByName,
-    //   sortByCreatedAt,
-    //   changeTabState,
-    // } = this.props;
-
-    // const { searchTreatmentText = "", searchDiagnosisText = "" } = this.state;
-
-    // if (
-    //   (columnKey !== TABLE_COLUMN.CREATED_AT.key &&
-    //     columnKey !== TABLE_COLUMN.PID.key) ||
-    //   searchTreatmentText.length > 0 ||
-    //   searchDiagnosisText.length > 0
-    // ) {
-    //   return;
-    // }
-
-    // if (columnKey === TABLE_COLUMN.CREATED_AT.key) {
-    //   if (!order) {
-    //     // sort by createdAt  asc
-    //     sortByCreatedAt({ currentTab });
-    //     changeTabState({ currentTab, type: SORT_CREATEDAT, value: 1 });
-    //   } else {
-    //     // sort by created at asc or desc
-
-    //     sortByCreatedAt({ currentTab });
-
-    //     if (order === ASCEND) {
-    //       changeTabState({ currentTab, type: SORT_CREATEDAT, value: 1 });
-    //     } else if (order === DESCEND) {
-    //       changeTabState({ currentTab, type: SORT_CREATEDAT, value: 0 });
-    //     }
-    //   }
-    // } else if (columnKey === TABLE_COLUMN.PID.key) {
-    //   if (!order) {
-    //     // sort by name ascending
-
-    //     sortByName({ currentTab });
-    //     changeTabState({ currentTab, type: SORT_NAME, value: 0 });
-    //   } else {
-    //     // sort ascending or descending
-    //     sortByName({ currentTab });
-
-    //     if (order === ASCEND) {
-    //       changeTabState({ currentTab, type: SORT_NAME, value: 0 });
-    //     } else if (order === DESCEND) {
-    //       changeTabState({ currentTab, type: SORT_NAME, value: 1 });
-    //     }
-    //   }
-    // }
-
-    // this.handleGetPatients();
-  };
-
-  render() {
-    const {
-      editServiceDrawer,
-      myTasksDrawer,
-      reassignmentDrawer,
-      reasonDrawer,
-    } = this.state;
-    const {
-      // onRow,
-      onSelectChange,
-      // getLoadingComponent,
-      getDataSource,
-    } = this;
-
-    const rowSelection = {
-      onChange: onSelectChange,
-    };
-
-    const {
-      loading,
-      pagination_bottom,
-      authPermissions = [],
-      intl: { formatMessage } = {},
-    } = this.props;
-
-    const locale = {
-      //   emptyText: this.formatMessage(messages.emptyConsultationTable),
-      emptyText: "No consultation fee to display yet",
-    };
-
-    const careplanId = 1;
-
-    return (
-      <>
-        <Table
-          // onRow={authPermissions.includes(USER_PERMISSIONS.PATIENTS.VIEW) ? onRow : null}
-          rowClassName={() => "pointer"}
-          // loading={loading === true ? getLoadingComponent() : false}
-          columns={getColumn({
-            //   formatMessage,
-            sortState: this.state.sortState,
-            className: "pointer",
-            getColumnSearchProps: this.getColumnSearchProps,
-          })}
-          dataSource={getDataSource()}
-          scroll={{ x: "100%" }}
-          pagination={{
-            position: "bottom",
-            pageSize: 10,
-          }}
-          locale={locale}
-          onChange={this.onChange}
-        />
-        {editServiceDrawer === true && (
-          <EditRecommendSubscription
-            visible={editServiceDrawer}
-            onCloseDrawer={this.onCloseDrawer}
-          />
-        )}
-        {myTasksDrawer === true && (
-          <MyTasks visible={myTasksDrawer} onCloseDrawer={this.onCloseDrawer} />
-        )}
-        {reassignmentDrawer === true && (
-          <Reassignment
-            visible={reassignmentDrawer}
-            onCloseDrawer={this.onCloseDrawer}
-            activityData={this.state.activityData}
-            status={"pending"}
-          />
-        )}
-        {reasonDrawer === true && (
-          <Reason
-            visible={reasonDrawer}
-            onCloseDrawer={this.onCloseDrawer}
-            activityData={this.state.activityData}
-          />
-        )}
-        <AddAppointmentDrawer carePlanId={careplanId} />
-      </>
-    );
-  }
 }
 
 export default injectIntl(PendingActivitiesTable);

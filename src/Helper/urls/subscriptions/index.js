@@ -1,114 +1,113 @@
 // ADD SERVICE AND SUBSCRIPTION URL
 
 export const getServicesUrl = () => {
-  return `/serviceoffering/user`;
+    return `/serviceoffering/user`;
 };
 export const addServicesUrl = () => {
-  return `/serviceoffering`;
+    return `/serviceoffering`;
 };
 
 export const getSubscriptionUrl = () => {
-  return `/servicesubscription/user`;
+    return `/servicesubscription/user`;
 };
 
 export const addSubscriptionUrl = () => {
-  return `/servicesubscription`;
+    return `/servicesubscription`;
 };
 
 export const updateSubscription = (subscriptionId) => {
-  return `/servicesubscription/${subscriptionId}`;
+    return `/servicesubscription/${subscriptionId}`;
 };
 
 // SERVICE AND SUBSCRIPTION URL
 
 export const recommendSubscriptionUrl = () => {
-  return `/servicesubscriptionusermapping`;
+    return `/servicesubscriptionusermapping`;
 };
 
 export const recommendServiceUrl = () => {
-  return `/serviceusermapping`;
+    return `/serviceusermapping`;
 };
 
 export const updateRecommendServiceUrl = (serviceId) => {
-  return `/serviceusermapping/${serviceId}`;
+    return `/serviceusermapping/${serviceId}`;
 };
 
 export const updateRecommendSubscriptionUrl = (subscriptionId) => {
-  return `/servicesubscriptionusermapping/${subscriptionId}`;
+    return `/servicesubscriptionusermapping/${subscriptionId}`;
 };
 
 export const getRecommendSeviceUrl = (patientId) => {
-  return `/servicesubscriptionusermapping/all/${patientId}`;
+    return `/servicesubscriptionusermapping/all/${patientId}`;
 };
 
 // PROVIDER SUBSCRIPTION AND SERVICE URL
 
 export const getProviderServicesUrl = (doctorId) => {
-  return `/serviceoffering/provider/${doctorId}`;
+    return `/serviceoffering/provider/${doctorId}`;
 };
 
 export const getProviderSubscriptionUrl = (doctorId) => {
-  return `servicesubscription/provider/${doctorId}`;
+    return `servicesubscription/provider/${doctorId}`;
 };
 
 // TRANSACTION URL
 
 export const getTransactionsUrl = (doctorId) => {
-  return `/servicesubtx`;
+    return `/servicesubtx`;
 };
 
 export const activateTransactionUrl = () => {
-  return `/servicesubtx/activity`;
+    return `/servicesubtx/activity`;
 };
 
 // ACTIVITIES URL
-
 export const activitiesUrl = (activityStatus, dueDateSort) => {
-  if (dueDateSort) {
-    return `/txactivities?status=${activityStatus}&sort_duedate=${dueDateSort}`;
-  } else {
-    return `/txactivities?status=${activityStatus}`;
-  }
+    if (dueDateSort) {
+        return `/txactivities?status=${activityStatus}&sort_duedate=${dueDateSort}`;
+    } else {
+        return `/txactivities?status=${activityStatus}`;
+    }
 };
 
 export const updateActivityUrl = (activityId) => {
-  return `/txactivities/${activityId}`;
+    return `/txactivities/${activityId}`;
 };
 
 export const updateReasonForReassignement = (activityId) => {
-  return `/txactivities/reassign/${activityId}`;
+    return `/txactivities/reassign/${activityId}`;
 };
 
 export const patientCareplansUrl = (patientId) => {
-  return `/careplans/patient-care-plan-details/${patientId}`;
+    return `/careplans/patient-care-plan-details/${patientId}`;
 };
 
 export const patientCareplansSecondaryDoctorUrl = (patientId) => {
-  return `/careplans/patient-care-plan-details-sec/${patientId}`;
+    return `/careplans/patient-care-plan-details-sec/${patientId}`;
 };
 
 export const getFlashcardByActivityIdUrl = (activityId) => {
-  return `/flashcard/activity/${activityId}`;
+    return `/flashcard/activity/${activityId}`;
 };
 
 export const addFlashCardUrl = () => {
-  return `/flashcard`;
+    return `/flashcard`;
 };
 
 export const updateFlashcardUrl = (flashcardId) => {
-  return `/flashcard/${flashcardId}`;
+    return `/flashcard/${flashcardId}`;
 };
 
 export const searchActivites = (query) => {
-  return `/patients/namesearch?value=${query}`;
+    return `/patients/namesearch?value=${query}`;
 };
 
 // REASSIGNMENT URL
 
 export const getSecondaryDoctorUrl = (careplanId) => {
-  return `patients/${careplanId}/careplan-details-sec-doc`;
+    return `patients/${careplanId}/careplan-details-sec-doc`;
 };
 
 export const reassignmentAuditUrl = (activityId) => {
-  return `/reassignaudit/?activity_id=${activityId}`;
+    return `/reassignaudit/?activity_id=${activityId}`;
 };

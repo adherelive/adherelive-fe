@@ -1,5 +1,5 @@
-import { doRequest } from "../../Helper/network";
-import { REQUEST_TYPE } from "../../constant";
+import {doRequest} from "../../Helper/network";
+import {REQUEST_TYPE} from "../../constant";
 // import {
 //   getCdssDiagnosisList,
 //   addCdssDiagnosisList,
@@ -11,8 +11,8 @@ export const SET_PERFORMA_TABS = "SET_PERFORMA_TABS";
 export const SET_PERFORMA_TABS_ID = "SET_PERFORMA_TABS_ID";
 
 export const PERFORMA_INITIAL_STATE = {
-  performaTabs: [],
-  performaTabId: 0,
+    performaTabs: [],
+    performaTabId: 0,
 };
 
 // export const addDiagnosis = (payload) => {
@@ -78,38 +78,38 @@ export const PERFORMA_INITIAL_STATE = {
 // };
 
 export const setPerformaTabs = (value) => {
-  return async (dispatch) => {
-    dispatch({
-      type: SET_PERFORMA_TABS,
-      payload: value,
-    });
-  };
+    return async (dispatch) => {
+        dispatch({
+            type: SET_PERFORMA_TABS,
+            payload: value,
+        });
+    };
 };
 
 export const setPerformaTabsId = (value) => {
-  return async (dispatch) => {
-    dispatch({
-      type: SET_PERFORMA_TABS_ID,
-      payload: value,
-    });
-  };
+    return async (dispatch) => {
+        dispatch({
+            type: SET_PERFORMA_TABS_ID,
+            payload: value,
+        });
+    };
 };
 
 export default (state = PERFORMA_INITIAL_STATE, action = {}) => {
-  const { type, payload } = action;
-  switch (type) {
-    case SET_PERFORMA_TABS:
-      return {
-        ...state,
-        performaTabs: payload,
-      };
+    const {type, payload} = action;
+    switch (type) {
+        case SET_PERFORMA_TABS:
+            return {
+                ...state,
+                performaTabs: payload,
+            };
 
-    case SET_PERFORMA_TABS_ID:
-      return {
-        ...state,
-        performaTabId: payload,
-      };
-    default:
-      return state;
-  }
+        case SET_PERFORMA_TABS_ID:
+            return {
+                ...state,
+                performaTabId: payload,
+            };
+        default:
+            return state;
+    }
 };

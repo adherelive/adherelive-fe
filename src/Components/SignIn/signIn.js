@@ -67,7 +67,7 @@ class SignIn extends Component {
             }
           }
         } catch (err) {
-          console.log("298293 err ----> ", err);
+          console.log("handleSingIn err ----> ", err);
           this.setState({ loading: false });
           message.error(this.formatMessage(messages.somethingWentWrong), 4);
         }
