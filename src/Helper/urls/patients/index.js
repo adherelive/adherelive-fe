@@ -1,6 +1,7 @@
 export const getAddPatientUrl = () => {
   return `/doctors/patients`;
 };
+
 // AKSHAY NEW CODE IMPLEMENTATIONS
 export const getPatientDetailsUrl = (patientId) => {
   return `patients/${patientId}`;

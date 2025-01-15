@@ -62,7 +62,6 @@ export const activateTransactionUrl = () => {
 };
 
 // ACTIVITIES URL
-
 export const activitiesUrl = (activityStatus, dueDateSort) => {
     if (dueDateSort) {
         return `/txactivities?status=${activityStatus}&sort_duedate=${dueDateSort}`;
@@ -77,10 +76,6 @@ export const updateActivityUrl = (activityId) => {
 
 export const updateReasonForReassignement = (activityId) => {
     return `/txactivities/reassign/${activityId}`;
-};
-
-export const updateReasonForReassignement = (activityId) => {
-  return `/txactivities/reassign/${activityId}`;
 };
 
 export const patientCareplansUrl = (patientId) => {
@@ -115,14 +110,4 @@ export const getSecondaryDoctorUrl = (careplanId) => {
 
 export const reassignmentAuditUrl = (activityId) => {
     return `/reassignaudit/?activity_id=${activityId}`;
-};
-
-// REASSIGNMENT URL
-
-export const getSecondaryDoctorUrl = (careplanId) => {
-  return `patients/${careplanId}/careplan-details-sec-doc`;
-};
-
-export const reassignmentAuditUrl = (activityId) => {
-  return `/reassignaudit/?activity_id=${activityId}`;
 };
