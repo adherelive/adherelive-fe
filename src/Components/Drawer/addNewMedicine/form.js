@@ -175,6 +175,12 @@ class AddMedicineForm extends Component {
 
     scrollToTop = () => {
         let antForm = document.getElementsByClassName("Form")[0];
+
+        // Added this check to prevent error
+        if (antForm && antForm.parentNode) {
+            antForm.parentNode.scrollTop = 0;
+        }
+
         let antDrawerBody = antForm.parentNode;
         let antDrawerWrapperBody = antDrawerBody.parentNode;
         antDrawerBody.scrollIntoView(true);

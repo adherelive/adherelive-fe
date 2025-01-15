@@ -7,6 +7,7 @@ import {
     MISSED_ACTION_TEXT,
     MISSED_ACTIONS,
     MISSED_APPOINTMENT_TEXT,
+    MISSED_APPOINTMENTS,
     MISSED_MEDICATION,
     MISSED_MEDICATION_TEXT,
     MISSED_SYMPTOM_TEXT,
@@ -105,6 +106,8 @@ class PatientDetailsDrawer extends Component {
         let carePlanMedicationIds = [];
         let appointmentsListIds = [];
 
+        console.log("PatientDetailsDrawer -> componentDidMount -> patients --->\n", patients);
+
         /* TODO: Need to check why this part has been commented out
         for (let appointment of Object.values(appointments)){
           let {basic_info:{id} ,participant_one : {id : participant_one_Id = 1} , participant_two : {id: participant_two_Id = 1}} = appointment;
@@ -114,13 +117,15 @@ class PatientDetailsDrawer extends Component {
           }
         }
         */
-
+        
         for (let carePlan of Object.values(care_plans)) {
             let {
                 basic_info: { id = 1, patient_id: patientId = 1 } = {},
                 medication_ids = [],
                 appointment_ids = [],
             } = carePlan;
+
+            console.log("PatientDetailsDrawer -> componentDidMount -> carePlan --->\n", carePlan);
 
             if (parseInt(patient_id) === parseInt(patientId)) {
                 carePlanId = id;
@@ -137,53 +142,6 @@ class PatientDetailsDrawer extends Component {
             getAppointments(patient_id);
         }
     }
-
-    // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
-    getCarePlanForPatient = async (patientId) => {
-        try {
-            const {getPatientCareplanByPatientId} = this.props;
-            const getCarePlanResponse = await getPatientCareplanByPatientId(
-                patientId
-            );
-            const {
-                status,
-                statusCode,
-                payload: {data = {}, message: resp_msg = ""} = {},
-            } = getCarePlanResponse || {};
-            if (!status) {
-                // message.error(resp_msg);
-            } else if (status) {
-                if (!isEmpty(data.care_plans)) {
-                    let carePlanId = 1;
-                    let carePlanMedicationIds = [];
-                    let appointmentsListIds = [];
-                    for (let carePlan of Object.values(data.care_plans)) {
-                        let {
-                            basic_info: {id = 1, patient_id = 1},
-                            medication_ids = [],
-                            appointment_ids = [],
-                        } = carePlan;
-                        // if (parseInt(patientId) === parseInt(patient_id)) {
-                        carePlanId = id;
-                        carePlanMedicationIds = carePlan.carePlanMedicationIds;
-                        appointmentsListIds = carePlan.carePlanAppointmentIds;
-                        // }
-                    }
-                    this.setState({
-                        carePlanId,
-                        carePlanMedicationIds,
-                        appointmentsListIds,
-                        care_plans: data.care_plans,
-                    });
-                }
-                // this.setState({
-                //   carePlans: data.care_plans,
-                // });
-            }
-        } catch (error) {
-            console.log("Patient Careplans Get errrrorrrr ===>", error);
-        }
-    };
 
     componentDidUpdate(prevProps) {
         const {
