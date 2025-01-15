@@ -40,7 +40,7 @@
     "reselect": "^4.0.0",
     "showdown": "^1.9.1",
     "twilio-chat": "^5.0.2",
-    "web-vitals": "^2.1.4",
+    "web-vitals": "^4.0.0",
     "@devexpress/dx-react-core": "3.0.4",
     "@devexpress/dx-react-scheduler": "3.0.4",
     "@devexpress/dx-react-scheduler-material-ui": "3.0.4",
