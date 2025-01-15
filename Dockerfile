@@ -3,7 +3,8 @@ FROM node:16.10.0 AS builder
 LABEL application="adherelive-frontend"
 LABEL owner="AdhereLive Pvt Ltd"
 # Stage 1
-RUN mkdir -p /code && mkdir -p /code/public
+RUN mkdir -p /code
+RUN mkdir -p /code/public
 WORKDIR /code
 COPY package.json ./
 COPY package-lock.json ./

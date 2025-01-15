@@ -11,6 +11,7 @@ import {
     MISSED_MEDICATION_TEXT,
     MISSED_SYMPTOM_TEXT,
     PATIENT_BOX_CONTENT,
+    USER_PERMISSIONS,
 } from "../../../constant";
 import messages from "./message";
 import moment from "moment";
@@ -85,47 +86,50 @@ class PatientDetailsDrawer extends Component {
                 // });
             }
         } catch (error) {
-            console.log("Patient Careplans Get errrrorrrr ===>", error);
+            console.log("Patient Care Plans are getting an error ---> \n", error);
         }
     };
 
     componentDidMount() {
         const {
             getMedications,
-            payload: {patient_id} = {},
+            payload: { patient_id } = {},
             care_plans = {},
             getAppointments,
             appointments = {},
             patients = {},
             getPatientDetailsById,
         } = this.props;
+
         let carePlanId = 1;
         let carePlanMedicationIds = [];
         let appointmentsListIds = [];
 
-        // for (let appointment of Object.values(appointments)){
+        /* TODO: Need to check why this part has been commented out
+        for (let appointment of Object.values(appointments)){
+          let {basic_info:{id} ,participant_one : {id : participant_one_Id = 1} , participant_two : {id: participant_two_Id = 1}} = appointment;
 
-        //   let {basic_info:{id} ,participant_one : {id : participant_one_Id = 1} , participant_two : {id: participant_two_Id = 1}} = appointment;
-
-        //   if (parseInt(patient_id) === parseInt(participant_two_Id)) {
-        //     appointmentsListIds.push(id);
-        //   }
-
-        // }
+          if (parseInt(patient_id) === parseInt(participant_two_Id)) {
+            appointmentsListIds.push(id);
+          }
+        }
+        */
 
         for (let carePlan of Object.values(care_plans)) {
             let {
-                basic_info: {id = 1, patient_id: patientId = 1},
+                basic_info: { id = 1, patient_id: patientId = 1 } = {},
                 medication_ids = [],
                 appointment_ids = [],
             } = carePlan;
+
             if (parseInt(patient_id) === parseInt(patientId)) {
                 carePlanId = id;
                 carePlanMedicationIds = medication_ids;
                 appointmentsListIds = appointment_ids;
             }
         }
-        this.setState({carePlanId, carePlanMedicationIds, appointmentsListIds});
+
+        this.setState({ carePlanId, carePlanMedicationIds, appointmentsListIds });
 
         if (patient_id) {
             this.handleGetPatientDetails(patient_id);
@@ -263,7 +267,7 @@ class PatientDetailsDrawer extends Component {
         }
     }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS START
+    // AKSHAY NEW CODE IMPLEMENTATIONS START
     async handleGetPatientDetails(patient_id) {
         try {
             const {getPatientDetailsById} = this.props;
@@ -283,8 +287,7 @@ class PatientDetailsDrawer extends Component {
             message.warn(this.formatMessage(messages.somethingWentWrong));
         }
     }
-
-    //AKSHAY NEW CODE IMPLEMENTATIONS END
+    // AKSHAY NEW CODE IMPLEMENTATIONS END
 
     getFormattedDays = (dates) => {
         let dayString = [];
