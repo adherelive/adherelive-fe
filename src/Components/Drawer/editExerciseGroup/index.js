@@ -4,7 +4,6 @@ import {hasErrors} from "../../../Helper/validation";
 
 import Drawer from "antd/es/drawer";
 // import Form from "antd/es/form";
-
 import messages from "./messages";
 import EditExerciseGroupForm from "./form";
 import Footer from "../footer";
@@ -12,7 +11,7 @@ import AddExerciseDrawer from "../../../Containers/Drawer/addExercise";
 import message from "antd/es/message";
 import {VIDEO_TYPES} from "../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import {Form} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class EditExerciseGroup extends Component {

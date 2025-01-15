@@ -42,7 +42,7 @@
 // // DRAWERS
 // import VitalTimelineDrawer from "../../../Containers/Drawer/vitalTimeline";
 // import MedicationTimelineDrawer from "../../../Containers/Drawer/medicationTimeline";
-// import AddCareplanDrawer from "../../../Containers/Drawer/addCareplan";
+// import AddCarePlanDrawer from "../../../Containers/Drawer/addCareplan";
 // import AddMedicationReminder from "../../../Containers/Drawer/addMedicationReminder";
 // import AddVitals from "../../../Containers/Drawer/addVitals";
 // import AddAppointmentDrawer from "../../../Containers/Drawer/addAppointment";
@@ -2840,7 +2840,7 @@
 //             />
 //             <AddVitals carePlanId={carePlanId} />
 //             <AddAppointmentDrawer carePlanId={carePlanId} />
-//             <AddCareplanDrawer patientId={patient_id} />
+//             <AddCarePlanDrawer patientId={patient_id} />
 //             <AddReportDrawer />
 //             <AddFoodItem />
 //             <AddDietDrawer carePlanId={carePlanId} />

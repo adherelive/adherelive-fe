@@ -5,25 +5,25 @@ import {close} from "../../modules/drawer";
 import {DRAWER} from "../../constant";
 import {getMedications} from "../../modules/medications";
 import {
-    getAppointments,
     addAppointment,
     addCarePlanAppointment,
-    getAppointmentsDetails,
+    getAppointments,
     getAppointmentsDataForDay,
+    getAppointmentsDetails,
 } from "../../modules/appointments";
 import {
-    markFavourite,
     getFavourites,
+    markFavourite,
     removeFavourite,
     removeFavouriteByRecordId,
 } from "../../modules/favouritesData/index";
 import {googleTranslate} from "../../modules/cdss";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
-import {updateActivityById} from "./../../modules/subscription/activities";
 import {
-    setScheduleAppontmentData,
     getPatientCareplanByPatientIdAndUserRoleId,
+    setScheduleAppontmentData,
+    updateActivityById
 } from "./../../modules/subscription/activities";
 import {setFlashCard} from "../../modules/subscription/flashcard";
 

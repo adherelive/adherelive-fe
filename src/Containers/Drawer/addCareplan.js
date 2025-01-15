@@ -1,27 +1,17 @@
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import AddCareplanDrawer from "../../Components/Drawer/addCareplan";
+import AddCarePlanDrawer from "../../Components/Drawer/addCareplan";
 import {close} from "../../modules/drawer";
 import {DRAWER} from "../../constant";
 import {getInitialData} from "../../modules/auth";
 import {getMedications} from "../../modules/medications";
-import {
-    getAppointments,
-    addAppointment,
-    addCarePlanAppointment,
-} from "../../modules/appointments";
 import {searchMedicine} from "../../modules/medicines";
 import {searchTreatment} from "../../modules/treatments";
 import {searchCondition} from "../../modules/conditions";
 import {searchSeverity} from "../../modules/severity";
 import {addCareplanForPatient} from "../../modules/patients";
 // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
-import {
-    getDiagnosisList,
-    addDiagnosis,
-    diagnosisSearch,
-    googleTranslate,
-} from "../../modules/cdss";
+import {addDiagnosis, diagnosisSearch, getDiagnosisList, googleTranslate,} from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
     const {
@@ -69,5 +59,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(AddCareplanDrawer)
+    connect(mapStateToProps, mapDispatchToProps)(AddCarePlanDrawer)
 );

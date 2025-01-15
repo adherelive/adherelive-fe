@@ -2,22 +2,21 @@ import {Drawer} from "antd";
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import {
-    WHEN_TO_TAKE_ABBR_LABELS,
-    DELETE_TEMPLATE_RELATED_TYPE,
-    MEDICATION_TIMING,
+    APPOINTMENT_TYPE_TITLE,
     DAYS_TEXT_NUM_SHORT,
+    DELETE_TEMPLATE_RELATED_TYPE,
     EVENT_TYPE,
+    MEDICATION_TIMING,
     MEDICATION_TIMING_HOURS,
     MEDICATION_TIMING_MINUTES,
-    TABLET,
-    SYRUP,
     MEDICINE_UNITS,
+    SYRUP,
+    TABLET,
     USER_CATEGORY,
-    APPOINTMENT_TYPE_TITLE,
+    WHEN_TO_TAKE_ABBR_LABELS,
 } from "../../../constant";
 import moment from "moment";
 import message from "antd/es/message";
-import Icon from "antd/es/icon";
 import Button from "antd/es/button";
 import EditMedicationReminder from "../../../Containers/Drawer/editMedicationReminder";
 import EditAppointmentDrawer from "../../../Containers/Drawer/editAppointment";
@@ -32,7 +31,7 @@ import SyrupIcon from "../../../Assets/images/pharmacy.png";
 import uuid from "react-uuid";
 import messages from "./message";
 import Input from "antd/es/input";
-import {PoweroffOutlined, EditFilled, DeleteFilled} from "@ant-design/icons";
+import {DeleteFilled, EditFilled, PoweroffOutlined} from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 import TextArea from "antd/lib/input/TextArea";
 import {getDaysBetweenDates} from "../../../Helper/moment/diffranceInDays";
@@ -441,7 +440,9 @@ class TemplatePageCreateDrawer extends Component {
     };
 
     // AKSHAY NEW CODE IMPLEMENTATION
-    deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
+    // TODO: Check where this duplicate function has come from
+    /*
+        deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
         console.log(innerFormType);
         console.log(innerFormKey);
         let {
@@ -491,6 +492,7 @@ class TemplatePageCreateDrawer extends Component {
             medicationCheckedIds,
         });
     };
+    */
 
     onCloseInner = () => {
         this.setState({
@@ -632,11 +634,11 @@ class TemplatePageCreateDrawer extends Component {
     };
 
     async handleDeleteTemplateMed(key) {
-        const {deleteCareplanTemplateRelated} = this.props;
+        const {deleteCarePlanTemplateRelated} = this.props;
         const {carePlanTemplateId = null, medicationIds = {}} = this.state;
         try {
             const other_id = medicationIds[key] || null;
-            const response = await deleteCareplanTemplateRelated({
+            const response = await deleteCarePlanTemplateRelated({
                 careplan_template_id: carePlanTemplateId,
                 other_id,
                 other_type: DELETE_TEMPLATE_RELATED_TYPE.MEDICATION,
@@ -662,11 +664,11 @@ class TemplatePageCreateDrawer extends Component {
     }
 
     async handleDeleteTemplateAppointment(key) {
-        const {deleteCareplanTemplateRelated} = this.props;
+        const {deleteCarePlanTemplateRelated} = this.props;
         const {carePlanTemplateId = null, appointmentIds = {}} = this.state;
         try {
             const other_id = appointmentIds[key] || null;
-            const response = await deleteCareplanTemplateRelated({
+            const response = await deleteCarePlanTemplateRelated({
                 careplan_template_id: carePlanTemplateId,
                 other_id,
                 other_type: DELETE_TEMPLATE_RELATED_TYPE.APPOINTMENT,
@@ -693,11 +695,11 @@ class TemplatePageCreateDrawer extends Component {
     }
 
     async handleDeleteTemplateVital(key) {
-        const {deleteCareplanTemplateRelated} = this.props;
+        const {deleteCarePlanTemplateRelated} = this.props;
         const {carePlanTemplateId = null, vitalIds = {}} = this.state;
         try {
             const other_id = vitalIds[key] || null;
-            const response = await deleteCareplanTemplateRelated({
+            const response = await deleteCarePlanTemplateRelated({
                 careplan_template_id: carePlanTemplateId,
                 other_id,
                 other_type: DELETE_TEMPLATE_RELATED_TYPE.VITAL,
@@ -724,11 +726,11 @@ class TemplatePageCreateDrawer extends Component {
     }
 
     async handleDeleteTemplateDiet(key) {
-        const {deleteCareplanTemplateRelated} = this.props;
+        const {deleteCarePlanTemplateRelated} = this.props;
         const {carePlanTemplateId = null, dietIds = {}} = this.state;
         try {
             const other_id = dietIds[key] || null;
-            const response = await deleteCareplanTemplateRelated({
+            const response = await deleteCarePlanTemplateRelated({
                 careplan_template_id: carePlanTemplateId,
                 other_id,
                 other_type: DELETE_TEMPLATE_RELATED_TYPE.DIET,
@@ -755,11 +757,11 @@ class TemplatePageCreateDrawer extends Component {
     }
 
     async handleDeleteTemplateWorkout(key) {
-        const {deleteCareplanTemplateRelated} = this.props;
+        const {deleteCarePlanTemplateRelated} = this.props;
         const {carePlanTemplateId = null, workoutIds = {}} = this.state;
         try {
             const other_id = workoutIds[key] || null;
-            const response = await deleteCareplanTemplateRelated({
+            const response = await deleteCarePlanTemplateRelated({
                 careplan_template_id: carePlanTemplateId,
                 other_id,
                 other_type: DELETE_TEMPLATE_RELATED_TYPE.WORKOUT,
@@ -1055,7 +1057,7 @@ class TemplatePageCreateDrawer extends Component {
             followup_advise = "",
         } = this.state;
         const {
-            updateCareplanTemplate,
+            updateCarePlanTemplate,
             close,
             getAllTemplatesForDoctor,
             authenticated_category,
@@ -1100,7 +1102,7 @@ class TemplatePageCreateDrawer extends Component {
                 const deleteDietArr = deleteDietKeys;
                 const deleteWorkoutArr = deleteWorkoutKeys;
                 this.setState({submitting: true});
-                const response = await updateCareplanTemplate(carePlanTemplateId, {
+                const response = await updateCarePlanTemplate(carePlanTemplateId, {
                     medicationsData,
                     appointmentsData,
                     vitalsData,
@@ -1652,7 +1654,7 @@ class TemplatePageCreateDrawer extends Component {
 
                     let typeTitle = APPOINTMENT_TYPE_TITLE[appointment_type].title;
                     let typeDescription = type_description;
-                    let rediologyType = radiology_type;
+                    let radiologyType = radiology_type;
 
                     return (
                         <div className="flex wp100 flex-grow-1 align-center" key={key}>
@@ -1682,7 +1684,7 @@ class TemplatePageCreateDrawer extends Component {
                                 </div>
                                 <div className="drawer-block-description">
                                     {typeDescription}
-                                    {rediologyType !== "" && ` (${rediologyType})`}
+                                    {radiologyType !== "" && ` (${radiologyType})`}
                                 </div>
                                 <div className="drawer-block-description">
                                     {/* {date
@@ -2490,11 +2492,11 @@ class TemplatePageCreateDrawer extends Component {
             title: `${this.formatMessage(messages.deleteTemplateNote)}`,
             content: <div>{warnNoteTemplateDelete()}</div>,
             onOk: async () => {
-                const {deleteCareplanTemplateRelated, getAllTemplatesForDoctor} =
+                const {deleteCarePlanTemplateRelated, getAllTemplatesForDoctor} =
                     this.props;
                 const {carePlanTemplateId = null} = this.state;
                 try {
-                    const response = await deleteCareplanTemplateRelated({
+                    const response = await deleteCarePlanTemplateRelated({
                         careplan_template_id: carePlanTemplateId,
                     });
 

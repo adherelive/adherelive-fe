@@ -15,7 +15,7 @@ import {doRequest} from "../../Helper/network";
 import {Twilio} from "../../Helper/urls";
 import {REQUEST_TYPE, USER_CATEGORY} from "../../constant";
 
-import {Button, message, Spin} from "antd";
+import {Button} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
 
 class VideoComponent extends Component {

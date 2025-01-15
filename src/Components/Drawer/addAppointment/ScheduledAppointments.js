@@ -1,40 +1,21 @@
-import React, {useState, Fragment, useEffect} from "react";
-import {injectIntl} from "react-intl";
-import {
-    Drawer,
-    Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
-    Space,
-} from "antd";
+import React, {Fragment, useEffect, useState} from "react";
+import {Button, Drawer, Radio, Select, Space, Spin,} from "antd";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
-
 import moment from "moment";
 
 // import messages from "./message";
-import Footer from "../../Drawer/footer";
 import Form from "antd/es/form";
 import {useDispatch, useSelector} from "react-redux";
 import isEmpty from "../../../Helper/is-empty";
 import Paper from "@mui/material/Paper";
 import {
-    Scheduler,
-    DayView,
-    Appointments,
-    //   AppointmentTooltip,
     AppointmentForm,
-    //
-    //   WeekView,
-    //   MonthView,
-    //   ViewSwitcher,
-    Toolbar,
+    Appointments,
     DateNavigator,
+    DayView,
+    Scheduler,
     TodayButton,
+    Toolbar,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import {ViewState} from "@devexpress/dx-react-scheduler";
 import {getAppointmentsDataForDay} from "../../../modules/appointments/index";

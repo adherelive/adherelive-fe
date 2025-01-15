@@ -9,16 +9,15 @@ import Button from "antd/es/button";
 import Footer from "../footer";
 import confirm from "antd/es/modal/confirm";
 import moment from "moment";
-import Icon from "antd/es/icon";
 import DatePicker from "antd/es/date-picker";
 
 import {
     DeleteTwoTone,
-    PlusOutlined,
-    EyeTwoTone,
     DownloadOutlined,
+    EyeTwoTone,
     LoadingOutlined,
     PaperClipOutlined,
+    PlusOutlined,
 } from "@ant-design/icons";
 
 import messages from "./message";

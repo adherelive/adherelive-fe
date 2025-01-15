@@ -196,11 +196,6 @@ const messages = defineMessages({
         description: "",
         defaultMessage: "Clinical Notes",
     },
-    clinical_notes: {
-        id: "app.allTemplatesAddDrawer.clinical_notes",
-        description: "",
-        defaultMessage: "Clinical Notes",
-    },
     followup_advise: {
         id: "app.allTemplatesAddDrawer.followup_advise",
         description: "",

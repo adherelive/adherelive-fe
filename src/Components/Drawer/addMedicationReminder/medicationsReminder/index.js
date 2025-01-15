@@ -16,7 +16,7 @@ import startDateField from "../common/startDate";
 import endDateField from "../common/endDate";
 import repeatDaysField from "../common/selectedDays";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import {Form} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class AddMedicationReminder extends Component {

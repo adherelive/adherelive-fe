@@ -17,7 +17,7 @@ class editTemplateColumn extends Component {
 
     handleEditPatientDrawer = (e) => {
         e.preventDefault();
-        const {id, duplicateCareplanTemplate} = this.props || {};
+        const {id, duplicateCarePlanTemplate} = this.props || {};
 
         //   const {openEditPatientDrawer,patientData,carePlanData} = this.props;
         //   openEditPatientDrawer({patientData,carePlanData});
@@ -42,9 +42,9 @@ class editTemplateColumn extends Component {
 
     handleCreateDuplicate = async () => {
         try {
-            const {id, duplicateCareplanTemplate} = this.props || {};
+            const {id, duplicateCarePlanTemplate} = this.props || {};
 
-            const response = await duplicateCareplanTemplate(id);
+            const response = await duplicateCarePlanTemplate(id);
             const {
                 payload: {data = {}, message: resp_message = ""} = {},
                 status,

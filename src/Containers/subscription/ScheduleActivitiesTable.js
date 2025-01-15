@@ -3,15 +3,9 @@ import ScheduleActivitiesTable from "../../Components/Subscription/ScheduleActiv
 import {withRouter} from "react-router-dom";
 import {getAllActivities} from "./../../modules/subscription/activities";
 import {DRAWER} from "../../constant";
-import {open, close} from "../../modules/drawer";
-import {
-    getAppointmentsDetails,
-    getAppointments,
-} from "../../modules/appointments";
-import {
-    setScheduleAppontmentData,
-    searchTxActivites,
-} from "../../modules/subscription/activities";
+import {open} from "../../modules/drawer";
+import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
+import {searchTxActivites, setScheduleAppontmentData,} from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
     const {subscription: {activities = {}} = {}} = state;

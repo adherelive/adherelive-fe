@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 
 import {Provider} from "react-redux";
-import {IntlProvider, addLocaleData} from "react-intl";
+import {addLocaleData, IntlProvider} from "react-intl";
 import arLocaleData from "react-intl/locale-data/ar";
 import esLocaleData from "react-intl/locale-data/es";
 import hiLocalData from "react-intl/locale-data/hi";
@@ -12,6 +12,8 @@ import {getQuery} from "./Helper/queryString";
 import store from "./store";
 
 import "./Styles/index.less";
+import {DevSupport} from "@react-buddy/ide-toolbox";
+import {ComponentPreviews, useInitial} from "./dev";
 
 const Desktop = lazy(() =>
     import(/* webpackChunkName: "DesktopWrapper" */ "./Containers/Routes")
@@ -43,7 +45,11 @@ ReactDOM.render(
     <Provider store={store}>
         <IntlProvider locale={locale} key={locale} messages={messages}>
             <Suspense fallback={null}>
-                <Desktop/>
+                <DevSupport ComponentPreviews={ComponentPreviews}
+                            useInitialHook={useInitial}
+                >
+                    <Desktop/>
+                </DevSupport>
             </Suspense>
         </IntlProvider>
     </Provider>,

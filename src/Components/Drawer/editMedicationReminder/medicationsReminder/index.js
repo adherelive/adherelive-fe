@@ -21,7 +21,7 @@ import repeatDaysField from "../common/selectedDays";
 import moment from "moment";
 import AddMedicineDrawer from "../../../../Containers/Drawer/addMedicine";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import {Form} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class EditMedicationReminder extends Component {

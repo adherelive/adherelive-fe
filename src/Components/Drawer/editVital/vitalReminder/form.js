@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Button, Input, message, Radio} from "antd";
+import {Button, message, Radio} from "antd";
 import moment from "moment";
 import startTimeField from "../common/startTime";
 import RepeatFields from "../common/repeatFields";
@@ -15,15 +15,9 @@ import vitalOccurenceField from "../common/vitalOccurence";
 
 import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
-import {
-    REPEAT_TYPE,
-    USER_CATEGORY,
-    DAYS_NUMBER,
-    DAYS,
-    ALTERNATE_DAYS,
-} from "../../../../constant";
+import {DAYS_NUMBER, REPEAT_TYPE, USER_CATEGORY,} from "../../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import {Form} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;

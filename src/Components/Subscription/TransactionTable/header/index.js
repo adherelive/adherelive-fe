@@ -1,6 +1,6 @@
 import React from "react";
 
-import {TABLE_COLUMN, getTransactionFilters} from "../helper";
+import {getTransactionFilters, TABLE_COLUMN} from "../helper";
 import messages from "../messages";
 import TransactionId from "../dataColumn/id";
 import Doctor from "../dataColumn/doctor";
@@ -8,11 +8,9 @@ import Patient from "../dataColumn/patient";
 import Subscription from "../dataColumn/subscription";
 import Duration from "../dataColumn/duration";
 import Payment from "../dataColumn/payment";
-import PaymentProduct from "../dataColumn/paymentProduct";
 import Amount from "../dataColumn/amount";
 import Status from "../dataColumn/status";
 import Date from "../dataColumn/date";
-import {USER_CATEGORY} from "../../../../constant";
 
 export default (props) => {
     const {formatMessage, authenticated_category} = props || {};

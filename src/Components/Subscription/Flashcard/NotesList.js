@@ -1,8 +1,6 @@
-import React, {useState, useEffect, Fragment} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import Tooltip from "antd/es/tooltip";
-import {EditOutlined} from "@ant-design/icons";
-import {DeleteOutlined} from "@ant-design/icons";
-import {CheckOutlined} from "@ant-design/icons";
+import {CheckOutlined, DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import TextArea from "antd/lib/input/TextArea";
 import isEmpty from "../../../Helper/is-empty";
 import moment from "moment";

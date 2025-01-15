@@ -457,7 +457,7 @@
 //       clinical_notes = "",
 //       followup_advise = "",
 //     } = this.state;
-//     const { createCareplanTemplate, close, authenticated_category } =
+//     const { createCarePlanTemplate, close, authenticated_category } =
 //       this.props;
 //     let medicationsData = Object.values(medications);
 //     let appointmentsData = Object.values(appointments);
@@ -487,7 +487,7 @@
 //     if (validate) {
 //       try {
 //         this.setState({ submitting: true });
-//         const response = await createCareplanTemplate({
+//         const response = await createCarePlanTemplate({
 //           medicationsData,
 //           appointmentsData,
 //           vitalsData,
@@ -982,7 +982,7 @@
 
 //           let typeTitle = APPOINTMENT_TYPE_TITLE[appointment_type].title;
 //           let typeDescription = type_description;
-//           let rediologyType = radiology_type;
+//           let radiologyType = radiology_type;
 
 //           return (
 //             <div className="flex wp100 flex-grow-1 align-center" key={key}>
@@ -1012,7 +1012,7 @@
 //                 </div>
 //                 <div className="drawer-block-description">
 //                   {typeDescription}
-//                   {rediologyType !== "" && ` (${rediologyType})`}
+//                   {radiologyType !== "" && ` (${radiologyType})`}
 //                 </div>
 
 //                 <div className="drawer-block-description">

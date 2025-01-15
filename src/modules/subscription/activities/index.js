@@ -2,18 +2,15 @@ import {doRequest} from "../../../Helper/network";
 import {REQUEST_TYPE} from "../../../constant";
 import {
     activitiesUrl,
-    updateActivityUrl,
-    patientCareplansUrl,
-    patientCareplansSecondaryDoctorUrl,
-    searchActivites,
     getSecondaryDoctorUrl,
-    updateReasonForReassignement,
+    patientCareplansSecondaryDoctorUrl,
+    patientCareplansUrl,
     reassignmentAuditUrl,
+    searchActivites,
+    updateActivityUrl,
+    updateReasonForReassignement,
 } from "../../../Helper/urls/subscriptions";
-import {
-    SET_PENDING_ACTIVITIES_TABLE_DATA,
-    SET_ACTIVITY_DATA_FOR_SCHEDULE,
-} from "../../../reducer/index";
+import {SET_ACTIVITY_DATA_FOR_SCHEDULE, SET_PENDING_ACTIVITIES_TABLE_DATA,} from "../../../reducer/index";
 
 export const getAllActivities = (activityStatus, dueDateSort) => {
     let response = {};

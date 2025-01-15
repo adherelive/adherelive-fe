@@ -1,27 +1,15 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {DeleteTwoTone} from "@ant-design/icons";
+import {ClockCircleOutlined, DeleteTwoTone, EditFilled, EnvironmentFilled} from "@ant-design/icons";
 import uuid from "react-uuid";
 import {Input, message} from "antd";
-import {
-    PATH,
-    FULL_DAYS,
-    FULL_DAYS_NUMBER,
-    USER_CATEGORY,
-    DAYS_TEXT_NUM_SHORT,
-} from "../../constant";
+import {DAYS_TEXT_NUM_SHORT, FULL_DAYS, FULL_DAYS_NUMBER, PATH, USER_CATEGORY,} from "../../constant";
 import UploadSteps from "./steps";
 import LocationModal from "./locationmodal";
 import TimingModal from "./timingModal";
 import {withRouter} from "react-router-dom";
 import moment from "moment";
 import messages from "./messages";
-import Icon from "@ant-design/icons";
-import {
-    EnvironmentFilled,
-    EditFilled,
-    ClockCircleOutlined,
-} from "@ant-design/icons";
 
 const dayTimings = {
     [FULL_DAYS.MON]: [{startTime: "", endTime: ""}],

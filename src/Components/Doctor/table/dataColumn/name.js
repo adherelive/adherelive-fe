@@ -1,9 +1,5 @@
 import React from "react";
-import {
-    TABLE_DEFAULT_BLANK_FIELD,
-    TABLE_STATUS,
-    USER_CATEGORY,
-} from "../../../../constant";
+import {TABLE_DEFAULT_BLANK_FIELD, TABLE_STATUS, USER_CATEGORY,} from "../../../../constant";
 import TableStatus from "../../../../Helper/TableStatus";
 import messages from "../messages";
 

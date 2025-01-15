@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from "react";
+import React, {Component} from "react";
 import {injectIntl} from "react-intl";
-import {Menu, Tooltip, message, Avatar, Dropdown} from "antd";
+import {Avatar, Dropdown, Menu, message, Tooltip} from "antd";
 import {PATH, USER_CATEGORY, USER_PERMISSIONS} from "../../constant";
 import confirm from "antd/es/modal/confirm";
 
@@ -8,19 +8,17 @@ import Logo from "../../Assets/images/logo3x.png";
 import dashboardIcon from "../../Assets/images/dashboard.svg";
 import {withRouter} from "react-router-dom";
 import {
+    BellFilled,
     CalendarTwoTone,
     FileOutlined,
-    ProfileOutlined,
-    AccountBookOutlined,
-    WalletOutlined,
-    SwapOutlined,
     MedicineBoxOutlined,
-    BellFilled,
+    ProfileOutlined,
+    SwapOutlined,
+    WalletOutlined,
 } from "@ant-design/icons";
 import messages from "./messages";
 import config from "../../config";
 import {getAbbreviation} from "../../Helper/common";
-import Icon from "@ant-design/icons";
 
 const {Item: MenuItem} = Menu || {};
 

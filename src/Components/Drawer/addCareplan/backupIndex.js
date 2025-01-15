@@ -23,7 +23,7 @@
 
 // const { Option } = Select;
 
-// class AddCareplanDrawer extends Component {
+// class AddCarePlanDrawer extends Component {
 //   constructor(props) {
 //     super(props);
 //     this.state = {
@@ -580,4 +580,4 @@
 //   }
 // }
 
-// export default injectIntl(AddCareplanDrawer);
+// export default injectIntl(AddCarePlanDrawer);

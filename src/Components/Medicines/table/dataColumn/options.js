@@ -1,11 +1,10 @@
 import React from "react";
 import message from "antd/es/message";
-import Icon from "antd/es/icon";
 import Tooltip from "antd/es/tooltip";
 import messages from "../messages";
 import confirm from "antd/es/modal/confirm";
 import moment from "moment";
-import {DeleteOutlined, CheckCircleOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 
 const ALL_TABS = {
     PUBLIC: "1",

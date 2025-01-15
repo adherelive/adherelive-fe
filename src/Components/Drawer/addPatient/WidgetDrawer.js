@@ -1,22 +1,7 @@
-import React, {Component, Fragment, useState, useEffect} from "react";
-import {injectIntl} from "react-intl";
-import {
-    Drawer,
-    Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
-} from "antd";
-import {Checkbox, Row, Col} from "antd";
+import React, {Fragment, useEffect, useState} from "react";
+import {Checkbox, Col, Drawer, Radio, Row, Select,} from "antd";
 
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
-
-import moment from "moment";
-import throttle from "lodash-es/throttle";
 
 // import messages from "./message";
 import Footer from "../footer";

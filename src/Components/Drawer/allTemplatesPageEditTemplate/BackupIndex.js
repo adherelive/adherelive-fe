@@ -548,11 +548,11 @@
 //   };
 
 //   async handleDeleteTemplateMed(key) {
-//     const { deleteCareplanTemplateRelated } = this.props;
+//     const { deleteCarePlanTemplateRelated } = this.props;
 //     const { carePlanTemplateId = null, medicationIds = {} } = this.state;
 //     try {
 //       const other_id = medicationIds[key] || null;
-//       const response = await deleteCareplanTemplateRelated({
+//       const response = await deleteCarePlanTemplateRelated({
 //         careplan_template_id: carePlanTemplateId,
 //         other_id,
 //         other_type: DELETE_TEMPLATE_RELATED_TYPE.MEDICATION,
@@ -578,11 +578,11 @@
 //   }
 
 //   async handleDeleteTemplateAppointment(key) {
-//     const { deleteCareplanTemplateRelated } = this.props;
+//     const { deleteCarePlanTemplateRelated } = this.props;
 //     const { carePlanTemplateId = null, appointmentIds = {} } = this.state;
 //     try {
 //       const other_id = appointmentIds[key] || null;
-//       const response = await deleteCareplanTemplateRelated({
+//       const response = await deleteCarePlanTemplateRelated({
 //         careplan_template_id: carePlanTemplateId,
 //         other_id,
 //         other_type: DELETE_TEMPLATE_RELATED_TYPE.APPOINTMENT,
@@ -609,11 +609,11 @@
 //   }
 
 //   async handleDeleteTemplateVital(key) {
-//     const { deleteCareplanTemplateRelated } = this.props;
+//     const { deleteCarePlanTemplateRelated } = this.props;
 //     const { carePlanTemplateId = null, vitalIds = {} } = this.state;
 //     try {
 //       const other_id = vitalIds[key] || null;
-//       const response = await deleteCareplanTemplateRelated({
+//       const response = await deleteCarePlanTemplateRelated({
 //         careplan_template_id: carePlanTemplateId,
 //         other_id,
 //         other_type: DELETE_TEMPLATE_RELATED_TYPE.VITAL,
@@ -640,11 +640,11 @@
 //   }
 
 //   async handleDeleteTemplateDiet(key) {
-//     const { deleteCareplanTemplateRelated } = this.props;
+//     const { deleteCarePlanTemplateRelated } = this.props;
 //     const { carePlanTemplateId = null, dietIds = {} } = this.state;
 //     try {
 //       const other_id = dietIds[key] || null;
-//       const response = await deleteCareplanTemplateRelated({
+//       const response = await deleteCarePlanTemplateRelated({
 //         careplan_template_id: carePlanTemplateId,
 //         other_id,
 //         other_type: DELETE_TEMPLATE_RELATED_TYPE.DIET,
@@ -671,11 +671,11 @@
 //   }
 
 //   async handleDeleteTemplateWorkout(key) {
-//     const { deleteCareplanTemplateRelated } = this.props;
+//     const { deleteCarePlanTemplateRelated } = this.props;
 //     const { carePlanTemplateId = null, workoutIds = {} } = this.state;
 //     try {
 //       const other_id = workoutIds[key] || null;
-//       const response = await deleteCareplanTemplateRelated({
+//       const response = await deleteCarePlanTemplateRelated({
 //         careplan_template_id: carePlanTemplateId,
 //         other_id,
 //         other_type: DELETE_TEMPLATE_RELATED_TYPE.WORKOUT,
@@ -971,7 +971,7 @@
 //       followup_advise = "",
 //     } = this.state;
 //     const {
-//       updateCareplanTemplate,
+//       updateCarePlanTemplate,
 //       close,
 //       getAllTemplatesForDoctor,
 //       authenticated_category,
@@ -1016,7 +1016,7 @@
 //         const deleteDietArr = deleteDietKeys;
 //         const deleteWorkoutArr = deleteWorkoutKeys;
 //         this.setState({ submitting: true });
-//         const response = await updateCareplanTemplate(carePlanTemplateId, {
+//         const response = await updateCarePlanTemplate(carePlanTemplateId, {
 //           medicationsData,
 //           appointmentsData,
 //           vitalsData,
@@ -1564,7 +1564,7 @@
 
 //           let typeTitle = APPOINTMENT_TYPE_TITLE[appointment_type].title;
 //           let typeDescription = type_description;
-//           let rediologyType = radiology_type;
+//           let radiologyType = radiology_type;
 
 //           return (
 //             <div className="flex wp100 flex-grow-1 align-center" key={key}>
@@ -1594,7 +1594,7 @@
 //                 </div>
 //                 <div className="drawer-block-description">
 //                   {typeDescription}
-//                   {rediologyType !== "" && ` (${rediologyType})`}
+//                   {radiologyType !== "" && ` (${radiologyType})`}
 //                 </div>
 //                 <div className="drawer-block-description">
 //                   {date
@@ -2382,11 +2382,11 @@
 //       title: `${this.formatMessage(messages.deleteTemplateNote)}`,
 //       content: <div>{warnNoteTemplateDelete()}</div>,
 //       onOk: async () => {
-//         const { deleteCareplanTemplateRelated, getAllTemplatesForDoctor } =
+//         const { deleteCarePlanTemplateRelated, getAllTemplatesForDoctor } =
 //           this.props;
 //         const { carePlanTemplateId = null } = this.state;
 //         try {
-//           const response = await deleteCareplanTemplateRelated({
+//           const response = await deleteCarePlanTemplateRelated({
 //             careplan_template_id: carePlanTemplateId,
 //           });
 

@@ -23,14 +23,9 @@ import formulation from "../common/formulation";
 
 import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
-import {
-    REPEAT_TYPE,
-    USER_CATEGORY,
-    DAYS_NUMBER,
-    MEDICINE_UNITS,
-} from "../../../../constant";
+import {DAYS_NUMBER, MEDICINE_UNITS, REPEAT_TYPE, USER_CATEGORY,} from "../../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import {Form} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../../Helper/is-empty";
 
@@ -50,6 +45,7 @@ class EditMedicationReminderForm extends Component {
 
     componentDidMount() {
         this.scrollToTop();
+        console.log("componentDidMount", this.props.form);
         const {
             form: {validateFields},
             // currentUser: {

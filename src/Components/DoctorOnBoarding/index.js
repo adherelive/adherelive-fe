@@ -1,26 +1,13 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {DeleteTwoTone} from "@ant-design/icons";
+import {DeleteTwoTone, FlagFilled} from "@ant-design/icons";
 import uuid from "react-uuid";
-import {
-    Tabs,
-    Button,
-    Steps,
-    Col,
-    Select,
-    Input,
-    Upload,
-    Modal,
-    TimePicker,
-    // Icon,
-    message,
-} from "antd";
+import {Input, message, Modal, Select, Steps, TimePicker, Upload,} from "antd";
 import SideMenu from "./sidebar";
 import {REQUEST_TYPE} from "../../constant";
 import {getUploadURL} from "../../Helper/urls/user";
 import {doRequest} from "../../Helper/network";
 import plus from "../../Assets/images/plus.png";
-import {FlagFilled} from "@ant-design/icons";
 
 const {Step} = Steps;
 
