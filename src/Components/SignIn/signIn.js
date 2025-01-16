@@ -60,7 +60,7 @@ class SignIn extends Component {
                         }
                     } else {
                         if (statusCode === 422) {
-                            message.error(this.formatMessage(messages.emailDoesNotxist), 4);
+                            message.error(this.formatMessage(messages.emailDoesNotExist), 4);
                         } else {
                             this.setState({loading: false});
                             message.error(this.formatMessage(messages.invalidCredentials), 4);
