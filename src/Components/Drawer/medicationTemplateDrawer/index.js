@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {Button, Checkbox, Drawer, Icon, Input, message, Modal, Select, Spin, TimePicker,} from "antd";
+import {Button, Checkbox, Drawer, Input, message, Modal, Select, Spin, TimePicker,} from "antd";
 
 import {
     APPOINTMENT_TYPE_TITLE,
