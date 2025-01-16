@@ -47,7 +47,7 @@ class AddMedicationReminderForm extends Component {
         this.state = {};
     }
 
-    componentDidMount() {
+/*    componentDidMount() {
         this.scrollToTop();
         const {
             form: {validateFields},
@@ -85,7 +85,63 @@ class AddMedicationReminderForm extends Component {
                 }
             });
         }
+    }*/
+
+    componentDidMount() {
+        this.scrollToTop();
+        const {
+            form: { validateFields },
+            fetchMedicationStages,
+            fetchProgramProducts,
+        } = this.props;
+
+        const programId = []; // Corrected assignment
+        const _id = "1"; // Ensured it's a string
+        const category = "PATIENT"; // Ensured it's a string
+
+        validateFields();
+
+        if (category === USER_CATEGORY.PATIENT) {
+            if (programId.length > 0) {
+                fetchProgramProducts(programId[0]);
+            }
+            fetchMedicationStages(_id).then((response) => {
+                const { status, payload } = response;
+                if (status) {
+                    const {
+                        data: { medicationStages = [], program_has_medication_stage } = {},
+                    } = payload;
+                    this.setState({
+                        medicationStages: medicationStages,
+                        program_has_medication_stage,
+                    });
+                } else {
+                    this.setState({
+                        medicationStages: [],
+                        program_has_medication_stage,
+                    });
+                }
+            });
+        }
     }
+
+
+    /*    scrollToTop = () => {
+            let antForm = document.getElementsByClassName("Form")[0];
+
+            // Added this check to prevent error
+            if (antForm && antForm.parentNode) {
+                console.log("AddMedicationReminder Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+                antForm.parentNode.scrollTop = 0;
+            }
+
+            console.log("AddMedicationReminder Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+
+            let antDrawerBody = antForm.parentNode;
+            let antDrawerWrapperBody = antDrawerBody.parentNode;
+            antDrawerBody.scrollIntoView(true);
+            antDrawerWrapperBody.scrollTop -= 200;
+        };*/
 
     scrollToTop = () => {
         let antForm = document.getElementsByClassName("Form")[0];
@@ -94,15 +150,23 @@ class AddMedicationReminderForm extends Component {
         if (antForm && antForm.parentNode) {
             console.log("AddMedicationReminder Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
             antForm.parentNode.scrollTop = 0;
+
+            let antDrawerBody = antForm.parentNode;
+            if (antDrawerBody && antDrawerBody.parentNode) {
+                let antDrawerWrapperBody = antDrawerBody.parentNode;
+                if (antDrawerWrapperBody) {
+                    antDrawerBody.scrollIntoView(true);
+                    antDrawerWrapperBody.scrollTop -= 200;
+                }
+            }
+        } else {
+            console.log("Element or parentNode not found.");
         }
 
         console.log("AddMedicationReminder Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
-
-        let antDrawerBody = antForm.parentNode;
-        let antDrawerWrapperBody = antDrawerBody.parentNode;
-        antDrawerBody.scrollIntoView(true);
-        antDrawerWrapperBody.scrollTop -= 200;
     };
+
+
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
