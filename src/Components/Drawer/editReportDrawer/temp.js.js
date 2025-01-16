@@ -54,7 +54,7 @@ class editReportDrawer extends Component {
 
             for (let each in upload_documents) {
                 if (report_document_ids.includes(each)) {
-                    console.log("786578326427348234762427394823 --->EACH", each);
+                    console.log("temp EACH ---> ", each);
 
                     let doc = upload_documents[each];
                     if (doc) {
