@@ -75,6 +75,15 @@ class EditVitalForm extends Component {
 
     scrollToTop = () => {
         let antForm = document.getElementsByClassName("Form")[0];
+
+        // Added this check to prevent error
+        if (antForm && antForm.parentNode) {
+            console.log("EditVital Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+            antForm.parentNode.scrollTop = 0;
+        }
+
+        console.log("EditVital Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+
         let antDrawerBody = antForm.parentNode;
         let antDrawerWrapperBody = antDrawerBody.parentNode;
         antDrawerBody.scrollIntoView(true);

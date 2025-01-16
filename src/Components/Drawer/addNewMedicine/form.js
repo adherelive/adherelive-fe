@@ -179,11 +179,11 @@ class AddMedicineForm extends Component {
 
         // Added this check to prevent error
         if (antForm && antForm.parentNode) {
-            console.log("Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+            console.log("AddNewMedicine Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
             antForm.parentNode.scrollTop = 0;
         }
 
-        console.log("Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+        console.log("AddNewMedicine Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
 
         let antDrawerBody = antForm.parentNode;
         let antDrawerWrapperBody = antDrawerBody.parentNode;

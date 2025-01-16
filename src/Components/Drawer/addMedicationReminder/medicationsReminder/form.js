@@ -89,6 +89,15 @@ class AddMedicationReminderForm extends Component {
 
     scrollToTop = () => {
         let antForm = document.getElementsByClassName("Form")[0];
+
+        // Added this check to prevent error
+        if (antForm && antForm.parentNode) {
+            console.log("AddMedicationReminder Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+            antForm.parentNode.scrollTop = 0;
+        }
+
+        console.log("AddMedicationReminder Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+
         let antDrawerBody = antForm.parentNode;
         let antDrawerWrapperBody = antDrawerBody.parentNode;
         antDrawerBody.scrollIntoView(true);

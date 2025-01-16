@@ -192,7 +192,8 @@ class EditPatientDrawer extends Component {
         console.log("Edit Patient componentDidUpdate formattedData symptomData", symptomData);
 
         console.log("Edit Patient componentDidUpdate prev_visible", prev_visible);
-        
+        console.log("Edit Patient componentDidUpdate visible", visible);
+
         if (prev_visible !== visible) {
             const {searchSeverity} = this.props;
             console.log("Edit Patient componentDidUpdate patient_id", patient_id);

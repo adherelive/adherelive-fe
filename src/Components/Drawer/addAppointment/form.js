@@ -150,8 +150,17 @@ class AddAppointmentForm extends Component {
     };
 
     scrollToTop = () => {
-        console.log("I am in the Scroll to Top");
+        console.log("I am in the scrollToTop in AddAppointment");
         let antForm = document.getElementsByClassName("Form")[0];
+
+        // Added this check to prevent error
+        if (antForm && antForm.parentNode) {
+            console.log("AddAppointment Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+            antForm.parentNode.scrollTop = 0;
+        }
+
+        console.log("AddAppointment Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+
         let antDrawerBody = antForm.parentNode;
         let antDrawerWrapperBody = antDrawerBody.parentNode;
         antDrawerBody.scrollIntoView(true);
