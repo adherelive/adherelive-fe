@@ -69,7 +69,7 @@ class ScheduledActivitiesTable extends Component {
     handleEdit = async (activityData) => {
         const {
             openEditAppointmentDrawer,
-            setScheduleAppontmentData,
+            setScheduleAppointmentData,
             // getAppointments,
         } = this.props;
 
@@ -78,7 +78,7 @@ class ScheduledActivitiesTable extends Component {
         } else {
             let finalActivityData = activityData;
             finalActivityData.fromButton = "edit";
-            setScheduleAppontmentData(finalActivityData);
+            setScheduleAppointmentData(finalActivityData);
 
             const patient_id = activityData.patient_id;
             const id = activityData.appointment_id;

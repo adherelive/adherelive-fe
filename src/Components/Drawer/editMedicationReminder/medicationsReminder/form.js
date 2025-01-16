@@ -45,7 +45,7 @@ class EditMedicationReminderForm extends Component {
 
     componentDidMount() {
         this.scrollToTop();
-        console.log("componentDidMount", this.props.form);
+        console.log("Inside componentDidMount of Form", this.props.form);
         const {
             form: {validateFields},
             // currentUser: {
@@ -89,8 +89,11 @@ class EditMedicationReminderForm extends Component {
 
         // Added this check to prevent error
         if (antForm && antForm.parentNode) {
+            console.log("Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
             antForm.parentNode.scrollTop = 0;
         }
+
+        console.log("Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
 
         let antDrawerBody = antForm.parentNode;
         let antDrawerWrapperBody = antDrawerBody.parentNode;

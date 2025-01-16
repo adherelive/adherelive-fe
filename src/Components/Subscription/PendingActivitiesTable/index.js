@@ -66,12 +66,12 @@ class PendingActivitiesTable extends Component {
     };
 
     scheduleHanlder = (activityData) => {
-        const {openAppointmentDrawer, setScheduleAppontmentData} = this.props;
+        const {openAppointmentDrawer, setScheduleAppointmentData} = this.props;
 
         let finalActivityData = activityData;
         let patientId = activityData.patient_id;
         finalActivityData.fromButton = "schedule";
-        setScheduleAppontmentData(finalActivityData);
+        setScheduleAppointmentData(finalActivityData);
 
         openAppointmentDrawer({
             patients: {
@@ -108,20 +108,20 @@ class PendingActivitiesTable extends Component {
             openAppointmentDrawer,
             history,
             setFlashCard,
-            setScheduleAppontmentData,
+            setScheduleAppointmentData,
         } = this.props;
         if (activityData.details.service_offering_name === "Remote monitoring") {
             let finalActivityData = activityData;
             finalActivityData.fromButton = "start";
             localStorage.setItem("flashcardOpen", true);
             setFlashCard(true);
-            setScheduleAppontmentData(finalActivityData);
+            setScheduleAppointmentData(finalActivityData);
             history.push(`patients/${activityData.patient_id}`);
         } else {
             let patientId = activityData.patient_id;
             let finalActivityData = activityData;
             finalActivityData.fromButton = "start";
-            setScheduleAppontmentData(finalActivityData);
+            setScheduleAppointmentData(finalActivityData);
 
             openAppointmentDrawer({
                 patients: {

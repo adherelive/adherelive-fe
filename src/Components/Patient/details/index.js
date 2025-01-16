@@ -862,12 +862,12 @@ class PatientDetails extends Component {
         };
     }
 
-    handleInititalData = async (redirect_patient_id = null) => {
+    handleInitialData = async (redirect_patient_id = null) => {
         let {
             getMedications,
             getAppointments,
             getPatientCarePlanDetails,
-            //AKSHAY NEW CODE IMPLEMENTATIONS
+            // AKSHAY NEW CODE IMPLEMENTATIONS
             getPatientDetailsById,
             getAppointmentsDetails,
             patient_id,
@@ -1050,7 +1050,7 @@ class PatientDetails extends Component {
         this.setState({carePlanTemplateId, activeKey});
 
         // in app notification seen count
-        this.initiateInAppNotificationObj();
+        await this.initiateInAppNotificationObj();
     };
 
     async componentDidMount() {
@@ -1059,7 +1059,8 @@ class PatientDetails extends Component {
             notification_redirect = {},
             getAllTemplatesForDoctor,
         } = this.props;
-        await this.handleInititalData();
+        console.log("getAllTemplatesForDoctor in componentDidMount ---> ", getAllTemplatesForDoctor);
+        await this.handleInitialData();
         // await getAllTemplatesForDoctor();
         if (Object.keys(notification_redirect).length) {
             resetNotificationRedirect();
@@ -1068,9 +1069,9 @@ class PatientDetails extends Component {
 
     componentWillUnmount() {
         // AKSHAY NEW CODE IMPLEMENTATIONS FOR SUBSCRIPTION
-        const {setFlashCard, setScheduleAppontmentData} = this.props;
+        const {setFlashCard, setScheduleAppointmentData} = this.props;
         setFlashCard(false);
-        setScheduleAppontmentData({});
+        setScheduleAppointmentData({});
     }
 
     componentDidUpdate = async (prevProps, prevState) => {
@@ -1099,7 +1100,7 @@ class PatientDetails extends Component {
             (care_plan_id && care_plan_id !== prev_care_plan_id) ||
             (tab && tab !== prev_tab)
         ) {
-            await this.handleInititalData(redirected_p_id);
+            await this.handleInitialData(redirected_p_id);
             if (Object.keys(notification_redirect).length) {
                 resetNotificationRedirect();
             }
@@ -2787,7 +2788,7 @@ class PatientDetails extends Component {
         const {treatment_details: {treatment_provider} = {}} =
             this.props.user_details;
 
-        console.log("2347632645327453287648273648723", {props: this.props});
+        console.log("Props inside PatientDetails Class ---> ", {props: this.props});
 
         let showAddButton =
             (authPermissions.includes(USER_PERMISSIONS.APPOINTMENTS.ADD) ||

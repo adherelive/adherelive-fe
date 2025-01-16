@@ -373,10 +373,10 @@ class PatientDetailsDrawer extends Component {
         const {
             history,
             payload: {patient_id} = {},
-            setScheduleAppontmentData,
+            setScheduleAppointmentData,
         } = this.props;
         this.onClose();
-        await setScheduleAppontmentData({});
+        await setScheduleAppointmentData({});
         history.push(`/patients/${patient_id}`);
     };
 

@@ -7,7 +7,7 @@ import {DRAWER} from "../../constant";
 import {open} from "../../modules/drawer";
 import {getAppointmentsDetails} from "../../modules/appointments";
 import {setFlashCard} from "../../modules/subscription/flashcard";
-import {searchTxActivites, setScheduleAppontmentData,} from "../../modules/subscription/activities";
+import {searchTxActivites, setScheduleAppointmentData,} from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
     const {subscription: {activities = {}} = {}} = state;
@@ -26,8 +26,8 @@ const mapDispatchToProps = (dispatch) => {
         getAllActivities: (activityStatus, dueDateSort) =>
             dispatch(getAllActivities(activityStatus, dueDateSort)),
         setFlashCard: (value) => dispatch(setFlashCard(value)),
-        setScheduleAppontmentData: (payload) =>
-            dispatch(setScheduleAppontmentData(payload)),
+        setScheduleAppointmentData: (payload) =>
+            dispatch(setScheduleAppointmentData(payload)),
         openPatientDetailsDrawer: (payload) =>
             dispatch(open({type: DRAWER.PATIENT_DETAILS, payload})),
         searchTxActivites: (query) => dispatch(searchTxActivites(query)),
