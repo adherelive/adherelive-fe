@@ -7,6 +7,7 @@ import {getFullName} from "../../../../Helper/common";
 import messages from "../messages";
 import {Tooltip} from "antd";
 import {TABLE_DEFAULT_BLANK_FIELD} from "../../../../constant";
+import Icon from "@ant-design/icons";
 import {EyeFilled, EyeInvisibleFilled} from "@ant-design/icons";
 
 class Watchlist extends Component {

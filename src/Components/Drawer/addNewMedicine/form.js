@@ -5,8 +5,9 @@ import {injectIntl} from "react-intl";
 import Select from "antd/es/select";
 import Input from "antd/es/input";
 import messages from "./messages";
+import message from "antd/es/message";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import {Form, Mention} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -169,7 +170,7 @@ class AddMedicineForm extends Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount", this.props.form);
+        console.log("In Add New Medicine componentDidMount", this.props.form);
         this.scrollToTop();
     }
 
@@ -178,8 +179,11 @@ class AddMedicineForm extends Component {
 
         // Added this check to prevent error
         if (antForm && antForm.parentNode) {
+            console.log("Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
             antForm.parentNode.scrollTop = 0;
         }
+
+        console.log("Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
 
         let antDrawerBody = antForm.parentNode;
         let antDrawerWrapperBody = antDrawerBody.parentNode;
