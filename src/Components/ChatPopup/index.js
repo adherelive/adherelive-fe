@@ -1019,7 +1019,7 @@ class ChatPopUp extends Component {
                                     otherUserLastConsumedMessageIndex={
                                         otherUserLastConsumedMessageIndex
                                     }
-                                    //AKSHAY NEW CODE IMPLEMENTATIONS
+                                    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
                                     channelId={finalChannel}
                                 />
                             )}

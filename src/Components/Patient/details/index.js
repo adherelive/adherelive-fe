@@ -924,7 +924,7 @@ class PatientDetails extends Component {
         // if (showTd) {
         const response = await getPatientCarePlanDetails(patient_id);
 
-        //AKSHAY NEW CODE IMPLEMENTATIONS START
+        // Changes made by Akshay NEW CODE IMPLEMENTATIONS START
         const responsePatientDetails = await getPatientDetailsById(patient_id);
         if (responsePatientDetails.status) {
             this.setState({
@@ -932,7 +932,7 @@ class PatientDetails extends Component {
                 patientUserDetails: responsePatientDetails.payload.data.users,
             });
         }
-        //AKSHAY NEW CODE IMPLEMENTATIONS END
+        // Changes made by Akshay NEW CODE IMPLEMENTATIONS END
 
         let {status = false, payload = {}} = response;
         if (status) {
@@ -2951,7 +2951,7 @@ class PatientDetails extends Component {
                                                 >
                                                     {(authenticated_category === USER_CATEGORY.DOCTOR ||
                                                         authenticated_category === USER_CATEGORY.HSP) && (
-                                                        //AKSHAY NEW CODE IMPLEMENTATION
+                                                        // Changes made by Akshay NEW CODE IMPLEMENTATION
                                                         // BELOW CODE COMMENTED BY AKSHAY
                                                         // &&
                                                         // isOtherCarePlan

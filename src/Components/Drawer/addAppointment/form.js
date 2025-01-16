@@ -619,7 +619,7 @@ class AddAppointmentForm extends Component {
     getProviderOption = () => {
         let {static_templates: {appointments: {providers = {}} = {}} = {}} =
             this.props;
-        //AKSHAY NEW CODE IMPLEMENTATION
+        // Changes made by Akshay NEW CODE IMPLEMENTATION
 
         let newTypes = [];
         console.log("providers", providers);

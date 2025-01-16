@@ -59,7 +59,7 @@ class AddExercise extends Component {
                 //     start_time: { hours = "", minutes = "" } = {},
                 //   } = {},
                 // } = this.props;
-                //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+                // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
                 const {days = [], start_time: {hours = "", minutes = ""} = {}} =
                     data;
 

@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
         patients,
         features = {},
         features_mappings = {},
-        //AKSHAY NEW CODE IMPLEMENTATIONS
+        // Changes made by Akshay NEW CODE IMPLEMENTATIONS
         care_plans,
     } = state;
     return {

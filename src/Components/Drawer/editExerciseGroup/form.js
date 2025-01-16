@@ -263,7 +263,7 @@ class EditExerciseGroupForm extends Component {
                 <Option
                     key={`${each}-${type}`}
                     value={repetition_id}
-                    //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+                    // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
                     detail_id={detail_id}
                     canEdit={canEdit}
                     // PREVIOUS CODE
@@ -287,7 +287,7 @@ class EditExerciseGroupForm extends Component {
                     <Option
                         key={`${each}-${type}`}
                         value={id}
-                        //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+                        // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
                         canEdit={canEdit}
                         // PREVIOUS CODE
                         // onClick={this.handleDifferentPortionSelect({ editable: canEdit })}

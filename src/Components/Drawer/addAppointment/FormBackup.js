@@ -494,7 +494,7 @@
 //   getProviderOption = () => {
 //     let { static_templates: { appointments: { providers = {} } = {} } = {} } =
 //       this.props;
-//     //AKSHAY NEW CODE IMPLEMENTATION
+//     // Changes made by Akshay NEW CODE IMPLEMENTATION
 
 //     let newTypes = [];
 //     for (let provider of Object.values(providers)) {

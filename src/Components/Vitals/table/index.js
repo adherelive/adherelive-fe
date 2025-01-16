@@ -72,7 +72,7 @@ class VitalTable extends Component {
         let canViewDetails = true;
         if (
             (!isOtherCarePlan && user_role_id.toString() === auth_role.toString()) ||
-            //AKSHAY NEW CODE IMPLEMENTATIONS
+            // Changes made by Akshay NEW CODE IMPLEMENTATIONS
             (!isEmpty(care_plans) &&
                 care_plans.secondary_doctor_user_role_ids.includes(auth_role) === true)
         ) {
@@ -121,7 +121,7 @@ class VitalTable extends Component {
         let canViewDetails = true;
         if (
             (!isOtherCarePlan && user_role_id.toString() === auth_role.toString()) ||
-            //AKSHAY NEW CODE IMPLEMENTATIONS
+            // Changes made by Akshay NEW CODE IMPLEMENTATIONS
             (!isEmpty(care_plans) &&
                 care_plans.secondary_doctor_user_role_ids.includes(auth_role) === true)
         ) {

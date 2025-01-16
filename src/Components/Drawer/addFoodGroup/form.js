@@ -202,7 +202,7 @@ class AddFoodGroupForm extends Component {
                     <Option
                         key={`${each}-${name}`}
                         value={portion_id}
-                        //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+                        // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
                         detail_id={detail_id}
                         canEdit={canEdit}
                         // PREVIOUS CODE
@@ -227,7 +227,7 @@ class AddFoodGroupForm extends Component {
                     <Option
                         key={`${each}-${name}`}
                         value={id}
-                        //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+                        // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
                         canEdit={canEdit}
                         // PREVIOUS CODE
                         // onClick={this.handleDifferentPortionSelect({ editable: canEdit })}

@@ -884,7 +884,7 @@ class TwilioChat extends Component {
                                 otherUserLastConsumedMessageIndex={
                                     otherUserLastConsumedMessageIndex
                                 }
-                                //AKSHAY NEW CODE IMPLEMENTATIONS
+                                // Changes made by Akshay NEW CODE IMPLEMENTATIONS
                                 channelId={this.channelName}
                             />
                         )}

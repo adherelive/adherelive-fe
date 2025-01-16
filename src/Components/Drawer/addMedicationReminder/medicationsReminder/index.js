@@ -37,7 +37,7 @@ class AddMedicationReminder extends Component {
         );
     }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS
+    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
     // THIS ONE COMMENTED
     // componentDidMount() {
     //   const { getMedicationDetails, patientId } = this.props;

@@ -28,7 +28,7 @@ class AddDiet extends Component {
         );
     }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS
+    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
     // THIS ONE COMMENTED
     // async componentDidMount() {
     //   await this.getAllPortions();
@@ -40,7 +40,7 @@ class AddDiet extends Component {
 
         if (visible && visible != prev_visible) {
             await this.setPatientPreferenceTimings();
-            //AKSHAY NEW CODE IMPLEMENTATIONS
+            // Changes made by Akshay NEW CODE IMPLEMENTATIONS
             // THIS ONE ADDED
             await this.getAllPortions();
         }

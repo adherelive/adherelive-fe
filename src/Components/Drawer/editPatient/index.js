@@ -87,13 +87,13 @@ class EditPatientDrawer extends Component {
         );
     }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS
+    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
     // THIS ONE COMMENTED
     // componentDidMount() {
     //   this.handleConditionSearch(" ");
     // }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS START
+    // Changes made by Akshay NEW CODE IMPLEMENTATIONS START
     async handleGetPatientDetails(patient_id) {
         try {
             console.log("handleGetPatientDetails for Edit Patient patient_id ---> ", patient_id);
@@ -117,8 +117,7 @@ class EditPatientDrawer extends Component {
         }
     }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS END
-
+    // Changes made by Akshay NEW CODE IMPLEMENTATIONS END
     componentDidUpdate(prevProps, prevState) {
         const {visible: prev_visible} = prevProps;
         const {visible} = this.props;
@@ -159,6 +158,11 @@ class EditPatientDrawer extends Component {
             } = {},
         } = carePlanData || {};
 
+        console.log("Edit Patient componentDidUpdate carePlanData ---> ", carePlanData);
+        console.log("Edit Patient componentDidUpdate patientData ---> ", patientData);
+        console.log("Edit Patient componentDidUpdate users ---> ", users);
+
+
         let symptomNames = [];
         let symptomData = [];
         try {
@@ -187,6 +191,8 @@ class EditPatientDrawer extends Component {
 
         console.log("Edit Patient componentDidUpdate formattedData symptomData", symptomData);
 
+        console.log("Edit Patient componentDidUpdate prev_visible", prev_visible);
+        
         if (prev_visible !== visible) {
             const {searchSeverity} = this.props;
             console.log("Edit Patient componentDidUpdate patient_id", patient_id);
@@ -1246,7 +1252,7 @@ class EditPatientDrawer extends Component {
                         option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
                         0
                     }
-                    //AKSHAY NEW CODE IMPLEMENTATIONS
+                    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
                     // disabled={!isTreatmentDisabled}
                 >
                     {this.getTreatmentOption()}

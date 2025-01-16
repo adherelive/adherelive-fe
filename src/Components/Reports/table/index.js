@@ -51,7 +51,7 @@ class ReportTable extends Component {
 
     openEditDrawer = (payload) => () => {
         const {openEditReport} = this.props;
-        //AKSHAY NEW CODE IMPLEMENTATIONS
+        // Changes made by Akshay NEW CODE IMPLEMENTATIONS
         const {flashCard} = payload;
         if (!isEmpty(flashCard)) {
             let flashCardData = {
