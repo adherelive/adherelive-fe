@@ -6,7 +6,7 @@ import {withRouter} from "react-router-dom";
 import {PATH} from "../../constant";
 import config from "../../config";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -67,7 +67,7 @@ class SignIn extends Component {
                         }
                     }
                 } catch (err) {
-                    console.log("handleSingIn err ----> ", err);
+                    console.log("Component Signin handleSingIn err ---> ", err);
                     this.setState({loading: false});
                     message.error(this.formatMessage(messages.somethingWentWrong), 4);
                 }

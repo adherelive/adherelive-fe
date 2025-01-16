@@ -1,5 +1,5 @@
 import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
+import { FAVOURITE_TYPE, REQUEST_TYPE } from "../../constant";
 import {
     getFavouritesUrl,
     markFavouriteUrl,

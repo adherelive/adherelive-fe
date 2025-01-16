@@ -98,7 +98,7 @@ class AddAppointmentForm extends Component {
                 message.error(resp_msg);
             }
         } catch (error) {
-            console.log("MedicalTests Get errrrorrrr ---> ", error);
+            console.log("MedicalTests Get error ---> ", error);
         }
     };
 
@@ -117,7 +117,7 @@ class AddAppointmentForm extends Component {
                 message.error(resp_msg);
             }
         } catch (error) {
-            console.log("RadiologyResponse Get errrrorrrr ---> ", error);
+            console.log("RadiologyResponse Get error ---> ", error);
         }
     };
 

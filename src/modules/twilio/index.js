@@ -66,8 +66,7 @@ export const fetchVideoAccessToken = (userId) => {
                     payload: payload.error,
                 });
             }
-        } catch (error) {
-        }
+        } catch (error) {}
     };
 };
 
@@ -95,8 +94,7 @@ export const fetchChatAccessToken = (userId) => {
                     payload: payload.error,
                 });
             }
-        } catch (error) {
-        }
+        } catch (error) {}
         return response;
     };
 };
@@ -108,8 +106,7 @@ export const setPatientForChat = (patient_id) => {
                 type: SET_PATIENT_FOR_CHAT_COMPLETED,
                 payload: {patient_id},
             });
-        } catch (error) {
-        }
+        } catch (error) {}
     };
 };
 
@@ -120,8 +117,7 @@ export const setCareplanForChat = (care_plan_id) => {
                 type: SET_CARE_PLAN_FOR_CHAT_COMPLETED,
                 payload: {care_plan_id},
             });
-        } catch (error) {
-        }
+        } catch (error) {}
     };
 };
 

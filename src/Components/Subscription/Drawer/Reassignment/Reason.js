@@ -1,12 +1,34 @@
-import React, {Fragment, useEffect, useState} from "react";
-import {Button, Drawer, Radio, Select,} from "antd";
+import React, { Component, Fragment, useState, useEffect } from "react";
+import { injectIntl } from "react-intl";
+import {
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  // message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
+} from "antd";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
 
+import moment from "moment";
+import throttle from "lodash-es/throttle";
 // import messages from "./message";
+import Footer from "../../../Drawer/footer";
+import { PoweroffOutlined } from "@ant-design/icons";
 
-import {useDispatch} from "react-redux";
-import {getReassignmentAudit,} from "./../../../../modules/subscription/activities";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getPatientCareplanByPatientIdAndUserRoleId,
+  getPatientSecondaryDoctorByCareplanId,
+  updateActivityById,
+  updateReasonForReassignment,
+  getReassignmentAudit,
+} from "./../../../../modules/subscription/activities";
 import message from "antd/es/message";
+import TextArea from "antd/es/input/TextArea";
 import isEmpty from "../../../../Helper/is-empty";
 
 const {Option} = Select;
@@ -63,14 +85,13 @@ function Reason({onCloseDrawer, visible, activityData, status}) {
                 setAuditData(data);
             }
         } catch (error) {
-            console.log("Patient Careplans Get errrrorrrr ---> ", error);
+            console.log("Reassignment Reason Patient Careplans Get Error ---> ", error);
         }
     };
 
     // const formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const renderReasonDrawer = () => {
         // const newData = {
@@ -169,8 +190,7 @@ function Reason({onCloseDrawer, visible, activityData, status}) {
         );
     };
 
-    const onSubmit = async () => {
-    };
+    const onSubmit = async () => {};
 
     const {consultation, submitting} = values;
 

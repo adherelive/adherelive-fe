@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Button, message, Radio} from "antd";
+import { Button, Input, message, Radio } from "antd";
 import moment from "moment";
 import startTimeField from "../common/startTime";
 import RepeatFields from "../common/repeatFields";
@@ -15,9 +15,15 @@ import vitalOccurrenceField from "../common/vitalOccurence";
 
 import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
-import {DAYS_NUMBER, REPEAT_TYPE, USER_CATEGORY,} from "../../../../constant";
+import {
+  REPEAT_TYPE,
+  USER_CATEGORY,
+  DAYS_NUMBER,
+  DAYS,
+  ALTERNATE_DAYS,
+} from "../../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -236,8 +242,7 @@ class EditVitalForm extends Component {
         validateFields([startTimeField.field_name]);
     };
 
-    onChangeEventStartTime = (startTime) => {
-    };
+    onChangeEventStartTime = (startTime) => {};
 
     onStartDateChange = (currentDate) => {
         const {
@@ -262,14 +267,11 @@ class EditVitalForm extends Component {
         }
     };
 
-    onEndDateChange = () => {
-    };
+    onEndDateChange = () => {};
 
-    onStartTimeChange = () => {
-    };
+    onStartTimeChange = () => {};
 
-    onEndTimeChange = () => {
-    };
+    onEndTimeChange = () => {};
 
     onEventDurationChange = (start, end) => {
         const {

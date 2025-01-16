@@ -9,7 +9,10 @@ import {
     mapMedicineToPublic,
     resetSearchPrivate,
     resetSearchPublic,
+    searchMedicine,
 } from "../../modules/medicines";
+import { open } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {

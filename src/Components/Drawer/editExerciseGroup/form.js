@@ -13,7 +13,7 @@ import {VIDEO_TYPES} from "../../../constant";
 import CameraOutlined from "@ant-design/icons/CameraOutlined";
 import Upload from "antd/es/upload";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;

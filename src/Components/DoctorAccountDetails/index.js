@@ -268,8 +268,7 @@ class DoctorAccountDetails extends Component {
                     message.warn(this.formatMessage(messages.somethingWentWrong));
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

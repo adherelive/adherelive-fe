@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Button, Input, message} from "antd";
 import CompanyIcon from "../../Assets/images/logo3x.png";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -17,8 +17,7 @@ class ForgotPassword extends Component {
         this.state = {};
     }
 
-    async componentDidMount() {
-    }
+    async componentDidMount() {}
 
     handleForgotPassword = async (e) => {
         e.preventDefault();
@@ -49,7 +48,7 @@ class ForgotPassword extends Component {
                         }
                     }
                 } catch (err) {
-                    console.log("ForgotPassword err ---> ", err);
+                    console.log("Components ForgotPassword err ---> ", err);
                     this.setState({loading: false});
                     message.error("Something went wrong, Please try again", 4);
                 }

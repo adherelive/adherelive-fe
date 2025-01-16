@@ -1,7 +1,9 @@
 import React from "react";
+import { Icon } from "antd";
 
 import {
     DAYS_TEXT_NUM_SHORT,
+    EVENT_TYPE,
     MEDICATION_TIMING,
     MEDICATION_TIMING_HOURS,
     MEDICATION_TIMING_MINUTES,

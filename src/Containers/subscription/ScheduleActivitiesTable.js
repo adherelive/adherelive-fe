@@ -3,7 +3,7 @@ import ScheduleActivitiesTable from "../../Components/Subscription/ScheduleActiv
 import {withRouter} from "react-router-dom";
 import {getAllActivities} from "./../../modules/subscription/activities";
 import {DRAWER} from "../../constant";
-import {open} from "../../modules/drawer";
+import { open, close } from "../../modules/drawer";
 import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
 import {searchTxActivites, setScheduleAppointmentData,} from "../../modules/subscription/activities";
 

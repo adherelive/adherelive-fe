@@ -1,8 +1,18 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {Drawer, Input, message, Radio, Select, Spin, Switch,} from "antd";
+import {
+  Drawer,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  Switch,
+} from "antd";
 import moment from "moment";
 import throttle from "lodash-es/throttle";
+import { getName } from "../../../Helper/validation";
 
 import india from "../../../Assets/images/india.png";
 import australia from "../../../Assets/images/australia.png";
@@ -20,7 +30,12 @@ import france from "../../../Assets/images/france.png";
 import messages from "./message";
 import "react-datepicker/dist/react-datepicker.css";
 import TextArea from "antd/lib/input/TextArea";
-import {PATIENT_CONSTANTS,} from "../../../constant";
+import {
+  FINAL,
+  PROBABLE,
+  DIAGNOSIS_TYPE,
+  PATIENT_CONSTANTS,
+} from "../../../constant";
 import Footer from "../footer";
 
 import isEmpty from "../../../Helper/is-empty";
@@ -1506,7 +1521,7 @@ class EditPatientDrawer extends Component {
                 weight,
                 symptoms: JSON.stringify(this.state.finalSymptomData),
                 address,
-                //followup_advise,
+                followup_advise,
             });
             // submit({ mobile_number, name, gender, date_of_birth, treatment_id: treatment, severity_id: severity, condition_id: condition, prefix ,allergies,diagnosis_description,diagnosis_type,comorbidities,clinical_notes,height,weight, symptoms})
         }

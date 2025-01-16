@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import {injectIntl} from "react-intl";
-import {Table} from "antd";
+import { Table, Icon, Empty } from "antd";
 import generateRow from "./datarow";
 // import { USER_PERMISSIONS } from '../../../constant'
 import getColumn from "./header";
+import messages from "./messages";
 import message from "antd/es/message";
 import EditRecommendSubscription from "../Drawer/RecommendSubscription/EditRecommendSubscription";
 import EditRecommendService from "../Drawer/RecommendService/EditRecommendService";
@@ -22,11 +23,9 @@ class SubscriptionTable extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+  componentDidMount() {}
 
-    componentDidUpdate(prevProps, prevState) {
-    }
+  componentDidUpdate(prevProps, prevState) {}
 
     getLoadingComponent = () => {
         const antIcon = <LoadingOutlined style={{fontSize: 24}} spin/>;

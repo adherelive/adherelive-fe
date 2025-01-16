@@ -12,8 +12,7 @@ class editTemplateColumn extends Component {
         super(props);
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     handleEditPatientDrawer = (e) => {
         e.preventDefault();
@@ -35,8 +34,7 @@ class editTemplateColumn extends Component {
             onOk: async () => {
                 handleCreateDuplicate();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 
@@ -56,7 +54,7 @@ class editTemplateColumn extends Component {
                 message.warn(resp_message);
             }
         } catch (error) {
-            console.log("error ---> ", error);
+            console.log("handleCreateDuplicate error ---> ", error);
             message.warn(error);
         }
     };

@@ -33,7 +33,7 @@ export const getPatientsPaginated = ({
                                          watchlist = 0,
                                      }) => {
     let response = {};
-    console.log("Response in getPatientsPaginated outside FOR: ", response);
+    console.log("Response in getPatientsPaginated outside for: ", response);
     return async (dispatch) => {
         try {
             dispatch({type: GET_PATIENT_PAGINATED});
@@ -50,7 +50,7 @@ export const getPatientsPaginated = ({
                 }),
             });
 
-            console.log("Response in getPatientsPaginated inside FOR: ", response);
+            console.log("Response in getPatientsPaginated inside for: ", response);
             let {status, payload: {data = {}} = {}} = response || {};
 
             if (status === true) {

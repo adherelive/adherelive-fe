@@ -3,6 +3,7 @@ import {injectIntl} from "react-intl";
 import {withRouter} from "react-router-dom";
 
 import Table from "antd/es/table";
+import Icon from "antd/es/icon";
 
 import generateRow from "./dataRow";
 import getColumn from "./header";

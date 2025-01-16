@@ -1,6 +1,11 @@
 import React from "react";
 import {Button} from "antd";
 
+import {
+  SET_FLASHCARD_OPEN,
+  SET_ACTIVITY_DATA_FOR_SCHEDULE,
+} from "../../../../reducer/index";
+import isEmpty from "../../../../Helper/is-empty";
 export default (props) => {
     const {
         data: {

@@ -2,7 +2,19 @@ import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import {DeleteTwoTone, FlagFilled} from "@ant-design/icons";
 import uuid from "react-uuid";
-import {Input, message, Modal, Select, Steps, TimePicker, Upload,} from "antd";
+import {
+  Tabs,
+  Button,
+  Steps,
+  Col,
+  Select,
+  Input,
+  Upload,
+  Modal,
+  TimePicker,
+  // Icon,
+  message,
+} from "antd";
 import SideMenu from "./sidebar";
 import {REQUEST_TYPE} from "../../constant";
 import {getUploadURL} from "../../Helper/urls/user";
@@ -336,8 +348,7 @@ class Register extends Component {
                 });
 
                 return {
-                    abort() {
-                    },
+                    abort() {},
                 };
             };
 
@@ -543,8 +554,7 @@ class Register extends Component {
         const {imageUrl} = this.state;
 
         return {
-            abort() {
-            },
+            abort() {},
         };
     };
 

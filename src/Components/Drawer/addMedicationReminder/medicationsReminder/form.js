@@ -23,9 +23,9 @@ import formulation from "../common/formulation";
 
 import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
-import {DAYS_NUMBER, MEDICINE_UNITS, REPEAT_TYPE, USER_CATEGORY,} from "../../../../constant";
+import {DAYS_NUMBER, MEDICINE_UNITS, REPEAT_TYPE, USER_CATEGORY, TABLET,} from "../../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../../Helper/is-empty";
 
@@ -100,7 +100,7 @@ class AddMedicationReminderForm extends Component {
         } = this.props;
 
         const {programId} = []; // Corrected assignment
-        const {_id} = "1"; // Ensured it's a string
+        const {_id} = "7"; // Ensured it's a string
         const {category} = "PATIENT"; // Ensured it's a string
 
         validateFields();
@@ -314,8 +314,7 @@ class AddMedicationReminderForm extends Component {
         validateFields([startTimeField.field_name]);
     };
 
-    onChangeEventStartTime = (startTime) => {
-    };
+    onChangeEventStartTime = (startTime) => {};
 
     onStartDateChange = (currentDate) => {
         const {
@@ -340,14 +339,11 @@ class AddMedicationReminderForm extends Component {
         }
     };
 
-    onEndDateChange = () => {
-    };
+    onEndDateChange = () => {};
 
-    onStartTimeChange = () => {
-    };
+    onStartTimeChange = () => {};
 
-    onEndTimeChange = () => {
-    };
+    onEndTimeChange = () => {};
 
     onEventDurationChange = (start, end) => {
         const {
@@ -455,8 +451,7 @@ class AddMedicationReminderForm extends Component {
                     } else {
                         message.error(msg);
                     }
-                } catch (error) {
-                }
+                } catch (error) {}
             }
         });
     };

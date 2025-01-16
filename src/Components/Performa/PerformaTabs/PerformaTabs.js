@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Tabs} from "antd";
+import {Button, Tabs} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {setPerformaTabsId} from "../../../modules/performa";
 import ObsGyane from "../PerformaTabs/ObsGyane/ObsGyane";

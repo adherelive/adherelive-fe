@@ -2,6 +2,7 @@ import React from "react";
 import {Select} from "antd";
 // import { diagnosisList } from "./diagnosisList.json";
 import {useSelector} from "react-redux";
+import isEmpty from "../../../Helper/is-empty";
 
 const {Option} = Select;
 

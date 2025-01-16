@@ -1,5 +1,15 @@
 import React, {Component, Fragment} from "react";
-import {Avatar, Button, Form, Input, message, Modal, Spin, Upload,} from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Spin,
+  Avatar,
+  // Icon,
+  Upload,
+  Modal,
+  message,
+} from "antd";
 import moment from "moment";
 import Chat from "twilio-chat";
 // import DoubleTick from "../../Assets/images/double-tick-indicator.png";

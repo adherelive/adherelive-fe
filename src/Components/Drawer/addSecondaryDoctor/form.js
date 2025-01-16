@@ -8,8 +8,9 @@ import messages from "./messages";
 import Spin from "antd/es/spin";
 import {getName} from "../../../Helper/validation";
 import debounce from "lodash-es/debounce";
+import isEmpty from "../../../Helper/is-empty";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Option} = Select;
@@ -34,8 +35,7 @@ class AddSecondaryDoctor extends Component {
         this.searchName = debounce(this.searchName.bind(this), 200);
     }
 
-    async componentDidMount() {
-    }
+    async componentDidMount() {}
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
@@ -61,7 +61,7 @@ class AddSecondaryDoctor extends Component {
             });
         } catch (error) {
             this.setState({searchingName: false});
-            console.log("error ---> ", error);
+            console.log("searchName Add Secondary Doctor error ---> ", error);
         }
     };
 

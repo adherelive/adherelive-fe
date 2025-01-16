@@ -25,7 +25,7 @@ import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
 import {DAYS_NUMBER, MEDICINE_UNITS, REPEAT_TYPE, USER_CATEGORY,} from "../../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../../Helper/is-empty";
 
@@ -257,8 +257,7 @@ class EditMedicationReminderForm extends Component {
         validateFields([startTimeField.field_name]);
     };
 
-    onChangeEventStartTime = (startTime) => {
-    };
+    onChangeEventStartTime = (startTime) => {};
 
     onStartDateChange = (currentDate) => {
         const {
@@ -283,14 +282,11 @@ class EditMedicationReminderForm extends Component {
         }
     };
 
-    onEndDateChange = () => {
-    };
+    onEndDateChange = () => {};
 
-    onStartTimeChange = () => {
-    };
+    onStartTimeChange = () => {};
 
-    onEndTimeChange = () => {
-    };
+    onEndTimeChange = () => {};
 
     onEventDurationChange = (start, end) => {
         const {

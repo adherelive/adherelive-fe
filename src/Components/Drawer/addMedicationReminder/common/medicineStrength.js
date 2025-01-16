@@ -3,6 +3,7 @@ import {injectIntl} from "react-intl";
 
 // antd models
 import InputNumber from "antd/es/input-number";
+import Input from "antd/es/input";
 import Form from "antd/es/form";
 
 const {Item: FormItem} = Form;

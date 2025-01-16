@@ -127,8 +127,7 @@ function Index({
 
     // formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const {submitting} = values;
 

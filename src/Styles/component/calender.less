@@ -65,7 +65,8 @@
     border-color: gray;
 
     &.current {
-      border: 1px solid @deep-sea-blue;
+      border: 1px solid;
+      border-color: @deep-sea-blue;
       z-index: 4 !important;
 
       .fc-bg {
@@ -74,14 +75,17 @@
     }
 
     &.booked {
-      border: 1px solid @silver;
+      border: 1px solid;
+      border-color: @silver;
 
       .fc-bg {
-        background: repeating-linear-gradient(45deg,
+        background: repeating-linear-gradient(
+        45deg,
         @white 9px,
         @white 11px,
         @silver 14px,
-        @silver 12px);
+        @silver 12px
+        );
       }
     }
   }

@@ -11,6 +11,7 @@ import {doRequest} from "../../Helper/network";
 import UploadSteps from "./steps";
 import plus from "../../Assets/images/plus.png";
 // import YearPicker from "react-year-picker";
+import throttle from "lodash-es/throttle";
 import moment from "moment";
 import {withRouter} from "react-router-dom";
 import messages from "./messages";
@@ -681,8 +682,7 @@ class QualificationRegister extends Component {
                 }
 
                 return {
-                    abort() {
-                    },
+                    abort() {},
                 };
             };
 
@@ -750,8 +750,7 @@ class QualificationRegister extends Component {
                 }
 
                 return {
-                    abort() {
-                    },
+                    abort() {},
                 };
             };
 
@@ -1166,7 +1165,7 @@ class QualificationRegister extends Component {
             }
         } catch (err) {
             console.log("err", err);
-            message.warn("Something has gone wrong. Please try again later");
+            message.warn("Something has gone wrong in handleSpecialitySearch. Please try again later");
             this.setState({fetchingSpeciality: false});
         }
     };
@@ -1193,7 +1192,7 @@ class QualificationRegister extends Component {
             }
         } catch (err) {
             console.log("err", err);
-            message.warn("Something has gone wrong. Please try again later");
+            message.warn("Something has gone wrong in handleSpecialitySearchOnFocus. Please try again later");
             this.setState({fetchingSpeciality: false});
         }
     };

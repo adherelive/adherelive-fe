@@ -1,9 +1,11 @@
 import React, {Component} from "react";
 import {injectIntl} from "react-intl";
-import {Table} from "antd";
+import { Table, Empty } from "antd";
 import generateRow from "./datarow";
 // import { USER_PERMISSIONS } from '../../../constant'
 import getColumn from "./header";
+import messages from "./messages";
+import message from "antd/es/message";
 import EditService from "../Drawer/AddService/EditService";
 import {LoadingOutlined} from "@ant-design/icons";
 
@@ -16,11 +18,9 @@ class DoctorServiceTable extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
-    componentDidUpdate(prevProps, prevState) {
-    }
+    componentDidUpdate(prevProps, prevState) {}
 
     getLoadingComponent = () => {
         const antIcon = <LoadingOutlined style={{fontSize: 24}} spin/>;
