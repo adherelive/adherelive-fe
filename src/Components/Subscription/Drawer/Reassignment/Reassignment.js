@@ -6,7 +6,7 @@ import {Button, Drawer, Radio, Select,} from "antd";
 
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getPatientCareplanByPatientIdAndUserRoleId,
+    getPatientCarePlanByPatientIdAndUserRoleId,
     getPatientSecondaryDoctorByCareplanId,
     updateReasonForReassignment,
 } from "./../../../../modules/subscription/activities";
@@ -56,7 +56,7 @@ function Reassignment({onCloseDrawer, visible, activityData, status}) {
     const getCarePlanForPatient = async () => {
         try {
             const getCarePlanResponse = await dispatch(
-                getPatientCareplanByPatientIdAndUserRoleId(activityData.patient_id)
+                getPatientCarePlanByPatientIdAndUserRoleId(activityData.patient_id)
             );
             const {
                 status,

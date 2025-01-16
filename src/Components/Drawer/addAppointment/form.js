@@ -125,11 +125,11 @@ class AddAppointmentForm extends Component {
     getCarePlanForPatient = async () => {
         try {
             const {
-                getPatientCareplanByPatientIdAndUserRoleId,
+                getPatientCarePlanByPatientIdAndUserRoleId,
                 scheduleAppointment,
             } = this.props;
             const getCarePlanResponse =
-                await getPatientCareplanByPatientIdAndUserRoleId(
+                await getPatientCarePlanByPatientIdAndUserRoleId(
                     scheduleAppointment.patient_id
                 );
             const {

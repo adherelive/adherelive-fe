@@ -11,7 +11,7 @@ import startDateField from "../common/startDate";
 import endDateField from "../common/endDate";
 import instructions from "../common/instructions";
 import vitalNameField from "../common/vitalName";
-import vitalOccurenceField from "../common/vitalOccurence";
+import vitalOccurrenceField from "../common/vitalOccurence";
 
 import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
@@ -45,7 +45,7 @@ class EditVitalForm extends Component {
             fetchProgramProducts,
         } = this.props;
         const {programId} = [];
-        const {_id} = "1";
+        const {_id} = "7";
         const {category} = "PATIENT";
         validateFields();
 
@@ -508,7 +508,7 @@ class EditVitalForm extends Component {
 
                         <div className="star-red">*</div>
                     </div>
-                    {vitalOccurenceField.render({...this.props})}
+                    {vitalOccurrenceField.render({...this.props})}
                     <RepeatFields
                         {...this.props}
                         formatMessage={formatMessage}

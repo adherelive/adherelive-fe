@@ -7,7 +7,7 @@ import vitalNameField from "../common/vitalName";
 import repeatField from "../common/repeatType";
 import repeatDaysField from "../common/selectedDays";
 import repeatIntervalField from "../common/repeatInterval";
-import vitalOccurenceField from "../common/vitalOccurence";
+import vitalOccurrenceField from "../common/vitalOccurence";
 import instructions from "../common/instructions";
 import RepeatFields from "../common/repeatFields";
 import startDateField from "../common/startDate";
@@ -20,7 +20,7 @@ import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
 
-class AddvitalsForm extends Component {
+class AddVitalsForm extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -28,7 +28,7 @@ class AddvitalsForm extends Component {
 
     componentDidMount() {
         this.scrollToTop();
-        console.log("AddvitalsForm", this.props.form);
+        console.log("AddVitalsForm this.props.form ---> ", this.props.form);
         const {
             form: {validateFields},
             // currentUser: {
@@ -39,7 +39,7 @@ class AddvitalsForm extends Component {
             fetchProgramProducts,
         } = this.props;
         const {programId} = [];
-        const {_id} = "23";
+        const {_id} = "7";
         const {category} = "PATIENT";
         validateFields();
 
@@ -68,13 +68,23 @@ class AddvitalsForm extends Component {
     }
 
     scrollToTop = () => {
-        console.log("scrollToTop", this.props.form);
+        console.log("addVitals scrollToTop this.props.form ---> ", this.props.form);
         let antForm = document.getElementsByClassName("Form")[0];
+
+        // Added this check to prevent error
+        if (antForm && antForm.parentNode) {
+            console.log("AddVital Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+            antForm.parentNode.scrollTop = 0;
+        }
+
+        console.log("AddVital Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
+
         let antDrawerBody = antForm.parentNode;
         let antDrawerWrapperBody = antDrawerBody.parentNode;
         antDrawerBody.scrollIntoView(true);
         antDrawerWrapperBody.scrollTop -= 200;
     };
+
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
     handleCancel = (e) => {
@@ -354,7 +364,7 @@ class AddvitalsForm extends Component {
 
                         <div className="star-red">*</div>
                     </div>
-                    {vitalOccurenceField.render({...this.props})}
+                    {vitalOccurrenceField.render({...this.props})}
                     <RepeatFields
                         {...this.props}
                         formatMessage={formatMessage}
@@ -375,4 +385,4 @@ class AddvitalsForm extends Component {
     }
 }
 
-export default AddvitalsForm;
+export default AddVitalsForm;

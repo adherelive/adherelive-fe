@@ -150,7 +150,7 @@ export const getPatientCareplanByPatientId = (patientId) => {
     };
 };
 
-export const getPatientCareplanByPatientIdAndUserRoleId = (patientId) => {
+export const getPatientCarePlanByPatientIdAndUserRoleId = (patientId) => {
     let response = {};
     return async (dispatch) => {
         try {
