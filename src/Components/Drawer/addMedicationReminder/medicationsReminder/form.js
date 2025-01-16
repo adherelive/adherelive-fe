@@ -91,13 +91,17 @@ class AddMedicationReminderForm extends Component {
         this.scrollToTop();
         const {
             form: { validateFields },
+            // currentUser: {
+            //   basicInfo: { _id, category },
+            //   programId = []
+            // },
             fetchMedicationStages,
             fetchProgramProducts,
         } = this.props;
 
-        const programId = []; // Corrected assignment
-        const _id = "1"; // Ensured it's a string
-        const category = "PATIENT"; // Ensured it's a string
+        const {programId} = []; // Corrected assignment
+        const {_id} = "1"; // Ensured it's a string
+        const {category} = "PATIENT"; // Ensured it's a string
 
         validateFields();
 
@@ -111,15 +115,17 @@ class AddMedicationReminderForm extends Component {
                     const {
                         data: { medicationStages = [], program_has_medication_stage } = {},
                     } = payload;
-                    this.setState({
-                        medicationStages: medicationStages,
-                        program_has_medication_stage,
-                    });
-                } else {
-                    this.setState({
-                        medicationStages: [],
-                        program_has_medication_stage,
-                    });
+                    if (medicationStages.length > 0) {
+                        this.setState({
+                            medicationStages: medicationStages,
+                            program_has_medication_stage,
+                        });
+                    } else {
+                        this.setState({
+                            medicationStages: [],
+                            program_has_medication_stage,
+                        });
+                    }
                 }
             });
         }
