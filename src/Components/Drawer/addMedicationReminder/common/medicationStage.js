@@ -38,12 +38,12 @@ class MedicationStage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("PREV PROPS =====>", prevProps);
-        console.log("Prosssssssssss ---> ", this.props);
+        console.log("Medication stage componentDidUpdate PrevPros ---> ", prevProps);
+        console.log("Medication stage componentDidUpdate this.props ---> ", this.props);
     }
 
     Hits = ({hits}) => {
-        console.log("7654678743576890", {hits, length: hits.length});
+        console.log("Medication stage componentDidUpdate hits ---> ", {hits, length: hits.length});
 
         // let list = [];
         // for(let hit of hits){

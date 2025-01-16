@@ -80,7 +80,7 @@ class MedicineTable extends Component {
             } = response || {};
             this.setState({searchPublicCount: total_count, loading: false});
         } catch (error) {
-            console.log("error ===>", error);
+            console.log("error ---> ", error);
         }
     }
 

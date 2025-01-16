@@ -63,7 +63,7 @@ function Reason({onCloseDrawer, visible, activityData, status}) {
                 setAuditData(data);
             }
         } catch (error) {
-            console.log("Patient Careplans Get errrrorrrr ===>", error);
+            console.log("Patient Careplans Get errrrorrrr ---> ", error);
         }
     };
 

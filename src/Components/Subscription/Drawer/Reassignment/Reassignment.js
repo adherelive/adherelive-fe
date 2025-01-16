@@ -69,7 +69,7 @@ function Reassignment({onCloseDrawer, visible, activityData, status}) {
                 setCareplanList(data.care_plans);
             }
         } catch (error) {
-            console.log("Patient Careplans Get errrrorrrr ===>", error);
+            console.log("Patient Careplans Get errrrorrrr ---> ", error);
         }
     };
 

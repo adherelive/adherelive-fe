@@ -429,7 +429,7 @@ class SummaryTab extends Component {
         const {symptomsModalKey, symptomParts} = this.state;
         const {upload_documents = {}} = this.props;
         console.log(
-            "weiutqweoiuiquwoerw===>",
+            "weiutqweoiuiquwoerw---> ",
             symptomsModalKey,
             symptomParts,
             symptomParts[symptomsModalKey]

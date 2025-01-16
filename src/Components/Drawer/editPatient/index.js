@@ -96,6 +96,8 @@ class EditPatientDrawer extends Component {
     //AKSHAY NEW CODE IMPLEMENTATIONS START
     async handleGetPatientDetails(patient_id) {
         try {
+            console.log("handleGetPatientDetails for Edit Patient patient_id ---> ", patient_id);
+
             const {getPatientDetailsById} = this.props;
             const response = await getPatientDetailsById(patient_id);
 
@@ -161,7 +163,7 @@ class EditPatientDrawer extends Component {
         let symptomData = [];
         try {
             symptomData = JSON.parse(symptoms);
-            console.log("symptomData", symptomData);
+            console.log("Edit Patient componentDidUpdate symptomData ---> ", symptomData);
             if (!isEmpty(symptomData)) {
                 symptomData.forEach((ele) => {
                     symptomNames.push(ele.symptomName);
@@ -183,11 +185,13 @@ class EditPatientDrawer extends Component {
 
         const formattedDate = this.getFormattedDate(dob);
 
-        console.log("symptomData,symptomData,symptomData", symptomData);
+        console.log("Edit Patient componentDidUpdate formattedData symptomData", symptomData);
 
         if (prev_visible !== visible) {
             const {searchSeverity} = this.props;
-            this.handleGetPatientDetails(patient_id);
+            console.log("Edit Patient componentDidUpdate patient_id", patient_id);
+
+            this.handleGetPatientDetails(patient_id); //.then(() => {});
             this.handleConditionSearch(" ");
             searchSeverity("");
             this.setState({

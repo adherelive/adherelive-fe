@@ -150,7 +150,7 @@ class favouriteMedicine extends Component {
             const res = await getFavourites({type: "medicine"});
             console.log("932867523847927482369704823789", {res});
         } catch (error) {
-            console.log(" error ===>", error);
+            console.log(" error ---> ", error);
         }
     };
 

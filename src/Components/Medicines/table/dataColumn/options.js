@@ -132,7 +132,7 @@ export default (props) => {
                         message.error(resp_msg);
                     }
                 } catch (error) {
-                    console.log("Error ===>", {error});
+                    console.log("Error ---> ", {error});
                 }
             },
             onCancel() {

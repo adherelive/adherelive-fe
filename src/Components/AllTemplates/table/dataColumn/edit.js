@@ -56,7 +56,7 @@ class editTemplateColumn extends Component {
                 message.warn(resp_message);
             }
         } catch (error) {
-            console.log("error ===>", error);
+            console.log("error ---> ", error);
             message.warn(error);
         }
     };

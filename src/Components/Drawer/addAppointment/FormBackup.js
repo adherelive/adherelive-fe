@@ -98,7 +98,7 @@
 //         message.error(resp_msg);
 //       }
 //     } catch (error) {
-//       console.log("MedicalTests Get errrrorrrr ===>", error);
+//       console.log("MedicalTests Get errrrorrrr ---> ", error);
 //     }
 //   };
 //   getRadiologyFavourites = async () => {
@@ -116,7 +116,7 @@
 //         message.error(resp_msg);
 //       }
 //     } catch (error) {
-//       console.log("RadiologyResponse Get errrrorrrr ===>", error);
+//       console.log("RadiologyResponse Get errrrorrrr ---> ", error);
 //     }
 //   };
 //   // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
@@ -143,7 +143,7 @@
 //         });
 //       }
 //     } catch (error) {
-//       console.log("Patient Careplans Get errrrorrrr ===>", error);
+//       console.log("Patient Careplans Get errrrorrrr ---> ", error);
 //     }
 //   };
 //   scrollToTop = () => {

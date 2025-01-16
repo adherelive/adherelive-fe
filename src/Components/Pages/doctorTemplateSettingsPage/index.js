@@ -43,7 +43,7 @@ class TemplatePage extends Component {
                 this.setState({loading: false});
             }
         } catch (error) {
-            console.log("error ===>", error);
+            console.log("error ---> ", error);
             message.warn(error);
         }
     }
@@ -68,7 +68,7 @@ class TemplatePage extends Component {
                 message.error(msg);
             }
         } catch (error) {
-            console.log("err ===>", error);
+            console.log("err ---> ", error);
         }
     }
 

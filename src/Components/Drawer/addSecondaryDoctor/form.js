@@ -61,7 +61,7 @@ class AddSecondaryDoctor extends Component {
             });
         } catch (error) {
             this.setState({searchingName: false});
-            console.log("error ===>", error);
+            console.log("error ---> ", error);
         }
     };
 

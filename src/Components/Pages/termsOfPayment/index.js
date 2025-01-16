@@ -38,7 +38,7 @@ class TermsOfPayment extends Component {
                 this.setState({value: content});
             }
         } catch (error) {
-            console.log("23742747327423y742 ===>", {error});
+            console.log("23742747327423y742 ---> ", {error});
             message.warn("Something went wrong");
         }
     }

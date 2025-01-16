@@ -162,7 +162,7 @@
 //         message.error(resp_msg);
 //       }
 //     } catch (error) {
-//       console.log("MedicalTests Get errrrorrrr ===>", error);
+//       console.log("MedicalTests Get errrrorrrr ---> ", error);
 //     }
 //   };
 
@@ -181,7 +181,7 @@
 //         message.error(resp_msg);
 //       }
 //     } catch (error) {
-//       console.log("RadiologyResponse Get errrrorrrr ===>", error);
+//       console.log("RadiologyResponse Get errrrorrrr ---> ", error);
 //     }
 //   };
 

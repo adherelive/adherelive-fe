@@ -166,7 +166,7 @@ class EditAppointmentForm extends Component {
                 message.error(resp_msg);
             }
         } catch (error) {
-            console.log("MedicalTests Get errrrorrrr ===>", error);
+            console.log("MedicalTests Get errrrorrrr ---> ", error);
         }
     };
 
@@ -185,7 +185,7 @@ class EditAppointmentForm extends Component {
                 message.error(resp_msg);
             }
         } catch (error) {
-            console.log("RadiologyResponse Get errrrorrrr ===>", error);
+            console.log("RadiologyResponse Get errrrorrrr ---> ", error);
         }
     };
 

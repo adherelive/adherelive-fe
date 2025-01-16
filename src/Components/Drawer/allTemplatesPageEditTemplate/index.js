@@ -658,7 +658,7 @@ class TemplatePageCreateDrawer extends Component {
                 message.warn(msg);
             }
         } catch (error) {
-            console.log("deleteMedicationError ===>", error);
+            console.log("deleteMedicationError ---> ", error);
             message.warn(error);
         }
     }
@@ -689,7 +689,7 @@ class TemplatePageCreateDrawer extends Component {
                 message.warn(msg);
             }
         } catch (error) {
-            console.log("deleteAppointmentError ===>", error);
+            console.log("deleteAppointmentError ---> ", error);
             message.warn(error);
         }
     }
@@ -720,7 +720,7 @@ class TemplatePageCreateDrawer extends Component {
                 message.warn(msg);
             }
         } catch (error) {
-            console.log("deleteVitalError ===>", error);
+            console.log("deleteVitalError ---> ", error);
             message.warn(error);
         }
     }
@@ -751,7 +751,7 @@ class TemplatePageCreateDrawer extends Component {
                 message.warn(msg);
             }
         } catch (error) {
-            console.log("deleteDietError ===>", error);
+            console.log("deleteDietError ---> ", error);
             message.warn(error);
         }
     }
@@ -782,7 +782,7 @@ class TemplatePageCreateDrawer extends Component {
                 message.warn(msg);
             }
         } catch (error) {
-            console.log("deleteWorkoutError ===>", error);
+            console.log("deleteWorkoutError ---> ", error);
             message.warn(error);
         }
     }

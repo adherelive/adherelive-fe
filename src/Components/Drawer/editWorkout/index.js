@@ -189,7 +189,7 @@ class EditWorkout extends Component {
             this.setState({loading: false});
         } catch (error) {
             this.setState({loading: false});
-            console.log("error ===>", {error});
+            console.log("error ---> ", {error});
         }
     };
 

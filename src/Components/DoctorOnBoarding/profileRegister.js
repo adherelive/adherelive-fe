@@ -475,7 +475,7 @@ class Profileregister extends Component {
             }
             doctorProfileRegister(data).then((response) => {
                 console.log(
-                    " 32453454RESPONSE FOR DOC PROFILE REGISTER ===>",
+                    " 32453454RESPONSE FOR DOC PROFILE REGISTER ---> ",
                     response
                 );
                 const {
@@ -583,7 +583,7 @@ class Profileregister extends Component {
             }
         } catch (error) {
             this.setState({searchingMail: false});
-            console.log("error ===>", error);
+            console.log("error ---> ", error);
         }
     };
 
@@ -621,7 +621,7 @@ class Profileregister extends Component {
                 if (Object.keys(emails).length) {
                     for (let i in emails) {
                         const each = emails[i];
-                        // console.log("983264573542654326 ===>",{typed_email,each});
+                        // console.log("983264573542654326 ---> ",{typed_email,each});
 
                         if (typed_email === each) {
                             message.info(this.formatMessage(messages.mailInUse));

@@ -51,8 +51,8 @@ class AddMedicationReminder extends Component {
         if (visible && visible != prev_visible) {
             getMedicationDetails(patientId);
         }
-        console.log("this.props", this.props);
-        console.log("prevProps", prevProps);
+        console.log("Medication Reminder componentDidUpdate this.props ---> ", this.props);
+        console.log("Medication Reminder componentDidUpdate prevProps ---> ", prevProps);
     }
 
     hasErrors = (fieldsError) => {

@@ -125,7 +125,7 @@ class AddSecondaryDoc extends Component {
             disabled: disabledSubmit,
         };
 
-        console.log("82376482364826348723", {props: this.props});
+        console.log("In Add Secondary Doctor, render() ---> ", {props: this.props});
 
         return (
             <Fragment>

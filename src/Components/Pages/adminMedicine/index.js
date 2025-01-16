@@ -45,7 +45,7 @@ class AdminMedicine extends Component {
             } = response || {};
             this.setState({totalPublicMedicinesCount: total_count});
         } catch (error) {
-            console.log("89368754234 error ===>", error);
+            console.log("Admin Medicine componentDidMount error ---> ", error);
         }
     }
 
@@ -62,7 +62,7 @@ class AdminMedicine extends Component {
             } = response || {};
             this.setState({totalPrivateMedicinesCount: total_count});
         } catch (error) {
-            console.log("89368754234 error ===>", error);
+            console.log("89368754234 error ---> ", error);
         }
     }
 

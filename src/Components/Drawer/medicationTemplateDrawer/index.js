@@ -158,7 +158,7 @@ class TemplateDrawer extends Component {
 
         console.log("327546235423786479812742376", {template_medications});
 
-        // console.log("32786428457523476834234532847 carePlanTemplateIds===>",carePlanTemplateIds)
+        // console.log("32786428457523476834234532847 carePlanTemplateIds---> ",carePlanTemplateIds)
 
         let carePlanTemplateId = Object.keys(carePlanTemplateIds).length
             ? parseInt(carePlanTemplateIds[0])
