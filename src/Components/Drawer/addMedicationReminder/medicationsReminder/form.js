@@ -414,43 +414,45 @@ class AddMedicationReminderForm extends Component {
         });
     };
 
-    // onPatientChange = () => {
-    //   const {
-    //     form: { setFieldsValue },
-    //     fetchProgramProducts,
-    //     fetchMedicationStages
-    //   } = this.props;
+    /*
+    onPatientChange = () => {
+      const {
+        form: { setFieldsValue },
+        fetchProgramProducts,
+        fetchMedicationStages
+      } = this.props;
 
-    //   const otherUser = this.getOtherUser();
+      const otherUser = this.getOtherUser();
 
-    //   if (otherUser) {
-    //     const {
-    //       basicInfo: { _id },
-    //       programId = []
-    //     } = otherUser;
-    //     fetchProgramProducts(programId[0]);
-    //     fetchMedicationStages(_id).then(response => {
-    //       const { status, payload } = response;
-    //       if (status) {
-    //         const {
-    //           data: { medicationStages = [], program_has_medication_stage } = {}
-    //         } = payload;
-    //         if (medicationStages.length > 0) {
-    //           this.setState({
-    //             medicationStages: medicationStages,
-    //             program_has_medication_stage
-    //           });
-    //         } else {
-    //           this.setState({
-    //             medicationStages: [],
-    //             program_has_medication_stage
-    //           });
-    //         }
-    //       }
-    //     });
-    //     setFieldsValue({ [chooseMedicationField.field_name]: null });
-    //   }
-    // };
+      if (otherUser) {
+        const {
+          basicInfo: { _id },
+          programId = []
+        } = otherUser;
+        fetchProgramProducts(programId[0]);
+        fetchMedicationStages(_id).then(response => {
+          const { status, payload } = response;
+          if (status) {
+            const {
+              data: { medicationStages = [], program_has_medication_stage } = {}
+            } = payload;
+            if (medicationStages.length > 0) {
+              this.setState({
+                medicationStages: medicationStages,
+                program_has_medication_stage
+              });
+            } else {
+              this.setState({
+                medicationStages: [],
+                program_has_medication_stage
+              });
+            }
+          }
+        });
+        setFieldsValue({ [chooseMedicationField.field_name]: null });
+      }
+    };
+    */
 
     getFooter = () => {
         const {

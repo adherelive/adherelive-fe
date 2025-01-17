@@ -154,21 +154,38 @@ class AddAppointmentForm extends Component {
     };
 
     scrollToTop = () => {
-        console.log("I am in the scrollToTop in AddAppointment");
-        let antForm = document.getElementsByClassName("Form")[0];
+        try {
+            // First try to get the form element using ref
+            const formElement = this.formRef.current;
 
-        // Added this check to prevent error
-        if (antForm && antForm.parentNode) {
-            console.log("AddAppointment Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
-            antForm.parentNode.scrollTop = 0;
+            if (!formElement) {
+                console.log("Form element not found via ref");
+                return;
+            }
+
+            // Find the drawer body and wrapper (ant-drawer-body and ant-drawer-wrapper-body)
+            let drawerBody = formElement.closest('.ant-drawer-body');
+            let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
+
+            if (!drawerBody || !drawerWrapper) {
+                console.log("Drawer elements not found");
+                return;
+            }
+
+            // Log for debugging
+            console.log("Form element:", formElement);
+            console.log("Drawer body:", drawerBody);
+            console.log("Drawer wrapper:", drawerWrapper);
+
+            // Scroll the drawer body into view
+            drawerBody.scrollIntoView(true);
+
+            // Adjust final scroll position
+            drawerWrapper.scrollTop -= 200;
+
+        } catch (error) {
+            console.error("Error in scrollToTop:", error);
         }
-
-        console.log("AddAppointment Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
-
-        let antDrawerBody = antForm.parentNode;
-        let antDrawerWrapperBody = antDrawerBody.parentNode;
-        antDrawerBody.scrollIntoView(true);
-        antDrawerWrapperBody.scrollTop -= 200;
     };
 
     openCalendar = (e) => {

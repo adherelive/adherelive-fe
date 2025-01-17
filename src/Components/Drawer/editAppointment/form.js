@@ -69,20 +69,23 @@ class EditAppointmentForm extends Component {
         this.drawerWrapperRef = React.createRef();
     }
 
-    // openCalendar = (e) => {
-    //   e.preventDefault();
-    //   const datePicker = window.document.getElementsByClassName(DATE);
+    /*
+    openCalendar = (e) => {
+      e.preventDefault();
+      const datePicker = window.document.getElementsByClassName(DATE);
 
-    //   if (datePicker) {
-    //     const firstChild = datePicker.firstChild;
-    //     if (firstChild) {
-    //       const datePickerInput = firstChild.firstChild;
-    //       if (datePicker && datePickerInput.click) {
-    //         datePickerInput.click();
-    //       }
-    //     }
-    //   }
-    // };
+      if (datePicker) {
+        const firstChild = datePicker.firstChild;
+        if (firstChild) {
+          const datePickerInput = firstChild.firstChild;
+          if (datePicker && datePickerInput.click) {
+            datePickerInput.click();
+          }
+        }
+      }
+    };
+    */
+
     componentDidMount = () => {
         this.scrollToTop();
         let {
@@ -196,11 +199,38 @@ class EditAppointmentForm extends Component {
     };
 
     scrollToTop = () => {
-        let antForm = document.getElementsByClassName("Form")[0];
-        let antDrawerBody = antForm.parentNode;
-        let antDrawerWrapperBody = antDrawerBody.parentNode;
-        antDrawerBody.scrollIntoView(true);
-        antDrawerWrapperBody.scrollTop -= 200;
+        try {
+            // First try to get the form element using ref
+            const formElement = this.formRef.current;
+
+            if (!formElement) {
+                console.log("Form element not found via ref");
+                return;
+            }
+
+            // Find the drawer body and wrapper (ant-drawer-body and ant-drawer-wrapper-body)
+            let drawerBody = formElement.closest('.ant-drawer-body');
+            let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
+
+            if (!drawerBody || !drawerWrapper) {
+                console.log("Drawer elements not found");
+                return;
+            }
+
+            // Log for debugging
+            console.log("Form element:", formElement);
+            console.log("Drawer body:", drawerBody);
+            console.log("Drawer wrapper:", drawerWrapper);
+
+            // Scroll the drawer body into view
+            drawerBody.scrollIntoView(true);
+
+            // Adjust final scroll position
+            drawerWrapper.scrollTop -= 200;
+
+        } catch (error) {
+            console.error("Error in scrollToTop:", error);
+        }
     };
 
     fetchPatients = async (data) => {
