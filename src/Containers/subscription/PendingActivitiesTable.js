@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import PendingActivitiesTable from "../../Components/Subscription/PendingActivitiesTable";
 import {withRouter} from "react-router-dom";
-import {getAllActivities} from "./../../modules/subscription/activities";
+import {getAllActivities} from "../../modules/subscription/activities";
 // import { open } from "../../../modules/drawer";
 import {DRAWER} from "../../constant";
 import { open, close } from "../../modules/drawer";

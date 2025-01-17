@@ -21,12 +21,12 @@ import { PoweroffOutlined } from "@ant-design/icons";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getPatientCareplanByPatientIdAndUserRoleId,
+  getPatientCarePlanByPatientIdAndUserRoleId,
   getPatientSecondaryDoctorByCareplanId,
   updateActivityById,
   updateReasonForReassignment,
   getReassignmentAudit,
-} from "./../../../../modules/subscription/activities";
+} from "../../../../modules/subscription/activities";
 import message from "antd/es/message";
 import TextArea from "antd/es/input/TextArea";
 import isEmpty from "../../../../Helper/is-empty";

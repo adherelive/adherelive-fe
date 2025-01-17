@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import ScheduleActivitiesTable from "../../Components/Subscription/ScheduleActivitiesTable";
 import {withRouter} from "react-router-dom";
-import {getAllActivities} from "./../../modules/subscription/activities";
+import {getAllActivities} from "../../modules/subscription/activities";
 import {DRAWER} from "../../constant";
 import { open, close } from "../../modules/drawer";
 import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";

@@ -1700,10 +1700,6 @@ class PatientDetails extends Component {
         }
     };
 
-    showTemplateDrawer = () => {
-        this.setState({templateDrawerVisible: true});
-    };
-
     // onRowAppointment = ({id,carePlan}) => () => {
     //   console.log("38248274826384628423");
     //   const { onRowClickAppointment } = this;
@@ -1893,12 +1889,9 @@ class PatientDetails extends Component {
     //   );
     // };
 
-    handleSymptoms = (e) => {
-        const {openSymptomsDrawer, patient_id} = this.props;
-        openSymptomsDrawer({
-            patient_id,
-        });
-    };
+    // showTemplateDrawer = () => {
+    //     this.setState({templateDrawerVisible: true});
+    // };
 
     onCloseTemplate = async () => {
         const {getAllTemplatesForDoctor} = this.props;
@@ -1919,20 +1912,6 @@ class PatientDetails extends Component {
         getPortions();
         // getWorkoutDetails();
         this.setState({templateDrawerVisible: true});
-    };
-
-    onRowClickMedication = (key) => (event) => {
-        const {openEditMedicationDrawer, patient_id} = this.props;
-        openEditMedicationDrawer({id: key, patient_id});
-        //this.props.history.push(getGetFacilitiesUrl(key));
-    };
-
-    onRowMedication = (record, rowIndex) => {
-        const {onRowClickMedication} = this;
-        const {key} = record;
-        return {
-            onClick: onRowClickMedication(key),
-        };
     };
 
     handleSubmitTemplate = (data) => {
