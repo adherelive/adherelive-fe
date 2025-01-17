@@ -71,6 +71,10 @@ class AddAppointmentForm extends Component {
             carePlans: {},
             pageUrl: window.location.pathname.split("/"),
         };
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     async componentDidMount() {
@@ -985,7 +989,10 @@ class AddAppointmentForm extends Component {
         const typeValue = getFieldValue(APPOINTMENT_TYPE) || null;
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 <FormItem
                     // label={formatMessage(messages.patient)}
                     className="mb-24"

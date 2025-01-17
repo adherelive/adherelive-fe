@@ -50,6 +50,10 @@ class AddFoodGroupForm extends Component {
         };
 
         this.handleFoodSearch = debounce(this.handleFoodSearch.bind(this), 200);
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     componentDidMount() {
@@ -557,7 +561,10 @@ class AddFoodGroupForm extends Component {
         });
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 {/* food item */}
                 <FormItem
                     label={formatMessage(messages.food_item)}

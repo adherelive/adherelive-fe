@@ -50,6 +50,10 @@ class EditExerciseGroupForm extends Component {
             this.handleExerciseSearch.bind(this),
             200
         );
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     async componentDidMount() {
@@ -641,7 +645,10 @@ class EditExerciseGroupForm extends Component {
         });
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 {/* exercise  */}
                 <FormItem
                     label={formatMessage(messages.exercise)}

@@ -63,6 +63,10 @@ class EditAppointmentForm extends Component {
             radiologyTypeSelected: null,
             typeDescValue: "",
         };
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     // openCalendar = (e) => {
@@ -1078,7 +1082,10 @@ class EditAppointmentForm extends Component {
         const typeValue = getFieldValue(APPOINTMENT_TYPE);
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 <FormItem
                     // label={formatMessage(message.patient)}
                     className="mb-24"

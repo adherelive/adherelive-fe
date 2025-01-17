@@ -36,6 +36,10 @@ class AddExerciseForm extends Component {
         this.state = {
             loading: false,
         };
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     componentDidMount() {
@@ -123,7 +127,10 @@ class AddExerciseForm extends Component {
         });
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 {/* food item name */}
                 <FormItem
                     label={formatMessage(messages.exercise_name)}

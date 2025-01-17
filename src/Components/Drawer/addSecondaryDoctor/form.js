@@ -33,6 +33,10 @@ class AddSecondaryDoctor extends Component {
         );
 
         this.searchName = debounce(this.searchName.bind(this), 200);
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     async componentDidMount() {}
@@ -167,7 +171,10 @@ class AddSecondaryDoctor extends Component {
 
         const {searchingName = false} = this.state;
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 <FormItem
                     label={formatMessage(messages.doctor_name)}
                     className="flex-grow-1 mt-4"

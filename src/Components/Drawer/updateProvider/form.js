@@ -54,6 +54,10 @@ class UpdateProviderForm extends Component {
         this.state = {
             account_type_exists: false,
         };
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     componentDidMount() {
@@ -212,7 +216,10 @@ class UpdateProviderForm extends Component {
         );
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 <FormItem
                     validateStatus={fieldsError[EMAIL] ? "error" : ""}
                     help={fieldsError[EMAIL] || ""}

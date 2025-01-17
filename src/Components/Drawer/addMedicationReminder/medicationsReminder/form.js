@@ -133,36 +133,6 @@ class AddMedicationReminderForm extends Component {
         }
     };
 
-    /*
-    scrollToTop = () => {
-        // Check if the element "Form" exists?
-        console.log("All Form elements:", document.getElementsByClassName("Form"));
-
-        let antForm = document.getElementsByClassName("Form")[0];
-        console.log("AddMedicationReminder Form scrollTop antForm ---> ", antForm);
-        console.log("AddMedicationReminder Form scrollTop antForm parentNode ---> \n");
-        //console.log(antForm.parentNode);
-
-        // Added this check to prevent error
-        if (antForm && antForm.parentNode) {
-            console.log("AddMedicationReminder Form scrollTop antForm.parentNode ---> ", antForm.parentNode);
-            antForm.parentNode.scrollTop = 0;
-
-            let antDrawerBody = antForm.parentNode;
-            if (antDrawerBody && antDrawerBody.parentNode) {
-                let antDrawerWrapperBody = antDrawerBody.parentNode;
-                if (antDrawerWrapperBody) {
-                    antDrawerBody.scrollIntoView(true);
-                    antDrawerWrapperBody.scrollTop -= 200;
-                }
-            }
-        } else {
-            console.log("Element or parentNode not found.");
-        }
-        console.log("AddMedicationReminder Confirm form scrollTop antForm.parentNode ---> ", antForm.parentNode);
-    };
-    */
-
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
     handleCancel = (e) => {
