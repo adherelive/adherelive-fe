@@ -2437,7 +2437,7 @@ class PatientDetails extends Component {
                                    auth_role,
                                    message,
                                }) => {
-        console.log("38972168738712638712638716237821", {
+        console.log("Patient Details with Auth Role: ", {
             auth_role,
             str: auth_role.toString(),
         });
