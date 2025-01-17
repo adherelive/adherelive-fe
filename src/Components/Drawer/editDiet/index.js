@@ -10,7 +10,7 @@ import Footer from "../footer";
 import Loading from "../../Common/Loading";
 import confirm from "antd/es/modal/confirm";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class EditDiet extends Component {
@@ -189,7 +189,7 @@ class EditDiet extends Component {
             this.setState({loading: false});
         } catch (error) {
             this.setState({loading: false});
-            console.log("error ---> ", {error});
+            console.log("getDietDetails error ---> ", {error});
         }
     };
 
@@ -445,8 +445,7 @@ class EditDiet extends Component {
                     message.warn(this.formatMessage(messages.somethingWentWrong));
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

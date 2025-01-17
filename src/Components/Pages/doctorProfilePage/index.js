@@ -393,8 +393,7 @@ class DoctorProfilePage extends Component {
                     console.log("doctorDeactivate UI error --> ", error);
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 
@@ -2073,8 +2072,7 @@ class DoctorProfilePage extends Component {
             })
         );
     };
-    handleChangeLocation = () => {
-    };
+    handleChangeLocation = () => {};
     getDoctorBasicDetails = () => {
         const {
             auth: {authenticated_category = "", authenticated_user = null},
@@ -2530,8 +2528,7 @@ class DoctorProfilePage extends Component {
                 }
 
                 return {
-                    abort() {
-                    },
+                    abort() {},
                 };
             };
     customRequestRegistration =
@@ -2567,8 +2564,7 @@ class DoctorProfilePage extends Component {
                 }
 
                 return {
-                    abort() {
-                    },
+                    abort() {},
                 };
             };
     getDoctorQualificationDetails = () => {

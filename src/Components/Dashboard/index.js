@@ -20,6 +20,7 @@ import PatientDetailsDrawer from "../../Containers/Drawer/patientDetails";
 
 import ChatPopup from "../../Containers/ChatPopup";
 import AddPatientDrawer from "../Drawer/addPatient";
+import Loading from "../Common/Loading";
 import {withRouter} from "react-router-dom";
 import Donut from "../Common/graphs/donut";
 import GraphsModal from "./graphsModal";
@@ -39,6 +40,7 @@ import ScheduledActivitiesTable from "../../Containers/subscription/ScheduleActi
 import PendingActivitiesTable from "../../Containers/subscription/PendingActivitiesTable";
 
 // helpers...
+import { getRoomId } from "../../Helper/twilio";
 
 const {GETSTREAM_API_KEY, GETSTREAM_APP_ID} = config;
 const {TabPane} = Tabs;

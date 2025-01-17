@@ -12,7 +12,7 @@ import prefixField from "../../Prefix";
 import Customization from "../addProvider/customization";
 import {ACCOUNT_TYPES, CURRENT, SAVINGS} from "../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -54,6 +54,10 @@ class UpdateProviderForm extends Component {
         this.state = {
             account_type_exists: false,
         };
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     componentDidMount() {
@@ -134,8 +138,7 @@ class UpdateProviderForm extends Component {
             onOk: async () => {
                 this.resetAllAccount();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 
@@ -213,7 +216,10 @@ class UpdateProviderForm extends Component {
         );
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 <FormItem
                     validateStatus={fieldsError[EMAIL] ? "error" : ""}
                     help={fieldsError[EMAIL] || ""}

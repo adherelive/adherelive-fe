@@ -4,6 +4,7 @@ import message from "antd/es/message";
 import Button from "antd/es/button";
 import Modal from "antd/es/modal";
 import confirm from "antd/es/modal/confirm";
+import Switch from "antd/es/switch";
 
 import {
     ArrowLeftOutlined,
@@ -21,6 +22,8 @@ import {ACCOUNT_STATUS, DAYS_TEXT_NUM, TABLE_DEFAULT_BLANK_FIELD,} from "../../.
 import {PageLoading} from "../../../Helper/loading/pageLoading";
 import {withRouter} from "react-router-dom";
 import Tooltip from "antd/es/tooltip";
+import Menu from "antd/es/menu";
+import Dropdown from "antd/es/dropdown";
 import Tag from "antd/es/tag";
 
 class AdminDoctorDetails extends Component {
@@ -106,7 +109,7 @@ class AdminDoctorDetails extends Component {
             this.setState({
                 loading: false,
             });
-            message.warn("Somthing has gone wrong, please try again later");
+            message.warn("Somthing has gone wrong @ Doctor Admin details, please try again later");
         }
     };
 
@@ -189,8 +192,7 @@ class AdminDoctorDetails extends Component {
                     console.log("doctorDeactivate UI error --> ", error);
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

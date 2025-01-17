@@ -1,13 +1,29 @@
-import React, {Fragment, useEffect, useState} from "react";
-import {Button, Drawer, Radio, Select,} from "antd";
+import React, { Component, Fragment, useState, useEffect } from "react";
+import { injectIntl } from "react-intl";
+import {
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  // message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
+} from "antd";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
 
+import moment from "moment";
+import throttle from "lodash-es/throttle";
 // import messages from "./message";
+import Footer from "../../../Drawer/footer";
+import { PoweroffOutlined } from "@ant-design/icons";
 
 import {useDispatch, useSelector} from "react-redux";
 import {
     getPatientCarePlanByPatientIdAndUserRoleId,
     getPatientSecondaryDoctorByCareplanId,
+    updateActivityById,
     updateReasonForReassignment,
 } from "./../../../../modules/subscription/activities";
 import message from "antd/es/message";
@@ -69,14 +85,13 @@ function Reassignment({onCloseDrawer, visible, activityData, status}) {
                 setCareplanList(data.care_plans);
             }
         } catch (error) {
-            console.log("Patient Careplans Get errrrorrrr ---> ", error);
+            console.log("Drawer reassignment patient care plans gets error ---> ", error);
         }
     };
 
     // const formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const setCareplan = async (value) => {
         const response = await dispatch(

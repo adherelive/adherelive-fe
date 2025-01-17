@@ -2,7 +2,7 @@ import React from "react";
 import TabletIcon from "../../../../Assets/images/tabletIcon3x.png";
 import InjectionIcon from "../../../../Assets/images/injectionIcon3x.png";
 import SyrupIcon from "../../../../Assets/images/pharmacy.png";
-import {SYRUP, TABLET} from "../../../../constant";
+import {MEDICINE_FORM_TYPE, SYRUP, TABLET} from "../../../../constant";
 import isEmpty from "../../../../Helper/is-empty";
 
 export default (props) => {

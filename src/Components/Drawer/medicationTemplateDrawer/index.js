@@ -704,8 +704,7 @@ class TemplateDrawer extends Component {
                 onOk: async () => {
                     this.setState({carePlanTemplateId: parseInt(value)});
                 },
-                onCancel() {
-                },
+                onCancel() {},
             });
         } else {
             this.setState({carePlanTemplateId: parseInt(value)});

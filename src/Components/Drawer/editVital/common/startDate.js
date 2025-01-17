@@ -4,7 +4,8 @@ import {DatePicker, Form} from "antd";
 import calendar from "../../../../Assets/images/calendar1.svg";
 import moment from "moment";
 
-import {EVENT_ACTION} from "../../../../constant";
+import repeatTypeField from "./repeatType";
+import {EVENT_ACTION, REPEAT_TYPE} from "../../../../constant";
 
 const {Item: FormItem} = Form;
 const FIELD_NAME = "start_date";

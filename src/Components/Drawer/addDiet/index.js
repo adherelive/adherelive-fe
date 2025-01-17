@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {Drawer} from "antd";
+import { Button, Drawer } from "antd";
 import messages from "./messages";
 import SingleDayComponent from "../singleDayComponent/index";
 import message from "antd/es/message";
@@ -9,7 +9,7 @@ import DietFieldsForm from "./form";
 import Footer from "../footer";
 import Loading from "../../Common/Loading";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class AddDiet extends Component {

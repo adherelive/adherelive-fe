@@ -1,11 +1,25 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {Button, Drawer, message, Select, Spin, Switch,} from "antd";
+import {
+  Drawer,
+  // Icon,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
+  Switch,
+} from "antd";
+import moment from "moment";
 import throttle from "lodash-es/throttle";
+import { getName } from "../../../Helper/validation";
 
 import messages from "./message";
 import "react-datepicker/dist/react-datepicker.css";
 import TextArea from "antd/lib/input/TextArea";
+import { FINAL, PROBABLE, DIAGNOSIS_TYPE } from "../../../constant";
 import Footer from "../footer";
 
 import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
@@ -16,6 +30,7 @@ import CustomSymptoms from "../addPatient/CustomSymptoms";
 import CustomDiagnosis from "../addPatient/CustomDiagnosis";
 import MultipleTreatmentAlert from "../addPatient/MultipleTreatmentAlert";
 import WidgetDrawer from "../addPatient/WidgetDrawer";
+import Icon from "@ant-design/icons";
 
 const {Option} = Select;
 
@@ -59,8 +74,7 @@ class AddCarePlanDrawer extends Component {
         );
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     componentDidUpdate(prevProps, prevState) {
         const {visible: prev_visible} = prevProps;

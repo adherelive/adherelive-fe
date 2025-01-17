@@ -1,5 +1,15 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {Button, message, Spin, Switch,} from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Spin,
+  // Avatar,
+  Upload,
+  // Modal,
+  message,
+  Switch,
+} from "antd";
 import Close from "../../../Assets/images/close.png";
 import isEmpty from "../../../Helper/is-empty";
 import {setFlashCard} from "./../../../modules/subscription/flashcard";

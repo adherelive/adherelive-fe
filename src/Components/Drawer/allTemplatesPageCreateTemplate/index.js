@@ -16,6 +16,8 @@ import {
 } from "../../../constant";
 import moment from "moment";
 import message from "antd/es/message";
+import Icon from "antd/es/icon";
+import Button from "antd/es/button";
 import EditMedicationReminder from "../../../Containers/Drawer/editMedicationReminder";
 import EditAppointmentDrawer from "../../../Containers/Drawer/editAppointment";
 import EditVitalDrawer from "../../../Containers/Drawer/editVitals";
@@ -68,8 +70,7 @@ class TemplatePageCreateDrawer extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
@@ -639,8 +640,7 @@ class TemplatePageCreateDrawer extends Component {
 
                 close();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {ClockCircleOutlined, DeleteTwoTone, EditFilled, EnvironmentFilled} from "@ant-design/icons";
+import {ClockCircleOutlined, DeleteTwoTone, EditFilled, EnvironmentFilled, Icon} from "@ant-design/icons";
 import uuid from "react-uuid";
 import {Input, message} from "antd";
 import {DAYS_TEXT_NUM_SHORT, FULL_DAYS, FULL_DAYS_NUMBER, PATH, USER_CATEGORY,} from "../../constant";

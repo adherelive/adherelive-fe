@@ -11,6 +11,8 @@ import {Checkbox, TimePicker} from "antd";
 import messages from "./message";
 import moment from "moment";
 import calendar from "../../../Assets/images/calendar1.svg";
+import { ClockCircleOutlined } from "@ant-design/icons";
+import Dropdown from "antd/es/dropdown";
 import TimeKeeper from "react-timekeeper";
 import {FAVOURITE_TYPE, MEDICAL_TEST, RADIOLOGY} from "../../../constant";
 import StarOutlined from "@ant-design/icons/StarOutlined";
@@ -18,7 +20,7 @@ import StarFilled from "@ant-design/icons/StarFilled";
 import Tooltip from "antd/es/tooltip";
 import message from "antd/es/message";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../Helper/is-empty";
 
@@ -61,22 +63,29 @@ class EditAppointmentForm extends Component {
             radiologyTypeSelected: null,
             typeDescValue: "",
         };
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
-    // openCalendar = (e) => {
-    //   e.preventDefault();
-    //   const datePicker = window.document.getElementsByClassName(DATE);
+    /*
+    openCalendar = (e) => {
+      e.preventDefault();
+      const datePicker = window.document.getElementsByClassName(DATE);
 
-    //   if (datePicker) {
-    //     const firstChild = datePicker.firstChild;
-    //     if (firstChild) {
-    //       const datePickerInput = firstChild.firstChild;
-    //       if (datePicker && datePickerInput.click) {
-    //         datePickerInput.click();
-    //       }
-    //     }
-    //   }
-    // };
+      if (datePicker) {
+        const firstChild = datePicker.firstChild;
+        if (firstChild) {
+          const datePickerInput = firstChild.firstChild;
+          if (datePicker && datePickerInput.click) {
+            datePickerInput.click();
+          }
+        }
+      }
+    };
+    */
+
     componentDidMount = () => {
         this.scrollToTop();
         let {
@@ -190,11 +199,38 @@ class EditAppointmentForm extends Component {
     };
 
     scrollToTop = () => {
-        let antForm = document.getElementsByClassName("Form")[0];
-        let antDrawerBody = antForm.parentNode;
-        let antDrawerWrapperBody = antDrawerBody.parentNode;
-        antDrawerBody.scrollIntoView(true);
-        antDrawerWrapperBody.scrollTop -= 200;
+        try {
+            // First try to get the form element using ref
+            const formElement = this.formRef.current;
+
+            if (!formElement) {
+                console.log("editAppointment Form element not found via ref");
+                return;
+            }
+
+            // Find the drawer body and wrapper (ant-drawer-body and ant-drawer-wrapper-body)
+            let drawerBody = formElement.closest('.ant-drawer-body');
+            let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
+
+            if (!drawerBody || !drawerWrapper) {
+                console.log("editAppointment Drawer elements not found");
+                return;
+            }
+
+            // Log for debugging
+            console.log("Form element editAppointment: ", formElement);
+            console.log("Drawer body editAppointment: ", drawerBody);
+            console.log("Drawer wrapper editAppointment: ", drawerWrapper);
+
+            // Scroll the drawer body into view
+            drawerBody.scrollIntoView(true);
+
+            // Adjust final scroll position
+            drawerWrapper.scrollTop -= 200;
+
+        } catch (error) {
+            console.error("Error in scrollToTop editAppointment: ", error);
+        }
     };
 
     fetchPatients = async (data) => {
@@ -1076,7 +1112,10 @@ class EditAppointmentForm extends Component {
         const typeValue = getFieldValue(APPOINTMENT_TYPE);
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 <FormItem
                     // label={formatMessage(message.patient)}
                     className="mb-24"

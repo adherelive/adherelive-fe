@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {Modal} from "antd";
+import { Modal, Button } from "antd";
+import message from "antd/es/message";
 import isEmpty from "../../../Helper/is-empty";
 
 function MultipleTreatmentAlert({diagnosis_description}) {

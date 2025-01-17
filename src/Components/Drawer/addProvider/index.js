@@ -9,7 +9,7 @@ import message from "antd/es/message";
 
 import AddProviderForm from "./form";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class addProviderDrawer extends Component {

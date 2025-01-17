@@ -9,7 +9,13 @@ import Button from "antd/es/button";
 import Footer from "../footer";
 import confirm from "antd/es/modal/confirm";
 
-import {DeleteTwoTone, DownloadOutlined, EyeTwoTone, LoadingOutlined, PlusOutlined,} from "@ant-design/icons";
+import {
+  DeleteTwoTone,
+  PlusOutlined,
+  EyeTwoTone,
+  DownloadOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 
 import messages from "./message";
 
@@ -34,8 +40,7 @@ class editReportDrawer extends Component {
     //     this.getAllReportsData();
     // }
 
-    componentDidUpdate() {
-    }
+    componentDidUpdate() {}
 
     async getAllReportsData() {
         try {
@@ -218,7 +223,7 @@ class editReportDrawer extends Component {
             const {name} = document || {};
             return name === file.name;
         });
-        console.log("287423 Existing ---> ", existing);
+        console.log("temp Existing ---> ", existing);
         if (existing.length === 0) {
             newDocuments.push({
                 name: file.name,
@@ -388,8 +393,7 @@ class editReportDrawer extends Component {
                 });
                 close();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

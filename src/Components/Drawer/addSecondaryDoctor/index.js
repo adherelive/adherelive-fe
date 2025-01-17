@@ -10,7 +10,7 @@ import messages from "./messages";
 import AddFoodItemForm from "./form";
 import Footer from "../footer";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class AddSecondaryDoc extends Component {

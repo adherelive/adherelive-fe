@@ -15,8 +15,7 @@ class ReportDocuments extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     getImageView = ({src = "", id, name}) => {
         return (

@@ -1,5 +1,14 @@
 import React, {Component, Fragment} from "react";
-import {Button, Input, message, Spin, Upload,} from "antd";
+import {
+  // Form,
+  Input,
+  Button,
+  Spin,
+  // Avatar,
+  Upload,
+  // Modal,
+  message,
+} from "antd";
 // import moment from "moment";
 import Chat from "twilio-chat";
 // import DoubleTick from "../../Assets/images/double-tick-indicator.png";
@@ -18,7 +27,12 @@ import {injectIntl} from "react-intl";
 import CallIcon from "../../Assets/images/telephone.png";
 import CallDisabledIcon from "../../Assets/images/call-disabled.png";
 
-import {FEATURES, USER_CATEGORY,} from "../../constant";
+import {
+  // USER_ADHERE_BOT,
+  // CHAT_MESSAGE_TYPE,
+  FEATURES,
+  USER_CATEGORY,
+} from "../../constant";
 import ChatMessageDetails from "./chatMessageDetails";
 
 import Menu from "antd/es/menu";
@@ -29,7 +43,7 @@ import {MoreOutlined} from "@ant-design/icons";
 import Tooltip from "antd/es/tooltip";
 import isEmpty from "../../Helper/is-empty";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const Header = ({

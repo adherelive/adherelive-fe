@@ -1,13 +1,15 @@
 import React, {Component} from "react";
 import {injectIntl} from "react-intl";
-import {Select, Table} from "antd";
+import {Empty, Icon, Select, Table} from "antd";
 import generateRow from "./datarow";
 // import { USER_PERMISSIONS } from '../../../constant'
 import getColumn from "./header";
 import messages from "./messages";
+import message from "antd/es/message";
 import EditRecommendSubscription from "../Drawer/RecommendSubscription/EditRecommendSubscription";
 import MyTasks from "../Drawer/MyTasks/index";
 import Button from "antd/es/button";
+import Input from "antd/es/input";
 import SearchOutlined from "@ant-design/icons/SearchOutlined";
 import {TABLE_COLUMN} from "./helper";
 import AddAppointmentDrawer from "./../../../Containers/Drawer/addAppointment";
@@ -39,8 +41,7 @@ class PendingActivitiesTable extends Component {
         getAppointmentsDetails();
     }
 
-    componentDidUpdate(prevProps, prevState) {
-    }
+  componentDidUpdate(prevProps, prevState) {}
 
     getLoadingComponent = () => {
         const antIcon = <LoadingOutlined style={{fontSize: 24}} spin/>;

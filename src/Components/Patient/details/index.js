@@ -384,7 +384,6 @@ const PatientProfileHeader = ({
                                   secondary_doctor_user_role_ids,
                               }) => {
     console.log("Selected Care Plan, in Patient Profile Header: ", {selectedCarePlanId});
-    console.log("AKSHAY NEW CHANGES");
 
     console.log("showAddButton", showAddButton);
     console.log("selectedCarePlanId", selectedCarePlanId);
@@ -1174,7 +1173,7 @@ class PatientDetails extends Component {
                 this.setState({symptom_dates});
             }
         } catch (error) {
-            console.log("errrrrr---> ", error);
+            console.log("fetchSymptomsData error ---> ", error);
             message.warn(error);
         }
     };
@@ -2438,7 +2437,7 @@ class PatientDetails extends Component {
                                    auth_role,
                                    message,
                                }) => {
-        console.log("38972168738712638712638716237821", {
+        console.log("Patient Details with Auth Role: ", {
             auth_role,
             str: auth_role.toString(),
         });
@@ -2613,7 +2612,7 @@ class PatientDetails extends Component {
         //   emptyText: this.formatMessage(messages.emptyAppointmentTable)
         // };
 
-        console.log("render page -> Selected Care Plan ID: ", {
+        console.log("Render page -> Selected Care Plan ID: ", {
             selectedCarePlanId,
             state: this.state,
         });

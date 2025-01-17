@@ -23,6 +23,7 @@ import {
 import AddConsultationFeeDrawer from "../../../Containers/Drawer/addConsultationFee";
 import AddAccountDetailsDrawer from "../../../Containers/Drawer/addAccountDetailsDrawer";
 import EditAccountDetailsDrawer from "../../../Containers/Drawer/editAccountDetailsDrawer";
+import DoctorConsultationFeeTable from "../../../Containers/DoctorConsultationFee";
 import DoctorAccountDetails from "../../../Containers/DoctorAccountDetails";
 
 import messages from "./messages";
@@ -526,8 +527,7 @@ class DoctorSettingsPage extends Component {
                     message.warn(this.formatMessage(messages.somethingWentWrong));
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

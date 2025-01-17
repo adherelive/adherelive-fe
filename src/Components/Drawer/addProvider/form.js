@@ -15,7 +15,7 @@ import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
 import prefixField from "../../Prefix";
 import {ACCOUNT_TYPES, CURRENT, SAVINGS} from "../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -122,8 +122,7 @@ class AddProviderForm extends Component {
             onOk: async () => {
                 this.resetAllAccount();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

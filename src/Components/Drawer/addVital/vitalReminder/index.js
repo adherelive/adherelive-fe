@@ -14,7 +14,7 @@ import instructions from "../../addMedicationReminder/common/instructions";
 import vitalName from "../common/vitalName";
 import vitalOccurence from "../common/vitalOccurence";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class AddVitals extends Component {
@@ -32,8 +32,7 @@ class AddVitals extends Component {
         );
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     hasErrors = (fieldsError) => {
         return Object.keys(fieldsError).some((field) => fieldsError[field]);

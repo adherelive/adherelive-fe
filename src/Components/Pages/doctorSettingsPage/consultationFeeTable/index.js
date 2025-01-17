@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {injectIntl} from "react-intl";
-import {Table} from "antd";
+import { Table, Empty } from "antd";
 import generateRow from "./datarow";
 // import { USER_PERMISSIONS } from '../../../constant'
 import getColumn from "./header";
@@ -13,8 +13,7 @@ class ConsultationFeeTable extends Component {
         this.state = {};
     }
 
-    componentDidUpdate(prevProps, prevState) {
-    }
+    componentDidUpdate(prevProps, prevState) {}
 
     // onRowClick = (key) => (event) => {
     //   event.preventDefault();

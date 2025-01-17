@@ -13,7 +13,7 @@ import {VIDEO_TYPES} from "../../../constant";
 import CameraOutlined from "@ant-design/icons/CameraOutlined";
 import Upload from "antd/es/upload";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -50,6 +50,10 @@ class EditExerciseGroupForm extends Component {
             this.handleExerciseSearch.bind(this),
             200
         );
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     async componentDidMount() {
@@ -641,7 +645,10 @@ class EditExerciseGroupForm extends Component {
         });
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 {/* exercise  */}
                 <FormItem
                     label={formatMessage(messages.exercise)}

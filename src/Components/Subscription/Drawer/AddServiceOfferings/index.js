@@ -1,8 +1,22 @@
 import React, {Fragment, useState} from "react";
-import {Button, Drawer, Input, message, Radio, Select,} from "antd";
+import { injectIntl } from "react-intl";
+import {
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
+} from "antd";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
 
+import moment from "moment";
+import throttle from "lodash-es/throttle";
 // import messages from "./message";
+import Footer from "../../../Drawer/footer";
 import Form from "antd/es/form";
 import InputNumber from "antd/es/input-number";
 import {useDispatch, useSelector} from "react-redux";
@@ -109,8 +123,7 @@ function Index({
 
     // formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const getServiceOfferingOption = () => {
         let options = [];

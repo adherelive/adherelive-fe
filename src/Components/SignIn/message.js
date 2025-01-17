@@ -11,8 +11,8 @@ const messages = defineMessages({
         description: "Enter your password",
         defaultMessage: "Enter your password",
     },
-    emailDoesNotxist: {
-        id: "app.signIn.emailDoesNotxist",
+    emailDoesNotExist: {
+        id: "app.signIn.emailDoesNotExist",
         description: "Email does not exist!",
         defaultMessage: "Email does not exist!",
     },

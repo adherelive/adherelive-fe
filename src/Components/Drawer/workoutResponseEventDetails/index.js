@@ -19,8 +19,7 @@ class WorkoutReponseEventDetailsDrawer extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 

@@ -1,5 +1,8 @@
 import React from "react";
+import { getFullName } from "../../../../Helper/common";
 import {getName} from "../../../../Helper/validation";
+import Tooltip from "antd/es/tooltip";
+import Avatar from "antd/es/avatar";
 
 export default (props) => {
     const {transactions} = props || {};

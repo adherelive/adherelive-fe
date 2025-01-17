@@ -1,5 +1,8 @@
 import React from "react";
+import TableStatus from "../../../../Helper/TableStatus";
+import { TABLE_STATUS } from "../../../../constant";
 import {Button} from "antd";
+import moment from "moment";
 import ActivateTransactionInfo from "../../Modal/ActivateTransactionInfo";
 
 export default (props) => {

@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {Form, Radio, Select} from "antd";
+import {Checkbox, Form, Input, Radio, Select} from "antd";
 import moment from "moment";
 import {ACTIVITY_TYPE, APPOINTMENT_TYPE, EVENT_TYPE, USER_CATEGORY, USER_STATUS,} from "../../../../constant";
 import messages from "../message";

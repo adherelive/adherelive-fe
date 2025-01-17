@@ -25,14 +25,11 @@ class CalendarComponent extends Component {
         onEventDurationChange(start, end);
     };
 
-    eventResizeStart = (event, ...args) => {
-    };
+    eventResizeStart = (event, ...args) => {};
 
-    eventResizeStop = (event, ...args) => {
-    };
+    eventResizeStop = (event, ...args) => {};
 
-    eventDragStart = (event, args) => {
-    };
+    eventDragStart = (event, args) => {};
 
     eventDrop = (event, duration) => {
         const {start, end} = event;
@@ -40,8 +37,7 @@ class CalendarComponent extends Component {
         onEventDurationChange(start, end);
     };
 
-    eventDragStop = (event) => {
-    };
+    eventDragStop = (event) => {};
 
     componentDidMount() {
         this.adjustCurrentEvent();

@@ -61,30 +61,7 @@ class VitalName extends Component {
             }
         } catch (err) {
             console.log("err", err);
-            message.warn("Something has gone wrong. Please try again later");
-            this.setState({fetchingVitals: false});
-        }
-    }
-
-    async handleVitalSearch(data) {
-        try {
-            // if (data) {
-            const {searchVital} = this.props;
-            this.setState({fetchingVitals: true});
-            const response = await searchVital(data);
-            const {status, payload: {data: responseData, message} = {}} =
-                response;
-            if (status) {
-                this.setState({fetchingVitals: false});
-            } else {
-                this.setState({fetchingVitals: false});
-            }
-            // } else {
-            //   this.setState({ fetchingVitals: false });
-            // }
-        } catch (err) {
-            console.log("err", err);
-            message.warn("Something has gone wrong. Please try again later");
+            message.warn("Something has gone wrong in handleVitalSearch. Please try again later");
             this.setState({fetchingVitals: false});
         }
     }
