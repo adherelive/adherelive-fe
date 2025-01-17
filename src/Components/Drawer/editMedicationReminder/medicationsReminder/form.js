@@ -94,7 +94,7 @@ class EditMedicationReminderForm extends Component {
             const formElement = this.formRef.current;
 
             if (!formElement) {
-                console.log("Form element not found via ref");
+                console.log("medicationReminder Form element not found via ref");
                 return;
             }
 
@@ -103,14 +103,14 @@ class EditMedicationReminderForm extends Component {
             let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
 
             if (!drawerBody || !drawerWrapper) {
-                console.log("Drawer elements not found");
+                console.log("medicationReminder Drawer elements not found");
                 return;
             }
 
             // Log for debugging
-            console.log("Form element:", formElement);
-            console.log("Drawer body:", drawerBody);
-            console.log("Drawer wrapper:", drawerWrapper);
+            console.log("Form element medicationReminder: ", formElement);
+            console.log("Drawer body medicationReminder: ", drawerBody);
+            console.log("Drawer wrapper medicationReminder: ", drawerWrapper);
 
             // Scroll the drawer body into view
             drawerBody.scrollIntoView(true);
@@ -119,7 +119,7 @@ class EditMedicationReminderForm extends Component {
             drawerWrapper.scrollTop -= 200;
 
         } catch (error) {
-            console.error("Error in scrollToTop:", error);
+            console.error("Error in scrollToTop medicationReminder: ", error);
         }
     };
 

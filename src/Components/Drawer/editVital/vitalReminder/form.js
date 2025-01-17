@@ -85,14 +85,14 @@ class EditVitalForm extends Component {
 
     scrollToTop = () => {
         // Check if the element "Form" exists?
-        console.log("All Form elements:", document.getElementsByClassName("Form"));
+        console.log("All Form elements editVitals: ", document.getElementsByClassName("Form"));
 
         try {
             // First try to get the form element using ref
             const formElement = this.formRef.current;
 
             if (!formElement) {
-                console.log("Form element not found via ref");
+                console.log("editVitals Form element not found via ref");
                 return;
             }
 
@@ -101,14 +101,14 @@ class EditVitalForm extends Component {
             let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
 
             if (!drawerBody || !drawerWrapper) {
-                console.log("Drawer elements not found");
+                console.log("Edit Vitals Drawer elements not found");
                 return;
             }
 
             // Log for debugging
-            console.log("Form element:", formElement);
-            console.log("Drawer body:", drawerBody);
-            console.log("Drawer wrapper:", drawerWrapper);
+            console.log("Form element editVitals: ", formElement);
+            console.log("Drawer body editVitals: ", drawerBody);
+            console.log("Drawer wrapper editVitals: ", drawerWrapper);
 
             // Scroll the drawer body into view
             drawerBody.scrollIntoView(true);
@@ -117,7 +117,7 @@ class EditVitalForm extends Component {
             drawerWrapper.scrollTop -= 200;
 
         } catch (error) {
-            console.error("Error in scrollToTop:", error);
+            console.error("Error in scrollToTop editVitals: ", error);
         }
     };
 

@@ -159,7 +159,7 @@ class AddAppointmentForm extends Component {
             const formElement = this.formRef.current;
 
             if (!formElement) {
-                console.log("Form element not found via ref");
+                console.log("addAppointment Form element not found via ref");
                 return;
             }
 
@@ -168,14 +168,14 @@ class AddAppointmentForm extends Component {
             let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
 
             if (!drawerBody || !drawerWrapper) {
-                console.log("Drawer elements not found");
+                console.log("addAppointment Drawer elements not found");
                 return;
             }
 
             // Log for debugging
-            console.log("Form element:", formElement);
-            console.log("Drawer body:", drawerBody);
-            console.log("Drawer wrapper:", drawerWrapper);
+            console.log("Form element addAppointment: ", formElement);
+            console.log("Drawer body addAppointment: ", drawerBody);
+            console.log("Drawer wrapper addAppointment: ", drawerWrapper);
 
             // Scroll the drawer body into view
             drawerBody.scrollIntoView(true);
@@ -184,7 +184,7 @@ class AddAppointmentForm extends Component {
             drawerWrapper.scrollTop -= 200;
 
         } catch (error) {
-            console.error("Error in scrollToTop:", error);
+            console.error("Error in scrollToTop addAppointment: ", error);
         }
     };
 

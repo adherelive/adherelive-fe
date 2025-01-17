@@ -39,7 +39,7 @@ class AddSubscriptionForm extends Component {
             const formElement = this.formRef.current;
 
             if (!formElement) {
-                console.log("Form element not found via ref");
+                console.log("addSubscription Form element not found via ref");
                 return;
             }
 
@@ -48,14 +48,14 @@ class AddSubscriptionForm extends Component {
             let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
 
             if (!drawerBody || !drawerWrapper) {
-                console.log("Drawer elements not found");
+                console.log("addSubscription Drawer elements not found");
                 return;
             }
 
             // Log for debugging
-            console.log("Form element:", formElement);
-            console.log("Drawer body:", drawerBody);
-            console.log("Drawer wrapper:", drawerWrapper);
+            console.log("Form element addSubscription: ", formElement);
+            console.log("Drawer body addSubscription: ", drawerBody);
+            console.log("Drawer wrapper addSubscription: ", drawerWrapper);
 
             // Scroll the drawer body into view
             drawerBody.scrollIntoView(true);
@@ -64,7 +64,7 @@ class AddSubscriptionForm extends Component {
             drawerWrapper.scrollTop -= 200;
 
         } catch (error) {
-            console.error("Error in scrollToTop:", error);
+            console.error("Error in scrollToTop addSubscription: ", error);
         }
     };
 

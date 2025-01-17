@@ -31,8 +31,10 @@ class AddVitalsForm extends Component {
     }
 
     componentDidMount() {
+        console.log("AddVitalsForm before scrollToTop this.props.form ---> ", this.props.form);
         this.scrollToTop();
-        console.log("AddVitalsForm this.props.form ---> ", this.props.form);
+        console.log("AddVitalsForm after scrollToTop this.props.form ---> ", this.props.form);
+
         const {
             form: {validateFields},
             // currentUser: {
@@ -77,7 +79,7 @@ class AddVitalsForm extends Component {
             const formElement = this.formRef.current;
 
             if (!formElement) {
-                console.log("Form element not found via ref");
+                console.log("vitalReminder Form element not found via ref");
                 return;
             }
 
@@ -86,14 +88,14 @@ class AddVitalsForm extends Component {
             let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
 
             if (!drawerBody || !drawerWrapper) {
-                console.log("Drawer elements not found");
+                console.log("vitalReminder Drawer elements not found");
                 return;
             }
 
             // Log for debugging
-            console.log("Form element:", formElement);
-            console.log("Drawer body:", drawerBody);
-            console.log("Drawer wrapper:", drawerWrapper);
+            console.log("Form element vitalReminder: ", formElement);
+            console.log("Drawer body vitalReminder: ", drawerBody);
+            console.log("Drawer wrapper vitalReminder: ", drawerWrapper);
 
             // Scroll the drawer body into view
             drawerBody.scrollIntoView(true);
@@ -102,7 +104,7 @@ class AddVitalsForm extends Component {
             drawerWrapper.scrollTop -= 200;
 
         } catch (error) {
-            console.error("Error in scrollToTop:", error);
+            console.error("Error in scrollToTop vitalReminder: ", error);
         }
     };
 
