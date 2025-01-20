@@ -70,7 +70,7 @@ class SideMenu extends Component {
             if (status === true) {
                 message.success("Signed out successfully from AdhereLive platform");
             } else {
-                message.warn("Something has gone wrong. Please try again later");
+                message.warn("Something has gone wrong while logging out. Please try again later!");
             }
         } catch (error) {}
     };
