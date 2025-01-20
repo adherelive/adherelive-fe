@@ -620,9 +620,9 @@ class EditAppointmentForm extends Component {
                 setFieldsValue({[PROVIDER_ID]: data});
             }
         } catch (err) {
-            console.log("err", err);
-            // message.warn("Something has gone wrong. Please try again later");
-            // this.setState({ fetchingMedicines: false });
+            console.log("Error in Provider Search: ", err);
+            message.warn("Something has gone wrong in Provider Search. Please try again later");
+            this.setState({ fetchingMedicines: false });
         }
     };
 

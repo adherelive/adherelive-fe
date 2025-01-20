@@ -74,7 +74,7 @@ function EditRecommendService({onCloseDrawer, visible, editData}) {
             selectedService: {},
         });
         onCloseDrawer();
-        message.success("Recommended service updated sucessfully");
+        message.success("Recommended service updated successfully");
     };
 
     const onSubmit = () => {

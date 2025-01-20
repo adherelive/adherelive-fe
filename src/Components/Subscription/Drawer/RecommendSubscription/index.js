@@ -61,7 +61,7 @@ function Index({visible, onCloseDrawer, patient_id}) {
         });
         onCloseDrawer();
         if (status === true) {
-            message.success("Subscription recommended sucessfully");
+            message.success("Subscription recommended successfully");
         } else if (status === false) {
             message.error(apiMessage);
         }
