@@ -54,7 +54,7 @@ function Index({onCloseDrawer, visible, patient_id}) {
             selectedService: {},
         });
         onCloseDrawer();
-        message.success("Service recommended sucessfully");
+        message.success("Service recommended successfully");
     };
 
     const onSubmit = () => {

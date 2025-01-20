@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, {Component} from "react";
 import {injectIntl} from "react-intl";
 import {withRouter} from "react-router-dom";
 
@@ -77,15 +77,15 @@ class TransactionTable extends Component {
 
     getParentNode = (t) => t.parentNode;
 
-    formatDataMessage = (data) => this.props.intl.formatMessage(data);
+    formatMessage = (data) => this.props.intl.formatMessage(data);
 
     render() {
         const {loading} = this.state;
-        const {getLoadingComponent, getDataSource, formatDataMessage, getParentNode} =
+        const {getLoadingComponent, getDataSource, formatMessage, getParentNode} =
             this;
 
         const transactionLocale = {
-            emptyText: this.formatDataMessage(messages.emptyTransactionTable),
+            emptyText: this.formatMessage(messages.emptyTransactionTable),
         };
         const {authenticated_category} = this.props;
 
@@ -96,7 +96,7 @@ class TransactionTable extends Component {
                 rowClassName={() => "pointer"}
                 loading={loading === true ? getLoadingComponent() : false}
                 columns={getColumn({
-                    formatDataMessage,
+                    formatMessage,
                     className: "pointer",
                     authenticated_category,
                 })}

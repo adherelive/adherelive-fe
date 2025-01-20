@@ -96,7 +96,7 @@ function EditRecommendSubscription({visible, onCloseDrawer, editData}) {
             selectedSubscription: {},
         });
         onCloseDrawer();
-        message.success("Recommend subscription updated sucessfully");
+        message.success("Recommend subscription updated successfully");
     };
 
     const onSubmit = () => {

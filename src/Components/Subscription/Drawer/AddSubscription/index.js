@@ -93,7 +93,7 @@ function Index({onCloseDrawer, visible, doctor_id}) {
         setServiceOfferingArray([]);
         setEnableSubscriptionFees(false);
         onCloseDrawer();
-        message.success("Subscription added sucessfully");
+        message.success("Subscription added successfully");
     };
 
     const handleOk = () => {

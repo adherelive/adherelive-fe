@@ -49,7 +49,7 @@ function AddService({onCloseDrawer, visible, doctor_id}) {
             currency: "INR",
         });
         onCloseDrawer();
-        message.success("Service added sucessfully");
+        message.success("Service added successfully");
     };
 
     const onSubmit = () => {
