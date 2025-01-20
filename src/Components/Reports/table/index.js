@@ -110,15 +110,15 @@ class ReportTable extends Component {
     //     }
     // };
 
-    formatMessage = (data) => this.props.intl.formatMessage(data);
+    formatDataMessage = (data) => this.props.intl.formatMessage(data);
 
     render() {
-        const {intl: {formatMessage} = {}} = this.props;
+        const {intl: {formatDataMessage} = {}} = this.props;
         const {modalVisible, documentData} = this.state;
         const {getDataSource, closeModal} = this;
 
         const reportLocale = {
-            emptyText: this.formatMessage(messages.emptyReports),
+            emptyText: this.formatDataMessage(messages.emptyReports),
         };
 
         return (
@@ -127,7 +127,7 @@ class ReportTable extends Component {
                     rowClassName={() => "pointer"}
                     // loading={loading === true ? getLoadingComponent() : false}
                     columns={getColumn({
-                        formatMessage,
+                        formatDataMessage,
                         className: "pointer",
                     })}
                     dataSource={getDataSource()}
@@ -141,7 +141,7 @@ class ReportTable extends Component {
                     visible={modalVisible}
                     documentData={documentData}
                     onClose={closeModal}
-                    formatMessage={formatMessage}
+                    formatDataMessage={formatDataMessage}
                 />
             </Fragment>
         );

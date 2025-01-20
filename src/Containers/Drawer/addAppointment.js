@@ -24,7 +24,7 @@ import {
     getPatientCarePlanByPatientIdAndUserRoleId,
     setScheduleAppointmentData,
     updateActivityById
-} from "./../../modules/subscription/activities";
+} from "../../modules/subscription/activities";
 import {setFlashCard} from "../../modules/subscription/flashcard";
 
 const mapStateToProps = (state) => {

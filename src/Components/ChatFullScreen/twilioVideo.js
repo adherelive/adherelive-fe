@@ -150,11 +150,11 @@ class VideoComponent extends Component {
     };
 
     attachTracks = (tracks, container) => {
-        console.log("73648723648723684723684==========>", tracks);
+        console.log("attachTracks twilioVideo tracks ---> ", tracks);
 
         tracks.forEach((track) => {
             if (track.kind !== "data") {
-                console.log("73648723648723684723684", track);
+                console.log("attachTracks twilioVideo single track ---> ", track);
                 container.appendChild(track.attach());
             }
         });

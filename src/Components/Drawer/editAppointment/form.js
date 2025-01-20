@@ -433,14 +433,6 @@ class EditAppointmentForm extends Component {
         return newTreatments;
     };
 
-    calendarComp = () => {
-        return (
-            <div className="flex justify-center align-center">
-                <img src={calendar} alt="calender icon" className="w20"/>
-            </div>
-        );
-    };
-
     getStartTime = () => {
         const {form: {getFieldValue} = {}} = this.props;
         return moment(getFieldValue(START_TIME)).format("hh:mm A");

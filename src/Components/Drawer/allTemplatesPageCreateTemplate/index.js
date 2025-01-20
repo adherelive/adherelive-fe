@@ -143,58 +143,6 @@ class TemplatePageCreateDrawer extends Component {
         });
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATION
-    deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
-        console.log(innerFormType);
-        console.log(innerFormKey);
-        let {
-            appointments = {},
-            appointmentKeys = [],
-            medications = {},
-            medicationKeys = [],
-            vitals = {},
-            vitalKeys = [],
-            diets = {},
-            dietKeys = [],
-            workouts = {},
-            workoutKeys = [],
-            medicationCheckedIds = [],
-        } = this.state;
-
-        if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
-            delete medications[innerFormKey];
-            medicationKeys.splice(medicationKeys.indexOf(innerFormKey), 1);
-            medicationCheckedIds.splice(medicationKeys.indexOf(innerFormKey), 1);
-        } else if (innerFormType == EVENT_TYPE.APPOINTMENT) {
-            delete appointments[innerFormKey];
-            appointmentKeys.splice(appointmentKeys.indexOf(innerFormKey), 1);
-        } else if (innerFormType == EVENT_TYPE.VITALS) {
-            delete vitals[innerFormKey];
-            vitalKeys.splice(vitalKeys.indexOf(innerFormKey), 1);
-        } else if (innerFormType === EVENT_TYPE.DIET) {
-            delete diets[innerFormKey];
-            dietKeys.splice(dietKeys.indexOf(innerFormKey), 1);
-        } else if (innerFormType === EVENT_TYPE.WORKOUT) {
-            delete workouts[innerFormKey];
-            workoutKeys.splice(workoutKeys.indexOf(innerFormKey), 1);
-        }
-
-        this.setState({
-            appointments,
-            appointmentKeys,
-            medications,
-            medicationKeys,
-            vitals,
-            vitalKeys,
-            diets,
-            dietKeys,
-            workouts,
-            workoutKeys,
-            templateEdited: true,
-            medicationCheckedIds,
-        });
-    };
-
     showAddMedication = () => {
         this.setState({showAddMedicationInner: true});
     };

@@ -21,7 +21,7 @@ import {
 import {googleTranslate} from "../../modules/cdss";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
-import {updateActivityById} from "./../../modules/subscription/activities";
+import {updateActivityById} from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
     const {

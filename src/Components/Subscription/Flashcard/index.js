@@ -12,8 +12,8 @@ import {
 } from "antd";
 import Close from "../../../Assets/images/close.png";
 import isEmpty from "../../../Helper/is-empty";
-import {setFlashCard} from "./../../../modules/subscription/flashcard";
-import {fetchReports} from "./../../../modules/reports";
+import {setFlashCard} from "../../../modules/subscription/flashcard";
+import {fetchReports} from "../../../modules/reports";
 import {useDispatch, useSelector} from "react-redux";
 import AddNotesSection from "./AddNotesSection";
 import NotesList from "./NotesList";

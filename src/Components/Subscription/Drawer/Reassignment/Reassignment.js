@@ -25,7 +25,7 @@ import {
     getPatientSecondaryDoctorByCareplanId,
     updateActivityById,
     updateReasonForReassignment,
-} from "./../../../../modules/subscription/activities";
+} from "../../../../modules/subscription/activities";
 import message from "antd/es/message";
 import TextArea from "antd/es/input/TextArea";
 import isEmpty from "../../../../Helper/is-empty";

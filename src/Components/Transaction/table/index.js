@@ -77,15 +77,15 @@ class TransactionTable extends Component {
 
     getParentNode = (t) => t.parentNode;
 
-    formatMessage = (data) => this.props.intl.formatMessage(data);
+    formatDataMessage = (data) => this.props.intl.formatMessage(data);
 
     render() {
         const {loading} = this.state;
-        const {getLoadingComponent, getDataSource, formatMessage, getParentNode} =
+        const {getLoadingComponent, getDataSource, formatDataMessage, getParentNode} =
             this;
 
         const transactionLocale = {
-            emptyText: this.formatMessage(messages.emptyTransactionTable),
+            emptyText: this.formatDataMessage(messages.emptyTransactionTable),
         };
         const {authenticated_category} = this.props;
 
@@ -96,7 +96,7 @@ class TransactionTable extends Component {
                 rowClassName={() => "pointer"}
                 loading={loading === true ? getLoadingComponent() : false}
                 columns={getColumn({
-                    formatMessage,
+                    formatDataMessage,
                     className: "pointer",
                     authenticated_category,
                 })}
