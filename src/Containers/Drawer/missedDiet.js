@@ -18,6 +18,8 @@ const mapStateToProps = (state) => {
         commonReducer: {missedChartDrawerLoading},
     } = state;
 
+    console.log("Missed Diets Drawer Patients: ", patients);
+
     return {
         visible: visible && type === DRAWER.MISSED_DIET,
         authenticated_category,

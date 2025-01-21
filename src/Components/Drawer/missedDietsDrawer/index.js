@@ -45,6 +45,9 @@ class MissedDietsDrawer extends Component {
         const {patients = {}, missed_diets = {}} = this.props;
         const {handlePatientDetailsRedirect, formatMessage} = this;
 
+        console.log("Missed Diet Drawer Patients: ", patients);
+        console.log("Missed Diet Drawer Missed Diets: ", missed_diets);
+
         const dietList = [];
         const criticalList = [];
         const nonCriticalList = [];
