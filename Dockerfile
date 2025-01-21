@@ -1,5 +1,8 @@
 FROM node:16.10.0 AS builder
 # RUN useradd -d /home/azureuser -m -s /bin/bash azureuser
+# Get the current Git commit hash and set it as a build argument
+ARG COMMIT_HASH
+LABEL commit_hash=$COMMIT_HASH
 LABEL application="adherelive-frontend"
 LABEL owner="AdhereLive Pvt Ltd"
 # Stage 1
