@@ -28,41 +28,45 @@ class MissedMedicationsDrawer extends Component {
         close();
     };
 
-    // getMissedMedication = async () => {
-    //   try {
-    //     const { getAllMissedScheduleEvents, missed_medications, medication_ids: {critical, non_critical} = {} } = this.props;
-    //     // this.setState({fetching:true});
-    //     // const response = await getAllMissedScheduleEvents();
-    //     // const {
-    //     //   status,
-    //     //   payload: {
-    //     //     data: {
-    //     //       missed_medications = {},
-    //     //       medication_ids : {critical=[],non_critical=[]} =  {}
-    //     //     }
-    //     //   } = {},
-    //     //   statusCode
-    //     // } = response || {};
-    //     //
-    //     //
-    //     // if (status && statusCode === 200) {
-    //       this.setState({
-    //         missed_medications: missed_medications,
-    //         criticalMedicationIds: critical,
-    //         nonCriticalMedicationIds: non_critical,
-    //         // fetching:false
-    //       });
-    //     // }else{
-    //     //   this.setState({fetching:false})
-    //     // }
-    //   } catch (err) {
-    //     console.log("err", err);
-    //     message.warn(this.formatMessage(messages.somethingWentWrong));
-    //     this.setState({fetching:false});
-    //   }
-    // };
+    /**
+     * TODO: Implement getMissedMedication
+    getMissedMedication = async () => {
+      try {
+        const { getAllMissedScheduleEvents, missed_medications, medication_ids: {critical, non_critical} = {} } = this.props;
+        this.setState({fetching:true});
+        const response = await getAllMissedScheduleEvents();
+        const {
+          status,
+          payload: {
+            data: {
+              missed_medications = {},
+              medication_ids : {critical=[],non_critical=[]} =  {}
+            }
+          } = {},
+          statusCode
+        } = response || {};
+
+
+        if (status && statusCode === 200) {
+          this.setState({
+            missed_medications: missed_medications,
+            criticalMedicationIds: critical,
+            nonCriticalMedicationIds: non_critical,
+            // fetching:false
+          });
+        }else{
+          this.setState({fetching:false})
+        }
+      } catch (err) {
+        console.log("err", err);
+        message.warn(this.formatMessage(messages.somethingWentWrong));
+        this.setState({fetching:false});
+      }
+    };
+     */
 
     handlePatientDetailsRedirect = (patient_id) => (e) => {
+        console.log("Missed Medication handlePatientDetailsRedirect ---> patient_id: ", patient_id);
         const {authenticated_category} = this.props;
 
         if (authenticated_category === USER_CATEGORY.PROVIDER) {
@@ -93,6 +97,9 @@ class MissedMedicationsDrawer extends Component {
             const {basic_info: {id: patientId, full_name} = {}} =
             patients[participant_id] || {};
 
+            console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
+            console.log("Missed Medication Drawer Participant ID: ", patients[participant_id]);
+
             if (critical) {
                 criticalList.push(
                     <MissedMedicationCard
@@ -116,53 +123,54 @@ class MissedMedicationsDrawer extends Component {
             }
         });
 
-        // for (let medication in missed_medications) {
-        //   const eachMedicationEventArray = missed_medications[medication];
-        //   for(let eachMedicationEvent of eachMedicationEventArray){
-        //
-        //   const {
-        //     critical:Critical,
-        //     start_time,
-        //     details:{
-        //         medications: {
-        //             participant_id : participantId= ""
-        //         } = {},
-        //         medicines: {
-        //             basic_info: {
-        //                 name: medicineName = "",
-        //                 type: medicineType = ""
-        //             } = {}
-        //         } = {}
-        //
-        //     } = {},
-        //
-        //   } = eachMedicationEvent || {};
-        //
-        //   if(timings.indexOf(start_time) === -1) {
-        //     timings.push(start_time);
-        //   }
-        //   participant_id=participantId;
-        //   medicine_name=medicineName;
-        //   medicine_type=medicineType;
-        //   critical=Critical;
-        //   }
-        //
-        //
-        //   const {
-        //     basic_info: {
-        //       id: pId = "",
-        //       first_name = "",
-        //       middle_name = "",
-        //       last_name = "",
-        //         full_name = "",
-        //     } = {}
-        //   } = patients[participant_id] || {};
-        //
-        //   let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`;
-        //
-        //   const isCritical=critical;
-        //
-        // }
+        /**
+         * TODO: Why is this commented out?
+        for (let medication in missed_medications) {
+          const eachMedicationEventArray = missed_medications[medication];
+          for(let eachMedicationEvent of eachMedicationEventArray){
+
+          const {
+            critical:Critical,
+            start_time,
+            details:{
+                medications: {
+                    participant_id : participantId= ""
+                } = {},
+                medicines: {
+                    basic_info: {
+                        name: medicineName = "",
+                        type: medicineType = ""
+                    } = {}
+                } = {}
+
+            } = {},
+
+          } = eachMedicationEvent || {};
+
+          if(timings.indexOf(start_time) === -1) {
+            timings.push(start_time);
+          }
+          participant_id=participantId;
+          medicine_name=medicineName;
+          medicine_type=medicineType;
+          critical=Critical;
+          }
+
+          const {
+            basic_info: {
+              id: pId = "",
+              first_name = "",
+              middle_name = "",
+              last_name = "",
+                full_name = "",
+            } = {}
+          } = patients[participant_id] || {};
+
+          let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`;
+          const isCritical=critical;
+
+        }
+         */
 
         medicationList.push(
             <div>
@@ -195,6 +203,7 @@ class MissedMedicationsDrawer extends Component {
         return medicationList;
     };
 
+    // TODO: Add the Patient Name to the list of medicines shown in the drawer
     render() {
         const {visible = false, missedChartDrawerLoading} = this.props;
         const {fetching} = this.state;
