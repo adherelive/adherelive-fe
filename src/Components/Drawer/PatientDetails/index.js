@@ -509,7 +509,7 @@ class PatientDetailsDrawer extends Component {
                             <div className="pr10 fs24 fw600">{`${getName(
                                 first_name
                             )}  ${getName(middle_name)} ${getName(last_name)}`}</div>
-                            <div className="pr10 fs20 fw500">{`(${
+                            <div className="pr10 fs20 fw500">{` (${
                                 gender ? `${GENDER[gender].view} ` : ""
                             }${age ? age : "--"})`}</div>
                             {/* <Icon type="wechat" width={20} /> */}
