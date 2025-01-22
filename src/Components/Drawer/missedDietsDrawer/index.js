@@ -62,8 +62,7 @@ class MissedDietsDrawer extends Component {
 
             console.log("Missed Diet Drawer Participant ID from keys: ", participant_id);
 
-            const {basic_info: {id: patientId, full_name} = {}} =
-            patients[participant_id] || {};
+            const {basic_info: {id: patientId, full_name} = {}} = patients[participant_id] || {};
 
             console.log("Missed Diet Drawer Diet ID: ", missed_diets[id]);
             console.log("Missed Diet Drawer Participant ID: ", patients[participant_id]);

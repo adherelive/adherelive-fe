@@ -90,7 +90,6 @@ class MissedMedicationsDrawer extends Component {
         const nonCriticalList = [];
 
         Object.keys(missed_medications).forEach((id) => {
-            // const medicineName = missed_medications[id].medicines.basic_info.name;
             const {
                 critical,
                 participant_id,
@@ -105,11 +104,18 @@ class MissedMedicationsDrawer extends Component {
 
             console.log("Missed Medication Drawer Participant ID from keys: ", participant_id);
 
-            const {basic_info: {id: patientId, full_name} = {}} =
-            patients[participant_id] || {};
+            //const {basic_info: {id: patientId, full_name} = {}} = patients[participant_id] || {};
+
+            // Find the patient object using participant_id
+            const patient = patients.find((patient) => patient.id === participant_id);
+            const { basic_info: { full_name } = {} } = patient || {};
 
             console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
             console.log("Missed Medication Drawer Participant ID: ", patients[participant_id]);
+            console.log("Missed Medication Drawer Medicine Name: ", medicineName);
+            console.log("Missed Medication Drawer Medicine Type: ", medicineType);
+            console.log("Missed Medication Drawer Timings: ", timings);
+            console.log("Missed Medication Drawer Patient Full Name: ", full_name);
 
             if (critical) {
                 criticalList.push(
