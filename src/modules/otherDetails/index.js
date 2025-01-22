@@ -1,9 +1,5 @@
 import {doRequest} from "../../Helper/network";
-import {
-    getMedicationDetailsUrl,
-    getTermsAndPolicyUrl,
-    updateTermsAndPolicyUrl,
-} from "../../Helper/urls/otherDetails";
+import {getMedicationDetailsUrl, getTermsAndPolicyUrl, updateTermsAndPolicyUrl,} from "../../Helper/urls/otherDetails";
 import {REQUEST_TYPE} from "../../constant";
 
 const GET_MEDICATION_DETAILS_START = "GET_MEDICATION_DETAILS_START";

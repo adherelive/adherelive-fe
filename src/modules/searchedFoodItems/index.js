@@ -1,10 +1,7 @@
 import {doRequest} from "../../Helper/network";
 import {REQUEST_TYPE} from "../../constant";
 import {searchFoodUrl} from "../../Helper/urls/foodItems";
-import {
-    ADD_FOOD_ITEM_COMPLETED,
-    EDIT_FOOD_ITEM_COMPLETED,
-} from "../foodItems";
+import {ADD_FOOD_ITEM_COMPLETED, EDIT_FOOD_ITEM_COMPLETED,} from "../foodItems";
 
 export const SEARCH_FOOD_START = "SEARCH_FOOD_START";
 export const SEARCH_FOOD_COMPLETED = "SEARCH_FOOD_COMPLETED";

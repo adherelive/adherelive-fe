@@ -1,18 +1,17 @@
-import React, {Fragment, useState, useEffect} from "react";
-import {injectIntl} from "react-intl";
+import React, {Fragment, useEffect, useState} from "react";
+import { injectIntl } from "react-intl";
 import {
-    Drawer,
-    Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
 } from "antd";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
-
 import moment from "moment";
 import throttle from "lodash-es/throttle";
 
@@ -39,8 +38,7 @@ function Index({onCloseDrawer, visible, myTaskData}) {
 
     // formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const renderMyTasksForService = () => {
         console.log("myTask", myTask);

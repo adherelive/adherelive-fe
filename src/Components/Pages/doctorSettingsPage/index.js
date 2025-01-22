@@ -2,18 +2,20 @@ import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import message from "antd/es/message";
 import Button from "antd/es/button";
-import {Select, Dropdown} from "antd";
+import {Dropdown, Select} from "antd";
 import plus from "../../../Assets/images/plus.png";
 import edit_image from "../../../Assets/images/edit.svg";
-import {DeleteTwoTone} from "@ant-design/icons";
+import {BarChartOutlined, CreditCardOutlined, DeleteTwoTone, PlusOutlined, WalletOutlined} from "@ant-design/icons";
 import confirm from "antd/es/modal/confirm";
 
 // todo: import any component from antd using this format
 import Tooltip from "antd/es/tooltip";
 
 import {
-    CONSULTATION_FEE,
     BILLING,
+    CONSULTATION_FEE,
+    CONSULTATION_FEE_TYPE_TEXT,
+    PATH,
     PAYMENT_DETAILS,
     TABLE_DEFAULT_BLANK_FIELD,
 } from "../../../constant";
@@ -21,21 +23,12 @@ import {
 import AddConsultationFeeDrawer from "../../../Containers/Drawer/addConsultationFee";
 import AddAccountDetailsDrawer from "../../../Containers/Drawer/addAccountDetailsDrawer";
 import EditAccountDetailsDrawer from "../../../Containers/Drawer/editAccountDetailsDrawer";
-
 import DoctorConsultationFeeTable from "../../../Containers/DoctorConsultationFee";
 import DoctorAccountDetails from "../../../Containers/DoctorAccountDetails";
 
-import {
-    BarChartOutlined,
-    CreditCardOutlined,
-    WalletOutlined,
-} from "@ant-design/icons";
-
 import messages from "./messages";
-import {PATH, CONSULTATION_FEE_TYPE_TEXT} from "../../../constant";
 import {withRouter} from "react-router-dom";
 import Menu from "antd/es/menu";
-import {PlusOutlined} from "@ant-design/icons";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import AddService from "../../../Components/Subscription/Drawer/AddService";
@@ -534,8 +527,7 @@ class DoctorSettingsPage extends Component {
                     message.warn(this.formatMessage(messages.somethingWentWrong));
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

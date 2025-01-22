@@ -1,20 +1,20 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import {
-    Drawer,
-    // Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
-    Switch,
+  Drawer,
+  // Icon,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
+  Switch,
 } from "antd";
 import moment from "moment";
 import throttle from "lodash-es/throttle";
-import {getName} from "../../../Helper/validation";
+import { getName } from "../../../Helper/validation";
 
 // antd components
 import InputNumber from "antd/es/input-number";
@@ -36,20 +36,17 @@ import messages from "./message";
 import "react-datepicker/dist/react-datepicker.css";
 import TextArea from "antd/lib/input/TextArea";
 import {
-    FINAL,
-    PROBABLE,
-    DIAGNOSIS_TYPE,
-    PATIENT_CONSTANTS,
+  FINAL,
+  PROBABLE,
+  DIAGNOSIS_TYPE,
+  PATIENT_CONSTANTS,
 } from "../../../constant";
 
-import {PoweroffOutlined} from "@ant-design/icons";
+import {MinusCircleOutlined, PlusCircleOutlined, PoweroffOutlined} from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
-import {PlusCircleOutlined} from "@ant-design/icons";
-import {MinusCircleOutlined} from "@ant-design/icons";
 import Icon from "@ant-design/icons";
 
 // AKSHAY NEW CODE IMPLEMENTATIONS
-
 import CustomSymptoms from "./CustomSymptoms";
 import CustomDiagnosis from "./CustomDiagnosis";
 import MultipleTreatmentAlert from "./MultipleTreatmentAlert";
@@ -123,8 +120,7 @@ class PatientDetailsDrawer extends Component {
         );
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     // AKSHAY NEW CODE IMPLEMENTATIONS
     static getDerivedStateFromProps(nextProps, nextState) {

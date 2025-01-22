@@ -10,7 +10,7 @@ import TextArea from "antd/es/input/TextArea";
 import Button from "antd/es/button";
 import debounce from "lodash-es/debounce";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -50,6 +50,10 @@ class EditFoodGroupForm extends Component {
         };
 
         this.handleFoodSearch = debounce(this.handleFoodSearch.bind(this), 200);
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     async componentDidMount() {
@@ -247,7 +251,7 @@ class EditFoodGroupForm extends Component {
                     <Option
                         key={`${each}-${name}`}
                         value={portion_id}
-                        //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+                        // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
                         detail_id={detail_id}
                         canEdit={canEdit}
                         // PREVIOUS CODE
@@ -272,7 +276,7 @@ class EditFoodGroupForm extends Component {
                     <Option
                         key={`${each}-${name}`}
                         value={id}
-                        //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+                        // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
                         canEdit={canEdit}
                         // PREVIOUS CODE
                         // onClick={this.handleDifferentPortionSelect({ editable: canEdit })}
@@ -633,7 +637,10 @@ class EditFoodGroupForm extends Component {
         });
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 {/* food item */}
                 <FormItem
                     label={formatMessage(messages.food_item)}

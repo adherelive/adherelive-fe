@@ -167,18 +167,50 @@ class AddMedicineForm extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     componentDidMount() {
+        console.log("In Add New Medicine componentDidMount", this.props.form);
         this.scrollToTop();
     }
 
     scrollToTop = () => {
-        let antForm = document.getElementsByClassName("Form")[0];
-        let antDrawerBody = antForm.parentNode;
-        let antDrawerWrapperBody = antDrawerBody.parentNode;
-        antDrawerBody.scrollIntoView(true);
-        antDrawerWrapperBody.scrollTop -= 200;
+        try {
+            // First try to get the form element using ref
+            const formElement = this.formRef.current;
+
+            if (!formElement) {
+                console.log("addNewMedicine Form element not found via ref");
+                return;
+            }
+
+            // Find the drawer body and wrapper (ant-drawer-body and ant-drawer-wrapper-body)
+            let drawerBody = formElement.closest('.ant-drawer-body');
+            let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
+
+            if (!drawerBody || !drawerWrapper) {
+                console.log("addNewMedicine Drawer elements not found");
+                return;
+            }
+
+            // Log for debugging
+            console.log("Form element addNewMedicine: ", formElement);
+            console.log("Drawer body addNewMedicine: ", drawerBody);
+            console.log("Drawer wrapper addNewMedicine: ", drawerWrapper);
+
+            // Scroll the drawer body into view
+            drawerBody.scrollIntoView(true);
+
+            // Adjust final scroll position
+            drawerWrapper.scrollTop -= 200;
+
+        } catch (error) {
+            console.error("Error in scrollToTop addNewMedicine: ", error);
+        }
     };
 
     getParentNode = (t) => t.parentNode;
@@ -248,7 +280,10 @@ class AddMedicineForm extends Component {
         });
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 <FormItem
                     className="full-width ant-date-custom"
                     label={formatMessage(messages.medicineName)}

@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from "react";
+import React, {Component, Fragment, useRef, useEffect} from "react";
 import {Button, Input, message, Radio} from "antd";
 import moment from "moment";
 import participantsField from "../common/participants";
@@ -23,15 +23,9 @@ import formulation from "../common/formulation";
 
 import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
-import {
-    REPEAT_TYPE,
-    USER_CATEGORY,
-    DAYS_NUMBER,
-    TABLET,
-    MEDICINE_UNITS,
-} from "../../../../constant";
+import {DAYS_NUMBER, MEDICINE_UNITS, REPEAT_TYPE, USER_CATEGORY, TABLET,} from "../../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../../Helper/is-empty";
 
@@ -51,12 +45,16 @@ class AddMedicationReminderForm extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        // Initialize refs, create refs for the elements we need to scroll
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     componentDidMount() {
         this.scrollToTop();
         const {
-            form: {validateFields},
+            form: { validateFields },
             // currentUser: {
             //   basicInfo: { _id, category },
             //   programId = []
@@ -64,18 +62,22 @@ class AddMedicationReminderForm extends Component {
             fetchMedicationStages,
             fetchProgramProducts,
         } = this.props;
-        const {programId} = [];
-        const {_id} = "23";
-        const {category} = "PATIENT";
+
+        const {programId} = []; // Corrected assignment
+        const {_id} = "7"; // Ensured it's a string
+        const {category} = "PATIENT"; // Ensured it's a string
+
         validateFields();
 
         if (category === USER_CATEGORY.PATIENT) {
-            fetchProgramProducts(programId[0]);
+            if (programId.length > 0) {
+                fetchProgramProducts(programId[0]);
+            }
             fetchMedicationStages(_id).then((response) => {
-                const {status, payload} = response;
+                const { status, payload } = response;
                 if (status) {
                     const {
-                        data: {medicationStages = [], program_has_medication_stage} = {},
+                        data: { medicationStages = [], program_has_medication_stage } = {},
                     } = payload;
                     if (medicationStages.length > 0) {
                         this.setState({
@@ -94,11 +96,41 @@ class AddMedicationReminderForm extends Component {
     }
 
     scrollToTop = () => {
-        let antForm = document.getElementsByClassName("Form")[0];
-        let antDrawerBody = antForm.parentNode;
-        let antDrawerWrapperBody = antDrawerBody.parentNode;
-        antDrawerBody.scrollIntoView(true);
-        antDrawerWrapperBody.scrollTop -= 200;
+        // Check if the element "Form" exists?
+        console.log("All Form elements:", document.getElementsByClassName("Form"));
+
+        try {
+            // First try to get the form element using ref
+            const formElement = this.formRef.current;
+
+            if (!formElement) {
+                console.log("medicineReminder Form element not found via ref");
+                return;
+            }
+
+            // Find the drawer body and wrapper (ant-drawer-body and ant-drawer-wrapper-body)
+            let drawerBody = formElement.closest('.ant-drawer-body');
+            let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
+
+            if (!drawerBody || !drawerWrapper) {
+                console.log("medicineReminder Drawer elements not found");
+                return;
+            }
+
+            // Log for debugging
+            console.log("Form element medicineReminder: ", formElement);
+            console.log("Drawer body medicineReminder: ", drawerBody);
+            console.log("Drawer wrapper medicineReminder: ", drawerWrapper);
+
+            // Scroll the drawer body into view
+            drawerBody.scrollIntoView(true);
+
+            // Adjust final scroll position
+            drawerWrapper.scrollTop -= 200;
+
+        } catch (error) {
+            console.error("Error in scrollToTop medicineReminder: ", error);
+        }
     };
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
@@ -240,8 +272,7 @@ class AddMedicationReminderForm extends Component {
         validateFields([startTimeField.field_name]);
     };
 
-    onChangeEventStartTime = (startTime) => {
-    };
+    onChangeEventStartTime = (startTime) => {};
 
     onStartDateChange = (currentDate) => {
         const {
@@ -266,14 +297,11 @@ class AddMedicationReminderForm extends Component {
         }
     };
 
-    onEndDateChange = () => {
-    };
+    onEndDateChange = () => {};
 
-    onStartTimeChange = () => {
-    };
+    onStartTimeChange = () => {};
 
-    onEndTimeChange = () => {
-    };
+    onEndTimeChange = () => {};
 
     onEventDurationChange = (start, end) => {
         const {
@@ -381,49 +409,50 @@ class AddMedicationReminderForm extends Component {
                     } else {
                         message.error(msg);
                     }
-                } catch (error) {
-                }
+                } catch (error) {}
             }
         });
     };
 
-    // onPatientChange = () => {
-    //   const {
-    //     form: { setFieldsValue },
-    //     fetchProgramProducts,
-    //     fetchMedicationStages
-    //   } = this.props;
+    /*
+    onPatientChange = () => {
+      const {
+        form: { setFieldsValue },
+        fetchProgramProducts,
+        fetchMedicationStages
+      } = this.props;
 
-    //   const otherUser = this.getOtherUser();
+      const otherUser = this.getOtherUser();
 
-    //   if (otherUser) {
-    //     const {
-    //       basicInfo: { _id },
-    //       programId = []
-    //     } = otherUser;
-    //     fetchProgramProducts(programId[0]);
-    //     fetchMedicationStages(_id).then(response => {
-    //       const { status, payload } = response;
-    //       if (status) {
-    //         const {
-    //           data: { medicationStages = [], program_has_medication_stage } = {}
-    //         } = payload;
-    //         if (medicationStages.length > 0) {
-    //           this.setState({
-    //             medicationStages: medicationStages,
-    //             program_has_medication_stage
-    //           });
-    //         } else {
-    //           this.setState({
-    //             medicationStages: [],
-    //             program_has_medication_stage
-    //           });
-    //         }
-    //       }
-    //     });
-    //     setFieldsValue({ [chooseMedicationField.field_name]: null });
-    //   }
-    // };
+      if (otherUser) {
+        const {
+          basicInfo: { _id },
+          programId = []
+        } = otherUser;
+        fetchProgramProducts(programId[0]);
+        fetchMedicationStages(_id).then(response => {
+          const { status, payload } = response;
+          if (status) {
+            const {
+              data: { medicationStages = [], program_has_medication_stage } = {}
+            } = payload;
+            if (medicationStages.length > 0) {
+              this.setState({
+                medicationStages: medicationStages,
+                program_has_medication_stage
+              });
+            } else {
+              this.setState({
+                medicationStages: [],
+                program_has_medication_stage
+              });
+            }
+          }
+        });
+        setFieldsValue({ [chooseMedicationField.field_name]: null });
+      }
+    };
+    */
 
     getFooter = () => {
         const {
@@ -592,7 +621,10 @@ class AddMedicationReminderForm extends Component {
 
         return (
             <Fragment>
-                <Form className="event-form pb80 wp100 Form">
+                <Form
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                     {/* {participantsField.render({
             ...this.props,
             otherUser,

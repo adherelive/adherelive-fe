@@ -1,10 +1,6 @@
 import {doRequest} from "../../Helper/network";
 import {REQUEST_TYPE} from "../../constant";
-import {
-    getCdssDiagnosisList,
-    addCdssDiagnosisList,
-    getDiagnosisSearchUrl,
-} from "../../Helper/urls/cdss";
+import {addCdssDiagnosisList, getCdssDiagnosisList, getDiagnosisSearchUrl,} from "../../Helper/urls/cdss";
 import isEmpty from "../../Helper/is-empty";
 
 export const GET_CDSS_DIAGNOSIS_LIST = "GET_CDSS_DIAGNOSIS_LIST";

@@ -23,14 +23,9 @@ import formulation from "../common/formulation";
 
 import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
-import {
-    REPEAT_TYPE,
-    USER_CATEGORY,
-    DAYS_NUMBER,
-    MEDICINE_UNITS,
-} from "../../../../constant";
+import {DAYS_NUMBER, MEDICINE_UNITS, REPEAT_TYPE, USER_CATEGORY,} from "../../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../../Helper/is-empty";
 
@@ -46,10 +41,15 @@ class EditMedicationReminderForm extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        // Initialize refs, create refs for the elements we need to scroll
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     componentDidMount() {
         this.scrollToTop();
+        console.log("Inside componentDidMount of Form", this.props.form);
         const {
             form: {validateFields},
             // currentUser: {
@@ -89,11 +89,38 @@ class EditMedicationReminderForm extends Component {
     }
 
     scrollToTop = () => {
-        let antForm = document.getElementsByClassName("Form")[0];
-        let antDrawerBody = antForm.parentNode;
-        let antDrawerWrapperBody = antDrawerBody.parentNode;
-        antDrawerBody.scrollIntoView(true);
-        antDrawerWrapperBody.scrollTop -= 200;
+        try {
+            // First try to get the form element using ref
+            const formElement = this.formRef.current;
+
+            if (!formElement) {
+                console.log("medicationReminder Form element not found via ref");
+                return;
+            }
+
+            // Find the drawer body and wrapper (ant-drawer-body and ant-drawer-wrapper-body)
+            let drawerBody = formElement.closest('.ant-drawer-body');
+            let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
+
+            if (!drawerBody || !drawerWrapper) {
+                console.log("medicationReminder Drawer elements not found");
+                return;
+            }
+
+            // Log for debugging
+            console.log("Form element medicationReminder: ", formElement);
+            console.log("Drawer body medicationReminder: ", drawerBody);
+            console.log("Drawer wrapper medicationReminder: ", drawerWrapper);
+
+            // Scroll the drawer body into view
+            drawerBody.scrollIntoView(true);
+
+            // Adjust final scroll position
+            drawerWrapper.scrollTop -= 200;
+
+        } catch (error) {
+            console.error("Error in scrollToTop medicationReminder: ", error);
+        }
     };
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
@@ -252,8 +279,7 @@ class EditMedicationReminderForm extends Component {
         validateFields([startTimeField.field_name]);
     };
 
-    onChangeEventStartTime = (startTime) => {
-    };
+    onChangeEventStartTime = (startTime) => {};
 
     onStartDateChange = (currentDate) => {
         const {
@@ -278,14 +304,11 @@ class EditMedicationReminderForm extends Component {
         }
     };
 
-    onEndDateChange = () => {
-    };
+    onEndDateChange = () => {};
 
-    onStartTimeChange = () => {
-    };
+    onStartTimeChange = () => {};
 
-    onEndTimeChange = () => {
-    };
+    onEndTimeChange = () => {};
 
     onEventDurationChange = (start, end) => {
         const {
@@ -586,7 +609,10 @@ class EditMedicationReminderForm extends Component {
 
         return (
             <Fragment>
-                <Form className="event-form pb80 wp100 Form">
+                <Form
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                     {/* {participantsField.render({
             ...this.props,
             otherUser,

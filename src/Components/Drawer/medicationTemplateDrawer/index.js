@@ -1,33 +1,21 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {
-    Drawer,
-    // Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    TimePicker,
-    Modal,
-    Spin,
-} from "antd";
-
-import {Checkbox} from "antd";
+import {Button, Checkbox, Drawer, Input, message, Modal, Select, Spin, TimePicker,} from "antd";
 
 import {
-    WHEN_TO_TAKE_ABBR_TYPES,
-    WHEN_TO_TAKE_ABBR_LABELS,
-    MEDICATION_TIMING,
+    APPOINTMENT_TYPE_TITLE,
     DAYS,
     DAYS_TEXT_NUM_SHORT,
     EVENT_TYPE,
+    MEDICATION_TIMING,
     MEDICATION_TIMING_HOURS,
     MEDICATION_TIMING_MINUTES,
-    TABLET,
-    SYRUP,
     RADIOLOGY,
+    SYRUP,
+    TABLET,
     USER_CATEGORY,
-    APPOINTMENT_TYPE_TITLE,
+    WHEN_TO_TAKE_ABBR_LABELS,
+    WHEN_TO_TAKE_ABBR_TYPES,
 } from "../../../constant";
 import moment from "moment";
 import EditMedicationReminder from "../../../Containers/Drawer/editMedicationReminder";
@@ -49,7 +37,7 @@ import getMonth from "date-fns/getMonth";
 import getHours from "date-fns/getHours";
 import getMinutes from "date-fns/getMinutes";
 
-import {PoweroffOutlined, EditFilled, DeleteFilled} from "@ant-design/icons";
+import {DeleteFilled, EditFilled, PoweroffOutlined} from "@ant-design/icons";
 import Icon from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 
@@ -170,7 +158,7 @@ class TemplateDrawer extends Component {
 
         console.log("327546235423786479812742376", {template_medications});
 
-        // console.log("32786428457523476834234532847 carePlanTemplateIds===>",carePlanTemplateIds)
+        // console.log("32786428457523476834234532847 carePlanTemplateIds---> ",carePlanTemplateIds)
 
         let carePlanTemplateId = Object.keys(carePlanTemplateIds).length
             ? parseInt(carePlanTemplateIds[0])
@@ -716,8 +704,7 @@ class TemplateDrawer extends Component {
                 onOk: async () => {
                     this.setState({carePlanTemplateId: parseInt(value)});
                 },
-                onCancel() {
-                },
+                onCancel() {},
             });
         } else {
             this.setState({carePlanTemplateId: parseInt(value)});
@@ -1765,14 +1752,16 @@ class TemplateDrawer extends Component {
                         {this.formatMessage(messages.medications)}
                     </div>
                     <div className="flex">
-                        {/* {medicationKeys.length > 0 && (
-              <p
-                onClick={() => this.translateHandler("medication")}
-                className="translate-text pointer mr10"
-              >
-                Translate in Hindi
-              </p>
-            )} */}
+                        {
+                            /* {medicationKeys.length > 0 && (
+                              <p
+                                onClick={() => this.translateHandler("medication")}
+                                className="translate-text pointer mr10"
+                              >
+                                Translate in Hindi
+                              </p>
+                            )} */
+                        }
 
                         <div className=" add-more" onClick={this.showAddMedication}>
                             {this.formatMessage(messages.addMore)}
@@ -2030,7 +2019,7 @@ class TemplateDrawer extends Component {
                         APPOINTMENT_TYPE_TITLE[!appointment_type ? type : appointment_type]
                             .title;
                     let typeDescription = type_description;
-                    let rediologyType = radiology_type;
+                    let radiologyType = radiology_type;
                     return (
                         <div className="flex wp100 flex-grow-1 align-center" key={key}>
                             <div className="drawer-block">
@@ -2059,21 +2048,23 @@ class TemplateDrawer extends Component {
                                 </div>
                                 <div className="drawer-block-description">
                                     {typeDescription}
-                                    {rediologyType !== "" && ` (${rediologyType})`}
+                                    {radiologyType !== "" && ` (${radiologyType})`}
                                 </div>
                                 <div className="drawer-block-description">
-                                    {/* {
-                    date
-                      ? `After ${moment(date).diff(moment(), "days") + 1} days`
-                      : time_gap
-                      ? `After ${time_gap} days`
-                      : ""
+                                    {
+                                        /* {
+                                            date
+                                              ? `After ${moment(date).diff(moment(), "days") + 1} days`
+                                              : time_gap
+                                              ? `After ${time_gap} days`
+                                              : ""
 
-                    // date && `After ${moment(date).diff(moment(), "days")} days`
-                    // // : time_gap
-                    // // ? `After ${time_gap - 1} days`
-                    // // : ""
-                  } */}
+                                            // date && `After ${moment(date).diff(moment(), "days")} days`
+                                            // // : time_gap
+                                            // // ? `After ${time_gap - 1} days`
+                                            // // : ""
+                                          } */
+                                    }
                                     {time_gap == 0 ? "Today" : `After ${time_gap} days`}
                                 </div>
                                 <div className="drawer-block-description">{`Notes:${description}`}</div>
@@ -2087,14 +2078,16 @@ class TemplateDrawer extends Component {
                         {this.formatMessage(messages.actions)}
                     </div>
                     <div className="flex">
-                        {/* {vitalKeys.length > 0 && (
-              <p
-                onClick={() => this.translateHandler("vital")}
-                className="translate-text pointer mr10"
-              >
-                Translate in Hindi
-              </p>
-            )} */}
+                        {
+                            /* {vitalKeys.length > 0 && (
+                              <p
+                                onClick={() => this.translateHandler("vital")}
+                                className="translate-text pointer mr10"
+                              >
+                                Translate in Hindi
+                              </p>
+                            )} */
+                        }
 
                         <div className="flex add-more" onClick={this.showAddVital}>
                             {this.formatMessage(messages.addMore)}

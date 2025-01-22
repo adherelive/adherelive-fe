@@ -1,33 +1,31 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import {
-    Drawer,
-    // Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
-    Switch,
+  Drawer,
+  // Icon,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
+  Switch,
 } from "antd";
 import moment from "moment";
 import throttle from "lodash-es/throttle";
-import {getName} from "../../../Helper/validation";
+import { getName } from "../../../Helper/validation";
 
 import messages from "./message";
 import "react-datepicker/dist/react-datepicker.css";
 import TextArea from "antd/lib/input/TextArea";
-import {FINAL, PROBABLE, DIAGNOSIS_TYPE} from "../../../constant";
+import { FINAL, PROBABLE, DIAGNOSIS_TYPE } from "../../../constant";
 import Footer from "../footer";
 
-import {PlusCircleOutlined} from "@ant-design/icons";
-import {MinusCircleOutlined} from "@ant-design/icons";
+import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 
 // AKSHAY NEW CODE IMPLEMENTATIONS
-
 import CustomSymptoms from "../addPatient/CustomSymptoms";
 import CustomDiagnosis from "../addPatient/CustomDiagnosis";
 import MultipleTreatmentAlert from "../addPatient/MultipleTreatmentAlert";
@@ -36,7 +34,7 @@ import Icon from "@ant-design/icons";
 
 const {Option} = Select;
 
-class AddCareplanDrawer extends Component {
+class AddCarePlanDrawer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -76,8 +74,7 @@ class AddCareplanDrawer extends Component {
         );
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     componentDidUpdate(prevProps, prevState) {
         const {visible: prev_visible} = prevProps;
@@ -927,4 +924,4 @@ class AddCareplanDrawer extends Component {
     }
 }
 
-export default injectIntl(AddCareplanDrawer);
+export default injectIntl(AddCarePlanDrawer);

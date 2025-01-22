@@ -1,9 +1,6 @@
 import {doRequest} from "../../../Helper/network";
 import {REQUEST_TYPE} from "../../../constant";
-import {
-    getTransactionsUrl,
-    activateTransactionUrl,
-} from "../../../Helper/urls/subscriptions";
+import {activateTransactionUrl, getTransactionsUrl,} from "../../../Helper/urls/subscriptions";
 import {SET_TRANSACTION_TABLE_DATA} from "../../../reducer/index";
 
 export const getAllTransactions = () => {

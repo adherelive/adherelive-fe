@@ -1,22 +1,22 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import {
-    Drawer,
-    Icon,
-    Select,
-    Input,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
-    Checkbox,
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
+  Checkbox,
 } from "antd";
 import message from "antd/es/message";
 import {
-    CONSULTATION_FEE_TYPE_TEXT,
-    SAVINGS,
-    CURRENT,
-    ACCOUNT_TYPES,
+  CONSULTATION_FEE_TYPE_TEXT,
+  SAVINGS,
+  CURRENT,
+  ACCOUNT_TYPES,
 } from "../../../constant";
 
 import moment from "moment";
@@ -62,8 +62,7 @@ class editAccountDetailsDrawer extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     componentDidUpdate(prevProps, prevState) {
         const {visible: prev_visible} = prevProps;

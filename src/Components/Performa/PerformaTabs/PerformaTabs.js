@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {Tabs, Button} from "antd";
-import {useSelector, useDispatch} from "react-redux";
+import {Button, Tabs} from "antd";
+import {useDispatch, useSelector} from "react-redux";
 import {setPerformaTabsId} from "../../../modules/performa";
 import ObsGyane from "../PerformaTabs/ObsGyane/ObsGyane";
 import BasicInfo from "../PerformaTabs/BasicInfo/BasicInfo";

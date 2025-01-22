@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Input, Checkbox} from "antd";
+import {Checkbox, Input} from "antd";
 import ObstctricHistorytable from "./ObstctricHistorytable";
 import MiddleTable from "./MiddleTable";
 

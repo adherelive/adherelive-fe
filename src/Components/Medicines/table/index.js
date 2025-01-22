@@ -8,13 +8,11 @@ import moment from "moment";
 import generateRow from "./dataRow";
 import getColumn from "./header";
 import config from "../../../config";
-
 import message from "antd/es/message";
 import {TABLE_COLUMN} from "./helper";
 
 import messages from "./messages";
-import Icon from "@ant-design/icons";
-import {LoadingOutlined, SearchOutlined} from "@ant-design/icons";
+import {Icon, LoadingOutlined, SearchOutlined} from "@ant-design/icons";
 
 const ALL_TABS = {
     PUBLIC: "1",
@@ -34,8 +32,7 @@ class MedicineTable extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     componentDidUpdate(prevProps, prevState) {
         console.log("componentDidUpdate function");
@@ -70,7 +67,7 @@ class MedicineTable extends Component {
             const {getPublicMedicines} = this.props;
             this.setState({loading: true});
             const response = await getPublicMedicines({value, offset});
-            console.log("handleSearchPublicMedicine function", {
+            console.log("handleSearchPublicMedicine function: ", {
                 response,
                 value,
                 offset,
@@ -83,7 +80,7 @@ class MedicineTable extends Component {
             } = response || {};
             this.setState({searchPublicCount: total_count, loading: false});
         } catch (error) {
-            console.log("error ===>", error);
+            console.log("handleSearchPublicMedicine error ---> ", error);
         }
     }
 
@@ -490,7 +487,7 @@ class MedicineTable extends Component {
                     ? totalPrivateMedicinesCount
                     : searchPrivateCount;
 
-        console.log("render function");
+        console.log("Inside render function");
 
         return (
             <Table

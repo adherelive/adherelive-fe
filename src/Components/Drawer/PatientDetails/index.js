@@ -2,17 +2,17 @@ import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import {Drawer} from "antd";
 import {
-    GENDER,
-    PATIENT_BOX_CONTENT,
-    MISSED_MEDICATION,
-    MISSED_ACTIONS,
     DIAGNOSIS_TYPE,
-    MISSED_MEDICATION_TEXT,
+    GENDER,
     MISSED_ACTION_TEXT,
+    MISSED_ACTIONS,
     MISSED_APPOINTMENT_TEXT,
-    MISSED_SYMPTOM_TEXT,
-    USER_PERMISSIONS,
     MISSED_APPOINTMENTS,
+    MISSED_MEDICATION,
+    MISSED_MEDICATION_TEXT,
+    MISSED_SYMPTOM_TEXT,
+    PATIENT_BOX_CONTENT,
+    USER_PERMISSIONS,
 } from "../../../constant";
 import messages from "./message";
 import moment from "moment";
@@ -87,47 +87,54 @@ class PatientDetailsDrawer extends Component {
                 // });
             }
         } catch (error) {
-            console.log("Patient Careplans Get errrrorrrr ===>", error);
+            console.log("Patient Care Plans are getting an error ---> \n", error);
         }
     };
 
     componentDidMount() {
         const {
             getMedications,
-            payload: {patient_id} = {},
+            payload: { patient_id } = {},
             care_plans = {},
             getAppointments,
             appointments = {},
             patients = {},
             getPatientDetailsById,
         } = this.props;
+
         let carePlanId = 1;
         let carePlanMedicationIds = [];
         let appointmentsListIds = [];
 
-        // for (let appointment of Object.values(appointments)){
+        console.log("PatientDetailsDrawer -> componentDidMount -> patients --->\n", patients);
 
-        //   let {basic_info:{id} ,participant_one : {id : participant_one_Id = 1} , participant_two : {id: participant_two_Id = 1}} = appointment;
+        /* TODO: Need to check why this part has been commented out
+        for (let appointment of Object.values(appointments)){
+          let {basic_info:{id} ,participant_one : {id : participant_one_Id = 1} , participant_two : {id: participant_two_Id = 1}} = appointment;
 
-        //   if (parseInt(patient_id) === parseInt(participant_two_Id)) {
-        //     appointmentsListIds.push(id);
-        //   }
-
-        // }
-
+          if (parseInt(patient_id) === parseInt(participant_two_Id)) {
+            appointmentsListIds.push(id);
+          }
+        }
+        */
+        
         for (let carePlan of Object.values(care_plans)) {
             let {
-                basic_info: {id = 1, patient_id: patientId = 1},
+                basic_info: { id = 1, patient_id: patientId = 1 } = {},
                 medication_ids = [],
                 appointment_ids = [],
             } = carePlan;
+
+            console.log("PatientDetailsDrawer -> componentDidMount -> carePlan --->\n", carePlan);
+
             if (parseInt(patient_id) === parseInt(patientId)) {
                 carePlanId = id;
                 carePlanMedicationIds = medication_ids;
                 appointmentsListIds = appointment_ids;
             }
         }
-        this.setState({carePlanId, carePlanMedicationIds, appointmentsListIds});
+
+        this.setState({ carePlanId, carePlanMedicationIds, appointmentsListIds });
 
         if (patient_id) {
             this.handleGetPatientDetails(patient_id);
@@ -135,53 +142,6 @@ class PatientDetailsDrawer extends Component {
             getAppointments(patient_id);
         }
     }
-
-    // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
-    getCarePlanForPatient = async (patientId) => {
-        try {
-            const {getPatientCareplanByPatientId} = this.props;
-            const getCarePlanResponse = await getPatientCareplanByPatientId(
-                patientId
-            );
-            const {
-                status,
-                statusCode,
-                payload: {data = {}, message: resp_msg = ""} = {},
-            } = getCarePlanResponse || {};
-            if (!status) {
-                // message.error(resp_msg);
-            } else if (status) {
-                if (!isEmpty(data.care_plans)) {
-                    let carePlanId = 1;
-                    let carePlanMedicationIds = [];
-                    let appointmentsListIds = [];
-                    for (let carePlan of Object.values(data.care_plans)) {
-                        let {
-                            basic_info: {id = 1, patient_id = 1},
-                            medication_ids = [],
-                            appointment_ids = [],
-                        } = carePlan;
-                        // if (parseInt(patientId) === parseInt(patient_id)) {
-                        carePlanId = id;
-                        carePlanMedicationIds = carePlan.carePlanMedicationIds;
-                        appointmentsListIds = carePlan.carePlanAppointmentIds;
-                        // }
-                    }
-                    this.setState({
-                        carePlanId,
-                        carePlanMedicationIds,
-                        appointmentsListIds,
-                        care_plans: data.care_plans,
-                    });
-                }
-                // this.setState({
-                //   carePlans: data.care_plans,
-                // });
-            }
-        } catch (error) {
-            console.log("Patient Careplans Get errrrorrrr ===>", error);
-        }
-    };
 
     componentDidUpdate(prevProps) {
         const {
@@ -265,7 +225,7 @@ class PatientDetailsDrawer extends Component {
         }
     }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS START
+    // AKSHAY NEW CODE IMPLEMENTATIONS START
     async handleGetPatientDetails(patient_id) {
         try {
             const {getPatientDetailsById} = this.props;
@@ -285,8 +245,7 @@ class PatientDetailsDrawer extends Component {
             message.warn(this.formatMessage(messages.somethingWentWrong));
         }
     }
-
-    //AKSHAY NEW CODE IMPLEMENTATIONS END
+    // AKSHAY NEW CODE IMPLEMENTATIONS END
 
     getFormattedDays = (dates) => {
         let dayString = [];
@@ -414,10 +373,10 @@ class PatientDetailsDrawer extends Component {
         const {
             history,
             payload: {patient_id} = {},
-            setScheduleAppontmentData,
+            setScheduleAppointmentData,
         } = this.props;
         this.onClose();
-        await setScheduleAppontmentData({});
+        await setScheduleAppointmentData({});
         history.push(`/patients/${patient_id}`);
     };
 
@@ -550,7 +509,7 @@ class PatientDetailsDrawer extends Component {
                             <div className="pr10 fs24 fw600">{`${getName(
                                 first_name
                             )}  ${getName(middle_name)} ${getName(last_name)}`}</div>
-                            <div className="pr10 fs20 fw500">{`(${
+                            <div className="pr10 fs20 fw500">{` (${
                                 gender ? `${GENDER[gender].view} ` : ""
                             }${age ? age : "--"})`}</div>
                             {/* <Icon type="wechat" width={20} /> */}
@@ -640,7 +599,9 @@ class PatientDetailsDrawer extends Component {
                                     //   authPermissions.includes(USER_PERMISSIONS.MEDICATIONS.ADD) ?   "ml16" : null
                                     //   : null
                                     //   }
-                                    //    mwp45 maxwp48 h100 br5 bg-${PATIENT_BOX_CONTENT[id]["background_color"]} br-${PATIENT_BOX_CONTENT[id]["border_color"]} float-l flex flex-1 direction-column justify-space-between`}
+                                    //    mwp45 maxwp48 h100 br5 bg-${PATIENT_BOX_CONTENT[id]["background_color"]}
+                                    //    br-${PATIENT_BOX_CONTENT[id]["border_color"]}
+                                    //    float-l flex flex-1 direction-column justify-space-between`}
                                 >
                                     <div className="ml10 mt10 fs16 fw600">
                                         {PATIENT_BOX_CONTENT[id]["text"]}

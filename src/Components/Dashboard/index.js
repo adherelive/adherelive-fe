@@ -3,13 +3,13 @@ import {injectIntl} from "react-intl";
 import messages from "./message";
 import {connect} from "getstream";
 import {
-    TABLE_DEFAULT_BLANK_FIELD,
     FEATURES,
-    MISSED_MEDICATION,
-    MISSED_APPOINTMENTS,
     MISSED_ACTIONS,
+    MISSED_APPOINTMENTS,
     MISSED_DIET,
+    MISSED_MEDICATION,
     MISSED_WORKOUT,
+    TABLE_DEFAULT_BLANK_FIELD,
     USER_PERMISSIONS,
 } from "../../constant";
 import Tabs from "antd/es/tabs";
@@ -24,10 +24,9 @@ import Loading from "../Common/Loading";
 import {withRouter} from "react-router-dom";
 import Donut from "../Common/graphs/donut";
 import GraphsModal from "./graphsModal";
-import {getPatientConsultingVideoUrl} from "../../Helper/url/patients";
-import {getPatientConsultingUrl} from "../../Helper/url/patients";
+import {getPatientConsultingUrl, getPatientConsultingVideoUrl} from "../../Helper/url/patients";
 import config from "../../config";
-import {message, Button, Spin, Menu, Dropdown, Modal} from "antd";
+import {Button, Dropdown, Menu, message, Modal, Spin} from "antd";
 import SearchPatient from "../../Containers/SearchPatient";
 import MissedAppointmentsDrawer from "../../Containers/Drawer/missedAppointment";
 import MissedVitalsDrawer from "../../Containers/Drawer/missedVital";
@@ -41,7 +40,7 @@ import ScheduledActivitiesTable from "../../Containers/subscription/ScheduleActi
 import PendingActivitiesTable from "../../Containers/subscription/PendingActivitiesTable";
 
 // helpers...
-import {getRoomId} from "../../Helper/twilio";
+import { getRoomId } from "../../Helper/twilio";
 
 const {GETSTREAM_API_KEY, GETSTREAM_APP_ID} = config;
 const {TabPane} = Tabs;
@@ -166,74 +165,93 @@ class Dashboard extends Component {
         this.initiateInAppNotificationObj();
     }
 
-    // handleGetAllDietsForDoctor = async() => {
-    //   try{
-    //     const { getAllDietsForDoctor } = this.props;
-    //     const response = await getAllDietsForDoctor();
-    //     const { status, payload: { message : resp_msg = ''  } = {}  } =
-    //           response || {};
 
-    //     if(!status){
-    //       message.warn(resp_msg);
+    /**
+     * TODO: Why are the following methods not used?
+    handleGetAllDietsForDoctor = async() => {
+      try{
+        const { getAllDietsForDoctor } = this.props;
+        const response = await getAllDietsForDoctor();
+        const { status, payload: { message : resp_msg = ''  } = {}  } =
+              response || {};
 
-    //     }
-    //   }catch(error){
-    //     console.log("error ===========>>>",{error});
-    //   }
-    // }
+        if(!status){
+          message.warn(resp_msg);
 
-    // initiateInAppNotificationObj = () => {
-    //   const { notificationToken, feedId, } = this.props;
-    //   if (notificationToken || feedId) {
-    //       let client = connect(
-    //           GETSTREAM_API_KEY,
-    //           notificationToken,
-    //           GETSTREAM_APP_ID
-    //       );
-
-    //       this.client = clientFeed;
-
-    //   }
-
-    //   this.updateUnseenNotificationData();
-    // };
-
-    // getFeedData = async() => {
-    //   let clientFeed = this.client.feed("notification", atob(this.feedId));
-    //   const data = await clientFeed.get({ limit: 30 });
-    //   return data;
-    // }
-
-    // updateUnseenNotificationData = async () => {
-    //   const data = await this.getFeedData();
-    //   const { unseen = 0 } = data || {};
-    //   this.props.updateUnseenInAppNotificationCount(unseen);
-    // };
+        }
+      }catch(error){
+        console.log("error ===========>>>",{error});
+      }
+    }
 
     initiateInAppNotificationObj = () => {
+      const { notificationToken, feedId, } = this.props;
+      if (notificationToken || feedId) {
+          let client = connect(
+              GETSTREAM_API_KEY,
+              notificationToken,
+              GETSTREAM_APP_ID
+          );
+
+          this.client = clientFeed;
+
+      }
+
+      this.updateUnseenNotificationData();
+    };
+
+    getFeedData = async() => {
+      let clientFeed = this.client.feed("notification", atob(this.feedId));
+      const data = await clientFeed.get({ limit: 30 });
+      return data;
+    }
+
+    updateUnseenNotificationData = async () => {
+      const data = await this.getFeedData();
+      const { unseen = 0 } = data || {};
+      this.props.updateUnseenInAppNotificationCount(unseen);
+    };
+     */
+
+    initiateInAppNotificationObj = async () => {
         const {notificationToken, feedId} = this.props;
         const {updateUnseenNotificationData} = this;
 
         if (notificationToken || feedId) {
+            // try {
             let clientFeed = connect(
                 config.GETSTREAM_API_KEY,
                 notificationToken,
                 config.GETSTREAM_APP_ID
             );
-
             this.client = clientFeed;
+            console.log("Client connected successfully: ", clientFeed);
+            // } catch (err) {
+            //     console.log("Error connecting to GetStream: ", err);
+            // }
         }
-
-        updateUnseenNotificationData();
+        // TODO: Check where this leads to
+        // try {
+        await updateUnseenNotificationData(); // Wait for the Promise to resolve
+        // } catch (err) {
+        //     console.error("Error updating notifications: ", err);
+        // Handle the error appropriately (e.g., display an error message)
+        // }
     };
 
     getFeedData = async () => {
         const {feedId} = this.props;
         const limit = config.REACT_APP_NOTIFICATION_ONE_TIME_LIMIT;
+        // try {
         let clientFeed = this.client.feed("notification", feedId);
-
         const data = await clientFeed.get({limit});
         return data;
+        // } catch (error) {
+        //     console.error("Error fetching feed data: ", error);
+        //     return {unseen: 0}; // Return a default object to prevent further errors
+        // Or throw the error if you want it to propagate up
+        // throw error;
+        // }
     };
 
     updateUnseenNotificationData = async () => {

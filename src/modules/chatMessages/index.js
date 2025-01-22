@@ -64,8 +64,7 @@ export const addMessageOfChat = (room_id, messages) => {
                 type: ADD_MESSAGE_FOR_CHAT_COMPLETED,
                 payload: {room_id, messages},
             });
-        } catch (error) {
-        }
+        } catch (error) {}
     };
 };
 

@@ -31,8 +31,7 @@ class AdminMedicine extends Component {
         this.handleGetAllPrivateMedicines();
     }
 
-    componentDidUpdate(prevProps, prevState) {
-    }
+    componentDidUpdate(prevProps, prevState) {}
 
     async handleGetAllPublicMedicines() {
         try {
@@ -47,7 +46,7 @@ class AdminMedicine extends Component {
             } = response || {};
             this.setState({totalPublicMedicinesCount: total_count});
         } catch (error) {
-            console.log("89368754234 error ===>", error);
+            console.log("Admin Medicine componentDidMount error ---> ", error);
         }
     }
 
@@ -64,7 +63,7 @@ class AdminMedicine extends Component {
             } = response || {};
             this.setState({totalPrivateMedicinesCount: total_count});
         } catch (error) {
-            console.log("89368754234 error ===>", error);
+            console.log("handleGetAllPrivateMedicines Admin Medicine error ---> ", error);
         }
     }
 

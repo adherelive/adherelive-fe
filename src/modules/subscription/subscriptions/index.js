@@ -1,10 +1,10 @@
 import {doRequest} from "../../../Helper/network";
 import {REQUEST_TYPE} from "../../../constant";
 import {
-    getSubscriptionUrl,
     addSubscriptionUrl,
-    updateSubscription,
     getProviderSubscriptionUrl,
+    getSubscriptionUrl,
+    updateSubscription,
 } from "../../../Helper/urls/subscriptions";
 import {SET_SUBSCRIPTIONS} from "../../../reducer/index";
 

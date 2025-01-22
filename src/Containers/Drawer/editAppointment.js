@@ -6,22 +6,22 @@ import {DRAWER} from "../../constant";
 import {getMedications} from "../../modules/medications";
 import {getPatientCarePlanDetails} from "../../modules/carePlans";
 import {
-    getAppointments,
-    updateAppointment,
     deleteAppointment,
-    getAppointmentsDetails,
+    getAppointments,
     getAppointmentsDataForDay,
+    getAppointmentsDetails,
+    updateAppointment,
 } from "../../modules/appointments";
 import {
-    markFavourite,
     getFavourites,
+    markFavourite,
     removeFavourite,
     removeFavouriteByRecordId,
 } from "../../modules/favouritesData/index";
 import {googleTranslate} from "../../modules/cdss";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
-import {updateActivityById} from "./../../modules/subscription/activities";
+import {updateActivityById} from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
     const {

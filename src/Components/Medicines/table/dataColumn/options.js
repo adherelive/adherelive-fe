@@ -1,11 +1,10 @@
 import React from "react";
 import message from "antd/es/message";
-import Icon from "antd/es/icon";
 import Tooltip from "antd/es/tooltip";
 import messages from "../messages";
 import confirm from "antd/es/modal/confirm";
 import moment from "moment";
-import {DeleteOutlined, CheckCircleOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, DeleteOutlined, Icon} from "@ant-design/icons";
 
 const ALL_TABS = {
     PUBLIC: "1",
@@ -90,8 +89,7 @@ export default (props) => {
                     console.log("error", error);
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
             maskClosable: false,
             keyboard: false,
         });
@@ -133,11 +131,10 @@ export default (props) => {
                         message.error(resp_msg);
                     }
                 } catch (error) {
-                    console.log("Error ===>", {error});
+                    console.log("handleDelete Error ---> ", {error});
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
             maskClosable: false,
             keyboard: false,
         });

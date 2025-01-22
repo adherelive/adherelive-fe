@@ -4,7 +4,6 @@ import {DatePicker} from "antd";
 import FullCalendar from "fullcalendar-reactwrapper";
 import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";
 // // import isEqual from "lodash-es/isEqual";
-
 import next from "../../../../Assets/images/ico-calendar-nav-next.svg";
 import prev from "../../../../Assets/images/ico-calendar-nav-prev.svg";
 import dropDownIcon from "../../../../Assets/images/ico-dropdown.svg";
@@ -26,14 +25,11 @@ class CalendarComponent extends Component {
         onEventDurationChange(start, end);
     };
 
-    eventResizeStart = (event, ...args) => {
-    };
+    eventResizeStart = (event, ...args) => {};
 
-    eventResizeStop = (event, ...args) => {
-    };
+    eventResizeStop = (event, ...args) => {};
 
-    eventDragStart = (event, args) => {
-    };
+    eventDragStart = (event, args) => {};
 
     eventDrop = (event, duration) => {
         const {start, end} = event;
@@ -41,8 +37,7 @@ class CalendarComponent extends Component {
         onEventDurationChange(start, end);
     };
 
-    eventDragStop = (event) => {
-    };
+    eventDragStop = (event) => {};
 
     componentDidMount() {
         this.adjustCurrentEvent();

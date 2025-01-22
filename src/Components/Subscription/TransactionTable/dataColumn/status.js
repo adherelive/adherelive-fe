@@ -1,6 +1,6 @@
 import React from "react";
 import TableStatus from "../../../../Helper/TableStatus";
-import {TABLE_STATUS} from "../../../../constant";
+import { TABLE_STATUS } from "../../../../constant";
 
 export default (props) => {
     const {transactions} = props || {};

@@ -1,14 +1,13 @@
 import {doRequest} from "../../Helper/network";
 import {REQUEST_TYPE} from "../../constant";
 import {
-    getAddPatientUrl,
-    searchPatientFromNumUrl,
-    getRequestConsentUrl,
-    getConsentVerifyUrl,
-    searchPatientForDoctorUrl,
     addCareplanForPatientUrl,
-    // AKSHAY NEW CODE IMPLEMENTATIONS
+    getAddPatientUrl,
+    getConsentVerifyUrl,
     getPatientDetailsUrl,
+    getRequestConsentUrl,
+    searchPatientForDoctorUrl,
+    searchPatientFromNumUrl,
 } from "../../Helper/urls/patients";
 import {getInitialData} from "./../auth/index";
 

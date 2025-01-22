@@ -1,13 +1,16 @@
 FROM node:22.13.0 AS builder
 #RUN useradd -d /home/azureuser -m -s /bin/bash azureuser
+# Get the current Git commit hash and set it as a build argument
+ARG COMMIT_HASH
+LABEL commit_hash=$COMMIT_HASH
 LABEL application="adherelive-frontend"
-LABEL owner="Akshay Nagargoje"
-#RUN mkdir /code
-RUN mkdir -p /code && mkdir -p /code/public
+LABEL owner="AdhereLive Pvt Ltd"
+# Stage 1
+RUN mkdir -p /code
+RUN mkdir -p /code/public
 WORKDIR /code
 COPY package.json ./
 COPY package-lock.json ./
-#RUN npm install
 RUN npm install && npm cache clean --force --loglevel=error
 COPY . .
 RUN cp env_files/.env_prod .env

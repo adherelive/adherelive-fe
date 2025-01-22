@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from "react";
+import React, { Component, Fragment } from "react";
 import {injectIntl} from "react-intl";
 
 import {Select} from "antd";
@@ -27,8 +27,7 @@ class Prefix extends Component {
         super(props);
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     getInitialValue = () => {
         const {prefix} = this.props;

@@ -1,20 +1,19 @@
 import React, {Fragment, useState} from "react";
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
 import {
-    Drawer,
-    Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
 } from "antd";
 import Form from "antd/es/form";
 import TextArea from "antd/es/input/TextArea";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
-
 import moment from "moment";
 import throttle from "lodash-es/throttle";
 import {useDispatch, useSelector} from "react-redux";
@@ -55,7 +54,7 @@ function Index({onCloseDrawer, visible, patient_id}) {
             selectedService: {},
         });
         onCloseDrawer();
-        message.success("Service recommended sucessfully");
+        message.success("Service recommended successfully");
     };
 
     const onSubmit = () => {
@@ -81,8 +80,7 @@ function Index({onCloseDrawer, visible, patient_id}) {
 
     // formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const onChangeHandler = (e) => {
         setValues({...values, [e.target.name]: e.target.value});

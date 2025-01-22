@@ -56,8 +56,8 @@ class VitalName extends Component {
             //   this.setState({ fetchingVitals: false });
             // }
         } catch (err) {
-            console.log("err", err);
-            message.warn("Something has gone wrong. Please try again later");
+            console.log("Error in Vital Search: ", err);
+            message.warn("Something has gone wrong in Vitals Search. Please try again later");
             this.setState({fetchingVitals: false});
         }
     }

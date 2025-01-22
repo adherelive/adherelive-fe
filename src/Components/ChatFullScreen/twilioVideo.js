@@ -15,7 +15,7 @@ import {doRequest} from "../../Helper/network";
 import {Twilio} from "../../Helper/urls";
 import {REQUEST_TYPE, USER_CATEGORY} from "../../constant";
 
-import {Button, message, Spin} from "antd";
+import { Button, message, Spin } from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
 
 class VideoComponent extends Component {
@@ -150,11 +150,11 @@ class VideoComponent extends Component {
     };
 
     attachTracks = (tracks, container) => {
-        console.log("73648723648723684723684==========>", tracks);
+        console.log("attachTracks twilioVideo tracks ---> ", tracks);
 
         tracks.forEach((track) => {
             if (track.kind !== "data") {
-                console.log("73648723648723684723684", track);
+                console.log("attachTracks twilioVideo single track ---> ", track);
                 container.appendChild(track.attach());
             }
         });

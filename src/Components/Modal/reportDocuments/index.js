@@ -1,12 +1,10 @@
-import React, {Fragment, Component} from "react";
+import React, {Component, Fragment} from "react";
 import Modal from "antd/es/modal";
-import {PaperClipOutlined} from "@ant-design/icons";
+import {EyeTwoTone, PaperClipOutlined} from "@ant-design/icons";
 import messages from "./messages";
 import Tooltip from "antd/es/tooltip";
 import {injectIntl} from "react-intl";
 import Button from "antd/es/button";
-
-import {EyeTwoTone} from "@ant-design/icons";
 
 class ReportDocuments extends Component {
     constructor(props) {
@@ -17,8 +15,7 @@ class ReportDocuments extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     getImageView = ({src = "", id, name}) => {
         return (

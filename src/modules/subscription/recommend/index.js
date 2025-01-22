@@ -1,12 +1,12 @@
 import {doRequest} from "../../../Helper/network";
 import {REQUEST_TYPE} from "../../../constant";
 import {
+    getRecommendSeviceUrl,
+    getMyTaskOfServiceOrSubscriptionUrl,
     recommendServiceUrl,
     recommendSubscriptionUrl,
-    getRecommendSeviceUrl,
     updateRecommendServiceUrl,
     updateRecommendSubscriptionUrl,
-    getMyTaskOfServiceOrSubscriptionUrl,
 } from "../../../Helper/urls/subscriptions";
 import isEmpty from "../../../Helper/is-empty";
 import {SET_RECOMMENDED_SUBSCRIPTIONS_AND_SERVICES} from "../../../reducer/index";

@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Select, Form, Radio, Icon} from "antd";
+import {Form, Icon, Radio, Select} from "antd";
 // import { MinusCircleOutlined } from "@ant-design/icons";
 import {injectIntl} from "react-intl";
 import dropDownIcon from "../../../../Assets/images/material-icons-black-arrow-drop-down.svg";

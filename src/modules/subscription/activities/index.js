@@ -2,18 +2,15 @@ import {doRequest} from "../../../Helper/network";
 import {REQUEST_TYPE} from "../../../constant";
 import {
     activitiesUrl,
-    updateActivityUrl,
-    patientCareplansUrl,
-    patientCareplansSecondaryDoctorUrl,
-    searchActivites,
     getSecondaryDoctorUrl,
-    updateReasonForReassignement,
+    patientCareplansSecondaryDoctorUrl,
+    patientCareplansUrl,
     reassignmentAuditUrl,
+    searchActivites,
+    updateActivityUrl,
+    updateReasonForReassignement,
 } from "../../../Helper/urls/subscriptions";
-import {
-    SET_PENDING_ACTIVITIES_TABLE_DATA,
-    SET_ACTIVITY_DATA_FOR_SCHEDULE,
-} from "../../../reducer/index";
+import {SET_ACTIVITY_DATA_FOR_SCHEDULE, SET_PENDING_ACTIVITIES_TABLE_DATA,} from "../../../reducer/index";
 
 export const getAllActivities = (activityStatus, dueDateSort) => {
     let response = {};
@@ -121,7 +118,7 @@ export const getReassignmentAudit = (activityId) => {
     };
 };
 
-export const setScheduleAppontmentData = (payload) => {
+export const setScheduleAppointmentData = (payload) => {
     return async (dispatch) => {
         dispatch({
             type: SET_ACTIVITY_DATA_FOR_SCHEDULE,
@@ -153,7 +150,7 @@ export const getPatientCareplanByPatientId = (patientId) => {
     };
 };
 
-export const getPatientCareplanByPatientIdAndUserRoleId = (patientId) => {
+export const getPatientCarePlanByPatientIdAndUserRoleId = (patientId) => {
     let response = {};
     return async (dispatch) => {
         try {

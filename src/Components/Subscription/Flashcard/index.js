@@ -1,29 +1,24 @@
-import React, {useState, useEffect, Fragment} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {
-    Form,
-    Input,
-    Button,
-    Spin,
-    // Avatar,
-    Upload,
-    // Modal,
-    message,
-    Switch,
+  Form,
+  Input,
+  Button,
+  Spin,
+  // Avatar,
+  Upload,
+  // Modal,
+  message,
+  Switch,
 } from "antd";
 import Close from "../../../Assets/images/close.png";
 import isEmpty from "../../../Helper/is-empty";
-import {setFlashCard} from "./../../../modules/subscription/flashcard";
-import {fetchReports} from "./../../../modules/reports";
+import {setFlashCard} from "../../../modules/subscription/flashcard";
+import {fetchReports} from "../../../modules/reports";
 import {useDispatch, useSelector} from "react-redux";
 import AddNotesSection from "./AddNotesSection";
 import NotesList from "./NotesList";
-import {
-    addFlashcard,
-    updateFlashcardById,
-    setFlashcardData,
-} from "../../../modules/subscription/flashcard";
-import {MinusOutlined} from "@ant-design/icons";
-import {ShrinkOutlined} from "@ant-design/icons";
+import {addFlashcard, setFlashcardData, updateFlashcardById,} from "../../../modules/subscription/flashcard";
+import {MinusOutlined, ShrinkOutlined} from "@ant-design/icons";
 import {SET_ACTIVITY_DATA_FOR_SCHEDULE} from "../../../reducer/index";
 
 const Header = ({close, minimizeHandler, minimize}) => {

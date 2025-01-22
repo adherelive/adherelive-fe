@@ -2,23 +2,22 @@ import {connect} from "react-redux";
 import DoctorSettingsPage from "../../../Components/Pages/doctorSettingsPage";
 import {withRouter} from "react-router-dom";
 import {
-    getDoctorProfileDetails,
-    getAdminPaymentProduct,
-    getDoctorPaymentProduct,
     addDoctorPaymentProduct,
     deleteDoctorPaymentProduct,
+    getAdminPaymentProduct,
+    getDoctorPaymentProduct,
+    getDoctorProfileDetails,
 } from "../../../modules/doctors";
 import {
     addAccountDetails,
-    getAccountDetails,
     deleteAccountDetails,
+    getAccountDetails,
     updateAccountDetails,
 } from "../../../modules/accountDetails";
 import {open} from "../../../modules/drawer";
 import {DRAWER} from "../../../constant";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTIONS
-
 import {getServices} from "../../../modules/subscription/services";
 import {getSubscriptions} from "../../../modules/subscription/subscriptions";
 

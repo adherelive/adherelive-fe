@@ -1,10 +1,7 @@
 import React from "react";
 import {Button} from "antd";
 import {useDispatch} from "react-redux";
-import {
-    SET_FLASHCARD_OPEN,
-    SET_ACTIVITY_DATA_FOR_SCHEDULE,
-} from "../../../../reducer/index";
+import {SET_ACTIVITY_DATA_FOR_SCHEDULE, SET_FLASHCARD_OPEN,} from "../../../../reducer/index";
 
 export default (props) => {
     const dispatch = useDispatch();

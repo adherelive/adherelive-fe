@@ -1,8 +1,8 @@
 import {connect} from "react-redux";
 import ProviderTransactionPage from "../../../Components/Pages/providerTransactionPage";
 import {withRouter} from "react-router-dom";
-import {open} from "../../../modules/drawer";
-import {DRAWER} from "../../../constant";
+import { open } from "../../../modules/drawer";
+import { DRAWER } from "../../../constant";
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import {getAllTransactions} from "../../../modules/subscription/transactions/index";
 

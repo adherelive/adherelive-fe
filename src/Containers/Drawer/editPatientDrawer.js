@@ -9,11 +9,7 @@ import {searchMedicine} from "../../modules/medicines";
 import {updatePatientAndCareplan} from "../../modules/doctors";
 import {getPatientDetailsById} from "../../modules/patients";
 // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
-import {
-    getDiagnosisList,
-    diagnosisSearch,
-    googleTranslate,
-} from "../../modules/cdss";
+import {diagnosisSearch, getDiagnosisList, googleTranslate,} from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
     const {auth} = state;

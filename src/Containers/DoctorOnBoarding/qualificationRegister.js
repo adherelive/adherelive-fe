@@ -2,13 +2,13 @@ import {withRouter} from "react-router-dom";
 import QualificationRegister from "../../Components/DoctorOnBoarding/qualificationRegister";
 import {signOut} from "../../modules/auth";
 import {
+    callNewDoctorAction,
+    deleteDoctorQualificationImage,
+    deleteDoctorRegistrationImage,
     doctorQualificationRegister,
     getDoctorQualificationRegisterData,
     registerQualification,
-    deleteDoctorQualificationImage,
-    deleteDoctorRegistrationImage,
     registerRegistration,
-    callNewDoctorAction,
 } from "../../modules/onBoarding";
 import {connect} from "react-redux";
 import {searchCollege} from "../../modules/colleges";
@@ -16,8 +16,8 @@ import {searchCouncil} from "../../modules/councils";
 import {searchDegree} from "../../modules/degrees";
 import {searchSpecialties} from "../../modules/specialities";
 import {
-    getDoctorDetails,
-    getDoctorProfileDetails,
+  getDoctorDetails,
+  getDoctorProfileDetails,
 } from "../../modules/doctors";
 
 const mapStateToProps = (state) => {

@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from "react";
+import React, { Component, Fragment } from "react";
 import {injectIntl} from "react-intl";
 import messages from "./message";
 import message from "antd/es/message";
@@ -9,18 +9,18 @@ import debounce from "lodash-es/debounce";
 import {SearchOutlined} from "@ant-design/icons";
 
 import {
-    Drawer,
-    Icon,
-    Select,
-    Input,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
-    Menu,
-    Dropdown,
-    Tooltip,
-    Avatar,
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
+  Menu,
+  Dropdown,
+  Tooltip,
+  Avatar,
 } from "antd";
 
 const {Option} = Select;
@@ -41,8 +41,7 @@ class SearchPatient extends Component {
         );
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 

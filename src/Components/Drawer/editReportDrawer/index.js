@@ -14,11 +14,11 @@ import DatePicker from "antd/es/date-picker";
 
 import {
     DeleteTwoTone,
-    PlusOutlined,
-    EyeTwoTone,
     DownloadOutlined,
+    EyeTwoTone,
     LoadingOutlined,
     PaperClipOutlined,
+    PlusOutlined,
 } from "@ant-design/icons";
 
 import messages from "./message";
@@ -41,8 +41,7 @@ class editReportDrawer extends Component {
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     componentDidUpdate(prevProps, prevState) {
         const {visible: prev_visible} = prevProps;
@@ -150,8 +149,7 @@ class editReportDrawer extends Component {
                     }
                 });
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 
@@ -328,7 +326,7 @@ class editReportDrawer extends Component {
             const {name} = document || {};
             return name === file.name;
         });
-        console.log("287423 Existing ---> ", existing);
+        console.log("handleUploadChange Existing ---> ", existing);
         if (existing.length === 0) {
             newDocuments.push({
                 name: file.name,
@@ -360,7 +358,7 @@ class editReportDrawer extends Component {
         } = this;
 
         const {name = "", test_date} = this.state;
-        console.log("786578326427348234762427394823 Render", test_date);
+        console.log("Edit Report Drawer RenderAddReport test_date ---> ", test_date);
         return (
             <div className="form-block-ap ">
                 <div className="form-headings-ap flex align-center justify-start">
@@ -558,8 +556,7 @@ class editReportDrawer extends Component {
                 });
                 close();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 
@@ -607,10 +604,7 @@ class editReportDrawer extends Component {
             enableModal,
             submitting = false,
         } = this.state;
-        console.log(
-            "786578326427348234762427394823 enableModal  ---> ",
-            viewModalVisible && enableModal
-        );
+        console.log("Edit Report Drawer enableModal ---> ", viewModalVisible && enableModal);
 
         if (visible !== true) {
             return null;

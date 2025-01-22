@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Form, Input, Button, Spin, Avatar, Upload, Modal} from "antd";
+import { Form, Input, Button, Spin, Avatar, Upload, Modal } from "antd";
 import moment from "moment";
 import Chat from "twilio-chat";
 import DoubleTick from "../../Assets/images/double-tick-indicator.png";
@@ -19,18 +19,18 @@ import bodyImage from "../../../src/Assets/images/body.jpg";
 // import CloseChatIcon from "../../Assets/images/ico-vc-message-close.png";
 import CallIcon from "../../Assets/images/telephone.png";
 import {
-    USER_ADHERE_BOT,
-    CHAT_MESSAGE_TYPE,
-    PARTS,
-    PART_LIST_BACK,
-    PART_LIST_CODES,
-    PART_LIST_FRONT,
-    BODY,
-    PARTS_GRAPH,
-    BODY_VIEW,
-    BODY_SIDE,
-    USER_CATEGORY,
-    EVENT_TYPE,
+  USER_ADHERE_BOT,
+  CHAT_MESSAGE_TYPE,
+  PARTS,
+  PART_LIST_BACK,
+  PART_LIST_CODES,
+  PART_LIST_FRONT,
+  BODY,
+  PARTS_GRAPH,
+  BODY_VIEW,
+  BODY_SIDE,
+  USER_CATEGORY,
+  EVENT_TYPE,
 } from "../../constant";
 import BotMessage from "./botMessage";
 import {getFullName, isJSON} from "../../Helper/common";
@@ -54,8 +54,7 @@ class MediaComponent extends Component {
         // this.getUrl(message);
     }
 
-    componentWillUnmount() {
-    }
+    componentWillUnmount() {}
 
     imageModal = () => {
         return (

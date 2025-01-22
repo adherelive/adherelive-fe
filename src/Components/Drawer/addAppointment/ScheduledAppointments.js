@@ -1,4 +1,4 @@
-import React, {useState, Fragment, useEffect} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {injectIntl} from "react-intl";
 import {
     Drawer,
@@ -13,7 +13,6 @@ import {
     Space,
 } from "antd";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
-
 import moment from "moment";
 
 // import messages from "./message";
@@ -23,18 +22,17 @@ import {useDispatch, useSelector} from "react-redux";
 import isEmpty from "../../../Helper/is-empty";
 import Paper from "@mui/material/Paper";
 import {
-    Scheduler,
-    DayView,
+    AppointmentForm,
     Appointments,
     //   AppointmentTooltip,
-    AppointmentForm,
-    //
     //   WeekView,
     //   MonthView,
     //   ViewSwitcher,
-    Toolbar,
     DateNavigator,
+    DayView,
+    Scheduler,
     TodayButton,
+    Toolbar,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import {ViewState} from "@devexpress/dx-react-scheduler";
 import {getAppointmentsDataForDay} from "../../../modules/appointments/index";
@@ -129,8 +127,7 @@ function Index({
 
     // formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const {submitting} = values;
 

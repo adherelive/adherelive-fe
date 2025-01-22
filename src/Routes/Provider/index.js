@@ -1,11 +1,11 @@
-import React, {lazy, Component, Fragment} from "react";
+import React, {Component, Fragment, lazy} from "react";
 import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Redirect,
-    useLocation,
-    withRouter,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+  useLocation,
+  withRouter,
 } from "react-router-dom";
 import BlankState from "../../Components/Common/BlankState";
 import {PATH} from "../../constant";

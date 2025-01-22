@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Modal, Button} from "antd";
+import {Button, Modal} from "antd";
 import message from "antd/es/message";
 import {useDispatch} from "react-redux";
 import {updateSubscriptions} from "../../../modules/subscription/subscriptions";
@@ -14,7 +14,7 @@ function DeactivateSubscriptionWarn({data}) {
 
     const callBack = () => {
         setIsModalVisible(false);
-        message.success("Subscription deactivated sucessfully");
+        message.success("Subscription deactivated successfully");
     };
 
     const handleOk = () => {

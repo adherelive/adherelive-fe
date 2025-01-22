@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {Button, Drawer} from "antd";
+import { Button, Drawer } from "antd";
 import messages from "./messages";
 import SingleDayComponent from "../singleDayComponent/index";
 import message from "antd/es/message";
@@ -9,7 +9,7 @@ import DietFieldsForm from "./form";
 import Footer from "../footer";
 import Loading from "../../Common/Loading";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class AddDiet extends Component {
@@ -28,7 +28,7 @@ class AddDiet extends Component {
         );
     }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS
+    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
     // THIS ONE COMMENTED
     // async componentDidMount() {
     //   await this.getAllPortions();
@@ -40,7 +40,7 @@ class AddDiet extends Component {
 
         if (visible && visible != prev_visible) {
             await this.setPatientPreferenceTimings();
-            //AKSHAY NEW CODE IMPLEMENTATIONS
+            // Changes made by Akshay NEW CODE IMPLEMENTATIONS
             // THIS ONE ADDED
             await this.getAllPortions();
         }

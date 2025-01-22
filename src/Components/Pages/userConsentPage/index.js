@@ -65,7 +65,7 @@ class UserConsent extends Component {
             }
         } catch (error) {
             message.warn(error);
-            console.log("err ---> ", error);
+            console.log("handleGiveConsent Consent Page error ---> ", error);
         }
     };
 

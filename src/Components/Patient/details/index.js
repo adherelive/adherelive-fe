@@ -14,27 +14,25 @@ import isEmpty from "../../../Helper/is-empty";
 import config from "../../../config";
 
 import {
-    REQUEST_TYPE,
-    GENDER,
-    USER_PERMISSIONS,
-    TABLET,
-    SYRUP,
-    PARTS,
-    PART_LIST_CODES,
+    APPOINTMENT_TYPE_TITLE,
     DIAGNOSIS_TYPE,
-    TABLE_DEFAULT_BLANK_FIELD,
     FEATURES,
-    USER_CATEGORY,
-    HOST,
-    PATH,
+    GENDER,
+    PART_LIST_CODES,
+    PARTS,
+    REQUEST_TYPE,
+    SYRUP,
+    TABLE_DEFAULT_BLANK_FIELD,
+    TABLET,
     TYPE_APPOINTMENTS,
+    TYPE_DIETS,
     TYPE_SYMPTOMS,
     TYPE_VITALS,
-    TYPE_DIETS,
     TYPE_WORKOUTS,
-    APPOINTMENT_TYPE_TITLE,
+    USER_CATEGORY,
+    USER_PERMISSIONS,
 } from "../../../constant";
-import {Tabs, Table, Dropdown, Spin, message, Button} from "antd";
+import {Button, Dropdown, message, Spin, Table, Tabs} from "antd";
 import Modal from "antd/es/modal";
 import Menu from "antd/es/menu";
 
@@ -43,7 +41,7 @@ import OtpInput from "react-otp-input";
 // DRAWERS
 import VitalTimelineDrawer from "../../../Containers/Drawer/vitalTimeline";
 import MedicationTimelineDrawer from "../../../Containers/Drawer/medicationTimeline";
-import AddCareplanDrawer from "../../../Containers/Drawer/addCareplan";
+import AddCarePlanDrawer from "../../../Containers/Drawer/addCareplan";
 import AddMedicationReminder from "../../../Containers/Drawer/addMedicationReminder";
 import AddVitals from "../../../Containers/Drawer/addVitals";
 import AddAppointmentDrawer from "../../../Containers/Drawer/addAppointment";
@@ -72,12 +70,7 @@ import PatientAlerts from "../../../Containers/Patient/common/patientAlerts";
 
 import PatientCarePlans from "./common/patientProfileCarePlans";
 
-import {
-    PhoneOutlined,
-    MessageOutlined,
-    VideoCameraOutlined,
-    CaretDownOutlined,
-} from "@ant-design/icons";
+import {CaretDownOutlined, MessageOutlined, PhoneOutlined, PlusOutlined, VideoCameraOutlined,} from "@ant-design/icons";
 import moment from "moment";
 
 // appointment upload modal
@@ -90,12 +83,10 @@ import TabletIcon from "../../../Assets/images/tabletIcon3x.png";
 import InjectionIcon from "../../../Assets/images/injectionIcon3x.png";
 import SyrupIcon from "../../../Assets/images/pharmacy.png";
 import {getPatientConsultingVideoUrl} from "../../../Helper/url/patients";
-import {getPatientConsultingUrl} from "../../../Helper/url/patients";
 import SymptomTabs from "../../../Containers/Symptoms";
 import {getRoomId} from "../../../Helper/twilio";
 import {getFullName} from "../../../Helper/common";
 import Tooltip from "antd/es/tooltip";
-import {PlusOutlined} from "@ant-design/icons";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscription";
@@ -389,8 +380,7 @@ const PatientProfileHeader = ({
                                   user_role_id,
                                   secondary_doctor_user_role_ids,
                               }) => {
-    console.log("3287642547652342", {selectedCarePlanId});
-    console.log("AKSHAY NEW CHANGES");
+    console.log("Selected Care Plan, in Patient Profile Header: ", {selectedCarePlanId});
 
     console.log("showAddButton", showAddButton);
     console.log("selectedCarePlanId", selectedCarePlanId);
@@ -871,12 +861,12 @@ class PatientDetails extends Component {
         };
     }
 
-    handleInititalData = async (redirect_patient_id = null) => {
+    handleInitialData = async (redirect_patient_id = null) => {
         let {
             getMedications,
             getAppointments,
             getPatientCarePlanDetails,
-            //AKSHAY NEW CODE IMPLEMENTATIONS
+            // AKSHAY NEW CODE IMPLEMENTATIONS
             getPatientDetailsById,
             getAppointmentsDetails,
             patient_id,
@@ -930,7 +920,7 @@ class PatientDetails extends Component {
         // if (showTd) {
         const response = await getPatientCarePlanDetails(patient_id);
 
-        //AKSHAY NEW CODE IMPLEMENTATIONS START
+        // Changes made by Akshay NEW CODE IMPLEMENTATIONS START
         const responsePatientDetails = await getPatientDetailsById(patient_id);
         if (responsePatientDetails.status) {
             this.setState({
@@ -938,7 +928,7 @@ class PatientDetails extends Component {
                 patientUserDetails: responsePatientDetails.payload.data.users,
             });
         }
-        //AKSHAY NEW CODE IMPLEMENTATIONS END
+        // Changes made by Akshay NEW CODE IMPLEMENTATIONS END
 
         let {status = false, payload = {}} = response;
         if (status) {
@@ -1059,7 +1049,7 @@ class PatientDetails extends Component {
         this.setState({carePlanTemplateId, activeKey});
 
         // in app notification seen count
-        this.initiateInAppNotificationObj();
+        await this.initiateInAppNotificationObj();
     };
 
     async componentDidMount() {
@@ -1068,7 +1058,8 @@ class PatientDetails extends Component {
             notification_redirect = {},
             getAllTemplatesForDoctor,
         } = this.props;
-        await this.handleInititalData();
+        console.log("getAllTemplatesForDoctor in componentDidMount ---> ", getAllTemplatesForDoctor);
+        await this.handleInitialData();
         // await getAllTemplatesForDoctor();
         if (Object.keys(notification_redirect).length) {
             resetNotificationRedirect();
@@ -1077,9 +1068,9 @@ class PatientDetails extends Component {
 
     componentWillUnmount() {
         // AKSHAY NEW CODE IMPLEMENTATIONS FOR SUBSCRIPTION
-        const {setFlashCard, setScheduleAppontmentData} = this.props;
+        const {setFlashCard, setScheduleAppointmentData} = this.props;
         setFlashCard(false);
-        setScheduleAppontmentData({});
+        setScheduleAppointmentData({});
     }
 
     componentDidUpdate = async (prevProps, prevState) => {
@@ -1108,7 +1099,7 @@ class PatientDetails extends Component {
             (care_plan_id && care_plan_id !== prev_care_plan_id) ||
             (tab && tab !== prev_tab)
         ) {
-            await this.handleInititalData(redirected_p_id);
+            await this.handleInitialData(redirected_p_id);
             if (Object.keys(notification_redirect).length) {
                 resetNotificationRedirect();
             }
@@ -1126,21 +1117,30 @@ class PatientDetails extends Component {
         // }
     };
 
-    initiateInAppNotificationObj = () => {
+    initiateInAppNotificationObj = async () => {
         const {notificationToken, feedId} = this.props;
         const {updateUnseenNotificationData} = this;
 
         if (notificationToken || feedId) {
+            // try {
             let clientFeed = connect(
                 config.GETSTREAM_API_KEY,
                 notificationToken,
                 config.GETSTREAM_APP_ID
             );
-
             this.client = clientFeed;
+            //     console.log("Client connected successfully: ", clientFeed);
+            // } catch (err) {
+            //     console.log("Error connecting to GetStream: ", err);
+            // }
         }
-
-        updateUnseenNotificationData();
+        // TODO: Check where this leads to
+        // try {
+        await updateUnseenNotificationData(); // Wait for the Promise to resolve
+        // } catch (err) {
+        //     console.error("Error updating notifications: ", err);
+        // Handle the error appropriately (e.g., display an error message)
+        // }
     };
 
     getFeedData = async () => {
@@ -1170,7 +1170,7 @@ class PatientDetails extends Component {
                 this.setState({symptom_dates});
             }
         } catch (error) {
-            console.log("errrrrr---> ", error);
+            console.log("fetchSymptomsData error ---> ", error);
             message.warn(error);
         }
     };
@@ -1443,15 +1443,33 @@ class PatientDetails extends Component {
                         <div>{this.formatMessage(messages.appointments)}</div>
                     </Menu.Item>
                 )}
-                {/* <Menu.Item onClick={handleSymptoms}>
-          <div>{this.formatMessage(messages.symptoms)}</div>
-        </Menu.Item> */}
-                {/* {authPermissions.includes(USER_PERMISSIONS.VITALS.ADD ) && (
-          <Menu.Item>
-            <div>{this.formatMessage(messages.actions)}</div>
-          </Menu.Item>
-        )} */}
-
+                {
+                    /* <Menu.Item onClick={handleSymptoms}>
+                      <div>{this.formatMessage(messages.symptoms)}</div>
+                    </Menu.Item> */
+                }
+                {
+                    /* {authPermissions.includes(USER_PERMISSIONS.VITALS.ADD ) && (
+                      <Menu.Item>
+                        <div>{this.formatMessage(messages.actions)}</div>
+                      </Menu.Item>
+                    )} */
+                }
+                {authPermissions.includes(USER_PERMISSIONS.VITALS.ADD) && (
+                    <Menu.Item onClick={handleVitals}>
+                        <div>{this.formatMessage(messages.vitals)}</div>
+                    </Menu.Item>
+                )}
+                {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
+                    <Menu.Item onClick={handleAddCareplan}>
+                        <div>{this.formatMessage(messages.newTreatmentPlan)}</div>
+                    </Menu.Item>
+                )}
+                {authPermissions.includes(USER_PERMISSIONS.REPORTS.ADD) && (
+                    <Menu.Item onClick={handleAddReports}>
+                        <div>{this.formatMessage(messages.reports)}</div>
+                    </Menu.Item>
+                )}
       
         {authPermissions.includes(USER_PERMISSIONS.VITALS.ADD) && (
           <Menu.Item onClick={handleVitals}>
@@ -1486,380 +1504,16 @@ class PatientDetails extends Component {
             <div>{this.formatMessage(messages.secondary_doctor)}</div>
           </Menu.Item>
         )}
-
-        {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
-          <Menu.Item onClick={handleAddPerforma}>
-            <div>Add Performa</div>
-          </Menu.Item>
-        )}
-      </Menu>
-    );
-  };
-
-  handleAppointment = (e) => {
-    // e.preventDefault();
-    const { openAppointmentDrawer, patient_id, getAppointmentsDetails } =
-      this.props;
-    getAppointmentsDetails();
-    openAppointmentDrawer({
-      patients: {
-        id: patient_id,
-        first_name: "test",
-        last_name: "patient",
-      },
-      patient_id,
-    });
-  };
-
-  handleAddDiet = (e) => {
-    const { openAddDietDrawer, patient_id } = this.props;
-
-    openAddDietDrawer({
-      patient_id,
-    });
-  };
-
-  handleAddWorkout = (e) => {
-    const { openAddWorkoutDrawer, patient_id } = this.props;
-
-    openAddWorkoutDrawer({
-      patient_id,
-    });
-  };
-
-  handleAddDoctorToCareplan = (e) => {
-    const { openAddSecondaryDoctorDrawer } = this.props;
-    const { selectedCarePlanId = null } = this.state;
-
-    openAddSecondaryDoctorDrawer({
-      selectedCarePlanId,
-    });
-  };
-
-  handleAddCareplan = (e) => {
-    const { openAddCareplanDrawer, patient_id } = this.props;
-    openAddCareplanDrawer({
-      // patients: {
-      //   id: patient_id,
-      //   first_name: "test",
-      //   last_name: "patient"
-      // },
-      // patient_id
-    });
-  };
-
-  handleAddPerforma = (e) => {
-    this.setState({
-      addPerforma: true,
-    });
-  };
-
-  handleAddReports = (e) => {
-    const { openAddReportsDrawer } = this.props;
-    const { patient_id } = this.props;
-
-    openAddReportsDrawer({
-      patient_id,
-    });
-  };
-
-  handleMedicationReminder = (e) => {
-    const { openMReminderDrawer, patient_id } = this.props;
-    openMReminderDrawer({
-      patient_id,
-    });
-  };
-
-  handleVitals = (e) => {
-    const { openVitalsDrawer, patient_id } = this.props;
-    openVitalsDrawer({
-      patient_id,
-    });
-  };
-
-  handleSymptoms = (e) => {
-    const { openSymptomsDrawer, patient_id } = this.props;
-    openSymptomsDrawer({
-      patient_id,
-    });
-  };
-
-  getBodyPartName = (selected_part) => {
-    const { formatMessage } = this;
-    if (selected_part === PART_LIST_CODES.HEAD) {
-      return formatMessage(messages.head);
-    } else if (selected_part === PART_LIST_CODES.LEFT_EYE) {
-      return formatMessage(messages.leftEye);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_EYE) {
-      return formatMessage(messages.rightEye);
-    } else if (selected_part === PART_LIST_CODES.LEFT_EAR) {
-      return formatMessage(messages.leftEar);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_EAR) {
-      return formatMessage(messages.rightEar);
-    } else if (selected_part === PART_LIST_CODES.NOSE) {
-      return formatMessage(messages.nose);
-    } else if (selected_part === PART_LIST_CODES.MOUTH) {
-      return formatMessage(messages.mouth);
-    } else if (selected_part === PART_LIST_CODES.NECK) {
-      return formatMessage(messages.neck);
-    } else if (selected_part === PART_LIST_CODES.LEFT_SHOULDER) {
-      return formatMessage(messages.leftShoulder);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_SHOULDER) {
-      return formatMessage(messages.rightShoulder);
-    } else if (selected_part === PART_LIST_CODES.CHEST) {
-      return formatMessage(messages.chest);
-    } else if (selected_part === PART_LIST_CODES.LEFT_ARM) {
-      return formatMessage(messages.leftArm);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_ARM) {
-      return formatMessage(messages.rightArm);
-    } else if (selected_part === PART_LIST_CODES.LEFT_ELBOW) {
-      return formatMessage(messages.leftElbow);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_ELBOW) {
-      return formatMessage(messages.rightElbow);
-    } else if (selected_part === PART_LIST_CODES.STOMACH) {
-      return formatMessage(messages.stomach);
-    } else if (selected_part === PART_LIST_CODES.ABDOMEN) {
-      return formatMessage(messages.abdomen);
-    } else if (selected_part === PART_LIST_CODES.LEFT_FOREARM) {
-      return formatMessage(messages.leftForearm);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_FOREARM) {
-      return formatMessage(messages.rightForearm);
-    } else if (selected_part === PART_LIST_CODES.LEFT_WRIST) {
-      return formatMessage(messages.leftWrist);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_WRIST) {
-      return formatMessage(messages.rightWrist);
-    } else if (selected_part === PART_LIST_CODES.LEFT_HAND) {
-      return formatMessage(messages.leftHand);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_HAND) {
-      return formatMessage(messages.rightHand);
-    } else if (selected_part === PART_LIST_CODES.LEFT_HAND_FINGER) {
-      return formatMessage(messages.leftHandFingers);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_HAND_FINGER) {
-      return formatMessage(messages.rightHandFingers);
-    } else if (selected_part === PART_LIST_CODES.LEFT_HIP) {
-      return formatMessage(messages.leftHip);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_HIP) {
-      return formatMessage(messages.rightHip);
-    } else if (selected_part === PART_LIST_CODES.LEFT_THIGH) {
-      return formatMessage(messages.leftThigh);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_THIGH) {
-      return formatMessage(messages.rightThigh);
-    } else if (selected_part === PART_LIST_CODES.LEFT_KNEE) {
-      return formatMessage(messages.leftKnee);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_KNEE) {
-      return formatMessage(messages.rightKnee);
-    } else if (selected_part === PART_LIST_CODES.LEFT_SHIN) {
-      return formatMessage(messages.leftShin);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_SHIN) {
-      return formatMessage(messages.rightShin);
-    } else if (selected_part === PART_LIST_CODES.LEFT_ANKLE) {
-      return formatMessage(messages.leftAnkle);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_ANKLE) {
-      return formatMessage(messages.rightAnkle);
-    } else if (selected_part === PART_LIST_CODES.LEFT_FOOT) {
-      return formatMessage(messages.leftFoot);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_FOOT) {
-      return formatMessage(messages.rightFoot);
-    } else if (selected_part === PART_LIST_CODES.LEFT_TOE) {
-      return formatMessage(messages.leftToe);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_TOE) {
-      return formatMessage(messages.rightToe);
-    } else if (selected_part === PART_LIST_CODES.RECTUM) {
-      return formatMessage(messages.rectum);
-    } else if (selected_part === PART_LIST_CODES.URINARY_BLADDER) {
-      return formatMessage(messages.urinary);
-    } else if (selected_part === PART_LIST_CODES.HEAD_BACK) {
-      return formatMessage(messages.head);
-    } else if (selected_part === PART_LIST_CODES.NECK_BACK) {
-      return formatMessage(messages.neck);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_SHOULDER_BACK) {
-      return formatMessage(messages.rightShoulder);
-    } else if (selected_part === PART_LIST_CODES.LEFT_SHOULDER_BACK) {
-      return formatMessage(messages.leftShoulder);
-    } else if (selected_part === PART_LIST_CODES.BACK) {
-      return formatMessage(messages.back);
-    } else if (selected_part === PART_LIST_CODES.LOWER_BACK) {
-      return formatMessage(messages.lowerBack);
-    } else if (selected_part === PART_LIST_CODES.LEFT_TRICEP) {
-      return formatMessage(messages.leftTricep);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_TRICEP) {
-      return formatMessage(messages.rightTricep);
-    } else if (selected_part === PART_LIST_CODES.LEFT_FOREARM_BACK) {
-      return formatMessage(messages.leftForearm);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_FOREARM_BACK) {
-      return formatMessage(messages.rightForearm);
-    } else if (selected_part === PART_LIST_CODES.LEFT_HAMSTRING) {
-      return formatMessage(messages.leftHamString);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_HAMSTRING) {
-      return formatMessage(messages.rightHamString);
-    } else if (selected_part === PART_LIST_CODES.LEFT_CALF) {
-      return formatMessage(messages.leftCalf);
-    } else if (selected_part === PART_LIST_CODES.RIGHT_CALF) {
-      return formatMessage(messages.rightCalf);
-    }
-  };
-
-  showTemplateDrawer = () => {
-    this.setState({ templateDrawerVisible: true });
-  };
-
-  // onRowAppointment = ({id,carePlan}) => () => {
-  //   console.log("38248274826384628423");
-  //   const { onRowClickAppointment } = this;
-  //   return {
-  //     onClick: onRowClickAppointment({id,carePlan})
-  //   };
-  // };
-
-  onRowAppointment =
-    ({ id, carePlan }) =>
-    () => {
-      console.log("38248274826384628423");
-
-      const {
-        openEditAppointmentDrawer,
-        patient_id,
-        auth_role = null,
-        getAppointmentsDetails,
-      } = this.props;
-      const { isOtherCarePlan = false } = this.state;
-      const { basic_info: { user_role_id = null } = {} } = carePlan || {};
-      let canViewDetails = true;
-      if (
-        (!isOtherCarePlan &&
-          user_role_id.toString() === auth_role.toString()) ||
-        // AKSHAY NEW CODE IMPLEMENTATIONS
-        (!isEmpty(carePlan) &&
-          carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true)
-      ) {
-        canViewDetails = false;
-      }
-      getAppointmentsDetails();
-      openEditAppointmentDrawer({ id, patient_id, canViewDetails });
+                {
+                    /* authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
+                      <Menu.Item onClick={handleAddPerforma}>
+                        <div>Add Performa</div>
+                      </Menu.Item>
+                    )} */
+                }
+            </Menu>
+        );
     };
-
-  onRowClickMedication = (key) => (event) => {
-    const { openEditMedicationDrawer, patient_id } = this.props;
-    openEditMedicationDrawer({ id: key, patient_id });
-    //this.props.history.push(getGetFacilitiesUrl(key));
-  };
-
-  onRowMedication = (record, rowIndex) => {
-    const { onRowClickMedication } = this;
-    const { key } = record;
-    return {
-      onClick: onRowClickMedication(key),
-    };
-  };
-
-  onRowClickSymptoms = (record) => (event) => {
-    const { openSymptomsDrawer, patient_id } = this.props;
-    openSymptomsDrawer({ data: record, patient_id });
-    //this.props.history.push(getGetFacilitiesUrl(key));
-  };
-
-  onRowSymptoms = (record, rowIndex) => {
-    const { onRowClickSymptoms } = this;
-    // const { key } = record;
-    return {
-      onClick: onRowClickSymptoms(record),
-    };
-  };
-
-  handlePatientLastVisitAlert = () => {
-    const { getLastVisitAlerts, patient_id } = this.props;
-
-    getLastVisitAlerts(patient_id).then((response) => {
-      const {
-        status = false,
-        statusCode,
-        payload: {
-          error: { error_type = "" } = {},
-          message: errorMessage = "",
-        } = {},
-      } = response;
-
-      if (status) {
-        let data = response.payload.data;
-      } else {
-        message.error(this.formatMessage(messages.somethingWentWrong));
-      }
-    });
-  };
-
-  // handleSubmitTemplate = data => {
-  //   const {
-  //     addCarePlanMedicationsAndAppointments,
-  //     getMedications,
-  //     getAppointments,
-  //     care_plans,
-  //     patient_id,
-  //     getPatientCarePlanDetails
-  //   } = this.props;
-  //
-  //   let carePlanId = 1;
-  //   for (let carePlan of Object.values(care_plans)) {
-  //     let {
-  //       basic_info: { id = 1, patient_id: patientId = 1 }
-  //     } = carePlan;
-  //     if (patient_id == patientId) {
-  //       carePlanId = id;
-  //     }
-  //   }
-  //   addCarePlanMedicationsAndAppointments(data, carePlanId).then(response => {
-  //     const {
-  //       status = false,
-  //       statusCode,
-  //       payload: {
-  //         error: { error_type = "" } = {},
-  //         message: errorMessage = ""
-  //       } = {}
-  //     } = response;
-  //     if (status) {
-  //       this.onCloseTemplate();
-  //
-  //       message.success(this.formatMessage(messages.carePlanUpdated));
-  //       getMedications(patient_id).then(() => {
-  //         getAppointments(patient_id).then(() => {
-  //           getPatientCarePlanDetails(patient_id);
-  //         });
-  //       });
-  //     } else {
-  //       if (statusCode === 422 && error_type == "slot_present") {
-  //         message.error(this.formatMessage(messages.slotPresent));
-  //       } else if (statusCode === 422) {
-  //         message.error(errorMessage);
-  //       } else {
-  //         message.error(this.formatMessage(messages.somethingWentWrong));
-  //       }
-  //     }
-  //   });
-  // };
-  openVideoChatTab = (roomId) => () => {
-    const videoCallBlocked = this.checkVideoCallIsBlocked();
-
-    if (videoCallBlocked) {
-      message.error(this.formatMessage(messages.videoCallBlocked));
-      return;
-    }
-    window.open(
-      `${config.WEB_URL}/test${getPatientConsultingVideoUrl(roomId)}`,
-      "_blank"
-    );
-  };
-
-  checkVideoCallIsBlocked = () => {
-    const { features_mappings = {} } = this.props;
-    let videoCallBlocked = false;
-    const videoCallFeatureId = this.getFeatureId(FEATURES.VIDEO_CALL);
-    const otherUserCategoryId = this.getOtherUserCategoryId();
-    const { [otherUserCategoryId]: mappingsData = [] } = features_mappings;
-
-    if (mappingsData.indexOf(videoCallFeatureId) >= 0) {
-      videoCallBlocked = false;
-    } else {
-      videoCallBlocked = true;
-    }
 
     handleAppointment = (e) => {
         // e.preventDefault();
@@ -2064,10 +1718,6 @@ class PatientDetails extends Component {
         }
     };
 
-    showTemplateDrawer = () => {
-        this.setState({templateDrawerVisible: true});
-    };
-
     // onRowAppointment = ({id,carePlan}) => () => {
     //   console.log("38248274826384628423");
     //   const { onRowClickAppointment } = this;
@@ -2076,32 +1726,29 @@ class PatientDetails extends Component {
     //   };
     // };
 
-    onRowAppointment =
-        ({id, carePlan}) =>
-            () => {
-                console.log("38248274826384628423");
-
-                const {
-                    openEditAppointmentDrawer,
-                    patient_id,
-                    auth_role = null,
-                    getAppointmentsDetails,
-                } = this.props;
-                const {isOtherCarePlan = false} = this.state;
-                const {basic_info: {user_role_id = null} = {}} = carePlan || {};
-                let canViewDetails = true;
-                if (
-                    (!isOtherCarePlan &&
-                        user_role_id.toString() === auth_role.toString()) ||
-                    // AKSHAY NEW CODE IMPLEMENTATIONS
-                    (!isEmpty(carePlan) &&
-                        carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true)
-                ) {
-                    canViewDetails = false;
-                }
-                getAppointmentsDetails();
-                openEditAppointmentDrawer({id, patient_id, canViewDetails});
-            };
+    onRowAppointment = ({id, carePlan}) => () => {
+        console.log("Inside oRowAppointment function");
+        const {
+            openEditAppointmentDrawer,
+            patient_id,
+            auth_role = null,
+            getAppointmentsDetails,
+        } = this.props;
+        const {isOtherCarePlan = false} = this.state;
+        const {basic_info: {user_role_id = null} = {}} = carePlan || {};
+        let canViewDetails = true;
+        if (
+            (!isOtherCarePlan &&
+                user_role_id.toString() === auth_role.toString()) ||
+            // AKSHAY NEW CODE IMPLEMENTATIONS
+            (!isEmpty(carePlan) &&
+                carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true)
+        ) {
+            canViewDetails = false;
+        }
+        getAppointmentsDetails();
+        openEditAppointmentDrawer({id, patient_id, canViewDetails});
+    };
 
     onRowClickMedication = (key) => (event) => {
         const {openEditMedicationDrawer, patient_id} = this.props;
@@ -2152,54 +1799,6 @@ class PatientDetails extends Component {
         });
     };
 
-    // handleSubmitTemplate = data => {
-    //   const {
-    //     addCarePlanMedicationsAndAppointments,
-    //     getMedications,
-    //     getAppointments,
-    //     care_plans,
-    //     patient_id,
-    //     getPatientCarePlanDetails
-    //   } = this.props;
-    //
-    //   let carePlanId = 1;
-    //   for (let carePlan of Object.values(care_plans)) {
-    //     let {
-    //       basic_info: { id = 1, patient_id: patientId = 1 }
-    //     } = carePlan;
-    //     if (patient_id == patientId) {
-    //       carePlanId = id;
-    //     }
-    //   }
-    //   addCarePlanMedicationsAndAppointments(data, carePlanId).then(response => {
-    //     const {
-    //       status = false,
-    //       statusCode,
-    //       payload: {
-    //         error: { error_type = "" } = {},
-    //         message: errorMessage = ""
-    //       } = {}
-    //     } = response;
-    //     if (status) {
-    //       this.onCloseTemplate();
-    //
-    //       message.success(this.formatMessage(messages.carePlanUpdated));
-    //       getMedications(patient_id).then(() => {
-    //         getAppointments(patient_id).then(() => {
-    //           getPatientCarePlanDetails(patient_id);
-    //         });
-    //       });
-    //     } else {
-    //       if (statusCode === 422 && error_type == "slot_present") {
-    //         message.error(this.formatMessage(messages.slotPresent));
-    //       } else if (statusCode === 422) {
-    //         message.error(errorMessage);
-    //       } else {
-    //         message.error(this.formatMessage(messages.somethingWentWrong));
-    //       }
-    //     }
-    //   });
-    // };
     openVideoChatTab = (roomId) => () => {
         const videoCallBlocked = this.checkVideoCallIsBlocked();
 
@@ -2249,20 +1848,28 @@ class PatientDetails extends Component {
         return patient_id;
     };
 
-    // maximizeChat = () => {
-    //   const { patient_id } = this.props;
-    //   window.open(
-    //     `${config.WEB_URL}${getPatientConsultingUrl(patient_id)}`,
-    //     "_blank"
-    //   );
-    // };
-
-    handleSymptoms = (e) => {
-        const {openSymptomsDrawer, patient_id} = this.props;
-        openSymptomsDrawer({
-            patient_id,
-        });
+    /**
+     * TODO: This function is not being used anywhere in the code
+    maximizeChat = () => {
+      const { patient_id } = this.props;
+      window.open(
+        `${config.WEB_URL}${getPatientConsultingUrl(patient_id)}`,
+        "_blank"
+      );
     };
+
+    showTemplateDrawer = () => {
+        this.setState({templateDrawerVisible: true});
+    };
+
+    maximizeChat = () => {
+      const { patient_id } = this.props;
+      window.open(
+        `${config.WEB_URL}${getPatientConsultingUrl(patient_id)}`,
+        "_blank"
+      );
+    };
+     */
 
     onCloseTemplate = async () => {
         const {getAllTemplatesForDoctor} = this.props;
@@ -2285,19 +1892,57 @@ class PatientDetails extends Component {
         this.setState({templateDrawerVisible: true});
     };
 
-    onRowClickMedication = (key) => (event) => {
-        const {openEditMedicationDrawer, patient_id} = this.props;
-        openEditMedicationDrawer({id: key, patient_id});
-        //this.props.history.push(getGetFacilitiesUrl(key));
-    };
+    /**
+     * TODO: This function is not being used anywhere in the code
+    handleSubmitTemplate = data => {
+        const {
+            addCarePlanMedicationsAndAppointments,
+            getMedications,
+            getAppointments,
+            care_plans,
+            patient_id,
+            getPatientCarePlanDetails
+        } = this.props;
 
-    onRowMedication = (record, rowIndex) => {
-        const {onRowClickMedication} = this;
-        const {key} = record;
-        return {
-            onClick: onRowClickMedication(key),
-        };
+        let carePlanId = 1;
+        for (let carePlan of Object.values(care_plans)) {
+            let {
+                basic_info: { id = 1, patient_id: patientId = 1 }
+            } = carePlan;
+            if (patient_id == patientId) {
+                carePlanId = id;
+            }
+        }
+        addCarePlanMedicationsAndAppointments(data, carePlanId).then(response => {
+            const {
+                status = false,
+                statusCode,
+                payload: {
+                    error: { error_type = "" } = {},
+                    message: errorMessage = ""
+                } = {}
+            } = response;
+            if (status) {
+                this.onCloseTemplate();
+
+                message.success(this.formatMessage(messages.carePlanUpdated));
+                getMedications(patient_id).then(() => {
+                    getAppointments(patient_id).then(() => {
+                        getPatientCarePlanDetails(patient_id);
+                    });
+                });
+            } else {
+                if (statusCode === 422 && error_type == "slot_present") {
+                    message.error(this.formatMessage(messages.slotPresent));
+                } else if (statusCode === 422) {
+                    message.error(errorMessage);
+                } else {
+                    message.error(this.formatMessage(messages.somethingWentWrong));
+                }
+            }
+        });
     };
+     */
 
     handleSubmitTemplate = (data) => {
         const {
@@ -2338,14 +1983,6 @@ class PatientDetails extends Component {
             }
         });
     };
-
-    // maximizeChat = () => {
-    //   const { patient_id } = this.props;
-    //   window.open(
-    //     `${config.WEB_URL}${getPatientConsultingUrl(patient_id)}`,
-    //     "_blank"
-    //   );
-    // };
 
     consentConfirmModal = () => {
         const {intl: {formatMessage} = {}} = this.props;
@@ -2636,102 +2273,107 @@ class PatientDetails extends Component {
 
     handleBeforeUploadRegistration = (key) => (file) => {
         const {allAppointmentDocs = {}} = this.state;
+        console.log("handleBeforeUploadRegistration ---> this.state: ", this.state);
 
-        console.log("6756467897865678777", this.state);
-        // if(allAppointmentDocs[key]){
-        //   const {upload_documents = {}} = allAppointmentDocs[key];
-        //   console.log("783423452374672348",upload_documents);
-        //   for (let doc of upload_documents) {
-        //     console.log("DOCCCCCCCCCCCCCCCCCCCCC",doc);
-        //     let fileName = file.name;
-        //     let newFileName = fileName.replace(/\s/g, '');
-        //     if (doc.includes(newFileName)) {
-        //       console.log("DUPLICATE");
-        //       message.error(this.formatMessage(messages.duplicateError));
-        //       return false;
-        //     }
-        //   }
-        //   console.log("handleBeforeUploadRegistration Called YYYYYYYYYYYYYYYYYYy");
-        //   return true
-        // }
+        /**
+         * TODO: Why is this commented?
+        if(allAppointmentDocs[key]){
+          const {upload_documents = {}} = allAppointmentDocs[key];
+          console.log("783423452374672348",upload_documents);
+          for (let doc of upload_documents) {
+            console.log("handleBeforeUploadRegistration document ---> doc: ",doc);
+            let fileName = file.name;
+            let newFileName = fileName.replace(/\s/g, '');
+            if (doc.includes(newFileName)) {
+              console.log("DUPLICATE");
+              message.error(this.formatMessage(messages.duplicateError));
+              return false;
+            }
+          }
+          console.log("handleBeforeUploadRegistration Called");
+          return true
+        }
+         */
         console.log("handleBeforeUploadRegistration Called");
         return true;
     };
 
-    // handleAddAppointmentDocuments = (appointment_id)  => info => {
+    /**
+     * TODO: This function is not being used anywhere in the code
+    handleAddAppointmentDocuments = (appointment_id)  => info => {
+      const fileList = info.fileList;
+      let key = appointment_id;
+      let {  allAppointmentDocs={} } = this.state;
+      console.log("4334543535345345",info);
+    }
 
-    //   const fileList = info.fileList;
-    //   let key = appointment_id;
-    //   let {  allAppointmentDocs={} } = this.state;
-    //   console.log("4334543535345345",info);
+    handleChangeList = key => info => {
+      console.log("234532432423423",info);
+      const fileList = info.fileList;
+      let { education = {} } = this.state;
+      let newEducation = education;
+      let { photos = [], photo = [] } = newEducation[key];
+      for (let item of fileList) {
 
-    // }
+        let uid = item.uid;
+        let push = true;
 
-    // handleChangeList = key => info => {
+        if (typeof (item) == 'object') {
+          for (let photo of photos) {
 
-    //   console.log("234532432423423",info);
-    //   // const fileList = info.fileList;
-    //   // let { education = {} } = this.state;
-    //   // let newEducation = education;
-    //   // let { photos = [], photo = [] } = newEducation[key];
-    //   // for (let item of fileList) {
+            let { name = '' } = item;
+            let fileName = name;
+            let newFileName = fileName.replace(/\s/g, '');
+            if (photo.includes(newFileName)) {
+              push = false;
+            }
+          }
+        }
+        if (newEducation[key].photo && newEducation[key].photo.length) {
+          for (let pic of newEducation[key].photo) {
+            if (pic.uid === uid) {
+              push = false;
+            }
+          }
+        }
+        if (push) {
+          newEducation[key].photo.push(item);
+        }
+      };
 
-    //   //   let uid = item.uid;
-    //   //   let push = true;
-
-    //   //   if (typeof (item) == 'object') {
-    //   //     for (let photo of photos) {
-
-    //   //       let { name = '' } = item;
-    //   //       let fileName = name;
-    //   //       let newFileName = fileName.replace(/\s/g, '');
-    //   //       if (photo.includes(newFileName)) {
-    //   //         push = false;
-    //   //       }
-    //   //     }
-    //   //   }
-    //   //   if (newEducation[key].photo && newEducation[key].photo.length) {
-    //   //     for (let pic of newEducation[key].photo) {
-    //   //       if (pic.uid === uid) {
-    //   //         push = false;
-    //   //       }
-    //   //     }
-    //   //   }
-    //   //   if (push) {
-    //   //     newEducation[key].photo.push(item);
-    //   //   }
-    //   // };
-
-    //   // this.setState({ education: newEducation });
-    // };
-
+      this.setState({ education: newEducation });
+    };
+     */
+    
     onUploadCompleteRegistration = async (data = {}, key) => {
-        // const {allAppointmentDocs ={} } =this.state;
         const {upload_documents: latest_docs = {}} = data;
-        // console.log("7865789089767567890",data);
 
-        // const {storeAppointmentDocuments} = this.props;
-        // let appointmentDocs = allAppointmentDocs[key];
-        // allAppointmentDocs[key] = {...appointmentDocs,upload_documents};
-        // let newAppointmentDocs = allAppointmentDocs[key];
-        // this.setState({allAppointmentDocs:{...allAppointmentDocs}});
+        /**
+         * TODO: Why is this commented?
+        console.log("onUploadCompleteRegistration ---> data: ",data);
 
-        // storeAppointmentDocuments(data)
+        const {storeAppointmentDocuments} = this.props;
+        let appointmentDocs = allAppointmentDocs[key];
+        allAppointmentDocs[key] = {...appointmentDocs,upload_documents};
+        let newAppointmentDocs = allAppointmentDocs[key];
+        this.setState({allAppointmentDocs:{...allAppointmentDocs}});
+        storeAppointmentDocuments(data);
+         */
 
         const {allAppointmentDocs = {}} = this.state;
-        let newappointmentDocs = allAppointmentDocs;
+        let newAppointmentDocs = allAppointmentDocs;
 
-        if (newappointmentDocs[key]) {
-            let newDocs = newappointmentDocs[key].upload_documents;
-            newappointmentDocs[key].upload_documents = latest_docs;
+        if (newAppointmentDocs[key]) {
+            let newDocs = newAppointmentDocs[key].upload_documents;
+            newAppointmentDocs[key].upload_documents = latest_docs;
             this.setState({
-                allAppointmentDocs: newappointmentDocs,
+                allAppointmentDocs: newAppointmentDocs,
             });
         } else {
-            newappointmentDocs[key] = {};
-            newappointmentDocs[key].upload_documents = latest_docs;
+            newAppointmentDocs[key] = {};
+            newAppointmentDocs[key].upload_documents = latest_docs;
             this.setState({
-                allAppointmentDocs: newappointmentDocs,
+                allAppointmentDocs: newAppointmentDocs,
             });
         }
     };
@@ -2801,7 +2443,7 @@ class PatientDetails extends Component {
                                    auth_role,
                                    message,
                                }) => {
-        console.log("38972168738712638712638716237821", {
+        console.log("Patient Details with Auth Role: ", {
             auth_role,
             str: auth_role.toString(),
         });
@@ -2976,7 +2618,7 @@ class PatientDetails extends Component {
         //   emptyText: this.formatMessage(messages.emptyAppointmentTable)
         // };
 
-        console.log("render page -> Selected Care Plan ID: ", {
+        console.log("Render page -> Selected Care Plan ID: ", {
             selectedCarePlanId,
             state: this.state,
         });
@@ -3154,7 +2796,7 @@ class PatientDetails extends Component {
         const {treatment_details: {treatment_provider} = {}} =
             this.props.user_details;
 
-        console.log("2347632645327453287648273648723", {props: this.props});
+        console.log("Props inside PatientDetails Class ---> ", {props: this.props});
 
         let showAddButton =
             (authPermissions.includes(USER_PERMISSIONS.APPOINTMENTS.ADD) ||
@@ -3314,7 +2956,7 @@ class PatientDetails extends Component {
                                                 >
                                                     {(authenticated_category === USER_CATEGORY.DOCTOR ||
                                                         authenticated_category === USER_CATEGORY.HSP) && (
-                                                        //AKSHAY NEW CODE IMPLEMENTATION
+                                                        // Changes made by Akshay NEW CODE IMPLEMENTATION
                                                         // BELOW CODE COMMENTED BY AKSHAY
                                                         // &&
                                                         // isOtherCarePlan
@@ -3491,7 +3133,7 @@ class PatientDetails extends Component {
 
                         <AddVitals carePlanId={carePlanId}/>
                         <AddAppointmentDrawer carePlanId={carePlanId}/>
-                        <AddCareplanDrawer patientId={patient_id}/>
+                        <AddCarePlanDrawer patientId={patient_id}/>
                         <AddReportDrawer/>
                         <AddFoodItem/>
                         <AddDietDrawer carePlanId={carePlanId}/>

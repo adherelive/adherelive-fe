@@ -10,7 +10,6 @@ import {Checkbox, TimePicker} from "antd";
 import messages from "./message";
 import moment from "moment";
 import calendar from "../../../Assets/images/calendar1.svg";
-
 import {ClockCircleOutlined} from "@ant-design/icons";
 import Dropdown from "antd/es/dropdown";
 import TimeKeeper from "react-timekeeper";
@@ -72,6 +71,10 @@ class AddAppointmentForm extends Component {
             carePlans: {},
             pageUrl: window.location.pathname.split("/"),
         };
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     async componentDidMount() {
@@ -99,7 +102,7 @@ class AddAppointmentForm extends Component {
                 message.error(resp_msg);
             }
         } catch (error) {
-            console.log("MedicalTests Get errrrorrrr ===>", error);
+            console.log("MedicalTests Get error ---> ", error);
         }
     };
 
@@ -118,7 +121,7 @@ class AddAppointmentForm extends Component {
                 message.error(resp_msg);
             }
         } catch (error) {
-            console.log("RadiologyResponse Get errrrorrrr ===>", error);
+            console.log("RadiologyResponse Get error ---> ", error);
         }
     };
 
@@ -126,11 +129,11 @@ class AddAppointmentForm extends Component {
     getCarePlanForPatient = async () => {
         try {
             const {
-                getPatientCareplanByPatientIdAndUserRoleId,
+                getPatientCarePlanByPatientIdAndUserRoleId,
                 scheduleAppointment,
             } = this.props;
             const getCarePlanResponse =
-                await getPatientCareplanByPatientIdAndUserRoleId(
+                await getPatientCarePlanByPatientIdAndUserRoleId(
                     scheduleAppointment.patient_id
                 );
             const {
@@ -146,16 +149,43 @@ class AddAppointmentForm extends Component {
                 });
             }
         } catch (error) {
-            console.log("Patient Careplans Get errrrorrrr ===>", error);
+            console.log("Get Care Plan for Patient Get error ---> ", error);
         }
     };
 
     scrollToTop = () => {
-        let antForm = document.getElementsByClassName("Form")[0];
-        let antDrawerBody = antForm.parentNode;
-        let antDrawerWrapperBody = antDrawerBody.parentNode;
-        antDrawerBody.scrollIntoView(true);
-        antDrawerWrapperBody.scrollTop -= 200;
+        try {
+            // First try to get the form element using ref
+            const formElement = this.formRef.current;
+
+            if (!formElement) {
+                console.log("addAppointment Form element not found via ref");
+                return;
+            }
+
+            // Find the drawer body and wrapper (ant-drawer-body and ant-drawer-wrapper-body)
+            let drawerBody = formElement.closest('.ant-drawer-body');
+            let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
+
+            if (!drawerBody || !drawerWrapper) {
+                console.log("addAppointment Drawer elements not found");
+                return;
+            }
+
+            // Log for debugging
+            console.log("Form element addAppointment: ", formElement);
+            console.log("Drawer body addAppointment: ", drawerBody);
+            console.log("Drawer wrapper addAppointment: ", drawerWrapper);
+
+            // Scroll the drawer body into view
+            drawerBody.scrollIntoView(true);
+
+            // Adjust final scroll position
+            drawerWrapper.scrollTop -= 200;
+
+        } catch (error) {
+            console.error("Error in scrollToTop addAppointment: ", error);
+        }
     };
 
     openCalendar = (e) => {
@@ -371,14 +401,6 @@ class AddAppointmentForm extends Component {
             }
         }
         return treatmentId;
-    };
-
-    calendarComp = () => {
-        return (
-            <div className="flex justify-center align-center">
-                <img src={calendar} alt="calender icon" className="w20"/>
-            </div>
-        );
     };
 
     getTreatmentOption = () => {
@@ -619,7 +641,7 @@ class AddAppointmentForm extends Component {
     getProviderOption = () => {
         let {static_templates: {appointments: {providers = {}} = {}} = {}} =
             this.props;
-        //AKSHAY NEW CODE IMPLEMENTATION
+        // Changes made by Akshay NEW CODE IMPLEMENTATION
 
         let newTypes = [];
         console.log("providers", providers);
@@ -976,7 +998,10 @@ class AddAppointmentForm extends Component {
         const typeValue = getFieldValue(APPOINTMENT_TYPE) || null;
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 <FormItem
                     // label={formatMessage(messages.patient)}
                     className="mb-24"

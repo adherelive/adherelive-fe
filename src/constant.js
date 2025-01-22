@@ -2,6 +2,7 @@ export const PATH = {
     LANDING_PAGE: "/",
     DASHBOARD: "/dashboard",
     SIGN_IN: "/sign-in",
+    API_DOCS: "/api-docs",
     PROFILE: "/profile",
     SETTINGS: "/settings",
     CONSULTATION_FEE: "/consultation-fee",

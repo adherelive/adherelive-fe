@@ -1,10 +1,7 @@
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import TosPPEditorPage from "../../../Components/Pages/tosPPEditorPage";
-import {
-    getTermsAndPolicy,
-    updateTermsAndPolicy,
-} from "../../../modules/otherDetails";
+import {getTermsAndPolicy, updateTermsAndPolicy,} from "../../../modules/otherDetails";
 
 const mapStateToProps = (state) => {
     const {} = state;

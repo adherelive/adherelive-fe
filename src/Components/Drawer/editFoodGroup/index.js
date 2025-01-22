@@ -4,14 +4,13 @@ import {hasErrors} from "../../../Helper/validation";
 
 import Drawer from "antd/es/drawer";
 // import Form from "antd/es/form";
-
 import messages from "./messages";
 import EditFoodGroupForm from "./form";
 import Footer from "../footer";
 import AddFoodItemDrawer from "../../../Containers/Drawer/addFoodItem";
 import message from "antd/es/message";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class EditFoodGroup extends Component {

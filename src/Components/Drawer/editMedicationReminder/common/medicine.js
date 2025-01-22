@@ -9,10 +9,10 @@ import Button from "antd/es/button";
 import messages from "../message";
 
 import {
-    TagFilled,
-    TagOutlined,
-    StarOutlined,
-    StarFilled,
+  TagFilled,
+  TagOutlined,
+  StarOutlined,
+  StarFilled,
 } from "@ant-design/icons";
 
 const {Item: FormItem} = Form;

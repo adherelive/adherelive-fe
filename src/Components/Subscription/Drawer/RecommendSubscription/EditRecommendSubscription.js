@@ -1,15 +1,15 @@
-import React, {Fragment, useState, useEffect} from "react";
-import {injectIntl} from "react-intl";
+import React, {Fragment, useEffect, useState} from "react";
+import { injectIntl } from "react-intl";
 import {
-    Drawer,
-    Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
 } from "antd";
 import Form from "antd/es/form";
 import TextArea from "antd/es/input/TextArea";
@@ -96,7 +96,7 @@ function EditRecommendSubscription({visible, onCloseDrawer, editData}) {
             selectedSubscription: {},
         });
         onCloseDrawer();
-        message.success("Recommend subscription updated sucessfully");
+        message.success("Recommend subscription updated successfully");
     };
 
     const onSubmit = () => {
@@ -133,8 +133,7 @@ function EditRecommendSubscription({visible, onCloseDrawer, editData}) {
 
     // formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const onChangeHandler = (e) => {
         setValues({...values, [e.target.name]: e.target.value});

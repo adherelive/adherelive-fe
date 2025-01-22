@@ -1,16 +1,16 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import {
-    Drawer,
-    Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
-    Modal,
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
+  Modal,
 } from "antd";
 import config from "../../../config";
 import messages from "./message";
@@ -21,11 +21,11 @@ import ImagePlaceHolder from "../../../Assets/images/image_placeholder.png";
 import humanBodyBack from "../../../Assets/images/humanBodyBack.jpeg";
 import Download from "../../../Assets/images/down-arrow.png";
 import {
-    PARTS,
-    PART_LIST_BACK,
-    PART_LIST_CODES,
-    PART_LIST_FRONT,
-    BODY,
+  PARTS,
+  PART_LIST_BACK,
+  PART_LIST_CODES,
+  PART_LIST_FRONT,
+  BODY,
 } from "../../../constant";
 
 class SymptomsDrawer extends Component {
@@ -36,8 +36,7 @@ class SymptomsDrawer extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 

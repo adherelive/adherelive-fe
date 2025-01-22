@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 // import { injectIntl, FormattedMessage } from "react-intl";
-import {Button, Input, message, Checkbox} from "antd";
+import {Button, Checkbox, Input, message} from "antd";
 
 import PPModal from "../../Containers/Modal/PPConfirm";
 import {injectIntl} from "react-intl";
@@ -8,7 +8,7 @@ import messages from "./message";
 import {PATH} from "../../constant";
 import config from "../../config";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -32,8 +32,7 @@ class SignUp extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 

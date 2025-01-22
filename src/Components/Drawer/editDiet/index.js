@@ -10,7 +10,7 @@ import Footer from "../footer";
 import Loading from "../../Common/Loading";
 import confirm from "antd/es/modal/confirm";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class EditDiet extends Component {
@@ -35,7 +35,7 @@ class EditDiet extends Component {
     async componentDidMount() {
         const {dietData = {}, editTemplateDiet = null} = this.props;
 
-        //AKSHAY NEW CODE IMPLEMENTATIONS
+        // Changes made by Akshay NEW CODE IMPLEMENTATIONS
         // THIS ONE COMMENTED
         // await this.getAllPortions();
 
@@ -64,7 +64,7 @@ class EditDiet extends Component {
         if (visible && visible !== prev_visible) {
             await this.setPatientPreferenceTimings();
             await this.getDietDetails();
-            //AKSHAY NEW CODE IMPLEMENTATIONS
+            // Changes made by Akshay NEW CODE IMPLEMENTATIONS
             // THIS ONE ADDED
             await this.getAllPortions();
         }
@@ -189,7 +189,7 @@ class EditDiet extends Component {
             this.setState({loading: false});
         } catch (error) {
             this.setState({loading: false});
-            console.log("error ===>", {error});
+            console.log("getDietDetails error ---> ", {error});
         }
     };
 
@@ -445,8 +445,7 @@ class EditDiet extends Component {
                     message.warn(this.formatMessage(messages.somethingWentWrong));
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

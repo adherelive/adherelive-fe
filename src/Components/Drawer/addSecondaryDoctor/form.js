@@ -10,7 +10,7 @@ import {getName} from "../../../Helper/validation";
 import debounce from "lodash-es/debounce";
 import isEmpty from "../../../Helper/is-empty";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Option} = Select;
@@ -33,10 +33,13 @@ class AddSecondaryDoctor extends Component {
         );
 
         this.searchName = debounce(this.searchName.bind(this), 200);
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
-    async componentDidMount() {
-    }
+    async componentDidMount() {}
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
@@ -62,7 +65,7 @@ class AddSecondaryDoctor extends Component {
             });
         } catch (error) {
             this.setState({searchingName: false});
-            console.log("error ===>", error);
+            console.log("searchName Add Secondary Doctor error ---> ", error);
         }
     };
 
@@ -168,7 +171,10 @@ class AddSecondaryDoctor extends Component {
 
         const {searchingName = false} = this.state;
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 <FormItem
                     label={formatMessage(messages.doctor_name)}
                     className="flex-grow-1 mt-4"

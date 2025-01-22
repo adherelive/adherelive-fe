@@ -9,17 +9,16 @@ import Spin from "antd/es/spin";
 import message from "antd/es/message";
 import config from "../../../../config";
 import Tooltip from "antd/es/tooltip";
-import {CloseCircleOutlined} from "@ant-design/icons";
+import {CloseCircleOutlined, EditOutlined} from "@ant-design/icons";
 
 import {
-    InstantSearch,
-    Hits,
-    SearchBox,
-    Highlight,
-    connectSearchBox,
+  InstantSearch,
+  Hits,
+  SearchBox,
+  Highlight,
+  connectSearchBox,
 } from "react-instantsearch-dom";
 import algoliasearch from "algoliasearch/lite";
-import {EditOutlined} from "@ant-design/icons";
 
 const {Item: FormItem} = Form;
 const {Option} = Select;
@@ -127,7 +126,7 @@ class MedicationStage extends Component {
             }
         } catch (err) {
             console.log("err", err);
-            message.warn("Something has gone wrong. Please try again later");
+            message.warn("Something has gone wrong in handleMedicineSearch. Please try again later");
             this.setState({fetchingMedicines: false});
         }
     }

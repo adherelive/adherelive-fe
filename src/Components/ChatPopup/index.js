@@ -1,13 +1,13 @@
 import React, {Component, Fragment} from "react";
 import {
-    // Form,
-    Input,
-    Button,
-    Spin,
-    // Avatar,
-    Upload,
-    // Modal,
-    message,
+  // Form,
+  Input,
+  Button,
+  Spin,
+  // Avatar,
+  Upload,
+  // Modal,
+  message,
 } from "antd";
 // import moment from "moment";
 import Chat from "twilio-chat";
@@ -28,10 +28,10 @@ import CallIcon from "../../Assets/images/telephone.png";
 import CallDisabledIcon from "../../Assets/images/call-disabled.png";
 
 import {
-    // USER_ADHERE_BOT,
-    // CHAT_MESSAGE_TYPE,
-    FEATURES,
-    USER_CATEGORY,
+  // USER_ADHERE_BOT,
+  // CHAT_MESSAGE_TYPE,
+  FEATURES,
+  USER_CATEGORY,
 } from "../../constant";
 import ChatMessageDetails from "./chatMessageDetails";
 
@@ -43,7 +43,7 @@ import {MoreOutlined} from "@ant-design/icons";
 import Tooltip from "antd/es/tooltip";
 import isEmpty from "../../Helper/is-empty";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const Header = ({
@@ -1033,7 +1033,7 @@ class ChatPopUp extends Component {
                                     otherUserLastConsumedMessageIndex={
                                         otherUserLastConsumedMessageIndex
                                     }
-                                    //AKSHAY NEW CODE IMPLEMENTATIONS
+                                    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
                                     channelId={finalChannel}
                                 />
                             )}

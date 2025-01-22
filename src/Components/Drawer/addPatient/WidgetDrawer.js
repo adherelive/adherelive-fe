@@ -1,20 +1,21 @@
-import React, {Component, Fragment, useState, useEffect} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment, useState, useEffect } from "react";
+import { injectIntl } from "react-intl";
 import {
-    Drawer,
-    Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
+  Checkbox,
+  Col,
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  Row,
+  DatePicker,
 } from "antd";
-import {Checkbox, Row, Col} from "antd";
 
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
-
 import moment from "moment";
 import throttle from "lodash-es/throttle";
 
@@ -319,8 +320,7 @@ function WidgetDrawer({
         onCloseDrawer();
     };
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const setDuration = (value) => {
         console.log("finalSymptomData", finalSymptomData);

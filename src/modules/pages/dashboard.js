@@ -15,7 +15,7 @@ function missedEventReducer(state, data) {
         workout_ids = {},
     } = data || {};
 
-    console.log("datadata", data);
+    console.log("In the Dashboard function missedEventReducer - data ---> ", data);
     if (
         Object.keys(missed_medications).length > 0 ||
         Object.keys(missed_appointments).length > 0 ||

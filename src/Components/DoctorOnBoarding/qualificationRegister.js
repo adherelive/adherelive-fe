@@ -1,15 +1,12 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {DeleteTwoTone, LoadingOutlined, EyeTwoTone} from "@ant-design/icons";
+import {DeleteTwoTone, EyeTwoTone, LoadingOutlined} from "@ant-design/icons";
 import uuid from "react-uuid";
-import {Input, DatePicker, Upload, message, Spin, Button} from "antd";
+import {Button, DatePicker, Input, message, Spin, Upload} from "antd";
 
 import Select from "antd/es/select";
-import {REQUEST_TYPE, PATH, USER_CATEGORY} from "../../constant";
-import {
-    getUploadQualificationDocumentUrl,
-    getUploadRegistrationDocumentUrl,
-} from "../../Helper/urls/doctor";
+import {PATH, REQUEST_TYPE, USER_CATEGORY} from "../../constant";
+import {getUploadQualificationDocumentUrl, getUploadRegistrationDocumentUrl,} from "../../Helper/urls/doctor";
 import {doRequest} from "../../Helper/network";
 import UploadSteps from "./steps";
 import plus from "../../Assets/images/plus.png";
@@ -685,8 +682,7 @@ class QualificationRegister extends Component {
                 }
 
                 return {
-                    abort() {
-                    },
+                    abort() {},
                 };
             };
 
@@ -754,8 +750,7 @@ class QualificationRegister extends Component {
                 }
 
                 return {
-                    abort() {
-                    },
+                    abort() {},
                 };
             };
 
@@ -1170,7 +1165,7 @@ class QualificationRegister extends Component {
             }
         } catch (err) {
             console.log("err", err);
-            message.warn("Something has gone wrong. Please try again later");
+            message.warn("Something has gone wrong in handleSpecialitySearch. Please try again later");
             this.setState({fetchingSpeciality: false});
         }
     };
@@ -1197,7 +1192,7 @@ class QualificationRegister extends Component {
             }
         } catch (err) {
             console.log("err", err);
-            message.warn("Something has gone wrong. Please try again later");
+            message.warn("Something has gone wrong in handleSpecialitySearchOnFocus. Please try again later");
             this.setState({fetchingSpeciality: false});
         }
     };

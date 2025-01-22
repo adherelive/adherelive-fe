@@ -1,5 +1,5 @@
-import React, {useState, useEffect, Fragment} from "react";
-import {Modal, Button} from "antd";
+import React, {Fragment, useEffect, useState} from "react";
+import { Modal, Button } from "antd";
 import message from "antd/es/message";
 import isEmpty from "../../../Helper/is-empty";
 

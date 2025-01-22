@@ -2,14 +2,13 @@ import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import Button from "antd/es/button";
 import Tooltip from "antd/es/tooltip";
-import {DeleteTwoTone} from "@ant-design/icons";
+import {DeleteTwoTone, PlusOutlined} from "@ant-design/icons";
 import message from "antd/es/message";
 import {TABLE_DEFAULT_BLANK_FIELD} from "../../constant";
 import messages from "./messages";
 import confirm from "antd/es/modal/confirm";
 import edit_image from "../../Assets/images/edit.svg";
 import Loading from "../Common/Loading";
-import {PlusOutlined} from "@ant-design/icons";
 
 class DoctorAccountDetails extends Component {
     constructor(props) {
@@ -269,8 +268,7 @@ class DoctorAccountDetails extends Component {
                     message.warn(this.formatMessage(messages.somethingWentWrong));
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

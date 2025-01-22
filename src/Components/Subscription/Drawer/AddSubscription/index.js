@@ -1,20 +1,19 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
 import {
-    Drawer,
-    // Icon,
-    Select,
-    Input,
-    message,
-    Button,
-    Spin,
-    Radio,
-    DatePicker,
+  Drawer,
+  // Icon,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
 } from "antd";
 import Form from "antd/es/form";
 import TextArea from "antd/es/input/TextArea";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
-
 import moment from "moment";
 import throttle from "lodash-es/throttle";
 
@@ -27,7 +26,7 @@ import EditSubscriptionFeesWarn from "../../Modal/EditSubscriptionFeesWarn";
 import isEmpty from "./../../../../Helper/is-empty";
 import {addSubscriptions} from "./../../../../modules/subscription/subscriptions/index";
 import {useDispatch} from "react-redux";
-import {EditOutlined, DeleteOutlined} from "@ant-design/icons";
+import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 
 const {Option} = Select;
 
@@ -94,7 +93,7 @@ function Index({onCloseDrawer, visible, doctor_id}) {
         setServiceOfferingArray([]);
         setEnableSubscriptionFees(false);
         onCloseDrawer();
-        message.success("Subscription added sucessfully");
+        message.success("Subscription added successfully");
     };
 
     const handleOk = () => {

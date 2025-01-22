@@ -3,7 +3,7 @@ version: "3.0"
 services:
   nginx:
     build:
-      context: ./nginx
+      context: ../nginx
       restart: unless-stopped
     ports:
       - "80:80"
@@ -26,7 +26,7 @@ services:
 
   node:
     build:
-      context: .
+      context: ..
       #dockerfile: ./docker/DockerfileProd
       #image: gagneet/adherelive-fe:prod
       #env_file:
@@ -130,5 +130,5 @@ volumes:
   adhere_storage_stack2: null
   adhere_storage_stack3: null
   adhere_storage_stack4: null
-    #adhere_mongo:
+  #adhere_mongo:
   #driver: local

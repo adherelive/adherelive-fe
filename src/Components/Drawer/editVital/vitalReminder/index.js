@@ -8,8 +8,7 @@ import confirm from "antd/es/modal/confirm";
 import Button from "antd/es/button";
 
 import EditVitalForm from "./form";
-
-import {MEDICINE_UNITS} from "../../../../constant";
+import { MEDICINE_UNITS } from "../../../../constant";
 import messages from "../message";
 import Footer from "../../footer";
 import startTimeField from "../common/startTime";
@@ -21,7 +20,7 @@ import instructions from "../common/instructions";
 import vitalOccurence from "../common/vitalOccurence";
 import vitalNameField from "../common/vitalName";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class EditVital extends Component {
@@ -208,8 +207,7 @@ class EditVital extends Component {
                     getMedications(patient_id);
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

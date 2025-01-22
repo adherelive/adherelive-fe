@@ -14,11 +14,11 @@ import DatePicker from "antd/es/date-picker";
 
 import {
     DeleteTwoTone,
-    PlusOutlined,
-    EyeTwoTone,
     DownloadOutlined,
+    EyeTwoTone,
     LoadingOutlined,
     PaperClipOutlined,
+    PlusOutlined,
 } from "@ant-design/icons";
 
 import messages from "./message";
@@ -39,8 +39,7 @@ class addReportDrawer extends Component {
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     getUploadButton = () => {
         const {uploading} = this.state;
@@ -379,8 +378,7 @@ class addReportDrawer extends Component {
                 });
                 close();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

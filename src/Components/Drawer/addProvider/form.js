@@ -11,11 +11,11 @@ import confirm from "antd/es/modal/confirm";
 import Customization from "./customization";
 import messages from "./message";
 
-import {EyeTwoTone, EyeInvisibleOutlined} from "@ant-design/icons";
+import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
 import prefixField from "../../Prefix";
-import {SAVINGS, CURRENT, ACCOUNT_TYPES} from "../../../constant";
+import {ACCOUNT_TYPES, CURRENT, SAVINGS} from "../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -122,8 +122,7 @@ class AddProviderForm extends Component {
             onOk: async () => {
                 this.resetAllAccount();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

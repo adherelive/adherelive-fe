@@ -4,7 +4,7 @@ import message from "antd/es/message";
 import Button from "antd/es/button";
 import Modal from "antd/es/modal";
 // import uuid from 'react-uuid';
-import {Avatar, Upload, Input, Select, Spin, DatePicker} from "antd";
+import {Avatar, DatePicker, Input, Select, Spin, Upload} from "antd";
 import throttle from "lodash-es/throttle";
 import {doRequest} from "../../../Helper/network";
 // import LocationModal from '../../../Components/DoctorOnBoarding/locationmodal';
@@ -16,44 +16,41 @@ import Menu from "antd/es/menu";
 import Dropdown from "antd/es/dropdown";
 
 import {
-    CheckCircleTwoTone,
-    ExclamationCircleTwoTone,
     ArrowLeftOutlined,
-    UserOutlined,
-    EditOutlined,
     CameraFilled,
-    DeleteTwoTone,
+    CheckCircleTwoTone,
     CheckOutlined,
     CloseOutlined,
-    PlusCircleOutlined,
+    DeleteTwoTone,
+    EditOutlined,
+    ExclamationCircleTwoTone,
     EyeTwoTone,
+    PlusCircleOutlined,
+    PlusOutlined,
+    UserOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
 import messages from "./messages";
+import {getUploadQualificationDocumentUrl, getUploadURL,} from "../../../Helper/urls/doctor";
 import {
-    getUploadURL,
-    getUploadQualificationDocumentUrl,
-} from "../../../Helper/urls/doctor";
-import {
-    PATH,
-    USER_CATEGORY,
-    TABLE_DEFAULT_BLANK_FIELD,
+    ACCOUNT_STATUS,
     DAYS_TEXT_NUM,
-    REQUEST_TYPE,
-    MALE,
-    GENDER,
     FEMALE,
-    OTHER,
     FULL_DAYS,
     FULL_DAYS_NUMBER,
+    GENDER,
     HTTP_CODE_SERVER_ERROR,
-    ACCOUNT_STATUS,
+    MALE,
+    OTHER,
+    PATH,
+    REQUEST_TYPE,
+    TABLE_DEFAULT_BLANK_FIELD,
+    USER_CATEGORY,
 } from "../../../constant";
 import {PageLoading} from "../../../Helper/loading/pageLoading";
 import {withRouter} from "react-router-dom";
 import confirm from "antd/es/modal/confirm";
 import Tag from "antd/es/tag";
-import {PlusOutlined} from "@ant-design/icons";
 
 const {Option} = Select;
 
@@ -268,7 +265,7 @@ class DoctorProfilePage extends Component {
                         degrees = {},
                         doctor_clinics = {},
                         doctor_qualifications = {},
-                        docotr_registrations = {},
+                        doctor_registrations = {},
                         doctors = {},
                         registration_councils = {},
                         specialities = {},
@@ -323,7 +320,7 @@ class DoctorProfilePage extends Component {
                         degrees,
                         doctor_clinics,
                         doctor_qualifications,
-                        docotr_registrations,
+                        doctor_registrations,
                         doctors,
                         registration_councils,
                         specialities,
@@ -356,8 +353,8 @@ class DoctorProfilePage extends Component {
             this.setState({
                 loading: false,
             });
-            console.log("72833257423646238748236482634823", {error});
-            message.warn("Something went wrong, please try again later");
+            console.log("Error in getInitialData: ", {error});
+            message.warn("Something went wrong in getting initial data, please try again later");
         }
     };
 
@@ -393,11 +390,10 @@ class DoctorProfilePage extends Component {
                         message.warn(respMessage);
                     }
                 } catch (error) {
-                    console.log("doctorDeactivate UI error --> ", error);
+                    console.log("handleCloseWarning doctorDeactivate UI error --> ", error);
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 
@@ -417,13 +413,14 @@ class DoctorProfilePage extends Component {
                 message.warn(respMessage);
             }
         } catch (error) {
-            console.log("863478235632849703482 doctorActivate UI error --> ", error);
+            console.log("handleActivate doctorActivate UI error --> ", error);
         }
     };
 
     updateProfileData = async (updateData) => {
         try {
             this.setState({updateLoading: true});
+            console.log("updateProfileData data received is ---> updateData: ", updateData);
             const {
                 auth: {authenticated_category = "", authenticated_user = null},
                 doctors,
@@ -449,6 +446,9 @@ class DoctorProfilePage extends Component {
                 payload: {message: respMessage},
                 statusCode,
             } = response;
+
+            console.log("updateProfileData response is ---> response: ", response);
+
             if (status) {
                 this.setState({
                     updateLoading: false,
@@ -475,7 +475,7 @@ class DoctorProfilePage extends Component {
             this.setState({
                 updateLoading: false,
             });
-            console.log(error);
+            console.log("Error in updateProfileData for Doctor: ". error);
             message.warn("Something went wrong, please try again later");
         }
         return false;
@@ -484,28 +484,33 @@ class DoctorProfilePage extends Component {
     editName = () => {
         this.setState({edit_name: true});
     };
+
     onChangeName = (e) => {
         this.setState({name: e.target.value});
     };
+
     updateName = () => {
         const {name, doctor_user_id} = this.state;
         const {doctors} = this.props;
         const {
             basic_info: {first_name = "", middle_name = "", last_name = ""},
         } = doctors[doctor_user_id];
-        const oldName = `${first_name} ${middle_name ? `${middle_name} ` : ""}${
-            last_name ? last_name : ""
+        const oldName =
+            `${first_name} ${middle_name ? `${middle_name} ` : ""} ${last_name ? last_name : ""
         }`;
+
         if (name == oldName.trim()) {
             this.setState({edit_name: false});
             return;
         }
+
         if (name == "") {
             this.setState({name: oldName});
             this.setState({edit_name: false});
             message.warn(this.formatMessage(messages.nameError));
             return;
         }
+
         this.updateProfileData({name: name}).then((res) => {
             if (res) {
                 this.setState({edit_name: false});
@@ -514,6 +519,7 @@ class DoctorProfilePage extends Component {
             }
         });
     };
+
     undoNameChanges = () => {
         const {doctor_user_id = ""} = this.state;
         const {doctors} = this.props;
@@ -1077,6 +1083,7 @@ class DoctorProfilePage extends Component {
         const {history} = this.props;
         history.goBack();
     };
+
     renderName = () => {
         const {first_name = "", middle_name = "", last_name = ""} = this.state;
         let userName = `${first_name} ${middle_name ? `${middle_name} ` : ""}${
@@ -1118,6 +1125,7 @@ class DoctorProfilePage extends Component {
             );
         }
     };
+
     renderRegistrationNumber = (registration_id) => {
         const {
             edit_registration_number,
@@ -1982,6 +1990,7 @@ class DoctorProfilePage extends Component {
         newClinicTimings[clinic_id] = true;
         this.setState({edit_clinic_timings: newClinicTimings});
     };
+
     getDoctorDetailsHeader = () => {
         const {formatMessage, handleBack, getFooter} = this;
         const {
@@ -1993,7 +2002,7 @@ class DoctorProfilePage extends Component {
 
         const {basic_info: {user_id} = {}} = doctors[id] || {};
         const {activated_on = null} = users[user_id] || {};
-        console.log("1819238 ", {activated_on});
+        console.log("getDoctorDetailsHeader activated on: ", {activated_on});
 
         return (
             <div>
@@ -2063,6 +2072,7 @@ class DoctorProfilePage extends Component {
         }
         return isJpgOrPng;
     };
+
     handleChange = (info) => {
         const {file} = info;
         const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -2076,8 +2086,11 @@ class DoctorProfilePage extends Component {
             })
         );
     };
-    handleChangeLocation = () => {
-    };
+
+    // TODO: Check why these have not been declared or used?
+    // handleChangeLocation = () => {};
+    // handleProfilePicModalOpen = () => {};
+
     getDoctorBasicDetails = () => {
         const {
             auth: {authenticated_category = "", authenticated_user = null},
@@ -2085,12 +2098,15 @@ class DoctorProfilePage extends Component {
             users,
             specialities,
         } = this.props;
+
         const current_doctor = doctors[authenticated_user];
+
         let {
             profile_pic_url = "",
             edit_name = "",
             doctor_user_id = "",
         } = this.state;
+
         const {formatMessage, handleProfilePicModalOpen} = this;
         const {basic_info: {user_id, gender, city, speciality_id} = {}} =
         doctors[doctor_user_id] || {};
@@ -2106,7 +2122,6 @@ class DoctorProfilePage extends Component {
             if (p_pic && profile_pic_url === "" && p_pic.length) {
                 this.setState({profile_pic_url: p_pic});
             }
-
             profile_pic_url = p_pic;
         }
 
@@ -2117,6 +2132,7 @@ class DoctorProfilePage extends Component {
             activated_on,
             deleted_at = null,
         } = users[user_id] || {};
+
         const {basic_info: {name: specialityName} = {}} =
         specialities[speciality_id] || {};
 
@@ -2533,8 +2549,7 @@ class DoctorProfilePage extends Component {
                 }
 
                 return {
-                    abort() {
-                    },
+                    abort() {},
                 };
             };
     customRequestRegistration =
@@ -2570,8 +2585,7 @@ class DoctorProfilePage extends Component {
                 }
 
                 return {
-                    abort() {
-                    },
+                    abort() {},
                 };
             };
     getDoctorQualificationDetails = () => {

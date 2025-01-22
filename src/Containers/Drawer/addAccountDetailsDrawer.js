@@ -4,9 +4,9 @@ import {addAccountDetails} from "../../modules/accountDetails";
 import {DRAWER} from "../../constant";
 import {close} from "../../modules/drawer";
 import {
-    getAdminPaymentProduct,
-    getDoctorPaymentProduct,
-    addDoctorPaymentProduct,
+  getAdminPaymentProduct,
+  getDoctorPaymentProduct,
+  addDoctorPaymentProduct,
 } from "../../modules/doctors";
 
 // import { createReminder, updateReminder } from "../../modules/reminder"; // write to add to database

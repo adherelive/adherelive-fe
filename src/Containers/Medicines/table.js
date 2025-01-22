@@ -2,17 +2,17 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import MedicineTable from "../../Components/Medicines/table";
 import {
-    searchMedicine,
-    getPublicMedicines,
+    deleteMedicine,
     getPrivateMedicines,
+    getPublicMedicines,
     makeMedicinePublic,
+    mapMedicineToPublic,
     resetSearchPrivate,
     resetSearchPublic,
-    mapMedicineToPublic,
-    deleteMedicine,
+    searchMedicine,
 } from "../../modules/medicines";
-import {open} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
+import { open } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {
