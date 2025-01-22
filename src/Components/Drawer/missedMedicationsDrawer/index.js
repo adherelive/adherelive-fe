@@ -111,7 +111,7 @@ class MissedMedicationsDrawer extends Component {
 
             // Access patient data
             patient = patients[patientId];
-            patientName = patient?.basic_info?.full_name || 'Unknown Patient';
+            patientName = patient?.basic_info?.full_name || `Patient ID: ${patientId}`;
 
             console.log("Processing medication:", {
                 id,
