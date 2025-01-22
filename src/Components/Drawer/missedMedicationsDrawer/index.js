@@ -85,11 +85,26 @@ class MissedMedicationsDrawer extends Component {
         console.log("Missed Medication Drawer Patients: ", patients);
         console.log("Missed Medication Drawer Missed Medications: ", missed_medications);
 
+        Object.keys(missed_medications).forEach((id) => {
+            console.log("Current missed medication:", missed_medications[id]);
+            // First, let's see what we're getting
+        });
+
         const medicationList = [];
         const criticalList = [];
         const nonCriticalList = [];
 
         Object.keys(missed_medications).forEach((id) => {
+            // Log the full object to see its structure
+            console.log("Processing medication with id:", id);
+            console.log("Full medication object:", missed_medications[id]);
+
+            const medication = missed_medications[id] || {};
+
+            // Get patient ID either from participant_id or another field
+            // We need to verify where the patient ID is stored in the missed_medications object
+            const patientId = medication.participant_id || medication.patient_id || id;
+
             const {
                 critical,
                 participant_id,
@@ -102,9 +117,9 @@ class MissedMedicationsDrawer extends Component {
                 timings,
             } = missed_medications[id] || {};
 
-            // Access patient object using participant_id
-            const patient = patients[participant_id];
-            const PatientName = patient?.basic_info?.full_name || 'Unknown Patient';
+            // Access patient using the correct ID
+            const patient = patients[patientId];
+            const patientName = patient?.basic_info?.full_name || 'Unknown Patient';
 
             // // Access patient object using participant_id
             // const patient = patients[participant_id];
@@ -115,7 +130,7 @@ class MissedMedicationsDrawer extends Component {
 
             //const { basic_info: {id: patientId } = {} } = patients[participant_id] || {};
             //const { basic_info: {id: full_name } = {} } = patients[] || {};
-
+            console.log("Found patient:", patientId, patient, patientName);
             console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
             console.log("Missed Medication Drawer Participant ID: ", patient);
             console.log("Missed Medication Drawer Medicine Name: ", medicineName);
