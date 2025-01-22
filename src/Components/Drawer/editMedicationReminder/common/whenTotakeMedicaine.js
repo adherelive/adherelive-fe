@@ -355,10 +355,18 @@ class WhenToTakeMedication extends Component {
             }
         });
 
-        if (flag === false) {
-            this.setState({nugget_selected: null});
-        }
-    };
+    // TODO: This code segment added fro Performa
+    getFieldDecorator("keys", {
+      // initialValue: when_to_take.map((id, index) => parseInt(id) - 1),
+      initialValue: when_to_take.map((id, index) => parseInt(id)),
+    });
+    let keys = getFieldValue("keys");
+
+    // TODO: Check what happens with this code in FE
+    //    if (flag === false) {
+    //        this.setState({nugget_selected: null});
+    //    }
+    //};
 
     handleDeselect = (value) => {
         // const updateField = selected_timing_overall.filter(

@@ -1470,25 +1470,40 @@ class PatientDetails extends Component {
                         <div>{this.formatMessage(messages.reports)}</div>
                     </Menu.Item>
                 )}
+      
+        {authPermissions.includes(USER_PERMISSIONS.VITALS.ADD) && (
+          <Menu.Item onClick={handleVitals}>
+            <div>{this.formatMessage(messages.vitals)}</div>
+          </Menu.Item>
+        )}
+        {authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
+          <Menu.Item onClick={handleAddCareplan}>
+            <div>{this.formatMessage(messages.newTreatmentPlan)}</div>
+          </Menu.Item>
+        )}
+        {authPermissions.includes(USER_PERMISSIONS.REPORTS.ADD) && (
+          <Menu.Item onClick={handleAddReports}>
+            <div>{this.formatMessage(messages.reports)}</div>
+          </Menu.Item>
+        )}
 
-                {authPermissions.includes(USER_PERMISSIONS.DIETS.ADD) && (
-                    <Menu.Item onClick={handleAddDiet}>
-                        <div>{this.formatMessage(messages.diet)}</div>
-                    </Menu.Item>
-                )}
+        {authPermissions.includes(USER_PERMISSIONS.DIETS.ADD) && (
+          <Menu.Item onClick={handleAddDiet}>
+            <div>{this.formatMessage(messages.diet)}</div>
+          </Menu.Item>
+        )}
 
-                {authPermissions.includes(USER_PERMISSIONS.WORKOUTS.ADD) && (
-                    <Menu.Item onClick={this.handleAddWorkout}>
-                        <div>{this.formatMessage(messages.workout)}</div>
-                    </Menu.Item>
-                )}
+        {authPermissions.includes(USER_PERMISSIONS.WORKOUTS.ADD) && (
+          <Menu.Item onClick={this.handleAddWorkout}>
+            <div>{this.formatMessage(messages.workout)}</div>
+          </Menu.Item>
+        )}
 
-                {authPermissions.includes(USER_PERMISSIONS.DOCTORS.ADD) && (
-                    <Menu.Item onClick={this.handleAddDoctorToCareplan}>
-                        <div>{this.formatMessage(messages.secondary_doctor)}</div>
-                    </Menu.Item>
-                )}
-
+        {authPermissions.includes(USER_PERMISSIONS.DOCTORS.ADD) && (
+          <Menu.Item onClick={this.handleAddDoctorToCareplan}>
+            <div>{this.formatMessage(messages.secondary_doctor)}</div>
+          </Menu.Item>
+        )}
                 {
                     /* authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) && (
                       <Menu.Item onClick={handleAddPerforma}>
