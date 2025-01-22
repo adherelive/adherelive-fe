@@ -123,19 +123,10 @@ class MissedMedicationsDrawer extends Component {
             // const {basic_info: {id: patientId, full_name} = {}} = patients[participant_id] || {};
 
             const { fullName, patientId } = this.getFullNameAndPatientId(patients);
-
             const medication = missed_medications[id] || {};
 
-            // Get patient ID either from participant_id or another field
-            // We need to verify where the patient ID is stored in the missed_medications object
-            // const patientId = medication.participant_id || patients[participant_id] || id;
-
-            // Access patient using the correct ID
-            // const patient = patients[patientId];
-            // const patientName = patient?.basic_info?.full_name || `Patient ID: ${patientId}`;
-
-            console.log("Found patient original loop: ", patientId, fullName);
-            console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
+            console.log("Patient ID and Full Name: ", patientId, fullName);
+            console.log("Missed medication drawer Medicine ID: ", medication);
 
             if (critical) {
                 criticalList.push(
@@ -143,7 +134,8 @@ class MissedMedicationsDrawer extends Component {
                         formatMessage={formatMessage}
                         name={fullName}
                         time={timings}
-                        medicineName={`${medicineName} (${medicineType})`} // Use template literal
+                        medicineName={medicineName}
+                        medicineType={medicineType}
                         onClick={handlePatientDetailsRedirect(patientId)}
                     />
                 );
@@ -153,7 +145,8 @@ class MissedMedicationsDrawer extends Component {
                         formatMessage={formatMessage}
                         name={fullName}
                         time={timings}
-                        medicineName={`${medicineName} (${medicineType})`} // Use template literal
+                        medicineName={medicineName}
+                        medicineType={medicineType}
                         onClick={handlePatientDetailsRedirect(patientId)}
                     />
                 );
@@ -205,7 +198,6 @@ class MissedMedicationsDrawer extends Component {
 
           let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`;
           const isCritical=critical;
-
         }
          */
 
