@@ -137,13 +137,13 @@ class MissedMedicationsDrawer extends Component {
             console.log("Missed Medication Drawer Medicine Type: ", medicineType);
             console.log("Missed Medication Drawer Timings: ", timings);
             console.log("Missed Medication Drawer Patient Full Name: ", full_name);
-            console.log("Missed Medication Drawer Patient Name: ", PatientName);
+            console.log("Missed Medication Drawer Patient Name: ", patientName);
 
             if (critical) {
                 criticalList.push(
                     <MissedMedicationCard
                         formatMessage={formatMessage}
-                        name={PatientName}
+                        name={patientName}
                         time={timings}
                         medicineName={medicineName}
                         medicineType={medicineType}
