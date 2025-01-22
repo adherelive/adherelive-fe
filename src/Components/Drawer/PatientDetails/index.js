@@ -599,7 +599,9 @@ class PatientDetailsDrawer extends Component {
                                     //   authPermissions.includes(USER_PERMISSIONS.MEDICATIONS.ADD) ?   "ml16" : null
                                     //   : null
                                     //   }
-                                    //    mwp45 maxwp48 h100 br5 bg-${PATIENT_BOX_CONTENT[id]["background_color"]} br-${PATIENT_BOX_CONTENT[id]["border_color"]} float-l flex flex-1 direction-column justify-space-between`}
+                                    //    mwp45 maxwp48 h100 br5 bg-${PATIENT_BOX_CONTENT[id]["background_color"]}
+                                    //    br-${PATIENT_BOX_CONTENT[id]["border_color"]}
+                                    //    float-l flex flex-1 direction-column justify-space-between`}
                                 >
                                     <div className="ml10 mt10 fs16 fw600">
                                         {PATIENT_BOX_CONTENT[id]["text"]}

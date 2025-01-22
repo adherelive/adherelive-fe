@@ -165,49 +165,53 @@ class Dashboard extends Component {
         this.initiateInAppNotificationObj();
     }
 
-    // handleGetAllDietsForDoctor = async() => {
-    //   try{
-    //     const { getAllDietsForDoctor } = this.props;
-    //     const response = await getAllDietsForDoctor();
-    //     const { status, payload: { message : resp_msg = ''  } = {}  } =
-    //           response || {};
 
-    //     if(!status){
-    //       message.warn(resp_msg);
+    /**
+     * TODO: Why are the following methods not used?
+    handleGetAllDietsForDoctor = async() => {
+      try{
+        const { getAllDietsForDoctor } = this.props;
+        const response = await getAllDietsForDoctor();
+        const { status, payload: { message : resp_msg = ''  } = {}  } =
+              response || {};
 
-    //     }
-    //   }catch(error){
-    //     console.log("error ===========>>>",{error});
-    //   }
-    // }
+        if(!status){
+          message.warn(resp_msg);
 
-    // initiateInAppNotificationObj = () => {
-    //   const { notificationToken, feedId, } = this.props;
-    //   if (notificationToken || feedId) {
-    //       let client = connect(
-    //           GETSTREAM_API_KEY,
-    //           notificationToken,
-    //           GETSTREAM_APP_ID
-    //       );
+        }
+      }catch(error){
+        console.log("error ===========>>>",{error});
+      }
+    }
 
-    //       this.client = clientFeed;
+    initiateInAppNotificationObj = () => {
+      const { notificationToken, feedId, } = this.props;
+      if (notificationToken || feedId) {
+          let client = connect(
+              GETSTREAM_API_KEY,
+              notificationToken,
+              GETSTREAM_APP_ID
+          );
 
-    //   }
+          this.client = clientFeed;
 
-    //   this.updateUnseenNotificationData();
-    // };
+      }
 
-    // getFeedData = async() => {
-    //   let clientFeed = this.client.feed("notification", atob(this.feedId));
-    //   const data = await clientFeed.get({ limit: 30 });
-    //   return data;
-    // }
+      this.updateUnseenNotificationData();
+    };
 
-    // updateUnseenNotificationData = async () => {
-    //   const data = await this.getFeedData();
-    //   const { unseen = 0 } = data || {};
-    //   this.props.updateUnseenInAppNotificationCount(unseen);
-    // };
+    getFeedData = async() => {
+      let clientFeed = this.client.feed("notification", atob(this.feedId));
+      const data = await clientFeed.get({ limit: 30 });
+      return data;
+    }
+
+    updateUnseenNotificationData = async () => {
+      const data = await this.getFeedData();
+      const { unseen = 0 } = data || {};
+      this.props.updateUnseenInAppNotificationCount(unseen);
+    };
+     */
 
     initiateInAppNotificationObj = async () => {
         const {notificationToken, feedId} = this.props;
