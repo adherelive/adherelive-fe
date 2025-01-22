@@ -108,6 +108,7 @@ class MissedMedicationsDrawer extends Component {
 
             // Find the patient object using participant_id
             const patient = patients.find((patient) => patient.id === participant_id);
+            const { basic_info: { patientId } = {} } = patient || {};
             const { basic_info: { full_name } = {} } = patient || {};
 
             console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
