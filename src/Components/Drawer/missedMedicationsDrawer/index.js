@@ -131,11 +131,13 @@ class MissedMedicationsDrawer extends Component {
             // const {basic_info: {id: patientId, full_name} = {}} = patients[participant_id] || {};
 
             // Get patient details using participant_id if available
-            const { fullName, id } = this.getFullNameAndPatientId(patients, participant_id);
-            // const medication = missed_medications[id] || {};
+            // const { fullName, id } = this.getFullNameAndPatientId(patients, participant_id);
+            // Get just what we need from the patient info
+            const patientInfo = this.getFullNameAndPatientId(patients, participant_id);
+            const fullName = patientInfo.fullName;
+            const patientId = patientInfo.id;
 
-            console.log("Patient ID and Full Name: ", id, fullName);
-            // console.log("Missed medication drawer Medicine ID: ", medication);
+            console.log("Patient ID and Full Name: ", patientId, fullName);
 
             if (critical) {
                 criticalList.push(
@@ -145,7 +147,7 @@ class MissedMedicationsDrawer extends Component {
                         time={timings}
                         medicineName={medicineName}
                         medicineType={medicineType}
-                        onClick={handlePatientDetailsRedirect(id)}
+                        onClick={handlePatientDetailsRedirect(patientId)}
                     />
                 );
             } else {
@@ -156,7 +158,7 @@ class MissedMedicationsDrawer extends Component {
                         time={timings}
                         medicineName={medicineName}
                         medicineType={medicineType}
-                        onClick={handlePatientDetailsRedirect(id)}
+                        onClick={handlePatientDetailsRedirect(patientId)}
                     />
                 );
             }
