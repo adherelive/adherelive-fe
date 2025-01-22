@@ -45,9 +45,6 @@ class MissedDietsDrawer extends Component {
         const {patients = {}, missed_diets = {}} = this.props;
         const {handlePatientDetailsRedirect, formatMessage} = this;
 
-        console.log("Missed Diet Drawer Patients: ", patients);
-        console.log("Missed Diet Drawer Missed Diets: ", missed_diets);
-
         const dietList = [];
         const criticalList = [];
         const nonCriticalList = [];
@@ -59,8 +56,6 @@ class MissedDietsDrawer extends Component {
                 diet_name = "",
                 timings,
             } = missed_diets[id] || {};
-
-            console.log("Missed Diet Drawer Participant ID from keys: ", participant_id);
 
             const {basic_info: {id: patientId, full_name} = {}} = patients[participant_id] || {};
 

@@ -121,7 +121,8 @@ class MissedMedicationsDrawer extends Component {
                 patientName
             });
 
-            console.log("Current missed medication:", missed_medications[id]);
+            console.log("Found patient first loop: ", patientId, patient, patientName);
+            console.log("Current missed medication first loop: ", missed_medications[id]);
             // First, let's see what we're getting
         });
 
@@ -130,10 +131,6 @@ class MissedMedicationsDrawer extends Component {
         const nonCriticalList = [];
 
         Object.keys(missed_medications).forEach((id) => {
-            // Log the full object to see its structure
-            console.log("Processing medication with id: ", id);
-            console.log("Full medication object: ", missed_medications[id]);
-
             const medication = missed_medications[id] || {};
 
             // Get patient ID either from participant_id or another field
@@ -156,23 +153,8 @@ class MissedMedicationsDrawer extends Component {
             const patient = patients[patientId];
             const patientName = patient?.basic_info?.full_name || 'Unknown Patient';
 
-            // // Access patient object using participant_id
-            // const patient = patients[participant_id];
-            //
-            // // Get full_name and id from patient object
-            // const patientId = patient?.basic_info?.id || "";
-            // const full_name = patientId?.basic_info?.full_name || "";
-            // const full_name = patients[{6: {basic_info: {full_name}}}] || 'Unknown Patient';
-
-            //const { basic_info: {id: patientId } = {} } = patients[participant_id] || {};
-            //const { basic_info: {id: full_name } = {} } = patients[] || {};
-            console.log("Found patient:", patientId, patient, patientName);
+            console.log("Found patient original loop: ", patientId, patient, patientName);
             console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
-            console.log("Missed Medication Drawer Participant ID: ", patient);
-            console.log("Missed Medication Drawer Medicine Name: ", medicineName);
-            console.log("Missed Medication Drawer Medicine Type: ", medicineType);
-            console.log("Missed Medication Drawer Timings: ", timings);
-            console.log("Missed Medication Drawer Patient Name: ", patientName);
 
             if (critical) {
                 criticalList.push(
