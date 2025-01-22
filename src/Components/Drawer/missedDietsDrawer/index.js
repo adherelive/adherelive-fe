@@ -29,6 +29,7 @@ class MissedDietsDrawer extends Component {
     };
 
     handlePatientDetailsRedirect = (patient_id) => (e) => {
+        console.log("Missed Diet handlePatientDetailsRedirect ---> patient_id: ", patient_id);
         const {authenticated_category} = this.props;
 
         if (authenticated_category === USER_CATEGORY.PROVIDER) {
@@ -56,8 +57,10 @@ class MissedDietsDrawer extends Component {
                 timings,
             } = missed_diets[id] || {};
 
-            const {basic_info: {id: patientId, full_name} = {}} =
-            patients[participant_id] || {};
+            const {basic_info: {id: patientId, full_name} = {}} = patients[participant_id] || {};
+
+            console.log("Missed Diet Drawer Diet ID: ", missed_diets[id]);
+            console.log("Missed Diet Drawer Participant ID: ", patients[participant_id]);
 
             if (critical) {
                 criticalList.push(
