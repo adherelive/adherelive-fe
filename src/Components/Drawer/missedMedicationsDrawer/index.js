@@ -127,6 +127,7 @@ class MissedMedicationsDrawer extends Component {
             // // Get full_name and id from patient object
             // const patientId = patient?.basic_info?.id || "";
             // const full_name = patientId?.basic_info?.full_name || "";
+            const full_name = patients[{6: {basic_info: {full_name}}}] || 'Unknown Patient';
 
             //const { basic_info: {id: patientId } = {} } = patients[participant_id] || {};
             //const { basic_info: {id: full_name } = {} } = patients[] || {};
