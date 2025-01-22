@@ -78,13 +78,13 @@ class MissedMedicationsDrawer extends Component {
         history.push(`/patients/${patient_id}`);
     };
 
-    getFullNameAndPatientId(data) {
-        if (!data) {
+    getFullNameAndPatientId(patients) {
+        if (!patients) {
             return { fullName: "", patientId: null };
         }
-        for (const patientId in data) {
-            if (data.hasOwnProperty(patientId)) {
-                const patient = data[patientId];
+        for (const patientId in patients) {
+            if (patients.hasOwnProperty(patientId)) {
+                const patient = patients[patientId];
                 const fullName = patient?.basic_info?.full_name || "";
 
                 if (fullName) {
@@ -98,8 +98,6 @@ class MissedMedicationsDrawer extends Component {
     getMedicationList = () => {
         const {patients = {}, missed_medications = {}} = this.props;
         const {handlePatientDetailsRedirect, formatMessage} = this;
-
-        const patient = this.getFullNameAndPatientId(patients);
 
         const medicationList = [];
         const criticalList = [];
@@ -122,6 +120,8 @@ class MissedMedicationsDrawer extends Component {
             //       src/Components/Drawer/missedDietsDrawer/index.js
             // const {basic_info: {id: patientId, full_name} = {}} = patients[participant_id] || {};
 
+            const { fullName, patientId } = this.getFullNameAndPatientId(patients);
+
             const medication = missed_medications[id] || {};
 
             // Get patient ID either from participant_id or another field
@@ -132,17 +132,14 @@ class MissedMedicationsDrawer extends Component {
             // const patient = patients[patientId];
             // const patientName = patient?.basic_info?.full_name || `Patient ID: ${patientId}`;
 
-            const patientId = patient.patientId;
-            const patientName = patient.fullName;
-
-            console.log("Found patient original loop: ", patient, patientId, patientName);
+            console.log("Found patient original loop: ", patientId, fullName);
             console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
 
             if (critical) {
                 criticalList.push(
                     <MissedMedicationCard
                         formatMessage={formatMessage}
-                        name={patientName}
+                        name={fullName}
                         time={timings}
                         medicineName={medicineName}
                         medicineType={medicineType}
@@ -153,7 +150,7 @@ class MissedMedicationsDrawer extends Component {
                 nonCriticalList.push(
                     <MissedMedicationCard
                         formatMessage={this.formatMessage}
-                        name={patientName}
+                        name={fullName}
                         time={timings}
                         medicineName={medicineName}
                         medicineType={medicineType}
