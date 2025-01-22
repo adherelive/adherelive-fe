@@ -78,65 +78,34 @@ class MissedMedicationsDrawer extends Component {
         history.push(`/patients/${patient_id}`);
     };
 
+    getFullNameAndPatientId(data) {
+        if (!data) {
+            return { fullName: "", patientId: null };
+        }
+        for (const patientId in data) {
+            if (data.hasOwnProperty(patientId)) {
+                const patient = data[patientId];
+                const fullName = patient?.basic_info?.full_name || "";
+
+                if (fullName) {
+                    return { fullName, patientId };
+                }
+            }
+        }
+        return { fullName: "", patientId: null };
+    }
+
     getMedicationList = () => {
         const {patients = {}, missed_medications = {}} = this.props;
         const {handlePatientDetailsRedirect, formatMessage} = this;
 
-        // Declare all variables at the top
-        let medication;
-        let patientId;
-        let medicineName;
-        let medicineType;
-        let critical;
-        let timings;
-        let patient;
-        let patientName;
-
-        console.log("Missed Medication Drawer Patients: ", patients);
-        console.log("Missed Medication Drawer Missed Medications: ", missed_medications);
-
-        Object.keys(missed_medications).forEach((id) => {
-            // Assign values within the loop
-            medication = missed_medications[id] || {};
-
-            critical = medication.critical;
-            timings = medication.timings;
-
-            // Safely access nested properties
-            medicineName = medication?.medicines?.basic_info?.name || "";
-            medicineType = medication?.medicines?.basic_info?.type || "";
-
-            // Get patient ID
-            patientId = medication.participant_id;
-
-            // Access patient data
-            patient = patients[patientId];
-            patientName = patient?.basic_info?.full_name || `Patient ID: ${patientId}`;
-
-            console.log("Processing medication:", {
-                id,
-                patientId,
-                medicineName,
-                patient,
-                patientName
-            });
-
-            console.log("Found patient first loop: ", patientId, patient, patientName);
-            console.log("Current missed medication first loop: ", missed_medications[id]);
-            // First, let's see what we're getting
-        });
+        const patient = this.getFullNameAndPatientId(patients);
 
         const medicationList = [];
         const criticalList = [];
         const nonCriticalList = [];
 
         Object.keys(missed_medications).forEach((id) => {
-            const medication = missed_medications[id] || {};
-
-            // Get patient ID either from participant_id or another field
-            // We need to verify where the patient ID is stored in the missed_medications object
-            const patientId = medication.participant_id || medication.patient_id || id;
-
             const {
                 critical,
                 participant_id,
@@ -149,11 +118,24 @@ class MissedMedicationsDrawer extends Component {
                 timings,
             } = missed_medications[id] || {};
 
-            // Access patient using the correct ID
-            const patient = patients[patientId];
-            const patientName = patient?.basic_info?.full_name || `Patient ID: ${patientId}`;
+            // TODO: Check why the JSON structure for the 'patients' is different from the 'missedDiet' drawer
+            //       src/Components/Drawer/missedDietsDrawer/index.js
+            // const {basic_info: {id: patientId, full_name} = {}} = patients[participant_id] || {};
 
-            console.log("Found patient original loop: ", patientId, patient, patientName);
+            const medication = missed_medications[id] || {};
+
+            // Get patient ID either from participant_id or another field
+            // We need to verify where the patient ID is stored in the missed_medications object
+            // const patientId = medication.participant_id || patients[participant_id] || id;
+
+            // Access patient using the correct ID
+            // const patient = patients[patientId];
+            // const patientName = patient?.basic_info?.full_name || `Patient ID: ${patientId}`;
+
+            const patientId = patient.patientId;
+            const patientName = patient.fullName;
+
+            console.log("Found patient original loop: ", patient, patientId, patientName);
             console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
 
             if (critical) {
