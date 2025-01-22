@@ -151,7 +151,7 @@ class MissedMedicationsDrawer extends Component {
 
             // Access patient using the correct ID
             const patient = patients[patientId];
-            const patientName = patient?.basic_info?.full_name || 'Unknown Patient';
+            const patientName = patient?.basic_info?.full_name || `Patient ID: ${patientId}`;
 
             console.log("Found patient original loop: ", patientId, patient, patientName);
             console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
