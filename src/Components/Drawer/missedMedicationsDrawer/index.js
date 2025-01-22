@@ -78,6 +78,25 @@ class MissedMedicationsDrawer extends Component {
         history.push(`/patients/${patient_id}`);
     };
 
+    getFullNameAndPatientId(patients) {
+        if (!patients) {
+            return { fullName: "", patientId: null };
+        }
+        for (const id in patients) {
+            if (patients.hasOwnProperty(id)) {
+                const patient = patients[id];
+                const fullName = patient?.basic_info?.full_name || "";
+
+                console.log("Patient ID and Name are: ", id, fullName);
+
+                if (fullName) {
+                    return { fullName, id };
+                }
+            }
+        }
+        return { fullName: "", id: null };
+    }
+
     getMedicationList = () => {
         const {patients = {}, missed_medications = {}} = this.props;
         const {handlePatientDetailsRedirect, formatMessage} = this;
@@ -90,33 +109,44 @@ class MissedMedicationsDrawer extends Component {
             const {
                 critical,
                 participant_id,
-                medicines: {basic_info: {name: medicineName} = {}} = {},
+                medicines: { // {basic_info: {name: medicineName} = {}} = {}
+                    basic_info: {
+                        name: medicineName = "",
+                        type: medicineType = "",
+                    } = {},
+                } = {},
                 timings,
             } = missed_medications[id] || {};
 
-            const {basic_info: {id: patientId, full_name} = {}} =
-            patients[participant_id] || {};
+            // TODO: Check why the JSON structure for the 'patients' is different from the 'missedDiet' drawer
+            //       src/Components/Drawer/missedDietsDrawer/index.js
+            // const {basic_info: {id: patientId, full_name} = {}} = patients[participant_id] || {};
 
-            console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
-            console.log("Missed Medication Drawer Participant ID: ", patients[participant_id]);
+            const { fullName, patientId } = this.getFullNameAndPatientId(patients);
+            const medication = missed_medications[id] || {};
+
+            console.log("Patient ID and Full Name: ", patientId, fullName);
+            console.log("Missed medication drawer Medicine ID: ", medication);
 
             if (critical) {
                 criticalList.push(
                     <MissedMedicationCard
                         formatMessage={formatMessage}
-                        name={full_name}
+                        name={fullName}
                         time={timings}
                         medicineName={medicineName}
+                        medicineType={medicineType}
                         onClick={handlePatientDetailsRedirect(patientId)}
                     />
                 );
             } else {
                 nonCriticalList.push(
                     <MissedMedicationCard
-                        formatMessage={this.formatMessage}
-                        name={full_name}
+                        formatMessage={formatMessage}
+                        name={fullName}
                         time={timings}
                         medicineName={medicineName}
+                        medicineType={medicineType}
                         onClick={handlePatientDetailsRedirect(patientId)}
                     />
                 );
@@ -168,7 +198,6 @@ class MissedMedicationsDrawer extends Component {
 
           let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`;
           const isCritical=critical;
-
         }
          */
 
