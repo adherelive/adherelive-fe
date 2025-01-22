@@ -25,15 +25,13 @@ export default (props) => {
             <div className="fs18 fw700 pointer black-85" onClick={onClick}>
                 {name}
             </div>
-
-            <div className="fs14 fw600 brown-grey mb20 italic">{medicineName}</div>
-            <div className="fs14 fw600 brown-grey mb20">{medicineType}</div>
-
+            <div className="fs14 fw600 brown-grey mb20 italic">
+                {medicineName} ({medicineType})
+            </div>
             <div className="fs14 fw700 black-65 mb5">
                 {formatMessage(messages.missed_timings)}
             </div>
-
-            {/*  todo: change the time array once driven from events & backend updated  */}
+            {/*  TODO: change the time array once driven from events & backend updated  */}
             <div className="flex direction-column align-start">
                 {getTimings(time)}
             </div>

@@ -82,17 +82,19 @@ class MissedMedicationsDrawer extends Component {
         if (!patients) {
             return { fullName: "", patientId: null };
         }
-        for (const patientId in patients) {
-            if (patients.hasOwnProperty(patientId)) {
-                const patient = patients[patientId];
+        for (const id in patients) {
+            if (patients.hasOwnProperty(id)) {
+                const patient = patients[id];
                 const fullName = patient?.basic_info?.full_name || "";
 
+                console.log("Patient ID and Name are: ", id, fullName);
+
                 if (fullName) {
-                    return { fullName, patientId };
+                    return { fullName, id };
                 }
             }
         }
-        return { fullName: "", patientId: null };
+        return { fullName: "", id: null };
     }
 
     getMedicationList = () => {
@@ -141,19 +143,17 @@ class MissedMedicationsDrawer extends Component {
                         formatMessage={formatMessage}
                         name={fullName}
                         time={timings}
-                        medicineName={medicineName}
-                        medicineType={medicineType}
+                        medicineName={`${medicineName} (${medicineType})`} // Use template literal
                         onClick={handlePatientDetailsRedirect(patientId)}
                     />
                 );
             } else {
                 nonCriticalList.push(
                     <MissedMedicationCard
-                        formatMessage={this.formatMessage}
+                        formatMessage={formatMessage}
                         name={fullName}
                         time={timings}
-                        medicineName={medicineName}
-                        medicineType={medicineType}
+                        medicineName={`${medicineName} (${medicineType})`} // Use template literal
                         onClick={handlePatientDetailsRedirect(patientId)}
                     />
                 );
