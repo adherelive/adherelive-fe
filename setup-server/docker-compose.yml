@@ -3,7 +3,7 @@ version: "3.0"
 services:
   nginx:
     build:
-      context: ./nginx
+      context: ../nginx
       restart: unless-stopped
     ports:
       - "80:80"
@@ -26,7 +26,7 @@ services:
 
   node:
     build:
-      context: .
+      context: ..
       #dockerfile: ./docker/DockerfileProd
       #image: gagneet/adherelive-fe:prod
       #env_file:
