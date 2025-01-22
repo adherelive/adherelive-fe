@@ -133,7 +133,7 @@ class AgoraVideo extends Component {
                 await this.setfVideoOff();
             }
         } catch (error) {
-            console.log("error in initial video call setup===>", error);
+            console.log("error in initial video call setup---> ", error);
         }
     };
 

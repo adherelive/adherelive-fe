@@ -9,7 +9,7 @@ import {setCareplanForChat, setPatientForChat} from "../../modules/twilio";
 import {openPopUp} from "../../modules/chat";
 import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
 // AKSHAY NEW CODE FOR SUBSCRIPTION
-import {getPatientCareplanByPatientId, setScheduleAppontmentData,} from "../../modules/subscription/activities";
+import {getPatientCareplanByPatientId, setScheduleAppointmentData,} from "../../modules/subscription/activities";
 // import { getPatientCareplanByPatientId } from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
@@ -63,8 +63,8 @@ const mapDispatchToProps = (dispatch) => {
         getPatientMissedEvents: (patient_id) =>
             dispatch(getPatientMissedEvents(patient_id)),
         // AKSHAY NEW CODE IMPLEMENTATIONS
-        setScheduleAppontmentData: (payload) =>
-            dispatch(setScheduleAppontmentData(payload)),
+        setScheduleAppointmentData: (payload) =>
+            dispatch(setScheduleAppointmentData(payload)),
         getPatientCareplanByPatientId: (patientId) =>
             dispatch(getPatientCareplanByPatientId(patientId)),
     };

@@ -29,7 +29,7 @@ import {
     getMyTaskOfServiceOrSubscription,
     getRecommendServiceAndSubscription,
 } from "../../modules/subscription/recommend";
-import {setScheduleAppontmentData} from "../../modules/subscription/activities";
+import {setScheduleAppointmentData} from "../../modules/subscription/activities";
 // import { googleTranslate } from "../../modules/cdss";
 import {googleTranslate, googleTranslateMultipleText,} from "../../modules/cdss";
 import {setPerformaTabs, setPerformaTabsId} from "../../modules/performa";
@@ -214,8 +214,8 @@ const mapDispatchToProps = (dispatch) => {
         // AKSHAY NEW CODE FOR SUBSCRIPTIONS
         getFlashCardByActivityId: (activityId) =>
             dispatch(getFlashCardByActivityId(activityId)),
-        setScheduleAppontmentData: (payload) =>
-            dispatch(setScheduleAppontmentData(payload)),
+        setScheduleAppointmentData: (payload) =>
+            dispatch(setScheduleAppointmentData(payload)),
         setFlashCard: () => dispatch(setFlashCard()),
         getServices: () => dispatch(getServices()),
         getSubscriptions: () => dispatch(getSubscriptions()),

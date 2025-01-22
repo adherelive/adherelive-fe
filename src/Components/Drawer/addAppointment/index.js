@@ -12,7 +12,7 @@ import AddAppointmentForm from "./form";
 import Footer from "../footer";
 import {RADIOLOGY} from "../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import {Form, Mention} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../Helper/is-empty";
 import ScheduledAppointments from "./ScheduledAppointments";
@@ -56,7 +56,7 @@ class AddAppointment extends Component {
             scheduleAppointment,
             setFlashCard,
             history,
-            setScheduleAppontmentData,
+            setScheduleAppointmentData,
         } = this.props;
         const {formRef = {}, formatMessage} = this;
 
@@ -251,7 +251,7 @@ class AddAppointment extends Component {
                                     updateResponse &&
                                     scheduleAppointment.fromButton === "schedule"
                                 ) {
-                                    setScheduleAppontmentData({});
+                                    setScheduleAppointmentData({});
                                 }
                             }
                             // getAppointments(patient_id);
@@ -318,7 +318,7 @@ class AddAppointment extends Component {
     };
 
     onClose = () => {
-        const {close, setScheduleAppontmentData} = this.props;
+        const {close, setScheduleAppointmentData} = this.props;
         const {formRef} = this;
         const {
             props: {
@@ -329,7 +329,7 @@ class AddAppointment extends Component {
         close();
         // AKSHAY NEW CODE FOR SUBSCRIPTION
         if (this.state.pageUrl[1] !== "patients") {
-            setScheduleAppontmentData({});
+            setScheduleAppointmentData({});
         }
     };
 

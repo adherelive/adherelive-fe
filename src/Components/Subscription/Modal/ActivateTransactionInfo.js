@@ -25,7 +25,7 @@ function ActivateTransactionInfo({transactionData}) {
 
     const callBack = () => {
         setIsModalVisible(false);
-        message.success("Transaction activated sucessfully");
+        message.success("Transaction activated successfully");
     };
 
     const handleOk = () => {
@@ -39,7 +39,9 @@ function ActivateTransactionInfo({transactionData}) {
         } else {
             type = "service";
         }
-        console.log("transactionData", transactionData);
+        
+        console.log("Activate transactions -> transactionData: ", transactionData);
+        
         let formData = {};
         if (type === "subscription") {
             formData = {
@@ -70,8 +72,8 @@ function ActivateTransactionInfo({transactionData}) {
 
     // console.log(new Date(startdate) > new Date(demoDate));
 
-    console.log("todaysDate", todaysDate);
-    console.log("expiryDate", expiryDate.format("DD-MM-YYYY"));
+    console.log("Today's Date: ", todaysDate);
+    console.log("Expiry Date: ", expiryDate.format("DD-MM-YYYY"));
 
     console.log(new Date(todaysDate) >= new Date(expiryDate));
 
@@ -99,7 +101,7 @@ function ActivateTransactionInfo({transactionData}) {
                 onCancel={handleCancel}
                 confirmLoading={loading}
             >
-                <p>Are you sure ?</p>
+                <p>Are you sure, you wish to activate the transaction?</p>
             </Modal>
         </>
     );

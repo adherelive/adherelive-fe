@@ -1,8 +1,18 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {Drawer, Input, message, Radio, Select, Spin, Switch,} from "antd";
+import {
+  Drawer,
+  Select,
+  Input,
+  message,
+  Button,
+  Spin,
+  Radio,
+  Switch,
+} from "antd";
 import moment from "moment";
 import throttle from "lodash-es/throttle";
+import { getName } from "../../../Helper/validation";
 
 import india from "../../../Assets/images/india.png";
 import australia from "../../../Assets/images/australia.png";
@@ -20,7 +30,12 @@ import france from "../../../Assets/images/france.png";
 import messages from "./message";
 import "react-datepicker/dist/react-datepicker.css";
 import TextArea from "antd/lib/input/TextArea";
-import {PATIENT_CONSTANTS,} from "../../../constant";
+import {
+  FINAL,
+  PROBABLE,
+  DIAGNOSIS_TYPE,
+  PATIENT_CONSTANTS,
+} from "../../../constant";
 import Footer from "../footer";
 
 import isEmpty from "../../../Helper/is-empty";
@@ -87,15 +102,17 @@ class EditPatientDrawer extends Component {
         );
     }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS
+    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
     // THIS ONE COMMENTED
     // componentDidMount() {
     //   this.handleConditionSearch(" ");
     // }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS START
+    // Changes made by Akshay NEW CODE IMPLEMENTATIONS START
     async handleGetPatientDetails(patient_id) {
         try {
+            console.log("handleGetPatientDetails for Edit Patient patient_id ---> ", patient_id);
+
             const {getPatientDetailsById} = this.props;
             const response = await getPatientDetailsById(patient_id);
 
@@ -115,8 +132,7 @@ class EditPatientDrawer extends Component {
         }
     }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS END
-
+    // Changes made by Akshay NEW CODE IMPLEMENTATIONS END
     componentDidUpdate(prevProps, prevState) {
         const {visible: prev_visible} = prevProps;
         const {visible} = this.props;
@@ -157,11 +173,16 @@ class EditPatientDrawer extends Component {
             } = {},
         } = carePlanData || {};
 
+        console.log("Edit Patient componentDidUpdate carePlanData ---> ", carePlanData);
+        console.log("Edit Patient componentDidUpdate patientData ---> ", patientData);
+        console.log("Edit Patient componentDidUpdate users ---> ", users);
+
+
         let symptomNames = [];
         let symptomData = [];
         try {
             symptomData = JSON.parse(symptoms);
-            console.log("symptomData", symptomData);
+            console.log("Edit Patient componentDidUpdate symptomData ---> ", symptomData);
             if (!isEmpty(symptomData)) {
                 symptomData.forEach((ele) => {
                     symptomNames.push(ele.symptomName);
@@ -183,11 +204,16 @@ class EditPatientDrawer extends Component {
 
         const formattedDate = this.getFormattedDate(dob);
 
-        console.log("symptomData,symptomData,symptomData", symptomData);
+        console.log("Edit Patient componentDidUpdate formattedData symptomData", symptomData);
+
+        console.log("Edit Patient componentDidUpdate prev_visible", prev_visible);
+        console.log("Edit Patient componentDidUpdate visible", visible);
 
         if (prev_visible !== visible) {
             const {searchSeverity} = this.props;
-            this.handleGetPatientDetails(patient_id);
+            console.log("Edit Patient componentDidUpdate patient_id", patient_id);
+
+            this.handleGetPatientDetails(patient_id); //.then(() => {});
             this.handleConditionSearch(" ");
             searchSeverity("");
             this.setState({
@@ -1242,7 +1268,7 @@ class EditPatientDrawer extends Component {
                         option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
                         0
                     }
-                    //AKSHAY NEW CODE IMPLEMENTATIONS
+                    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
                     // disabled={!isTreatmentDisabled}
                 >
                     {this.getTreatmentOption()}
@@ -1426,8 +1452,7 @@ class EditPatientDrawer extends Component {
             date_of_birth &&
             (age < 0 || age > 140 || moment(date_of_birth).isAfter(moment()))
         ) {
-            //handle case of newBorn
-
+            // TODO: handle case of newBorn
             message.error(this.formatMessage(messages.validDobError));
             return false;
         } else if (!treatment) {
@@ -1495,7 +1520,7 @@ class EditPatientDrawer extends Component {
                 weight,
                 symptoms: JSON.stringify(this.state.finalSymptomData),
                 address,
-                //followup_advise,
+                // followup_advise,
             });
             // submit({ mobile_number, name, gender, date_of_birth, treatment_id: treatment, severity_id: severity, condition_id: condition, prefix ,allergies,diagnosis_description,diagnosis_type,comorbidities,clinical_notes,height,weight, symptoms})
         }

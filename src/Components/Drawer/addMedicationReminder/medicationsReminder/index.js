@@ -16,7 +16,7 @@ import startDateField from "../common/startDate";
 import endDateField from "../common/endDate";
 import repeatDaysField from "../common/selectedDays";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class AddMedicationReminder extends Component {
@@ -37,7 +37,7 @@ class AddMedicationReminder extends Component {
         );
     }
 
-    //AKSHAY NEW CODE IMPLEMENTATIONS
+    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
     // THIS ONE COMMENTED
     // componentDidMount() {
     //   const { getMedicationDetails, patientId } = this.props;
@@ -51,8 +51,8 @@ class AddMedicationReminder extends Component {
         if (visible && visible != prev_visible) {
             getMedicationDetails(patientId);
         }
-        console.log("this.props", this.props);
-        console.log("prevProps", prevProps);
+        console.log("Medication Reminder componentDidUpdate this.props ---> ", this.props);
+        console.log("Medication Reminder componentDidUpdate prevProps ---> ", prevProps);
     }
 
     hasErrors = (fieldsError) => {

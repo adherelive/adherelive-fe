@@ -1,9 +1,22 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {Button, Drawer, Radio, Select, Space, Spin,} from "antd";
+import {injectIntl} from "react-intl";
+import {
+    Drawer,
+    Icon,
+    Select,
+    Input,
+    message,
+    Button,
+    Spin,
+    Radio,
+    DatePicker,
+    Space,
+} from "antd";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
 import moment from "moment";
 
 // import messages from "./message";
+import Footer from "../../Drawer/footer";
 import Form from "antd/es/form";
 import {useDispatch, useSelector} from "react-redux";
 import isEmpty from "../../../Helper/is-empty";
@@ -11,6 +24,10 @@ import Paper from "@mui/material/Paper";
 import {
     AppointmentForm,
     Appointments,
+    //   AppointmentTooltip,
+    //   WeekView,
+    //   MonthView,
+    //   ViewSwitcher,
     DateNavigator,
     DayView,
     Scheduler,
@@ -110,8 +127,7 @@ function Index({
 
     // formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const {submitting} = values;
 

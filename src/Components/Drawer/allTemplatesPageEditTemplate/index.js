@@ -17,6 +17,7 @@ import {
 } from "../../../constant";
 import moment from "moment";
 import message from "antd/es/message";
+import Icon from "antd/es/icon";
 import Button from "antd/es/button";
 import EditMedicationReminder from "../../../Containers/Drawer/editMedicationReminder";
 import EditAppointmentDrawer from "../../../Containers/Drawer/editAppointment";
@@ -503,6 +504,7 @@ class TemplatePageCreateDrawer extends Component {
     };
 
     // AKSHAY NEW CODE IMPLEMENTATION
+    /*
     deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
         console.log(innerFormType);
         console.log(innerFormKey);
@@ -517,6 +519,56 @@ class TemplatePageCreateDrawer extends Component {
             dietKeys = [],
             workouts = {},
             workoutKeys = [],
+      medicationCheckedIds = [],
+    } = this.state;
+    if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
+      delete medications[innerFormKey];
+      medicationKeys.splice(medicationKeys.indexOf(innerFormKey), 1);
+      medicationCheckedIds.splice(medicationKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.APPOINTMENT) {
+      delete appointments[innerFormKey];
+      appointmentKeys.splice(appointmentKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType == EVENT_TYPE.VITALS) {
+      delete vitals[innerFormKey];
+      vitalKeys.splice(vitalKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.DIET) {
+      delete diets[innerFormKey];
+      dietKeys.splice(dietKeys.indexOf(innerFormKey), 1);
+    } else if (innerFormType === EVENT_TYPE.WORKOUT) {
+      delete workouts[innerFormKey];
+      workoutKeys.splice(workoutKeys.indexOf(innerFormKey), 1);
+    }
+
+    this.setState({
+      appointments,
+      appointmentKeys,
+      medications,
+      medicationKeys,
+      vitals,
+      vitalKeys,
+      diets,
+      dietKeys,
+      workouts,
+      workoutKeys,
+      templateEdited: true,
+      medicationCheckedIds,
+    });
+  };
+  */
+  deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
+    console.log(innerFormType);
+    console.log(innerFormKey);
+    let {
+      appointments = {},
+      appointmentKeys = [],
+      medications = {},
+      medicationKeys = [],
+      vitals = {},
+      vitalKeys = [],
+      diets = {},
+      dietKeys = [],
+      workouts = {},
+      workoutKeys = [],
             // innerFormType = "",
             // innerFormKey = "",
             medicationIds = {},
@@ -658,7 +710,7 @@ class TemplatePageCreateDrawer extends Component {
                 message.warn(msg);
             }
         } catch (error) {
-            console.log("deleteMedicationError ===>", error);
+            console.log("deleteMedicationError ---> ", error);
             message.warn(error);
         }
     }
@@ -689,7 +741,7 @@ class TemplatePageCreateDrawer extends Component {
                 message.warn(msg);
             }
         } catch (error) {
-            console.log("deleteAppointmentError ===>", error);
+            console.log("deleteAppointmentError ---> ", error);
             message.warn(error);
         }
     }
@@ -720,7 +772,7 @@ class TemplatePageCreateDrawer extends Component {
                 message.warn(msg);
             }
         } catch (error) {
-            console.log("deleteVitalError ===>", error);
+            console.log("deleteVitalError ---> ", error);
             message.warn(error);
         }
     }
@@ -751,7 +803,7 @@ class TemplatePageCreateDrawer extends Component {
                 message.warn(msg);
             }
         } catch (error) {
-            console.log("deleteDietError ===>", error);
+            console.log("deleteDietError ---> ", error);
             message.warn(error);
         }
     }
@@ -782,7 +834,7 @@ class TemplatePageCreateDrawer extends Component {
                 message.warn(msg);
             }
         } catch (error) {
-            console.log("deleteWorkoutError ===>", error);
+            console.log("deleteWorkoutError ---> ", error);
             message.warn(error);
         }
     }
@@ -1246,8 +1298,7 @@ class TemplatePageCreateDrawer extends Component {
                 await getAllTemplatesForDoctor();
                 close();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 
@@ -2553,8 +2604,7 @@ class TemplatePageCreateDrawer extends Component {
 
                 close();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

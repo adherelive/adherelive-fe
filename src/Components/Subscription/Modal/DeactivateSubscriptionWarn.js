@@ -14,7 +14,7 @@ function DeactivateSubscriptionWarn({data}) {
 
     const callBack = () => {
         setIsModalVisible(false);
-        message.success("Subscription deactivated sucessfully");
+        message.success("Subscription deactivated successfully");
     };
 
     const handleOk = () => {

@@ -7,8 +7,7 @@ class editPatientColumn extends Component {
         super(props);
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     handleEditPatientDrawer = (e) => {
         e.preventDefault();

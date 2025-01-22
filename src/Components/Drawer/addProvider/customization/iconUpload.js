@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from "react";
 import Form from "antd/es/form";
 import Upload from "antd/es/upload";
+import Icon from "antd/es/icon";
 
 import {DeleteTwoTone, EyeTwoTone, UploadOutlined} from "@ant-design/icons";
 import LoadingStatus from "../../../Common/Loading";

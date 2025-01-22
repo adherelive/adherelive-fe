@@ -5,6 +5,11 @@ import {close} from "../../modules/drawer";
 import {DRAWER} from "../../constant";
 import {getInitialData} from "../../modules/auth";
 import {getMedications} from "../../modules/medications";
+import {
+  addAppointment,
+  addCarePlanAppointment,
+  getAppointments,
+} from "../../modules/appointments";
 import {searchMedicine} from "../../modules/medicines";
 import {searchTreatment} from "../../modules/treatments";
 import {searchCondition} from "../../modules/conditions";

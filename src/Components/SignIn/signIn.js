@@ -6,7 +6,7 @@ import {withRouter} from "react-router-dom";
 import {PATH} from "../../constant";
 import config from "../../config";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -60,14 +60,14 @@ class SignIn extends Component {
                         }
                     } else {
                         if (statusCode === 422) {
-                            message.error(this.formatMessage(messages.emailDoesNotxist), 4);
+                            message.error(this.formatMessage(messages.emailDoesNotExist), 4);
                         } else {
                             this.setState({loading: false});
                             message.error(this.formatMessage(messages.invalidCredentials), 4);
                         }
                     }
                 } catch (err) {
-                    console.log("handleSingIn err ----> ", err);
+                    console.log("Component Signin handleSingIn err ---> ", err);
                     this.setState({loading: false});
                     message.error(this.formatMessage(messages.somethingWentWrong), 4);
                 }

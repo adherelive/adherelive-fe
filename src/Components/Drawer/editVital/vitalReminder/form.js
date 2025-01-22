@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Button, message, Radio} from "antd";
+import { Button, Input, message, Radio } from "antd";
 import moment from "moment";
 import startTimeField from "../common/startTime";
 import RepeatFields from "../common/repeatFields";
@@ -11,13 +11,19 @@ import startDateField from "../common/startDate";
 import endDateField from "../common/endDate";
 import instructions from "../common/instructions";
 import vitalNameField from "../common/vitalName";
-import vitalOccurenceField from "../common/vitalOccurence";
+import vitalOccurrenceField from "../common/vitalOccurence";
 
 import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
-import {DAYS_NUMBER, REPEAT_TYPE, USER_CATEGORY,} from "../../../../constant";
+import {
+  REPEAT_TYPE,
+  USER_CATEGORY,
+  DAYS_NUMBER,
+  DAYS,
+  ALTERNATE_DAYS,
+} from "../../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -31,6 +37,10 @@ class EditVitalForm extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        // Initialize refs, create refs for the elements we need to scroll
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     componentDidMount() {
@@ -45,7 +55,7 @@ class EditVitalForm extends Component {
             fetchProgramProducts,
         } = this.props;
         const {programId} = [];
-        const {_id} = "23";
+        const {_id} = "7";
         const {category} = "PATIENT";
         validateFields();
 
@@ -74,11 +84,41 @@ class EditVitalForm extends Component {
     }
 
     scrollToTop = () => {
-        let antForm = document.getElementsByClassName("Form")[0];
-        let antDrawerBody = antForm.parentNode;
-        let antDrawerWrapperBody = antDrawerBody.parentNode;
-        antDrawerBody.scrollIntoView(true);
-        antDrawerWrapperBody.scrollTop -= 200;
+        // Check if the element "Form" exists?
+        console.log("All Form elements editVitals: ", document.getElementsByClassName("Form"));
+
+        try {
+            // First try to get the form element using ref
+            const formElement = this.formRef.current;
+
+            if (!formElement) {
+                console.log("editVitals Form element not found via ref");
+                return;
+            }
+
+            // Find the drawer body and wrapper (ant-drawer-body and ant-drawer-wrapper-body)
+            let drawerBody = formElement.closest('.ant-drawer-body');
+            let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
+
+            if (!drawerBody || !drawerWrapper) {
+                console.log("Edit Vitals Drawer elements not found");
+                return;
+            }
+
+            // Log for debugging
+            console.log("Form element editVitals: ", formElement);
+            console.log("Drawer body editVitals: ", drawerBody);
+            console.log("Drawer wrapper editVitals: ", drawerWrapper);
+
+            // Scroll the drawer body into view
+            drawerBody.scrollIntoView(true);
+
+            // Adjust final scroll position
+            drawerWrapper.scrollTop -= 200;
+
+        } catch (error) {
+            console.error("Error in scrollToTop editVitals: ", error);
+        }
     };
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
@@ -227,8 +267,7 @@ class EditVitalForm extends Component {
         validateFields([startTimeField.field_name]);
     };
 
-    onChangeEventStartTime = (startTime) => {
-    };
+    onChangeEventStartTime = (startTime) => {};
 
     onStartDateChange = (currentDate) => {
         const {
@@ -253,14 +292,11 @@ class EditVitalForm extends Component {
         }
     };
 
-    onEndDateChange = () => {
-    };
+    onEndDateChange = () => {};
 
-    onStartTimeChange = () => {
-    };
+    onStartTimeChange = () => {};
 
-    onEndTimeChange = () => {
-    };
+    onEndTimeChange = () => {};
 
     onEventDurationChange = (start, end) => {
         const {
@@ -394,29 +430,31 @@ class EditVitalForm extends Component {
         enableSubmit();
     };
 
-    // setRepeatEveryDay = e => {
-    //   e.preventDefault();
-    //   const {
-    //     form: { setFieldsValue },
-    //     enableSubmit
-    //   } = this.props;
-    //   setFieldsValue({
-    //     [repeatDaysField.field_name]: DAYS
-    //   });
-    //   enableSubmit();
-    // };
+    /*
+    setRepeatEveryDay = e => {
+      e.preventDefault();
+      const {
+        form: { setFieldsValue },
+        enableSubmit
+      } = this.props;
+      setFieldsValue({
+        [repeatDaysField.field_name]: DAYS
+      });
+      enableSubmit();
+    };
 
-    // setRepeatAlternateDay = e => {
-    //   e.preventDefault();
-    //   const {
-    //     form: { setFieldsValue },
-    //     enableSubmit
-    //   } = this.props;
-    //   setFieldsValue({
-    //     [repeatDaysField.field_name]: ALTERNATE_DAYS
-    //   });
-    //   enableSubmit();
-    // };
+    setRepeatAlternateDay = e => {
+      e.preventDefault();
+      const {
+        form: { setFieldsValue },
+        enableSubmit
+      } = this.props;
+      setFieldsValue({
+        [repeatDaysField.field_name]: ALTERNATE_DAYS
+      });
+      enableSubmit();
+    };
+    */
 
     getFooter = () => {
         const {
@@ -475,7 +513,10 @@ class EditVitalForm extends Component {
 
         return (
             <Fragment>
-                <Form className="event-form pb80 wp100 Form">
+                <Form
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                     <div className="flex direction-row flex-grow-1">
                         <label
                             htmlFor="vital_template"
@@ -499,7 +540,7 @@ class EditVitalForm extends Component {
 
                         <div className="star-red">*</div>
                     </div>
-                    {vitalOccurenceField.render({...this.props})}
+                    {vitalOccurrenceField.render({...this.props})}
                     <RepeatFields
                         {...this.props}
                         formatMessage={formatMessage}

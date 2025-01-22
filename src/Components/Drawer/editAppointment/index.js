@@ -15,7 +15,7 @@ import Footer from "../footer";
 
 import {RADIOLOGY} from "../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "./../../../Helper/is-empty";
 import ScheduledAppointments from "../addAppointment/ScheduledAppointments";
@@ -38,8 +38,7 @@ class EditAppointment extends Component {
         );
     }
 
-    componentDidMount = () => {
-    };
+    componentDidMount = () => {};
 
     enableSubmit = () => {
         this.setState({disabledSubmit: false});
@@ -352,8 +351,7 @@ class EditAppointment extends Component {
                     getAppointments(patient_id);
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

@@ -118,7 +118,7 @@ export const getReassignmentAudit = (activityId) => {
     };
 };
 
-export const setScheduleAppontmentData = (payload) => {
+export const setScheduleAppointmentData = (payload) => {
     return async (dispatch) => {
         dispatch({
             type: SET_ACTIVITY_DATA_FOR_SCHEDULE,
@@ -150,7 +150,7 @@ export const getPatientCareplanByPatientId = (patientId) => {
     };
 };
 
-export const getPatientCareplanByPatientIdAndUserRoleId = (patientId) => {
+export const getPatientCarePlanByPatientIdAndUserRoleId = (patientId) => {
     let response = {};
     return async (dispatch) => {
         try {

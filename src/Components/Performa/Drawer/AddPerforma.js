@@ -1,5 +1,16 @@
-import React, {Fragment, useState} from "react";
-import {Button, Drawer, Radio, Select,} from "antd";
+import React, { Component, Fragment, useState } from "react";
+import { injectIntl } from "react-intl";
+import {
+  Drawer,
+  Icon,
+  Select,
+  Input,
+  // message,
+  Button,
+  Spin,
+  Radio,
+  DatePicker,
+} from "antd";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
 // import moment from "moment";
 // import throttle from "lodash-es/throttle";
@@ -32,7 +43,7 @@ function AddPerforma({onCloseDrawer, visible, doctor_id}) {
             currency: "INR",
         });
         onCloseDrawer();
-        message.success("Service added sucessfully");
+        message.success("Service added successfully");
     };
 
     const onSubmit = () => {
@@ -48,8 +59,7 @@ function AddPerforma({onCloseDrawer, visible, doctor_id}) {
 
     // const formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    const onClose = () => {
-    };
+    const onClose = () => {};
 
     const setConsultation = (value) => {
         setValues({

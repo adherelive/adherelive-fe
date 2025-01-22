@@ -1,4 +1,4 @@
-import {Select} from "antd";
+import { Select, Space } from "antd";
 
 const LabReportsOptions = ({addFields, setInputFields}) => {
     const handleChange = (value) => {

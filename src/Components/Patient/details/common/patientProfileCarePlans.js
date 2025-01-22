@@ -1,9 +1,15 @@
 import React, {Component} from "react";
 import {injectIntl} from "react-intl";
+import Button from "antd/es/button";
 
-import {getAuthCategory} from "../../../../Helper/common";
+import {getAuthCategory, getFullName} from "../../../../Helper/common";
 import careplanBg from "../../../../Assets/images/careplan-access-bg.png";
-import {TABLE_DEFAULT_BLANK_FIELD,} from "../../../../constant";
+import {
+    DIAGNOSIS_TYPE,
+    FINAL,
+    PROBABLE,
+    TABLE_DEFAULT_BLANK_FIELD,
+} from "../../../../constant";
 import messages from "./messages";
 import isEmpty from "./../../../../Helper/is-empty";
 
@@ -126,41 +132,44 @@ class PatientCarePlans extends Component {
         });
     };
 
-    // getHiddenCarePlans = () => {
-    //   const {
-    //     care_plans,
-    //     doctors,
-    //     authenticated_user,
-    //     patientCarePlanIds,
-    //     intl: { formatMessage } = {}
-    //   } = this.props;
-    //   const { getCarePlanStatus } = this;
+    /**
+     * TODO: This function is not used anywhere in the code. So, it can be removed.
+    getHiddenCarePlans = () => {
+      const {
+        care_plans,
+        doctors,
+        authenticated_user,
+        patientCarePlanIds,
+        intl: { formatMessage } = {}
+      } = this.props;
+      const { getCarePlanStatus } = this;
 
-    //   const authDoctor = getAuthCategory({ doctors, authenticated_user });
+      const authDoctor = getAuthCategory({ doctors, authenticated_user });
 
-    //   const { care_plan_ids = [] } = authDoctor || {};
+      const { care_plan_ids = [] } = authDoctor || {};
 
-    //   let hiddenCarePlans = [];
+      let hiddenCarePlans = [];
 
-    //   patientCarePlanIds.forEach((id, index) => {
-    //     if (!care_plan_ids.includes(id)) {
-    //       const { expired_on } = care_plans[id] || {};
-    //       hiddenCarePlans.push(
-    //         <div
-    //           key={`cp-no-consent-${id}`}
-    //           className={`flex justify-space-between align-center p10 br5`}
-    //         >
-    //           <div className="fs18 fw700">{`${formatMessage(
-    //             messages.careplan_text
-    //           )} ${index + 1}`}</div>
-    //           <div className="">{getCarePlanStatus(expired_on)}</div>
-    //         </div>
-    //       );
-    //     }
-    //   });
+      patientCarePlanIds.forEach((id, index) => {
+        if (!care_plan_ids.includes(id)) {
+          const { expired_on } = care_plans[id] || {};
+          hiddenCarePlans.push(
+            <div
+              key={`cp-no-consent-${id}`}
+              className={`flex justify-space-between align-center p10 br5`}
+            >
+              <div className="fs18 fw700">{`${formatMessage(
+                messages.careplan_text
+              )} ${index + 1}`}</div>
+              <div className="">{getCarePlanStatus(expired_on)}</div>
+            </div>
+          );
+        }
+      });
 
-    //   return hiddenCarePlans;
-    // };
+      return hiddenCarePlans;
+    };
+    */
 
     getHiddenCarePlans = () => {
         const {renderFooter} = this;
@@ -176,17 +185,20 @@ class PatientCarePlans extends Component {
         );
     };
 
-    // renderFooter = () => {
-    //   const { intl: { formatMessage } = {}, handleRequestConsent } = this.props;
+    /**
+     * TODO: This function is not used anywhere in the code. So, it can be removed.
+    renderFooter = () => {
+      const { intl: { formatMessage } = {}, handleRequestConsent } = this.props;
 
-    //   return (
-    //     <div onClick={handleRequestConsent}>
-    //       <Button type={"primary"} block={true}>
-    //         {formatMessage(messages.request_access_text)}
-    //       </Button>
-    //     </div>
-    //   );
-    // };
+      return (
+        <div onClick={handleRequestConsent}>
+          <Button type={"primary"} block={true}>
+            {formatMessage(messages.request_access_text)}
+          </Button>
+        </div>
+      );
+    };
+    */
 
     renderFooter = () => {
         const {intl: {formatMessage} = {}, handleRequestConsent} = this.props;

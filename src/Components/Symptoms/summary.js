@@ -429,7 +429,7 @@ class SummaryTab extends Component {
         const {symptomsModalKey, symptomParts} = this.state;
         const {upload_documents = {}} = this.props;
         console.log(
-            "weiutqweoiuiquwoerw===>",
+            "Component Symptoms summary renderModalBody ---> ",
             symptomsModalKey,
             symptomParts,
             symptomParts[symptomsModalKey]

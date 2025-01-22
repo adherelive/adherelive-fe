@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {Select} from "antd";
 // import { diagnosisList } from "./diagnosisList.json";
 import {useSelector} from "react-redux";

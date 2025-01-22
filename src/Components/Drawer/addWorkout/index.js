@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {Drawer} from "antd";
+import { Button, Drawer } from "antd";
 import messages from "./messages";
 import SingleDayExerciseComponent from "../singleDayExerciseComponent/index";
 import message from "antd/es/message";
@@ -9,7 +9,7 @@ import ExerciseFieldsForm from "./form";
 import Footer from "../footer";
 import moment from "moment";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class AddExercise extends Component {
@@ -59,7 +59,7 @@ class AddExercise extends Component {
                 //     start_time: { hours = "", minutes = "" } = {},
                 //   } = {},
                 // } = this.props;
-                //AKSHAY NEW CODE IMPLEMENTATIONS FOR V4
+                // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
                 const {days = [], start_time: {hours = "", minutes = ""} = {}} =
                     data;
 

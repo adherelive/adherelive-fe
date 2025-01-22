@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import {injectIntl} from "react-intl";
 import message from "antd/es/message";
 import {getFullName} from "../../../../Helper/common";
-import {Tooltip} from "antd";
+import {Icon, Tooltip} from "antd";
 import messages from "../messages";
 import {EyeFilled, EyeInvisibleFilled} from "@ant-design/icons";
 

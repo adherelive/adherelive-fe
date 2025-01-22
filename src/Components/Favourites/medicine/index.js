@@ -1,10 +1,12 @@
-import React, {Component} from "react";
+import React, { Component, Fragment } from "react";
 import {injectIntl} from "react-intl";
 import {withRouter} from "react-router-dom";
+import Input from "antd/es/input";
+import Button from "antd/es/button";
 import message from "antd/es/message";
 import Select from "antd/es/select";
 import Tooltip from "antd/es/tooltip";
-import {TagFilled} from "@ant-design/icons";
+import { TagFilled, TagOutlined } from "@ant-design/icons";
 
 const {Option} = Select;
 
@@ -150,7 +152,7 @@ class favouriteMedicine extends Component {
             const res = await getFavourites({type: "medicine"});
             console.log("932867523847927482369704823789", {res});
         } catch (error) {
-            console.log(" error ===>", error);
+            console.log("Medicine handleGetFavourites error ---> ", error);
         }
     };
 

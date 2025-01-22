@@ -8,6 +8,7 @@ import Modal from "antd/es/modal";
 import Button from "antd/es/button";
 import Footer from "../footer";
 import confirm from "antd/es/modal/confirm";
+import Icon from "antd/es/icon";
 import moment from "moment";
 import DatePicker from "antd/es/date-picker";
 
@@ -38,8 +39,7 @@ class addReportDrawer extends Component {
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     getUploadButton = () => {
         const {uploading} = this.state;
@@ -378,8 +378,7 @@ class addReportDrawer extends Component {
                 });
                 close();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

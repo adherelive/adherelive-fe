@@ -1,6 +1,21 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
-import {Input, message, Select, Spin, Upload,} from "antd";
+import {
+  Tabs,
+  Button,
+  Steps,
+  Col,
+  Select,
+  Input,
+  InputNumber,
+  Upload,
+  Modal,
+  TimePicker,
+  Icon,
+  message,
+  Spin,
+} from "antd";
+import SideMenu from "./sidebar";
 import {PATH, REQUEST_TYPE, USER_CATEGORY} from "../../constant";
 import UploadSteps from "./steps";
 import {getUploadURL} from "../../Helper/urls/user";
@@ -8,7 +23,10 @@ import {doRequest} from "../../Helper/network";
 import plus from "../../Assets/images/plus.png";
 import {withRouter} from "react-router-dom";
 // import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import PlacesAutocomplete from "react-places-autocomplete";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 import india from "../../Assets/images/india.png";
 import australia from "../../Assets/images/australia.png";
 import us from "../../Assets/images/flag.png";
@@ -244,7 +262,7 @@ class Profileregister extends Component {
                 });
             }
         } catch (error) {
-            console.log("err ---> ", error);
+            console.log("getDoctorInitialData error ---> ", error);
             message.warn("Something went wrong. Please try again later");
         }
     }
@@ -319,8 +337,7 @@ class Profileregister extends Component {
         // },100);
 
         return {
-            abort() {
-            },
+            abort() {},
         };
     };
 
@@ -341,8 +358,7 @@ class Profileregister extends Component {
         });
 
         return {
-            abort() {
-            },
+            abort() {},
         };
     };
 
@@ -475,7 +491,7 @@ class Profileregister extends Component {
             }
             doctorProfileRegister(data).then((response) => {
                 console.log(
-                    " 32453454RESPONSE FOR DOC PROFILE REGISTER ===>",
+                    "OnNextClick FOR DOC PROFILE REGISTER ---> ",
                     response
                 );
                 const {
@@ -520,7 +536,7 @@ class Profileregister extends Component {
             const {status} = response;
         } catch (err) {
             console.log("err", err);
-            message.warn("Something has gone wrong. Please try again later");
+            message.warn("Something has gone wrong on handleSendPasswordMail. Please try again later");
             this.setState({fetchingSpeciality: false});
         }
     }
@@ -583,7 +599,7 @@ class Profileregister extends Component {
             }
         } catch (error) {
             this.setState({searchingMail: false});
-            console.log("error ===>", error);
+            console.log("searchEmail error ---> ", error);
         }
     };
 
@@ -621,7 +637,7 @@ class Profileregister extends Component {
                 if (Object.keys(emails).length) {
                     for (let i in emails) {
                         const each = emails[i];
-                        // console.log("983264573542654326 ===>",{typed_email,each});
+                        // console.log("983264573542654326 ---> ",{typed_email,each});
 
                         if (typed_email === each) {
                             message.info(this.formatMessage(messages.mailInUse));

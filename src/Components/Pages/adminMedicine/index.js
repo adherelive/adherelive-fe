@@ -5,6 +5,8 @@ import Button from "antd/es/button";
 import Tabs from "antd/es/tabs";
 import AddMedicineDrawer from "../../../Containers/Drawer/addMedicine";
 import MedicineTable from "../../../Containers/Medicines/table";
+import config from "../../../config";
+import message from "antd/es/message";
 import {PlusOutlined} from "@ant-design/icons";
 
 const {TabPane} = Tabs;
@@ -29,8 +31,7 @@ class AdminMedicine extends Component {
         this.handleGetAllPrivateMedicines();
     }
 
-    componentDidUpdate(prevProps, prevState) {
-    }
+    componentDidUpdate(prevProps, prevState) {}
 
     async handleGetAllPublicMedicines() {
         try {
@@ -45,7 +46,7 @@ class AdminMedicine extends Component {
             } = response || {};
             this.setState({totalPublicMedicinesCount: total_count});
         } catch (error) {
-            console.log("89368754234 error ===>", error);
+            console.log("Admin Medicine componentDidMount error ---> ", error);
         }
     }
 
@@ -62,7 +63,7 @@ class AdminMedicine extends Component {
             } = response || {};
             this.setState({totalPrivateMedicinesCount: total_count});
         } catch (error) {
-            console.log("89368754234 error ===>", error);
+            console.log("handleGetAllPrivateMedicines Admin Medicine error ---> ", error);
         }
     }
 

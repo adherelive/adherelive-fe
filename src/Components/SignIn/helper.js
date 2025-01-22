@@ -1,5 +1,6 @@
-import React, {Component} from "react";
-import {Button, Form, Input, message} from "antd";
+import React, { Component, Fragment } from "react";
+import { injectIntl, FormattedMessage } from "react-intl";
+import { Button, Input, Form, Row, Col, message } from "antd";
 import {Spring} from "react-spring/renderprops";
 import LoginByGoogle from "./googleLogin";
 import LoginByFacebook from "./facebookLogin";
@@ -18,8 +19,7 @@ class SignIn extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     toggleLogin = () => {
         let {login} = this.state;
@@ -48,7 +48,7 @@ class SignIn extends Component {
                         message.error("Username or Password incorrect", 4);
                     }
                 } catch (err) {
-                    console.log("298293 err ---> ", err);
+                    console.log("Component Signin Helper error ---> ", err);
                     this.setState({loading: false});
                     message.error("Something went wrong, Please try again", 4);
                 }

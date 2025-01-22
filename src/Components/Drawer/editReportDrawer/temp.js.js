@@ -9,7 +9,13 @@ import Button from "antd/es/button";
 import Footer from "../footer";
 import confirm from "antd/es/modal/confirm";
 
-import {DeleteTwoTone, DownloadOutlined, EyeTwoTone, LoadingOutlined, PlusOutlined,} from "@ant-design/icons";
+import {
+  DeleteTwoTone,
+  PlusOutlined,
+  EyeTwoTone,
+  DownloadOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 
 import messages from "./message";
 
@@ -30,13 +36,9 @@ class editReportDrawer extends Component {
 
     // componentDidMount(){
     //     const {payload : {report_id},patient_id} = this.props;
-    //   //   console.log("786578326427348234762427394823 ---> ",this.props);
-    //     // this.getAllReportsData();
-
+    //     console.log("editReportDrawer componentDidMount this.props ---> ",this.props);
+    //     this.getAllReportsData();
     // }
-
-    componentDidUpdate() {
-    }
 
     async getAllReportsData() {
         try {
@@ -47,14 +49,14 @@ class editReportDrawer extends Component {
             const {getAllReports} = this.props;
             let uploaded_documents = [];
             const response = await getAllReports(patient_id);
-            // console.log("786578326427348234762427394823 ---> getAllReportsData response",response);
+            // console.log("editReportDrawer getAllReportsData response ---> ",response);
             const {reports = {}, upload_documents = {}} = response;
             const {basic_info: {name = ""} = {}, report_document_ids = []} =
             reports[report_id] || {};
 
             for (let each in upload_documents) {
                 if (report_document_ids.includes(each)) {
-                    console.log("786578326427348234762427394823 --->EACH", each);
+                    console.log("temp EACH ---> ", each);
 
                     let doc = upload_documents[each];
                     if (doc) {
@@ -75,7 +77,7 @@ class editReportDrawer extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // console.log("786578326427348234762427394823 ---> ",this.props);
+        // console.log("temp componentDidUpdate this.props ---> ", this.props);
     }
 
     getUploadButton = () => {
@@ -219,7 +221,7 @@ class editReportDrawer extends Component {
             const {name} = document || {};
             return name === file.name;
         });
-        console.log("287423 Existing ---> ", existing);
+        console.log("temp Existing ---> ", existing);
         if (existing.length === 0) {
             newDocuments.push({
                 name: file.name,
@@ -389,8 +391,7 @@ class editReportDrawer extends Component {
                 });
                 close();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 
@@ -417,7 +418,7 @@ class editReportDrawer extends Component {
     render() {
         const {visible} = this.props;
         const {name, new_documents} = this.state;
-        // console.log("786578326427348234762427394823 Render new_documents ---> ",this.props);
+        // console.log("temp Render new_documents this.props ---> ", this.props);
 
         const {
             onClose,

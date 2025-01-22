@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Button} from "antd";
+import { Button, message } from "antd";
 import moment from "moment";
 import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
@@ -7,7 +7,7 @@ import vitalNameField from "../common/vitalName";
 import repeatField from "../common/repeatType";
 import repeatDaysField from "../common/selectedDays";
 import repeatIntervalField from "../common/repeatInterval";
-import vitalOccurenceField from "../common/vitalOccurence";
+import vitalOccurrenceField from "../common/vitalOccurence";
 import instructions from "../common/instructions";
 import RepeatFields from "../common/repeatFields";
 import startDateField from "../common/startDate";
@@ -15,20 +15,25 @@ import endDateField from "../common/endDate";
 import startTimeField from "../common/startTime";
 import {ALTERNATE_DAYS, DAYS, DAYS_NUMBER, REPEAT_TYPE, USER_CATEGORY,} from "../../../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
 
-class AddvitalsForm extends Component {
+class AddVitalsForm extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        // Initialize refs, create refs for the elements we need to scroll
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     componentDidMount() {
         this.scrollToTop();
-        console.log("AddvitalsForm", this.props.form);
+        console.log("AddVitalsForm after scrollToTop this.props.form ---> ", this.props.form);
+
         const {
             form: {validateFields},
             // currentUser: {
@@ -39,7 +44,7 @@ class AddvitalsForm extends Component {
             fetchProgramProducts,
         } = this.props;
         const {programId} = [];
-        const {_id} = "23";
+        const {_id} = "7";
         const {category} = "PATIENT";
         validateFields();
 
@@ -68,13 +73,40 @@ class AddvitalsForm extends Component {
     }
 
     scrollToTop = () => {
-        console.log("scrollToTop", this.props.form);
-        let antForm = document.getElementsByClassName("Form")[0];
-        let antDrawerBody = antForm.parentNode;
-        let antDrawerWrapperBody = antDrawerBody.parentNode;
-        antDrawerBody.scrollIntoView(true);
-        antDrawerWrapperBody.scrollTop -= 200;
+        try {
+            // First try to get the form element using ref
+            const formElement = this.formRef.current;
+
+            if (!formElement) {
+                console.log("vitalReminder Form element not found via ref");
+                return;
+            }
+
+            // Find the drawer body and wrapper (ant-drawer-body and ant-drawer-wrapper-body)
+            let drawerBody = formElement.closest('.ant-drawer-body');
+            let drawerWrapper = formElement.closest('.ant-drawer-wrapper-body');
+
+            if (!drawerBody || !drawerWrapper) {
+                console.log("vitalReminder Drawer elements not found");
+                return;
+            }
+
+            // Log for debugging
+            console.log("Form element vitalReminder: ", formElement);
+            console.log("Drawer body vitalReminder: ", drawerBody);
+            console.log("Drawer wrapper vitalReminder: ", drawerWrapper);
+
+            // Scroll the drawer body into view
+            drawerBody.scrollIntoView(true);
+
+            // Adjust final scroll position
+            drawerWrapper.scrollTop -= 200;
+
+        } catch (error) {
+            console.error("Error in scrollToTop vitalReminder: ", error);
+        }
     };
+
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
     handleCancel = (e) => {
@@ -330,7 +362,10 @@ class AddvitalsForm extends Component {
 
         return (
             <Fragment>
-                <Form className="event-form pb80 wp100 Form">
+                <Form
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                     <div className="flex direction-row flex-grow-1">
                         <label
                             htmlFor="vital_template"
@@ -354,7 +389,7 @@ class AddvitalsForm extends Component {
 
                         <div className="star-red">*</div>
                     </div>
-                    {vitalOccurenceField.render({...this.props})}
+                    {vitalOccurrenceField.render({...this.props})}
                     <RepeatFields
                         {...this.props}
                         formatMessage={formatMessage}
@@ -375,4 +410,4 @@ class AddvitalsForm extends Component {
     }
 }
 
-export default AddvitalsForm;
+export default AddVitalsForm;

@@ -3,6 +3,7 @@ import {REQUEST_TYPE} from "../../constant";
 import {
     activateDoctorURL,
     addDoctorPaymentPoductUrl,
+    addPatientToWatchlistUrl,
     addRazorpayIdUrl,
     deactivateDoctorURL,
     getAdminPaymentProductUrl,
@@ -12,6 +13,7 @@ import {
     getDoctorProfileDetailsUrl,
     getVerifyDoctorUrl,
     patientWatchlistUrl,
+    removePatientFromWatchlistUrl,
     searchDoctorEmailUrl,
     searchDoctorNameUrl,
     updateDoctorURL,
@@ -19,6 +21,7 @@ import {
 } from "../../Helper/urls/doctor";
 
 import {getAllDoctorsForProviderUrl} from "../../Helper/urls/provider";
+import { accountDetailsUrl } from "../../Helper/urls/accounts";
 
 export const SEARCH_DOCTOR_START = "SEARCH_DOCTOR_START";
 export const SEARCH_DOCTOR_COMPLETE = "SEARCH_DOCTOR_COMPLETE";
@@ -586,37 +589,40 @@ export const getDoctorProfileDetails = (id = null) => {
     };
 };
 
-// export const addAccountDetails = (payload) => {
-//     let response = {};
-//     return async dispatch => {
-//       try {
-//         dispatch({ type: ADD_ACCOUNT_DETAILS });
-//         response = await doRequest({
-//           method: REQUEST_TYPE.POST,
-//           url: accountDetailsUrl(),
-//           data: payload
-//         });
+/**
+ * TODO: Add Account Details function, is it still required?
+export const addAccountDetails = (payload) => {
+    let response = {};
+    return async dispatch => {
+      try {
+        dispatch({ type: ADD_ACCOUNT_DETAILS });
+        response = await doRequest({
+          method: REQUEST_TYPE.POST,
+          url: accountDetailsUrl(),
+          data: payload
+        });
 
-//         const { status, payload: { data, error } = {} } = response || {};
-//         if (status === true) {
-//           dispatch({
-//             type: ADD_ACCOUNT_DETAILS_COMPLETE,
-//             data: data,
-//             payload: data
-//           });
-//         } else {
-//           dispatch({
-//             type: ADD_ACCOUNT_DETAILS_FAILED,
-//             error,
-//           });
-//         }
-//       } catch (error) {
-//         console.log("ADD_ACCOUNT_DETAILS ERROR --> ", error);
-//       }
-//       return response;
-//     }
+        const { status, payload: { data, error } = {} } = response || {};
+        if (status === true) {
+          dispatch({
+            type: ADD_ACCOUNT_DETAILS_COMPLETE,
+            data: data,
+            payload: data
+          });
+        } else {
+          dispatch({
+            type: ADD_ACCOUNT_DETAILS_FAILED,
+            error,
+          });
+        }
+      } catch (error) {
+        console.log("ADD_ACCOUNT_DETAILS ERROR --> ", error);
+      }
+      return response;
+    }
 
-// }
+}
+*/
 
 export const addRazorpayId = (id, payload) => {
     let response = {};
@@ -706,36 +712,38 @@ export const activateDoctor = (user_id) => {
     };
 };
 
-// export const getAccountDetails = () => {
-//   let response = {};
-//   return async dispatch => {
-//     try {
-//       dispatch({ type: GET_ACCOUNT_DETAILS });
-//       response = await doRequest({
-//         method: REQUEST_TYPE.GET,
-//         url: accountDetailsUrl(),
-//       });
+/**
+ * TODO: Get Account Details function, is it still required?
+export const getAccountDetails = () => {
+  let response = {};
+  return async dispatch => {
+    try {
+      dispatch({ type: GET_ACCOUNT_DETAILS });
+      response = await doRequest({
+        method: REQUEST_TYPE.GET,
+        url: accountDetailsUrl(),
+      });
 
-//       const { status, payload: { data, error } = {} } = response || {};
-//       if (status === true) {
-//         dispatch({
-//           type: GET_ACCOUNT_DETAILS_COMPLETE,
-//           data: data,
-//           payload: data
-//         });
-//       } else {
-//         dispatch({
-//           type: GET_ACCOUNT_DETAILS_FAILED,
-//           error,
-//         });
-//       }
-//     } catch (error) {
-//       console.log("GET_ACCOUNT_DETAILS ERROR --> ", error);
-//     }
-//     return response;
-//   }
-
-// }
+      const { status, payload: { data, error } = {} } = response || {};
+      if (status === true) {
+        dispatch({
+          type: GET_ACCOUNT_DETAILS_COMPLETE,
+          data: data,
+          payload: data
+        });
+      } else {
+        dispatch({
+          type: GET_ACCOUNT_DETAILS_FAILED,
+          error,
+        });
+      }
+    } catch (error) {
+      console.log("GET_ACCOUNT_DETAILS ERROR --> ", error);
+    }
+    return response;
+  }
+}
+*/
 
 function doctorReducer(state, data) {
     const {doctors} = data || {};

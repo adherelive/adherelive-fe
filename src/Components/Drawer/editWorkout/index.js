@@ -11,7 +11,7 @@ import Loading from "../../Common/Loading";
 import confirm from "antd/es/modal/confirm";
 import moment from "moment";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class EditWorkout extends Component {
@@ -189,7 +189,7 @@ class EditWorkout extends Component {
             this.setState({loading: false});
         } catch (error) {
             this.setState({loading: false});
-            console.log("error ===>", {error});
+            console.log("getWorkoutDetails error ---> ", {error});
         }
     };
 
@@ -444,8 +444,7 @@ class EditWorkout extends Component {
                     message.warn(this.formatMessage(messages.somethingWentWrong));
                 }
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

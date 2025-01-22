@@ -16,6 +16,8 @@ import {
 } from "../../../constant";
 import moment from "moment";
 import message from "antd/es/message";
+import Icon from "antd/es/icon";
+import Button from "antd/es/button";
 import EditMedicationReminder from "../../../Containers/Drawer/editMedicationReminder";
 import EditAppointmentDrawer from "../../../Containers/Drawer/editAppointment";
 import EditVitalDrawer from "../../../Containers/Drawer/editVitals";
@@ -68,8 +70,7 @@ class TemplatePageCreateDrawer extends Component {
         };
     }
 
-    componentDidMount() {
-    }
+    componentDidMount() {}
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
@@ -139,58 +140,6 @@ class TemplatePageCreateDrawer extends Component {
             showInner: false,
             isDietVisible: false,
             isWorkoutVisible: false,
-        });
-    };
-
-    // AKSHAY NEW CODE IMPLEMENTATION
-    deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
-        console.log(innerFormType);
-        console.log(innerFormKey);
-        let {
-            appointments = {},
-            appointmentKeys = [],
-            medications = {},
-            medicationKeys = [],
-            vitals = {},
-            vitalKeys = [],
-            diets = {},
-            dietKeys = [],
-            workouts = {},
-            workoutKeys = [],
-            medicationCheckedIds = [],
-        } = this.state;
-
-        if (innerFormType == EVENT_TYPE.MEDICATION_REMINDER) {
-            delete medications[innerFormKey];
-            medicationKeys.splice(medicationKeys.indexOf(innerFormKey), 1);
-            medicationCheckedIds.splice(medicationKeys.indexOf(innerFormKey), 1);
-        } else if (innerFormType == EVENT_TYPE.APPOINTMENT) {
-            delete appointments[innerFormKey];
-            appointmentKeys.splice(appointmentKeys.indexOf(innerFormKey), 1);
-        } else if (innerFormType == EVENT_TYPE.VITALS) {
-            delete vitals[innerFormKey];
-            vitalKeys.splice(vitalKeys.indexOf(innerFormKey), 1);
-        } else if (innerFormType === EVENT_TYPE.DIET) {
-            delete diets[innerFormKey];
-            dietKeys.splice(dietKeys.indexOf(innerFormKey), 1);
-        } else if (innerFormType === EVENT_TYPE.WORKOUT) {
-            delete workouts[innerFormKey];
-            workoutKeys.splice(workoutKeys.indexOf(innerFormKey), 1);
-        }
-
-        this.setState({
-            appointments,
-            appointmentKeys,
-            medications,
-            medicationKeys,
-            vitals,
-            vitalKeys,
-            diets,
-            dietKeys,
-            workouts,
-            workoutKeys,
-            templateEdited: true,
-            medicationCheckedIds,
         });
     };
 
@@ -639,8 +588,7 @@ class TemplatePageCreateDrawer extends Component {
 
                 close();
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 

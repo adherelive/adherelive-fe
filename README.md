@@ -6,6 +6,16 @@ For the frontend code of the AdhereLive Website
     - [AdhereLive Portal](https://portal.adhere.live)
 - While for the Patient, we have a iOS and Android Mobile App
 
+# Code Help
+
+## For the React Frontend
+- src/Components/Patient/details/index.js: This file contains all the details of the patient menu. 
+It is used to display the details of the patient 'Add More' details and for all the details for adding 
+and editing the items like Appointment, Medication, Diagnosis, etc. 
+- src/Components/Drawer/PatientDetails/index.js: This file contains the drawer for the patient details. 
+On the Patient page left hand side, the drawer is displayed with the patient details.
+
+
 # Build & Deploy
 
 ## For Development Builds

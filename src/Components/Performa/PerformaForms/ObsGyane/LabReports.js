@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import LabReportsOptions from "./Dropdowns/LabReportsOptions";
-import {MinusCircleOutlined, PlusCircleOutlined,} from "@ant-design/icons";
+import {CloseCircleOutlined, MinusCircleOutlined, PlusCircleOutlined,} from "@ant-design/icons";
 import isEmpty from "../../../../Helper/is-empty";
 import moment from "moment";
 import {Input, message, Select} from "antd";

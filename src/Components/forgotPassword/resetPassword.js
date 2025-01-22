@@ -4,7 +4,7 @@ import {Button, Input, message} from "antd";
 import CompanyIcon from "../../Assets/images/logo3x.png";
 import {PATH} from "../../constant";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -80,7 +80,7 @@ class ResetPassword extends Component {
                     }
                 }
             } catch (err) {
-                console.log("298293 err ---> ", err);
+                console.log("handleResetPassword Reset Password error ---> ", err);
                 this.setState({loading: false});
                 message.error("Something went wrong, Please try again", 4);
             }

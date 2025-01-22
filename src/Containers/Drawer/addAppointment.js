@@ -21,10 +21,10 @@ import {googleTranslate} from "../../modules/cdss";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import {
-    getPatientCareplanByPatientIdAndUserRoleId,
-    setScheduleAppontmentData,
+    getPatientCarePlanByPatientIdAndUserRoleId,
+    setScheduleAppointmentData,
     updateActivityById
-} from "./../../modules/subscription/activities";
+} from "../../modules/subscription/activities";
 import {setFlashCard} from "../../modules/subscription/flashcard";
 
 const mapStateToProps = (state) => {
@@ -72,10 +72,10 @@ const mapDispatchToProps = (dispatch) => {
         updateActivityById: (id, payload) =>
             dispatch(updateActivityById(id, payload)),
         setFlashCard: (value) => dispatch(setFlashCard(value)),
-        setScheduleAppontmentData: (payload) =>
-            dispatch(setScheduleAppontmentData(payload)),
-        getPatientCareplanByPatientIdAndUserRoleId: (patientId) =>
-            dispatch(getPatientCareplanByPatientIdAndUserRoleId(patientId)),
+        setScheduleAppointmentData: (payload) =>
+            dispatch(setScheduleAppointmentData(payload)),
+        getPatientCarePlanByPatientIdAndUserRoleId: (patientId) =>
+            dispatch(getPatientCarePlanByPatientIdAndUserRoleId(patientId)),
         googleTranslate: (textToConvert) =>
             dispatch(googleTranslate(textToConvert)),
         getAppointmentsDataForDay: (date) =>

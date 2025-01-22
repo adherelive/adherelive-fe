@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 
-import {Calendar, Drawer, message} from "antd";
+import {Calendar, Drawer, Icon, message} from "antd";
 import moment from "moment";
 import {APPOINTMENT_TYPE_TITLE, TABLE_DEFAULT_BLANK_FIELD, USER_CATEGORY,} from "../../../constant";
 import messages from "./messages";
@@ -57,7 +57,7 @@ class ProviderDoctorCalneder extends Component {
                 });
             }
         } catch (error) {
-            console.log("err ---> ", error);
+            console.log("handleGetDayData Provider Doctor Calender ---> ", error);
             message.warn("Something went wrong");
         }
     };
@@ -434,7 +434,7 @@ class ProviderDoctorCalneder extends Component {
             panelMonth,
         } = this.state;
 
-        console.log("987432846723894023987487 RENDEr ---> ", {panelMonth});
+        console.log("Provider Doctor Calender panelMonth ---> ", {panelMonth});
         return (
             <Fragment>
                 <div className="p18 fs30 fw700 ">Schedules</div>

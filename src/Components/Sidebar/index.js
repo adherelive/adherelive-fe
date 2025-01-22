@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component, Fragment } from "react";
 import {injectIntl} from "react-intl";
 import {Avatar, Dropdown, Menu, message, Tooltip} from "antd";
 import {PATH, USER_CATEGORY, USER_PERMISSIONS} from "../../constant";
@@ -8,6 +8,7 @@ import Logo from "../../Assets/images/logo3x.png";
 import dashboardIcon from "../../Assets/images/dashboard.svg";
 import {withRouter} from "react-router-dom";
 import {
+    AccountBookOutlined,
     BellFilled,
     CalendarTwoTone,
     FileOutlined,
@@ -19,6 +20,7 @@ import {
 import messages from "./messages";
 import config from "../../config";
 import {getAbbreviation} from "../../Helper/common";
+import Icon from "@ant-design/icons";
 
 const {Item: MenuItem} = Menu || {};
 
@@ -68,10 +70,9 @@ class SideMenu extends Component {
             if (status === true) {
                 message.success("Signed out successfully from AdhereLive platform");
             } else {
-                message.warn("Something has gone wrong. Please try again later");
+                message.warn("Something has gone wrong while logging out. Please try again later!");
             }
-        } catch (error) {
-        }
+        } catch (error) {}
     };
 
     warnNote = () => {
@@ -93,11 +94,10 @@ class SideMenu extends Component {
                 onOk: async () => {
                     this.handleItemSelectForRedirect({key});
                 },
-                onCancel() {
-                },
+                onCancel() {},
             });
         } catch (error) {
-            console.log("err ---> ", error);
+            console.log("Component Sidebar handleRedirect err ---> ", error);
         }
     };
 

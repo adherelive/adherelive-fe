@@ -9,8 +9,10 @@ import TextArea from "antd/es/input/TextArea";
 import Input from "antd/es/input";
 import Tag from "antd/es/tag";
 import {TimePicker} from "antd";
+import TimeKeeper from "react-timekeeper";
+import edit_image from "../../../Assets/images/edit.svg";
 // AKSHAY NEW COE FOR ANTD V4
-import {Form} from "@ant-design/compatible";
+import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;
@@ -31,6 +33,10 @@ class WorkoutFieldsFrom extends Component {
             selectedDays: [],
             showTimeKeeper: false,
         };
+        // Initialize refs
+        this.formRef = React.createRef();
+        this.drawerBodyRef = React.createRef();
+        this.drawerWrapperRef = React.createRef();
     }
 
     componentDidMount() {
@@ -260,7 +266,10 @@ class WorkoutFieldsFrom extends Component {
         }
 
         return (
-            <Form className="fw700 wp100 pb30 Form">
+                <Form 
+                    ref={this.formRef}
+                    className="event-form pb80 wp100 Form"
+                >
                 <FormItem
                     label={formatMessage(messages.name)}
                     className="full-width mt10 ant-date-custom-ap-date "

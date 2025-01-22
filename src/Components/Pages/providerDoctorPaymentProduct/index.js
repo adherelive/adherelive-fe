@@ -6,6 +6,7 @@ import {Dropdown} from "antd";
 import Menu from "antd/es/menu";
 
 import AddConsultationFeeDrawer from "../../../Containers/Drawer/addConsultationFee";
+import ConsultationFeeTable from "../../../Containers/ConsultationFees";
 
 // import DoctorConsultationFeeTable from "../../../Containers/DoctorConsultationFee";
 import messages from "./messages";
