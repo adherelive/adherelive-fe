@@ -102,15 +102,22 @@ class MissedMedicationsDrawer extends Component {
                 timings,
             } = missed_medications[id] || {};
 
-            const { basic_info: {id: patientId } = {} } = patients[participant_id] || {};
-            const { basic_info: {id: full_name } = {} } = patients[id] || {};
+            // Access patient object using participant_id
+            const patient = patients[participant_id];
+
+            // Get full_name and id from patient object
+            const full_name = patient?.basic_info?.full_name || "";
+            const patientId = patient?.basic_info?.id || "";
+
+            //const { basic_info: {id: patientId } = {} } = patients[participant_id] || {};
+            //const { basic_info: {id: full_name } = {} } = patients[] || {};
 
             console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
-            console.log("Missed Medication Drawer Participant ID: ", patients[participant_id]);
+            console.log("Missed Medication Drawer Participant ID: ", patient);
             console.log("Missed Medication Drawer Medicine Name: ", medicineName);
             console.log("Missed Medication Drawer Medicine Type: ", medicineType);
             console.log("Missed Medication Drawer Timings: ", timings);
-            console.log("Missed Medication Drawer Patient Full Name: ", patients[full_name]);
+            console.log("Missed Medication Drawer Patient Full Name: ", full_name);
 
             if (critical) {
                 criticalList.push(
