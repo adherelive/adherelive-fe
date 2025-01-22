@@ -102,15 +102,15 @@ class MissedMedicationsDrawer extends Component {
                 timings,
             } = missed_medications[id] || {};
 
-            const {basic_info: {id: patientId} = {}} = patients[participant_id] || {};
-            const { basic_info: { full_name } = {} } = patients || {};
+            const { basic_info: {id: patientId } = {} } = patients[participant_id] || {};
+            const { basic_info: {id: full_name } = {} } = patients[id] || {};
 
             console.log("Missed Medication Drawer Medicine ID: ", missed_medications[id]);
             console.log("Missed Medication Drawer Participant ID: ", patients[participant_id]);
             console.log("Missed Medication Drawer Medicine Name: ", medicineName);
             console.log("Missed Medication Drawer Medicine Type: ", medicineType);
             console.log("Missed Medication Drawer Timings: ", timings);
-            console.log("Missed Medication Drawer Patient Full Name: ", full_name);
+            console.log("Missed Medication Drawer Patient Full Name: ", patients[full_name]);
 
             if (critical) {
                 criticalList.push(
@@ -119,6 +119,7 @@ class MissedMedicationsDrawer extends Component {
                         name={full_name}
                         time={timings}
                         medicineName={medicineName}
+                        medicineType={medicineType}
                         onClick={handlePatientDetailsRedirect(patientId)}
                     />
                 );
@@ -129,6 +130,7 @@ class MissedMedicationsDrawer extends Component {
                         name={full_name}
                         time={timings}
                         medicineName={medicineName}
+                        medicineType={medicineType}
                         onClick={handlePatientDetailsRedirect(patientId)}
                     />
                 );

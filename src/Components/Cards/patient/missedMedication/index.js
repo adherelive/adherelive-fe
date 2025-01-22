@@ -19,7 +19,7 @@ const getTimings = (timings = {}) => {
 };
 
 export default (props) => {
-    const {formatMessage, onClick, name, time, medicineName} = props;
+    const {formatMessage, onClick, name, time, medicineName, medicineType} = props;
     return (
         <div className="bw-cool-grey br5 mb10 p10">
             <div className="fs18 fw700 pointer black-85" onClick={onClick}>
@@ -27,6 +27,7 @@ export default (props) => {
             </div>
 
             <div className="fs14 fw600 brown-grey mb20 italic">{medicineName}</div>
+            <div className="fs14 fw600 brown-grey mb20">{medicineType}</div>
 
             <div className="fs14 fw700 black-65 mb5">
                 {formatMessage(messages.missed_timings)}
