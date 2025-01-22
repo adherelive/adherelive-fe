@@ -127,7 +127,7 @@ class MissedMedicationsDrawer extends Component {
             // // Get full_name and id from patient object
             // const patientId = patient?.basic_info?.id || "";
             // const full_name = patientId?.basic_info?.full_name || "";
-            const full_name = patients[{6: {basic_info: {full_name}}}] || 'Unknown Patient';
+            // const full_name = patients[{6: {basic_info: {full_name}}}] || 'Unknown Patient';
 
             //const { basic_info: {id: patientId } = {} } = patients[participant_id] || {};
             //const { basic_info: {id: full_name } = {} } = patients[] || {};
@@ -137,7 +137,6 @@ class MissedMedicationsDrawer extends Component {
             console.log("Missed Medication Drawer Medicine Name: ", medicineName);
             console.log("Missed Medication Drawer Medicine Type: ", medicineType);
             console.log("Missed Medication Drawer Timings: ", timings);
-            console.log("Missed Medication Drawer Patient Full Name: ", full_name);
             console.log("Missed Medication Drawer Patient Name: ", patientName);
 
             if (critical) {
@@ -155,7 +154,7 @@ class MissedMedicationsDrawer extends Component {
                 nonCriticalList.push(
                     <MissedMedicationCard
                         formatMessage={this.formatMessage}
-                        name={full_name}
+                        name={patientName}
                         time={timings}
                         medicineName={medicineName}
                         medicineType={medicineType}
