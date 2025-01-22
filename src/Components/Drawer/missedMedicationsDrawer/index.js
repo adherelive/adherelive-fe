@@ -90,12 +90,20 @@ class MissedMedicationsDrawer extends Component {
         const nonCriticalList = [];
 
         Object.keys(missed_medications).forEach((id) => {
+            // const medicineName = missed_medications[id].medicines.basic_info.name;
             const {
                 critical,
                 participant_id,
-                medicines: {basic_info: {name: medicineName} = {}} = {},
+                medicines: { // {basic_info: {name: medicineName} = {}} = {}
+                    basic_info: {
+                        name: medicineName = "",
+                        type: medicineType = "",
+                    } = {},
+                } = {},
                 timings,
             } = missed_medications[id] || {};
+
+            console.log("Missed Medication Drawer Participant ID from keys: ", participant_id);
 
             const {basic_info: {id: patientId, full_name} = {}} =
             patients[participant_id] || {};
