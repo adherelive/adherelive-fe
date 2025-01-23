@@ -14,7 +14,7 @@ import {
 const OPEN_DRAWER = "OPEN_DRAWER";
 const CLOSE_DRAWER = "CLOSE_DRAWER";
 
-const intial_state = {
+const initial_state = {
     visible: false,
     loading: false,
 };
@@ -53,7 +53,7 @@ export const close = () => {
     };
 };
 
-export default (state = intial_state, action) => {
+export default (state = initial_state, action) => {
     const {type, data} = action;
     switch (type) {
         case OPEN_DRAWER:

@@ -3,7 +3,7 @@ const OPEN_POPUP = "OPEN_POPUP";
 const MAXIMIZED_POPUP = "MAXIMIZED_POPUP";
 const CLOSE_POPUP = "CLOSE_POPUP";
 
-const intial_state = {
+const initial_state = {
     minimized: false,
     visible: false,
 };
@@ -32,7 +32,7 @@ export const maximizePopUp = () => {
     };
 };
 
-export default (state = intial_state, action) => {
+export default (state = initial_state, action) => {
     const {type, data} = action;
     switch (type) {
         case MINIMIZED_POPUP:

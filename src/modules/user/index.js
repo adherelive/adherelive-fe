@@ -1,5 +1,5 @@
-const intial_state = {
-    23: {
+const initial_state = {
+    1: {
         first_name: "Gagneet",
         middle_name: "B",
         last_name: "Singh",
@@ -14,14 +14,14 @@ const intial_state = {
             treatment_name: "Thyroid Condition",
             treatment_severity: 0,
             treatment_condition: "Trauma",
-            treatment_start_date: "2nd Decenber, 2020",
+            treatment_start_date: "2nd December, 2024",
             treatment_doctor: "Sparsh Jaiswal",
             treatment_provider: "Alfred",
         },
         alerts: {
-            count: 7,
+            count: 1,
             new_symptoms: ["Shoulder Pain", "Redness on stitches"],
-            missed_appointment: ["05 Dec, 2020"],
+            missed_appointment: ["05 Dec, 2024"],
         },
     },
 };
@@ -38,7 +38,7 @@ function userReducer(state, data) {
     }
 }
 
-export default (state = intial_state, action) => {
+export default (state = initial_state, action) => {
     const {type, data} = action;
     switch (type) {
         default:

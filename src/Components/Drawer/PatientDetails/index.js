@@ -584,7 +584,7 @@ class PatientDetailsDrawer extends Component {
                                 <div
                                     key={id}
                                     className={`mt10 ${
-                                        id === MISSED_MEDICATION || id === MISSED_ACTIONS
+                                        id === MISSED_MEDICATION || id === MISSED_ACTIONS || id === MISSED_APPOINTMENTS
                                             ? "ml16"
                                             : ""
                                     } mwp45 maxwp48  h100 br5 bg-${
