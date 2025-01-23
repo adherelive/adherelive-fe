@@ -47,8 +47,8 @@ class PatientDetailsDrawer extends Component {
     // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
     getCarePlanForPatient = async (patientId) => {
         try {
-            const {getPatientCareplanByPatientId} = this.props;
-            const getCarePlanResponse = await getPatientCareplanByPatientId(
+            const {getPatientCarePlanByPatientId} = this.props;
+            const getCarePlanResponse = await getPatientCarePlanByPatientId(
                 patientId
             );
             const {
@@ -62,6 +62,7 @@ class PatientDetailsDrawer extends Component {
                 if (!isEmpty(data.care_plans)) {
                     let carePlanId = 1;
                     let carePlanMedicationIds = [];
+                    let carePlanAppointmentIds = [];
                     let appointmentsListIds = [];
                     for (let carePlan of Object.values(data.care_plans)) {
                         let {
@@ -78,13 +79,12 @@ class PatientDetailsDrawer extends Component {
                     this.setState({
                         carePlanId,
                         carePlanMedicationIds,
+                        carePlanAppointmentIds,
                         appointmentsListIds,
                         care_plans: data.care_plans,
                     });
                 }
-                // this.setState({
-                //   carePlans: data.care_plans,
-                // });
+                // this.setState({ carePlans: data.care_plans, });
             }
         } catch (error) {
             console.log("Patient Care Plans are getting an error ---> \n", error);
@@ -110,7 +110,7 @@ class PatientDetailsDrawer extends Component {
 
         /* TODO: Need to check why this part has been commented out
         for (let appointment of Object.values(appointments)){
-          let {basic_info:{id} ,participant_one : {id : participant_one_Id = 1} , participant_two : {id: participant_two_Id = 1}} = appointment;
+          let {basic_info:{id}, participant_one : {id : participant_one_Id = 1} , participant_two : {id: participant_two_Id = 1}} = appointment;
 
           if (parseInt(patient_id) === parseInt(participant_two_Id)) {
             appointmentsListIds.push(id);

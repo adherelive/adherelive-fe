@@ -9,8 +9,8 @@ import {setCareplanForChat, setPatientForChat} from "../../modules/twilio";
 import {openPopUp} from "../../modules/chat";
 import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
 // AKSHAY NEW CODE FOR SUBSCRIPTION
-import {getPatientCareplanByPatientId, setScheduleAppointmentData,} from "../../modules/subscription/activities";
-// import { getPatientCareplanByPatientId } from "../../modules/subscription/activities";
+import {getPatientCarePlanByPatientId, setScheduleAppointmentData,} from "../../modules/subscription/activities";
+// import { getPatientCarePlanByPatientId } from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
     const {
@@ -65,8 +65,8 @@ const mapDispatchToProps = (dispatch) => {
         // AKSHAY NEW CODE IMPLEMENTATIONS
         setScheduleAppointmentData: (payload) =>
             dispatch(setScheduleAppointmentData(payload)),
-        getPatientCareplanByPatientId: (patientId) =>
-            dispatch(getPatientCareplanByPatientId(patientId)),
+        getPatientCarePlanByPatientId: (patientId) =>
+            dispatch(getPatientCarePlanByPatientId(patientId)),
     };
 };
 

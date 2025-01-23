@@ -20,10 +20,10 @@ const mapStateToProps = (state) => {
 
     return {
         visible: visible && type === DRAWER.MISSED_WORKOUT,
+        authenticated_category,
         loading,
         payload,
         authPermissions,
-        authenticated_category,
         authenticated_user,
         patients,
         missed_workouts,

@@ -127,7 +127,7 @@ export const setScheduleAppointmentData = (payload) => {
     };
 };
 
-export const getPatientCareplanByPatientId = (patientId) => {
+export const getPatientCarePlanByPatientId = (patientId) => {
     let response = {};
     return async (dispatch) => {
         try {

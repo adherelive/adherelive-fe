@@ -18,11 +18,23 @@ const mapStateToProps = (state) => {
         commonReducer: {missedChartDrawerLoading},
     } = state;
 
-    return {
-        visible: visible && type === DRAWER.MISSED_APPOINTMENT,
+    console.log("In the missedAppointment.js mapStateToProps - mapStateToProps ---> ",
+        authenticated_category,
         loading,
         payload,
+        authPermissions,
+        authenticated_user,
+        patients,
+        missed_appointments,
+        appointment_ids,
+        missedChartDrawerLoading
+    );
+
+    return {
+        visible: visible && type === DRAWER.MISSED_APPOINTMENT,
         authenticated_category,
+        loading,
+        payload,
         authPermissions,
         authenticated_user,
         patients,

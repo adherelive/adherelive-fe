@@ -15,12 +15,9 @@ export const ADD_APPOINTMENT_START = "ADD_APPOINTMENT_START";
 export const ADD_APPOINTMENT_COMPLETE = "ADD_APPOINTMENT_COMPLETE";
 export const ADD_APPOINTMENT_FAILED = "ADD_APPOINTMENT_FAILED";
 
-export const ADD_CARE_PLAN_APPOINTMENT_START =
-    "ADD_CARE_PLAN_APPOINTMENT_START";
-export const ADD_CARE_PLAN_APPOINTMENT_COMPLETE =
-    "ADD_CARE_PLAN_APPOINTMENT_COMPLETE";
-export const ADD_CARE_PLAN_APPOINTMENT_FAILED =
-    "ADD_CARE_PLAN_APPOINTMENT_FAILED";
+export const ADD_CARE_PLAN_APPOINTMENT_START = "ADD_CARE_PLAN_APPOINTMENT_START";
+export const ADD_CARE_PLAN_APPOINTMENT_COMPLETE = "ADD_CARE_PLAN_APPOINTMENT_COMPLETE";
+export const ADD_CARE_PLAN_APPOINTMENT_FAILED = "ADD_CARE_PLAN_APPOINTMENT_FAILED";
 
 export const UPDATE_APPOINTMENT_START = "UPDATE_APPOINTMENT_START";
 export const UPDATE_APPOINTMENT_COMPLETE = "UPDATE_APPOINTMENT_COMPLETE";
@@ -31,10 +28,8 @@ export const GET_APPOINTMENTS_COMPLETE = "GET_APPOINTMENTS_COMPLETE";
 export const GET_APPOINTMENTS_FAILED = "GET_APPOINTMENTS_FAILED";
 
 export const GET_APPOINTMENTS_DETAILS = "GET_APPOINTMENTS_DETAILS";
-export const GET_APPOINTMENTS_DETAILS_COMPLETE =
-    "GET_APPOINTMENTS_DETAILS_COMPLETE";
-export const GET_APPOINTMENTS_DETAILS_FAILED =
-    "GET_APPOINTMENTS_DETAILS_FAILED";
+export const GET_APPOINTMENTS_DETAILS_COMPLETE = "GET_APPOINTMENTS_DETAILS_COMPLETE";
+export const GET_APPOINTMENTS_DETAILS_FAILED = "GET_APPOINTMENTS_DETAILS_FAILED";
 
 export const DELETE_APPOINTMENTS_START = "DELETE_APPOINTMENTS_START";
 export const DELETE_APPOINTMENTS_COMPLETE = "DELETE_APPOINTMENTS_COMPLETE";
@@ -66,7 +61,7 @@ export const addAppointment = (payload) => {
                 });
             }
         } catch (error) {
-            console.log("ADD APPOINTMENT MODULE error ---> ", error);
+            console.log("Add the Appointments in Care Plan error ---> addAppointment: ", error);
         }
         return response;
     };
@@ -98,7 +93,7 @@ export const addCarePlanAppointment = (payload, carePlanId) => {
                 });
             }
         } catch (error) {
-            console.log("ADD APPOINTMENT MODULE error ---> ", error);
+            console.log("Add the Appointments in Care Plan error ---> addCarePlanAppointment: ", error);
         }
         return response;
     };
@@ -131,7 +126,7 @@ export const updateAppointment = (payload) => {
                 });
             }
         } catch (error) {
-            console.log("UPDATE APPOINTMENT MODULE error ---> ", error);
+            console.log("Update the Appointment for Patient error ---> updateAppointments: ", error);
         }
         return response;
     };
@@ -160,7 +155,7 @@ export const getAppointments = (id) => {
                 });
             }
         } catch (error) {
-            console.log("GET APPOINTMENTS FOR PATIENT ERROR", error);
+            console.log("Get the Appointments for a Patient error in appointments ---> getAppointments: ", error);
         }
         return response;
     };
@@ -189,7 +184,7 @@ export const getAppointmentsDetails = () => {
                 });
             }
         } catch (error) {
-            console.log("GET APPOINTMENTS FOR PATIENT ERROR", error);
+            console.log("Get the Appointments for a Patient error in appointments ---> getAppointmentsDetails: ", error);
         }
         return response;
     };
@@ -218,7 +213,7 @@ export const deleteAppointment = (id) => {
                 });
             }
         } catch (error) {
-            console.log("DELETE APPOINTMENTS ERROR", error);
+            console.log("Delete Appointments for Patient error ---> deleteAppointment: ", error);
         }
         return response;
     };
@@ -265,6 +260,7 @@ export const getAppointmentsDataForDay = (date) => {
             care_plan_id: 12515,
         },
     };
+
     let response = {};
     return async (dispatch) => {
         try {
@@ -281,13 +277,14 @@ export const getAppointmentsDataForDay = (date) => {
                     payload: data.appointments,
                 });
             } else {
-                // dispatch({
-                //   type: GET_APPOINTMENTS_FAILED,
-                //   error,
-                // });
+                /** TODO: Handle the error case with UI warning, currently just falling through
+                dispatch({
+                  type: GET_APPOINTMENTS_FAILED,
+                  error,
+                });*/
             }
         } catch (error) {
-            console.log("GET APPOINTMENTS FOR PATIENT ERROR", error);
+            console.log("Get the Appointments for a Patient error ---> getAppointmentsDataForDay: ", error);
         }
         return response;
     };
