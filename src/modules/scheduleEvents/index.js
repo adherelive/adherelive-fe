@@ -257,11 +257,12 @@ export const getAllMissedScheduleEvents = () => {
                 });
             }
         } catch (error) {
-            console.log("GetAllMissedScheduleEvents Error ---> ", error);
+            console.log("getAllMissedScheduleEvents Error ---> ", error);
         }
         return response;
     };
 };
+
 // AKSHAY NEW CODE IMPLEMENTATIONS
 export const getAllMissedEventDataByQuery = (type) => {
     let response = {};
@@ -290,7 +291,7 @@ export const getAllMissedEventDataByQuery = (type) => {
                 dispatch({type: SET_MISSED_CHART_DRAWER_LOADING, payload: false});
             }
         } catch (error) {
-            console.log("GetAllMissedScheduleEvents Error ---> ", error);
+            console.log("getAllMissedEventDataByQuery Error ---> ", error);
         }
         return response;
     };
@@ -320,7 +321,7 @@ export const getAllMissedEventChartCount = () => {
                 });
             }
         } catch (error) {
-            console.log("GetAllMissedScheduleEvents Error ---> ", error);
+            console.log("getAllMissedEventChartCount Error ---> ", error);
         }
         return response;
     };
