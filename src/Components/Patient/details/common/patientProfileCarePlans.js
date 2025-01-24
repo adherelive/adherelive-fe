@@ -89,7 +89,7 @@ class PatientCarePlans extends Component {
             const {basic_info: {name: provider_name = ""} = {}} =
             providers[linked_id] || {};
 
-            console.log("6tr678656", care_plans[id]);
+            console.log("getVisibleCarePlans ---> care_plans ID: ", care_plans[id]);
 
             return (
                 <div

@@ -298,6 +298,8 @@ class PatientDetailsDrawer extends Component {
     getAppointmentList = () => {
         const {appointmentsListIds} = this.state;
 
+        console.log("In the getAppointmentList appointmentsListIds: ", appointmentsListIds);
+
         const {appointments = {}, doctors = {}} = this.props;
         const {formatMessage} = this;
         const appointmentList = appointmentsListIds.map((id) => {
@@ -312,21 +314,26 @@ class PatientDetailsDrawer extends Component {
                 organizer: {id: organizer_id} = {},
             } = appointments[id] || {};
 
+            console.log("In the getAppointmentList appointments ID: ", appointments[id]);
+
             let docName = "";
 
-            // for(const doctorId in doctors) {
-            //   const {basic_info: {full_name, user_id} = {}} = doctors[doctorId] || {};
-            //   if(user_id === organizer_id) {
-            //     docName = full_name;
-            //   }
+            /**
+             * TODO: Need to check why this part has been commented out
+            for(const doctorId in doctors) {
+              const {basic_info: {full_name, user_id} = {}} = doctors[doctorId] || {};
+              if(user_id === organizer_id) {
+                docName = full_name;
+              }
+            }
+             */
 
-            // }
-
-            const {basic_info: {full_name, user_id} = {}} =
-            doctors[organizer_id] || {};
+            const {basic_info: {full_name, user_id} = {}} = doctors[organizer_id] || {};
             docName = full_name;
 
             let td = moment(start_time);
+            console.log("In the getAppointmentList start_time, end_time, organizer: ", td, end_time, organizer);
+
             return (
                 <div key={id} className="flex justify-space-between align-center mb10">
                     <div className="pointer tab-color fw600 wp35 tooltip">
@@ -351,6 +358,8 @@ class PatientDetailsDrawer extends Component {
                 </div>
             );
         });
+
+        console.log("In the getAppointmentList appointmentList: ", appointmentList);
         return appointmentList;
     };
 
@@ -624,7 +633,6 @@ class PatientDetailsDrawer extends Component {
                     </div>
 
                     {/*details*/}
-
                     <div className="clearfix"></div>
 
                     <div className="mt20 wp100">
@@ -703,7 +711,6 @@ class PatientDetailsDrawer extends Component {
                     </div>
 
                     {/*medications*/}
-
                     <div className="mt20 black-85 wp100">
                         <div className="mt10 mb10 fs18 fw600">
                             {formatMessage(messages.medications)}
@@ -713,7 +720,6 @@ class PatientDetailsDrawer extends Component {
                     </div>
 
                     {/*appointments*/}
-
                     <div className="mt20 black-85 wp100">
                         <div className="mt10 mb10 fs18 fw600">
                             {formatMessage(messages.appointments)}
