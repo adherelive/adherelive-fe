@@ -79,8 +79,13 @@ class MissedAppointmentsDrawer extends Component {
         const criticalList = [];
         const nonCriticalList = [];
 
+        console.log("getAppointmentList missed_appointments ---> ", missed_appointments);
+        console.log("getAppointmentList patients ---> ", patients);
+
         for (let appointment in missed_appointments) {
             const eachAppointmentEventArray = missed_appointments[appointment];
+
+            console.log("getAppointmentList eachAppointmentEventArray ---> ", eachAppointmentEventArray);
 
             // Safety check for empty array
             if (!eachAppointmentEventArray || !eachAppointmentEventArray.length) {
@@ -113,7 +118,7 @@ class MissedAppointmentsDrawer extends Component {
 
                 // Assuming you want to handle only specific categories
                 // Modify this logic based on your specific requirements
-                if (actorCategory !== USER_CATEGORY.PATIENT) {
+                if (actorCategory !== USER_CATEGORY.DOCTOR) {
                     // Skip non-patient events or handle differently
                     return;
                 }
