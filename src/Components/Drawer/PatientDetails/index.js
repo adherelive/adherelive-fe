@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from "react";
+import ErrorBoundary from '../../../ErrorBoundary';
 import {injectIntl} from "react-intl";
 import {Drawer} from "antd";
 import {
@@ -509,10 +510,9 @@ class PatientDetailsDrawer extends Component {
 
             return (
                 <Fragment>
+                    <ErrorBoundary>
                     {/*<img src={CloseIcon} alt="close icon" onClick={}/>*/}
-
                     {/*header*/}
-
                     <div className="wp100 flex justify-space-between align-center mt20">
                         <div className="flex justify-space-around align-center">
                             <div className="pr10 fs24 fw600">{`${getName(
@@ -727,6 +727,7 @@ class PatientDetailsDrawer extends Component {
 
                         {getAppointmentList()}
                     </div>
+                    </ErrorBoundary>
                 </Fragment>
             );
         }
