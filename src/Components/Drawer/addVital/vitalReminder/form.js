@@ -31,6 +31,7 @@ class AddVitalsForm extends Component {
     }
 
     componentDidMount() {
+        console.log("AddVitalsForm before scrollToTop this.props.form ---> ", this.props.form);
         this.scrollToTop();
         console.log("AddVitalsForm after scrollToTop this.props.form ---> ", this.props.form);
 

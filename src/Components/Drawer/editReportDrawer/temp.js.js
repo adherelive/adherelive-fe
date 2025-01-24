@@ -40,6 +40,7 @@ class editReportDrawer extends Component {
     //     this.getAllReportsData();
     // }
 
+    componentDidUpdate() {}
     async getAllReportsData() {
         try {
             const {

@@ -433,6 +433,13 @@ class EditAppointmentForm extends Component {
         return newTreatments;
     };
 
+    calendarComp = () => {
+        return (
+            <div className="flex justify-center align-center">
+                <img src={calendar} alt="calender icon" className="w20"/>
+            </div>
+        );
+    };
     getStartTime = () => {
         const {form: {getFieldValue} = {}} = this.props;
         return moment(getFieldValue(START_TIME)).format("hh:mm A");
@@ -621,8 +628,8 @@ class EditAppointmentForm extends Component {
             }
         } catch (err) {
             console.log("Error in Provider Search: ", err);
-            message.warn("Something has gone wrong in Provider Search. Please try again later");
-            this.setState({ fetchingMedicines: false });
+            // message.warn("Something has gone wrong in Provider Search. Please try again later");
+            // this.setState({ fetchingMedicines: false });
         }
     };
 

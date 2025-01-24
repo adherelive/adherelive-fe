@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from "react";
-import ErrorBoundary from '../../../ErrorBoundary';
 import {injectIntl} from "react-intl";
 import {Drawer} from "antd";
 import {
@@ -63,7 +62,7 @@ class PatientDetailsDrawer extends Component {
                 if (!isEmpty(data.care_plans)) {
                     let carePlanId = 1;
                     let carePlanMedicationIds = [];
-                    let carePlanAppointmentIds = [];
+                    //let carePlanAppointmentIds = [];
                     let appointmentsListIds = [];
                     for (let carePlan of Object.values(data.care_plans)) {
                         let {
@@ -80,7 +79,7 @@ class PatientDetailsDrawer extends Component {
                     this.setState({
                         carePlanId,
                         carePlanMedicationIds,
-                        carePlanAppointmentIds,
+                        //carePlanAppointmentIds,
                         appointmentsListIds,
                         care_plans: data.care_plans,
                     });

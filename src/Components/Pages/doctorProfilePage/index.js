@@ -354,7 +354,7 @@ class DoctorProfilePage extends Component {
                 loading: false,
             });
             console.log("Error in getInitialData: ", {error});
-            message.warn("Something went wrong in getting initial data, please try again later");
+            message.warn("Something went wrong in getting initial Doctor data, please try again later");
         }
     };
 
@@ -495,8 +495,8 @@ class DoctorProfilePage extends Component {
         const {
             basic_info: {first_name = "", middle_name = "", last_name = ""},
         } = doctors[doctor_user_id];
-        const oldName =
-            `${first_name} ${middle_name ? `${middle_name} ` : ""} ${last_name ? last_name : ""
+        const oldName = `${first_name} ${middle_name ? `${middle_name} ` : ""}${
+            last_name ? last_name : ""
         }`;
 
         if (name == oldName.trim()) {
@@ -2088,7 +2088,7 @@ class DoctorProfilePage extends Component {
     };
 
     // TODO: Check why these have not been declared or used?
-    // handleChangeLocation = () => {};
+    handleChangeLocation = () => {};
     // handleProfilePicModalOpen = () => {};
 
     getDoctorBasicDetails = () => {

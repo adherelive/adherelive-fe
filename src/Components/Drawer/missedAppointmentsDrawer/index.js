@@ -82,6 +82,8 @@ class MissedAppointmentsDrawer extends Component {
         for (let appointment in missed_appointments) {
             const eachAppointmentEventArray = missed_appointments[appointment];
 
+            console.log("getAppointmentList ---> eachAppointmentEventArray: ", eachAppointmentEventArray);
+
             // Add a safety check if the array is empty or undefined
             if (!eachAppointmentEventArray || !eachAppointmentEventArray.length) {
                 continue;
@@ -174,7 +176,7 @@ class MissedAppointmentsDrawer extends Component {
         }
 
         appointmentList.push(
-            <div key="missed-appointments">
+            <div>
                 <div>
                 <span className="fs18 fw700 brown-grey tac mb20">
                     {this.formatMessage(messages.critical)}

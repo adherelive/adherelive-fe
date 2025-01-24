@@ -85,8 +85,8 @@ class TemplatePageCreateDrawer extends Component {
 
     // AKSHAY NEW CODE IMPLEMENTATION
     deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
-        console.log(innerFormType);
-        console.log(innerFormKey);
+        console.log("deleteTemplateDataHandler ---> innerFormType: ", innerFormType);
+        console.log("deleteTemplateDataHandler ---> innerFormKey: ", innerFormKey);
         let {
             appointments = {},
             appointmentKeys = [],

@@ -10,7 +10,6 @@ import {openPopUp} from "../../modules/chat";
 import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import {getPatientCarePlanByPatientId, setScheduleAppointmentData,} from "../../modules/subscription/activities";
-// import { getPatientCarePlanByPatientId } from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
     const {
@@ -53,20 +52,15 @@ const mapDispatchToProps = (dispatch) => {
         close: () => dispatch(close()),
         getMedications: (id) => dispatch(getMedications(id)),
         setPatientForChat: (patient_id) => dispatch(setPatientForChat(patient_id)),
-        getPatientDetailsById: (patientId) =>
-            dispatch(getPatientDetailsById(patientId)),
-        setCareplanForChat: (care_plan_id) =>
-            dispatch(setCareplanForChat(care_plan_id)),
+        getPatientDetailsById: (patientId) => dispatch(getPatientDetailsById(patientId)),
+        setCareplanForChat: (care_plan_id) => dispatch(setCareplanForChat(care_plan_id)),
         openPopUp: () => dispatch(openPopUp()),
         getAppointments: (id) => dispatch(getAppointments(id)),
         getAppointmentsDetails: () => dispatch(getAppointmentsDetails()),
-        getPatientMissedEvents: (patient_id) =>
-            dispatch(getPatientMissedEvents(patient_id)),
+        getPatientMissedEvents: (patient_id) => dispatch(getPatientMissedEvents(patient_id)),
         // AKSHAY NEW CODE IMPLEMENTATIONS
-        setScheduleAppointmentData: (payload) =>
-            dispatch(setScheduleAppointmentData(payload)),
-        getPatientCarePlanByPatientId: (patientId) =>
-            dispatch(getPatientCarePlanByPatientId(patientId)),
+        setScheduleAppointmentData: (payload) => dispatch(setScheduleAppointmentData(payload)),
+        getPatientCarePlanByPatientId: (patientId) => dispatch(getPatientCarePlanByPatientId(patientId)),
     };
 };
 

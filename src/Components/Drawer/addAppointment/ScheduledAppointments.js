@@ -1,5 +1,4 @@
 import React, {Fragment, useEffect, useState} from "react";
-import ErrorBoundary from "../../../ErrorBoundary";
 import {injectIntl} from "react-intl";
 import {
     Drawer,
