@@ -73,8 +73,8 @@ class MissedAppointmentsDrawer extends Component {
     };
 
     getAppointmentList = () => {
-        const {patients = {}, missed_appointments = {}} = this.props;
-        const {handlePatientDetailsRedirect} = this;
+        const { patients = {}, missed_appointments = {} } = this.props;
+        const { handlePatientDetailsRedirect } = this;
         const appointmentList = [];
         const criticalList = [];
         const nonCriticalList = [];
@@ -99,25 +99,29 @@ class MissedAppointmentsDrawer extends Component {
                                 type = "",
                             } = {},
                         } = {},
-
-                        participant_one: {
-                            category: participant_one_category = "",
-                            id: participant_one_id = "",
-                        },
-                        participant_two: {
-                            category: participant_two_category = "",
-                            id: participant_two_id = "",
-                        },
+                        participant_one = {}, // Default to empty object if undefined
+                        participant_two = {}, // Default to empty object if undefined
                     } = {},
                 } = eachAppointmentEvent;
 
                 console.log("In the getAppointmentList eachAppointmentEvent: ", eachAppointmentEvent);
+
+                // Safely access participant_one and participant_two properties
+                const participant_one_category = participant_one?.category || "";
+                const participant_one_id = participant_one?.id || "";
+                const participant_two_category = participant_two?.category || "";
+                const participant_two_id = participant_two?.id || "";
+
                 console.log("In the getAppointmentList participant_one_category: ", participant_one_category);
 
+                // Determine participant_id based on category
                 if (participant_one_category === USER_CATEGORY.PATIENT) {
                     participant_id = participant_one_id;
-                } else {
+                } else if (participant_two_category === USER_CATEGORY.PATIENT) {
                     participant_id = participant_two_id;
+                } else {
+                    console.warn("No participant with PATIENT category found in appointment:", eachAppointmentEvent);
+                    continue; // Skip this appointment if no valid participant is found
                 }
 
                 isCritical = critical;
@@ -163,9 +167,9 @@ class MissedAppointmentsDrawer extends Component {
         appointmentList.push(
             <div>
                 <div>
-          <span className="fs18 fw700 brown-grey tac mb20">
-            {this.formatMessage(messages.critical)}
-          </span>
+                <span className="fs18 fw700 brown-grey tac mb20">
+                    {this.formatMessage(messages.critical)}
+                </span>
                     {criticalList.length > 0 ? (
                         criticalList
                     ) : (
@@ -175,9 +179,9 @@ class MissedAppointmentsDrawer extends Component {
                     )}
                 </div>
                 <div>
-          <span className="fs18 fw700 brown-grey tac">
-            {this.formatMessage(messages.non_critical)}
-          </span>
+                <span className="fs18 fw700 brown-grey tac">
+                    {this.formatMessage(messages.non_critical)}
+                </span>
                     {nonCriticalList.length > 0 ? (
                         nonCriticalList
                     ) : (

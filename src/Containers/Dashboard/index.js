@@ -53,6 +53,7 @@ const mapStateToProps = (state) => {
         drawer: {visible, data: {type, payload = {}} = {}},
         medicines = {},
     } = state;
+
     return {
         notificationToken,
         authenticated_category,
@@ -96,29 +97,23 @@ const mapDispatchToProps = (dispatch) => {
         fetchChatAccessToken: (userId) => dispatch(fetchChatAccessToken(userId)),
         searchPatientFromNum: (value) => dispatch(searchPatientFromNum(value)),
         addToWatchlist: (patient_id) => dispatch(addToWatchlist(patient_id)),
-        removePatientFromWatchlist: (patient_id) =>
-            dispatch(removePatientFromWatchlist(patient_id)),
+        removePatientFromWatchlist: (patient_id) => dispatch(removePatientFromWatchlist(patient_id)),
         showVerifyModal: (data) => dispatch(showVerifyModal(data)),
         getAllFeatures: () => dispatch(getAllFeatures()),
-        openMissedMedicationDrawer: () =>
-            dispatch(open({type: DRAWER.MISSED_MEDICATION})),
-        openMissedAppointmentDrawer: () =>
-            dispatch(open({type: DRAWER.MISSED_APPOINTMENT})),
+        openMissedMedicationDrawer: () => dispatch(open({type: DRAWER.MISSED_MEDICATION})),
+        openMissedAppointmentDrawer: () => dispatch(open({type: DRAWER.MISSED_APPOINTMENT})),
         openMissedVitalDrawer: () => dispatch(open({type: DRAWER.MISSED_VITAL})),
         getAllMissedScheduleEvents: () => dispatch(getAllMissedScheduleEvents()),
-        setUnseenNotificationCount: (count) =>
-            dispatch(setUnseenNotificationCount(count)),
+        setUnseenNotificationCount: (count) => dispatch(setUnseenNotificationCount(count)),
         getAllDietsForDoctor: () => dispatch(getAllDietsForDoctor()),
         openMissedDietDrawer: () => dispatch(open({type: DRAWER.MISSED_DIET})),
-        openMissedWorkoutDrawer: () =>
-            dispatch(open({type: DRAWER.MISSED_WORKOUT})),
+        openMissedWorkoutDrawer: () => dispatch(open({type: DRAWER.MISSED_WORKOUT})),
         // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
         getDiagnosisList: (payload) => dispatch(getDiagnosisList(payload)),
         addDiagnosis: (payload) => dispatch(addDiagnosis(payload)),
         diagnosisSearch: (payload) => dispatch(diagnosisSearch(payload)),
         getAllMissedEventChartCount: () => dispatch(getAllMissedEventChartCount()),
-        getAllMissedEventDataByQuery: (type) =>
-            dispatch(getAllMissedEventDataByQuery(type)),
+        getAllMissedEventDataByQuery: (type) => dispatch(getAllMissedEventDataByQuery(type)),
     };
 };
 
