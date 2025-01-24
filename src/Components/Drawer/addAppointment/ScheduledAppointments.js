@@ -160,32 +160,30 @@ function Index({
                 width={700}
             >
                 <div className="App">
-                    <ErrorBoundary>
-                        <Space direction="vertical" style={{width: "100%"}}>
-                            <Spin tip="Fetching Appointments..." spinning={loading}>
-                                <Paper>
-                                    <Scheduler data={appointmentData}>
-                                        <ViewState
-                                            currentDate={currentDate}
-                                            onCurrentDateChange={currentDateChange}
-                                        />
-                                        <DayView startDayHour={7.5} endDayHour={22.5}/>
-                                        {/* <WeekView startDayHour={7.5} endDayHour={22.5} />
-                                        <MonthView /> */}
-                                        <Appointments/>
-                                        <AppointmentForm
-                                            visible={false}
-                                            onAppointmentDataChange={onCellClick}
-                                        />
-                                        <Toolbar/>
-                                        {/* <ViewSwitcher /> */}
-                                        <DateNavigator/>
-                                        <TodayButton/>
-                                    </Scheduler>
-                                </Paper>
-                            </Spin>
-                        </Space>
-                    </ErrorBoundary>
+                    <Space direction="vertical" style={{width: "100%"}}>
+                        <Spin tip="Fetching Appointments..." spinning={loading}>
+                            <Paper>
+                                <Scheduler data={appointmentData}>
+                                    <ViewState
+                                        currentDate={currentDate}
+                                        onCurrentDateChange={currentDateChange}
+                                    />
+                                    <DayView startDayHour={7.5} endDayHour={22.5}/>
+                                    {/* <WeekView startDayHour={7.5} endDayHour={22.5} />
+                                    <MonthView /> */}
+                                    <Appointments/>
+                                    <AppointmentForm
+                                        visible={false}
+                                        onAppointmentDataChange={onCellClick}
+                                    />
+                                    <Toolbar/>
+                                    {/* <ViewSwitcher /> */}
+                                    <DateNavigator/>
+                                    <TodayButton/>
+                                </Scheduler>
+                            </Paper>
+                        </Spin>
+                    </Space>
                 </div>
                 <div className="add-patient-footer">
                     <Button onClick={onCloseDrawer} style={{marginRight: 8}}>

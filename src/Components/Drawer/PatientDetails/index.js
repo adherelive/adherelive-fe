@@ -510,7 +510,6 @@ class PatientDetailsDrawer extends Component {
 
             return (
                 <Fragment>
-                    <ErrorBoundary>
                     {/*<img src={CloseIcon} alt="close icon" onClick={}/>*/}
                     {/*header*/}
                     <div className="wp100 flex justify-space-between align-center mt20">
@@ -593,7 +592,7 @@ class PatientDetailsDrawer extends Component {
                                 <div
                                     key={id}
                                     className={`mt10 ${
-                                        id === MISSED_MEDICATION || id === MISSED_ACTIONS || id === MISSED_APPOINTMENTS
+                                        id === MISSED_MEDICATION || id === MISSED_ACTIONS // || id === MISSED_APPOINTMENTS
                                             ? "ml16"
                                             : ""
                                     } mwp45 maxwp48  h100 br5 bg-${
@@ -727,7 +726,6 @@ class PatientDetailsDrawer extends Component {
 
                         {getAppointmentList()}
                     </div>
-                    </ErrorBoundary>
                 </Fragment>
             );
         }
