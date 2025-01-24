@@ -109,6 +109,9 @@ class MissedAppointmentsDrawer extends Component {
                     } = {},
                 } = eachAppointmentEvent;
 
+                console.log("In the getAppointmentList eachAppointmentEvent: ", eachAppointmentEvent);
+                console.log("In the getAppointmentList participant_one_category: ", participant_one_category);
+
                 if (participant_one_category === USER_CATEGORY.PATIENT) {
                     participant_id = participant_one_id;
                 } else {
