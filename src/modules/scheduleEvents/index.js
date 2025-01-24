@@ -277,6 +277,9 @@ export const getAllMissedEventDataByQuery = (type) => {
             });
 
             const {status, payload: {data, error} = {}} = response || {};
+
+            console.log("getAllMissedEventDataByQuery response ---> ", response);
+
             if (status === true) {
                 dispatch({
                     type: GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED,
