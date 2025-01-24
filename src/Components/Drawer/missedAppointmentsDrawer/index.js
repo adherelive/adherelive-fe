@@ -82,66 +82,46 @@ class MissedAppointmentsDrawer extends Component {
         for (let appointment in missed_appointments) {
             const eachAppointmentEventArray = missed_appointments[appointment];
 
-            console.log("getAppointmentList ---> eachAppointmentEventArray: ", eachAppointmentEventArray);
-
-            // Add a safety check if the array is empty or undefined
+            // Safety check for empty array
             if (!eachAppointmentEventArray || !eachAppointmentEventArray.length) {
                 continue;
             }
 
-            // Reset these for each appointment
-            const timings = [];
-            let type_description = "";
-            let isCritical = false;
-            let participant_id = "";
-
-            for (let eachAppointmentEvent of eachAppointmentEventArray) {
-                // Add safety checks for nested destructuring
+            eachAppointmentEventArray.forEach(eachAppointmentEvent => {
                 const {
                     critical = false,
                     start_time,
-                    date: start_date,
-                    details = {}
+                    date,
+                    details = {},
+                    id: eventId
                 } = eachAppointmentEvent || {};
 
                 const {
-                    basic_info = {},
-                    participant_one = {},
-                    participant_two = {}
+                    actor = {}
                 } = details;
 
                 const {
-                    details: {
-                        type_description: typeDescription = "",
-                        type = "",
-                    } = {}
-                } = basic_info;
+                    id: actorId,
+                    details: actorDetails = {},
+                    user_role_id
+                } = actor;
 
                 const {
-                    category: participant_one_category = "",
-                    id: participant_one_id = ""
-                } = participant_one;
+                    name: actorName = "",
+                    category: actorCategory = ""
+                } = actorDetails;
 
-                const {
-                    category: participant_two_category = "",
-                    id: participant_two_id = ""
-                } = participant_two;
-
-                // Determine participant_id with additional safety checks
-                if (participant_one_category === USER_CATEGORY.PATIENT && participant_one_id) {
-                    participant_id = participant_one_id;
-                } else if (participant_two_category === USER_CATEGORY.PATIENT && participant_two_id) {
-                    participant_id = participant_two_id;
-                } else {
-                    // Skip this iteration if no valid patient ID is found
-                    continue;
+                // Assuming you want to handle only specific categories
+                // Modify this logic based on your specific requirements
+                if (actorCategory !== USER_CATEGORY.PATIENT) {
+                    // Skip non-patient events or handle differently
+                    return;
                 }
 
-                isCritical = critical;
-                timings.push(start_time);
-                type_description = typeDescription;
+                // You might need to map the actor ID to a patient ID
+                const participant_id = actorId;
 
-                // Look up patient details with safety check
+                // Look up patient details
                 const patientDetails = patients[participant_id] || {};
                 const {
                     basic_info: {
@@ -153,30 +133,29 @@ class MissedAppointmentsDrawer extends Component {
                 } = patientDetails;
 
                 let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`.trim();
-                let treatment_type = type_description.length > 0 ? type_description : " ";
 
-                // Create list items
                 const appointmentCard = (
                     <MissedAppointmentCard
-                        key={pId || Math.random()} // Add key to prevent React warnings
+                        key={eventId || Math.random()}
                         formatMessage={this.formatMessage}
-                        name={pName}
-                        time={timings}
-                        treatment_type={treatment_type}
+                        name={pName || actorName}
+                        time={[start_time]}
+                        treatment_type={" "} // You might want to add logic to get treatment type
                         onClick={handlePatientDetailsRedirect(pId)}
                     />
                 );
 
-                if (isCritical) {
+                if (critical) {
                     criticalList.push(appointmentCard);
                 } else {
                     nonCriticalList.push(appointmentCard);
                 }
-            }
+            });
         }
 
+        // Rest of the function remains the same as in the previous example
         appointmentList.push(
-            <div>
+            <div key="missed-appointments">
                 <div>
                 <span className="fs18 fw700 brown-grey tac mb20">
                     {this.formatMessage(messages.critical)}
