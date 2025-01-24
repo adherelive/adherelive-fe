@@ -173,7 +173,6 @@ class MissedAppointmentsDrawer extends Component {
             }
         }
 
-        // Rest of the function remains the same...
         appointmentList.push(
             <div key="missed-appointments">
                 <div>
