@@ -23,29 +23,20 @@ export const GET_LAST_VISIT_ALERTS = "GET_LAST_VISIT_ALERTS";
 export const GET_LAST_VISIT_ALERTS_COMPLETE = "GET_LAST_VISIT_ALERTS_COMPLETE";
 export const GET_LAST_VISIT_ALERTS_FAILED = "GET_LAST_VISIT_ALERTS_FAILED";
 
-export const APPOINTMENT_STATUS_UPDATE_COMPLETED =
-    "APPOINTMENT_STATUS_UPDATE_COMPLETED";
-export const APPOINTMENT_STATUS_UPDATE_FAILED =
-    "APPOINTMENT_STATUS_UPDATE_FAILED";
+export const APPOINTMENT_STATUS_UPDATE_COMPLETED = "APPOINTMENT_STATUS_UPDATE_COMPLETED";
+export const APPOINTMENT_STATUS_UPDATE_FAILED = "APPOINTMENT_STATUS_UPDATE_FAILED";
 
 export const GET_CALENDER_DATA_COUNT_START = "GET_CALENDER_DATA_COUNT_START";
-export const GET_CALENDER_DATA_COUNT_COMPLETED =
-    "GET_CALENDER_DATA_COUNT_COMPLETED";
+export const GET_CALENDER_DATA_COUNT_COMPLETED = "GET_CALENDER_DATA_COUNT_COMPLETED";
 export const GET_CALENDER_DATA_COUNT_FAILED = "GET_CALENDER_DATA_COUNT_FAILED";
 
-export const GET_CALENDER_DATA_FOR_DAY_START =
-    "GET_CALENDER_DATA_FOR_DAY_START";
-export const GET_CALENDER_DATA_FOR_DAY_COMPLETED =
-    "GET_CALENDER_DATA_FOR_DAY_COMPLETED";
-export const GET_CALENDER_DATA_FOR_DAY_FAILED =
-    "GET_CALENDER_DATA_FOR_DAY_FAILED";
+export const GET_CALENDER_DATA_FOR_DAY_START = "GET_CALENDER_DATA_FOR_DAY_START";
+export const GET_CALENDER_DATA_FOR_DAY_COMPLETED = "GET_CALENDER_DATA_FOR_DAY_COMPLETED";
+export const GET_CALENDER_DATA_FOR_DAY_FAILED = "GET_CALENDER_DATA_FOR_DAY_FAILED";
 
-export const GET_ALL_MISSED_SCHEDULE_EVENTS_START =
-    "GET_ALL_MISSED_SCHEDULE_EVENTS_START";
-export const GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED =
-    "GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED";
-export const GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED =
-    "GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED";
+export const GET_ALL_MISSED_SCHEDULE_EVENTS_START = "GET_ALL_MISSED_SCHEDULE_EVENTS_START";
+export const GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED = "GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED";
+export const GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED = "GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED";
 
 export const getScheduleEvents = (payload) => {
     let response = {};
@@ -72,7 +63,7 @@ export const getScheduleEvents = (payload) => {
                 });
             }
         } catch (error) {
-            console.log("GET SCHEDULE EVENTS error ---> ", error);
+            console.log("getScheduleEvents error ---> ", error);
         }
         return response;
     };
@@ -103,7 +94,7 @@ export const getCalenderDataCountForDay = (date) => {
                 });
             }
         } catch (error) {
-            console.log("GET_CALENDER_DATA_COUNT error ---> ", error);
+            console.log("getCalenderDataCountForDay error ---> ", error);
         }
         return response;
     };
@@ -135,7 +126,7 @@ export const getCalenderDataForDay = (date, type) => {
                 });
             }
         } catch (error) {
-            console.log("GET_CALENDER_DATA_FOR_DAY error ---> ", error);
+            console.log("getCalenderDataForDay error ---> ", error);
         }
         return response;
     };
@@ -168,7 +159,7 @@ export const getDoctorsCalenderDataForDay = (date, type) => {
                 });
             }
         } catch (error) {
-            console.log("GET_CALENDER_DATA_FOR_DAY error ---> ", error);
+            console.log("getDoctorsCalenderDataForDay error ---> ", error);
         }
         return response;
     };
@@ -199,7 +190,7 @@ export const getLastVisitAlerts = (id) => {
                 });
             }
         } catch (error) {
-            console.log("GET LAST VISIT ALERTS ERROR", error);
+            console.log("getLastVisitAlerts error ---> ", error);
         }
         return response;
     };
@@ -227,7 +218,7 @@ export const markAppointmentComplete = (id) => {
                 });
             }
         } catch (error) {
-            console.log("markAppointmentComplete 500 error", error);
+            console.log("markAppointmentComplete 500 Error ---> ", error);
         }
         return response;
     };
@@ -266,36 +257,48 @@ export const getAllMissedScheduleEvents = () => {
 // AKSHAY NEW CODE IMPLEMENTATIONS
 export const getAllMissedEventDataByQuery = (type) => {
     let response = {};
+
     return async (dispatch) => {
         try {
-            dispatch({type: SET_MISSED_CHART_DRAWER_LOADING, payload: true});
-            dispatch({type: GET_ALL_MISSED_SCHEDULE_EVENTS_START});
+            dispatch({ type: SET_MISSED_CHART_DRAWER_LOADING, payload: true });
+            dispatch({ type: GET_ALL_MISSED_SCHEDULE_EVENTS_START });
 
             response = await doRequest({
                 method: REQUEST_TYPE.GET,
                 url: getAllMissedEventDataByQueryUrl(type),
             });
 
-            const {status, payload: {data, error} = {}} = response || {};
+            const { status, payload } = response || {};
+            const { data, error } = payload || {};
 
             console.log("getAllMissedEventDataByQuery response ---> ", response);
+            console.log("Response status ---> ", status);
+            console.log("Response payload ---> ", payload);
+            console.log("Response data ---> ", data);
+            console.log("Response error ---> ", error);
 
-            if (status === true) {
+            if (status === true && data) {
                 dispatch({
                     type: GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED,
                     data: data,
                 });
-                dispatch({type: SET_MISSED_CHART_DRAWER_LOADING, payload: false});
+                dispatch({ type: SET_MISSED_CHART_DRAWER_LOADING, payload: false });
             } else {
                 dispatch({
                     type: GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED,
-                    error,
+                    error: error || "No data received",
                 });
-                dispatch({type: SET_MISSED_CHART_DRAWER_LOADING, payload: false});
+                dispatch({ type: SET_MISSED_CHART_DRAWER_LOADING, payload: false });
             }
         } catch (error) {
             console.log("getAllMissedEventDataByQuery Error ---> ", error);
+            dispatch({
+                type: GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED,
+                error: error.message,
+            });
+            dispatch({ type: SET_MISSED_CHART_DRAWER_LOADING, payload: false });
         }
+
         return response;
     };
 };
