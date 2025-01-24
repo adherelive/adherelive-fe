@@ -85,6 +85,8 @@ class MissedAppointmentsDrawer extends Component {
 
         for (let appointment in missed_appointments) {
             const eachAppointmentEventArray = missed_appointments[appointment];
+            console.log("In the getAppointmentList eachAppointmentEventArray: ", eachAppointmentEventArray);
+
             for (let eachAppointmentEvent of eachAppointmentEventArray) {
                 const {
                     critical,
