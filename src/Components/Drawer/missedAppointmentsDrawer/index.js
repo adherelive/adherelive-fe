@@ -124,43 +124,51 @@ class MissedAppointmentsDrawer extends Component {
                     continue; // Skip this appointment if no valid participant is found
                 }
 
+                // Validate participant_id before accessing patients object
+                if (!patients[participant_id]) {
+                    console.warn(`Patient with ID ${participant_id} not found in patients object.`);
+                    continue; // Skip this appointment
+                }
+
                 isCritical = critical;
                 timings.push(start_time);
                 type_description = typeDescription;
-            }
 
-            const {
-                basic_info: {
-                    id: pId = "",
-                    first_name = "",
-                    middle_name = "",
-                    last_name = "",
-                },
-            } = patients[participant_id] || {};
+                // Safely destructure basic_info from patients[participant_id]
+                const patient = patients[participant_id] || {};
+                const {
+                    basic_info: {
+                        id: pId = "",
+                        first_name = "",
+                        middle_name = "",
+                        last_name = "",
+                    } = {},
+                } = patient;
 
-            let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`;
-            let treatment_type = type_description.length > 0 ? type_description : " ";
+                let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`;
+                let treatment_type = type_description.length > 0 ? type_description : " ";
 
-            if (isCritical) {
-                criticalList.push(
-                    <MissedAppointmentCard
-                        formatMessage={this.formatMessage}
-                        name={pName}
-                        time={timings}
-                        treatment_type={treatment_type}
-                        onClick={handlePatientDetailsRedirect(pId)}
-                    />
-                );
-            } else {
-                nonCriticalList.push(
-                    <MissedAppointmentCard
-                        formatMessage={this.formatMessage}
-                        name={pName}
-                        time={timings}
-                        treatment_type={treatment_type}
-                        onClick={handlePatientDetailsRedirect(pId)}
-                    />
-                );
+                if (isCritical) {
+                    criticalList.push(
+                        <MissedAppointmentCard
+                            formatMessage={this.formatMessage}
+                            name={pName}
+                            time={timings}
+                            treatment_type={treatment_type}
+                            onClick={handlePatientDetailsRedirect(pId)}
+                        />
+                    );
+                } else {
+                    nonCriticalList.push(
+                        <MissedAppointmentCard
+                            formatMessage={this.formatMessage}
+                            name={pName}
+                            time={timings}
+                            treatment_type={treatment_type}
+                            onClick={handlePatientDetailsRedirect(pId)}
+                        />
+                    );
+                }
             }
         }
 
