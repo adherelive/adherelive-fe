@@ -97,6 +97,7 @@ class MissedAppointmentsDrawer extends Component {
                     critical = false,
                     start_time,
                     date,
+                    end_time,
                     details = {},
                     id: eventId
                 } = eachAppointmentEvent || {};
@@ -126,7 +127,10 @@ class MissedAppointmentsDrawer extends Component {
                 // You might need to map the actor ID to a patient ID
                 const participant_id = actorId;
 
+                console.log("getAppointmentList participant_id ---> ", participant_id, eachAppointmentEvent);
+
                 // Look up patient details
+                // TODO: We are not getting the Patient details, so will be looking up the Doctor details
                 const patientDetails = patients[participant_id] || {};
                 const {
                     basic_info: {

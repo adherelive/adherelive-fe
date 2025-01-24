@@ -119,9 +119,10 @@ class Dashboard extends Component {
         } = this.props;
 
         // this.setState({ loading: true });
-
         closePopUp();
-        let doctorUserId = ""; //user_id of doctor
+
+        let doctorUserId = ""; // user_id of doctor
+
         for (let doc of Object.values(doctors)) {
             let {basic_info: {user_id, id = 1} = {}} = doc;
             if (parseInt(user_id) === parseInt(authenticated_user)) {
@@ -130,6 +131,7 @@ class Dashboard extends Component {
         }
         this.setState({doctorUserId});
         this.setState({graphLoading: true, doctorUserId});
+
         getGraphs().then((response) => {
             const {
                 status,
@@ -149,7 +151,9 @@ class Dashboard extends Component {
         if (authPermissions.length === 0) {
             this.setState({showModal: true});
         }
+
         fetchChatAccessToken(authenticated_user);
+
         if (isEmpty(medicines)) {
             searchMedicine("");
         }
@@ -158,11 +162,12 @@ class Dashboard extends Component {
             getAllFeatures();
         }
 
-        // getAllMissedScheduleEvents();
+        getAllMissedScheduleEvents();
+
         // AKSHAY NEW CODE IMPLEMENTATIONS
         getAllMissedEventChartCount();
 
-        this.initiateInAppNotificationObj();
+        await this.initiateInAppNotificationObj();
     }
 
 

@@ -6,6 +6,9 @@ import {close} from "../../modules/drawer";
 import {DRAWER} from "../../constant";
 
 const mapStateToProps = (state) => {
+    console.log("Redux state:", state); // Log the entire state
+    console.log("Patients in state:", state.patients); // Log the patients object
+
     const {
         auth: {
             authPermissions = [],

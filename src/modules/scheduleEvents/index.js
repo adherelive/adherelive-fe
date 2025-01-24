@@ -235,12 +235,15 @@ export const getAllMissedScheduleEvents = () => {
                 url: getAllMissedScheduleEventsUrl(),
             });
 
+            console.log("getAllMissedScheduleEvents API response:", response); // Log the API response
+
             const {status, payload: {data, error} = {}} = response || {};
             if (status === true) {
                 dispatch({
                     type: GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED,
                     data: data,
                 });
+                console.log("getAllMissedScheduleEvents API data:", data); // Log the data
             } else {
                 dispatch({
                     type: GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED,
