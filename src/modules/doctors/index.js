@@ -140,7 +140,7 @@ export const searchDoctorEmail = (email) => {
                 });
             }
         } catch (error) {
-            console.log("SEARCH_DOCTOR ERROR --> ", error);
+            console.log("Doctor Email ID --> searchDoctorEmail: ", error);
         }
         return response;
     };
@@ -171,7 +171,7 @@ export const searchDoctorName = (name) => {
                 });
             }
         } catch (error) {
-            console.log("SEARCH_DOCTOR_NAME ERROR --> ", error);
+            console.log("Doctor Name Error --> searchDoctorName: ", error);
         }
         return response;
     };

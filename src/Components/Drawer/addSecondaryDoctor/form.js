@@ -2,13 +2,16 @@ import React, {Component} from "react";
 import {injectIntl} from "react-intl";
 import Select from "antd/es/select";
 import SecondaryDoctorForm from "./form";
+
 // import Form from "antd/es/form";
 import message from "antd/es/message";
 import messages from "./messages";
 import Spin from "antd/es/spin";
 import {getName} from "../../../Helper/validation";
+
 import debounce from "lodash-es/debounce";
 import isEmpty from "../../../Helper/is-empty";
+
 // AKSHAY NEW COE FOR ANTD V4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
@@ -32,7 +35,7 @@ class AddSecondaryDoctor extends Component {
             SecondaryDoctorForm
         );
 
-        this.searchName = debounce(this.searchName.bind(this), 200);
+        this.searchName = debounce(this.searchName.bind(this), 500);
         // Initialize refs
         this.formRef = React.createRef();
         this.drawerBodyRef = React.createRef();
@@ -44,10 +47,21 @@ class AddSecondaryDoctor extends Component {
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
     searchName = async (name) => {
+        // Only search if name is not empty
+        if (!name || name.trim() === '') {
+            this.setState({ rowData: [], searchingName: false });
+            return;
+        }
+
+        console.log("searchName Add Secondary Doctor ---> ", name);
+
         try {
             const {searchDoctorName} = this.props;
             this.setState({searchingName: true});
             const response = await searchDoctorName(name);
+
+            console.log("searchDoctorName response ---> ", response);
+
             const {
                 status,
                 statusCode,
@@ -171,10 +185,10 @@ class AddSecondaryDoctor extends Component {
 
         const {searchingName = false} = this.state;
         return (
-                <Form 
-                    ref={this.formRef}
-                    className="event-form pb80 wp100 Form"
-                >
+            <Form
+                ref={this.formRef}
+                className="event-form pb80 wp100 Form"
+            >
                 <FormItem
                     label={formatMessage(messages.doctor_name)}
                     className="flex-grow-1 mt-4"
