@@ -20,9 +20,9 @@ const mapStateToProps = (state) => {
 
     return {
         visible: visible && type === DRAWER.MISSED_VITAL,
+        authenticated_category,
         loading,
         payload,
-        authenticated_category,
         authPermissions,
         authenticated_user,
         patients,

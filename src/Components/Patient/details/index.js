@@ -18,8 +18,10 @@ import {
     DIAGNOSIS_TYPE,
     FEATURES,
     GENDER,
+    HOST,
     PART_LIST_CODES,
     PARTS,
+    PATH,    
     REQUEST_TYPE,
     SYRUP,
     TABLE_DEFAULT_BLANK_FIELD,
@@ -83,6 +85,7 @@ import TabletIcon from "../../../Assets/images/tabletIcon3x.png";
 import InjectionIcon from "../../../Assets/images/injectionIcon3x.png";
 import SyrupIcon from "../../../Assets/images/pharmacy.png";
 import {getPatientConsultingVideoUrl} from "../../../Helper/url/patients";
+import { getPatientConsultingUrl } from "../../../Helper/url/patients";
 import SymptomTabs from "../../../Containers/Symptoms";
 import {getRoomId} from "../../../Helper/twilio";
 import {getFullName} from "../../../Helper/common";
@@ -1703,6 +1706,9 @@ class PatientDetails extends Component {
         }
     };
 
+    showTemplateDrawer = () => {
+        this.setState({templateDrawerVisible: true});
+    };
     // onRowAppointment = ({id,carePlan}) => () => {
     //   console.log("38248274826384628423");
     //   const { onRowClickAppointment } = this;

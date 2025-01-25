@@ -403,6 +403,14 @@ class AddAppointmentForm extends Component {
         return treatmentId;
     };
 
+    calendarComp = () => {
+        return (
+            <div className="flex justify-center align-center">
+                <img src={calendar} alt="calender icon" className="w20"/>
+            </div>
+        );
+    };
+
     getTreatmentOption = () => {
         let {treatments = {}} = this.props;
         let newTreatments = [];

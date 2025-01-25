@@ -37,14 +37,11 @@ const mapDispatchToProps = (dispatch) => {
         getGraphs: () => dispatch(getGraphs()),
         updateGraphs: (data) => dispatch(updateGraphs(data)),
         getAllMissedScheduleEvents: () => dispatch(getAllMissedScheduleEvents()),
-        openMissedMedicationDrawer: () =>
-            dispatch(open({type: DRAWER.MISSED_MEDICATION})),
-        openMissedAppointmentDrawer: () =>
-            dispatch(open({type: DRAWER.MISSED_APPOINTMENT})),
+        openMissedMedicationDrawer: () => dispatch(open({type: DRAWER.MISSED_MEDICATION})),
+        openMissedAppointmentDrawer: () => dispatch(open({type: DRAWER.MISSED_APPOINTMENT})),
         openMissedVitalDrawer: () => dispatch(open({type: DRAWER.MISSED_VITAL})),
         openMissedDietDrawer: () => dispatch(open({type: DRAWER.MISSED_DIET})),
-        openMissedWorkoutDrawer: () =>
-            dispatch(open({type: DRAWER.MISSED_WORKOUT})),
+        openMissedWorkoutDrawer: () => dispatch(open({type: DRAWER.MISSED_WORKOUT})),
     };
 };
 

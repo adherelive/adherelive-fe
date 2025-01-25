@@ -119,9 +119,10 @@ class Dashboard extends Component {
         } = this.props;
 
         // this.setState({ loading: true });
-
         closePopUp();
-        let doctorUserId = ""; //user_id of doctor
+
+        let doctorUserId = ""; // user_id of doctor
+
         for (let doc of Object.values(doctors)) {
             let {basic_info: {user_id, id = 1} = {}} = doc;
             if (parseInt(user_id) === parseInt(authenticated_user)) {
@@ -130,6 +131,7 @@ class Dashboard extends Component {
         }
         this.setState({doctorUserId});
         this.setState({graphLoading: true, doctorUserId});
+
         getGraphs().then((response) => {
             const {
                 status,
@@ -149,7 +151,9 @@ class Dashboard extends Component {
         if (authPermissions.length === 0) {
             this.setState({showModal: true});
         }
+
         fetchChatAccessToken(authenticated_user);
+
         if (isEmpty(medicines)) {
             searchMedicine("");
         }
@@ -158,11 +162,12 @@ class Dashboard extends Component {
             getAllFeatures();
         }
 
-        // getAllMissedScheduleEvents();
+        getAllMissedScheduleEvents();
+
         // AKSHAY NEW CODE IMPLEMENTATIONS
         getAllMissedEventChartCount();
 
-        this.initiateInAppNotificationObj();
+        await this.initiateInAppNotificationObj();
     }
 
 
@@ -692,7 +697,6 @@ class Dashboard extends Component {
     };
 
     // AKSHAY NEW CODE IMPLEMENTATIONS
-
     setAddPatientAfterSearch = (patient_id, patientSearchAllData) => {
         let patientSearchData = patientSearchAllData;
         patientSearchData.patientId = patient_id;
@@ -767,8 +771,8 @@ class Dashboard extends Component {
             watchlistTab,
         } = this.state;
 
+        // TODO: Might need to check why this is not using the getRoomId() function, instead
         // const roomId = getRoomId(doctorRoleId, patientRoleId);
-
         const {channel_id: roomId} = care_plans[care_plan_id] || {};
 
         let bannerFlag = true;
@@ -781,18 +785,20 @@ class Dashboard extends Component {
         }
 
         // AKSHAY NEW CODE IMPLEMENTATIONS
-
-        // if (
-        //   Object.keys(graphs).length === 0 ||
-        //   loading ||
-        //   docName === TABLE_DEFAULT_BLANK_FIELD
-        // ) {
-        //   return (
-        //     <div className="hvh100 flex direction-column align-center justify-center">
-        //       <Loading className={"wp100"} />
-        //     </div>
-        //   );
-        // }
+        /**
+         * TODO: Why is this commented out?
+        if (
+          Object.keys(graphs).length === 0 ||
+          loading ||
+          docName === TABLE_DEFAULT_BLANK_FIELD
+        ) {
+          return (
+            <div className="hvh100 flex direction-column align-center justify-center">
+              <Loading className={"wp100"} />
+            </div>
+          );
+        }
+         */
 
         return (
             <Fragment>
@@ -924,8 +930,8 @@ class Dashboard extends Component {
                         <TabPane
                             tab={
                                 <span className="fs16 fw600">
-                  {formatMessage(messages.pending_activities)}
-                </span>
+                                    {formatMessage(messages.pending_activities)}
+                                </span>
                             }
                             key={CURRENT_TAB.PENDING_ACTIVITIES}
                         >
@@ -1014,15 +1020,15 @@ class Dashboard extends Component {
                             {this.formatMessage(messages.pending_verify_content_text)}
                         </div>
                         <span className="wp100 ht20 fs16 text-left">
-              {this.formatMessage(messages.pending_verify_content_other_text)}
-            </span>{" "}
+                            {this.formatMessage(messages.pending_verify_content_other_text)}
+                        </span>{" "}
                         <a
                             href={`mailto:${config.ADHERE_LIVE_CONTACT_LINK}?subject=${config.mail.VERIFICATION_PENDING_MESSAGE}`}
                             target={"_blank"}
                         >
-              <span className="wp100 ht20 fs16 text-left">
-                {this.formatMessage(messages.adhere_support_text)}
-              </span>
+                            <span className="wp100 ht20 fs16 text-left">
+                                {this.formatMessage(messages.adhere_support_text)}
+                            </span>
                         </a>
                     </div>
                 ) : null}

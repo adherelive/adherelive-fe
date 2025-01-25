@@ -169,7 +169,7 @@ function Index({
                                     />
                                     <DayView startDayHour={7.5} endDayHour={22.5}/>
                                     {/* <WeekView startDayHour={7.5} endDayHour={22.5} />
-              <MonthView /> */}
+                                    <MonthView /> */}
                                     <Appointments/>
                                     <AppointmentForm
                                         visible={false}

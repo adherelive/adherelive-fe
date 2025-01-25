@@ -47,8 +47,8 @@ class PatientDetailsDrawer extends Component {
     // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
     getCarePlanForPatient = async (patientId) => {
         try {
-            const {getPatientCareplanByPatientId} = this.props;
-            const getCarePlanResponse = await getPatientCareplanByPatientId(
+            const {getPatientCarePlanByPatientId} = this.props;
+            const getCarePlanResponse = await getPatientCarePlanByPatientId(
                 patientId
             );
             const {
@@ -62,6 +62,7 @@ class PatientDetailsDrawer extends Component {
                 if (!isEmpty(data.care_plans)) {
                     let carePlanId = 1;
                     let carePlanMedicationIds = [];
+                    //let carePlanAppointmentIds = [];
                     let appointmentsListIds = [];
                     for (let carePlan of Object.values(data.care_plans)) {
                         let {
@@ -78,13 +79,12 @@ class PatientDetailsDrawer extends Component {
                     this.setState({
                         carePlanId,
                         carePlanMedicationIds,
+                        //carePlanAppointmentIds,
                         appointmentsListIds,
                         care_plans: data.care_plans,
                     });
                 }
-                // this.setState({
-                //   carePlans: data.care_plans,
-                // });
+                // this.setState({ carePlans: data.care_plans, });
             }
         } catch (error) {
             console.log("Patient Care Plans are getting an error ---> \n", error);
@@ -110,7 +110,7 @@ class PatientDetailsDrawer extends Component {
 
         /* TODO: Need to check why this part has been commented out
         for (let appointment of Object.values(appointments)){
-          let {basic_info:{id} ,participant_one : {id : participant_one_Id = 1} , participant_two : {id: participant_two_Id = 1}} = appointment;
+          let {basic_info:{id}, participant_one : {id : participant_one_Id = 1} , participant_two : {id: participant_two_Id = 1}} = appointment;
 
           if (parseInt(patient_id) === parseInt(participant_two_Id)) {
             appointmentsListIds.push(id);
@@ -298,6 +298,8 @@ class PatientDetailsDrawer extends Component {
     getAppointmentList = () => {
         const {appointmentsListIds} = this.state;
 
+        console.log("In the getAppointmentList appointmentsListIds: ", appointmentsListIds);
+
         const {appointments = {}, doctors = {}} = this.props;
         const {formatMessage} = this;
         const appointmentList = appointmentsListIds.map((id) => {
@@ -312,21 +314,26 @@ class PatientDetailsDrawer extends Component {
                 organizer: {id: organizer_id} = {},
             } = appointments[id] || {};
 
+            console.log("In the getAppointmentList appointments ID: ", appointments[id]);
+
             let docName = "";
 
-            // for(const doctorId in doctors) {
-            //   const {basic_info: {full_name, user_id} = {}} = doctors[doctorId] || {};
-            //   if(user_id === organizer_id) {
-            //     docName = full_name;
-            //   }
+            /**
+             * TODO: Need to check why this part has been commented out
+            for(const doctorId in doctors) {
+              const {basic_info: {full_name, user_id} = {}} = doctors[doctorId] || {};
+              if(user_id === organizer_id) {
+                docName = full_name;
+              }
+            }
+             */
 
-            // }
-
-            const {basic_info: {full_name, user_id} = {}} =
-            doctors[organizer_id] || {};
+            const {basic_info: {full_name, user_id} = {}} = doctors[organizer_id] || {};
             docName = full_name;
 
             let td = moment(start_time);
+            console.log("In the getAppointmentList start_time, end_time, organizer: ", td, end_time, organizer);
+
             return (
                 <div key={id} className="flex justify-space-between align-center mb10">
                     <div className="pointer tab-color fw600 wp35 tooltip">
@@ -351,6 +358,8 @@ class PatientDetailsDrawer extends Component {
                 </div>
             );
         });
+
+        console.log("In the getAppointmentList appointmentList: ", appointmentList);
         return appointmentList;
     };
 
@@ -501,9 +510,7 @@ class PatientDetailsDrawer extends Component {
             return (
                 <Fragment>
                     {/*<img src={CloseIcon} alt="close icon" onClick={}/>*/}
-
                     {/*header*/}
-
                     <div className="wp100 flex justify-space-between align-center mt20">
                         <div className="flex justify-space-around align-center">
                             <div className="pr10 fs24 fw600">{`${getName(
@@ -584,7 +591,7 @@ class PatientDetailsDrawer extends Component {
                                 <div
                                     key={id}
                                     className={`mt10 ${
-                                        id === MISSED_MEDICATION || id === MISSED_ACTIONS
+                                        id === MISSED_MEDICATION || id === MISSED_ACTIONS // || id === MISSED_APPOINTMENTS
                                             ? "ml16"
                                             : ""
                                     } mwp45 maxwp48  h100 br5 bg-${
@@ -624,7 +631,6 @@ class PatientDetailsDrawer extends Component {
                     </div>
 
                     {/*details*/}
-
                     <div className="clearfix"></div>
 
                     <div className="mt20 wp100">
@@ -703,7 +709,6 @@ class PatientDetailsDrawer extends Component {
                     </div>
 
                     {/*medications*/}
-
                     <div className="mt20 black-85 wp100">
                         <div className="mt10 mb10 fs18 fw600">
                             {formatMessage(messages.medications)}
@@ -713,7 +718,6 @@ class PatientDetailsDrawer extends Component {
                     </div>
 
                     {/*appointments*/}
-
                     <div className="mt20 black-85 wp100">
                         <div className="mt10 mb10 fs18 fw600">
                             {formatMessage(messages.appointments)}

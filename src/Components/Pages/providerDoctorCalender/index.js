@@ -18,7 +18,7 @@ const PANEL = {
     MONTH: "month",
 };
 
-class ProviderDoctorCalneder extends Component {
+class ProviderDoctorCalender extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -476,4 +476,4 @@ class ProviderDoctorCalneder extends Component {
     }
 }
 
-export default injectIntl(ProviderDoctorCalneder);
+export default injectIntl(ProviderDoctorCalender);

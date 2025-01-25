@@ -29,34 +29,38 @@ class MissedMedicationsDrawer extends Component {
         close();
     };
 
-    //   async handleGetMissedVitals(){
-    //     try {
-    //         const {getAllMissedScheduleEvents} = this.props;
-    //         this.setState({fetching:true});
-    //         const response = await getAllMissedScheduleEvents();
-    //         const { status, payload: {  data : {missed_vitals = {},
-    //           vital_ids : {critical=[],non_critical=[]} =  {}}  } = {} ,statusCode } =
-    //         response || {};
-    //             if (status && statusCode === 200 ) {
-    //                 this.setState({
-    //                     missed_vitals:missed_vitals,
-    //                     criticalVitalIds:critical,
-    //                     nonCriticalVitalIds:non_critical,
-    //                     fetching:false
-    //               })
-    //
-    //             } else{
-    //               this.setState({fetching:false});
-    //
-    //             }
-    //
-    //     } catch (err) {
-    //         console.log("err", err);
-    //         message.warn(this.formatMessage(messages.somethingWentWrong));
-    //         this.setState({fetching:false});
-    //
-    //     }
-    // }
+
+    /**
+     * TODO: Why is this commented out?
+    async handleGetMissedVitals(){
+        try {
+            const {getAllMissedScheduleEvents} = this.props;
+            this.setState({fetching:true});
+            const response = await getAllMissedScheduleEvents();
+            const { status, payload: {  data : {missed_vitals = {},
+              vital_ids : {critical=[],non_critical=[]} =  {}}  } = {} ,statusCode } =
+            response || {};
+                if (status && statusCode === 200 ) {
+                    this.setState({
+                        missed_vitals:missed_vitals,
+                        criticalVitalIds:critical,
+                        nonCriticalVitalIds:non_critical,
+                        fetching:false
+                  })
+
+                } else{
+                  this.setState({fetching:false});
+
+                }
+
+        } catch (err) {
+            console.log("err", err);
+            message.warn(this.formatMessage(messages.somethingWentWrong));
+            this.setState({fetching:false});
+
+        }
+    }
+     */
 
     handlePatientDetailsRedirect = (patient_id) => (e) => {
         const {authenticated_category} = this.props;
@@ -79,7 +83,7 @@ class MissedMedicationsDrawer extends Component {
         const {handlePatientDetailsRedirect, formatMessage} = this;
 
         Object.keys(missed_vitals).forEach((id) => {
-            console.log("182371923 vitals", {vitals: missed_vitals[id]});
+            console.log("getVitalList missed vitals ID: ", {vitals: missed_vitals[id]});
             const {critical, patient_id, vital_name, timings} =
             missed_vitals[id] || {};
 
