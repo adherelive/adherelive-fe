@@ -1,7 +1,9 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import ReactMde from "react-mde";
-import * as Showdown from "showdown";
+// import * as Showdown from "showdown";
+import { marked } from "marked"; // Use marked instead of Showdown
+import { markedTasklists } from "markdown-it-task-lists"; // For task lists support
 import "react-mde/lib/styles/css/react-mde-all.css";
 import Button from "antd/es/button";
 import Radio from "antd/es/radio";
@@ -10,12 +12,29 @@ import message from "antd/es/message";
 import messages from "./messages";
 import {ArrowLeftOutlined} from "@ant-design/icons";
 
+/**
+ * Replaced Showdown with marked
 const converter = new Showdown.Converter({
-    tables: true,
-    simplifiedAutoLink: true,
-    strikethrough: true,
-    tasklists: true,
+    tables: true, // Enables GitHub Flavored Markdown (GFM) tables.
+    simplifiedAutoLink: true, // Automatically converts URLs and email addresses into links.
+    strikethrough: true, // Enables strikethrough syntax (~~text~~).
+    tasklists: true, // Enables GitHub-style task lists (- [x] Task).
 });
+*/
+
+// Set options for marked
+marked.setOptions({
+    gfm: true, // GitHub Flavored Markdown, which includes tables, strikethrough, and task lists
+    linkify: true, // Auto-converts URL-like text to links
+    tables: true,
+    sanitize: false,
+    breaks: false, // Disable converting single newlines to <br>
+    pedantic: false, // Don't strictly adhere to Markdown.pl
+    smartLists: true, // Use smarter list behavior
+    smartypants: false, // Disable automatic typographic replacements
+});
+// Enable task lists support
+marked.use(markedTasklists());
 
 const {Group: RadioGroup, Button: RadioButton} = Radio;
 
@@ -147,8 +166,10 @@ class TosPPEditorPage extends Component {
     render() {
         const {value, selectedTab} = this.state;
         const {setValue, setSelectedTab, getHeader} = this;
+        // Convert Markdown to HTML
+        const html = marked(markdown);
 
-        console.log("8318237827 value ---> ", value);
+        console.log("tosPPEditorPage value ---> ", value);
 
         return (
             <div className="wp100 tos-pp-markdown-editor p20">
@@ -158,8 +179,9 @@ class TosPPEditorPage extends Component {
                     onChange={setValue}
                     selectedTab={selectedTab}
                     onTabChange={setSelectedTab}
-                    generateMarkdownPreview={(markdown) =>
-                        Promise.resolve(converter.makeHtml(markdown))
+                    generateMarkdownPreview={(html) =>
+                        // Promise.resolve(converter.makeHtml(markdown)),
+                        Promise.resolve(html)  // Use marked instead of converter
                     }
                 />
             </div>
