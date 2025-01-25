@@ -99,14 +99,27 @@ class MissedAppointmentsDrawer extends Component {
                     critical = false,
                     start_time,
                     date: start_date,
-                    details = {}
+                    details = {},
+                    id: eventId,
                 } = eachAppointmentEvent || {};
 
                 const {
+                    actor = {},
                     basic_info = {},
                     participant_one = {},
-                    participant_two = {}
+                    participant_two = {},
                 } = details;
+
+                const {
+                    id: actorId,
+                    details: actorDetails = {},
+                    user_role_id
+                } = actor;
+
+                const {
+                    name: actorName = "",
+                    category: actorCategory = ""
+                } = actorDetails;
 
                 const {
                     details: {
@@ -135,6 +148,13 @@ class MissedAppointmentsDrawer extends Component {
                     continue;
                 }
 
+                // Assuming you want to handle only specific categories
+                // Modify this logic based on your specific requirements to a PATIENT
+                if (actorCategory !== USER_CATEGORY.DOCTOR) {
+                    // Skip non-patient events or handle differently
+                    return;
+                }
+
                 isCritical = critical;
                 timings.push(start_time);
                 type_description = typeDescription;
@@ -150,19 +170,16 @@ class MissedAppointmentsDrawer extends Component {
                     } = {}
                 } = patientDetails;
 
-                // TODO: Check why the patient information is not coming through
-                // const {basic_info : {id : pId = '', first_name = '',middle_name = '',last_name = ''}}=patients[participant_id] || {};
-
                 let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`.trim();
                 let treatment_type = type_description.length > 0 ? type_description : " ";
 
                 // Create list items
                 const appointmentCard = (
                     <MissedAppointmentCard
-                        key={pId || Math.random()} // Add key to prevent React warnings
+                        key={pId || eventId || Math.random()} // Add key to prevent React warnings
                         formatMessage={this.formatMessage}
                         name={pName}
-                        time={timings}
+                        time={timings || [start_time]}
                         treatment_type={treatment_type}
                         onClick={handlePatientDetailsRedirect(pId)}
                     />
@@ -176,7 +193,7 @@ class MissedAppointmentsDrawer extends Component {
             }
         }
 
-        // Rest of the function remains the same...
+        // Display the Missed Medications as Critical/Non-critical
         appointmentList.push(
             <div key="missed-appointments">
                 <div>
