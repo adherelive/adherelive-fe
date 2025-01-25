@@ -85,6 +85,7 @@ import TabletIcon from "../../../Assets/images/tabletIcon3x.png";
 import InjectionIcon from "../../../Assets/images/injectionIcon3x.png";
 import SyrupIcon from "../../../Assets/images/pharmacy.png";
 import {getPatientConsultingVideoUrl} from "../../../Helper/url/patients";
+import { getPatientConsultingUrl } from "../../../Helper/url/patients";
 import SymptomTabs from "../../../Containers/Symptoms";
 import {getRoomId} from "../../../Helper/twilio";
 import {getFullName} from "../../../Helper/common";
