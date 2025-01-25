@@ -167,7 +167,7 @@ class TosPPEditorPage extends Component {
         const {value, selectedTab} = this.state;
         const {setValue, setSelectedTab, getHeader} = this;
         // Convert Markdown to HTML
-        const html = marked(markdown);
+        // const html = marked(markdown);
 
         console.log("tosPPEditorPage value ---> ", value);
 
@@ -181,7 +181,7 @@ class TosPPEditorPage extends Component {
                     onTabChange={setSelectedTab}
                     generateMarkdownPreview={(html) =>
                         // Promise.resolve(converter.makeHtml(markdown)),
-                        Promise.resolve(html)  // Use marked instead of converter
+                        Promise.resolve(marked(html))  // Use marked instead of converter
                     }
                 />
             </div>
