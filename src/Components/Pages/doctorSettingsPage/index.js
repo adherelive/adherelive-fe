@@ -102,7 +102,7 @@ class DoctorSettingsPage extends Component {
                 statusCode,
             } = response || {};
 
-            console.log("RESPONSEEEEEEEEEEEEEEEE ====>", response);
+            console.log("handleGetDoctorPaymentProduct ---> getDoctorPaymentProduct response: ", response);
             if (status && statusCode === 200) {
                 this.setState({
                     fetchingDoctorPayments: false,
@@ -156,7 +156,7 @@ class DoctorSettingsPage extends Component {
         const {openConsultationFeeDrawer} = this.props;
         const {doctorPaymentProducts} = this.state;
         const {[id]: paymentData} = doctorPaymentProducts;
-        console.log("8723562837462375468327453287", {id, paymentData});
+        console.log("displayEditDoctorPaymentProduct ---> id, paymentData: ", {id, paymentData});
         openConsultationFeeDrawer(paymentData);
     };
 
@@ -210,10 +210,11 @@ class DoctorSettingsPage extends Component {
 
     noConsultationFeeDisplay = () => {
         const provider_id = this.isDoctorRoleAssociatedWithProvider() || null;
-        console.log("provider_id", provider_id);
+        console.log("noConsultationFeeDisplay ---> provider_id: ", provider_id);
         const {auth, providers, services} = this.props;
 
         return (
+            // TODO: Check why this has been commented
             // <div className="w700 mb20 flex direction-column align-center justify-center">
             //   <div className="br-lightgrey h200 w200 br4"></div>
             //   <div className="mt20 fs25 fw700 black-85">
@@ -244,24 +245,26 @@ class DoctorSettingsPage extends Component {
                     No Service Added
                 </div>
                 {/* <div className="mt20 fs18 fw600 ">
-        {this.formatMessage(messages.notAddedFeesYet)}
-      </div> */}
+                        {this.formatMessage(messages.notAddedFeesYet)}
+                    </div>*/
+                }
 
                 {auth.doctor_provider_id === null &&
                 Object.keys(services).length === 0 ? (
                     <div className=" mt20">
                         {/* <Button
-          type="primary"
-          onClick={this.displayAddDoctorPaymentProduct}
-        >
-          <span className="w200 fs20">
-            {this.formatMessage(messages.addFee)}
-          </span>
-         
-        </Button> */}
+                              type="primary"
+                              onClick={this.displayAddDoctorPaymentProduct}
+                            >
+                              <span className="w200 fs20">
+                                {this.formatMessage(messages.addFee)}
+                              </span>
+
+                            </Button> */
+                        }
                         {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
                         <Dropdown
-                            overlay={this.getMenu()}
+                            menu={this.getMenu()}
                             trigger={["click"]}
                             placement="bottomRight"
                         >
@@ -302,7 +305,7 @@ class DoctorSettingsPage extends Component {
                 );
             }
         } catch (err) {
-            console.log("err ", err);
+            console.log("handleDeleteDoctorPaymentProduct error: ", err);
             message.warn(this.formatMessage(messages.somethingWentWrong));
         }
     }
@@ -312,7 +315,6 @@ class DoctorSettingsPage extends Component {
         if (providerid) {
             return null;
         }
-
         return (
             <Button
                 type="dashed"
@@ -322,12 +324,13 @@ class DoctorSettingsPage extends Component {
                 value={this.formatMessage(messages.addAccountDetails)}
             >
                 {/* <div className="flex direction-column align-center justify-center hp100">
-          <img src={plus} className={"w20 h20 mr10 "} />
-        </div> */}
+                      <img src={plus} className={"w20 h20 mr10 "} />
+                    </div> */
+                }
                 <div className="mr10 flex direction-column align-center justify-center hp100">
-          <span className="fs20 fw700">
-            {this.formatMessage(messages.addAccountDetails)}
-          </span>
+                    <span className="fs20 fw700">
+                        {this.formatMessage(messages.addAccountDetails)}
+                    </span>
                 </div>
             </Button>
         );
@@ -339,7 +342,7 @@ class DoctorSettingsPage extends Component {
             const provider_id = this.isDoctorRoleAssociatedWithProvider() || null;
             let response = {};
 
-            console.log("83827163871873671638712", {provider_id});
+            console.log("handleGetAccountDetails ---> provider_id: ", {provider_id});
 
             if (provider_id) {
                 response = await getAccountDetails(provider_id);
@@ -362,7 +365,7 @@ class DoctorSettingsPage extends Component {
                 // const {basic_info : {id='',customer_name='',account_number='',ifsc_code='',account_type='',account_mobile_number='',in_use=false,prefix='',upi_id=null} = {} } = Object.values(account_details)[0] || {};
             }
         } catch (err) {
-            console.log("83827163871873671638712 err ", err);
+            console.log("handleGetAccountDetails error: ", err);
             message.warn(this.formatMessage(messages.somethingWentWrong));
         }
     }
@@ -375,7 +378,7 @@ class DoctorSettingsPage extends Component {
                 onClick={this.displayRazorpayAccountDetails}
             >
                 <div className="flex direction-column align-center justify-center hp100">
-                    <img src={plus} className={"w22 h22 mr10 "}/>
+                    <img src={plus} className={"w22 h22 mr10 "} alt={"Display Details!"}/>
                 </div>
                 <div className="flex direction-column align-center justify-center hp100">
           <span className="fs22 fw700">
@@ -659,6 +662,7 @@ class DoctorSettingsPage extends Component {
                                         <img
                                             src={edit_image}
                                             className="pointer edit-patient-icon"
+                                            alt={"Display RazorPay Account!"}
                                         />
                                     </div>
                                     <div className="flex direction-column  align-center justify-center dark-sky-blue">
@@ -846,7 +850,7 @@ class DoctorSettingsPage extends Component {
                 </Button> */}
                                 {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
                                 <Dropdown
-                                    overlay={this.getMenu()}
+                                    menu={this.getMenu()}
                                     trigger={["click"]}
                                     placement="bottomRight"
                                 >
