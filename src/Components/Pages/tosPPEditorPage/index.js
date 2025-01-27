@@ -22,7 +22,7 @@ const converter = new Showdown.Converter({
 
 // Custom renderer for task lists
 const renderer = {
-    listItem(text, task, checked) {
+    listitem(text, task, checked) {
         if (task) {
             return `<li><input type="checkbox" ${checked ? 'checked' : ''} disabled> ${text}</li>`;
         }
