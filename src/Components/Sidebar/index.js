@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, {Component} from "react";
 import {injectIntl} from "react-intl";
 import {Avatar, Dropdown, Menu, message, Tooltip} from "antd";
 import {PATH, USER_CATEGORY, USER_PERMISSIONS} from "../../constant";
@@ -8,7 +8,6 @@ import Logo from "../../Assets/images/logo3x.png";
 import dashboardIcon from "../../Assets/images/dashboard.svg";
 import {withRouter} from "react-router-dom";
 import {
-    AccountBookOutlined,
     BellFilled,
     CalendarTwoTone,
     FileOutlined,
@@ -20,7 +19,6 @@ import {
 import messages from "./messages";
 import config from "../../config";
 import {getAbbreviation} from "../../Helper/common";
-import Icon from "@ant-design/icons";
 
 const {Item: MenuItem} = Menu || {};
 
@@ -72,7 +70,8 @@ class SideMenu extends Component {
             } else {
                 message.warn("Something has gone wrong while logging out. Please try again later!");
             }
-        } catch (error) {}
+        } catch (error) {
+        }
     };
 
     warnNote = () => {
@@ -94,7 +93,8 @@ class SideMenu extends Component {
                 onOk: async () => {
                     this.handleItemSelectForRedirect({key});
                 },
-                onCancel() {},
+                onCancel() {
+                },
             });
         } catch (error) {
             console.log("Component Sidebar handleRedirect err ---> ", error);
@@ -398,7 +398,7 @@ class SideMenu extends Component {
             getProviderUserRoleIcon,
         } = this;
 
-        console.log("user_role_ids", user_role_ids);
+        console.log("getUserRoles ---> user_role_ids: ", user_role_ids);
 
         return user_role_ids.map((id) => {
             const {basic_info: {user_identity, linked_id} = {}} =
@@ -473,18 +473,20 @@ class SideMenu extends Component {
 
                 {/* <Menu.Divider /> */}
                 {/* <Menu.Item className="p10" key={PRIVACY_POLICY}>
-          <a href={PRIVACY_PAGE_URL} target={"_blank"}>
-            {this.formatMessage(messages.privacy_policy_text)}
-          </a>
-        </Menu.Item> */}
+                      <a href={PRIVACY_PAGE_URL} target={"_blank"}>
+                        {this.formatMessage(messages.privacy_policy_text)}
+                      </a>
+                    </Menu.Item> */
+                }
                 <Menu.Divider/>
                 <Menu.Item className="pl24 pr80" key={PROFILE}>
                     Profile
                 </Menu.Item>
                 <Menu.Divider/>
                 {/* <Menu.Item className="pl24 pr80" key={SETTINGS}>
-          Settings
-        </Menu.Item> */}
+                      Settings
+                    </Menu.Item> */
+                }
                 <Menu.Item className="pl24 pr80" key={TEMPLATES}>
                     {this.formatMessage(messages.templates)}
                 </Menu.Item>
@@ -631,7 +633,7 @@ class SideMenu extends Component {
 
         const {unseen_notification_count: count = 0} = notification_count || {};
         const unseen_notification_count = parseInt(count);
-        // console.log("2934y98237498238423 COUNTTTTTTTTTT",{unseen_notification_count});
+        // console.log("render Sidebar, count unseen notifications: ",{unseen_notification_count});
         let dp = "";
         let initials = "";
 
