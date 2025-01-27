@@ -264,7 +264,7 @@ class DoctorSettingsPage extends Component {
                         }
                         {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
                         <Dropdown
-                            menu={this.getMenu()}
+                            overlay={this.getMenu()}
                             trigger={["click"]}
                             placement="bottomRight"
                         >
@@ -378,7 +378,7 @@ class DoctorSettingsPage extends Component {
                 onClick={this.displayRazorpayAccountDetails}
             >
                 <div className="flex direction-column align-center justify-center hp100">
-                    <img src={plus} className={"w22 h22 mr10 "} alt={"Display Details!"}/>
+                    <img src={plus} className={"w22 h22 mr10 "}/>
                 </div>
                 <div className="flex direction-column align-center justify-center hp100">
           <span className="fs22 fw700">
@@ -662,7 +662,6 @@ class DoctorSettingsPage extends Component {
                                         <img
                                             src={edit_image}
                                             className="pointer edit-patient-icon"
-                                            alt={"Display RazorPay Account!"}
                                         />
                                     </div>
                                     <div className="flex direction-column  align-center justify-center dark-sky-blue">
@@ -850,7 +849,7 @@ class DoctorSettingsPage extends Component {
                 </Button> */}
                                 {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
                                 <Dropdown
-                                    menu={this.getMenu()}
+                                    overlay={this.getMenu()}
                                     trigger={["click"]}
                                     placement="bottomRight"
                                 >

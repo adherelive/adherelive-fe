@@ -298,7 +298,7 @@ class TimelineTab extends Component {
     renderTimelineBody = (data) => {
         const {upload_documents = {}} = this.props;
         let dataTorender = [];
-        console.log("1298317382 data --> ", data);
+        console.log("Symptoms timeline ---> renderTimelineBody data: ", data);
         for (let rowData of data) {
             const {
                 date = "",

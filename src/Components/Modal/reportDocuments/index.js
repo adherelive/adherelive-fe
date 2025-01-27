@@ -54,7 +54,7 @@ class ReportDocuments extends Component {
 
         return (
             <Modal
-                open={visible}
+                visible={visible}
                 className={"upload-appointment-docs-modal"}
                 title={formatMessage(messages.report_documents_text)}
                 closable
@@ -102,7 +102,7 @@ class ReportDocuments extends Component {
                 </div>
                 <div>
                     <Modal
-                        open={viewModalVisible}
+                        visible={viewModalVisible}
                         closable
                         mask
                         maskClosable

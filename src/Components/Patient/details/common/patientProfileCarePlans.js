@@ -115,7 +115,7 @@ class PatientCarePlans extends Component {
                                             )} (${provider_name})`
                                             : `${formatMessage(messages.with_you_text)} (Self)`
                                     : `Dr ${!isEmpty(doctor) && doctor.full_name}`
-                                //PREV CHNAGES
+                                // Previous changes
                                 // `Dr. ${getFullName({
                                 //     first_name,
                                 //     middle_name,
@@ -202,34 +202,25 @@ class PatientCarePlans extends Component {
 
     renderFooter = () => {
         const {intl: {formatMessage} = {}, handleRequestConsent} = this.props;
-
         return (
             <div className="absolute l0 t0 wp100 hp100  flex direction-column align-center justify-center">
-        <span className="fw700 fs18">
-          {formatMessage(messages.patientOtherTreatmentPlans)}
-        </span>
-                <span
-                    onClick={handleRequestConsent}
-                    className="tab-color pointer fw700 fs19"
-                >
-          {formatMessage(messages.request_access_text)}
-        </span>
+                <span className="fw700 fs18">
+                  {formatMessage(messages.patientOtherTreatmentPlans)}
+                </span>
+                <span onClick={handleRequestConsent} className="tab-color pointer fw700 fs19">
+                  {formatMessage(messages.request_access_text)}
+                </span>
             </div>
         );
     };
 
     hideFooter = () => {
-        const {doctors, authenticated_user, patientCarePlanIds, auth_role} =
-            this.props;
-
+        const {doctors, authenticated_user, patientCarePlanIds, auth_role} = this.props;
         const authDoctor = getAuthCategory({doctors, authenticated_user});
-
         const {care_plan_ids = []} = authDoctor || {};
-
         const hiddenCarePlanIds = patientCarePlanIds.filter((id) => {
             return !care_plan_ids[auth_role].includes(id);
         });
-
         return hiddenCarePlanIds.length > 0 ? false : true;
     };
 

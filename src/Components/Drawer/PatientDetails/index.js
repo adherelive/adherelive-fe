@@ -515,7 +515,7 @@ class PatientDetailsDrawer extends Component {
                         <div className="flex justify-space-around align-center">
                             <div className="pr10 fs24 fw600">
                                 {
-                                    `${getName(first_name)} ${getName(middle_name)} ${getName(last_name)}`
+                                    `${getName(first_name)} ${getName(middle_name)} ${getName(last_name)} `
                                 }
                             </div>
                             <div className="pr10 fs20 fw500">

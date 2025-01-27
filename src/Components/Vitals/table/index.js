@@ -64,11 +64,11 @@ class VitalTable extends Component {
         } = this.props;
         // const {vital_ids} = this.state;
 
-        console.log("23943278648726348723", {props: this.props});
+        console.log("Vitals table getDataSource ---> this.pros: ", {props: this.props});
         const {vital_ids = []} = care_plans || {};
         const {openResponseDrawer, openEditDrawer} = this;
         const {basic_info: {user_role_id = null} = {}} = care_plans || {};
-        console.log("care_plans vitals", care_plans);
+        console.log("Vitals table getDataSource ---> care_plans: ", care_plans);
         let canViewDetails = true;
         if (
             (!isOtherCarePlan && user_role_id.toString() === auth_role.toString()) ||

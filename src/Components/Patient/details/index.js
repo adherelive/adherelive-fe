@@ -21,7 +21,7 @@ import {
     HOST,
     PART_LIST_CODES,
     PARTS,
-    PATH,    
+    PATH,
     REQUEST_TYPE,
     SYRUP,
     TABLE_DEFAULT_BLANK_FIELD,
@@ -385,10 +385,10 @@ const PatientProfileHeader = ({
                               }) => {
     console.log("Selected Care Plan, in Patient Profile Header: ", {selectedCarePlanId});
 
-    console.log("showAddButton", showAddButton);
-    console.log("selectedCarePlanId", selectedCarePlanId);
-    console.log("auth_role", auth_role);
-    console.log("user_role_id", user_role_id);
+    console.log("PatientProfileHeader showAddButton: ", showAddButton);
+    console.log("PatientProfileHeader selectedCarePlanId: ", selectedCarePlanId);
+    console.log("PatientProfileHeader auth_role: ", auth_role);
+    console.log("PatientProfileHeader user_role_id: ", user_role_id);
     // AKSHAY NEW CODE IMPLEMENTATION START
     console.log(secondary_doctor_user_role_ids.includes(auth_role));
     // AKSHAY NEW CODE IMPLEMENTATION END
@@ -470,9 +470,9 @@ const PatientCard = ({
     return (
         <div className="flex direction-column tac br10 bg-faint-grey">
             {/* <div className="flex justify-end pt20 pl20 pr20 pb6">
-        <CaretDownOutlined className="pointer" />
-      </div> */}
-
+                <CaretDownOutlined className="pointer" />
+              </div> */
+            }
             <div className="wp100 flex justify-end p10">
                 <Dropdown overlay={menu} placement={"bottomLeft"}>
                     <CaretDownOutlined className="pointer"/>
@@ -490,7 +490,6 @@ const PatientCard = ({
             {/*    </Panel>*/}
             {/*  </Collapse>*/}
             {/*</div>*/}
-
             <div className="flex">
                 <div className="flex align-start">
                     <img
@@ -545,13 +544,14 @@ const PatientCard = ({
                         </div>
 
                         {/* <div className="br50 bg-darker-blue p10 mr10 w30 h30 flex justify-center align-center pointer">
-              <Tooltip placement={"bottom"} title={formatMessage(messages.video_icon_text)}>
-              <div className="text-white fs18" >
-                      {editPatientOption()}
+                              <Tooltip placement={"bottom"} title={formatMessage(messages.video_icon_text)}>
+                              <div className="text-white fs18" >
+                                      {editPatientOption()}
 
-              </div>
-              </Tooltip>
-            </div> */}
+                              </div>
+                              </Tooltip>
+                            </div> */
+                        }
                     </div>
                 </div>
             </div>
@@ -946,7 +946,6 @@ class PatientDetails extends Component {
             } = payload;
 
             // AKSHAY NEW CODE IMPLEMENTATION START
-
             const patientCarePlans =
                 !isEmpty(care_plan_ids) &&
                 care_plan_ids.filter((id) => {
@@ -959,15 +958,11 @@ class PatientDetails extends Component {
                 });
 
             // AKSHAY NEW CODE IMPLEMENTATION END
-
-            console.log(
-                "AKSHAY NEW CODE CHNAGES ====================>",
-                patientCarePlans
-            );
+            console.log("handleInitialData patientCarePlans: ", patientCarePlans);
 
             const {notification_redirect: {care_plan_id = null} = {}} =
                 this.props;
-            console.log("32486238476283746823648236487236", {
+            console.log("handleInitialData care plan ID, current CP ID: ", {
                 care_plan_id,
                 current_care_plan_id,
             });
@@ -979,9 +974,7 @@ class PatientDetails extends Component {
             // const { basic_info: { id: carePlanTemplateId = 0 } } = care_plan_templates[Object.keys(care_plan_templates)[0]];
 
             let carePlanTemplateExists =
-                care_plan_templates && Object.values(care_plan_templates).length
-                    ? true
-                    : false;
+                care_plan_templates && Object.values(care_plan_templates).length ? true : false;
 
             this.setState({
                 // carePlanTemplateId,
@@ -1011,7 +1004,6 @@ class PatientDetails extends Component {
         // getMedications(patient_id);
         // getAppointmentsDetails();
         // getAppointments(patient_id);
-
         // }
 
         if (isEmpty(medicines)) {
