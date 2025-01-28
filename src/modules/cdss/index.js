@@ -99,7 +99,7 @@ export const diagnosisSearch = (diagnosisName) => {
 };
 
 export const googleTranslate = async (textToConvert, fromLang = "en", toLang = "hi") => {
-    const API_KEY = "AIzaSyCPdjkLBwzrA_osAi6QMkTbgwKQif0VxLQ"; // Assuming API_KEY is defined elsewhere
+    const API_KEY = "AIzaSyC1QGwEYH7MUx1mTYgRMYPJDp5HfgK3Ybg"; // Assuming API_KEY is defined elsewhere
 
     const url = new URL("https://translation.googleapis.com/language/translate/v2");
     url.searchParams.set("key", API_KEY);
@@ -118,7 +118,7 @@ export const googleTranslate = async (textToConvert, fromLang = "en", toLang = "
 };
 
 export const googleTranslateMultipleText = async (textToConvertArray, toLang = "hi") => {
-    const API_KEY = "AIzaSyCPdjkLBwzrA_osAi6QMkTbgwKQif0VxLQ"; // Assuming API_KEY is defined elsewhere
+    const API_KEY = "AIzaSyC1QGwEYH7MUx1mTYgRMYPJDp5HfgK3Ybg"; // Assuming API_KEY is defined elsewhere
 
     if (!textToConvertArray || !textToConvertArray.length) {
         return { status: "error", message: "No text provided for translation" };
