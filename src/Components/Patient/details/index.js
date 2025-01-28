@@ -90,6 +90,7 @@ import SymptomTabs from "../../../Containers/Symptoms";
 import {getRoomId} from "../../../Helper/twilio";
 import {getFullName} from "../../../Helper/common";
 import Tooltip from "antd/es/tooltip";
+import {PlusOutlined} from "@ant-design/icons";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscription";
@@ -1053,7 +1054,7 @@ class PatientDetails extends Component {
             notification_redirect = {},
             getAllTemplatesForDoctor,
         } = this.props;
-        console.log("getAllTemplatesForDoctor in componentDidMount ---> ", getAllTemplatesForDoctor);
+        console.log("Patient details getAllTemplatesForDoctor in componentDidMount ---> ", getAllTemplatesForDoctor);
         await this.handleInitialData();
         // await getAllTemplatesForDoctor();
         if (Object.keys(notification_redirect).length) {
@@ -1133,8 +1134,8 @@ class PatientDetails extends Component {
         // try {
         await updateUnseenNotificationData(); // Wait for the Promise to resolve
         // } catch (err) {
+        //     // Handle the error appropriately (e.g., display an error message)
         //     console.error("Error updating notifications: ", err);
-        // Handle the error appropriately (e.g., display an error message)
         // }
     };
 
@@ -1844,14 +1845,6 @@ class PatientDetails extends Component {
     showTemplateDrawer = () => {
         this.setState({templateDrawerVisible: true});
     };
-
-    maximizeChat = () => {
-      const { patient_id } = this.props;
-      window.open(
-        `${config.WEB_URL}${getPatientConsultingUrl(patient_id)}`,
-        "_blank"
-      );
-    };
      */
 
     onCloseTemplate = async () => {
@@ -1875,58 +1868,6 @@ class PatientDetails extends Component {
         this.setState({templateDrawerVisible: true});
     };
 
-    /**
-     * TODO: This function is not being used anywhere in the code
-    handleSubmitTemplate = data => {
-        const {
-            addCarePlanMedicationsAndAppointments,
-            getMedications,
-            getAppointments,
-            care_plans,
-            patient_id,
-            getPatientCarePlanDetails
-        } = this.props;
-
-        let carePlanId = 1;
-        for (let carePlan of Object.values(care_plans)) {
-            let {
-                basic_info: { id = 1, patient_id: patientId = 1 }
-            } = carePlan;
-            if (patient_id == patientId) {
-                carePlanId = id;
-            }
-        }
-        addCarePlanMedicationsAndAppointments(data, carePlanId).then(response => {
-            const {
-                status = false,
-                statusCode,
-                payload: {
-                    error: { error_type = "" } = {},
-                    message: errorMessage = ""
-                } = {}
-            } = response;
-            if (status) {
-                this.onCloseTemplate();
-
-                message.success(this.formatMessage(messages.carePlanUpdated));
-                getMedications(patient_id).then(() => {
-                    getAppointments(patient_id).then(() => {
-                        getPatientCarePlanDetails(patient_id);
-                    });
-                });
-            } else {
-                if (statusCode === 422 && error_type == "slot_present") {
-                    message.error(this.formatMessage(messages.slotPresent));
-                } else if (statusCode === 422) {
-                    message.error(errorMessage);
-                } else {
-                    message.error(this.formatMessage(messages.somethingWentWrong));
-                }
-            }
-        });
-    };
-     */
-
     handleSubmitTemplate = (data) => {
         const {
             addCarePlanMedicationsAndAppointments,
@@ -1937,6 +1878,15 @@ class PatientDetails extends Component {
             getPatientCarePlanDetails,
         } = this.props;
         const {carePlanId, ...rest} = data || {};
+        //   let carePlanId = 1;
+        //   for (let carePlan of Object.values(care_plans)) {
+        //     let {
+        //       basic_info: { id = 1, patient_id: patientId = 1 }
+        //     } = carePlan;
+        //     if (patient_id == patientId) {
+        //       carePlanId = id;
+        //     }
+        //   }
         addCarePlanMedicationsAndAppointments(rest, carePlanId).then((response) => {
             const {
                 status = false,
@@ -2333,6 +2283,7 @@ class PatientDetails extends Component {
 
         /**
          * TODO: Why is this commented?
+        const { allAppointmentDocs ={} } = this.state;
         console.log("onUploadCompleteRegistration ---> data: ",data);
 
         const {storeAppointmentDocuments} = this.props;

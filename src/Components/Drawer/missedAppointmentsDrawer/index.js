@@ -21,37 +21,40 @@ class MissedAppointmentsDrawer extends Component {
         // this.handleGetMissedAppointments();
     }
 
-    //   async handleGetMissedAppointments(){
-    //     try {
-    //         const {getAllMissedScheduleEvents} = this.props;
-    //         this.setState({fetching:true});
-    //         const response = await getAllMissedScheduleEvents();
-    //         const { status, payload: {  data : {
-    //            missed_appointments = {},
-    //            appointment_ids : {critical=[],non_critical=[]} =  {}
-    //         }  } = {} ,statusCode } =
-    //         response || {};
-    //
-    //             if (status && statusCode === 200 ) {
-    //                 this.setState({
-    //                     missed_appointments:missed_appointments,
-    //                     criticalAppointmentIds:critical,
-    //                     nonCriticalAppointmentIds:non_critical,
-    //                     fetching:false
-    //               })
-    //
-    //             } else{
-    //               this.setState({fetching:false});
-    //             }
-    //
-    //     } catch (err) {
-    //         console.log("err", err);
-    //         message.warn(this.formatMessage(messages.somethingWentWrong));
-    //         this.setState({fetching:false});
-    //
-    //     }
-    //
-    // }
+    /**
+     * TODO: Why is this function commented out?
+     async handleGetMissedAppointments(){
+        try {
+            const {getAllMissedScheduleEvents} = this.props;
+            this.setState({fetching:true});
+            const response = await getAllMissedScheduleEvents();
+            const { status, payload: {  data : {
+               missed_appointments = {},
+               appointment_ids : {critical=[],non_critical=[]} =  {}
+            }  } = {} ,statusCode } =
+            response || {};
+
+                if (status && statusCode === 200 ) {
+                    this.setState({
+                        missed_appointments:missed_appointments,
+                        criticalAppointmentIds:critical,
+                        nonCriticalAppointmentIds:non_critical,
+                        fetching:false
+                  })
+
+                } else{
+                  this.setState({fetching:false});
+                }
+
+        } catch (err) {
+            console.log("err", err);
+            message.warn(this.formatMessage(messages.somethingWentWrong));
+            this.setState({fetching:false});
+
+        }
+
+    }
+     */
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
@@ -150,7 +153,7 @@ class MissedAppointmentsDrawer extends Component {
 
                 // Assuming you want to handle only specific categories
                 // Modify this logic based on your specific requirements to a PATIENT
-                if (actorCategory !== USER_CATEGORY.DOCTOR) {
+                if (actorCategory !== USER_CATEGORY.PATIENT) {
                     // Skip non-patient events or handle differently
                     return;
                 }
