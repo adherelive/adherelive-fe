@@ -507,7 +507,7 @@ const PatientCard = ({
                                 : patientFullName}
                         </div>
                         <div className="align-self-start">
-                            ({gender ? `${GENDER[gender].view} ` : ""}
+                            {' '}({gender ? `${GENDER[gender].view} ` : ""}
                             {patient_age})
                         </div>
                     </div>
