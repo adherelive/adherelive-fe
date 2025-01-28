@@ -18,17 +18,17 @@ const mapStateToProps = (state) => {
         commonReducer: {missedChartDrawerLoading},
     } = state;
 
-    console.log("In the missedDiet.js mapStateToProps - mapStateToProps ---> ",
-        authenticated_category,
-        loading,
-        payload,
-        authPermissions,
-        authenticated_user,
-        patients,
-        missed_diets,
-        diet_ids,
-        missedChartDrawerLoading
-    );
+    // console.log("In the missedDiet.js mapStateToProps - mapStateToProps ---> ",
+    //     authenticated_category,
+    //     loading,
+    //     payload,
+    //     authPermissions,
+    //     authenticated_user,
+    //     patients,
+    //     missed_diets,
+    //     diet_ids,
+    //     missedChartDrawerLoading
+    // );
 
     return {
         visible: visible && type === DRAWER.MISSED_DIET,

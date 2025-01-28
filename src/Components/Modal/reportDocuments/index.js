@@ -24,8 +24,7 @@ class ReportDocuments extends Component {
                 <div className="overlay"></div>
                 <div className="absolute tp45 l0 wp100 flex justify-center align-space-evenly doc-container">
                     <EyeTwoTone
-                        className="w20"
-                        className={"del doc-opt"}
+                        className={"w20 del doc-opt"}
                         onClick={this.handleDocumentViewOpen(src)}
                         twoToneColor="#fff"
                     />
@@ -74,7 +73,7 @@ class ReportDocuments extends Component {
                         const extension = name
                             .substring(name.length - 5, name.length)
                             .split(".")[1];
-                        console.log("93291872 extension --> ", {name, extension});
+                        console.log("Inside render() for ReportDocuments ---> name, extension: ", {name, extension});
 
                         const isImage =
                             extension === "png" ||

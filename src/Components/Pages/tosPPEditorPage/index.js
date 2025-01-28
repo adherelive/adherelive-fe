@@ -1,9 +1,7 @@
 import React, {Component, Fragment} from "react";
 import {injectIntl} from "react-intl";
 import ReactMde from "react-mde";
-// import * as Showdown from "showdown";
 import { marked } from "marked"; // Use marked instead of Showdown
-import { markedTasklists } from "markdown-it-task-lists"; // For task lists support
 import "react-mde/lib/styles/css/react-mde-all.css";
 import Button from "antd/es/button";
 import Radio from "antd/es/radio";
@@ -22,6 +20,16 @@ const converter = new Showdown.Converter({
 });
 */
 
+// Custom renderer for task lists
+const renderer = {
+    listitem(text, task, checked) {
+        if (task) {
+            return `<li><input type="checkbox" ${checked ? 'checked' : ''} disabled> ${text}</li>`;
+        }
+        return `<li>${text}</li>`;
+    },
+};
+
 // Set options for marked
 marked.setOptions({
     gfm: true, // GitHub Flavored Markdown, which includes tables, strikethrough, and task lists
@@ -34,7 +42,7 @@ marked.setOptions({
     smartypants: false, // Disable automatic typographic replacements
 });
 // Enable task lists support
-marked.use(markedTasklists());
+marked.use({renderer});
 
 const {Group: RadioGroup, Button: RadioButton} = Radio;
 

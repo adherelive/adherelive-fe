@@ -398,7 +398,7 @@ class SideMenu extends Component {
             getProviderUserRoleIcon,
         } = this;
 
-        console.log("user_role_ids", user_role_ids);
+        console.log("getUserRoles ---> user_role_ids: ", user_role_ids);
 
         return user_role_ids.map((id) => {
             const {basic_info: {user_identity, linked_id} = {}} =
@@ -473,18 +473,20 @@ class SideMenu extends Component {
 
                 {/* <Menu.Divider /> */}
                 {/* <Menu.Item className="p10" key={PRIVACY_POLICY}>
-          <a href={PRIVACY_PAGE_URL} target={"_blank"}>
-            {this.formatMessage(messages.privacy_policy_text)}
-          </a>
-        </Menu.Item> */}
+                      <a href={PRIVACY_PAGE_URL} target={"_blank"}>
+                        {this.formatMessage(messages.privacy_policy_text)}
+                      </a>
+                    </Menu.Item> */
+                }
                 <Menu.Divider/>
                 <Menu.Item className="pl24 pr80" key={PROFILE}>
                     Profile
                 </Menu.Item>
                 <Menu.Divider/>
                 {/* <Menu.Item className="pl24 pr80" key={SETTINGS}>
-          Settings
-        </Menu.Item> */}
+                      Settings
+                    </Menu.Item> */
+                }
                 <Menu.Item className="pl24 pr80" key={TEMPLATES}>
                     {this.formatMessage(messages.templates)}
                 </Menu.Item>
@@ -631,7 +633,7 @@ class SideMenu extends Component {
 
         const {unseen_notification_count: count = 0} = notification_count || {};
         const unseen_notification_count = parseInt(count);
-        // console.log("2934y98237498238423 COUNTTTTTTTTTT",{unseen_notification_count});
+        // console.log("render Sidebar, count unseen notifications: ",{unseen_notification_count});
         let dp = "";
         let initials = "";
 

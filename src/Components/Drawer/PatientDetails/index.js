@@ -456,12 +456,11 @@ class PatientDetailsDrawer extends Component {
                 } = {},
                 activated_on: start_date,
             } = care_plans[carePlanId] || {};
-            const {basic_info: {name: treatment = ""} = {}} =
-            treatments[treatment_id] || {};
-            const {basic_info: {name: condition = ""} = {}} =
-            conditions[condition_id] || {};
-            const {basic_info: {name: severity = ""} = {}} =
-            severities[severity_id] || {};
+
+            const {basic_info: {name: treatment = ""} = {}} = treatments[treatment_id] || {};
+            const {basic_info: {name: condition = ""} = {}} = conditions[condition_id] || {};
+            const {basic_info: {name: severity = ""} = {}} = severities[severity_id] || {};
+
             const {
                 basic_info: {
                     user_id = null,
@@ -475,6 +474,7 @@ class PatientDetailsDrawer extends Component {
                 reports = [],
                 provider_id,
             } = patientDetailsData[id] || {};
+
             const {basic_info: {prefix = "91", mobile_number = ""} = {}} =
             patientUserDetails[user_id] || {};
 
@@ -485,8 +485,8 @@ class PatientDetailsDrawer extends Component {
                     last_name: doctor_last_name,
                 } = {},
             } = doctors[doctor_id] || {};
-            const {basic_info: {name: providerName = "--"} = {}} =
-            providers[provider_id] || {};
+
+            const {basic_info: {name: providerName = "--"} = {}} = providers[provider_id] || {};
             const diagnosis_type = DIAGNOSIS_TYPE[type];
             const diagnosis = diagnosis_type["value"];
             const {
@@ -513,12 +513,17 @@ class PatientDetailsDrawer extends Component {
                     {/*header*/}
                     <div className="wp100 flex justify-space-between align-center mt20">
                         <div className="flex justify-space-around align-center">
-                            <div className="pr10 fs24 fw600">{`${getName(
-                                first_name
-                            )}  ${getName(middle_name)} ${getName(last_name)}`}</div>
-                            <div className="pr10 fs20 fw500">{` (${
-                                gender ? `${GENDER[gender].view} ` : ""
-                            }${age ? age : "--"})`}</div>
+                            <div className="pr10 fs24 fw600">
+                                {
+                                    `${getName(first_name)} ${getName(middle_name)} ${getName(last_name)} `
+                                }
+                            </div>
+                            <div className="pr10 fs20 fw500">
+                                {
+                                    ` (${gender ? `${GENDER[gender].view} ` : ""
+                                }
+                                ${age ? age : "--"})`}
+                            </div>
                             {/* <Icon type="wechat" width={20} /> */}
                             <img
                                 src={MsgIcon}
@@ -536,9 +541,11 @@ class PatientDetailsDrawer extends Component {
                         />
                     </div>
                     <div className="fw700 wp100">{`PID: ${uid}`}</div>
-                    <div className="fw700 wp100">{`${formatMessage(
-                        messages.mobile
-                    )}: +${prefix} ${mobile_number}`}</div>
+                    <div className="fw700 wp100">
+                        {
+                            `${formatMessage(messages.mobile)}: +${prefix} ${mobile_number}`
+                        }
+                    </div>
 
                     {/*boxes*/}
 

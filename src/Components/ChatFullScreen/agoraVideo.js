@@ -268,7 +268,7 @@ class AgoraVideo extends Component {
             startCall,
             room_id,
         } = this.props;
-        console.log("this.props", this.props);
+        console.log("startVideoCall this.props: ", this.props);
         try {
             const urlParams = new URLSearchParams(window.location.search);
             const isAudioOnParam = urlParams.get("isAudioOn") === "true";
@@ -281,11 +281,11 @@ class AgoraVideo extends Component {
             );
 
             const {appId, channel, token} = this.getVideoOptions();
-            console.log("appId", appId);
-            console.log("channel", channel);
-            console.log("token", token);
-            console.log("authenticated_user", authenticated_user);
-            console.log("auth_role", auth_role);
+            console.log("startVideoCall appId: ", appId);
+            console.log("startVideoCall channel: ", channel);
+            console.log("startVideoCall token: ", token);
+            console.log("startVideoCall authenticated_user: ", authenticated_user);
+            console.log("startVideoCall auth_role: ", auth_role);
 
             this.setState({loading: true});
             const uid = await this.rtc.client.join(
@@ -302,8 +302,7 @@ class AgoraVideo extends Component {
             await startCall();
 
             if ((!localVideoVal && isVideoOnParam) || localVideoVal === "true") {
-                // console.log("237642354623542387",{isVideoOnParam,flag1:(!localVideoVal && isVideoOnParam),flag2:(localVideoVal === "true")});
-
+                // console.log("startVideoCall parameters: ",{isVideoOnParam,flag1:(!localVideoVal && isVideoOnParam),flag2:(localVideoVal === "true")});
                 this.rtc.localVideoTrack.play("agora-self");
             }
 
@@ -313,7 +312,7 @@ class AgoraVideo extends Component {
             this.setState({loading: false, isStart: true});
             const isAudioOnFlag =
                 (!localAudioVal && isAudioOnParam) || localAudioVal === "true";
-            // console.log("87345275632465236",{isAudioOnFlag});
+            // console.log("startVideoCall isAudioOn Flag: ",{isAudioOnFlag});
             if (!isAudioOnFlag) {
                 this.setAudioOff();
             }

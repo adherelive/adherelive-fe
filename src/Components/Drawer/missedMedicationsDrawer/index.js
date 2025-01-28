@@ -109,6 +109,9 @@ class MissedMedicationsDrawer extends Component {
         const {patients = {}, missed_medications = {}} = this.props;
         const {handlePatientDetailsRedirect, formatMessage} = this;
 
+        console.log("Missed Medications Drawer ---> missed_medications: ", missed_medications);
+        console.log("Missed Medications Drawer ---> patients: ", patients);
+
         const medicationList = [];
         const criticalList = [];
         const nonCriticalList = [];

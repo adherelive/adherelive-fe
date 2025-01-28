@@ -1136,9 +1136,10 @@ class AdminDoctorDetails extends Component {
     };
 
     render() {
-        console.log("274354213749129837832674 ====>", this.props);
+        console.log("Admin Doctor details, render page ---> this.props: ", this.props);
         const {id, doctors} = this.props;
         const {loading, account_details = {}} = this.state;
+        console.log("Admin Doctor details, render ---> id, doctors, account_details: ", id, doctors, account_details);
         const {
             formatMessage,
             getDoctorDetailsHeader,

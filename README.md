@@ -14,6 +14,9 @@ It is used to display the details of the patient 'Add More' details and for all 
 and editing the items like Appointment, Medication, Diagnosis, etc. 
 - src/Components/Drawer/PatientDetails/index.js: This file contains the drawer for the patient details. 
 On the Patient page left hand side, the drawer is displayed with the patient details.
+  - The details are all in the function: getPatientDetailContent
+  - The actual rendering of the sidebar for the Patient happens in:
+    - src/Components/Patient/details/index.js
 
 
 # Build & Deploy
