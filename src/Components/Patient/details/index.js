@@ -90,7 +90,6 @@ import SymptomTabs from "../../../Containers/Symptoms";
 import {getRoomId} from "../../../Helper/twilio";
 import {getFullName} from "../../../Helper/common";
 import Tooltip from "antd/es/tooltip";
-import {PlusOutlined} from "@ant-design/icons";
 
 // AKSHAY NEW CODE FOR SUBSCRIPTION
 import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscription";

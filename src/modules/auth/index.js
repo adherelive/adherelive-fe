@@ -542,7 +542,7 @@ export const facebookSignIn = (data) => {
                 });
             }
         } catch (err) {
-            console.log("37861823 FACEBBOK ", err);
+            console.log("facebookSignIn error: ", err);
             throw err;
         }
     };
