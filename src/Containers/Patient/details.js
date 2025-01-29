@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import {close, open} from "../../modules/drawer";
 import {getMedications} from "../../modules/medications";
 import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
-import {addCareplanForPatient, consentVerify, getPatientDetailsById, requestConsent,} from "../../modules/patients";
+import {addCarePlanForPatient, consentVerify, getPatientDetailsById, requestConsent,} from "../../modules/patients";
 import {searchMedicine} from "../../modules/medicines";
 import {addCarePlanMedicationsAndAppointments, getPatientCarePlanDetails} from "../../modules/carePlans";
 import {DRAWER} from "../../constant";
@@ -182,8 +182,8 @@ const mapDispatchToProps = (dispatch) => {
         markAppointmentComplete: (id) => dispatch(markAppointmentComplete(id)),
         openAddCareplanDrawer: (payload) =>
             dispatch(open({type: DRAWER.ADD_CAREPLAN, payload})),
-        addCareplanForPatient: (patient_id, data) =>
-            dispatch(addCareplanForPatient(patient_id, data)),
+        addCarePlanForPatient: (patient_id, data) =>
+            dispatch(addCarePlanForPatient(patient_id, data)),
         openEditPatientDrawer: (payload) =>
             dispatch(open({type: DRAWER.EDIT_PATIENT, payload})),
         storeAppointmentDocuments: (data) =>

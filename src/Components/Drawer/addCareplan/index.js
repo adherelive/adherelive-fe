@@ -761,10 +761,10 @@ class AddCarePlanDrawer extends Component {
     };
 
     async handleDataSubmit(patient_id, data) {
-        const {addCareplanForPatient} = this.props;
+        const {addCarePlanForPatient} = this.props;
         const {close} = this.props;
         this.setState({submitting: true});
-        const response = await addCareplanForPatient(patient_id, data);
+        const response = await addCarePlanForPatient(patient_id, data);
         const {
             status,
             statusCode: code,
@@ -786,7 +786,7 @@ class AddCarePlanDrawer extends Component {
     }
 
     onSubmit = () => {
-        const {addCareplanForPatient, patientId: patient_id} = this.props;
+        const {addCarePlanForPatient, patientId: patient_id} = this.props;
         const {
             treatment = "",
             severity = "",

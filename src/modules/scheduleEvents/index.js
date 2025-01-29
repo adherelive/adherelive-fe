@@ -234,8 +234,7 @@ export const getAllMissedScheduleEvents = () => {
                 method: REQUEST_TYPE.GET,
                 url: getAllMissedScheduleEventsUrl(),
             });
-
-            console.log("getAllMissedScheduleEvents API response:", response); // Log the API response
+            console.log("getAllMissedScheduleEvents API response: ", response); // Log the API response
 
             const {status, payload: {data, error} = {}} = response || {};
             if (status === true) {
@@ -243,7 +242,7 @@ export const getAllMissedScheduleEvents = () => {
                     type: GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED,
                     data: data,
                 });
-                console.log("getAllMissedScheduleEvents API data:", data); // Log the data
+                console.log("getAllMissedScheduleEvents API data: ", data); // Log the data
             } else {
                 dispatch({
                     type: GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED,
@@ -251,7 +250,7 @@ export const getAllMissedScheduleEvents = () => {
                 });
             }
         } catch (error) {
-            console.log("getAllMissedScheduleEvents Error ---> ", error);
+            console.log("getAllMissedScheduleEvents Error: ", error);
         }
         return response;
     };

@@ -14,7 +14,7 @@ import {searchMedicine} from "../../modules/medicines";
 import {searchTreatment} from "../../modules/treatments";
 import {searchCondition} from "../../modules/conditions";
 import {searchSeverity} from "../../modules/severity";
-import {addCareplanForPatient} from "../../modules/patients";
+import {addCarePlanForPatient} from "../../modules/patients";
 // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
 import {addDiagnosis, diagnosisSearch, getDiagnosisList, googleTranslate,} from "../../modules/cdss";
 
@@ -52,8 +52,8 @@ const mapDispatchToProps = (dispatch) => {
         searchCondition: (value) => dispatch(searchCondition(value)),
         searchTreatment: (value) => dispatch(searchTreatment(value)),
         searchSeverity: (value) => dispatch(searchSeverity(value)),
-        addCareplanForPatient: (patient_id, data) =>
-            dispatch(addCareplanForPatient(patient_id, data)),
+        addCarePlanForPatient: (patient_id, data) =>
+            dispatch(addCarePlanForPatient(patient_id, data)),
         // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
         getDiagnosisList: (payload) => dispatch(getDiagnosisList(payload)),
         addDiagnosis: (payload) => dispatch(addDiagnosis(payload)),

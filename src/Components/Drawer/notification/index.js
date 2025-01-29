@@ -18,7 +18,7 @@ import {
   MEDICATION_TIMING,
   TYPE_WORKOUTS,
   PATIENT_MEAL_TIMINGS,
-  // WHEN_TO_TAKE_ABBR_TYPES,
+  WHEN_TO_TAKE_ABBR_TYPES,
 } from "../../../constant";
 import VideoCameraFilled from "@ant-design/icons/VideoCameraFilled";
 import MessageFilled from "@ant-design/icons/MessageFilled";
@@ -36,11 +36,11 @@ import vital_icon from "../../../Assets/images/vital.png";
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
-// import { getNotifications } from "../../../Helper/urls/notifications";
+import { getNotifications } from "../../../Helper/urls/notifications";
 const {Option} = Select;
 const APPOINTMENT = "appointment";
-// const MEDICATION = "medication";
-// const MEDICATION_REMINDER = "medication-reminder";
+const MEDICATION = "medication";
+const MEDICATION_REMINDER = "medication-reminder";
 const USER_MESSAGE = "USER_MESSAGE";
 const VITALS = "vitals";
 
