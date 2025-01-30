@@ -85,12 +85,12 @@ class MissedAppointmentsDrawer extends Component {
         for (let appointment in missed_appointments) {
             const eachAppointmentEventArray = missed_appointments[appointment];
 
-            // Add a safety check if the array is empty or undefined
+            // Add a safety check if the array is empty or undefined, skip if that is so
             if (!eachAppointmentEventArray || !eachAppointmentEventArray.length) {
                 continue;
             }
 
-            // Reset these for each appointment
+            // Reset for each appointment
             const timings = [];
             let type_description = "";
             let isCritical = false;
@@ -101,7 +101,6 @@ class MissedAppointmentsDrawer extends Component {
                 const {
                     critical = false,
                     start_time,
-                    date: start_date,
                     details = {},
                     id: eventId,
                 } = eachAppointmentEvent || {};
@@ -153,10 +152,10 @@ class MissedAppointmentsDrawer extends Component {
 
                 // Assuming you want to handle only specific categories
                 // Modify this logic based on your specific requirements to a PATIENT
-                if (actorCategory !== USER_CATEGORY.PATIENT) {
+                // if (actorCategory !== USER_CATEGORY.PATIENT) {
                     // Skip non-patient events or handle differently
-                    return;
-                }
+                    // return;
+                // }
 
                 isCritical = critical;
                 timings.push(start_time);
@@ -228,6 +227,7 @@ class MissedAppointmentsDrawer extends Component {
 
         return appointmentList;
     };
+
 
     render() {
         const {visible = false, missedChartDrawerLoading} = this.props;

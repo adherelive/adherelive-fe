@@ -13,14 +13,6 @@ const mapStateToProps = (state) => {
         medicines = {},
     } = state;
 
-    console.log("In the medicationTimeline.js mapStateToProps - mapStateToProps ---> ",
-        id,
-        loading,
-        medications,
-        schedule_events,
-        medicines
-    );
-
     return {
         visible: visible && type === DRAWER.MEDICATION_RESPONSE_TIMELINE,
         id,
