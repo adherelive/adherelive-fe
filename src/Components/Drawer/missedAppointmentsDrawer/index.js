@@ -82,11 +82,15 @@ class MissedAppointmentsDrawer extends Component {
         const criticalList = [];
         const nonCriticalList = [];
 
+        console.log("Patients from the Props: ", patients);
+        console.log("Missed Appointments from the Props: ", missed_appointments);
+
         for (let appointment in missed_appointments) {
             const eachAppointmentEventArray = missed_appointments[appointment];
 
             // Add a safety check if the array is empty or undefined, skip if that is so
             if (!eachAppointmentEventArray || !eachAppointmentEventArray.length) {
+                console.warn("Empty or undefined appointment array for: ", appointment);
                 continue;
             }
 
@@ -146,6 +150,7 @@ class MissedAppointmentsDrawer extends Component {
                 } else if (participant_two_category === USER_CATEGORY.PATIENT && participant_two_id) {
                     participant_id = participant_two_id;
                 } else {
+                    console.warn("No valid patient ID found for event: ", eventId);
                     // Skip this iteration if no valid patient ID is found
                     continue;
                 }
@@ -153,8 +158,8 @@ class MissedAppointmentsDrawer extends Component {
                 // Assuming you want to handle only specific categories
                 // Modify this logic based on your specific requirements to a PATIENT
                 // if (actorCategory !== USER_CATEGORY.PATIENT) {
-                    // Skip non-patient events or handle differently
-                    // return;
+                // Skip non-patient events or handle differently
+                // return;
                 // }
 
                 isCritical = critical;
@@ -174,6 +179,13 @@ class MissedAppointmentsDrawer extends Component {
 
                 let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`.trim();
                 let treatment_type = type_description.length > 0 ? type_description : " ";
+
+                console.log("appointmentCard props: ", {
+                    name: pName,
+                    time: timings || [start_time],
+                    treatment_type,
+                    pId,
+                });
 
                 // Create list items
                 const appointmentCard = (
