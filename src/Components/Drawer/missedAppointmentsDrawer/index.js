@@ -171,12 +171,12 @@ class MissedAppointmentsDrawer extends Component {
                 const patientDetails = patients[participant_id] || {};
                 const {
                     basic_info: {
-                        // id: pId = "",
+                        id: pId = "",
                         first_name = "",
                         middle_name = "",
                         last_name = "",
                         full_name = "",
-                        user_id: pId = "",
+                        // user_id: pId = "",
                     } = {}
                 } = patientDetails;
 
@@ -215,9 +215,9 @@ class MissedAppointmentsDrawer extends Component {
         appointmentList.push(
             <div>
                 <div>
-          <span className="fs18 fw700 brown-grey tac mb20">
-            {this.formatMessage(messages.critical)}
-          </span>
+                  <span className="fs18 fw700 brown-grey tac mb20">
+                    {this.formatMessage(messages.critical)}
+                  </span>
                     {criticalList.length > 0 ? (
                         criticalList
                     ) : (
@@ -227,9 +227,9 @@ class MissedAppointmentsDrawer extends Component {
                     )}
                 </div>
                 <div>
-          <span className="fs18 fw700 brown-grey tac">
-            {this.formatMessage(messages.non_critical)}
-          </span>
+                  <span className="fs18 fw700 brown-grey tac">
+                    {this.formatMessage(messages.non_critical)}
+                  </span>
                     {nonCriticalList.length > 0 ? (
                         nonCriticalList
                     ) : (
