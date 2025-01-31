@@ -114,7 +114,7 @@ class Dashboard extends Component {
             searchCondition,
             medicines,
             features,
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             getAllMissedEventChartCount,
         } = this.props;
 
@@ -164,7 +164,7 @@ class Dashboard extends Component {
 
         getAllMissedScheduleEvents();
 
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         getAllMissedEventChartCount();
 
         await this.initiateInAppNotificationObj();
@@ -696,7 +696,7 @@ class Dashboard extends Component {
         );
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
     setAddPatientAfterSearch = (patient_id, patientSearchAllData) => {
         let patientSearchData = patientSearchAllData;
         patientSearchData.patientId = patient_id;
@@ -784,7 +784,7 @@ class Dashboard extends Component {
             bannerFlag = false;
         }
 
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         /**
          * TODO: Why is this commented out?
         if (
@@ -985,7 +985,7 @@ class Dashboard extends Component {
                     submit={this.addPatient}
                     patients={patients}
                     submitting={submitting}
-                    // AKSHAY NEW CODE IMPLEMENTATIONS
+                    // code implementation after phase 1
                     patientSearchData={this.state.patientSearchData}
                     getDiagnosisList={this.props.getDiagnosisList}
                     diagnosisSearch={this.props.diagnosisSearch}

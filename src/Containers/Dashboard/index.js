@@ -22,7 +22,7 @@ import {
 } from "../../modules/scheduleEvents";
 import {setUnseenNotificationCount} from "../../modules/pages/NotificationCount";
 import {getAllDietsForDoctor} from "../../modules/diets";
-// AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
+// code implementation after phase 1 for CDSS/mongodb
 import {addDiagnosis, diagnosisSearch, getDiagnosisList,} from "../../modules/cdss";
 
 const mapStateToProps = (state) => {

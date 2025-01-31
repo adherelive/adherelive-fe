@@ -77,7 +77,7 @@ import workout_responses from "./workoutResponses";
 import exercise_groups from "./exerciseGroups";
 import workout_exercise_groups from "./workoutExerciseGroups";
 
-// AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
+// code implementation after phase 1 for CDSS/mongodb
 import cdss from "./cdss";
 import commonReducer from "./commonReducer";
 import subscription from "../reducer/index";
@@ -160,7 +160,7 @@ const rootReducer = combineReducers({
     workout_responses,
     exercise_groups,
     workout_exercise_groups,
-    // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
+    // code implementation after phase 1 for CDSS/mongodb
     cdss,
     commonReducer,
     subscription,

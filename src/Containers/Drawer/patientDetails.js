@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
         getAppointments: (id) => dispatch(getAppointments(id)),
         getAppointmentsDetails: () => dispatch(getAppointmentsDetails()),
         getPatientMissedEvents: (patient_id) => dispatch(getPatientMissedEvents(patient_id)),
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         setScheduleAppointmentData: (payload) => dispatch(setScheduleAppointmentData(payload)),
         getPatientCarePlanByPatientId: (patientId) => dispatch(getPatientCarePlanByPatientId(patientId)),
     };

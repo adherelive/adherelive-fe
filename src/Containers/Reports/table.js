@@ -57,7 +57,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         report_ids,
         openEditReport,
         fetchPatientReports: fetchPatientReports(patientId),
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         setFlashCard,
         setFlashcardData,
     };

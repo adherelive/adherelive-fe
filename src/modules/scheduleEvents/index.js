@@ -256,7 +256,7 @@ export const getAllMissedScheduleEvents = () => {
     };
 };
 
-// AKSHAY NEW CODE IMPLEMENTATIONS
+// code implementation after phase 1
 export const getAllMissedEventDataByQuery = (type) => {
     let response = {};
 

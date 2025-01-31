@@ -28,7 +28,7 @@ export default (props) => {
     } else if (diff == 13) {
         selectedRadio = 2;
     } else if (diff == 41) {
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         selectedRadio = 3;
     }
 

@@ -6,7 +6,7 @@ import messages from "../messages";
 export default (props) => {
     const {openResponseDrawer, formatMessage, id} = props || {};
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
     const {medicationData} = props || {};
     const {remaining = 0, total = 0} = medicationData || {};
 

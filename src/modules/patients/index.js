@@ -281,7 +281,7 @@ export const getPatientMissedEvents = (patient_id) => {
     };
 };
 
-// AKSHAY NEW CODE IMPLEMENTATIONS
+// code implementation after phase 1
 export const getPatientDetailsById = (patientId) => {
     let response = {};
     return async (dispatch) => {

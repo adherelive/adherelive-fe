@@ -420,7 +420,7 @@ class TwilioChat extends Component {
     getToken = () => {
         const {roomId, care_plans, patientId} = this.props;
         let channel = "";
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         if (!isEmpty(care_plans)) {
             var filtered = Object.fromEntries(
                 Object.entries(care_plans).filter(
@@ -435,12 +435,12 @@ class TwilioChat extends Component {
                 channel = filtered[key].channel_id;
             }
         }
-        // AKSHAY NEW CODE IMPLEMENTATIONS END
+        // code implementation after phase 1 end
 
         // let channel = "careplan-35-36-adherelive-demo";
         console.log("channel", channel);
         // this.channelName = roomId ? roomId : "test";
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         this.channelName = channel;
 
         this.initChat();

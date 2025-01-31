@@ -15,7 +15,7 @@ import {searchTreatment} from "../../modules/treatments";
 import {searchCondition} from "../../modules/conditions";
 import {searchSeverity} from "../../modules/severity";
 import {addCarePlanForPatient} from "../../modules/patients";
-// AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
+// code implementation after phase 1 for CDSS/mongodb
 import {addDiagnosis, diagnosisSearch, getDiagnosisList, googleTranslate,} from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
@@ -54,7 +54,7 @@ const mapDispatchToProps = (dispatch) => {
         searchSeverity: (value) => dispatch(searchSeverity(value)),
         addCarePlanForPatient: (patient_id, data) =>
             dispatch(addCarePlanForPatient(patient_id, data)),
-        // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
+        // code implementation after phase 1 for CDSS/mongodb
         getDiagnosisList: (payload) => dispatch(getDiagnosisList(payload)),
         addDiagnosis: (payload) => dispatch(addDiagnosis(payload)),
         diagnosisSearch: (payload) => dispatch(diagnosisSearch(payload)),

@@ -208,7 +208,7 @@ const mapDispatchToProps = (dispatch) => {
         openAddSecondaryDoctorDrawer: (payload) =>
             dispatch(open({type: DRAWER.ADD_SECONDARY_DOCTOR, payload})),
 
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         getPortions: () => dispatch(getPortions()),
         // getWorkoutDetails: () => dispatch(getWorkoutDetails()),
         // AKSHAY NEW CODE FOR SUBSCRIPTIONS

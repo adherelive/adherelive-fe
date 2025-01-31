@@ -25,7 +25,7 @@ import Footer from "../footer";
 import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 
-// AKSHAY NEW CODE IMPLEMENTATIONS
+// code implementation after phase 1
 import CustomSymptoms from "../addPatient/CustomSymptoms";
 import CustomDiagnosis from "../addPatient/CustomDiagnosis";
 import MultipleTreatmentAlert from "../addPatient/MultipleTreatmentAlert";
@@ -50,7 +50,7 @@ class AddCarePlanDrawer extends Component {
             symptoms: "",
             submitting: false,
             isCollapse: false,
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             widgetDrawerOpen: false,
             finalSymptomData: [],
             diagnosisType: false,
@@ -301,7 +301,7 @@ class AddCarePlanDrawer extends Component {
         }
     }
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
+    // code implementation after phase 1 for CDSS/mongodb
 
     onDiagnosisSearchHanlder = (value) => {
         this.props.diagnosisSearch(value);

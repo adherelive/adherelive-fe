@@ -1997,7 +1997,7 @@ class TemplateDrawer extends Component {
                     console.log("Appointment keys", key);
                     const {
                         reason = "",
-                        // AKSHAY NEW CODE IMPLEMENTATIONS
+                        // code implementation after phase 1
                         // COMMENTED THIS
                         schedule_data: {
                             // date = "",
@@ -2529,7 +2529,7 @@ class TemplateDrawer extends Component {
         // });
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
 
     convertMsToDays = (ms) => {
         const msInOneSecond = 1000;
@@ -2553,7 +2553,7 @@ class TemplateDrawer extends Component {
 
         return this.convertMsToDays(differenceInMs);
     };
-    // AKSHAY NEW CODE IMPLEMENTATIONS END
+    // code implementation after phase 1 end
 
     onSubmit = () => {
         const {
@@ -2585,7 +2585,7 @@ class TemplateDrawer extends Component {
         let dietData = Object.values(diets);
         let workoutData = Object.values(workouts);
 
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
 
         var currentDate = moment(new Date(), "YYYY/MM/DD");
 
@@ -2593,7 +2593,7 @@ class TemplateDrawer extends Component {
         var currentDay = currentDate.format("D");
         var currentYear = currentDate.format("YYYY");
 
-        // AKSHAY NEW CODE IMPLEMENTATIONS END
+        // code implementation after phase 1 end
         console.log("prvious medicationsData", medicationsData);
         for (let medication in medicationsData) {
             let newMed = medicationsData[medication];
@@ -2674,7 +2674,7 @@ class TemplateDrawer extends Component {
                     this.getDaysBetweenDates(dateOne, dateTwo)
                 ).toISOString();
             }
-            // AKSHAY NEW CODE IMPLEMENTATIONS END
+            // code implementation after phase 1 end
         }
 
         for (let appointment in appointmentsData) {
@@ -2707,7 +2707,7 @@ class TemplateDrawer extends Component {
                 appointmentsData[appointment].schedule_data.date = updatedDate;
             }
 
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
 
             var appointmentDate = moment(
                 appointmentsData[appointment].schedule_data.date,
@@ -2732,7 +2732,7 @@ class TemplateDrawer extends Component {
                 }
             }
 
-            // AKSHAY NEW CODE IMPLEMENTATIONS END
+            // code implementation after phase 1 end
 
             if (!start_time) {
                 if (!date) {

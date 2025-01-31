@@ -41,7 +41,7 @@ import Footer from "../footer";
 import isEmpty from "../../../Helper/is-empty";
 import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 
-// AKSHAY NEW CODE IMPLEMENTATIONS
+// code implementation after phase 1
 import CustomSymptomsEdit from "./CustomSymptomsEdit";
 import CustomDiagnosisEdit from "./CustomDiagnosisEdit";
 import MultipleTreatmentAlert from "../addPatient/MultipleTreatmentAlert";
@@ -82,7 +82,7 @@ class EditPatientDrawer extends Component {
             careplan_id: null,
             submitting: false,
             isCollapse: false,
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             widgetDrawerOpen: false,
             finalSymptomData: [],
             diagnosisType: false,
@@ -173,16 +173,11 @@ class EditPatientDrawer extends Component {
             } = {},
         } = carePlanData || {};
 
-        console.log("Edit Patient componentDidUpdate carePlanData ---> ", carePlanData);
-        console.log("Edit Patient componentDidUpdate patientData ---> ", patientData);
-        console.log("Edit Patient componentDidUpdate users ---> ", users);
-
 
         let symptomNames = [];
         let symptomData = [];
         try {
             symptomData = JSON.parse(symptoms);
-            console.log("Edit Patient componentDidUpdate symptomData ---> ", symptomData);
             if (!isEmpty(symptomData)) {
                 symptomData.forEach((ele) => {
                     symptomNames.push(ele.symptomName);
@@ -204,14 +199,9 @@ class EditPatientDrawer extends Component {
 
         const formattedDate = this.getFormattedDate(dob);
 
-        console.log("Edit Patient componentDidUpdate formattedData symptomData", symptomData);
-
-        console.log("Edit Patient componentDidUpdate prev_visible", prev_visible);
-        console.log("Edit Patient componentDidUpdate visible", visible);
-
         if (prev_visible !== visible) {
             const {searchSeverity} = this.props;
-            console.log("Edit Patient componentDidUpdate patient_id", patient_id);
+            console.log("Edit Patient componentDidUpdate patient_id: ", patient_id);
 
             this.handleGetPatientDetails(patient_id); //.then(() => {});
             this.handleConditionSearch(" ");
@@ -393,7 +383,7 @@ class EditPatientDrawer extends Component {
         }
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
 
     onDiagnosisSearchHanlder = (value) => {
         this.props.diagnosisSearch(value);

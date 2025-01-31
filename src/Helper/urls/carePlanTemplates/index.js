@@ -9,7 +9,7 @@ export const updateCarePlanTemplateUrl = (id) => {
 export const duplicateCarePlanTemplateUrl = (careplan_template_id) => {
     return `/care-plan-templates/duplicate/${careplan_template_id}`;
 };
-// AKSHAY NEW CODE IMPLEMENTATIONS
+// code implementation after phase 1
 export const getAllTemplatesUrl = () => {
     return `/care-plan-templates/`;
 };

@@ -171,16 +171,19 @@ const columns_symptoms = [
         dataIndex: "description",
         key: "description",
     },
-    // {
-    //   title: "",
-    //   dataIndex: "edit",
-    //   key: "edit",
-    //   render: () => (
-    //     <div className="edit-medication">
-    //       <img src={edit_image} className="edit-medication-icon" />
-    //     </div>
-    //   ),
-    // },
+    /**
+     * TODO: Check why this part has been commented
+    {
+      title: "",
+      dataIndex: "edit",
+      key: "edit",
+      render: () => (
+        <div className="edit-medication">
+          <img src={edit_image} className="edit-medication-icon" />
+        </div>
+      ),
+    },
+     */
 ];
 
 const columns_medication_non_editable = [
@@ -297,17 +300,13 @@ const columns_appointments = [
             if (
                 (!isOtherCarePlan &&
                     user_role_id.toString() === auth_role.toString()) ||
-                // AKSHAY NEW CODE IMPLEMENTATIONS
+                // code implementation after phase 1
                 (!isEmpty(carePlan) &&
                     carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true)
             ) {
                 canViewDetails = false;
             }
             return (
-                // <Tooltip placement="bottom" title={
-                //    canViewDetails ? formatMessage(messages.view) : formatMessage(messages.edit)
-                // }
-                //    >
                 <div className="p10" onClick={onRowAppointment({id, carePlan})}>
                     <Tooltip
                         placement="bottom"
@@ -320,8 +319,7 @@ const columns_appointments = [
                         <div className="pointer flex justify-center align-center">
                             {canViewDetails ? (
                                 <EyeFilled
-                                    className="w20"
-                                    className={"del doc-opt"}
+                                    className={"w20 del doc-opt"}
                                     style={{fontSize: "18px", color: "#1890ff"}}
                                 />
                             ) : (
@@ -383,15 +381,8 @@ const PatientProfileHeader = ({
                                   user_role_id,
                                   secondary_doctor_user_role_ids,
                               }) => {
-    console.log("Selected Care Plan, in Patient Profile Header: ", {selectedCarePlanId});
-
-    console.log("PatientProfileHeader showAddButton: ", showAddButton);
-    console.log("PatientProfileHeader selectedCarePlanId: ", selectedCarePlanId);
-    console.log("PatientProfileHeader auth_role: ", auth_role);
-    console.log("PatientProfileHeader user_role_id: ", user_role_id);
-    // AKSHAY NEW CODE IMPLEMENTATION START
-    console.log(secondary_doctor_user_role_ids.includes(auth_role));
-    // AKSHAY NEW CODE IMPLEMENTATION END
+    console.log("Selected Care Plan, in PatientProfileHeader: ", {selectedCarePlanId});
+    console.log("Secondary Doctor in PatientProfileHeader: ", secondary_doctor_user_role_ids.includes(auth_role));
 
     return (
         <div className="flex pt20 pr24 pb10 pl24">
@@ -543,7 +534,9 @@ const PatientCard = ({
                             </Tooltip>
                         </div>
 
-                        {/* <div className="br50 bg-darker-blue p10 mr10 w30 h30 flex justify-center align-center pointer">
+                        {
+                            /*
+                            <div className="br50 bg-darker-blue p10 mr10 w30 h30 flex justify-center align-center pointer">
                               <Tooltip placement={"bottom"} title={formatMessage(messages.video_icon_text)}>
                               <div className="text-white fs18" >
                                       {editPatientOption()}
@@ -640,7 +633,7 @@ const PatientTreatmentCard = ({
                               }) => {
     const time = moment().format("Do MMMM YYYY, hh:mm a");
 
-    // AKSHY NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
     let carePlan = care_plans[selectedCarePlanId] || {};
 
     console.log(carePlan.secondary_doctor_user_role_ids);
@@ -857,7 +850,7 @@ class PatientDetails extends Component {
             activeKey: "1",
             recommendSubscription: false,
             recommendService: false,
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             patientDetailsData: {},
             patientUserDetails: {},
             addPerforma: false,
@@ -869,7 +862,7 @@ class PatientDetails extends Component {
             getMedications,
             getAppointments,
             getPatientCarePlanDetails,
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             getPatientDetailsById,
             getAppointmentsDetails,
             patient_id,
@@ -885,7 +878,7 @@ class PatientDetails extends Component {
             notification_redirect = {},
             authenticated_category,
             medicines = {},
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             flashcardOpen,
             scheduleAppointment,
             getFlashCardByActivityId,
@@ -1062,7 +1055,7 @@ class PatientDetails extends Component {
     }
 
     componentWillUnmount() {
-        // AKSHAY NEW CODE IMPLEMENTATIONS FOR SUBSCRIPTION
+        // code implementation after phase 1 for subscriptions
         const {setFlashCard, setScheduleAppointmentData} = this.props;
         setFlashCard(false);
         setScheduleAppointmentData({});
@@ -1723,7 +1716,7 @@ class PatientDetails extends Component {
         if (
             (!isOtherCarePlan &&
                 user_role_id.toString() === auth_role.toString()) ||
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             (!isEmpty(carePlan) &&
                 carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true)
         ) {

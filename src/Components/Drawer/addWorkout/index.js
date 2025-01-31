@@ -28,7 +28,7 @@ class AddExercise extends Component {
         );
     }
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
     // THIS ONE COMMENTED
     // async componentDidMount() {
     //   await this.getAllWorkoutDetails();

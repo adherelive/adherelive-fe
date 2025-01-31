@@ -46,7 +46,7 @@ import {MinusCircleOutlined, PlusCircleOutlined, PoweroffOutlined} from "@ant-de
 import isEmpty from "../../../Helper/is-empty";
 import Icon from "@ant-design/icons";
 
-// AKSHAY NEW CODE IMPLEMENTATIONS
+// code implementation after phase 1
 import CustomSymptoms from "./CustomSymptoms";
 import CustomDiagnosis from "./CustomDiagnosis";
 import MultipleTreatmentAlert from "./MultipleTreatmentAlert";
@@ -92,7 +92,7 @@ class PatientDetailsDrawer extends Component {
             address: "",
             patients: {},
             isCollapse: false,
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             widgetDrawerOpen: false,
             finalSymptomData: [],
             diagnosisType: false,
@@ -122,7 +122,7 @@ class PatientDetailsDrawer extends Component {
 
     componentDidMount() {}
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
     static getDerivedStateFromProps(nextProps, nextState) {
         if (nextProps.patientSearchData !== nextState.patientSearchData) {
             const {
@@ -561,7 +561,7 @@ class PatientDetailsDrawer extends Component {
         }
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
+    // code implementation after phase 1 for CDSS/mongodb
 
     onDiagnosisSearchHanlder = (value) => {
         this.props.diagnosisSearch(value);
