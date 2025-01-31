@@ -190,7 +190,7 @@ export const getLastVisitAlerts = (id) => {
                 });
             }
         } catch (error) {
-            console.log("getLastVisitAlerts error ---> ", error);
+            console.log("getLastVisitAlerts error: ", error);
         }
         return response;
     };
@@ -218,7 +218,7 @@ export const markAppointmentComplete = (id) => {
                 });
             }
         } catch (error) {
-            console.log("markAppointmentComplete 500 Error ---> ", error);
+            console.log("markAppointmentComplete 500 Error: ", error);
         }
         return response;
     };
