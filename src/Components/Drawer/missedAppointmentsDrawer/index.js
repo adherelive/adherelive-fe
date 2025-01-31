@@ -82,6 +82,12 @@ class MissedAppointmentsDrawer extends Component {
         const criticalList = [];
         const nonCriticalList = [];
 
+        // Reset for each appointment
+        const timings = [];
+        let type_description = "";
+        let isCritical = false;
+        let participant_id = "";
+
         console.log("Patients from the Props: ", patients);
         console.log("Missed Appointments from the Props: ", missed_appointments);
 
@@ -93,12 +99,6 @@ class MissedAppointmentsDrawer extends Component {
                 console.warn("Empty or undefined appointment array for: ", appointment);
                 continue;
             }
-
-            // Reset for each appointment
-            const timings = [];
-            let type_description = "";
-            let isCritical = false;
-            let participant_id = "";
 
             for (let eachAppointmentEvent of eachAppointmentEventArray) {
                 // Add safety checks for nested destructuring
@@ -147,7 +147,7 @@ class MissedAppointmentsDrawer extends Component {
                 // Determine participant_id with additional safety checks
                 if (participant_one_category === USER_CATEGORY.PATIENT && participant_one_id) {
                     participant_id = participant_one_id;
-                } else if (participant_two_category === USER_CATEGORY.PATIENT && participant_two_id) {
+                } else if (participant_two_category === USER_CATEGORY.DOCTOR && participant_two_id) {
                     participant_id = participant_two_id;
                 } else {
                     console.warn("No valid patient ID found for event: ", eventId);
@@ -158,8 +158,8 @@ class MissedAppointmentsDrawer extends Component {
                 // Assuming you want to handle only specific categories
                 // Modify this logic based on your specific requirements to a PATIENT
                 // if (actorCategory !== USER_CATEGORY.PATIENT) {
-                // Skip non-patient events or handle differently
-                // return;
+                //     // Skip non-patient events or handle differently
+                //     return;
                 // }
 
                 isCritical = critical;
@@ -170,10 +170,12 @@ class MissedAppointmentsDrawer extends Component {
                 const patientDetails = patients[participant_id] || {};
                 const {
                     basic_info: {
-                        id: pId = "",
+                        // id: pId = "",
                         first_name = "",
                         middle_name = "",
                         last_name = "",
+                        full_name = "",
+                        user_id: pId = "",
                     } = {}
                 } = patientDetails;
 
