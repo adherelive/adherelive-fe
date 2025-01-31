@@ -81,80 +81,134 @@ class MissedAppointmentsDrawer extends Component {
         const appointmentList = [];
         const criticalList = [];
         const nonCriticalList = [];
-        const timings = [];
-        let type_description = "";
-        let isCritical = false;
-        let participant_id = "";
+
+        console.log("Patients from the Props: ", patients);
+        console.log("Missed Appointments from the Props: ", missed_appointments);
 
         for (let appointment in missed_appointments) {
             const eachAppointmentEventArray = missed_appointments[appointment];
+
+            // Add a safety check if the array is empty or undefined, skip if that is so
+            if (!eachAppointmentEventArray || !eachAppointmentEventArray.length) {
+                console.warn("Empty or undefined appointment array for: ", appointment);
+                continue;
+            }
+
+            // Reset for each appointment
+            const timings = [];
+            let type_description = "";
+            let isCritical = false;
+            let participant_id = "";
+
             for (let eachAppointmentEvent of eachAppointmentEventArray) {
+                // Add safety checks for nested destructuring
                 const {
-                    critical,
+                    critical = false,
                     start_time,
                     date: start_date,
+                    details = {},
+                    id: eventId,
+                } = eachAppointmentEvent || {};
+
+                const {
+                    actor = {},
+                    basic_info = {},
+                    participant_one = {},
+                    participant_two = {},
+                } = details;
+
+                const {
+                    id: actorId,
+                    details: actorDetails = {},
+                    user_role_id
+                } = actor;
+
+                const {
+                    name: actorName = "",
+                    category: actorCategory = ""
+                } = actorDetails;
+
+                const {
                     details: {
-                        basic_info: {
-                            details: {
-                                type_description: typeDescription = "",
-                                type = "",
-                            } = {},
-                        } = {},
+                        type_description: typeDescription = "",
+                        type = "",
+                    } = {}
+                } = basic_info;
 
-                        participant_one: {
-                            category: participant_one_category = "",
-                            id: participant_one_id = "",
-                        },
-                        participant_two: {
-                            category: participant_two_category = "",
-                            id: participant_two_id = "",
-                        },
-                    } = {},
-                } = eachAppointmentEvent;
+                const {
+                    category: participant_one_category = "",
+                    id: participant_one_id = ""
+                } = participant_one;
 
-                if (participant_one_category === USER_CATEGORY.PATIENT) {
+                const {
+                    category: participant_two_category = "",
+                    id: participant_two_id = ""
+                } = participant_two;
+
+                // Determine participant_id with additional safety checks
+                if (participant_one_category === USER_CATEGORY.PATIENT && participant_one_id) {
                     participant_id = participant_one_id;
-                } else {
+                } else if (participant_two_category === USER_CATEGORY.DOCTOR && participant_two_id) {
                     participant_id = participant_two_id;
+                } else {
+                    console.warn("No valid patient ID found for event: ", eventId);
+                    // Skip this iteration if no valid patient ID is found
+                    // continue;
                 }
+
+                // Assuming you want to handle only specific categories
+                // Modify this logic based on your specific requirements to a PATIENT
+                // if (actorCategory !== USER_CATEGORY.PATIENT) {
+                //     // Skip non-patient events or handle differently
+                //     return;
+                // }
 
                 isCritical = critical;
                 timings.push(start_time);
                 type_description = typeDescription;
-            }
 
-            const {
-                basic_info: {
-                    id: pId = "",
-                    first_name = "",
-                    middle_name = "",
-                    last_name = "",
-                },
-            } = patients[participant_id] || {};
+                // Look up patient details with safety check
+                const patientDetails = patients[participant_id] || {};
+                const {
+                    basic_info: {
+                        // id: pId = "",
+                        first_name = "",
+                        middle_name = "",
+                        last_name = "",
+                        full_name = "",
+                        user_id: pId = "",
+                    } = {}
+                } = patientDetails;
 
-            let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`;
-            let treatment_type = type_description.length > 0 ? type_description : " ";
+                console.log("Patient Details in the for loop: ", patientDetails);
 
-            if (isCritical) {
-                criticalList.push(
+                let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`.trim();
+                let treatment_type = type_description.length > 0 ? type_description : " ";
+
+                console.log("appointmentCard props: ", {
+                    name: pName,
+                    time: timings || [start_time],
+                    treatment_type,
+                    pId,
+                });
+
+                // Create list items
+                const appointmentCard = (
                     <MissedAppointmentCard
+                        // key={pId || eventId || Math.random()} // Add key to prevent React warnings
                         formatMessage={this.formatMessage}
                         name={pName}
-                        time={timings}
+                        time={timings || [start_time]}
                         treatment_type={treatment_type}
                         onClick={handlePatientDetailsRedirect(pId)}
                     />
                 );
-            } else {
-                nonCriticalList.push(
-                    <MissedAppointmentCard
-                        formatMessage={this.formatMessage}
-                        name={pName}
-                        time={timings}
-                        treatment_type={treatment_type}
-                        onClick={handlePatientDetailsRedirect(pId)}
-                    />
-                );
+
+                if (isCritical) {
+                    criticalList.push(appointmentCard);
+                } else {
+                    nonCriticalList.push(appointmentCard);
+                }
             }
         }
 
