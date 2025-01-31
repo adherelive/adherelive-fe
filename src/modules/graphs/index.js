@@ -10,13 +10,11 @@ import {doRequest} from "../../Helper/network";
 
 export const GET_GRAPHS = "GET_GRAPHS";
 export const GET_GRAPHS_COMPLETED = "GET_GRAPHS_COMPLETED";
-export const GET_GRAPHS_COMPLETED_WITH_ERROR =
-    "GET_GRAPHS_COMPLETED_WITH_ERROR";
+export const GET_GRAPHS_COMPLETED_WITH_ERROR = "GET_GRAPHS_COMPLETED_WITH_ERROR";
 
 export const UPDATE_GRAPHS = "UPDATE_GRAPHS";
 export const UPDATE_GRAPHS_COMPLETED = "UPDATE_GRAPHS_COMPLETED";
-export const UPDATE_GRAPHS_COMPLETED_WITH_ERROR =
-    "UPDATE_GRAPHS_COMPLETED_WITH_ERROR";
+export const UPDATE_GRAPHS_COMPLETED_WITH_ERROR = "UPDATE_GRAPHS_COMPLETED_WITH_ERROR";
 
 function graphReducer(state, data) {
     const {charts} = data || {};
@@ -58,7 +56,7 @@ export const getGraphs = () => {
                 });
             }
         } catch (err) {
-            console.log("err get patient careplan details", err);
+            console.log("Error in getGraphs: ", err);
             throw err;
         }
 
@@ -95,7 +93,7 @@ export const updateGraphs = (payload) => {
                 });
             }
         } catch (err) {
-            console.log("err get patient careplan details", err);
+            console.log("Error in updateGraphs: ", err);
             throw err;
         }
 

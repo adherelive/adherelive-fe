@@ -20,7 +20,7 @@ import {
 } from "../../modules/favouritesData/index";
 import {googleTranslate} from "../../modules/cdss";
 
-// AKSHAY NEW CODE FOR SUBSCRIPTION
+// code implementation after phase 1 for Subscription
 import {updateActivityById} from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
@@ -67,7 +67,7 @@ const mapDispatchToProps = (dispatch) => {
         getAppointmentsDetails: () => dispatch(getAppointmentsDetails()),
 
         // editAppointment: data => dispatch(editAppointment(data)),
-        // AKSHAY NEW CODE FRO SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         updateActivityById: (id, payload) =>
             dispatch(updateActivityById(id, payload)),
         googleTranslate: (textToConvert) =>

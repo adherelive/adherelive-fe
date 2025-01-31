@@ -98,7 +98,7 @@ class SearchPatient extends Component {
 
         const {isPatientAvailable} = this.state;
 
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         let isPatientAvailableForDoctor = isPatientAvailable[patient_id];
 
         return (
@@ -153,7 +153,7 @@ class SearchPatient extends Component {
 
     getPatientOptions = () => {
         // const { patients } = this.props;
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         const {patients} = this.state;
         const {patient_ids, users, searchInput = ""} = this.state;
         let options = [];
@@ -192,7 +192,7 @@ class SearchPatient extends Component {
         //   );
         // }
 
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
 
         for (let id of patient_ids) {
             const {
@@ -314,7 +314,7 @@ class SearchPatient extends Component {
     //   }
     // }
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
 
     async handlePatientSearch(data) {
         try {

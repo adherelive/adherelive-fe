@@ -7,7 +7,7 @@ function missedEventReducer(state, data) {
         missed_vitals = {},
         missed_diets = {},
         missed_workouts = {},
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         appointment_ids = {},
         diet_ids = {},
         medication_ids = {},

@@ -10,13 +10,11 @@ import {
     searchPatientFromNumUrl,
 } from "../../Helper/urls/patients";
 import {getInitialData} from "./../auth/index";
-
 import {getPatientMissedEventsUrl} from "../../Helper/urls/event";
 
 export const ADD_PATIENT = "ADD_PATIENT";
 export const ADD_PATIENT_COMPLETED = "ADD_PATIENT_COMPLETED";
-export const ADD_PATIENT_COMPLETED_WITH_ERROR =
-    "ADD_PATIENT_COMPLETED_WITH_ERROR";
+export const ADD_PATIENT_COMPLETED_WITH_ERROR = "ADD_PATIENT_COMPLETED_WITH_ERROR";
 
 export const SEARCH_PATIENT = "SEARCH_PATIENT";
 export const SEARCH_PATIENT_COMPLETE = "SEARCH_PATIENT_COMPLETE";
@@ -31,25 +29,19 @@ export const CONSENT_VERIFY_COMPLETED = "CONSENT_VERIFY_COMPLETED";
 export const CONSENT_VERIFY_FAILED = "CONSENT_VERIFY_FAILED";
 
 export const SEARCH_PATIENT_FOR_DOCTOR = "SEARCH_PATIENT_FOR_DOCTOR";
-export const SEARCH_PATIENT_FOR_DOCTOR_COMPLETE =
-    "SEARCH_PATIENT_FOR_DOCTOR_COMPLETE";
-export const SEARCH_PATIENT_FOR_DOCTOR_FAILED =
-    "SEARCH_PATIENT_FOR_DOCTOR_FAILED";
+export const SEARCH_PATIENT_FOR_DOCTOR_COMPLETE = "SEARCH_PATIENT_FOR_DOCTOR_COMPLETE";
+export const SEARCH_PATIENT_FOR_DOCTOR_FAILED = "SEARCH_PATIENT_FOR_DOCTOR_FAILED";
 
 export const ADD_NEW_CAREPLAN = "ADD_NEW_CAREPLAN";
 export const ADD_NEW_CAREPLAN_COMPLETE = "ADD_NEW_CAREPLAN_COMPLETE";
 export const ADD_NEW_CAREPLAN_FAILED = "ADD_NEW_CAREPLAN_FAILED";
 
-export const GET_PATIENT_MISSED_EVENTS_START =
-    "GET_PATIENT_MISSED_EVENTS_START";
-export const GET_PATIENT_MISSED_EVENTS_COMPLETED =
-    "GET_PATIENT_MISSED_EVENTS_COMPLETED";
-export const GET_PATIENT_MISSED_EVENTS_FAILED =
-    "GET_PATIENT_MISSED_EVENTS_FAILED";
+export const GET_PATIENT_MISSED_EVENTS_START = "GET_PATIENT_MISSED_EVENTS_START";
+export const GET_PATIENT_MISSED_EVENTS_COMPLETED = "GET_PATIENT_MISSED_EVENTS_COMPLETED";
+export const GET_PATIENT_MISSED_EVENTS_FAILED = "GET_PATIENT_MISSED_EVENTS_FAILED";
 
 export const GENERATE_PRESCRIPTION_START = "GENERATE_PRESCRIPTION_START";
-export const GENERATE_PRESCRIPTION_COMPLETED =
-    "GENERATE_PRESCRIPTION_COMPLETED";
+export const GENERATE_PRESCRIPTION_COMPLETED = "GENERATE_PRESCRIPTION_COMPLETED";
 export const GENERATE_PRESCRIPTION_FAILED = "GENERATE_PRESCRIPTION_FAILED";
 
 export const requestConsent = (id) => {
@@ -75,7 +67,7 @@ export const requestConsent = (id) => {
                 });
             }
         } catch (err) {
-            console.log("err requestConsent", err);
+            console.log("Error in requestConsent: ", err);
             throw err;
         }
 
@@ -108,7 +100,7 @@ export const consentVerify = (payload) => {
                 });
             }
         } catch (err) {
-            console.log("err consentVerify", err);
+            console.log("Error in consentVerify: ", err);
             throw err;
         }
 
@@ -145,7 +137,7 @@ export const addPatient = (payload) => {
                 dispatch(getInitialData());
             }
         } catch (err) {
-            console.log("err add patient", err);
+            console.log("Error in add patient: ", err);
             throw err;
         }
 
@@ -173,13 +165,13 @@ export const searchPatientFromNum = (value) => {
                     payload: {error},
                 });
             } else if (status === true) {
-                // dispatch({
-                //   type:SEARCH_PATIENT_COMPLETE,
-                //   data: data,
-                // });
+                dispatch({
+                  type:SEARCH_PATIENT_COMPLETE,
+                  data: data,
+                });
             }
         } catch (error) {
-            console.log("error search patient", error);
+            console.log("Error in search patient from num: ", error);
             throw error;
         }
 
@@ -213,7 +205,7 @@ export const searchPatientForDoctor = (value) => {
                 });
             }
         } catch (error) {
-            console.log("error search patient", error);
+            console.log("Error in search patient for Doctor: ", error);
             throw error;
         }
 
@@ -221,7 +213,7 @@ export const searchPatientForDoctor = (value) => {
     };
 };
 
-export const addCareplanForPatient = (id, payload) => {
+export const addCarePlanForPatient = (id, payload) => {
     let response = {};
     return async (dispatch) => {
         try {
@@ -249,7 +241,7 @@ export const addCareplanForPatient = (id, payload) => {
                 });
             }
         } catch (err) {
-            console.log("err add patient", err);
+            console.log("Error in add care plan for patient: ", err);
             throw err;
         }
 
@@ -281,7 +273,7 @@ export const getPatientMissedEvents = (patient_id) => {
                 });
             }
         } catch (err) {
-            console.log("GET_PATIENT_MISSED_EVENTS_START err consentVerify", err);
+            console.log("Error in get patient missed events: ", err);
             throw err;
         }
 
@@ -289,13 +281,12 @@ export const getPatientMissedEvents = (patient_id) => {
     };
 };
 
-// AKSHAY NEW CODE IMPLEMENTATIONS
-
+// code implementation after phase 1
 export const getPatientDetailsById = (patientId) => {
     let response = {};
     return async (dispatch) => {
         try {
-            // dispatch({ type: ADD_PATIENT });
+            dispatch({ type: ADD_PATIENT });
 
             response = await doRequest({
                 method: REQUEST_TYPE.GET,
@@ -306,23 +297,22 @@ export const getPatientDetailsById = (patientId) => {
             response || {};
 
             if (status === false) {
-                // dispatch({
-                //   type: ADD_PATIENT_COMPLETED_WITH_ERROR,
-                //   payload: { error },
-                // });
+                dispatch({
+                  type: ADD_PATIENT_COMPLETED_WITH_ERROR,
+                  payload: { error },
+                });
             } else if (status === true) {
-                // const { patients = {} } = data;
-                // dispatch({
-                //   type: ADD_PATIENT_COMPLETED,
-                //   data: data,
-                // });
-                // dispatch(getInitialData());
+                const { patients = {} } = data;
+                dispatch({
+                  type: ADD_PATIENT_COMPLETED,
+                  data: data,
+                });
+                dispatch(getInitialData());
             }
         } catch (err) {
-            console.log("err in get patient details", err);
+            console.log("Error in get patient details by ID: ", err);
             throw err;
         }
-
         return response;
     };
 };
@@ -345,6 +335,7 @@ export default (state = {}, action) => {
     switch (type) {
         default:
             return patientReducer(state, data);
+        // TODO: Why is this return path comments?
         // return {
         //   ...PATIENT_INITIAL_STATE
         // };

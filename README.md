@@ -430,17 +430,17 @@ here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-
 Build the image using below commands
 
 ```sh
-cd ~/akshay/adherelive-web/
+cd ~/adherelive-web/
 git pull
 docker image build -t adhere-backend-9 .
-cd ~/akshay/docker_env
+cd ~/docker_env
 docker-compose up -d backend
 ```
 
 ## Frontend
 
 ```sh
-$ cd /home/azureuser/akshay/adherelive-fe
+$ cd /home/azureuser/adherelive-fe
 $ git pull
 $ docker image build -t adhere-frontend-11 .
 $ docker-compose  up -d frontend
@@ -558,17 +558,17 @@ docker swarm join-token manager
 Build the image using below commands
 
 ```sh
-cd ~/akshay/adherelive-web/
+cd ~/adherelive-web/
 git pull
 docker image build -t adhere-backend-9 .
-cd ~/akshay/docker_env
+cd ~/docker_env
 docker-compose up -d backend
 ```
 
 ## Frontend
 
 ```sh
-$ cd /home/azureuser/akshay/adherelive-fe
+$ cd /home/azureuser/adherelive-fe
 $ git pull
 $ docker image build -t adhere-frontend-11 .
 $ docker-compose  up -d frontend
@@ -618,7 +618,7 @@ $ cd ./adherelive-fe
 $ vi Dockerfile
 FROM node:16.10.0 as builder
 LABEL application="adhere-live-frontend"
-LABEL owner="Akshay Nagargoje"
+LABEL owner="AdhereLive Pvt Ltd"
 RUN mkdir /code
 WORKDIR /code
 COPY package*.json ./

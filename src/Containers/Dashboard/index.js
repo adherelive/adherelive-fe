@@ -22,7 +22,7 @@ import {
 } from "../../modules/scheduleEvents";
 import {setUnseenNotificationCount} from "../../modules/pages/NotificationCount";
 import {getAllDietsForDoctor} from "../../modules/diets";
-// AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
+// code implementation after phase 1 for CDSS/mongodb
 import {addDiagnosis, diagnosisSearch, getDiagnosisList,} from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
@@ -100,18 +100,18 @@ const mapDispatchToProps = (dispatch) => {
         removePatientFromWatchlist: (patient_id) => dispatch(removePatientFromWatchlist(patient_id)),
         showVerifyModal: (data) => dispatch(showVerifyModal(data)),
         getAllFeatures: () => dispatch(getAllFeatures()),
+        setUnseenNotificationCount: (count) => dispatch(setUnseenNotificationCount(count)),
+        getDiagnosisList: (payload) => dispatch(getDiagnosisList(payload)),
+        addDiagnosis: (payload) => dispatch(addDiagnosis(payload)),
+        diagnosisSearch: (payload) => dispatch(diagnosisSearch(payload)),
+        openMissedDietDrawer: () => dispatch(open({type: DRAWER.MISSED_DIET})),
+        openMissedWorkoutDrawer: () => dispatch(open({type: DRAWER.MISSED_WORKOUT})),
         openMissedMedicationDrawer: () => dispatch(open({type: DRAWER.MISSED_MEDICATION})),
         openMissedAppointmentDrawer: () => dispatch(open({type: DRAWER.MISSED_APPOINTMENT})),
         openMissedVitalDrawer: () => dispatch(open({type: DRAWER.MISSED_VITAL})),
         getAllMissedScheduleEvents: () => dispatch(getAllMissedScheduleEvents()),
-        setUnseenNotificationCount: (count) => dispatch(setUnseenNotificationCount(count)),
+        // TODO: Check why these are not getting used anywhere? Does the above cater for all the missed?
         getAllDietsForDoctor: () => dispatch(getAllDietsForDoctor()),
-        openMissedDietDrawer: () => dispatch(open({type: DRAWER.MISSED_DIET})),
-        openMissedWorkoutDrawer: () => dispatch(open({type: DRAWER.MISSED_WORKOUT})),
-        // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
-        getDiagnosisList: (payload) => dispatch(getDiagnosisList(payload)),
-        addDiagnosis: (payload) => dispatch(addDiagnosis(payload)),
-        diagnosisSearch: (payload) => dispatch(diagnosisSearch(payload)),
         getAllMissedEventChartCount: () => dispatch(getAllMissedEventChartCount()),
         getAllMissedEventDataByQuery: (type) => dispatch(getAllMissedEventDataByQuery(type)),
     };

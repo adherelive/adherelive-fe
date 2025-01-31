@@ -42,7 +42,7 @@ import {MoreOutlined} from "@ant-design/icons";
 
 import Tooltip from "antd/es/tooltip";
 import isEmpty from "../../Helper/is-empty";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
@@ -380,7 +380,7 @@ class ChatPopUp extends Component {
         const {payload: {patient_id} = {}} = this.props;
         let finalChannel = "";
         if (dashboardChat == true) {
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             if (!isEmpty(care_plans)) {
                 var filtered = Object.fromEntries(
                     Object.entries(care_plans).filter(
@@ -402,7 +402,7 @@ class ChatPopUp extends Component {
         console.log("finalChannel", finalChannel);
 
         // this.channelName = roomId ? roomId : "test";
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         this.channelName = finalChannel;
 
         // fetchChatAccessToken(authenticated_user).then(result => {
@@ -533,10 +533,10 @@ class ChatPopUp extends Component {
             this.props;
         const {payload: {patient_id} = {}} = this.props;
         console.log("messages", messages);
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         let finalChannel = "";
         if (dashboardChat == true) {
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             if (!isEmpty(care_plans)) {
                 var filtered = Object.fromEntries(
                     Object.entries(care_plans).filter(
@@ -572,10 +572,10 @@ class ChatPopUp extends Component {
         const {carePlan, roomId, addMessageOfChat, dashboardChat, care_plans} =
             this.props;
         const {payload: {patient_id} = {}} = this.props;
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         let finalChannel = "";
         if (dashboardChat == true) {
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             if (!isEmpty(care_plans)) {
                 var filtered = Object.fromEntries(
                     Object.entries(care_plans).filter(
@@ -986,7 +986,7 @@ class ChatPopUp extends Component {
 
         let finalChannel = "";
         if (dashboardChat == true) {
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             if (!isEmpty(care_plans)) {
                 var filtered = Object.fromEntries(
                     Object.entries(care_plans).filter(
@@ -1033,7 +1033,7 @@ class ChatPopUp extends Component {
                                     otherUserLastConsumedMessageIndex={
                                         otherUserLastConsumedMessageIndex
                                     }
-                                    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
+                                    // code implementation after phase 1
                                     channelId={finalChannel}
                                 />
                             )}

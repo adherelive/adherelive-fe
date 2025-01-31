@@ -36,7 +36,7 @@ function UsgFindings() {
                     {
                         value: "",
                         date: new Date().toDateString(),
-                        doctorName: "Akshay Nagargoje",
+                        doctorName: "Sparsh Jaiswal",
                         reportId: 1,
                     },
                 ],
@@ -60,7 +60,7 @@ function UsgFindings() {
         data[index].reportValues.push({
             value: "",
             date: new Date().toDateString(),
-            doctorName: "Akshay Nagargoje",
+            doctorName: "Sparsh Jaiswal",
             reportId: 2,
         });
         setInputFields(data);

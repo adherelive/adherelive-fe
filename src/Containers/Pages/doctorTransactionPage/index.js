@@ -3,12 +3,12 @@ import DoctorTransactionPage from "../../../Components/Pages/doctorTransactionPa
 import {withRouter} from "react-router-dom";
 import { open } from "../../../modules/drawer";
 import { DRAWER } from "../../../constant";
-// AKSHAY NEW CODE FOR SUBSCRIPTION
+// code implementation after phase 1 for Subscription
 import {getAllTransactions} from "../../../modules/subscription/transactions/index";
 
 const mapStateToProps = (state) => {
     const {
-        // AKSHAY NEW CODE FOR SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         subscription: {transactions = {}},
     } = state;
     return {

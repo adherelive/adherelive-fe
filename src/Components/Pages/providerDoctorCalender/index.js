@@ -46,7 +46,7 @@ class ProviderDoctorCalender extends Component {
                 getDoctorsCalenderDataForDay,
                 authenticated_category,
             } = this.props;
-            // AKSHAY NEW CODE IMPLEMENTATION
+            // code implementation after phase 1
             if (authenticated_category === USER_CATEGORY.PROVIDER) {
                 getCalenderDataForDay(ISOdate, type).then((response) => {
                     const {status, payload: {data, message} = {}} = response;
@@ -243,7 +243,7 @@ class ProviderDoctorCalender extends Component {
         });
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATION
+    // code implementation after phase 1
 
     openPatientDetails = (patientId) => {
         const {history, authenticated_category} = this.props;

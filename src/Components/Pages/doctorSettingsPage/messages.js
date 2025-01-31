@@ -127,7 +127,7 @@ const messages = defineMessages({
         description: "",
         defaultMessage: "This delete is irreversible",
     },
-    // AKSHAY NEW CODE FOR SUBSCRIPTION STARTED
+    // code implementation after phase 1 for Subscription STARTED
     menuTitleService: {
         id: "app.admin.doctors.settings.menuTitleService",
         description: "",
@@ -138,7 +138,7 @@ const messages = defineMessages({
         description: "",
         defaultMessage: "Subscription",
     },
-    // AKSHAY NEW CODE FOR SUBSCRIPTION ENDED
+    // code implementation after phase 1 for Subscription ENDED
 });
 
 export default messages;

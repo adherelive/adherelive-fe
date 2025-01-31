@@ -9,7 +9,7 @@ import TextArea from "antd/es/input/TextArea";
 import Input from "antd/es/input";
 import Tag from "antd/es/tag";
 import {DAYS} from "../../../constant";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 

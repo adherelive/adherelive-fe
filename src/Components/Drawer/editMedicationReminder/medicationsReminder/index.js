@@ -20,7 +20,7 @@ import endDateField from "../common/endDate";
 import repeatDaysField from "../common/selectedDays";
 import moment from "moment";
 import AddMedicineDrawer from "../../../../Containers/Drawer/addMedicine";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 

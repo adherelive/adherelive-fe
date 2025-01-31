@@ -23,10 +23,10 @@ const mapStateToProps = (state) => {
         patients,
         features = {},
         features_mappings = {},
-        // AKSHAY NEW CODE IMPLEMENTATION STARTED
+        // code implementation after phase 1 STARTED
         care_plans,
         drawer: {visible, data: {type, payload = {}} = {}},
-        // AKSHAY NEW CODE IMPLEMENTATION ENDED
+        // code implementation after phase 1 ENDED
     } = state;
     return {
         twilio,

@@ -91,7 +91,7 @@ import {getRoomId} from "../../../Helper/twilio";
 import {getFullName} from "../../../Helper/common";
 import Tooltip from "antd/es/tooltip";
 
-// AKSHAY NEW CODE FOR SUBSCRIPTION
+// code implementation after phase 1 for Subscription
 import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscription";
 import RecommendService from "../../Subscription/Drawer/RecommendService";
 import SubscriptionTable from "../../Subscription/SubscriptionTable";
@@ -171,16 +171,19 @@ const columns_symptoms = [
         dataIndex: "description",
         key: "description",
     },
-    // {
-    //   title: "",
-    //   dataIndex: "edit",
-    //   key: "edit",
-    //   render: () => (
-    //     <div className="edit-medication">
-    //       <img src={edit_image} className="edit-medication-icon" />
-    //     </div>
-    //   ),
-    // },
+    /**
+     * TODO: Check why this part has been commented
+    {
+      title: "",
+      dataIndex: "edit",
+      key: "edit",
+      render: () => (
+        <div className="edit-medication">
+          <img src={edit_image} className="edit-medication-icon" />
+        </div>
+      ),
+    },
+     */
 ];
 
 const columns_medication_non_editable = [
@@ -297,17 +300,13 @@ const columns_appointments = [
             if (
                 (!isOtherCarePlan &&
                     user_role_id.toString() === auth_role.toString()) ||
-                // AKSHAY NEW CODE IMPLEMENTATIONS
+                // code implementation after phase 1
                 (!isEmpty(carePlan) &&
                     carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true)
             ) {
                 canViewDetails = false;
             }
             return (
-                // <Tooltip placement="bottom" title={
-                //    canViewDetails ? formatMessage(messages.view) : formatMessage(messages.edit)
-                // }
-                //    >
                 <div className="p10" onClick={onRowAppointment({id, carePlan})}>
                     <Tooltip
                         placement="bottom"
@@ -320,8 +319,7 @@ const columns_appointments = [
                         <div className="pointer flex justify-center align-center">
                             {canViewDetails ? (
                                 <EyeFilled
-                                    className="w20"
-                                    className={"del doc-opt"}
+                                    className={"w20 del doc-opt"}
                                     style={{fontSize: "18px", color: "#1890ff"}}
                                 />
                             ) : (
@@ -383,15 +381,8 @@ const PatientProfileHeader = ({
                                   user_role_id,
                                   secondary_doctor_user_role_ids,
                               }) => {
-    console.log("Selected Care Plan, in Patient Profile Header: ", {selectedCarePlanId});
-
-    console.log("PatientProfileHeader showAddButton: ", showAddButton);
-    console.log("PatientProfileHeader selectedCarePlanId: ", selectedCarePlanId);
-    console.log("PatientProfileHeader auth_role: ", auth_role);
-    console.log("PatientProfileHeader user_role_id: ", user_role_id);
-    // AKSHAY NEW CODE IMPLEMENTATION START
-    console.log(secondary_doctor_user_role_ids.includes(auth_role));
-    // AKSHAY NEW CODE IMPLEMENTATION END
+    console.log("Selected Care Plan, in PatientProfileHeader: ", {selectedCarePlanId});
+    console.log("Secondary Doctor in PatientProfileHeader: ", secondary_doctor_user_role_ids.includes(auth_role));
 
     return (
         <div className="flex pt20 pr24 pb10 pl24">
@@ -543,7 +534,9 @@ const PatientCard = ({
                             </Tooltip>
                         </div>
 
-                        {/* <div className="br50 bg-darker-blue p10 mr10 w30 h30 flex justify-center align-center pointer">
+                        {
+                            /*
+                            <div className="br50 bg-darker-blue p10 mr10 w30 h30 flex justify-center align-center pointer">
                               <Tooltip placement={"bottom"} title={formatMessage(messages.video_icon_text)}>
                               <div className="text-white fs18" >
                                       {editPatientOption()}
@@ -640,7 +633,7 @@ const PatientTreatmentCard = ({
                               }) => {
     const time = moment().format("Do MMMM YYYY, hh:mm a");
 
-    // AKSHY NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
     let carePlan = care_plans[selectedCarePlanId] || {};
 
     console.log(carePlan.secondary_doctor_user_role_ids);
@@ -857,7 +850,7 @@ class PatientDetails extends Component {
             activeKey: "1",
             recommendSubscription: false,
             recommendService: false,
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             patientDetailsData: {},
             patientUserDetails: {},
             addPerforma: false,
@@ -869,7 +862,7 @@ class PatientDetails extends Component {
             getMedications,
             getAppointments,
             getPatientCarePlanDetails,
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             getPatientDetailsById,
             getAppointmentsDetails,
             patient_id,
@@ -885,7 +878,7 @@ class PatientDetails extends Component {
             notification_redirect = {},
             authenticated_category,
             medicines = {},
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             flashcardOpen,
             scheduleAppointment,
             getFlashCardByActivityId,
@@ -910,7 +903,7 @@ class PatientDetails extends Component {
         // this.fetchReportData();
         // this.fetchVitalDetails();
 
-        // AKSHAY NEW CODE FOR SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         this.props.getServices();
         this.props.getSubscriptions();
         this.props.getRecommendServiceAndSubscription(patient_id);
@@ -923,7 +916,7 @@ class PatientDetails extends Component {
         // if (showTd) {
         const response = await getPatientCarePlanDetails(patient_id);
 
-        // Changes made by Akshay NEW CODE IMPLEMENTATIONS START
+        // code implementation after phase 1 START
         const responsePatientDetails = await getPatientDetailsById(patient_id);
         if (responsePatientDetails.status) {
             this.setState({
@@ -931,7 +924,7 @@ class PatientDetails extends Component {
                 patientUserDetails: responsePatientDetails.payload.data.users,
             });
         }
-        // Changes made by Akshay NEW CODE IMPLEMENTATIONS END
+        // code implementation after phase 1 END
 
         let {status = false, payload = {}} = response;
         if (status) {
@@ -945,7 +938,7 @@ class PatientDetails extends Component {
                 } = {},
             } = payload;
 
-            // AKSHAY NEW CODE IMPLEMENTATION START
+            // code implementation after phase 1 START
             const patientCarePlans =
                 !isEmpty(care_plan_ids) &&
                 care_plan_ids.filter((id) => {
@@ -957,7 +950,7 @@ class PatientDetails extends Component {
                     }
                 });
 
-            // AKSHAY NEW CODE IMPLEMENTATION END
+            // code implementation after phase 1 END
             console.log("handleInitialData patientCarePlans: ", patientCarePlans);
 
             const {notification_redirect: {care_plan_id = null} = {}} =
@@ -984,7 +977,7 @@ class PatientDetails extends Component {
                 current_care_plan_id,
                 isOtherCarePlan: false,
                 selectedCarePlanId: current_care_plan_id,
-                // AKSHAY NEW CODE IMPLEMENTATION END
+                // code implementation after phase 1 END
                 // selectedCarePlanId: !isEmpty(patientCarePlans)
                 //   ? patientCarePlans[0]
                 //   : "",
@@ -1053,7 +1046,7 @@ class PatientDetails extends Component {
             notification_redirect = {},
             getAllTemplatesForDoctor,
         } = this.props;
-        console.log("getAllTemplatesForDoctor in componentDidMount ---> ", getAllTemplatesForDoctor);
+        console.log("Patient details getAllTemplatesForDoctor in componentDidMount ---> ", getAllTemplatesForDoctor);
         await this.handleInitialData();
         // await getAllTemplatesForDoctor();
         if (Object.keys(notification_redirect).length) {
@@ -1062,7 +1055,7 @@ class PatientDetails extends Component {
     }
 
     componentWillUnmount() {
-        // AKSHAY NEW CODE IMPLEMENTATIONS FOR SUBSCRIPTION
+        // code implementation after phase 1 for subscriptions
         const {setFlashCard, setScheduleAppointmentData} = this.props;
         setFlashCard(false);
         setScheduleAppointmentData({});
@@ -1101,7 +1094,7 @@ class PatientDetails extends Component {
         }
 
         const {activeKey = "1", isOtherCarePlan = false} = this.state;
-        // AKSHAY NEW CODE IMPLEMENTATION
+        // code implementation after phase 1
         // BELOW CODE COMMENTED
         // if (
         //   activeKey === "1" &&
@@ -1133,8 +1126,8 @@ class PatientDetails extends Component {
         // try {
         await updateUnseenNotificationData(); // Wait for the Promise to resolve
         // } catch (err) {
+        //     // Handle the error appropriately (e.g., display an error message)
         //     console.error("Error updating notifications: ", err);
-        // Handle the error appropriately (e.g., display an error message)
         // }
     };
 
@@ -1723,7 +1716,7 @@ class PatientDetails extends Component {
         if (
             (!isOtherCarePlan &&
                 user_role_id.toString() === auth_role.toString()) ||
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             (!isEmpty(carePlan) &&
                 carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true)
         ) {
@@ -1844,14 +1837,6 @@ class PatientDetails extends Component {
     showTemplateDrawer = () => {
         this.setState({templateDrawerVisible: true});
     };
-
-    maximizeChat = () => {
-      const { patient_id } = this.props;
-      window.open(
-        `${config.WEB_URL}${getPatientConsultingUrl(patient_id)}`,
-        "_blank"
-      );
-    };
      */
 
     onCloseTemplate = async () => {
@@ -1875,58 +1860,6 @@ class PatientDetails extends Component {
         this.setState({templateDrawerVisible: true});
     };
 
-    /**
-     * TODO: This function is not being used anywhere in the code
-    handleSubmitTemplate = data => {
-        const {
-            addCarePlanMedicationsAndAppointments,
-            getMedications,
-            getAppointments,
-            care_plans,
-            patient_id,
-            getPatientCarePlanDetails
-        } = this.props;
-
-        let carePlanId = 1;
-        for (let carePlan of Object.values(care_plans)) {
-            let {
-                basic_info: { id = 1, patient_id: patientId = 1 }
-            } = carePlan;
-            if (patient_id == patientId) {
-                carePlanId = id;
-            }
-        }
-        addCarePlanMedicationsAndAppointments(data, carePlanId).then(response => {
-            const {
-                status = false,
-                statusCode,
-                payload: {
-                    error: { error_type = "" } = {},
-                    message: errorMessage = ""
-                } = {}
-            } = response;
-            if (status) {
-                this.onCloseTemplate();
-
-                message.success(this.formatMessage(messages.carePlanUpdated));
-                getMedications(patient_id).then(() => {
-                    getAppointments(patient_id).then(() => {
-                        getPatientCarePlanDetails(patient_id);
-                    });
-                });
-            } else {
-                if (statusCode === 422 && error_type == "slot_present") {
-                    message.error(this.formatMessage(messages.slotPresent));
-                } else if (statusCode === 422) {
-                    message.error(errorMessage);
-                } else {
-                    message.error(this.formatMessage(messages.somethingWentWrong));
-                }
-            }
-        });
-    };
-     */
-
     handleSubmitTemplate = (data) => {
         const {
             addCarePlanMedicationsAndAppointments,
@@ -1937,6 +1870,15 @@ class PatientDetails extends Component {
             getPatientCarePlanDetails,
         } = this.props;
         const {carePlanId, ...rest} = data || {};
+        //   let carePlanId = 1;
+        //   for (let carePlan of Object.values(care_plans)) {
+        //     let {
+        //       basic_info: { id = 1, patient_id: patientId = 1 }
+        //     } = carePlan;
+        //     if (patient_id == patientId) {
+        //       carePlanId = id;
+        //     }
+        //   }
         addCarePlanMedicationsAndAppointments(rest, carePlanId).then((response) => {
             const {
                 status = false,
@@ -2333,6 +2275,7 @@ class PatientDetails extends Component {
 
         /**
          * TODO: Why is this commented?
+        const { allAppointmentDocs ={} } = this.state;
         console.log("onUploadCompleteRegistration ---> data: ",data);
 
         const {storeAppointmentDocuments} = this.props;
@@ -2493,8 +2436,7 @@ class PatientDetails extends Component {
         this.setState({activeKey: value});
     };
 
-    // AKSHAY NEW CODE FOR SUBSRCIPTION
-
+    // code implementation after phase 1 for Subscriptions
     handleRecommendDrawer = (action) => {
         // e.preventDefault();
         if (action === "subscriptionPlan") {
@@ -2939,8 +2881,7 @@ class PatientDetails extends Component {
                                                 >
                                                     {(authenticated_category === USER_CATEGORY.DOCTOR ||
                                                         authenticated_category === USER_CATEGORY.HSP) && (
-                                                        // Changes made by Akshay NEW CODE IMPLEMENTATION
-                                                        // BELOW CODE COMMENTED BY AKSHAY
+                                                        // code implementation after phase 1 changes made
                                                         // &&
                                                         // isOtherCarePlan
                                                         <TabPane tab="Medication" key="1">
@@ -3086,7 +3027,7 @@ class PatientDetails extends Component {
                                                             </div>
                                                         )}
                                                     </TabPane>
-                                                    {/* AKSHAY NEW CODE FOR SUBSCRIPTIONS */}
+                                                    {/* code implementation after phase 1 for subscriptions */}
                                                     <TabPane
                                                         tab={PATIENT_TABS.SUBSCRIPTIONS["name"]}
                                                         key={PATIENT_TABS.SUBSCRIPTIONS["key"]}
@@ -3106,7 +3047,7 @@ class PatientDetails extends Component {
                             )}
                         </div>
                     </div>
-                    {/* AKSHAY NEW CODE IMPLEMENTATIONS */}
+                    {/* code implementation after phase 1 */}
                     {/* {!isOtherCarePlan && ( */}
                     <Fragment>
                         <AddMedicationReminder
@@ -3166,7 +3107,7 @@ class PatientDetails extends Component {
                         </div>
                     )}
 
-                    {/* AKSHAY NEW CODE IMPLEMENTATIONS FOR SUBSCRIPTION */}
+                    {/* code implementation after phase 1 for Patient Flash Card */}
                     {flashcardOpen === true && <FlashCard/>}
 
                     <SymptomsDrawer/>
@@ -3208,7 +3149,7 @@ class PatientDetails extends Component {
                     />
                 )}
 
-                {/* AKSHAY NEW CODE IMPLEMENTATION */}
+                {/* code implementation after phase 1 */}
                 {recommendSubscription === true && (
                     <RecommendSubscription
                         visible={recommendSubscription}

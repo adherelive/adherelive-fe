@@ -51,7 +51,7 @@ class MedicationTable extends Component {
             intl: {formatMessage} = {},
             care_plans,
             auth_role = null,
-            // AKSHAY NEW CODE IMPLEMENTATION
+            // code implementation after phase 1
             medicinesNames,
         } = this.props;
 
@@ -80,7 +80,7 @@ class MedicationTable extends Component {
                 isOtherCarePlan,
                 medicines,
                 canViewDetails,
-                // AKSHAY NEW CODE IMPLEMENTATION
+                // code implementation after phase 1
                 medicinesNames,
             });
         });

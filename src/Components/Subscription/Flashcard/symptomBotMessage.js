@@ -247,7 +247,7 @@ class symptomBotMessage extends Component {
         // }
 
         let parsedMessage = JSON.parse(message.state.body);
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         const {symptom_id, symptoms} = parsedMessage || {};
         const {config} = symptoms[symptom_id] || {};
         console.log("symptoms[symptom_id]", symptoms[symptom_id]);
@@ -255,12 +255,12 @@ class symptomBotMessage extends Component {
         const {name: partName = ""} = PARTS_GRAPH[config.parts] || {};
         // side...
         const body_side = BODY_SIDE_TEXT[config.side] || {};
+        // code implementation after phase 1 end
 
-        // AKSHAY NEW CODE IMPLEMENTATIONS NED
-
-        // OLD CODE
+        // Old code implementation
         // const part = PARTS_GRAPH[parts].name || "";
         // const body_side = BODY_SIDE_TEXT[side] || "";
+
         let mess = "";
 
         mess = (

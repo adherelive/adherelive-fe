@@ -18,7 +18,7 @@ import {
   MEDICATION_TIMING,
   TYPE_WORKOUTS,
   PATIENT_MEAL_TIMINGS,
-  // WHEN_TO_TAKE_ABBR_TYPES,
+  WHEN_TO_TAKE_ABBR_TYPES,
 } from "../../../constant";
 import VideoCameraFilled from "@ant-design/icons/VideoCameraFilled";
 import MessageFilled from "@ant-design/icons/MessageFilled";
@@ -32,15 +32,15 @@ import {throttle} from "lodash";
 import {getPatientConsultingVideoUrl} from "../../../Helper/url/patients";
 import workout_icon from "../../../Assets/images/workout_icon.png";
 import vital_icon from "../../../Assets/images/vital.png";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
-// import { getNotifications } from "../../../Helper/urls/notifications";
+import { getNotifications } from "../../../Helper/urls/notifications";
 const {Option} = Select;
 const APPOINTMENT = "appointment";
-// const MEDICATION = "medication";
-// const MEDICATION_REMINDER = "medication-reminder";
+const MEDICATION = "medication";
+const MEDICATION_REMINDER = "medication-reminder";
 const USER_MESSAGE = "USER_MESSAGE";
 const VITALS = "vitals";
 

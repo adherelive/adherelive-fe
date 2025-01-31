@@ -8,7 +8,7 @@ import DietFieldsForm from "./form";
 // import Form from "antd/es/form";
 import Footer from "../footer";
 import Loading from "../../Common/Loading";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
@@ -28,7 +28,7 @@ class AddDiet extends Component {
         );
     }
 
-    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
     // THIS ONE COMMENTED
     // async componentDidMount() {
     //   await this.getAllPortions();
@@ -40,7 +40,7 @@ class AddDiet extends Component {
 
         if (visible && visible != prev_visible) {
             await this.setPatientPreferenceTimings();
-            // Changes made by Akshay NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             // THIS ONE ADDED
             await this.getAllPortions();
         }

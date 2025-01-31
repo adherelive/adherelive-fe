@@ -10,7 +10,7 @@ import Footer from "../footer";
 import Loading from "../../Common/Loading";
 import confirm from "antd/es/modal/confirm";
 import moment from "moment";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
@@ -35,7 +35,7 @@ class EditWorkout extends Component {
     async componentDidMount() {
         const {workoutData = {}, editTemplateWorkout = null} = this.props;
 
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         // THIS ONE COMMENTED
         await this.getAllWorkoutDetails();
 

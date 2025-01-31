@@ -29,7 +29,7 @@ export const getNotification = (value) => {
                 });
             }
         } catch (error) {
-            console.log("SEARCH NOTIFICATION MODULE catch error ->", error);
+            console.log("SEARCH NOTIFICATION MODULE catch error: ", error);
         }
         return response;
     };

@@ -79,7 +79,7 @@ class DietTable extends Component {
         const {basic_info: {user_role_id = null} = {}} =
         care_plans[carePlanId] || {};
         let canViewDetails = true;
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         let careplanData = care_plans[carePlanId];
         if (
             (!isOtherCarePlan && user_role_id.toString() === auth_role.toString()) ||
@@ -141,7 +141,7 @@ class DietTable extends Component {
         const {basic_info: {user_role_id = null} = {}} =
         care_plans[carePlanId] || {};
         let canViewDetails = true;
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         console.log("care_plans diets", care_plans);
         let careplanData = care_plans[carePlanId];
         if (

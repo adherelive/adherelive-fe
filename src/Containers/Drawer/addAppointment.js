@@ -19,7 +19,7 @@ import {
 } from "../../modules/favouritesData/index";
 import {googleTranslate} from "../../modules/cdss";
 
-// AKSHAY NEW CODE FOR SUBSCRIPTION
+// code implementation after phase 1 for Subscription
 import {
     getPatientCarePlanByPatientIdAndUserRoleId,
     setScheduleAppointmentData,
@@ -68,7 +68,7 @@ const mapDispatchToProps = (dispatch) => {
         removeFavourite: ({typeId, type}) =>
             dispatch(removeFavourite({typeId, type})),
         removeFavouriteRecord: (id) => dispatch(removeFavouriteByRecordId(id)),
-        // AKSHAY NEW CODE FRO SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         updateActivityById: (id, payload) =>
             dispatch(updateActivityById(id, payload)),
         setFlashCard: (value) => dispatch(setFlashCard(value)),

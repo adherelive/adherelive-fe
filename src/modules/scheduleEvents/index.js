@@ -132,7 +132,7 @@ export const getCalenderDataForDay = (date, type) => {
     };
 };
 
-// AKSHAY NEW CODE IMPLEMENTATION
+// code implementation after phase 1
 export const getDoctorsCalenderDataForDay = (date, type) => {
     let response = {};
     return async (dispatch) => {
@@ -190,7 +190,7 @@ export const getLastVisitAlerts = (id) => {
                 });
             }
         } catch (error) {
-            console.log("getLastVisitAlerts error ---> ", error);
+            console.log("getLastVisitAlerts error: ", error);
         }
         return response;
     };
@@ -218,7 +218,7 @@ export const markAppointmentComplete = (id) => {
                 });
             }
         } catch (error) {
-            console.log("markAppointmentComplete 500 Error ---> ", error);
+            console.log("markAppointmentComplete 500 Error: ", error);
         }
         return response;
     };
@@ -234,8 +234,7 @@ export const getAllMissedScheduleEvents = () => {
                 method: REQUEST_TYPE.GET,
                 url: getAllMissedScheduleEventsUrl(),
             });
-
-            console.log("getAllMissedScheduleEvents API response:", response); // Log the API response
+            console.log("getAllMissedScheduleEvents API response: ", response); // Log the API response
 
             const {status, payload: {data, error} = {}} = response || {};
             if (status === true) {
@@ -243,7 +242,7 @@ export const getAllMissedScheduleEvents = () => {
                     type: GET_ALL_MISSED_SCHEDULE_EVENTS_COMPLETED,
                     data: data,
                 });
-                console.log("getAllMissedScheduleEvents API data:", data); // Log the data
+                console.log("getAllMissedScheduleEvents API data: ", data); // Log the data
             } else {
                 dispatch({
                     type: GET_ALL_MISSED_SCHEDULE_EVENTS_FAILED,
@@ -251,13 +250,13 @@ export const getAllMissedScheduleEvents = () => {
                 });
             }
         } catch (error) {
-            console.log("getAllMissedScheduleEvents Error ---> ", error);
+            console.log("getAllMissedScheduleEvents Error: ", error);
         }
         return response;
     };
 };
 
-// AKSHAY NEW CODE IMPLEMENTATIONS
+// code implementation after phase 1
 export const getAllMissedEventDataByQuery = (type) => {
     let response = {};
 

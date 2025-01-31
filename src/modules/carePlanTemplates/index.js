@@ -108,7 +108,7 @@ export const getAllTemplatesForDoctor = () => {
     };
 };
 
-// AKSHAY NEW CODE IMPLEMENTATIONS
+// code implementation after phase 1
 
 export const getAllTemplatesForDoctorUsingQuery = (text) => {
     let response;

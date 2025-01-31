@@ -37,14 +37,14 @@ class PatientDetailsDrawer extends Component {
             missed_vitals: {},
             missed_medications: {},
             missed_symptoms: {},
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             patientDetailsData: {},
             patientUserDetails: {},
             care_plans: {},
         };
     }
 
-    // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+    // code implementation after phase 1 FOR SUBSCRIPTION
     getCarePlanForPatient = async (patientId) => {
         try {
             const {getPatientCarePlanByPatientId} = this.props;
@@ -225,7 +225,7 @@ class PatientDetailsDrawer extends Component {
         }
     }
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS START
+    // code implementation after phase 1 start
     async handleGetPatientDetails(patient_id) {
         try {
             const {getPatientDetailsById} = this.props;
@@ -245,7 +245,7 @@ class PatientDetailsDrawer extends Component {
             message.warn(this.formatMessage(messages.somethingWentWrong));
         }
     }
-    // AKSHAY NEW CODE IMPLEMENTATIONS END
+    // code implementation after phase 1 end
 
     getFormattedDays = (dates) => {
         let dayString = [];
@@ -436,7 +436,7 @@ class PatientDetailsDrawer extends Component {
                     carePlanAppointmentIds = [],
                     carePlanMedicationIds = [],
                 } = carePlan;
-                // AKSHAY NEW CODE IMPLEMENTTATIONS
+                // code implementation after phase 1
                 // if (`${doctorId}` === `${doctor_id}`) {
                 if (`${patient_id}` === `${id}`) {
                     carePlanId = cpId;

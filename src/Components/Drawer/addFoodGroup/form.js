@@ -9,7 +9,7 @@ import message from "antd/es/message";
 import TextArea from "antd/es/input/TextArea";
 import Button from "antd/es/button";
 import debounce from "lodash-es/debounce";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
@@ -206,7 +206,7 @@ class AddFoodGroupForm extends Component {
                     <Option
                         key={`${each}-${name}`}
                         value={portion_id}
-                        // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
+                        // code implementation after phase 1 FOR V4
                         detail_id={detail_id}
                         canEdit={canEdit}
                         // PREVIOUS CODE
@@ -231,7 +231,7 @@ class AddFoodGroupForm extends Component {
                     <Option
                         key={`${each}-${name}`}
                         value={id}
-                        // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
+                        // code implementation after phase 1 FOR V4
                         canEdit={canEdit}
                         // PREVIOUS CODE
                         // onClick={this.handleDifferentPortionSelect({ editable: canEdit })}

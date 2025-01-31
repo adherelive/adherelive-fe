@@ -8,7 +8,7 @@ import {getPatientDetailsById, getPatientMissedEvents} from "../../modules/patie
 import {setCareplanForChat, setPatientForChat} from "../../modules/twilio";
 import {openPopUp} from "../../modules/chat";
 import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
-// AKSHAY NEW CODE FOR SUBSCRIPTION
+// code implementation after phase 1 for Subscription
 import {getPatientCarePlanByPatientId, setScheduleAppointmentData,} from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
         getAppointments: (id) => dispatch(getAppointments(id)),
         getAppointmentsDetails: () => dispatch(getAppointmentsDetails()),
         getPatientMissedEvents: (patient_id) => dispatch(getPatientMissedEvents(patient_id)),
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         setScheduleAppointmentData: (payload) => dispatch(setScheduleAppointmentData(payload)),
         getPatientCarePlanByPatientId: (patientId) => dispatch(getPatientCarePlanByPatientId(patientId)),
     };

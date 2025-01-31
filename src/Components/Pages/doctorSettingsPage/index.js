@@ -30,7 +30,7 @@ import messages from "./messages";
 import {withRouter} from "react-router-dom";
 import Menu from "antd/es/menu";
 
-// AKSHAY NEW CODE FOR SUBSCRIPTION
+// code implementation after phase 1 for Subscription
 import AddService from "../../../Components/Subscription/Drawer/AddService";
 import AddSubscription from "../../../Components/Subscription/Drawer/AddSubscription";
 import DoctorServiceTable from "../../../Components/Subscription/DoctorServiceTable";
@@ -51,7 +51,7 @@ class DoctorSettingsPage extends Component {
             noAccountDetails: true,
             account_details: {},
             editDetailsSelectedID: null,
-            // AKSHAY NEW CODE FOR SUBSCRIPTION
+            // code implementation after phase 1 for Subscription
             addServiceDrawer: false,
             addSubscriptionDrawer: false,
         };
@@ -63,7 +63,7 @@ class DoctorSettingsPage extends Component {
         this.handleGetDoctorPaymentProduct();
         this.handleGetAdminPaymentProduct();
         this.handleGetAccountDetails();
-        // AKSHAY NEW CODE FOR SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         this.props.getServices();
         this.props.getSubscriptions();
     }
@@ -262,7 +262,7 @@ class DoctorSettingsPage extends Component {
 
                             </Button> */
                         }
-                        {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                        {/* code implementation after phase 1 for Subscriptions */}
                         <Dropdown
                             overlay={this.getMenu()}
                             trigger={["click"]}
@@ -482,7 +482,7 @@ class DoctorSettingsPage extends Component {
                             {/* {this.displayDoctorPaymentProducts()} */}
 
                             {/* <DoctorConsultationFeeTable /> */}
-                            {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                            {/* code implementation after phase 1 for Subscriptions */}
                             <DoctorServiceTable services={services}/>
                         </div>
                     )}
@@ -776,7 +776,7 @@ class DoctorSettingsPage extends Component {
         return false;
     };
 
-    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    // code implementation after phase 1 for Subscription
 
     handleServiceDrawer = () => {
         this.setState({
@@ -847,7 +847,7 @@ class DoctorSettingsPage extends Component {
                     {this.formatMessage(messages.addMore)}
                   </span>
                 </Button> */}
-                                {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                                {/* code implementation after phase 1 for Subscriptions */}
                                 <Dropdown
                                     overlay={this.getMenu()}
                                     trigger={["click"]}
@@ -898,7 +898,7 @@ class DoctorSettingsPage extends Component {
                     setIsUpdated={this.setIsUpdated}
                     updateAccountDetailsAdded={this.updateAccountDetailsAdded}
                 />
-                {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                {/* code implementation after phase 1 for Subscriptions */}
                 <AddService
                     visible={this.state.addServiceDrawer}
                     onCloseDrawer={this.onCloseDrawer}

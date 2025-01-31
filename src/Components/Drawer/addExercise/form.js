@@ -9,7 +9,7 @@ import {VIDEO_TYPES} from "../../../constant";
 import message from "antd/es/message";
 import CameraOutlined from "@ant-design/icons/CameraOutlined";
 import Upload from "antd/es/upload";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 

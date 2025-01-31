@@ -9,7 +9,7 @@ import AddFoodGroupForm from "./form";
 import Footer from "../footer";
 import AddFoodItemDrawer from "../../../Containers/Drawer/addFoodItem";
 import message from "antd/es/message";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 

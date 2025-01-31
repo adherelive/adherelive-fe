@@ -11,7 +11,7 @@ import Tag from "antd/es/tag";
 import {TimePicker} from "antd";
 import TimeKeeper from "react-timekeeper";
 import edit_image from "../../../Assets/images/edit.svg";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 

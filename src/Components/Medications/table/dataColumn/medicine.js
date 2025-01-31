@@ -16,7 +16,7 @@ export default (props) => {
         } = {},
     } = medicationData || {};
 
-    console.log("medicinesNames", props);
+    console.log("In medicine -> medicinesNames props: ", props);
 
     let finalName = name;
     if (isEmpty(medicationTemplateData)) {
@@ -28,7 +28,7 @@ export default (props) => {
         }
     }
 
-    console.log("finalNamefinalName", finalName);
+    console.log("In medicine -> finalName: ", finalName);
 
     return (
         <div className="flex direction-row justify-space-around align-center">

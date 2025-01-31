@@ -25,7 +25,7 @@ import Footer from "../footer";
 import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 
-// AKSHAY NEW CODE IMPLEMENTATIONS
+// code implementation after phase 1
 import CustomSymptoms from "../addPatient/CustomSymptoms";
 import CustomDiagnosis from "../addPatient/CustomDiagnosis";
 import MultipleTreatmentAlert from "../addPatient/MultipleTreatmentAlert";
@@ -50,7 +50,7 @@ class AddCarePlanDrawer extends Component {
             symptoms: "",
             submitting: false,
             isCollapse: false,
-            // AKSHAY NEW CODE IMPLEMENTATIONS
+            // code implementation after phase 1
             widgetDrawerOpen: false,
             finalSymptomData: [],
             diagnosisType: false,
@@ -301,7 +301,7 @@ class AddCarePlanDrawer extends Component {
         }
     }
 
-    // AKSHAY NEW CODE IMPLEMENTATIONS FOR CDSS
+    // code implementation after phase 1 for CDSS/mongodb
 
     onDiagnosisSearchHanlder = (value) => {
         this.props.diagnosisSearch(value);
@@ -476,7 +476,7 @@ class AddCarePlanDrawer extends Component {
 
         return (
             <div className="form-block-ap .add-careplan-drawer-container">
-                {/* AKSHAY NEW CODE IMPLEMENTATION */}
+                {/* code implementation after phase 1 */}
 
                 <div className="form-headings-ap flex align-center justify-space-between">
                     {this.formatMessage(messages.symptoms)}
@@ -761,10 +761,10 @@ class AddCarePlanDrawer extends Component {
     };
 
     async handleDataSubmit(patient_id, data) {
-        const {addCareplanForPatient} = this.props;
+        const {addCarePlanForPatient} = this.props;
         const {close} = this.props;
         this.setState({submitting: true});
-        const response = await addCareplanForPatient(patient_id, data);
+        const response = await addCarePlanForPatient(patient_id, data);
         const {
             status,
             statusCode: code,
@@ -786,7 +786,7 @@ class AddCarePlanDrawer extends Component {
     }
 
     onSubmit = () => {
-        const {addCareplanForPatient, patientId: patient_id} = this.props;
+        const {addCarePlanForPatient, patientId: patient_id} = this.props;
         const {
             treatment = "",
             severity = "",
@@ -814,7 +814,7 @@ class AddCarePlanDrawer extends Component {
                 symptoms: JSON.stringify(this.state.finalSymptomData),
             };
             try {
-                // AKSHAY NEW CODE IMPLEMENTATION FOR CDS
+                // code implementation after phase 1 FOR CDS
                 let cdssPost = {};
                 let symptomData = JSON.parse(data.symptoms);
 
@@ -884,7 +884,7 @@ class AddCarePlanDrawer extends Component {
                     width={"35%"}
                 >
                     {renderAddCareplan()}
-                    {/* AKSHAY NEW CODE IMPLEMENTATIONS */}
+                    {/* code implementation after phase 1 */}
                     <WidgetDrawer
                         visible={widgetDrawerOpen}
                         onCloseDrawer={this.onCloseWidgetDrawer}

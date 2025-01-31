@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import {close, open} from "../../modules/drawer";
 import {getMedications} from "../../modules/medications";
 import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
-import {addCareplanForPatient, consentVerify, getPatientDetailsById, requestConsent,} from "../../modules/patients";
+import {addCarePlanForPatient, consentVerify, getPatientDetailsById, requestConsent,} from "../../modules/patients";
 import {searchMedicine} from "../../modules/medicines";
 import {addCarePlanMedicationsAndAppointments, getPatientCarePlanDetails} from "../../modules/carePlans";
 import {DRAWER} from "../../constant";
@@ -21,7 +21,7 @@ import {resetNotificationRedirect} from "../../modules/notificationRedirect";
 import {getAllTemplatesForDoctor, getAllTemplatesForDoctorUsingQuery,} from "../../modules/carePlanTemplates";
 import {getPortions} from "../../modules/portions";
 // import { getWorkoutDetails } from "../../modules/workouts";
-// AKSHAY NEW CODE FOR SUBSCRIPTIONS
+// code implementation after phase 1 for Subscription
 import {getServices} from "../../modules/subscription/services";
 import {getSubscriptions} from "../../modules/subscription/subscriptions";
 import {getFlashCardByActivityId, setFlashCard} from "../../modules/subscription/flashcard";
@@ -77,7 +77,7 @@ const mapStateToProps = (state, ownProps) => {
         notification_redirect = {},
         diets = {},
         exercise_contents = {},
-        // AKSHAY NEW CODE FOR SUBSCRIPTIONS
+        // code implementation after phase 1 for Subscription
         subscription: {
             recommendServices = {},
             flashcardOpen = false,
@@ -138,7 +138,7 @@ const mapStateToProps = (state, ownProps) => {
         feedId,
         diets,
         exercise_contents,
-        // AKSHAY NEW CODE FOR SUBSCRIPTIONS
+        // code implementation after phase 1 for Subscription
         recommendServices,
         flashcardOpen,
         scheduleAppointment,
@@ -182,8 +182,8 @@ const mapDispatchToProps = (dispatch) => {
         markAppointmentComplete: (id) => dispatch(markAppointmentComplete(id)),
         openAddCareplanDrawer: (payload) =>
             dispatch(open({type: DRAWER.ADD_CAREPLAN, payload})),
-        addCareplanForPatient: (patient_id, data) =>
-            dispatch(addCareplanForPatient(patient_id, data)),
+        addCarePlanForPatient: (patient_id, data) =>
+            dispatch(addCarePlanForPatient(patient_id, data)),
         openEditPatientDrawer: (payload) =>
             dispatch(open({type: DRAWER.EDIT_PATIENT, payload})),
         storeAppointmentDocuments: (data) =>
@@ -208,10 +208,10 @@ const mapDispatchToProps = (dispatch) => {
         openAddSecondaryDoctorDrawer: (payload) =>
             dispatch(open({type: DRAWER.ADD_SECONDARY_DOCTOR, payload})),
 
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         getPortions: () => dispatch(getPortions()),
         // getWorkoutDetails: () => dispatch(getWorkoutDetails()),
-        // AKSHAY NEW CODE FOR SUBSCRIPTIONS
+        // code implementation after phase 1 for Subscription
         getFlashCardByActivityId: (activityId) =>
             dispatch(getFlashCardByActivityId(activityId)),
         setScheduleAppointmentData: (payload) =>

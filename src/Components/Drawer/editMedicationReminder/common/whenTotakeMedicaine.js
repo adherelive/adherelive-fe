@@ -749,40 +749,45 @@ class WhenToTakeMedication extends Component {
         let whenToTake = null;
 
         if (templateMedication) {
-            // console.log("327546235423786479812742376 templateMedication",{templateMedication,props:this.props});
-
-            // const {
-            //   schedule_data,
-            //   details
-            // } = templateMedication || {};
+            /**
+             * TODO: Check why this code has been commented out?
+            console.log("getWhenToTakeButtons templateMedication: ", {templateMedication,props:this.props});
+            const {
+              schedule_data,
+              details
+            } = templateMedication || {};
+            */
 
             const {schedule_data: {when_to_take_abbr} = {}} =
             templateMedication || {};
 
             whenToTake = when_to_take_abbr;
 
-            // let {
-            //   schedule_data: {when_to_take:schedule_data_when_to_take=[], when_to_take_abbr : schedule_data_when_to_take_abbr='' } = {},
-            //   details: {when_to_take:details_when_to_take=[], when_to_take_abbr : details_when_to_take_abbr='' } = {}
-            // } = templateMedication;
+            /**
+             * TODO: Check why this code has been commented out?
+            let {
+              schedule_data: {when_to_take:schedule_data_when_to_take=[], when_to_take_abbr : schedule_data_when_to_take_abbr='' } = {},
+              details: {when_to_take:details_when_to_take=[], when_to_take_abbr : details_when_to_take_abbr='' } = {}
+            } = templateMedication;
 
-            // when_to_take_abbr=schedule_data_when_to_take_abbr ? schedule_data_when_to_take_abbr : details_when_to_take_abbr ;
-            // schedule_data_when_to_take = schedule_data_when_to_take ? schedule_data_when_to_take : details_when_to_take;
+            when_to_take_abbr=schedule_data_when_to_take_abbr ? schedule_data_when_to_take_abbr : details_when_to_take_abbr ;
+            schedule_data_when_to_take = schedule_data_when_to_take ? schedule_data_when_to_take : details_when_to_take;
 
-            // if(!when_to_take_abbr){
-            //   if(schedule_data_when_to_take.length ===1){
-            //     when_to_take_abbr = WHEN_TO_TAKE_ABBR_TYPES.OD;
-            //   }
-            //   else if(schedule_data_when_to_take.length ===2){
-            //     when_to_take_abbr = WHEN_TO_TAKE_ABBR_TYPES.BD;
-            //   }
-            //   else if(schedule_data_when_to_take.length ===3){
-            //     when_to_take_abbr = WHEN_TO_TAKE_ABBR_TYPES.TD;
-            //   }
-            //   else if(schedule_data_when_to_take.length ===0){
-            //     when_to_take_abbr = WHEN_TO_TAKE_ABBR_TYPES.SOS;
-            //   }
-            // }
+            if(!when_to_take_abbr){
+              if(schedule_data_when_to_take.length ===1){
+                when_to_take_abbr = WHEN_TO_TAKE_ABBR_TYPES.OD;
+              }
+              else if(schedule_data_when_to_take.length ===2){
+                when_to_take_abbr = WHEN_TO_TAKE_ABBR_TYPES.BD;
+              }
+              else if(schedule_data_when_to_take.length ===3){
+                when_to_take_abbr = WHEN_TO_TAKE_ABBR_TYPES.TD;
+              }
+              else if(schedule_data_when_to_take.length ===0){
+                when_to_take_abbr = WHEN_TO_TAKE_ABBR_TYPES.SOS;
+              }
+            }
+             */
         }
 
         if (!existingWhenToTake) {
@@ -798,16 +803,18 @@ class WhenToTakeMedication extends Component {
             whenToTake = existingWhenToTake;
         }
 
-        // if(!whenToTake && !existingWhenToTake) {
-        //   whenToTake = WHEN_TO_TAKE_ABBR_TYPES.OD;
-        // } else {
-        //   console.log("873189273 here", {existingWhenToTake, whenToTake});
-        //   whenToTake = existingWhenToTake;
-        // }
+        /**
+         * TODO: Check why this code has been commented out?
+        if(!whenToTake && !existingWhenToTake) {
+          whenToTake = WHEN_TO_TAKE_ABBR_TYPES.OD;
+        } else {
+          console.log("getWhenToTakeButtons -> existing, whenToTake: ", {existingWhenToTake, whenToTake});
+          whenToTake = existingWhenToTake;
+        }
+        console.log("getWhenToTakeButtons -> this.props, when_to_take_abbr: ", {props:this.props,payload,when_to_take_abbr});
+        const keys = getKeys();
+        */
 
-        // console.log("763425462387947230942",{props:this.props,payload,when_to_take_abbr});
-
-        // const keys = getKeys();
         if (Object.keys(WHEN_TO_TAKE_BUTTONS).length > 0) {
             return (
                 <Fragment>
@@ -889,31 +896,34 @@ class WhenToTakeMedication extends Component {
 
                 {getFormItems()}
 
-                {/* {keys.length !== 0 && (
-          <RadioGroup
-            className="flex justify-content-end radio-formulation mb10"
-            buttonStyle="solid"
-            value={nugget_selected}
-          >
-            <RadioButton
-              value={1}
-              checked={nugget_selected === 1}
-              onClick={this.setAllMealsBefore}
-            >
-              Before Meals
-            </RadioButton>
-            <RadioButton
-              value={2}
-              checked={nugget_selected === 2}
-              onClick={this.setAllMealsAfter}
-            >
-              After Meals
-            </RadioButton>
-          </RadioGroup>
-        )} */}
+                {
+                    /*
+                    {keys.length !== 0 && (
+                      <RadioGroup
+                        className="flex justify-content-end radio-formulation mb10"
+                        buttonStyle="solid"
+                        value={nugget_selected}
+                      >
+                        <RadioButton
+                          value={1}
+                          checked={nugget_selected === 1}
+                          onClick={this.setAllMealsBefore}
+                        >
+                          Before Meals
+                        </RadioButton>
+                        <RadioButton
+                          value={2}
+                          checked={nugget_selected === 2}
+                          onClick={this.setAllMealsAfter}
+                        >
+                          After Meals
+                        </RadioButton>
+                      </RadioGroup>
+                    )}
+                    */
+                }
             </Fragment>
         );
-        // }
     }
 }
 

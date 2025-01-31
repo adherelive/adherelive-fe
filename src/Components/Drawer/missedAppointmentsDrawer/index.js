@@ -21,37 +21,40 @@ class MissedAppointmentsDrawer extends Component {
         // this.handleGetMissedAppointments();
     }
 
-    //   async handleGetMissedAppointments(){
-    //     try {
-    //         const {getAllMissedScheduleEvents} = this.props;
-    //         this.setState({fetching:true});
-    //         const response = await getAllMissedScheduleEvents();
-    //         const { status, payload: {  data : {
-    //            missed_appointments = {},
-    //            appointment_ids : {critical=[],non_critical=[]} =  {}
-    //         }  } = {} ,statusCode } =
-    //         response || {};
-    //
-    //             if (status && statusCode === 200 ) {
-    //                 this.setState({
-    //                     missed_appointments:missed_appointments,
-    //                     criticalAppointmentIds:critical,
-    //                     nonCriticalAppointmentIds:non_critical,
-    //                     fetching:false
-    //               })
-    //
-    //             } else{
-    //               this.setState({fetching:false});
-    //             }
-    //
-    //     } catch (err) {
-    //         console.log("err", err);
-    //         message.warn(this.formatMessage(messages.somethingWentWrong));
-    //         this.setState({fetching:false});
-    //
-    //     }
-    //
-    // }
+    /**
+     * TODO: Why is this function commented out?
+     async handleGetMissedAppointments(){
+        try {
+            const {getAllMissedScheduleEvents} = this.props;
+            this.setState({fetching:true});
+            const response = await getAllMissedScheduleEvents();
+            const { status, payload: {  data : {
+               missed_appointments = {},
+               appointment_ids : {critical=[],non_critical=[]} =  {}
+            }  } = {} ,statusCode } =
+            response || {};
+
+                if (status && statusCode === 200 ) {
+                    this.setState({
+                        missed_appointments:missed_appointments,
+                        criticalAppointmentIds:critical,
+                        nonCriticalAppointmentIds:non_critical,
+                        fetching:false
+                  })
+
+                } else{
+                  this.setState({fetching:false});
+                }
+
+        } catch (err) {
+            console.log("err", err);
+            message.warn(this.formatMessage(messages.somethingWentWrong));
+            this.setState({fetching:false});
+
+        }
+
+    }
+     */
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
 
@@ -79,15 +82,19 @@ class MissedAppointmentsDrawer extends Component {
         const criticalList = [];
         const nonCriticalList = [];
 
+        console.log("Patients from the Props: ", patients);
+        console.log("Missed Appointments from the Props: ", missed_appointments);
+
         for (let appointment in missed_appointments) {
             const eachAppointmentEventArray = missed_appointments[appointment];
 
-            // Add a safety check if the array is empty or undefined
+            // Add a safety check if the array is empty or undefined, skip if that is so
             if (!eachAppointmentEventArray || !eachAppointmentEventArray.length) {
+                console.warn("Empty or undefined appointment array for: ", appointment);
                 continue;
             }
 
-            // Reset these for each appointment
+            // Reset for each appointment
             const timings = [];
             let type_description = "";
             let isCritical = false;
@@ -141,19 +148,20 @@ class MissedAppointmentsDrawer extends Component {
                 // Determine participant_id with additional safety checks
                 if (participant_one_category === USER_CATEGORY.PATIENT && participant_one_id) {
                     participant_id = participant_one_id;
-                } else if (participant_two_category === USER_CATEGORY.PATIENT && participant_two_id) {
+                } else if (participant_two_category === USER_CATEGORY.DOCTOR && participant_two_id) {
                     participant_id = participant_two_id;
                 } else {
+                    console.warn("No valid patient ID found for event: ", eventId);
                     // Skip this iteration if no valid patient ID is found
-                    continue;
+                    // continue;
                 }
 
                 // Assuming you want to handle only specific categories
                 // Modify this logic based on your specific requirements to a PATIENT
-                if (actorCategory !== USER_CATEGORY.DOCTOR) {
-                    // Skip non-patient events or handle differently
-                    return;
-                }
+                // if (actorCategory !== USER_CATEGORY.PATIENT) {
+                //     // Skip non-patient events or handle differently
+                //     return;
+                // }
 
                 isCritical = critical;
                 timings.push(start_time);
@@ -167,16 +175,27 @@ class MissedAppointmentsDrawer extends Component {
                         first_name = "",
                         middle_name = "",
                         last_name = "",
+                        full_name = "",
+                        // user_id: pId = "",
                     } = {}
                 } = patientDetails;
+
+                console.log("Patient Details in the for loop: ", patientDetails);
 
                 let pName = `${first_name} ${getName(middle_name)} ${getName(last_name)}`.trim();
                 let treatment_type = type_description.length > 0 ? type_description : " ";
 
+                console.log("appointmentCard props: ", {
+                    name: pName,
+                    time: timings || [start_time],
+                    treatment_type,
+                    pId,
+                });
+
                 // Create list items
                 const appointmentCard = (
                     <MissedAppointmentCard
-                        key={pId || eventId || Math.random()} // Add key to prevent React warnings
+                        // key={pId || eventId || Math.random()} // Add key to prevent React warnings
                         formatMessage={this.formatMessage}
                         name={pName}
                         time={timings || [start_time]}
@@ -193,13 +212,12 @@ class MissedAppointmentsDrawer extends Component {
             }
         }
 
-        // Display the Missed Medications as Critical/Non-critical
         appointmentList.push(
-            <div key="missed-appointments">
+            <div>
                 <div>
-                <span className="fs18 fw700 brown-grey tac mb20">
+                  <span className="fs18 fw700 brown-grey tac mb20">
                     {this.formatMessage(messages.critical)}
-                </span>
+                  </span>
                     {criticalList.length > 0 ? (
                         criticalList
                     ) : (
@@ -209,9 +227,9 @@ class MissedAppointmentsDrawer extends Component {
                     )}
                 </div>
                 <div>
-                <span className="fs18 fw700 brown-grey tac">
+                  <span className="fs18 fw700 brown-grey tac">
                     {this.formatMessage(messages.non_critical)}
-                </span>
+                  </span>
                     {nonCriticalList.length > 0 ? (
                         nonCriticalList
                     ) : (

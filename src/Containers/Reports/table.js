@@ -6,7 +6,7 @@ import {fetchReports} from "../../modules/reports";
 import {open} from "../../modules/drawer";
 import {DRAWER} from "../../constant";
 
-// AKSHAY NEW CODE FOR SUBSCRIPTIONS
+// code implementation after phase 1 for Subscription
 import {setFlashCard, setFlashcardData,} from "../../modules/subscription/flashcard";
 
 const mapStateToProps = (state) => {
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => {
         openEditReport: (payload) =>
             dispatch(open({type: DRAWER.EDIT_REPORT, payload})),
         fetchPatientReports: (id) => () => dispatch(fetchReports(id)),
-        // AKSHAY NEW CODE IMPLEMENATATIONS
+        // code implementation after phase 1
         setFlashCard: (value) => dispatch(setFlashCard(value)),
         setFlashcardData: (payload) => dispatch(setFlashcardData(payload)),
     };
@@ -57,7 +57,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         report_ids,
         openEditReport,
         fetchPatientReports: fetchPatientReports(patientId),
-        // AKSHAY NEW CODE IMPLEMENTATIONS
+        // code implementation after phase 1
         setFlashCard,
         setFlashcardData,
     };

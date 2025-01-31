@@ -5,7 +5,7 @@ import messages from "./message";
 import {withRouter} from "react-router-dom";
 import {PATH} from "../../constant";
 import config from "../../config";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
