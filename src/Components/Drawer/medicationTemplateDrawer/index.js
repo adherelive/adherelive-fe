@@ -711,8 +711,11 @@ class TemplateDrawer extends Component {
         }
     };
 
-    // AKSHAY NEW CODE CHNAGES FOR TEMPLATE SEARCH
-
+    /**
+     * code implementation after phase 1 for Template Search
+     * @param value
+     * @returns {Promise<void>}
+     */
     onTemplateSearch = async (value) => {
         try {
             // if (value) {
@@ -749,7 +752,7 @@ class TemplateDrawer extends Component {
         this.setState({innerFormType, innerFormKey, showInner: true});
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATION
+    // code implementation after phase 1
     deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
         console.log(innerFormType);
         console.log(innerFormKey);
@@ -815,7 +818,7 @@ class TemplateDrawer extends Component {
         });
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATION
+    // code implementation after phase 1
 
     renderEditMedicationForm = () => {
         let {innerFormKey, medications} = this.state;
@@ -1790,8 +1793,7 @@ class TemplateDrawer extends Component {
                     const {basic_info: {details = ""} = {}} =
                     medicines[medicine_id] || {};
 
-                    // AKSHAY NEW CODE IMPLEMETATIONS
-
+                    // code implementation after phase 1
                     let newStrength = "";
                     let newUnit = "";
 
@@ -2214,7 +2216,7 @@ class TemplateDrawer extends Component {
                         </div>
                     );
                 })}
-                {/* AKSHAY NEW CODE IMPLEMETTAION FOR V4 */}
+                {/* code implementation after phase 1 for antd v4 */}
                 <div className="template-workout-container wp100">
                     <div className="wp100 flex align-center justify-space-between">
                         <div className="form-category-headings-ap align-self-start">
@@ -2464,7 +2466,7 @@ class TemplateDrawer extends Component {
                 if (templateEdited) {
                     this.setState({showTemplateNameModal: true});
                 } else {
-                    // AKSHAY NEW CODE IMPLEMENTATION
+                    // code implementation after phase 1
                     this.setState(
                         {
                             loading: true,
@@ -2478,7 +2480,7 @@ class TemplateDrawer extends Component {
                                 this.onSubmit();
                             }, 200)
                     );
-                    // AKSHAY NEW CODE IMPLEMENTATION END
+                    // code implementation after phase 1 END
                     // this.onSubmit();
                 }
             } else {
@@ -2509,7 +2511,7 @@ class TemplateDrawer extends Component {
     };
 
     submitWithOutName = () => {
-        // AKSHAY NEW CODE IMPLEMENTATION STARTED
+        // code implementation after phase 1 STARTED
         this.setState(
             {
                 disable: true,
@@ -2522,7 +2524,7 @@ class TemplateDrawer extends Component {
                     this.onSubmit();
                 }, 500)
         );
-        // AKSHAY NEW CODE IMPLEMENTATION ENDED
+        // code implementation after phase 1 ENDED
         //PREV CODE
         // this.setState({ name: "", createTemplate: false }, () => {
         //   this.onSubmit();

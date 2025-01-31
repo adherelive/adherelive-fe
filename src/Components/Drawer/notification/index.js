@@ -32,7 +32,7 @@ import {throttle} from "lodash";
 import {getPatientConsultingVideoUrl} from "../../../Helper/url/patients";
 import workout_icon from "../../../Assets/images/workout_icon.png";
 import vital_icon from "../../../Assets/images/vital.png";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 

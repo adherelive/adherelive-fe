@@ -18,7 +18,7 @@ import StarOutlined from "@ant-design/icons/StarOutlined";
 import StarFilled from "@ant-design/icons/StarFilled";
 import Tooltip from "antd/es/tooltip";
 import message from "antd/es/message";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import {Form, Mention} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../Helper/is-empty";
@@ -38,7 +38,7 @@ const APPOINTMENT_TYPE_DESCRIPTION = "type_description";
 const PROVIDER_ID = "provider_id";
 const REASON = "reason";
 const RADIOLOGY_TYPE = "radiology_type";
-// AKSHAY NEW CODE IMPLEMENTATION
+// code implementation after phase 1
 const APPOINTMENT_CAREPLAN = "appointment_careplan";
 
 const FIELDS = [
@@ -52,7 +52,7 @@ const FIELDS = [
     APPOINTMENT_TYPE_DESCRIPTION,
     PROVIDER_ID,
     RADIOLOGY_TYPE,
-    // AKSHAY NEW CODE IMPLEMENTATION
+    // code implementation after phase 1
     APPOINTMENT_CAREPLAN,
 ];
 
@@ -125,7 +125,7 @@ class AddAppointmentForm extends Component {
         }
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+    // code implementation after phase 1 FOR SUBSCRIPTION
     getCarePlanForPatient = async () => {
         try {
             const {
@@ -464,7 +464,7 @@ class AddAppointmentForm extends Component {
             static_templates: {appointments: {appointment_type = {}} = {}} = {},
             scheduleAppointment = {},
         } = this.props;
-        // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+        // code implementation after phase 1 FOR SUBSCRIPTION
         let finalType = {};
         if (!isEmpty(scheduleAppointment) && this.state.pageUrl[1] === "") {
             for (let type of Object.keys(appointment_type)) {
@@ -649,7 +649,7 @@ class AddAppointmentForm extends Component {
     getProviderOption = () => {
         let {static_templates: {appointments: {providers = {}} = {}} = {}} =
             this.props;
-        // Changes made by Akshay NEW CODE IMPLEMENTATION
+        // code implementation after phase 1
 
         let newTypes = [];
         console.log("providers", providers);
@@ -1045,8 +1045,7 @@ class AddAppointmentForm extends Component {
                     )}
                 </FormItem>
 
-                {/* AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION */}
-
+                {/* code implementation after phase 1 for Subscription  */}
                 {!isEmpty(scheduleAppointment) && this.state.pageUrl[1] === "" && (
                     <>
                         <div className="flex mt24 direction-row flex-grow-1">

@@ -10,13 +10,13 @@ import {
 import {open} from "../../../modules/drawer";
 import {DRAWER} from "../../../constant";
 
-// AKSHAY NEW CODE FOR SUBSCRIPTION
+// code implementation after phase 1 for Subscription
 import {getProviderServices} from "../../../modules/subscription/services";
 import {getProviderSubscriptions} from "../../../modules/subscription/subscriptions";
 
 const mapStateToProps = (state) => {
     const {
-        users = {}, // AKSHAY NEW CODE FOR SUBSCRIPTION
+        users = {}, // code implementation after phase 1 for Subscription
         subscription: {services = {}},
     } = state;
 
@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(open({type: DRAWER.ADD_CONSULTATION_FEE, payload})),
         deleteDoctorPaymentProduct: (data) =>
             dispatch(deleteDoctorPaymentProduct(data)),
-        // AKSHAY NEW CODE FOR SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         getProviderServices: (doctorId) => dispatch(getProviderServices(doctorId)),
         getProviderSubscriptions: (doctorId) =>
             dispatch(getProviderSubscriptions(doctorId)),

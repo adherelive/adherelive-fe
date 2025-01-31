@@ -15,7 +15,7 @@ import startTimeField from "../common/startTime";
 import startDateField from "../common/startDate";
 import endDateField from "../common/endDate";
 import repeatDaysField from "../common/selectedDays";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
@@ -37,7 +37,7 @@ class AddMedicationReminder extends Component {
         );
     }
 
-    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
     // THIS ONE COMMENTED
     // componentDidMount() {
     //   const { getMedicationDetails, patientId } = this.props;

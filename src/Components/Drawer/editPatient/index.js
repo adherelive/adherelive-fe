@@ -102,13 +102,13 @@ class EditPatientDrawer extends Component {
         );
     }
 
-    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
+    // code implementation after phase 1
     // THIS ONE COMMENTED
     // componentDidMount() {
     //   this.handleConditionSearch(" ");
     // }
 
-    // Changes made by Akshay NEW CODE IMPLEMENTATIONS START
+    // code implementation after phase 1 START
     async handleGetPatientDetails(patient_id) {
         try {
             console.log("handleGetPatientDetails for Edit Patient patient_id ---> ", patient_id);
@@ -132,7 +132,7 @@ class EditPatientDrawer extends Component {
         }
     }
 
-    // Changes made by Akshay NEW CODE IMPLEMENTATIONS END
+    // code implementation after phase 1 END
     componentDidUpdate(prevProps, prevState) {
         const {visible: prev_visible} = prevProps;
         const {visible} = this.props;
@@ -1130,7 +1130,7 @@ class EditPatientDrawer extends Component {
                     {this.formatMessage(messages.treatmentPlan)}
                 </div>
 
-                {/* AKSHAY NEW CODE IMPLEMENTATION */}
+                {/* code implementation after phase 1 */}
 
                 <div className="form-headings-ap flex align-center justify-space-between">
                     {this.formatMessage(messages.symptoms)}
@@ -1258,7 +1258,7 @@ class EditPatientDrawer extends Component {
                         option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
                         0
                     }
-                    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
+                    // code implementation after phase 1
                     // disabled={!isTreatmentDisabled}
                 >
                     {this.getTreatmentOption()}
@@ -1637,7 +1637,7 @@ class EditPatientDrawer extends Component {
                     width={"30%"}
                 >
                     {renderEditPatient()}
-                    {/* AKSHAY NEW CODE IMPLEMENTATIONS */}
+                    {/* code implementation after phase 1 */}
                     <WidgetDrawer
                         visible={widgetDrawerOpen}
                         onCloseDrawer={this.onCloseWidgetDrawer}

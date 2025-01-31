@@ -14,7 +14,7 @@ import EditAppointmentForm from "./form";
 import Footer from "../footer";
 
 import {RADIOLOGY} from "../../../constant";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "./../../../Helper/is-empty";
@@ -116,7 +116,7 @@ class EditAppointment extends Component {
                         .clone()
                         .set({month: newMonth, year: newYear, date: newDate})
                     : end_time;
-                // akshay new code implementations
+                // code implementation after phase 1
                 let finalDate = moment();
                 finalDate.set("year", newYear);
                 finalDate.set("month", newMonth);
@@ -229,7 +229,7 @@ class EditAppointment extends Component {
                             message.success(formatMessage(messages.edit_appointment_success));
                             getAppointments(pId);
 
-                            // AKSHAY NEW CODE FOR SUBSCRIPTION
+                            // code implementation after phase 1 for Subscription
 
                             if (!isEmpty(scheduleAppointment)) {
                                 const formData = {

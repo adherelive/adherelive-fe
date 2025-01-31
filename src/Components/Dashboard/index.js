@@ -485,7 +485,7 @@ class Dashboard extends Component {
         const {basic_info: {id = 1} = {}} = authenticated_user || {};
         this.setState({submitting: true});
 
-        // AKSHAY NEW CODE IMPLEMENTATION FOR CDS
+        // code implementation after phase 1 FOR CDS
         let cdssPost = {};
         let symptomData = JSON.parse(data.symptoms);
 

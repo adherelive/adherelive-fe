@@ -14,7 +14,7 @@ import messages from "./message";
 import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
 import prefixField from "../../Prefix";
 import {ACCOUNT_TYPES, CURRENT, SAVINGS} from "../../../constant";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 

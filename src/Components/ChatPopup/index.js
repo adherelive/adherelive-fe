@@ -42,7 +42,7 @@ import {MoreOutlined} from "@ant-design/icons";
 
 import Tooltip from "antd/es/tooltip";
 import isEmpty from "../../Helper/is-empty";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
@@ -1033,7 +1033,7 @@ class ChatPopUp extends Component {
                                     otherUserLastConsumedMessageIndex={
                                         otherUserLastConsumedMessageIndex
                                     }
-                                    // Changes made by Akshay NEW CODE IMPLEMENTATIONS
+                                    // code implementation after phase 1
                                     channelId={finalChannel}
                                 />
                             )}

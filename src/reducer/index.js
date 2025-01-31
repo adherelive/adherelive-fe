@@ -1,4 +1,4 @@
-// AKSHAY NEW CODE IMPLEMENTATION
+// code implementation after phase 1
 const initialState = {
     appointmentsForDay: {},
     services: {},

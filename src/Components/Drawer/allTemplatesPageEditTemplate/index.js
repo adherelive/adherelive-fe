@@ -440,7 +440,7 @@ class TemplatePageCreateDrawer extends Component {
         this.setState({innerFormType, innerFormKey, showInner: true});
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATION
+    // code implementation after phase 1
     // TODO: Check where this duplicate function has come from
     /*
         deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
@@ -503,7 +503,7 @@ class TemplatePageCreateDrawer extends Component {
         });
     };
 
-    // AKSHAY NEW CODE IMPLEMENTATION
+    // code implementation after phase 1
     /*
     deleteTemplateDataHandler = (innerFormType, innerFormKey) => () => {
         console.log(innerFormType);
@@ -1504,7 +1504,7 @@ class TemplatePageCreateDrawer extends Component {
                         } = {},
                     } = medications[key];
 
-                    // AKSHAY NEW CODE IMPLEMETATIONS
+                    // code implementation after phase 1
 
                     let newStrength = "";
                     let newUnit = "";
@@ -1869,7 +1869,7 @@ class TemplatePageCreateDrawer extends Component {
                         </div>
                     );
                 })}
-                {/* AKSHAY NEW CODE IMPLEMETTAION FOR V4 */}
+                {/* code implementation after phase 1 for antd v4 */}
                 <div className="template-workout-container wp100">
                     <div className="wp100 flex align-center justify-space-between">
                         <div className="form-category-headings-ap align-self-start">

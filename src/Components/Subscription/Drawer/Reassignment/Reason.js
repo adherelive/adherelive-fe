@@ -67,7 +67,7 @@ function Reason({onCloseDrawer, visible, activityData, status}) {
         getAuditForReassignment();
     }, []);
 
-    // AKSHAY NEW CODE IMPLEMENTATION FOR REASIGNMENT
+    // code implementation after phase 1 FOR REASIGNMENT
     const getAuditForReassignment = async () => {
         try {
             const getCarePlanResponse = await dispatch(

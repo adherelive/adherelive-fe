@@ -1279,7 +1279,7 @@ class PatientDetailsDrawer extends Component {
                     {this.formatMessage(messages.treatmentPlan)}
                 </div>
 
-                {/* AKSHAY NEW CODE IMPLEMENTATION */}
+                {/* code implementation after phase 1 */}
 
                 <div className="form-headings-ap flex align-center justify-space-between">
                     {this.formatMessage(messages.symptoms)}
@@ -1690,7 +1690,7 @@ class PatientDetailsDrawer extends Component {
                     width={"30%"}
                 >
                     {renderAddPatient()}
-                    {/* AKSHAY NEW CODE IMPLEMENTATIONS */}
+                    {/* code implementation after phase 1 */}
                     <WidgetDrawer
                         visible={widgetDrawerOpen}
                         onCloseDrawer={this.onCloseWidgetDrawer}

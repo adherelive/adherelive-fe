@@ -13,7 +13,7 @@ import messages from "./messages";
 import {ArrowLeftOutlined, PlusOutlined} from "@ant-design/icons";
 import Loading from "../../Common/Loading";
 
-// AKSHAY NEW CODE FOR SUBSCRIPTION
+// code implementation after phase 1 for Subscription
 import AddService from "../../../Components/Subscription/Drawer/AddService";
 import AddSubscription from "../../../Components/Subscription/Drawer/AddSubscription";
 import DoctorServiceTable from "../../../Components/Subscription/DoctorServiceTable";
@@ -29,7 +29,7 @@ class ProviderDoctorPaymentProduct extends Component {
             noDoctorPaymentProducts: true,
             isUpdated: false,
             loading: false,
-            // AKSHAY NEW CODE FOR SUBSCRIPTION
+            // code implementation after phase 1 for Subscription
             addServiceDrawer: false,
             addSubscriptionDrawer: false,
         };
@@ -39,7 +39,7 @@ class ProviderDoctorPaymentProduct extends Component {
         const {match: {params: {id = null} = {}} = {}} = this.props;
         this.handleGetDoctorPaymentProduct(id);
         this.handleGetAdminPaymentProduct();
-        // AKSHAY NEW CODE FOR SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         // this.props.getServices();
         // this.props.getSubscriptions();
         this.props.getProviderServices(id);
@@ -102,7 +102,7 @@ class ProviderDoctorPaymentProduct extends Component {
         }
     }
 
-    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    // code implementation after phase 1 for Subscription
 
     handleServiceDrawer = () => {
         this.setState({
@@ -147,7 +147,7 @@ class ProviderDoctorPaymentProduct extends Component {
               {this.formatMessage(messages.addFee)}
             </span>
           </Button> */}
-                    {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                    {/* code implementation after phase 1 for Subscriptions */}
                     <Button type="primary" onClick={this.handleServiceDrawer}>
             <span className="w200 fs20">
               {/* {this.formatMessage(messages.addFee)} */}
@@ -191,7 +191,7 @@ class ProviderDoctorPaymentProduct extends Component {
                             {/* <DoctorConsultationFeeTable
                 doctor_id={doctor_id}
               /> */}
-                            {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                            {/* code implementation after phase 1 for Subscriptions */}
                             <DoctorServiceTable services={services}/>
                         </div>
                     )}
@@ -275,7 +275,7 @@ class ProviderDoctorPaymentProduct extends Component {
                 {this.formatMessage(messages.addMore)}
               </span>
             </Button> */}
-                        {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                        {/* code implementation after phase 1 for Subscriptions */}
                         <Dropdown
                             overlay={this.getMenu()}
                             trigger={["click"]}
@@ -316,7 +316,7 @@ class ProviderDoctorPaymentProduct extends Component {
                     setIsUpdated={this.setIsUpdated}
                     doctor_id={id}
                 />
-                {/* AKSHAY NEW CODE FOR SUBSCRIPTION */}
+                {/* code implementation after phase 1 for Subscriptions */}
                 <AddService
                     visible={this.state.addServiceDrawer}
                     onCloseDrawer={this.onCloseDrawer}

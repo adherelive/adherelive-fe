@@ -68,7 +68,7 @@ function Reassignment({onCloseDrawer, visible, activityData, status}) {
         getCarePlanForPatient();
     }, []);
 
-    // AKSHAY NEW CODE IMPLEMENTATION FOR REASIGNMENT
+    // code implementation after phase 1 FOR REASIGNMENT
     const getCarePlanForPatient = async () => {
         try {
             const getCarePlanResponse = await dispatch(

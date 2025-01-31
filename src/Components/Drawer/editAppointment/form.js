@@ -19,7 +19,7 @@ import StarOutlined from "@ant-design/icons/StarOutlined";
 import StarFilled from "@ant-design/icons/StarFilled";
 import Tooltip from "antd/es/tooltip";
 import message from "antd/es/message";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../Helper/is-empty";
@@ -495,7 +495,7 @@ class EditAppointmentForm extends Component {
             scheduleAppointment = {},
         } = this.props;
 
-        // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+        // code implementation after phase 1 FOR SUBSCRIPTION
         let finalType = {};
         if (!isEmpty(scheduleAppointment)) {
             for (let type of Object.keys(appointment_type)) {

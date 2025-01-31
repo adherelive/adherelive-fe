@@ -600,7 +600,7 @@ const messages = defineMessages({
         description: "",
         defaultMessage: "Additional Providers",
     },
-    // AKSHAY NEW CODE FOR SUBSCRIPTION
+    // code implementation after phase 1 for Subscription
     recommendSubscriptionTitle: {
         id: "app.patientDetails.recommendSubscriptionTitle",
         description: "",

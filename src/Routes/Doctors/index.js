@@ -104,7 +104,7 @@ const DoctorTransactionPage = lazy(() =>
         /* webpackChunkName: "DoctorTransactionPage" */ "../../Containers/Pages/doctorTransactionPage"
         )
 );
-// AKSHAY NEW CODE IMPLEMENTATION
+// code implementation after phase 1
 const DoctorCalenderPage = lazy(() =>
     import(
         /* webpackChunkName: "DoctorCalenderPage" */ "../../Containers/Pages/providerDoctorCalender"
@@ -361,7 +361,7 @@ class Doctors extends Component {
                                     path={PATH.DOCTOR.TRANSACTION_DETAILS}
                                     component={DoctorTransactionPageComp}
                                 />
-                                {/* AKSHAY NEW CODE IMPLEMENTATION */}
+                                {/* code implementation after phase 1 */}
                                 <Route
                                     exact
                                     path={PATH.PROVIDER.CALENDER}

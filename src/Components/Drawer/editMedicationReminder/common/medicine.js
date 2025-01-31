@@ -267,7 +267,7 @@ class Medicine extends Component {
         }
         // PREV CHNAGES
         // if (options.length === 0 && !isDefault && med_id) {
-        //  AKSHAY NEW CODE IMPLEMETATION
+        // code implementation after phase 1
         if (options.length === 0 && !isDefault) {
             // searching and no opt found
             const {inputText = ""} = this.state;

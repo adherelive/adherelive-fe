@@ -91,7 +91,7 @@ import {getRoomId} from "../../../Helper/twilio";
 import {getFullName} from "../../../Helper/common";
 import Tooltip from "antd/es/tooltip";
 
-// AKSHAY NEW CODE FOR SUBSCRIPTION
+// code implementation after phase 1 for Subscription
 import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscription";
 import RecommendService from "../../Subscription/Drawer/RecommendService";
 import SubscriptionTable from "../../Subscription/SubscriptionTable";
@@ -903,7 +903,7 @@ class PatientDetails extends Component {
         // this.fetchReportData();
         // this.fetchVitalDetails();
 
-        // AKSHAY NEW CODE FOR SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         this.props.getServices();
         this.props.getSubscriptions();
         this.props.getRecommendServiceAndSubscription(patient_id);
@@ -916,7 +916,7 @@ class PatientDetails extends Component {
         // if (showTd) {
         const response = await getPatientCarePlanDetails(patient_id);
 
-        // Changes made by Akshay NEW CODE IMPLEMENTATIONS START
+        // code implementation after phase 1 START
         const responsePatientDetails = await getPatientDetailsById(patient_id);
         if (responsePatientDetails.status) {
             this.setState({
@@ -924,7 +924,7 @@ class PatientDetails extends Component {
                 patientUserDetails: responsePatientDetails.payload.data.users,
             });
         }
-        // Changes made by Akshay NEW CODE IMPLEMENTATIONS END
+        // code implementation after phase 1 END
 
         let {status = false, payload = {}} = response;
         if (status) {
@@ -938,7 +938,7 @@ class PatientDetails extends Component {
                 } = {},
             } = payload;
 
-            // AKSHAY NEW CODE IMPLEMENTATION START
+            // code implementation after phase 1 START
             const patientCarePlans =
                 !isEmpty(care_plan_ids) &&
                 care_plan_ids.filter((id) => {
@@ -950,7 +950,7 @@ class PatientDetails extends Component {
                     }
                 });
 
-            // AKSHAY NEW CODE IMPLEMENTATION END
+            // code implementation after phase 1 END
             console.log("handleInitialData patientCarePlans: ", patientCarePlans);
 
             const {notification_redirect: {care_plan_id = null} = {}} =
@@ -977,7 +977,7 @@ class PatientDetails extends Component {
                 current_care_plan_id,
                 isOtherCarePlan: false,
                 selectedCarePlanId: current_care_plan_id,
-                // AKSHAY NEW CODE IMPLEMENTATION END
+                // code implementation after phase 1 END
                 // selectedCarePlanId: !isEmpty(patientCarePlans)
                 //   ? patientCarePlans[0]
                 //   : "",
@@ -1094,7 +1094,7 @@ class PatientDetails extends Component {
         }
 
         const {activeKey = "1", isOtherCarePlan = false} = this.state;
-        // AKSHAY NEW CODE IMPLEMENTATION
+        // code implementation after phase 1
         // BELOW CODE COMMENTED
         // if (
         //   activeKey === "1" &&
@@ -2436,8 +2436,7 @@ class PatientDetails extends Component {
         this.setState({activeKey: value});
     };
 
-    // AKSHAY NEW CODE FOR SUBSRCIPTION
-
+    // code implementation after phase 1 for Subscriptions
     handleRecommendDrawer = (action) => {
         // e.preventDefault();
         if (action === "subscriptionPlan") {
@@ -2882,8 +2881,7 @@ class PatientDetails extends Component {
                                                 >
                                                     {(authenticated_category === USER_CATEGORY.DOCTOR ||
                                                         authenticated_category === USER_CATEGORY.HSP) && (
-                                                        // Changes made by Akshay NEW CODE IMPLEMENTATION
-                                                        // BELOW CODE COMMENTED BY AKSHAY
+                                                        // code implementation after phase 1 changes made
                                                         // &&
                                                         // isOtherCarePlan
                                                         <TabPane tab="Medication" key="1">
@@ -3029,7 +3027,7 @@ class PatientDetails extends Component {
                                                             </div>
                                                         )}
                                                     </TabPane>
-                                                    {/* AKSHAY NEW CODE FOR SUBSCRIPTIONS */}
+                                                    {/* code implementation after phase 1 for subscriptions */}
                                                     <TabPane
                                                         tab={PATIENT_TABS.SUBSCRIPTIONS["name"]}
                                                         key={PATIENT_TABS.SUBSCRIPTIONS["key"]}
@@ -3049,7 +3047,7 @@ class PatientDetails extends Component {
                             )}
                         </div>
                     </div>
-                    {/* AKSHAY NEW CODE IMPLEMENTATIONS */}
+                    {/* code implementation after phase 1 */}
                     {/* {!isOtherCarePlan && ( */}
                     <Fragment>
                         <AddMedicationReminder
@@ -3109,7 +3107,7 @@ class PatientDetails extends Component {
                         </div>
                     )}
 
-                    {/* AKSHAY NEW CODE IMPLEMENTATIONS FOR SUBSCRIPTION */}
+                    {/* code implementation after phase 1 for Patient Flash Card */}
                     {flashcardOpen === true && <FlashCard/>}
 
                     <SymptomsDrawer/>
@@ -3151,7 +3149,7 @@ class PatientDetails extends Component {
                     />
                 )}
 
-                {/* AKSHAY NEW CODE IMPLEMENTATION */}
+                {/* code implementation after phase 1 */}
                 {recommendSubscription === true && (
                     <RecommendSubscription
                         visible={recommendSubscription}

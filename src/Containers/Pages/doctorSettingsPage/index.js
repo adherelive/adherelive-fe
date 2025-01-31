@@ -17,7 +17,7 @@ import {
 import {open} from "../../../modules/drawer";
 import {DRAWER} from "../../../constant";
 
-// AKSHAY NEW CODE FOR SUBSCRIPTIONS
+// code implementation after phase 1 for Subscription
 import {getServices} from "../../../modules/subscription/services";
 import {getSubscriptions} from "../../../modules/subscription/subscriptions";
 
@@ -33,7 +33,7 @@ const mapStateToProps = (state) => {
             authenticated_category,
         } = {},
         account_details = {},
-        // AKSHAY NEW CODE FOR SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         subscription: {services = {}},
         providers,
     } = state;
@@ -72,7 +72,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteAccountDetails: (id) => dispatch(deleteAccountDetails(id)),
         updateAccountDetails: (id, payload) =>
             dispatch(updateAccountDetails(id, payload)),
-        // AKSHAY NEW CODE FOR SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         getServices: () => dispatch(getServices()),
         getSubscriptions: () => dispatch(getSubscriptions()),
     };

@@ -8,7 +8,7 @@ import Drawer from "antd/es/drawer";
 import message from "antd/es/message";
 
 import AddProviderForm from "./form";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 

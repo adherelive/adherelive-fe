@@ -11,7 +11,7 @@ import messages from "./message";
 import AddAppointmentForm from "./form";
 import Footer from "../footer";
 import {RADIOLOGY} from "../../../constant";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import {Form, Mention} from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../Helper/is-empty";
@@ -110,12 +110,12 @@ class AddAppointment extends Component {
 
                 const data = newProvider_id
                     ? {
-                        // todo: change participant one with patient from store
-                        // participant_two: {
+                        // TODO: change participant one with patient from store
+                        // participant_one: {
                         //   id: patient_id,
                         //   category: "patient",
                         // },
-                        // AKSHAY NEW CODE IMPLEMENTAION FOR SUBSCRIPTION
+                        // code implementation after phase 1 for Subscription
                         participant_two: {
                             id:
                                 !isEmpty(scheduleAppointment) &&
@@ -224,7 +224,7 @@ class AddAppointment extends Component {
                             resetFields();
                             message.success(formatMessage(messages.add_appointment_success));
 
-                            // AKSHAY NEW CODE FOR SUBSCRIPTION
+                            // code implementation after phase 1 for Subscription
 
                             if (
                                 !isEmpty(scheduleAppointment) &&
@@ -327,7 +327,7 @@ class AddAppointment extends Component {
         } = formRef;
         resetFields();
         close();
-        // AKSHAY NEW CODE FOR SUBSCRIPTION
+        // code implementation after phase 1 for Subscription
         if (this.state.pageUrl[1] !== "patients") {
             setScheduleAppointmentData({});
         }

@@ -44,7 +44,7 @@ class PatientDetailsDrawer extends Component {
         };
     }
 
-    // AKSHAY NEW CODE IMPLEMENTATION FOR SUBSCRIPTION
+    // code implementation after phase 1 FOR SUBSCRIPTION
     getCarePlanForPatient = async (patientId) => {
         try {
             const {getPatientCarePlanByPatientId} = this.props;
@@ -436,7 +436,7 @@ class PatientDetailsDrawer extends Component {
                     carePlanAppointmentIds = [],
                     carePlanMedicationIds = [],
                 } = carePlan;
-                // AKSHAY NEW CODE IMPLEMENTTATIONS
+                // code implementation after phase 1
                 // if (`${doctorId}` === `${doctor_id}`) {
                 if (`${patient_id}` === `${id}`) {
                     carePlanId = cpId;

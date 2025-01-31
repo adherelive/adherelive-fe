@@ -28,7 +28,7 @@ function ClinicalNotes() {
                 {
                     value: "",
                     date: new Date().toDateString(),
-                    doctorName: "Akshay Nagargoje",
+                    doctorName: "Sparsh Jaiswal",
                 },
             ],
         };
@@ -45,7 +45,7 @@ function ClinicalNotes() {
         data[index].reportValues.push({
             value: "",
             date: new Date().toDateString(),
-            doctorName: "Akshay Nagargoje",
+            doctorName: "Sparsh Jaiswal",
         });
         setInputFields(data);
     };

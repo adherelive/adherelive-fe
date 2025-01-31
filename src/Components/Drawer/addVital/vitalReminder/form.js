@@ -14,7 +14,7 @@ import startDateField from "../common/startDate";
 import endDateField from "../common/endDate";
 import startTimeField from "../common/startTime";
 import {ALTERNATE_DAYS, DAYS, DAYS_NUMBER, REPEAT_TYPE, USER_CATEGORY,} from "../../../../constant";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 

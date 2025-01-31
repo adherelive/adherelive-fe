@@ -12,7 +12,7 @@ import debounce from "lodash-es/debounce";
 import {VIDEO_TYPES} from "../../../constant";
 import CameraOutlined from "@ant-design/icons/CameraOutlined";
 import Upload from "antd/es/upload";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
@@ -267,7 +267,7 @@ class EditExerciseGroupForm extends Component {
                 <Option
                     key={`${each}-${type}`}
                     value={repetition_id}
-                    // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
+                    // code implementation after phase 1 FOR V4
                     detail_id={detail_id}
                     canEdit={canEdit}
                     // PREVIOUS CODE
@@ -291,7 +291,7 @@ class EditExerciseGroupForm extends Component {
                     <Option
                         key={`${each}-${type}`}
                         value={id}
-                        // Changes made by Akshay NEW CODE IMPLEMENTATIONS FOR V4
+                        // code implementation after phase 1 FOR V4
                         canEdit={canEdit}
                         // PREVIOUS CODE
                         // onClick={this.handleDifferentPortionSelect({ editable: canEdit })}

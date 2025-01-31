@@ -132,7 +132,7 @@ export const getCalenderDataForDay = (date, type) => {
     };
 };
 
-// AKSHAY NEW CODE IMPLEMENTATION
+// code implementation after phase 1
 export const getDoctorsCalenderDataForDay = (date, type) => {
     let response = {};
     return async (dispatch) => {

@@ -12,7 +12,7 @@ import {getName} from "../../../Helper/validation";
 import debounce from "lodash-es/debounce";
 import isEmpty from "../../../Helper/is-empty";
 
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
@@ -113,7 +113,7 @@ class AddSecondaryDoctor extends Component {
             //   basic_info: { first_name = "", middle_name = "", last_name = "" } = {},
             // } = doctors[doctor_id] || {};
 
-            // AKSHAY NEW CODE IMPLEMETATION START
+            // code implementation after phase 1 start
 
             let doctorData = doctors[doctor_id];
             let doctorBasicInfo = "";
@@ -130,7 +130,7 @@ class AddSecondaryDoctor extends Component {
             const {basic_info: {linked_id = null} = {}} =
             user_roles[user_role_id] || {};
 
-            // AKSHAY NEW CODE IMPLEMETATION END
+            // code implementation after phase 1 end
 
             let provider_name = "";
             //PREV CODE START
@@ -140,13 +140,13 @@ class AddSecondaryDoctor extends Component {
             //   provider_name = name;
             // }
             //PREV CODE END
-            // AKSHAY NEW CODE IMPLEMETATION START
+            // code implementation after phase 1 start
             if (linked_id) {
                 const {basic_info: {name} = {}} = providers[linked_id] || {};
 
                 provider_name = name;
             }
-            // AKSHAY NEW CODE IMPLEMETATION END
+            // code implementation after phase 1 end
 
             console.log(provider_name);
 

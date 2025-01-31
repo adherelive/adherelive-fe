@@ -476,7 +476,7 @@ class AddCarePlanDrawer extends Component {
 
         return (
             <div className="form-block-ap .add-careplan-drawer-container">
-                {/* AKSHAY NEW CODE IMPLEMENTATION */}
+                {/* code implementation after phase 1 */}
 
                 <div className="form-headings-ap flex align-center justify-space-between">
                     {this.formatMessage(messages.symptoms)}
@@ -814,7 +814,7 @@ class AddCarePlanDrawer extends Component {
                 symptoms: JSON.stringify(this.state.finalSymptomData),
             };
             try {
-                // AKSHAY NEW CODE IMPLEMENTATION FOR CDS
+                // code implementation after phase 1 FOR CDS
                 let cdssPost = {};
                 let symptomData = JSON.parse(data.symptoms);
 
@@ -884,7 +884,7 @@ class AddCarePlanDrawer extends Component {
                     width={"35%"}
                 >
                     {renderAddCareplan()}
-                    {/* AKSHAY NEW CODE IMPLEMENTATIONS */}
+                    {/* code implementation after phase 1 */}
                     <WidgetDrawer
                         visible={widgetDrawerOpen}
                         onCloseDrawer={this.onCloseWidgetDrawer}

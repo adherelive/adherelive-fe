@@ -17,7 +17,7 @@ export default (props) => {
         >
             <div className="p10" onClick={openResponseDrawer(id)}>
                 {/* <FieldTimeOutlined className="flex align-center justify-center" /> */}
-                {/* AKSHAY NEW CODE IMPLEMENTATIONS */}
+                {/* code implementation after phase 1 */}
                 <div className="ml10">{`${total - remaining}/${total}`}</div>
             </div>
         </Tooltip>

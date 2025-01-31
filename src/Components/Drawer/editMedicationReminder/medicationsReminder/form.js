@@ -24,7 +24,7 @@ import formulation from "../common/formulation";
 import messages from "../message";
 import {hasErrors, isNumber} from "../../../../Helper/validation";
 import {DAYS_NUMBER, MEDICINE_UNITS, REPEAT_TYPE, USER_CATEGORY,} from "../../../../constant";
-// AKSHAY NEW COE FOR ANTD V4
+// code implementation after phase 1 for antd v4
 import { Form, Mention } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../../Helper/is-empty";
@@ -646,7 +646,7 @@ class EditMedicationReminderForm extends Component {
                                 className="mg-ml flex justify-content-end"
                                 disabled={canViewDetails}
                             >
-                                {/* AKSHAY NEW CODE IMPLEMENTATION FOR ONE */}
+                                {/* code implementation after phase 1 for One */}
                                 <RadioButton
                                     value={MEDICINE_UNITS.ONE}
                                     className={
