@@ -30,14 +30,14 @@ export const recommendServiceUrl = () => {
 };
 
 export const updateRecommendServiceUrl = (serviceId) => {
-    return `/serviceusermapping/${serviceId}`;
+    return `/serviceusermapping/${serviceId}/update`;
 };
 
 export const updateRecommendSubscriptionUrl = (subscriptionId) => {
-    return `/servicesubscriptionusermapping/${subscriptionId}`;
+    return `/servicesubscriptionusermapping/${subscriptionId}/update`;
 };
 
-export const getRecommendSeviceUrl = (patientId) => {
+export const getRecommendServiceUrl = (patientId) => {
     return `/servicesubscriptionusermapping/all/${patientId}`;
 };
 
@@ -95,7 +95,7 @@ export const addFlashCardUrl = () => {
 };
 
 export const updateFlashcardUrl = (flashcardId) => {
-    return `/flashcard/${flashcardId}`;
+    return `/flashcard/${flashcardId}/update`;
 };
 
 export const searchActivites = (query) => {

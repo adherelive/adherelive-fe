@@ -13,7 +13,7 @@ export const getAllReportsUrl = (patient_id) => {
 };
 
 export const deleteUploadUrl = (doc_id) => {
-    return `/reports/${doc_id}`;
+    return `/reports/${doc_id}/delete`;
 };
 
 export const updateReportUrl = (report_id) => {
