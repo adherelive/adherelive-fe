@@ -15,11 +15,11 @@ export const updateAppointmentUrl = (id) => {
 };
 
 export const deleteAppointmentUrl = (id) => {
-    return `/appointments/${id}`;
+    return `/appointments/${id}/delete`;
 };
 
 export const addCarePlanAppointmentUrl = (carePlanId) => {
-    return `/appointments/${carePlanId}`;
+    return `/appointments/${carePlanId}/appointments`;
 };
 
 export const getUploadAppointmentDocumentUrl = (appointment_id) => {

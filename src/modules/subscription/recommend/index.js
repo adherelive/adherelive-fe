@@ -1,7 +1,7 @@
 import {doRequest} from "../../../Helper/network";
 import {REQUEST_TYPE} from "../../../constant";
 import {
-    getRecommendSeviceUrl,
+    getRecommendServiceUrl,
     getMyTaskOfServiceOrSubscriptionUrl,
     recommendServiceUrl,
     recommendSubscriptionUrl,
@@ -160,7 +160,7 @@ export const getRecommendServiceAndSubscription = (patientId) => {
         try {
             response = await doRequest({
                 method: REQUEST_TYPE.GET,
-                url: getRecommendSeviceUrl(patientId),
+                url: getRecommendServiceUrl(patientId),
             });
 
             const {status, payload: {data} = {}} = response || {};

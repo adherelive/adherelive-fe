@@ -72,7 +72,7 @@ export const getUploadURL = () => {
 };
 
 export const updateDoctorURL = (id) => {
-    return `/doctors/${id}`;
+    return `/doctors/${id}/update`;
 };
 
 export const addPatientToWatchlistUrl = (patient_id) => {
@@ -102,7 +102,7 @@ export const updatePatientAndCareplanUrl = (careplan_id) => {
     return `/doctors/updatePatient_careplan/${careplan_id}`;
 };
 export const deactivateDoctorURL = (doctor_id) => {
-    return `/doctors/${doctor_id}`;
+    return `/doctors/${doctor_id}/deactivate`;
 };
 
 export const activateDoctorURL = (user_id) => {
