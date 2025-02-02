@@ -2,24 +2,26 @@ import React, {Component} from "react";
 import {injectIntl} from "react-intl";
 import moment from "../../../../Helper/moment";
 import messages from "./messages";
-
 import {EVENT_STATUS, EVENT_TYPE} from "../../../../constant";
+import PropTypes from 'prop-types'; // Add prop validation
 
 class PatientAlerts extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: true,
-            areEvents: true,
-            last_visit: [],
-        };
-    }
+    static propTypes = {
+        getLastVisitAlerts: PropTypes.func.isRequired,
+        schedule_events: PropTypes.object.isRequired,
+        symptoms: PropTypes.object.isRequired,
+        intl: PropTypes.object.isRequired,
+    };
+
+    state = {
+        loading: true,
+        areEvents: false,
+        last_visit: [],
+        lastUpdated: null,
+    };
 
     componentDidMount() {
-        const {last_visit} = this.state;
-        if (last_visit.length === 0) {
-            this.getAlertData();
-        }
+        this.getAlertData();
     }
 
     getAlertData = async () => {
@@ -27,18 +29,24 @@ class PatientAlerts extends Component {
             this.setState({loading: true});
             const {getLastVisitAlerts} = this.props;
             const response = await getLastVisitAlerts();
-            const {status, payload: {data: {last_visit = []} = {}} = {}} =
-            response || {};
-            if (status === true) {
-                this.setState({last_visit, loading: false});
-            }
-            if (last_visit.length === 0) {
-                this.setState({areEvents: false, loading: false});
-            } else {
-                this.setState({loading: false});
-            }
+
+            const {status, payload: {data: {last_visit = []} = {}} = {}} = response || {};
+            if (!status) return;
+
+            const latestTimestamp = last_visit.reduce((acc, curr) =>
+                Math.max(acc, new Date(curr?.updatedAt)), 0
+            );
+
+            this.setState({
+                last_visit,
+                areEvents: last_visit.length > 0,
+                loading: false,
+                lastUpdated: latestTimestamp || null,
+            });
+
         } catch (error) {
-            this.setState({loading: false});
+            console.error('Error fetching alerts:', error);
+            this.setState({loading: false, areEvents: false});
         }
     };
 
@@ -51,160 +59,141 @@ class PatientAlerts extends Component {
         );
     };
 
-    getSymptom = ({id, time}) => {
-        const {symptoms, intl: {formatMessage} = {}} = this.props;
-        const {text} = symptoms[id] || {};
-
-        return (
-            <div
-                key={`symptom-${time}`}
-                className="wp100 flex align-center pt10 pb10 pl6 pr6 tal"
-            >
-                <div className="wp30 pl16 bl-dark-aqua fw600">
-                    {formatMessage(messages.symptom_added_text)}
-                </div>
-                <div className="wp70 fw600">{text}</div>
-                {/*<div className="wp40">{`${moment(time).format("LL")} ${moment(time).format("LT")}`}</div>*/}
-            </div>
-        );
-    };
-
-    getMedication = ({data, time}) => {
-        const {intl: {formatMessage} = {}} = this.props;
+    getGenericEvent = ({data, time}, typeConfig) => {
         const {status, details} = data || {};
+        const name = details?.[typeConfig.detailsPath]?.[typeConfig.idKey]?.basic_info?.name || '';
 
-        return (
-            <div
-                key={`medication-${time}`}
-                className="wp100 flex align-center pt10 pb10 pl6 pr6 tal"
-            >
-                {status === EVENT_STATUS.EXPIRED ? (
-                    <div className="wp30 pl16 fw600 bl-warning-red ">
-                        {formatMessage(messages.missed_medication)}
-                    </div>
-                ) : (
-                    <div className="wp30 pl16 fw600 bl-green ">
-                        {formatMessage(messages.taken_medication)}
-                    </div>
-                )}
-                <div className="wp70 fw600 ">{`${moment(time).format(
-                    "DD MMM, YYYY"
-                )} (${moment(time).format("LT")})`}</div>
-            </div>
-        );
+        return this.renderEvent({
+            time,
+            statusKey: status,
+            successMessage: typeConfig.successMessage,
+            warningMessage: typeConfig.warningMessage,
+            additionalContent: `(${name})`,
+        });
     };
 
-    getAppointment = ({data, time}) => {
-        const {intl: {formatMessage} = {}} = this.props;
-        const {status} = data || {};
-
-        return (
-            <div
-                key={`appointment-${time}`}
-                className="wp100 flex align-center pt10 pb10 pl6 pr6 tal"
-            >
-                {status === EVENT_STATUS.EXPIRED ? (
-                    <div className="wp30 pl16 fw600 bl-warning-red">
-                        {formatMessage(messages.missed_appointment)}
-                    </div>
-                ) : (
-                    <div className="wp30 pl16 fw600 bl-green">
-                        {formatMessage(messages.completed_appointment)}
-                    </div>
-                )}
-                <div className="wp70 fw600">{`${moment(time).format(
-                    "DD MMM, YYYY"
-                )} (${moment(time).format("LT")})`}</div>
-            </div>
-        );
+    getSymptom = ({id, time}) => {
+        const {symptoms} = this.props;
+        const {text} = symptoms[id] || {};
+        return this.renderEvent({
+            time,
+            statusKey: null,
+            successMessage: messages.symptom_added_text,
+            additionalContent: text,
+        });
     };
+
+    getMedication = (params) => this.getGenericEvent(params, {
+        warningMessage: messages.missed_medication,
+        successMessage: messages.taken_medication,
+    });
+
+    getAppointment = (params) => this.getGenericEvent(params, {
+        warningMessage: messages.missed_appointment,
+        successMessage: messages.completed_appointment,
+    });
 
     getVitals = ({data, time}) => {
-        const {intl: {formatMessage} = {}} = this.props;
-        const {
-            status,
-            details: {vital_templates: {basic_info: {name} = {}} = {}} = {},
-        } = data || {};
-
-        return (
-            <div
-                key={`vital-${time}`}
-                className="wp100 flex align-center pt10 pb10 pl6 pr6 tal"
-            >
-                {status === EVENT_STATUS.EXPIRED ? (
-                    <div className="wp30 pl16 fw600 bl-warning-red">
-                        {formatMessage(messages.missed_vital)}
-                    </div>
-                ) : (
-                    <div className="wp30 pl16 fw600 bl-green">
-                        {formatMessage(messages.completed_vital)}
-                    </div>
-                )}
-                <div className="wp50 fw600">{`${moment(time).format(
-                    "DD MMM, YYYY"
-                )} (${moment(time).format("LT")})`}</div>
-                <div className="wp20 fw500 word-wrap">{`(${name})`}</div>
-            </div>
-        );
+        const {details: {vital_templates: {basic_info: {name} = {}} = {}} = {}} = data || {};
+        return this.renderEvent({
+            time,
+            statusKey: data?.status,
+            successMessage: messages.completed_vital,
+            warningMessage: messages.missed_vital,
+            additionalContent: `(${name})`,
+        });
     };
 
     getDiets = ({data, time}) => {
-        const {intl: {formatMessage} = {}} = this.props;
-        const {status} = data || {};
         const {details: {diets = {}, diet_id = null} = {}} = data || {};
-        const {basic_info: {name = ""} = {}} = diets[diet_id] || {};
-        return (
-            <div
-                key={`diet-${time}`}
-                className="wp100 flex align-center pt10 pb10 pl6 pr6 tal"
-            >
-                {status === EVENT_STATUS.EXPIRED ? (
-                    <div className="wp30 pl16 fw600 bl-warning-red">
-                        {formatMessage(messages.missed_diet)}
-                    </div>
-                ) : (
-                    <div className="wp30 pl16 fw600 bl-green">
-                        {formatMessage(messages.completed_diet)}
-                    </div>
-                )}
-                <div className="wp50 fw600">{`${moment(time).format(
-                    "DD MMM, YYYY"
-                )} (${moment(time).format("LT")})`}</div>
-                <div className="wp20 fw500 word-wrap">{`(${name})`}</div>
-            </div>
-        );
+        return this.renderEvent({
+            time,
+            statusKey: data?.status,
+            successMessage: messages.completed_diet,
+            warningMessage: messages.missed_diet,
+            additionalContent: `(${name})`,
+        });
     };
 
     getWorkouts = ({data, time}) => {
-        const {intl: {formatMessage} = {}} = this.props;
-        const {status} = data || {};
         const {details: {workouts = {}, workout_id = null} = {}} = data || {};
-        const {basic_info: {name = ""} = {}} = workouts[workout_id] || {};
+        return this.renderEvent({
+            time,
+            statusKey: data?.status,
+            successMessage: messages.completed_workout,
+            warningMessage: messages.missed_workout,
+            additionalContent: `(${name})`,
+        });
+
+    };
+
+    // Unified event renderer to reduce duplication
+    renderEvent = (config) => {
+        const {formatMessage} = this.props.intl;
+        const {time, statusKey, successMessage, warningMessage, additionalContent} = config;
+
         return (
-            <div
-                key={`workout-${time}`}
-                className="wp100 flex align-center pt10 pb10 pl6 pr6 tal"
-            >
-                {status === EVENT_STATUS.EXPIRED ? (
-                    <div className="wp30 pl16 fw600 bl-warning-red">
-                        {formatMessage(messages.missed_workout)}
-                    </div>
-                ) : (
-                    <div className="wp30 pl16 fw600 bl-green">
-                        {formatMessage(messages.completed_workout)}
+            <div className="wp100 flex align-center pt10 pb10 pl6 pr6 tal">
+                <div className={`wp30 pl16 fw600 ${statusKey === EVENT_STATUS.EXPIRED ? 'bl-warning-red' : 'bl-green'}`}>
+                    {formatMessage(statusKey === EVENT_STATUS.EXPIRED ? warningMessage : successMessage)}
+                </div>
+                <div className="wp50 fw600">
+                    {moment(time).format("DD MMM, YYYY")} ({moment(time).format("LT")})
+                </div>
+                {additionalContent && (
+                    <div className="wp20 fw500 word-wrap">
+                        {additionalContent}
                     </div>
                 )}
-                <div className="wp50 fw600">{`${moment(time).format(
-                    "DD MMM, YYYY"
-                )} (${moment(time).format("LT")})`}</div>
-                <div className="wp20 fw500 word-wrap">{`(${name})`}</div>
             </div>
         );
     };
 
+    renderLastUpdated = () => {
+        const {lastUpdated} = this.state;
+        const {formatMessage} = this.props.intl;
+
+        if (!lastUpdated) return null;
+
+        return (
+            <div className="wp100 pl6 pt4 fs12 fw400 warm-grey">
+                {formatMessage(messages.last_updated)}: {moment(lastUpdated).format("LLL")}
+            </div>
+        );
+    };
+
+    renderHeader = () => {
+        const {intl: {formatMessage}} = this.props;
+        const {last_visit} = this.state;
+
+        return (
+            <div className="wp100 pl6 pt10 pb10 flex align-center bb-light-grey">
+                <div className="fs20 fw700">
+                    {formatMessage(messages.alert_header)}
+                </div>
+                <div className="fs20 fw500 warm-grey ml4">
+                    ({last_visit.length})
+                </div>
+                {this.renderLastUpdated()}
+            </div>
+        );
+    };
+
+    /**
+     * This is the helper function for the 'getEvents', which fetches the vitals:
+     * - Medication
+     * - Appointments
+     * - Actions
+     * - Diets
+     * - Workouts
+     * for a given scheduled event ID, with a given time, that is obtained from the 'getEvents' call
+     *
+     * @param data
+     * @param time
+     * @returns {*}
+     */
     getScheduleEvent = ({data, time}) => {
-        const {getMedication, getVitals, getAppointment, getDiets, getWorkouts} =
-            this;
+        const {getMedication, getVitals, getAppointment, getDiets, getWorkouts} = this;
         const {event_type} = data || {};
 
         switch (event_type) {
@@ -221,10 +210,16 @@ class PatientAlerts extends Component {
         }
     };
 
+    /**
+     * This function gathers and shows the alerts for the Patient page, since the last visit from the Doctor
+     *
+     *
+     * @returns {*}
+     */
     getEvents = () => {
         const {schedule_events} = this.props;
         const {last_visit} = this.state;
-        console.log("getEvents, last_visit ---> ", {last_visit});
+        console.log("Get Events -> last_visit array: ", {last_visit});
 
         const events = last_visit.map((details) => {
             const {event_type, id, updatedAt} = details || {};
@@ -244,22 +239,14 @@ class PatientAlerts extends Component {
     };
 
     render() {
-        const {intl: {formatMessage} = {}} = this.props;
-        const {loading, areEvents, last_visit = []} = this.state;
+        const {loading, areEvents} = this.state;
         const {getBlankState, getEvents} = this;
 
-        if (loading) {
-            return null;
-        }
+        if (loading) return null;
 
         return (
             <div className="br10 p10 wp100 bg-rosy-pink">
-                <div className="wp100 pl6 pt10 pb10 flex align-center bb-light-grey">
-                    <div className="fs20 fw700">
-                        {formatMessage(messages.alert_header)}
-                    </div>
-                    <div className="fs20 fw500 warm-grey ml4">{`(${last_visit.length})`}</div>
-                </div>
+                {this.renderHeader()}
                 {!areEvents ? getBlankState() : getEvents()}
             </div>
         );
