@@ -85,6 +85,13 @@ export const getVitals = (carePlanId) => {
     };
 };
 
+/**
+ * This function creates the timeline for the Vitals which need to be taken and which may have been missed
+ * or not reported by the Patient
+ *
+ * @param vitalId
+ * @returns {function(*): Promise<{}>}
+ */
 export const getVitalTimeline = (vitalId) => {
     let response = {};
     return async (dispatch) => {

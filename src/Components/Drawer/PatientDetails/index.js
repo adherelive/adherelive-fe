@@ -257,6 +257,12 @@ class PatientDetailsDrawer extends Component {
         return dayString.join(",");
     };
 
+    /**
+     * List all the Medications the Patient has been prescribed and show them as a List
+     * in the Patient Drawer
+     *
+     * @returns {*}
+     */
     getMedicationList = () => {
         const {carePlanMedicationIds} = this.state;
         const {medications = {}, medicines = {}} = this.props;
@@ -295,6 +301,12 @@ class PatientDetailsDrawer extends Component {
         return medicationList;
     };
 
+    /**
+     * List all the Appointments the Patient has been setup with and show them as a List
+     * in the Patient Drawer
+     *
+     * @returns {*}
+     */
     getAppointmentList = () => {
         const {appointmentsListIds} = this.state;
 
@@ -389,6 +401,12 @@ class PatientDetailsDrawer extends Component {
         history.push(`/patients/${patient_id}`);
     };
 
+    /**
+     * This function is to return the summary of details, including medications & appointments that the Patient has,
+     * when the Patient right-hand drawer is opened after clicking on the Patient name on the Dashboard
+     *
+     * @returns {Element}
+     */
     getPatientDetailContent = () => {
         const {
             auth = {},
@@ -408,9 +426,9 @@ class PatientDetailsDrawer extends Component {
         const {
             formatMessage,
             getMedicationList,
+            getAppointmentList,
             handlePatientDetailsRedirect,
             openChatTab,
-            getAppointmentList,
         } = this;
 
         const {authenticated_user, authPermissions = []} = auth || {};
@@ -594,6 +612,7 @@ class PatientDetailsDrawer extends Component {
                                 total = medication_critical + medication_non_critical;
                             }
 
+                            // Create and return the Patient right-side drawer with summary of Patient details
                             return (
                                 <div
                                     key={id}
@@ -688,7 +707,8 @@ class PatientDetailsDrawer extends Component {
                                 <div className="flex-2">
                                     {description
                                         ? `${description} (${diagnosis})`
-                                        : `${"--"} (${diagnosis})`}
+                                        : `${"--"} (${diagnosis})`
+                                    }
                                 </div>
                             </div>
                             <div className="flex justify-space-between align-center">
@@ -697,7 +717,8 @@ class PatientDetailsDrawer extends Component {
                                     {/* {symptoms ? symptoms : "--"} */}
                                     {typeof finalArray === "string"
                                         ? finalArray
-                                        : String(finalArray)}
+                                        : String(finalArray)
+                                    }
                                 </div>
                             </div>
                             <div className="flex justify-space-between align-center">
@@ -720,7 +741,6 @@ class PatientDetailsDrawer extends Component {
                         <div className="mt10 mb10 fs18 fw600">
                             {formatMessage(messages.medications)}
                         </div>
-
                         {getMedicationList()}
                     </div>
 
@@ -729,7 +749,6 @@ class PatientDetailsDrawer extends Component {
                         <div className="mt10 mb10 fs18 fw600">
                             {formatMessage(messages.appointments)}
                         </div>
-
                         {getAppointmentList()}
                     </div>
                 </Fragment>
