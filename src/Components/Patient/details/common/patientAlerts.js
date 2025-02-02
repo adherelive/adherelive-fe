@@ -33,9 +33,10 @@ class PatientAlerts extends Component {
             const {status, payload: {data: {last_visit = []} = {}} = {}} = response || {};
             if (!status) return;
 
-            const latestTimestamp = last_visit.reduce((acc, curr) =>
-                Math.max(acc, new Date(curr?.updatedAt)), 0
-            );
+            const latestTimestamp = last_visit.reduce((acc, curr) => {
+                const currDate = curr && curr.updatedAt ? new Date(curr.updatedAt) : 0;
+                return Math.max(acc, currDate);
+            }, 0);
 
             this.setState({
                 last_visit,
@@ -45,7 +46,7 @@ class PatientAlerts extends Component {
             });
 
         } catch (error) {
-            console.error('Error fetching alerts:', error);
+            console.error('Error fetching alerts: ', error);
             this.setState({loading: false, areEvents: false});
         }
     };
@@ -61,14 +62,18 @@ class PatientAlerts extends Component {
 
     getGenericEvent = ({data, time}, typeConfig) => {
         const {status, details} = data || {};
-        const name = details?.[typeConfig.detailsPath]?.[typeConfig.idKey]?.basic_info?.name || '';
+        const itemName = (details &&
+            details[typeConfig.detailsPath] &&
+            details[typeConfig.detailsPath][typeConfig.idKey] &&
+            details[typeConfig.detailsPath][typeConfig.idKey].basic_info &&
+            details[typeConfig.detailsPath][typeConfig.idKey].basic_info.name) || '';
 
         return this.renderEvent({
             time,
             statusKey: status,
             successMessage: typeConfig.successMessage,
             warningMessage: typeConfig.warningMessage,
-            additionalContent: `(${name})`,
+            additionalContent: `(${itemName})`,
         });
     };
 
@@ -106,6 +111,7 @@ class PatientAlerts extends Component {
 
     getDiets = ({data, time}) => {
         const {details: {diets = {}, diet_id = null} = {}} = data || {};
+        const {basic_info: {name = ""} = {}} = diets[diet_id] || {};
         return this.renderEvent({
             time,
             statusKey: data?.status,
@@ -117,6 +123,7 @@ class PatientAlerts extends Component {
 
     getWorkouts = ({data, time}) => {
         const {details: {workouts = {}, workout_id = null} = {}} = data || {};
+        const {basic_info: {name = ""} = {}} = workouts[workout_id] || {};
         return this.renderEvent({
             time,
             statusKey: data?.status,
