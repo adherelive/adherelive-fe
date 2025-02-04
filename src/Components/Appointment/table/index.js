@@ -13,13 +13,16 @@ class PatientTable extends Component {
         this.state = {};
     }
 
-    // onRow = (record, rowIndex) => {
-    //   const { onRowClick } = this;
-    //   const { key } = record;
-    //   return {
-    //     onClick: onRowClick(key)
-    //   };
-    // };
+    /**
+     * TODO: Why is this code commented?
+    onRow = (record, rowIndex) => {
+      const { onRowClick } = this;
+      const { key } = record;
+      return {
+        onClick: onRowClick(key)
+      };
+    };
+     */
 
     onSelectChange = (selectedRowKeys) => {
         this.setState({selectedRows: selectedRowKeys});
