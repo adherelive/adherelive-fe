@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {injectIntl} from "react-intl";
+import { connect } from 'react-redux';
 import {Table} from "antd";
 import generateRow from "./dataRow";
 import getColumn from "./header";
@@ -8,6 +9,7 @@ import message from "antd/es/message";
 import {CURRENT_TAB} from "../../Dashboard";
 import {TABLE_COLUMN} from "./helper";
 import config from "../../../config";
+import searchTreatmentPaginatedPatients from "../../../modules/pages/paginatedPatients.js";
 
 import Input from "antd/es/input";
 import Button from "antd/es/button";
@@ -29,8 +31,6 @@ class patientTable extends Component {
             offset: 0,
             pageSize: 0,
             loading: false,
-            // TODO: Confusion here, duplicate entry with 'null' and '0'
-            //total: null,
             tabChanged: false,
             created_at_order: 1,
             name_order: 1,
@@ -44,7 +44,9 @@ class patientTable extends Component {
             sortNameDesc: null,
             searchTreatmentText: "",
             searchDiagnosisText: "",
-            total: 0,
+            // TODO: Confusion here, duplicate entry with 'null' and '0'
+            total: null,
+            //total: 0,
             setOffset: null,
         };
     }
@@ -77,7 +79,7 @@ class patientTable extends Component {
 
     handleSearchTreatmentGetPatient = async (flag = false) => {
         try {
-            const {searchTreatmentPaginatedPatients, tabState} = this.props;
+            const { searchTreatmentPaginatedPatients, tabState} = this.props;
             const {offset = 0} = tabState;
 
             let data = tabState;
@@ -465,6 +467,14 @@ class patientTable extends Component {
 
         this.handleGetPatients();
     };
+
+    // // Map action creator to props
+    // const mapDispatchToProps = (dispatch) => ({
+    //     searchTreatmentPaginatedPatients: (params) =>
+    //         dispatch(searchTreatmentPaginatedPatients(params)),
+    //     // Add other actions here
+    // });
+
 
     render() {
         const {getDataSource, onPageChange, formatMessage, getLoadingComponent} =

@@ -1,5 +1,6 @@
 import React, {lazy, Suspense} from "react";
 import ReactDOM from "react-dom";
+// import { createRoot } from 'react-dom/client';
 import reportWebVitals from "./reportWebVitals";
 
 import {Provider} from "react-redux";
@@ -19,17 +20,19 @@ const Desktop = lazy(() =>
     import(/* webpackChunkName: "DesktopWrapper" */ "./Containers/Routes")
 );
 
-// const middleware = [thunk, retainState];
+/**
+ * TODO: Check why this has been removed?
+const middleware = [thunk, retainState];
 
-// let store;
-// if (process.env.NODE_ENV === "development") {
-//   store = createStore(
-//     allReducers,
-//     composeWithDevTools(applyMiddleware(...middleware))
-//   );
-// } else {
-//   store = createStore(allReducers, applyMiddleware(...middleware));
-// }
+let store;
+if (process.env.NODE_ENV === "development") {
+  store = createStore(
+    allReducers,
+    composeWithDevTools(applyMiddleware(...middleware))
+  );
+} else {
+  store = createStore(allReducers, applyMiddleware(...middleware));
+}*/
 
 addLocaleData(arLocaleData);
 addLocaleData(esLocaleData);
@@ -55,6 +58,27 @@ ReactDOM.render(
     </Provider>,
     document.getElementById("root")
 );
+
+/**
+ * TODO: Upgrade to React v18
+ *
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
+    <Provider store={store}>
+        <IntlProvider locale={locale} key={locale} messages={messages}>
+            <Suspense fallback={null}>
+                <DevSupport ComponentPreviews={ComponentPreviews}
+                            useInitialHook={useInitial}
+                >
+                    <Desktop/>
+                </DevSupport>
+            </Suspense>
+        </IntlProvider>
+    </Provider>,
+ );
+ */
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
