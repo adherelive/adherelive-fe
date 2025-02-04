@@ -7,7 +7,7 @@ import {DRAWER} from "../../constant";
 
 const mapStateToProps = (state) => {
     // console.log("Missed Diet mapStateToProps ---> redux state: ", state); // Log the entire state
-    console.log("Missed Diet mapStateToProps ---> patients: ", state.patients); // Log the patients object
+    // console.log("Missed Diet mapStateToProps ---> patients: ", state.patients); // Log the patients object
 
     const {
         auth: {

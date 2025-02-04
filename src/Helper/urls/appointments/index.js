@@ -10,6 +10,10 @@ export const getAppointmentsDetailsUrl = () => {
     return `/appointments/details`;
 };
 
+export const getAppointmentsMissedUrl = () => {
+    return `/appointments/missed`;
+};
+
 export const updateAppointmentUrl = (id) => {
     return `/appointments/update/${id}`;
 };

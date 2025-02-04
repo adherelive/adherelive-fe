@@ -75,7 +75,7 @@ class MissedAppointmentsDrawer extends Component {
         history.push(`/patients/${patient_id}`);
     };
 
-    getAppointmentList = () => {
+    getAppointmentsMissedList = () => {
         const {patients = {}, missed_appointments = {}} = this.props;
         const {handlePatientDetailsRedirect} = this;
         const appointmentList = [];
@@ -265,7 +265,7 @@ class MissedAppointmentsDrawer extends Component {
                         {missedChartDrawerLoading ? (
                             <Spin size="small" className="flex align-center justify-center"/>
                         ) : (
-                            this.getAppointmentList()
+                            this.getAppointmentsMissedList()
                         )}
                     </div>
                 </Drawer>

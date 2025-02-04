@@ -8,19 +8,23 @@ import ActivateTransactionInfo from "../../Modal/ActivateTransactionInfo";
 export default (props) => {
     const {transactions} = props || {};
 
+    /**
+     * TODO: Check why the 'Received Payment' is not active?
+     */
     return (
         <div className="ellipsis wp100  ">
             <div className="wp100 ">
                 {/* <TableStatus displayProps={displayProps} /> */}
                 {/* <Button
-          type="primary"
-          className="ml10 add-button "
-          // icon={"plus"}
-          style={{ backgroundColor: "#92d04f", border: "none" }}
-          size={"small"}
-        >
-          <span className="fs16">Activate</span>
-        </Button> */}
+                      type="primary"
+                      className="ml10 add-button "
+                      // icon={"plus"}
+                      style={{ backgroundColor: "#92d04f", border: "none" }}
+                      size={"small"}
+                    >
+                      <span className="fs16">Activate</span>
+                    </Button> */
+                }
                 <ActivateTransactionInfo transactionData={transactions}/>
                 <Button
                     type="primary"

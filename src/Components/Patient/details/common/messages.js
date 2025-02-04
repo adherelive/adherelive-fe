@@ -56,6 +56,10 @@ const messages = defineMessages({
         description: "",
         defaultMessage: "Completed Workout",
     },
+    last_updated: {
+        id: 'patient.alerts.last_updated',
+        defaultMessage: 'Last data update'
+    },
     symptom_added_text: {
         id: "app.patients.common.alert.symptom.added.text",
         description: "",
