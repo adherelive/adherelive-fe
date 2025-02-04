@@ -1,8 +1,11 @@
+import { logger } from '../../../config/logger';
+
 export const addDietUrl = () => {
     return `/diet`;
 };
 
 export const updateDietUrl = (diet_id) => {
+    logger.info(`API Request: ${diet_id}`);
     return `/diet/${diet_id}`;
 };
 
@@ -29,3 +32,24 @@ export const getDietTimelineUrl = (id) => {
 export const getPatientPreferenceDietDetailsUrl = (patient_id) => {
     return `/diet/details/patients/${patient_id}`;
 };
+
+
+/**
+ * Example API call with logging
+export const api = {
+    async fetchData(diet_id) {
+        logger.info(`API Request: ${diet_id}`);
+
+        try {
+            const response = await fetch(diet_id);
+            const data = await response.json();
+
+            logger.debug('API Response', { diet_id, data });
+            return data;
+        } catch (error) {
+            logger.error('API Error', { diet_id, error });
+            throw error;
+        }
+    }
+};
+ */

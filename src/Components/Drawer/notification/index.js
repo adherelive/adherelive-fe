@@ -106,17 +106,17 @@ class NotificationDrawer extends Component {
         } = this.props;
 
         if (notificationToken || feedId) {
-            // try {
-            this.client = connect(
-                GETSTREAM_API_KEY,
-                notificationToken,
-                GETSTREAM_APP_ID
-            );
-            this.clientFeed = this.client.feed("notification", feedId);
-            console.log("Client connected successfully: ", this.clientFeed);
-            // } catch (err) {
-            //     console.log("Error connecting to GetStream: ", err);
-            // }
+            try {
+                this.client = connect(
+                    GETSTREAM_API_KEY,
+                    notificationToken,
+                    GETSTREAM_APP_ID
+                );
+                this.clientFeed = this.client.feed("notification", feedId);
+                console.log("Client connected successfully: ", this.clientFeed);
+            } catch (err) {
+                console.log("Error connecting to GetStream: ", err);
+            }
 
             let offset = 0;
             if (loadMore) {
@@ -536,7 +536,7 @@ class NotificationDrawer extends Component {
 
         for (let each in notifications) {
             const notification = notifications[each] || {};
-            console.log("get All Notification: ", {notification});
+            console.log("Get All Notification: ", {notification});
             const {
                 time: date = "",
                 is_read = false,
@@ -550,13 +550,14 @@ class NotificationDrawer extends Component {
                 eachDate = moment(start_time).format("Do MMM YYYY");
             }
 
-            // if (is_read) {
-            //   dataTorender && read.push(dataTorender);
-            // } else {
-            //   dataTorender && unread.push(dataTorender);
-            // }
-
-            // notificationComponents.push(dataTorender);
+            /**
+             * TODO: Why is this code not utilized?
+            if (is_read) {
+              dataTorender && read.push(dataTorender);
+            } else {
+              dataTorender && unread.push(dataTorender);
+            }
+            notificationComponents.push(dataTorender);*/
 
             const displayDate = (
                 <div className="ml8 mt10 mb10 fw800" key={`${eachDate}`}>
