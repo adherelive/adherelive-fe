@@ -1,6 +1,6 @@
 {
   "name": "adherelive-fe",
-  "version": "3.1.6",
+  "version": "3.1.7",
   "description": "All packages for the adhere.live react frontend application",
   "private": true,
   "proxy": "http://localhost:5000",
@@ -44,9 +44,9 @@
     "@devexpress/dx-react-scheduler-material-ui": "3.0.4",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "@material-ui/core": "^4.12.4", // Replaces @mui/material for React 16 compatibility
-    "@material-ui/icons": "^4.11.3", // Replaces @mui/icons-material for React 16 compatibility
-    "@material-ui/lab": "^4.0.0-alpha.60", // Replaces @mui/lab for React 16 compatibility
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@react-buddy/ide-toolbox": "^2.4.0",
     "@react-buddy/palette-antd": "^4.18.1",
     "@react-buddy/palette-mui": "^5.0.1",
@@ -77,7 +77,7 @@
     "react-places-autocomplete": "^7.2.1",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "4.0.3", // Downgraded for React 16 compatibility
+    "react-scripts": "4.0.3",
     "react-spring": "^8.0.27",
     "react-timekeeper": "^1.1.0",
     "react-uuid": "^1.0.2",
