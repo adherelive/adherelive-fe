@@ -14,7 +14,7 @@ import store from "./store";
 
 import "./Styles/index.less";
 import {DevSupport} from "@react-buddy/ide-toolbox";
-import {ComponentPreviews, useInitial} from "./dev";
+import {ComponentPreviews, useInitial} from "./react-buddy";
 
 const Desktop = lazy(() =>
     import(/* webpackChunkName: "DesktopWrapper" */ "./Containers/Routes")
