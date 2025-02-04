@@ -224,6 +224,12 @@ export const markAppointmentComplete = (id) => {
     };
 };
 
+/**
+ * Somehow this function is being used to get a generic list of all the missed Vitals as a single query and
+ * display it to the User via summary on the Patient sidebar or the Patient page in red background.
+ *
+ * @returns {function(*): Promise<{}>}
+ */
 export const getAllMissedScheduleEvents = () => {
     let response = {};
     return async (dispatch) => {
@@ -256,7 +262,15 @@ export const getAllMissedScheduleEvents = () => {
     };
 };
 
-// code implementation after phase 1
+/**
+ * [Code implementation after phase 1]
+ * Query for and return the total number of missed events for the Patient in the right-side drawer
+ * for Patient (opened on Dashboard) and the top part of the Patient page, when the details of the Patient
+ * are displayed in a red-background for all the missed events
+ *
+ * @param type
+ * @returns {function(*): Promise<{}>}
+ */
 export const getAllMissedEventDataByQuery = (type) => {
     let response = {};
 

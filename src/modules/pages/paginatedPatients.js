@@ -24,6 +24,17 @@ export const GET_SEARCH_DIAGNOSIS_PATIENTS_COMPLETED =
 export const GET_SEARCH_DIAGNOSIS_PATIENTS_FAILED =
     "GET_SEARCH_DIAGNOSIS_PATIENTS_FAILED";
 
+/**
+ * This function paginates teh Patients for a Doctor Dashboard page
+ *
+ * @param sort_createdAt
+ * @param sort_name
+ * @param filter_diagnosis
+ * @param filter_treatment
+ * @param offset
+ * @param watchlist
+ * @returns {function(*): Promise<any>}
+ */
 export const getPatientsPaginated = ({
                                          sort_createdAt,
                                          sort_name,
@@ -74,11 +85,19 @@ export const getPatientsPaginated = ({
     };
 };
 
+/**
+ *
+ *
+ * @param filter_treatment
+ * @param offset
+ * @param watchlist
+ * @returns {function(*): Promise<any>}
+ */
 export const searchTreatmentPaginatedPatients = ({
-                                                     filter_treatment,
-                                                     offset,
-                                                     watchlist = 0,
-                                                 }) => {
+    filter_treatment,
+    offset,
+    watchlist = 0,
+}) => {
     let response = {};
     return async (dispatch) => {
         try {

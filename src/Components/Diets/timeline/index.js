@@ -8,6 +8,7 @@ import ClockCircleOutlined from "@ant-design/icons/es/icons/ClockCircleOutlined"
 import CheckCircleOutlined from "@ant-design/icons/es/icons/CheckCircleOutlined";
 import StopOutlined from "@ant-design/icons/es/icons/StopOutlined";
 import Modal from "antd/es/modal";
+import { withLogging } from '../../../config/logger';
 
 const {Item: TimelineItem} = Timeline;
 
@@ -52,6 +53,9 @@ class DietTimeline extends Component {
     }
 
     componentDidMount() {
+        const { logger } = this.props;
+        logger.info('Loading diet timeline');
+
         this.getTimelineData();
     }
 
@@ -298,4 +302,4 @@ class DietTimeline extends Component {
     }
 }
 
-export default injectIntl(DietTimeline);
+export default withLogging(injectIntl(DietTimeline));
