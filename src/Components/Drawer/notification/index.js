@@ -106,17 +106,17 @@ class NotificationDrawer extends Component {
         } = this.props;
 
         if (notificationToken || feedId) {
-            // try {
-            this.client = connect(
-                GETSTREAM_API_KEY,
-                notificationToken,
-                GETSTREAM_APP_ID
-            );
-            this.clientFeed = this.client.feed("notification", feedId);
-            console.log("Client connected successfully: ", this.clientFeed);
-            // } catch (err) {
-            //     console.log("Error connecting to GetStream: ", err);
-            // }
+            try {
+                this.client = connect(
+                    GETSTREAM_API_KEY,
+                    notificationToken,
+                    GETSTREAM_APP_ID
+                );
+                this.clientFeed = this.client.feed("notification", feedId);
+                console.log("Client connected successfully: ", this.clientFeed);
+            } catch (err) {
+                console.log("Error connecting to GetStream: ", err);
+            }
 
             let offset = 0;
             if (loadMore) {
