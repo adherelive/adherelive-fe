@@ -62,6 +62,12 @@ class SideMenu extends Component {
 
     formatMessage = (message) => this.props.intl.formatMessage(message);
 
+    /**
+     * This is the function that handles the logout of the Doctor
+     * It uses the /sign-out API from the backend and returns a user message on Success
+     *
+     * @returns {Promise<void>}
+     */
     handleLogout = async () => {
         const {logOut} = this.props;
         try {
@@ -75,6 +81,10 @@ class SideMenu extends Component {
         } catch (error) {}
     };
 
+    /**
+     *
+     * @returns {Element}
+     */
     warnNote = () => {
         return (
             <div className="pt16">
@@ -97,7 +107,7 @@ class SideMenu extends Component {
                 onCancel() {},
             });
         } catch (error) {
-            console.log("Component Sidebar handleRedirect err ---> ", error);
+            console.log("Component Sidebar handleRedirect error: ", error);
         }
     };
 
@@ -494,9 +504,9 @@ class SideMenu extends Component {
 
                 <Menu.Item className="p10" key={LOG_OUT}>
                     <div className="wp100 flex justify-center align-center">
-            <span className="pt6 pb6 pl10 pr10 bw-cool-grey br5 wp50 tac">
-              {formatMessage(messages.sign_out_text)}
-            </span>
+                        <span className="pt6 pb6 pl10 pr10 bw-cool-grey br5 wp50 tac">
+                          {formatMessage(messages.sign_out_text)}
+                        </span>
                     </div>
                 </Menu.Item>
             </Menu>
