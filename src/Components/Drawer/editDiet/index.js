@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {Button, Drawer} from "antd";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { Button, Drawer } from "antd";
 import messages from "./messages";
 import SingleDayComponent from "../singleDayComponent/index";
 import message from "antd/es/message";
@@ -10,7 +10,7 @@ import Footer from "../footer";
 import Loading from "../../Common/Loading";
 import confirm from "antd/es/modal/confirm";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class EditDiet extends Component {

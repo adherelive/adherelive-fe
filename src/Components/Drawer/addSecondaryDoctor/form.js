@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import Select from "antd/es/select";
 import SecondaryDoctorForm from "./form";
 
@@ -7,13 +7,12 @@ import SecondaryDoctorForm from "./form";
 import message from "antd/es/message";
 import messages from "./messages";
 import Spin from "antd/es/spin";
-import {getName} from "../../../Helper/validation";
+import { getName } from "../../../Helper/validation";
 
 import debounce from "lodash-es/debounce";
-import isEmpty from "../../../Helper/is-empty";
 
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 

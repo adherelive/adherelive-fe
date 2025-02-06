@@ -1,9 +1,9 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import AddSecondaryDoctorDrawer from "../../Components/Drawer/addSecondaryDoctor";
-import {DRAWER} from "../../constant";
-import {close} from "../../modules/drawer";
-import {searchDoctorName} from "../../modules/doctors";
-import {addSecondaryDoctorToCareplan} from "../../modules/carePlans";
+import { DRAWER } from "../../constant";
+import { close } from "../../modules/drawer";
+import { searchDoctorName } from "../../modules/doctors";
+import { addSecondaryDoctorToCareplan } from "../../modules/carePlans";
 
 const mapStateToProps = (state) => {
     const {auth} = state;

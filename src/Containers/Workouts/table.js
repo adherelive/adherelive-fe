@@ -1,9 +1,9 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import WorkoutTable from "../../Components/Workouts/table";
-import {getWorkoutsForPatient} from "../../modules/workouts";
-import {open} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
+import { getWorkoutsForPatient } from "../../modules/workouts";
+import { open } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {

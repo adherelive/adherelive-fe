@@ -1,10 +1,10 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Tooltip from "antd/es/tooltip";
-import {CheckOutlined, DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import { CheckOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import TextArea from "antd/lib/input/TextArea";
 import isEmpty from "../../../Helper/is-empty";
 import moment from "moment";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 function NotesList({
                        notesData,

@@ -1,5 +1,3 @@
-import isEmpty from "../../Helper/is-empty";
-
 export const GET_MEDICINES_NAMES = "GET_MEDICINES_NAMES";
 export const SET_MISSED_CHART_DRAWER_LOADING =
     "SET_MISSED_CHART_DRAWER_LOADING";

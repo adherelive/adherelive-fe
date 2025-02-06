@@ -1,10 +1,10 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import VitalTimelineDrawer from "../../Components/Drawer/vitalTimeline";
 
-import {getVitalTimeline} from "../../modules/vitals";
-import {close} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
+import { getVitalTimeline } from "../../modules/vitals";
+import { close } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {

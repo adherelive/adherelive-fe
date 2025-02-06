@@ -1,15 +1,15 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import PatientDetailsDrawer from "../../Components/Drawer/PatientDetails";
-import {DRAWER} from "../../constant";
-import {close} from "../../modules/drawer";
-import {getMedications} from "../../modules/medications";
-import {getPatientDetailsById, getPatientMissedEvents} from "../../modules/patients";
-import {setCareplanForChat, setPatientForChat} from "../../modules/twilio";
-import {openPopUp} from "../../modules/chat";
-import {getAppointments, getAppointmentsDetails,} from "../../modules/appointments";
+import { DRAWER } from "../../constant";
+import { close } from "../../modules/drawer";
+import { getMedications } from "../../modules/medications";
+import { getPatientDetailsById, getPatientMissedEvents } from "../../modules/patients";
+import { setCareplanForChat, setPatientForChat } from "../../modules/twilio";
+import { openPopUp } from "../../modules/chat";
+import { getAppointments, getAppointmentsDetails, } from "../../modules/appointments";
 // code implementation after phase 1 for Subscription
-import {getPatientCarePlanByPatientId, setScheduleAppointmentData,} from "../../modules/subscription/activities";
+import { getPatientCarePlanByPatientId, setScheduleAppointmentData, } from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
     const {

@@ -1,10 +1,10 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import DoctorConsultationFeeTable from "../../Components/DoctorConsultationFee/table";
-import {authDoctorSelector} from "../../modules/doctors/selectors";
-import {deleteDoctorPaymentProduct, getDoctorPaymentProduct,} from "../../modules/doctors";
-import {open} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
+import { authDoctorSelector } from "../../modules/doctors/selectors";
+import { deleteDoctorPaymentProduct, getDoctorPaymentProduct, } from "../../modules/doctors";
+import { open } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {

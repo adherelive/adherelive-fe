@@ -1,10 +1,10 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import Button from "antd/es/button";
 import Tooltip from "antd/es/tooltip";
-import {DeleteTwoTone, PlusOutlined} from "@ant-design/icons";
+import { DeleteTwoTone, PlusOutlined } from "@ant-design/icons";
 import message from "antd/es/message";
-import {TABLE_DEFAULT_BLANK_FIELD} from "../../constant";
+import { TABLE_DEFAULT_BLANK_FIELD } from "../../constant";
 import messages from "./messages";
 import confirm from "antd/es/modal/confirm";
 import edit_image from "../../Assets/images/edit.svg";

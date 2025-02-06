@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {hasErrors} from "../../../Helper/validation";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { hasErrors } from "../../../Helper/validation";
 
 import Drawer from "antd/es/drawer";
 // import Form from "antd/es/form";
@@ -9,9 +9,9 @@ import EditExerciseGroupForm from "./form";
 import Footer from "../footer";
 import AddExerciseDrawer from "../../../Containers/Drawer/addExercise";
 import message from "antd/es/message";
-import {VIDEO_TYPES} from "../../../constant";
+import { VIDEO_TYPES } from "../../../constant";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class EditExerciseGroup extends Component {

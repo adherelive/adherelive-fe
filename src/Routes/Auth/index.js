@@ -1,5 +1,5 @@
-import React, {Component, Fragment, lazy} from "react";
-import {USER_CATEGORY} from "../../constant";
+import React, { Component, Fragment, lazy } from "react";
+import { USER_CATEGORY } from "../../constant";
 
 const Doctors = lazy(() =>
     import(/* webpackChunkName: "DoctorsRouter" */ "../Doctors")

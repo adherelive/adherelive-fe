@@ -1,15 +1,15 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import EditPatientDrawer from "../../Components/Drawer/editPatient";
-import {DRAWER} from "../../constant";
-import {close} from "../../modules/drawer";
-import {searchTreatment} from "../../modules/treatments";
-import {searchCondition} from "../../modules/conditions";
-import {searchSeverity} from "../../modules/severity";
-import {searchMedicine} from "../../modules/medicines";
-import {updatePatientAndCareplan} from "../../modules/doctors";
-import {getPatientDetailsById} from "../../modules/patients";
+import { DRAWER } from "../../constant";
+import { close } from "../../modules/drawer";
+import { searchTreatment } from "../../modules/treatments";
+import { searchCondition } from "../../modules/conditions";
+import { searchSeverity } from "../../modules/severity";
+import { searchMedicine } from "../../modules/medicines";
+import { updatePatientAndCareplan } from "../../modules/doctors";
+import { getPatientDetailsById } from "../../modules/patients";
 // code implementation after phase 1 for CDSS/mongodb
-import {diagnosisSearch, getDiagnosisList, googleTranslate,} from "../../modules/cdss";
+import { diagnosisSearch, getDiagnosisList, googleTranslate, } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
     const {auth} = state;

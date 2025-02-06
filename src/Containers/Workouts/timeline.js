@@ -1,7 +1,7 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import WorkoutTimeline from "../../Components/Workouts/timeline";
-import {getWorkoutTimeline} from "../../modules/workouts";
+import { getWorkoutTimeline } from "../../modules/workouts";
 
 const mapStateToProps = (state) => {
     const {

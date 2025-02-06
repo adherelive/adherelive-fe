@@ -1,9 +1,9 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {message} from "antd";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { message } from "antd";
 import Loading from "../Common/Loading";
 import messages from "./message";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class ValidationPage extends Component {
     constructor(props) {

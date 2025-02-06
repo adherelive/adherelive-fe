@@ -1,10 +1,10 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {getAddVitalURL, getUpdateVitalURL, getVitalTimelineURL,} from "../../Helper/urls/vitals";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { getAddVitalURL, getUpdateVitalURL, getVitalTimelineURL, } from "../../Helper/urls/vitals";
 
-import {getDeleteVitalResponseUrl, getEditVitalResponseUrl,} from "../../Helper/urls/event";
+import { getDeleteVitalResponseUrl, getEditVitalResponseUrl, } from "../../Helper/urls/event";
 
-import {getPatientVitalsURL} from "../../Helper/urls/patients";
+import { getPatientVitalsURL } from "../../Helper/urls/patients";
 
 export const ADD_VITAL_START = "ADD_VITAL_START";
 export const ADD_VITAL_COMPLETED = "ADD_VITAL_COMPLETED";

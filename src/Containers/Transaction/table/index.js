@@ -1,7 +1,7 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import TransactionTable from "../../../Components/Transaction/table/index";
-import {withRouter} from "react-router-dom";
-import {getAllTransactions} from "../../../modules/providers";
+import { withRouter } from "react-router-dom";
+import { getAllTransactions } from "../../../modules/providers";
 
 const mapStateToProps = (state) => {
     const {

@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import DeactivateSubscriptionWarn from "../Modal/DeactivateSubscriptionWarn";
 import isEmpty from "../../../Helper/is-empty";
 

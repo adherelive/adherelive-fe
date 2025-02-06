@@ -1,11 +1,11 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import EditExerciseGroupDrawer from "../../Components/Drawer/editExerciseGroup";
-import {close} from "../../modules/drawer";
-import {addExercise, storeExerciseAndDetails, updateExercise, uploadExerciseContent,} from "../../modules/exercises";
-import {searchExercise} from "../../modules/searchedExercises";
-import {clearLatestCreatedExercise} from "../../modules/latestCreatedExercise";
-import {googleTranslate} from "../../modules/cdss";
+import { close } from "../../modules/drawer";
+import { addExercise, storeExerciseAndDetails, updateExercise, uploadExerciseContent, } from "../../modules/exercises";
+import { searchExercise } from "../../modules/searchedExercises";
+import { clearLatestCreatedExercise } from "../../modules/latestCreatedExercise";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
     const {auth} = state;

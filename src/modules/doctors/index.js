@@ -1,9 +1,8 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
 import {
     activateDoctorURL,
     addDoctorPaymentPoductUrl,
-    addPatientToWatchlistUrl,
     addRazorpayIdUrl,
     deactivateDoctorURL,
     getAdminPaymentProductUrl,
@@ -13,15 +12,13 @@ import {
     getDoctorProfileDetailsUrl,
     getVerifyDoctorUrl,
     patientWatchlistUrl,
-    removePatientFromWatchlistUrl,
     searchDoctorEmailUrl,
     searchDoctorNameUrl,
     updateDoctorURL,
     updatePatientAndCareplanUrl,
 } from "../../Helper/urls/doctor";
 
-import {getAllDoctorsForProviderUrl} from "../../Helper/urls/provider";
-import { accountDetailsUrl } from "../../Helper/urls/accounts";
+import { getAllDoctorsForProviderUrl } from "../../Helper/urls/provider";
 
 export const SEARCH_DOCTOR_START = "SEARCH_DOCTOR_START";
 export const SEARCH_DOCTOR_COMPLETE = "SEARCH_DOCTOR_COMPLETE";

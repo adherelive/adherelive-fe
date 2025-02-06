@@ -1,6 +1,6 @@
 import React from "react";
 import Tag from "antd/es/tag";
-import {TABLE_STATUS, TRANSACTION_STATUS} from "../../constant";
+import { TABLE_STATUS, TRANSACTION_STATUS } from "../../constant";
 import {
     CheckCircleOutlined,
     ClockCircleOutlined,

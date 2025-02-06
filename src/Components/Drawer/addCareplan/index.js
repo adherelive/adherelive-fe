@@ -1,28 +1,14 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {
-  Drawer,
-  // Icon,
-  Select,
-  Input,
-  message,
-  Button,
-  Spin,
-  Radio,
-  DatePicker,
-  Switch,
-} from "antd";
-import moment from "moment";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { Button, Drawer, message, Select, Spin, Switch, } from "antd";
 import throttle from "lodash-es/throttle";
-import { getName } from "../../../Helper/validation";
 
 import messages from "./message";
 import "react-datepicker/dist/react-datepicker.css";
 import TextArea from "antd/lib/input/TextArea";
-import { FINAL, PROBABLE, DIAGNOSIS_TYPE } from "../../../constant";
 import Footer from "../footer";
 
-import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
+import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 
 // code implementation after phase 1
@@ -30,7 +16,6 @@ import CustomSymptoms from "../addPatient/CustomSymptoms";
 import CustomDiagnosis from "../addPatient/CustomDiagnosis";
 import MultipleTreatmentAlert from "../addPatient/MultipleTreatmentAlert";
 import WidgetDrawer from "../addPatient/WidgetDrawer";
-import Icon from "@ant-design/icons";
 
 const {Option} = Select;
 

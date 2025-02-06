@@ -1,8 +1,8 @@
-import {applyMiddleware, legacy_createStore} from "redux";
+import { applyMiddleware, legacy_createStore } from "redux";
 import thunk from "redux-thunk";
 import retainState from "./RetainState";
 import allReducers from "./modules";
-import {composeWithDevTools} from "redux-devtools-extension";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const middleware = [thunk, retainState];
 

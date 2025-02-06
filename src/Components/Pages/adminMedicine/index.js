@@ -1,13 +1,11 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import messages from "./messages";
 import Button from "antd/es/button";
 import Tabs from "antd/es/tabs";
 import AddMedicineDrawer from "../../../Containers/Drawer/addMedicine";
 import MedicineTable from "../../../Containers/Medicines/table";
-import config from "../../../config";
-import message from "antd/es/message";
-import {PlusOutlined} from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 
 const {TabPane} = Tabs;
 

@@ -1,9 +1,9 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import PatientTable from "../../Components/Patient/table";
-import {withRouter} from "react-router-dom";
-import {open} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
-import {addToWatchlist, removePatientFromWatchlist,} from "../../modules/doctors";
+import { withRouter } from "react-router-dom";
+import { open } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
+import { addToWatchlist, removePatientFromWatchlist, } from "../../modules/doctors";
 
 const mapStateToProps = (state) => {
     const {

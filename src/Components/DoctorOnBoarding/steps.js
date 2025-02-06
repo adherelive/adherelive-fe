@@ -1,8 +1,8 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import messages from "./messages";
 // import {formatMessage} from "react-intl/src/format";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class Steps extends Component {
     constructor(props) {

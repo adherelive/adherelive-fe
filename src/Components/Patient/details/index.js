@@ -1,14 +1,14 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {connect} from "getstream";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { connect } from "getstream";
 import messages from "./message";
 import edit_image from "../../../Assets/images/edit.svg";
-import {getUploadAppointmentDocumentUrl} from "../../../Helper/urls/appointments";
-import {doRequest} from "../../../Helper/network";
-import {generatePrescriptionUrl} from "../../../Helper/urls/patients";
+import { getUploadAppointmentDocumentUrl } from "../../../Helper/urls/appointments";
+import { doRequest } from "../../../Helper/network";
+import { generatePrescriptionUrl } from "../../../Helper/urls/patients";
 import ShareIcon from "../../../Assets/images/redirect3x.png";
 import EyeFilled from "@ant-design/icons/EyeFilled";
-import {getName} from "../../../Helper/validation";
+import { getName } from "../../../Helper/validation";
 import isEmpty from "../../../Helper/is-empty";
 
 import config from "../../../config";
@@ -18,10 +18,8 @@ import {
     DIAGNOSIS_TYPE,
     FEATURES,
     GENDER,
-    HOST,
     PART_LIST_CODES,
     PARTS,
-    PATH,
     REQUEST_TYPE,
     SYRUP,
     TABLE_DEFAULT_BLANK_FIELD,
@@ -34,7 +32,7 @@ import {
     USER_CATEGORY,
     USER_PERMISSIONS,
 } from "../../../constant";
-import {Button, Dropdown, message, Spin, Table, Tabs} from "antd";
+import { Button, Dropdown, message, Spin, Table, Tabs } from "antd";
 import Modal from "antd/es/modal";
 import Menu from "antd/es/menu";
 
@@ -72,7 +70,13 @@ import PatientAlerts from "../../../Containers/Patient/common/patientAlerts";
 
 import PatientCarePlans from "./common/patientProfileCarePlans";
 
-import {CaretDownOutlined, MessageOutlined, PhoneOutlined, PlusOutlined, VideoCameraOutlined,} from "@ant-design/icons";
+import {
+    CaretDownOutlined,
+    MessageOutlined,
+    PhoneOutlined,
+    PlusOutlined,
+    VideoCameraOutlined,
+} from "@ant-design/icons";
 import moment from "moment";
 
 // appointment upload modal
@@ -84,11 +88,10 @@ import ChatPopup from "../../../Containers/ChatPopup";
 import TabletIcon from "../../../Assets/images/tabletIcon3x.png";
 import InjectionIcon from "../../../Assets/images/injectionIcon3x.png";
 import SyrupIcon from "../../../Assets/images/pharmacy.png";
-import {getPatientConsultingVideoUrl} from "../../../Helper/url/patients";
-import { getPatientConsultingUrl } from "../../../Helper/url/patients";
+import { getPatientConsultingVideoUrl } from "../../../Helper/url/patients";
 import SymptomTabs from "../../../Containers/Symptoms";
-import {getRoomId} from "../../../Helper/twilio";
-import {getFullName} from "../../../Helper/common";
+import { getRoomId } from "../../../Helper/twilio";
+import { getFullName } from "../../../Helper/common";
 import Tooltip from "antd/es/tooltip";
 
 // code implementation after phase 1 for Subscription

@@ -1,10 +1,10 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import MedicationTable from "../../Components/Medications/table";
 
-import {open} from "../../modules/drawer";
-import {getMedications} from "../../modules/medications";
-import {DRAWER} from "../../constant";
+import { open } from "../../modules/drawer";
+import { getMedications } from "../../modules/medications";
+import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {

@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import generateRow from "./dataRow";
 import getColumn from "./header";
 import message from "antd/es/message";
@@ -7,7 +7,7 @@ import Table from "antd/es/table";
 
 import messages from "./messages";
 import isEmpty from "../../../Helper/is-empty";
-import {LoadingOutlined} from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class DietTable extends Component {
     constructor(props) {

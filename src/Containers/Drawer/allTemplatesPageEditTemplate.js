@@ -1,14 +1,14 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import TemplatePageEditDrawer from "../../Components/Drawer/allTemplatesPageEditTemplate";
-import {DRAWER} from "../../constant";
-import {close} from "../../modules/drawer";
+import { DRAWER } from "../../constant";
+import { close } from "../../modules/drawer";
 import {
     createCarePlanTemplate,
     deleteCarePlanTemplateRelated,
     getAllTemplatesForDoctor,
     updateCarePlanTemplate,
 } from "../../modules/carePlanTemplates";
-import {getPortions} from "../../modules/portions";
+import { getPortions } from "../../modules/portions";
 // import { createReminder, updateReminder } from "../../modules/reminder"; // write to add to database
 const mapStateToProps = (state) => {
     const {

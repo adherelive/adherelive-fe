@@ -1,13 +1,13 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import ReportTable from "../../Components/Reports/table";
-import {fetchReports} from "../../modules/reports";
+import { fetchReports } from "../../modules/reports";
 
-import {open} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
+import { open } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
 
 // code implementation after phase 1 for Subscription
-import {setFlashCard, setFlashcardData,} from "../../modules/subscription/flashcard";
+import { setFlashCard, setFlashcardData, } from "../../modules/subscription/flashcard";
 
 const mapStateToProps = (state) => {
     const {

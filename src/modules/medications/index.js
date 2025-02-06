@@ -1,5 +1,5 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
 import {
     deleteMedicationUrl,
     getAddCarePlanMedicationReminderURL,
@@ -8,7 +8,7 @@ import {
     getMedicationTimelineURL,
     updateMedicationUrl,
 } from "../../Helper/urls/mReminders";
-import {GET_MEDICINES_NAMES} from "../commonReducer";
+import { GET_MEDICINES_NAMES } from "../commonReducer";
 
 // const INITIAL_STATE = {
 //   "100": {

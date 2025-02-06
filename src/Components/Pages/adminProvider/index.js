@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 
 import ProviderTable from "../../../Containers/Provider/table";
 import AddProviderDrawer from "../../../Containers/Drawer/addProvider";

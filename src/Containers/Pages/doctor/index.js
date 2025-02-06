@@ -1,6 +1,6 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import AdminDoctorPage from "../../../Components/Pages/adminDoctor";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 // import {open} from "../../../modules/drawer";
 // import {DRAWER} from "../../../constant";
 

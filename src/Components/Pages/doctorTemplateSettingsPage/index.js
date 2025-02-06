@@ -1,13 +1,13 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import TemplateTable from "../../../Containers/allTemplates/index";
 import message from "antd/es/message";
 import Button from "antd/es/button";
 import TemplatePageCreateDrawer from "../../../Containers/Drawer/allTemplatesPageCreateTemplate";
 import TemplatePageEditDrawer from "../../../Containers/Drawer/allTemplatesPageEditTemplate";
 import messages from "./message";
-import {Input} from "antd";
-import {SearchOutlined} from "@ant-design/icons";
+import { Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
 class TemplatePage extends Component {
     constructor(props) {

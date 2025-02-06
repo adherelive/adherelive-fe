@@ -1,6 +1,6 @@
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import ProfileRegister from "../../Components/DoctorOnBoarding/profileRegister";
-import {signOut} from "../../modules/auth";
+import { signOut } from "../../modules/auth";
 import {
     callNewDoctorAction,
     doctorProfileRegister,
@@ -8,8 +8,8 @@ import {
     getDoctorQualificationRegisterData,
     sendPasswordMail,
 } from "../../modules/onBoarding";
-import {connect} from "react-redux";
-import {getDoctorDetails, searchDoctorEmail} from "../../modules/doctors";
+import { connect } from "react-redux";
+import { getDoctorDetails, searchDoctorEmail } from "../../modules/doctors";
 
 const mapStateToProps = (state) => {
     const {auth, users, onBoarding, doctors, emails = {}} = state;

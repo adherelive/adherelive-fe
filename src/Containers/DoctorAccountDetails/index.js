@@ -1,15 +1,15 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import DoctorAccountDetails from "../../Components/DoctorAccountDetails";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
     addAccountDetails,
     deleteAccountDetails,
     getAccountDetails,
     updateAccountDetails,
 } from "../../modules/accountDetails";
-import {open} from "../../modules/drawer";
-import {authDoctorSelector} from "../../modules/doctors/selectors";
-import {DRAWER} from "../../constant";
+import { open } from "../../modules/drawer";
+import { authDoctorSelector } from "../../modules/doctors/selectors";
+import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {

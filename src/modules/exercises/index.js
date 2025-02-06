@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {addExerciseUrl, updateExerciseUrl, uploadExerciseContentUrl,} from "../../Helper/urls/exercises";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { addExerciseUrl, updateExerciseUrl, uploadExerciseContentUrl, } from "../../Helper/urls/exercises";
 
 // import {GET_SINGLE_DIET_DETAILS_COMPLETED} from "../../modules/diets";
 

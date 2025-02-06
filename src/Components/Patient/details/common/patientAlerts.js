@@ -1,8 +1,8 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import moment from "../../../../Helper/moment";
 import messages from "./messages";
-import {EVENT_STATUS, EVENT_TYPE} from "../../../../constant";
+import { EVENT_STATUS, EVENT_TYPE } from "../../../../constant";
 import PropTypes from 'prop-types'; // Add prop validation
 
 class PatientAlerts extends Component {

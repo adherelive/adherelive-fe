@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {Checkbox, Form} from "antd";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { Checkbox, Form } from "antd";
 
 const {Item: FormItem} = Form;
 

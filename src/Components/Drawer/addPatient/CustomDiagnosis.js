@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import {Select} from "antd";
+import React from "react";
+import { Select } from "antd";
 // import { diagnosisList } from "./diagnosisList.json";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const {Option} = Select;
 

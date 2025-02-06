@@ -1,12 +1,12 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import message from "antd/es/message";
 import Button from "antd/es/button";
 import Modal from "antd/es/modal";
 // import uuid from 'react-uuid';
-import {Avatar, DatePicker, Input, Select, Spin, Upload} from "antd";
+import { Avatar, DatePicker, Input, Select, Spin, Upload } from "antd";
 import throttle from "lodash-es/throttle";
-import {doRequest} from "../../../Helper/network";
+import { doRequest } from "../../../Helper/network";
 // import LocationModal from '../../../Components/DoctorOnBoarding/locationmodal';
 import TimingModal from "../../../Components/DoctorOnBoarding/timingModal";
 import plus from "../../../Assets/images/plus.png";
@@ -31,7 +31,7 @@ import {
 } from "@ant-design/icons";
 import moment from "moment";
 import messages from "./messages";
-import {getUploadQualificationDocumentUrl, getUploadURL,} from "../../../Helper/urls/doctor";
+import { getUploadQualificationDocumentUrl, getUploadURL, } from "../../../Helper/urls/doctor";
 import {
     ACCOUNT_STATUS,
     DAYS_TEXT_NUM,
@@ -47,8 +47,8 @@ import {
     TABLE_DEFAULT_BLANK_FIELD,
     USER_CATEGORY,
 } from "../../../constant";
-import {PageLoading} from "../../../Helper/loading/pageLoading";
-import {withRouter} from "react-router-dom";
+import { PageLoading } from "../../../Helper/loading/pageLoading";
+import { withRouter } from "react-router-dom";
 import confirm from "antd/es/modal/confirm";
 import Tag from "antd/es/tag";
 

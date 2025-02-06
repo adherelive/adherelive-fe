@@ -1,8 +1,8 @@
 import edit_image from "../../../../Assets/images/edit.svg";
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import message from "antd/es/message";
-import {CopyOutlined} from "@ant-design/icons";
+import { CopyOutlined } from "@ant-design/icons";
 import Tooltip from "antd/es/tooltip";
 import confirm from "antd/es/modal/confirm";
 import messages from "../messages";

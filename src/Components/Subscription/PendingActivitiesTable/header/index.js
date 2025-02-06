@@ -1,7 +1,7 @@
 import React from "react";
 
-import {TABLE_COLUMN} from "../helper";
-import {ASCEND, DESCEND} from "../../../../constant";
+import { TABLE_COLUMN } from "../helper";
+import { ASCEND, DESCEND } from "../../../../constant";
 // import messages from "../messages";
 import Service from "../datacolumn/service";
 import Date from "../datacolumn/date";

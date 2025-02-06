@@ -1,25 +1,23 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {Drawer} from "antd";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { Drawer } from "antd";
 import {
     DIAGNOSIS_TYPE,
     GENDER,
     MISSED_ACTION_TEXT,
     MISSED_ACTIONS,
     MISSED_APPOINTMENT_TEXT,
-    MISSED_APPOINTMENTS,
     MISSED_MEDICATION,
     MISSED_MEDICATION_TEXT,
     MISSED_SYMPTOM_TEXT,
     PATIENT_BOX_CONTENT,
-    USER_PERMISSIONS,
 } from "../../../constant";
 import messages from "./message";
 import moment from "moment";
 import message from "antd/es/message";
 import ShareIcon from "../../../Assets/images/redirect3x.png";
 import MsgIcon from "../../../Assets/images/chat.png";
-import {getName} from "../../../Helper/validation";
+import { getName } from "../../../Helper/validation";
 import isEmpty from "../../../Helper/is-empty";
 // import config from "../../../config/config";
 // import isEmpty from "../../../Helper/is-empty";

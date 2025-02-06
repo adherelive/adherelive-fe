@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import Drawer from "antd/es/drawer";
 import Input from "antd/es/input";
 import Upload from "antd/es/upload";
@@ -9,7 +9,6 @@ import Button from "antd/es/button";
 import Footer from "../footer";
 import confirm from "antd/es/modal/confirm";
 import moment from "moment";
-import Icon from "antd/es/icon";
 import DatePicker from "antd/es/date-picker";
 
 import {

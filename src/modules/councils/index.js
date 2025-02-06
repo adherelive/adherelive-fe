@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {searchCouncils} from "../../Helper/urls/councils";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { searchCouncils } from "../../Helper/urls/councils";
 
 export const SEARCH_COUNCIL_START = "SEARCH_COUNCIL_START";
 export const SEARCH_COUNCIL_COMPLETED = "SEARCH_COUNCIL_COMPLETED";

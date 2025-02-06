@@ -1,7 +1,7 @@
-import React, {Component, Fragment} from "react";
-import {Form, Select} from "antd";
+import React, { Component, Fragment } from "react";
+import { Form, Select } from "antd";
 import dropDownIcon from "../../../../Assets/images/material-icons-black-arrow-drop-down.svg";
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
 
 const FIELD_NAME = "unit";
 

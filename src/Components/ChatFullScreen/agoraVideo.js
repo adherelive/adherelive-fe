@@ -1,8 +1,8 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import AgoraRTC from "agora-rtc-sdk-ng";
 
-import {getDoctorFromRoomId, getPatientFromRoomId} from "../../Helper/twilio";
+import { getDoctorFromRoomId, getPatientFromRoomId } from "../../Helper/twilio";
 
 import config from "../../config";
 // import StartCallIcon from "../../Assets/images/ico-vc-start-call.png";
@@ -12,11 +12,11 @@ import AudioDisabledIcon from "../../Assets/images/ico-vc-audio-off.png";
 import VideoIcon from "../../Assets/images/ico-vc-video.png";
 import VideoDisabledIcon from "../../Assets/images/ico-vc-video-off.png";
 import UserDpPlaceholder from "../../Assets/images/ico-placeholder-userdp.svg";
-import {LOCAL_STORAGE, USER_CATEGORY} from "../../constant";
+import { LOCAL_STORAGE, USER_CATEGORY } from "../../constant";
 import messages from "./messages";
 import Loading from "../Common/Loading";
 import Tooltip from "antd/es/tooltip";
-import {Button} from "antd";
+import { Button } from "antd";
 import firebase from "firebase/app";
 import "firebase/analytics";
 import * as FirebaseHelper from "../../Helper/firebase";

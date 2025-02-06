@@ -44,6 +44,7 @@
     "@devexpress/dx-react-scheduler-material-ui": "3.0.4",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
+    "@google-cloud/translate": "^8.5.0",
     "@mui/icons-material": "^5.0.4",
     "@mui/lab": "^5.0.0-alpha.51",
     "@mui/material": "^5.0.4",

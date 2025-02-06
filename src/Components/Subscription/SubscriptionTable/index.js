@@ -1,15 +1,14 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import { Table, Icon, Empty } from "antd";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { Table } from "antd";
 import generateRow from "./datarow";
 // import { USER_PERMISSIONS } from '../../../constant'
 import getColumn from "./header";
-import messages from "./messages";
 import message from "antd/es/message";
 import EditRecommendSubscription from "../Drawer/RecommendSubscription/EditRecommendSubscription";
 import EditRecommendService from "../Drawer/RecommendService/EditRecommendService";
 import MyTasks from "../Drawer/MyTasks/index";
-import {LoadingOutlined} from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class SubscriptionTable extends Component {
     constructor(props) {

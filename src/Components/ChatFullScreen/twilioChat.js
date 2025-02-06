@@ -1,15 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {
-  Form,
-  Input,
-  Button,
-  Spin,
-  Avatar,
-  // Icon,
-  Upload,
-  Modal,
-  message,
-} from "antd";
+import React, { Component, Fragment } from "react";
+import { Avatar, Button, Form, Input, message, Modal, Spin, Upload, } from "antd";
 import moment from "moment";
 import Chat from "twilio-chat";
 // import DoubleTick from "../../Assets/images/double-tick-indicator.png";
@@ -20,13 +10,13 @@ import Send from "../../Assets/images/send.png";
 // import Download from "../../Assets/images/down-arrow.png";
 // import File from "../../Assets/images/file.png";
 import messages from "./messages";
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
 import CallIcon from "../../Assets/images/telephone.png";
 import CallDisabledIcon from "../../Assets/images/call-disabled.png";
 import ChatMessageDetails from "../ChatPopup/chatMessageDetails";
 import Tooltip from "antd/es/tooltip";
-import {MoreOutlined, PaperClipOutlined, SwapOutlined} from "@ant-design/icons";
-import {CHAT_MESSAGE_TYPE, CONSULTATION_FEE_TYPE_TEXT, FEATURES, USER_CATEGORY,} from "../../constant";
+import { MoreOutlined, PaperClipOutlined, SwapOutlined } from "@ant-design/icons";
+import { CHAT_MESSAGE_TYPE, CONSULTATION_FEE_TYPE_TEXT, FEATURES, USER_CATEGORY, } from "../../constant";
 
 // import Button from "antd/es/button";
 import Menu from "antd/es/menu";

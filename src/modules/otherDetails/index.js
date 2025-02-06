@@ -1,6 +1,10 @@
-import {doRequest} from "../../Helper/network";
-import {getMedicationDetailsUrl, getTermsAndPolicyUrl, updateTermsAndPolicyUrl,} from "../../Helper/urls/otherDetails";
-import {REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import {
+    getMedicationDetailsUrl,
+    getTermsAndPolicyUrl,
+    updateTermsAndPolicyUrl,
+} from "../../Helper/urls/otherDetails";
+import { REQUEST_TYPE } from "../../constant";
 
 const GET_MEDICATION_DETAILS_START = "GET_MEDICATION_DETAILS_START";
 const GET_MEDICATION_DETAILS_COMPLETE = "GET_MEDICATION_DETAILS_COMPLETE";

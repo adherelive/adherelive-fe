@@ -1,9 +1,9 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
 
-import {getAllProvidersUrl, updateProviderUrl,} from "../../Helper/urls/provider";
+import { getAllProvidersUrl, updateProviderUrl, } from "../../Helper/urls/provider";
 
-import {getAllTransactionsUrl} from "../../Helper/urls/transactions";
+import { getAllTransactionsUrl } from "../../Helper/urls/transactions";
 
 export const GET_ALL_TRANSACTIONS_START = "GET_ALL_TRANSACTIONS_START";
 export const GET_ALL_TRANSACTIONS_COMPLETE = "GET_ALL_TRANSACTIONS_COMPLETE";

@@ -1,13 +1,12 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import PendingActivitiesTable from "../../Components/Subscription/PendingActivitiesTable";
-import {withRouter} from "react-router-dom";
-import {getAllActivities} from "../../modules/subscription/activities";
+import { withRouter } from "react-router-dom";
+import { getAllActivities, searchTxActivites, setScheduleAppointmentData } from "../../modules/subscription/activities";
 // import { open } from "../../../modules/drawer";
-import {DRAWER} from "../../constant";
-import { open, close } from "../../modules/drawer";
-import {getAppointmentsDetails} from "../../modules/appointments";
-import {setFlashCard} from "../../modules/subscription/flashcard";
-import {searchTxActivites, setScheduleAppointmentData,} from "../../modules/subscription/activities";
+import { DRAWER } from "../../constant";
+import { open } from "../../modules/drawer";
+import { getAppointmentsDetails } from "../../modules/appointments";
+import { setFlashCard } from "../../modules/subscription/flashcard";
 
 const mapStateToProps = (state) => {
     const {subscription: {activities = {}} = {}} = state;

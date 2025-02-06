@@ -1,13 +1,13 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {withRouter} from "react-router-dom";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { withRouter } from "react-router-dom";
 
 import Table from "antd/es/table";
 
 import generateRow from "./dataRow";
 import getColumn from "./header";
 
-import {PageLoading} from "../../../Helper/loading/pageLoading";
+import { PageLoading } from "../../../Helper/loading/pageLoading";
 import messages from "./messages";
 
 class TransactionTable extends Component {

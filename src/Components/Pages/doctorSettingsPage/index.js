@@ -1,11 +1,11 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import message from "antd/es/message";
 import Button from "antd/es/button";
-import {Dropdown, Select} from "antd";
+import { Dropdown, Select } from "antd";
 import plus from "../../../Assets/images/plus.png";
 import edit_image from "../../../Assets/images/edit.svg";
-import {BarChartOutlined, CreditCardOutlined, DeleteTwoTone, PlusOutlined, WalletOutlined} from "@ant-design/icons";
+import { BarChartOutlined, CreditCardOutlined, DeleteTwoTone, PlusOutlined, WalletOutlined } from "@ant-design/icons";
 import confirm from "antd/es/modal/confirm";
 
 // todo: import any component from antd using this format
@@ -23,11 +23,10 @@ import {
 import AddConsultationFeeDrawer from "../../../Containers/Drawer/addConsultationFee";
 import AddAccountDetailsDrawer from "../../../Containers/Drawer/addAccountDetailsDrawer";
 import EditAccountDetailsDrawer from "../../../Containers/Drawer/editAccountDetailsDrawer";
-import DoctorConsultationFeeTable from "../../../Containers/DoctorConsultationFee";
 import DoctorAccountDetails from "../../../Containers/DoctorAccountDetails";
 
 import messages from "./messages";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Menu from "antd/es/menu";
 
 // code implementation after phase 1 for Subscription

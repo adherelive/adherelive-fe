@@ -1,4 +1,4 @@
-import {createSelector} from "reselect";
+import { createSelector } from "reselect";
 
 export const doctorSelector = (state) => state.doctors;
 const authSelector = (state) => state.auth;

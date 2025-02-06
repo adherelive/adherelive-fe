@@ -1,4 +1,4 @@
-import {ADD_EXERCISE_COMPLETED} from "../exercises";
+import { ADD_EXERCISE_COMPLETED } from "../exercises";
 
 const CLEAR_LATEST_CREATED_EXERCISE = "CLEAR_LATEST_CREATED_EXERCISE";
 

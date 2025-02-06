@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import fbLogo from "../../Assets/png/fb-logo.png";
 

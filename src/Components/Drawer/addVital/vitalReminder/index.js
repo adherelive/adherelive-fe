@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from "react";
-import {Drawer, message} from "antd";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { Drawer, message } from "antd";
+import { injectIntl } from "react-intl";
 
 import moment from "moment";
 import AddVitalsForm from "./form";
@@ -14,7 +14,7 @@ import instructions from "../../addMedicationReminder/common/instructions";
 import vitalName from "../common/vitalName";
 import vitalOccurence from "../common/vitalOccurence";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class AddVitals extends Component {

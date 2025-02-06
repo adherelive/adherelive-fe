@@ -1,7 +1,7 @@
-import React, {Component} from "react";
-import {Form, Select} from "antd";
-import {injectIntl} from "react-intl";
-import {MEDICINE_UNITS} from "../../../../constant";
+import React, { Component } from "react";
+import { Form, Select } from "antd";
+import { injectIntl } from "react-intl";
+import { MEDICINE_UNITS } from "../../../../constant";
 import messages from "../message";
 
 import unitField from "./medicationStrengthUnit";

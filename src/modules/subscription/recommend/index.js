@@ -1,15 +1,14 @@
-import {doRequest} from "../../../Helper/network";
-import {REQUEST_TYPE} from "../../../constant";
+import { doRequest } from "../../../Helper/network";
+import { REQUEST_TYPE } from "../../../constant";
 import {
     getRecommendServiceUrl,
-    getMyTaskOfServiceOrSubscriptionUrl,
     recommendServiceUrl,
     recommendSubscriptionUrl,
     updateRecommendServiceUrl,
     updateRecommendSubscriptionUrl,
 } from "../../../Helper/urls/subscriptions";
 import isEmpty from "../../../Helper/is-empty";
-import {SET_RECOMMENDED_SUBSCRIPTIONS_AND_SERVICES} from "../../../reducer/index";
+import { SET_RECOMMENDED_SUBSCRIPTIONS_AND_SERVICES } from "../../../reducer/index";
 
 export const recommendSubscription = (payload, callBack) => {
     let response = {};

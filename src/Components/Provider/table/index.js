@@ -1,16 +1,15 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {withRouter} from "react-router-dom";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { withRouter } from "react-router-dom";
 
 import Table from "antd/es/table";
-import Icon from "antd/es/icon";
 
 import generateRow from "./dataRow";
 import getColumn from "./header";
 
 import messages from "./messages";
-import {USER_CATEGORY} from "../../../constant";
-import {LoadingOutlined} from "@ant-design/icons";
+import { USER_CATEGORY } from "../../../constant";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class ProviderTable extends Component {
     constructor(props) {

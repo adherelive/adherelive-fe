@@ -1,5 +1,5 @@
-import {ADD_EXERCISE_COMPLETED, EDIT_EXERCISE_COMPLETED, STORE_EXERCISE_AND_DETAILS,} from "../exercises";
-import {GET_SINGLE_DIET_DETAILS_COMPLETED} from "../diets";
+import { ADD_EXERCISE_COMPLETED, EDIT_EXERCISE_COMPLETED, STORE_EXERCISE_AND_DETAILS, } from "../exercises";
+import { GET_SINGLE_DIET_DETAILS_COMPLETED } from "../diets";
 
 function exerciseDetaisReducer(state, data) {
     const {exercises, exercise_details} = data || {};

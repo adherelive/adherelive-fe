@@ -1,7 +1,7 @@
-import {doRequest} from "../../../Helper/network";
-import {REQUEST_TYPE} from "../../../constant";
-import {addServicesUrl, getProviderServicesUrl, getServicesUrl,} from "../../../Helper/urls/subscriptions";
-import {SET_SERVICES} from "../../../reducer/index";
+import { doRequest } from "../../../Helper/network";
+import { REQUEST_TYPE } from "../../../constant";
+import { addServicesUrl, getProviderServicesUrl, getServicesUrl, } from "../../../Helper/urls/subscriptions";
+import { SET_SERVICES } from "../../../reducer/index";
 
 export const getServices = () => {
     let response = {};

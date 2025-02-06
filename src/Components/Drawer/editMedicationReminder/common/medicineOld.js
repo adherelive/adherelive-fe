@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import Form from "antd/es/form";
 import Select from "antd/es/select";
 import Spin from "antd/es/spin";
@@ -8,23 +8,10 @@ import Tooltip from "antd/es/tooltip";
 import messages from "../message";
 import algoliasearch from "algoliasearch/lite";
 import config from "../../../../config";
-import {
-  InstantSearch,
-  // Hits,
-  // SearchBox,
-  // Highlight,
-  // connectSearchBox,
-  // connectHighlight
-} from "react-instantsearch-dom";
+import { InstantSearch, } from "react-instantsearch-dom";
 import Button from "antd/es/button";
 import message from "antd/es/message";
-import {
-  EditOutlined,
-  TagFilled,
-  TagOutlined,
-  StarOutlined,
-  StarFilled,
-} from "@ant-design/icons";
+import { StarFilled, StarOutlined, } from "@ant-design/icons";
 
 const {Item: FormItem} = Form;
 const {Option} = Select;

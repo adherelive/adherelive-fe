@@ -1,8 +1,8 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import DoctorTable from "../../Components/Doctor/table";
-import {withRouter} from "react-router-dom";
-import {getAllDoctors, getAllDoctorsForProvider} from "../../modules/doctors";
-import {USER_CATEGORY} from "../../constant";
+import { withRouter } from "react-router-dom";
+import { getAllDoctors, getAllDoctorsForProvider } from "../../modules/doctors";
+import { USER_CATEGORY } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {

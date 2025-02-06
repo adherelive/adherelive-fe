@@ -1,8 +1,8 @@
-import {REQUEST_TYPE} from "../../constant";
-import {doRequest} from "../../Helper/network";
-import {Doctor} from "../../Helper/urls";
+import { REQUEST_TYPE } from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { Doctor } from "../../Helper/urls";
 
-import {sendPasswordMailUrl} from "../../Helper/urls/provider";
+import { sendPasswordMailUrl } from "../../Helper/urls/provider";
 
 export const SEND_PASSWORD_MAIL = "SEND_PASSWORD_MAIL";
 export const SEND_PASSWORD_MAIL_COMPLETED = "SEND_PASSWORD_MAIL_COMPLETED";

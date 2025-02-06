@@ -1,9 +1,9 @@
-import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
-import {getAllMissedScheduleEvents} from "../../modules/scheduleEvents";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { getAllMissedScheduleEvents } from "../../modules/scheduleEvents";
 import MissedWorkoutsDrawer from "../../Components/Drawer/missedWorkoutsDrawer";
-import {close} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
+import { close } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     // console.log("Missed Workouts mapStateToProps ---> redux state: ", state); // Log the entire state

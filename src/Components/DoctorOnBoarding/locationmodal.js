@@ -1,6 +1,6 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {Button, Input, Modal} from "antd";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { Button, Input, Modal } from "antd";
 import PlacesAutocomplete from "react-places-autocomplete";
 import messages from "./messages";
 

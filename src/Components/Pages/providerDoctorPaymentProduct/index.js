@@ -1,16 +1,15 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import message from "antd/es/message";
 import Button from "antd/es/button";
-import {Dropdown} from "antd";
+import { Dropdown } from "antd";
 import Menu from "antd/es/menu";
 
 import AddConsultationFeeDrawer from "../../../Containers/Drawer/addConsultationFee";
-import ConsultationFeeTable from "../../../Containers/ConsultationFees";
 
 // import DoctorConsultationFeeTable from "../../../Containers/DoctorConsultationFee";
 import messages from "./messages";
-import {ArrowLeftOutlined, PlusOutlined} from "@ant-design/icons";
+import { ArrowLeftOutlined, PlusOutlined } from "@ant-design/icons";
 import Loading from "../../Common/Loading";
 
 // code implementation after phase 1 for Subscription

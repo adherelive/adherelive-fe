@@ -1,10 +1,10 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {Table} from "antd";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { Table } from "antd";
 import generateRow from "./dataRow";
 import getColumn from "./header";
 import messages from "./messages";
-import {LoadingOutlined} from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class TemplateTable extends Component {
     constructor(props) {

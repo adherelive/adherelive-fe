@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {getPortionsUrl} from "../../Helper/urls/portion";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { getPortionsUrl } from "../../Helper/urls/portion";
 
 export const GET_PORTIONS_START = "GET_PORTIONS_START";
 export const GET_PORTIONS_COMPLETED = "GET_PORTIONS_COMPLETED";

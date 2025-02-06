@@ -1,19 +1,14 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import Form from "antd/es/form";
 import Select from "antd/es/select";
-import {algoliaSearchHelper} from "../../../../Helper/algoliaSearch";
+import { algoliaSearchHelper } from "../../../../Helper/algoliaSearch";
 import message from "antd/es/message";
 import Tooltip from "antd/es/tooltip";
 import Button from "antd/es/button";
 import messages from "../message";
 
-import {
-  TagFilled,
-  TagOutlined,
-  StarOutlined,
-  StarFilled,
-} from "@ant-design/icons";
+import { StarFilled, StarOutlined, } from "@ant-design/icons";
 
 const {Item: FormItem} = Form;
 const {Option} = Select;

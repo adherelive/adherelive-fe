@@ -1,6 +1,6 @@
 import React from "react";
 
-import {TABLE_COLUMN} from "../helper";
+import { TABLE_COLUMN } from "../helper";
 import messages from "../messages";
 import PID from "../datacolumn/pid";
 import Diagnosis from "../datacolumn/diagnosis";
