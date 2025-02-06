@@ -1,6 +1,6 @@
-import React, {Component, Fragment, lazy} from "react";
+import React, { Component, Fragment, lazy } from "react";
 // import Footer from "../Containers/Footer";
-import {BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Loading from "../Components/Common/Loading";
 
 const Global = lazy(() => import(/* webpackChunkName: "Global"*/ "./Global"));

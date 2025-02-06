@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 // import DoctorDetailsPage from "../../../Containers/Pages/doctorDetails";
 import DoctorEditDetailsPage from "../../../Containers/Pages/doctorProfilePage";
 

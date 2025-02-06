@@ -1,6 +1,6 @@
 import React from "react";
 
-import {TABLE_COLUMN} from "../helper";
+import { TABLE_COLUMN } from "../helper";
 // import messages from "../messages";
 import Duration from "../datacolumn/duration";
 import Name from "../datacolumn/name";

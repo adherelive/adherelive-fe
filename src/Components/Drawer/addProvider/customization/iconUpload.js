@@ -1,17 +1,16 @@
-import React, {Component, Fragment} from "react";
+import React, { Component, Fragment } from "react";
 import Form from "antd/es/form";
 import Upload from "antd/es/upload";
-import Icon from "antd/es/icon";
 
-import {DeleteTwoTone, EyeTwoTone, UploadOutlined} from "@ant-design/icons";
+import { DeleteTwoTone, EyeTwoTone, UploadOutlined } from "@ant-design/icons";
 import LoadingStatus from "../../../Common/Loading";
 import messages from "../message";
 import Modal from "antd/es/modal";
 import Button from "antd/es/button";
-import {doRequest} from "../../../../Helper/network";
-import {getUploadURL} from "../../../../Helper/urls/user";
-import {REQUEST_TYPE} from "../../../../constant";
-import {message} from "antd";
+import { doRequest } from "../../../../Helper/network";
+import { getUploadURL } from "../../../../Helper/urls/user";
+import { REQUEST_TYPE } from "../../../../constant";
+import { message } from "antd";
 
 const {Item: FormItem} = Form;
 

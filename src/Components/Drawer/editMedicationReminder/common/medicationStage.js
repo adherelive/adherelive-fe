@@ -1,23 +1,16 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 
 import throttle from "lodash-es/throttle";
 
 import Form from "antd/es/form";
 import Select from "antd/es/select";
-import Spin from "antd/es/spin";
 import message from "antd/es/message";
 import config from "../../../../config";
 import Tooltip from "antd/es/tooltip";
-import {CloseCircleOutlined, EditOutlined} from "@ant-design/icons";
+import { CloseCircleOutlined, EditOutlined } from "@ant-design/icons";
 
-import {
-  InstantSearch,
-  Hits,
-  SearchBox,
-  Highlight,
-  connectSearchBox,
-} from "react-instantsearch-dom";
+import { connectSearchBox, Highlight, Hits, InstantSearch, } from "react-instantsearch-dom";
 import algoliasearch from "algoliasearch/lite";
 
 const {Item: FormItem} = Form;

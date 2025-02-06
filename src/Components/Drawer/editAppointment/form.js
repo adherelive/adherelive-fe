@@ -1,26 +1,24 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 
 // import Form from "antd/es/form";
 import Select from "antd/es/select";
 import DatePicker from "antd/es/date-picker";
 import Input from "antd/es/input";
 import TextArea from "antd/es/input/TextArea";
-import {Checkbox, TimePicker} from "antd";
+import { Checkbox, TimePicker } from "antd";
 
 import messages from "./message";
 import moment from "moment";
 import calendar from "../../../Assets/images/calendar1.svg";
-import { ClockCircleOutlined } from "@ant-design/icons";
-import Dropdown from "antd/es/dropdown";
 import TimeKeeper from "react-timekeeper";
-import {FAVOURITE_TYPE, MEDICAL_TEST, RADIOLOGY} from "../../../constant";
+import { FAVOURITE_TYPE, MEDICAL_TEST, RADIOLOGY } from "../../../constant";
 import StarOutlined from "@ant-design/icons/StarOutlined";
 import StarFilled from "@ant-design/icons/StarFilled";
 import Tooltip from "antd/es/tooltip";
 import message from "antd/es/message";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../Helper/is-empty";
 

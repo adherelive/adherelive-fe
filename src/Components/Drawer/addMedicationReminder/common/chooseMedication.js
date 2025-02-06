@@ -1,9 +1,9 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {Form, Select} from "antd";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { Form, Select } from "antd";
 import dropDownIcon from "../../../../Assets/images/material-icons-black-arrow-drop-down.svg";
 
-import {USER_CATEGORY} from "../../../../constant";
+import { USER_CATEGORY } from "../../../../constant";
 
 const DropDownIcon = <img src={dropDownIcon} alt="d" className="w24 h24"/>;
 

@@ -1,7 +1,7 @@
 import React from "react";
 
-import {TABLE_COLUMN} from "../helper";
-import {ASCEND, DESCEND} from "../../../../constant";
+import { TABLE_COLUMN } from "../helper";
+import { ASCEND, DESCEND } from "../../../../constant";
 import messages from "../messages";
 import PID from "../datacolumn/pid";
 import Diagnosis from "../datacolumn/diagnosis";

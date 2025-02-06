@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 
 // import Form from "antd/es/form";
 import messages from "./messages";
@@ -8,9 +8,9 @@ import DatePicker from "antd/es/date-picker";
 import TextArea from "antd/es/input/TextArea";
 import Input from "antd/es/input";
 import Tag from "antd/es/tag";
-import {DAYS} from "../../../constant";
+import { DAYS } from "../../../constant";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;

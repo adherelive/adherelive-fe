@@ -1,5 +1,5 @@
 import React from "react";
-import {DeleteOutlined} from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import messages from "../messages";
 import Tooltip from "antd/es/tooltip";
 

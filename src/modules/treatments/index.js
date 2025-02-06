@@ -1,7 +1,7 @@
-import {TREATMENT_INITIAL_STATE} from "../../data";
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {searchTreatments} from "../../Helper/urls/treatments";
+import { TREATMENT_INITIAL_STATE } from "../../data";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { searchTreatments } from "../../Helper/urls/treatments";
 
 export const SEARCH_TREATMENTS_START = "SEARCH_TREATMENTS_START";
 export const SEARCH_TREATMENTS_COMPLETED = "SEARCH_TREATMENTS_COMPLETED";

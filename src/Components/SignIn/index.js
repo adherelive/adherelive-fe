@@ -1,12 +1,12 @@
-import React, {Component} from "react";
-import {message} from "antd";
+import React, { Component } from "react";
+import { message } from "antd";
 import LoginComponent from "./toggleLogin";
 import SignUpComponent from "./toggleSignup";
 
 import CompanyIcon from "../../Assets/images/logo3x.png";
-import {PATH} from "../../constant";
+import { PATH } from "../../constant";
 
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
 import messages from "./message";
 
 class SignIn extends Component {

@@ -1,15 +1,14 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {DatePicker, Form} from "antd";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { DatePicker, Form } from "antd";
 import moment from "moment";
-import messages from "../message";
 import calendar from "../../../../Assets/images/calendar1.svg";
 import repeatIntervalField from "./repeatInterval";
 import repeatField from "./repeatType";
 import startDateField from "./startDate";
 
-import {REPEAT_TYPE} from "../../../../constant";
-import {isNumber} from "../../../../Helper/validation";
+import { REPEAT_TYPE } from "../../../../constant";
+import { isNumber } from "../../../../Helper/validation";
 
 const FIELD_NAME = "end_date";
 const {Item: FormItem} = Form;

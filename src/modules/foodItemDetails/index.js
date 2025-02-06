@@ -1,5 +1,5 @@
-import {ADD_FOOD_ITEM_COMPLETED, EDIT_FOOD_ITEM_COMPLETED, STORE_FOOD_ITEM_AND_DETAILS,} from "../foodItems";
-import {GET_SINGLE_DIET_DETAILS_COMPLETED} from "../diets";
+import { ADD_FOOD_ITEM_COMPLETED, EDIT_FOOD_ITEM_COMPLETED, STORE_FOOD_ITEM_AND_DETAILS, } from "../foodItems";
+import { GET_SINGLE_DIET_DETAILS_COMPLETED } from "../diets";
 
 function foodItemDetailsReducer(state, data) {
     const {food_items, food_item_details} = data || {};

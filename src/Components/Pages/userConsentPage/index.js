@@ -1,13 +1,13 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 // import {withRouter} from "react-router-dom";
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
 import Button from "antd/es/button";
 import Checkbox from "antd/es/checkbox";
 import message from "antd/es/message";
 import CompanyIcon from "../../../Assets/images/logo3x.png";
 import messages from "./message";
 import ReactMarkdown from "react-markdown";
-import {PATH} from "../../../constant";
+import { PATH } from "../../../constant";
 
 const TERMS_OF_SERVICE = "terms_of_service";
 

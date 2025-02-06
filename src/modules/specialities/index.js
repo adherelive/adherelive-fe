@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {searchSpecialities} from "../../Helper/urls/speciality";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { searchSpecialities } from "../../Helper/urls/speciality";
 
 export const SEARCH_SPECIALITIES_START = "SEARCH_SPECIALITIES_START";
 export const SEARCH_SPECIALITIES_COMPLETED = "SEARCH_SPECIALITIES_COMPLETED";

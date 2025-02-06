@@ -1,14 +1,13 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import PatientList from "./patientListSideBar";
 import TwilioChat from "../../Containers/ChatFullScreen/twilioChat";
-import {getPatientConsultingVideoUrl} from "../../Helper/url/patients";
+import { getPatientConsultingVideoUrl } from "../../Helper/url/patients";
 import config from "../../config";
-import {getRoomId} from "../../Helper/twilio";
-import {FEATURES} from "../../constant";
-import {message} from "antd";
+import { getRoomId } from "../../Helper/twilio";
+import { FEATURES } from "../../constant";
+import { message } from "antd";
 import messages from "./messages";
-import NotificationDrawer from "../../Containers/Drawer/notificationDrawer";
 
 class ChatFullScreen extends Component {
     constructor(props) {

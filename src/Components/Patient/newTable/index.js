@@ -1,23 +1,21 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import { connect } from 'react-redux';
-import {Table} from "antd";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { Table } from "antd";
 import generateRow from "./dataRow";
 import getColumn from "./header";
 import messages from "./messages";
 import message from "antd/es/message";
-import {CURRENT_TAB} from "../../Dashboard";
-import {TABLE_COLUMN} from "./helper";
+import { CURRENT_TAB } from "../../Dashboard";
+import { TABLE_COLUMN } from "./helper";
 import config from "../../../config";
-import searchTreatmentPaginatedPatients from "../../../modules/pages/paginatedPatients.js";
 
 import Input from "antd/es/input";
 import Button from "antd/es/button";
 import SearchOutlined from "@ant-design/icons/SearchOutlined";
-import {ASCEND, DESCEND, DIAGNOSIS_TYPE} from "../../../constant";
-import {LoadingOutlined} from "@ant-design/icons";
+import { ASCEND, DESCEND, DIAGNOSIS_TYPE } from "../../../constant";
+import { LoadingOutlined } from "@ant-design/icons";
 
-import {FILTER_DIAGNOSIS, FILTER_TREATMENT, OFFSET, SORT_CREATEDAT, SORT_NAME,} from "../../Dashboard/index";
+import { FILTER_DIAGNOSIS, FILTER_TREATMENT, OFFSET, SORT_CREATEDAT, SORT_NAME, } from "../../Dashboard/index";
 
 export const SORTING_TYPE = {
     SORT_BY_DATE: "0",

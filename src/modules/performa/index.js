@@ -1,11 +1,8 @@
-import { doRequest } from "../../Helper/network";
-import { REQUEST_TYPE } from "../../constant";
 // import {
 //   getCdssDiagnosisList,
 //   addCdssDiagnosisList,
 //   getDiagnosisSearchUrl,
 // } from "../../Helper/urls/cdss";
-import isEmpty from "../../Helper/is-empty";
 
 export const SET_PERFORMA_TABS = "SET_PERFORMA_TABS";
 export const SET_PERFORMA_TABS_ID = "SET_PERFORMA_TABS_ID";

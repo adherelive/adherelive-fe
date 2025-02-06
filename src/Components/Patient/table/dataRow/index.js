@@ -1,4 +1,4 @@
-import {formatPatientTableData, TABLE_COLUMN} from "../helper";
+import { formatPatientTableData, TABLE_COLUMN } from "../helper";
 
 export default (data) => {
     const {id, addToWatchlist, onRowClick, removePatientFromWatchlist} = data;

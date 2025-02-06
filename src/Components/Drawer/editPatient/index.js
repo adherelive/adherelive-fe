@@ -1,18 +1,8 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {
-  Drawer,
-  Select,
-  Input,
-  message,
-  Button,
-  Spin,
-  Radio,
-  Switch,
-} from "antd";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { Drawer, Input, message, Radio, Select, Spin, Switch, } from "antd";
 import moment from "moment";
 import throttle from "lodash-es/throttle";
-import { getName } from "../../../Helper/validation";
 
 import india from "../../../Assets/images/india.png";
 import australia from "../../../Assets/images/australia.png";
@@ -30,16 +20,11 @@ import france from "../../../Assets/images/france.png";
 import messages from "./message";
 import "react-datepicker/dist/react-datepicker.css";
 import TextArea from "antd/lib/input/TextArea";
-import {
-  FINAL,
-  PROBABLE,
-  DIAGNOSIS_TYPE,
-  PATIENT_CONSTANTS,
-} from "../../../constant";
+import { PATIENT_CONSTANTS, } from "../../../constant";
 import Footer from "../footer";
 
 import isEmpty from "../../../Helper/is-empty";
-import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
+import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
 // code implementation after phase 1
 import CustomSymptomsEdit from "./CustomSymptomsEdit";

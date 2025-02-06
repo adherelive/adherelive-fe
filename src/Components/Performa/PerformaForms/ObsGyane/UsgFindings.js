@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import UsgFindingsOption from "./Dropdowns/UsgFindingsOption";
-import {CloseCircleOutlined, MinusCircleOutlined, PlusCircleOutlined,} from "@ant-design/icons";
+import { MinusCircleOutlined, PlusCircleOutlined, } from "@ant-design/icons";
 import isEmpty from "../../../../Helper/is-empty";
 import moment from "moment";
-import {Input, message, Select} from "antd";
+import { Input, message, Select } from "antd";
 
 const {Option} = Select;
 

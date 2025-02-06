@@ -1,8 +1,8 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import editReportDrawer from "../../Components/Drawer/editReportDrawer";
-import {DRAWER} from "../../constant";
-import {close} from "../../modules/drawer";
-import {addReport, deleteReport, fetchReports, updateReport, uploadReport,} from "../../modules/reports";
+import { DRAWER } from "../../constant";
+import { close } from "../../modules/drawer";
+import { addReport, deleteReport, fetchReports, updateReport, uploadReport, } from "../../modules/reports";
 
 const mapStateToProps = (state) => {
     const {

@@ -1,6 +1,6 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import DoctorSettingsPage from "../../../Components/Pages/doctorSettingsPage";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
     addDoctorPaymentProduct,
     deleteDoctorPaymentProduct,
@@ -14,12 +14,12 @@ import {
     getAccountDetails,
     updateAccountDetails,
 } from "../../../modules/accountDetails";
-import {open} from "../../../modules/drawer";
-import {DRAWER} from "../../../constant";
+import { open } from "../../../modules/drawer";
+import { DRAWER } from "../../../constant";
 
 // code implementation after phase 1 for Subscription
-import {getServices} from "../../../modules/subscription/services";
-import {getSubscriptions} from "../../../modules/subscription/subscriptions";
+import { getServices } from "../../../modules/subscription/services";
+import { getSubscriptions } from "../../../modules/subscription/subscriptions";
 
 const mapStateToProps = (state) => {
     const {

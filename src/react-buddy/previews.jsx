@@ -1,5 +1,5 @@
-import {ComponentPreview, Previews} from '@react-buddy/ide-toolbox'
-import {PaletteTree} from './palette'
+import { ComponentPreview, Previews } from '@react-buddy/ide-toolbox'
+import { PaletteTree } from './palette'
 import NotificationDrawer from "../Components/Drawer/notification";
 
 const ComponentPreviews = () => {

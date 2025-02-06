@@ -1,12 +1,12 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {DatePicker, Form} from "antd";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { DatePicker, Form } from "antd";
 import calendar from "../../../../Assets/images/calendar1.svg";
 import moment from "moment";
 
 import repeatTypeField from "./repeatType";
 
-import { REPEAT_TYPE, EVENT_ACTION } from "../../../../constant";
+import { EVENT_ACTION } from "../../../../constant";
 
 const {Item: FormItem} = Form;
 const FIELD_NAME = "start_date";

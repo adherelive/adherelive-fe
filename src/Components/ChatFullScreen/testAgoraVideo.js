@@ -1,8 +1,8 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import AgoraRTC from "agora-rtc-sdk-ng";
 
-import {getDoctorFromRoomId, getPatientFromRoomId} from "../../Helper/twilio";
+import { getDoctorFromRoomId, getPatientFromRoomId } from "../../Helper/twilio";
 
 import config from "../../config";
 import AudioIcon from "../../Assets/images/ico-vc-audio.png";
@@ -10,16 +10,16 @@ import AudioDisabledIcon from "../../Assets/images/ico-vc-audio-off.png";
 import VideoIcon from "../../Assets/images/ico-vc-video.png";
 import VideoDisabledIcon from "../../Assets/images/ico-vc-video-off.png";
 import UserDpPlaceholder from "../../Assets/images/ico-placeholder-userdp.svg";
-import {LOCAL_STORAGE, USER_CATEGORY} from "../../constant";
+import { LOCAL_STORAGE, USER_CATEGORY } from "../../constant";
 import messages from "./messages";
 // import Loading from "../Common/Loading";
 import Tooltip from "antd/es/tooltip";
-import {Button, Progress} from "antd";
+import { Button, Progress } from "antd";
 import Logo from "../../Assets/images/logo3x.png";
 
-import {getPatientConsultingVideoUrl} from "../../Helper/url/patients";
+import { getPatientConsultingVideoUrl } from "../../Helper/url/patients";
 // import { getRoomId } from "../../Helper/twilio";
-import {AudioMutedOutlined} from "@ant-design/icons";
+import { AudioMutedOutlined } from "@ant-design/icons";
 
 class TestAgoraVideo extends Component {
     constructor(props) {

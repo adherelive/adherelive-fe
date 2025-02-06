@@ -1,6 +1,6 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import AdminDoctorDetails from "../../../Components/Pages/adminDoctorDetails";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
     activateDoctor,
     addRazorpayId,
@@ -8,7 +8,7 @@ import {
     getDoctorDetails,
     verifyDoctor,
 } from "../../../modules/doctors";
-import {getDoctorAccountDetails} from "../../../modules/accountDetails";
+import { getDoctorAccountDetails } from "../../../modules/accountDetails";
 // import {verifyDoctor} from "../../../modules/doctors";
 // import {open} from "../../../modules/drawer";
 // import {DRAWER} from "../../../constant";

@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import {
     MISSED_ACTIONS,
     MISSED_APPOINTMENTS,
@@ -26,7 +26,7 @@ import messages from "./messages";
 import DoctorTable from "../../../Containers/Doctor/table";
 import GraphsModal from "./graphsModal";
 import Donut from "../../Common/graphs/donut";
-import {PlusOutlined} from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 
 const CHART_MISSED_MEDICATION = "Missed Medication";
 const CHART_MISSED_APPOINTMENT = "Missed Appointment";

@@ -1,4 +1,4 @@
-import {ADD_REPORT_COMPLETE, UPLOAD_REPORT_COMPLETE} from "../reports";
+import { ADD_REPORT_COMPLETE, UPLOAD_REPORT_COMPLETE } from "../reports";
 
 function reportPageReducer(state, data) {
     const {report_ids} = data || {};

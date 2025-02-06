@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import FormItem from "antd/lib/form/FormItem";
 
 class WhenToTakeForm extends Component {

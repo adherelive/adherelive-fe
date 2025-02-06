@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 // import TransactionTable from "../../../Containers/Transaction/table/index";
 import TransactionTable from "../../../Components/Subscription/TransactionTable";
 import messages from "./messages";

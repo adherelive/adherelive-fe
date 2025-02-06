@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {hasErrors} from "../../../Helper/validation";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { hasErrors } from "../../../Helper/validation";
 import moment from "moment";
 
 import Drawer from "antd/es/drawer";
@@ -10,9 +10,9 @@ import message from "antd/es/message";
 import messages from "./message";
 import AddAppointmentForm from "./form";
 import Footer from "../footer";
-import {RADIOLOGY} from "../../../constant";
+import { RADIOLOGY } from "../../../constant";
 // code implementation after phase 1 for antd v4
-import {Form, Mention} from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../Helper/is-empty";
 import ScheduledAppointments from "./ScheduledAppointments";

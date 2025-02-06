@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {Agora} from "../../Helper/urls";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { Agora } from "../../Helper/urls";
 
 export const AGORA_VIDEO_TOKEN_START = "AGORA_VIDEO_TOKEN_START";
 export const AGORA_VIDEO_TOKEN_COMPLETE = "AGORA_VIDEO_TOKEN_COMPLETE";

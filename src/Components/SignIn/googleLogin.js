@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import GoogleLogin from "react-google-login";
 
 class LoginByGoogle extends Component {

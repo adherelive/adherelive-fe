@@ -1,7 +1,7 @@
-import {doRequest} from "../../../Helper/network";
-import {REQUEST_TYPE} from "../../../constant";
-import {SET_ACTIVITY_DATA_FOR_SCHEDULE, SET_FALASHCARD_DATA, SET_FLASHCARD_OPEN,} from "../../../reducer/index";
-import {addFlashCardUrl, getFlashcardByActivityIdUrl, updateFlashcardUrl,} from "../../../Helper/urls/subscriptions";
+import { doRequest } from "../../../Helper/network";
+import { REQUEST_TYPE } from "../../../constant";
+import { SET_ACTIVITY_DATA_FOR_SCHEDULE, SET_FALASHCARD_DATA, SET_FLASHCARD_OPEN, } from "../../../reducer/index";
+import { addFlashCardUrl, getFlashcardByActivityIdUrl, updateFlashcardUrl, } from "../../../Helper/urls/subscriptions";
 import isEmpty from "./../../../Helper/is-empty";
 
 export const setFlashCard = (value) => {

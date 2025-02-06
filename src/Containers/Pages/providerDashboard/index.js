@@ -1,10 +1,10 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import ProviderDoctorPage from "../../../Components/Pages/providerDashboard";
-import {withRouter} from "react-router-dom";
-import {getGraphs, updateGraphs} from "../../../modules/graphs";
-import {getAllMissedScheduleEvents} from "../../../modules/scheduleEvents";
-import {DRAWER} from "../../../constant";
-import {open} from "../../../modules/drawer";
+import { withRouter } from "react-router-dom";
+import { getGraphs, updateGraphs } from "../../../modules/graphs";
+import { getAllMissedScheduleEvents } from "../../../modules/scheduleEvents";
+import { DRAWER } from "../../../constant";
+import { open } from "../../../modules/drawer";
 
 const mapStateToProps = (state) => {
     const {

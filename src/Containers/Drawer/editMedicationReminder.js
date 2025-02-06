@@ -1,14 +1,14 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import EditMedicationReminder from "../../Components/Drawer/editMedicationReminder/medicationsReminder";
-import {DRAWER} from "../../constant";
-import {close} from "../../modules/drawer";
-import {deleteMedication, getMedications, updateMedication,} from "../../modules/medications";
-import {getMedicationDetails} from "../../modules/otherDetails";
-import {addMedicine, searchMedicine} from "../../modules/medicines";
-import {getPatientCarePlanDetails} from "../../modules/carePlans";
+import { DRAWER } from "../../constant";
+import { close } from "../../modules/drawer";
+import { deleteMedication, getMedications, updateMedication, } from "../../modules/medications";
+import { getMedicationDetails } from "../../modules/otherDetails";
+import { addMedicine, searchMedicine } from "../../modules/medicines";
+import { getPatientCarePlanDetails } from "../../modules/carePlans";
 
-import {getFavourites, markFavourite, removeFavourite,} from "../../modules/favouritesData/index";
-import {googleTranslate} from "../../modules/cdss";
+import { getFavourites, markFavourite, removeFavourite, } from "../../modules/favouritesData/index";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
     const {auth} = state;

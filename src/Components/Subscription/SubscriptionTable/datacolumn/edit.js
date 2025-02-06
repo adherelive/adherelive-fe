@@ -1,8 +1,6 @@
 import React from "react";
-import { EditOutlined } from "@ant-design/icons";
 import Tooltip from "antd/es/tooltip";
-import messages from "../messages";
-import {USER_CATEGORY} from "../../../../constant";
+import { USER_CATEGORY } from "../../../../constant";
 import edit_image from "../../../../Assets/images/edit.svg";
 
 export default (props) => {

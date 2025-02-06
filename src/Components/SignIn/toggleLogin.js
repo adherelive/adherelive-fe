@@ -1,13 +1,13 @@
-import React, {Component} from "react";
-import {message} from "antd";
-import {Spring} from "react-spring/renderprops";
+import React, { Component } from "react";
+import { message } from "antd";
+import { Spring } from "react-spring/renderprops";
 import SignInForm from "./signIn";
 
 import rightArrow from "../../Assets/images/next.png";
-import {PATH} from "../../constant";
+import { PATH } from "../../constant";
 
 import config from "../../config";
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
 import messages from "./message";
 
 class ToggleLogin extends Component {

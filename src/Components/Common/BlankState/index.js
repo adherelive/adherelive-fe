@@ -1,12 +1,12 @@
-import React, {Fragment} from "react";
-import {withRouter} from "react-router-dom";
-import {injectIntl} from "react-intl";
+import React, { Fragment } from "react";
+import { withRouter } from "react-router-dom";
+import { injectIntl } from "react-intl";
 
 import CompanyIcon from "../../../Assets/images/logo3x.png";
 import Button from "antd/es/button";
 import messages from "./messages";
-import {PATH} from "../../../constant";
-import {ArrowLeftOutlined} from "@ant-design/icons";
+import { PATH } from "../../../constant";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const ERROR_CODE = 404;
 

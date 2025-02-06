@@ -1,6 +1,6 @@
-import {REQUEST_TYPE} from "../../constant";
-import {doRequest} from "../../Helper/network";
-import {fetchRaiseChatNotificationUrl} from "../../Helper/urls/notifications";
+import { REQUEST_TYPE } from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { fetchRaiseChatNotificationUrl } from "../../Helper/urls/notifications";
 
 const ADD_MESSAGE_FOR_CHAT_COMPLETED = "ADD_MESSAGE_FOR_CHAT_COMPLETED";
 

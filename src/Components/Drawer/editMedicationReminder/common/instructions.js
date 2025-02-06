@@ -1,6 +1,6 @@
-import React, {Component} from "react";
-import {Form} from "antd";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { Form } from "antd";
+import { injectIntl } from "react-intl";
 import TextArea from "antd/es/input/TextArea";
 import messages from "../message";
 import isEmpty from "../../../../Helper/is-empty";

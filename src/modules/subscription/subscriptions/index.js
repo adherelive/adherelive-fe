@@ -1,12 +1,12 @@
-import {doRequest} from "../../../Helper/network";
-import {REQUEST_TYPE} from "../../../constant";
+import { doRequest } from "../../../Helper/network";
+import { REQUEST_TYPE } from "../../../constant";
 import {
     addSubscriptionUrl,
     getProviderSubscriptionUrl,
     getSubscriptionUrl,
     updateSubscription,
 } from "../../../Helper/urls/subscriptions";
-import {SET_SUBSCRIPTIONS} from "../../../reducer/index";
+import { SET_SUBSCRIPTIONS } from "../../../reducer/index";
 
 export const getSubscriptions = () => {
     let response = {};

@@ -1,7 +1,7 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {Form, Input, Tag} from "antd";
-import {DAYS} from "../../../../constant";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { Form, Input, Tag } from "antd";
+import { DAYS } from "../../../../constant";
 
 const {Item: FormItem} = Form;
 const {CheckableTag} = Tag;

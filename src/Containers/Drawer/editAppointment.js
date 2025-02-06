@@ -1,10 +1,10 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import EditAppointmentDrawer from "../../Components/Drawer/editAppointment";
-import {close} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
-import {getMedications} from "../../modules/medications";
-import {getPatientCarePlanDetails} from "../../modules/carePlans";
+import { close } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
+import { getMedications } from "../../modules/medications";
+import { getPatientCarePlanDetails } from "../../modules/carePlans";
 import {
     deleteAppointment,
     getAppointments,
@@ -18,10 +18,10 @@ import {
     removeFavourite,
     removeFavouriteByRecordId,
 } from "../../modules/favouritesData/index";
-import {googleTranslate} from "../../modules/cdss";
+import { googleTranslate } from "../../modules/cdss";
 
 // code implementation after phase 1 for Subscription
-import {updateActivityById} from "../../modules/subscription/activities";
+import { updateActivityById } from "../../modules/subscription/activities";
 
 const mapStateToProps = (state) => {
     const {

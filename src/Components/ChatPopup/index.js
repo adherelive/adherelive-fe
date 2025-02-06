@@ -1,14 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {
-  // Form,
-  Input,
-  Button,
-  Spin,
-  // Avatar,
-  Upload,
-  // Modal,
-  message,
-} from "antd";
+import React, { Component, Fragment } from "react";
+import { Button, Input, message, Spin, Upload, } from "antd";
 // import moment from "moment";
 import Chat from "twilio-chat";
 // import DoubleTick from "../../Assets/images/double-tick-indicator.png";
@@ -21,29 +12,24 @@ import Maximize from "../../Assets/images/maximize.png";
 // import Download from "../../Assets/images/down-arrow.png";
 // import File from "../../Assets/images/file.png";
 import messages from "./messages";
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
 // import bodyImage from "../../../src/Assets/images/body.jpg";
 // import CloseChatIcon from "../../Assets/images/ico-vc-message-close.png";
 import CallIcon from "../../Assets/images/telephone.png";
 import CallDisabledIcon from "../../Assets/images/call-disabled.png";
 
-import {
-  // USER_ADHERE_BOT,
-  // CHAT_MESSAGE_TYPE,
-  FEATURES,
-  USER_CATEGORY,
-} from "../../constant";
+import { FEATURES, USER_CATEGORY, } from "../../constant";
 import ChatMessageDetails from "./chatMessageDetails";
 
 import Menu from "antd/es/menu";
 import Dropdown from "antd/es/dropdown";
-import {MENU_ITEMS} from "../ChatFullScreen/twilioChat";
-import {MoreOutlined} from "@ant-design/icons";
+import { MENU_ITEMS } from "../ChatFullScreen/twilioChat";
+import { MoreOutlined } from "@ant-design/icons";
 
 import Tooltip from "antd/es/tooltip";
 import isEmpty from "../../Helper/is-empty";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const Header = ({

@@ -1,10 +1,10 @@
-import React, {Component} from "react";
-import {Form, Input} from "antd";
-import {injectIntl} from "react-intl";
-import {isNumber} from "../../../../Helper/validation";
+import React, { Component } from "react";
+import { Form, Input } from "antd";
+import { injectIntl } from "react-intl";
+import { isNumber } from "../../../../Helper/validation";
 import messages from "../message";
 import repeatTypeField from "./repeatType";
-import {REPEAT_TYPE} from "../../../../constant";
+import { REPEAT_TYPE } from "../../../../constant";
 
 const {Item: FormItem} = Form;
 const FIELD_NAME = "repeatInterval";

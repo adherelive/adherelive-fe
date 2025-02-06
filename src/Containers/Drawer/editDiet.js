@@ -1,10 +1,10 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import EditDietDrawer from "../../Components/Drawer/editDiet";
-import {close} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
-import {getPortions} from "../../modules/portions";
-import {addFoodItem} from "../../modules/foodItems";
+import { close } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
+import { getPortions } from "../../modules/portions";
+import { addFoodItem } from "../../modules/foodItems";
 import {
     deleteDiet,
     getPatientPreferenceDietDetails,
@@ -12,8 +12,8 @@ import {
     updateDiet,
     updateDietTotalCalories,
 } from "../../modules/diets";
-import {getPatientCarePlanDetails} from "../../modules/carePlans";
-import {googleTranslate} from "../../modules/cdss";
+import { getPatientCarePlanDetails } from "../../modules/carePlans";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
     const {auth} = state;

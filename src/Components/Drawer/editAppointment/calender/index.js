@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {DatePicker} from "antd";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { DatePicker } from "antd";
 import FullCalendar from "fullcalendar-reactwrapper";
 import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";
 // // import isEqual from "lodash-es/isEqual";
@@ -9,12 +9,12 @@ import prev from "../../../../Assets/images/ico-calendar-nav-prev.svg";
 import dropDownIcon from "../../../../Assets/images/ico-dropdown.svg";
 import userPlaceHolder from "../../../../Assets/images/ico-placeholder-userdp.svg";
 
-import {doRequest} from "../../../../Helper/network";
-import {getBookedSlotsURL} from "../../../../Helper/urls/event";
+import { doRequest } from "../../../../Helper/network";
+import { getBookedSlotsURL } from "../../../../Helper/urls/event";
 
 import messages from "../message";
 import moment from "moment";
-import {EVENT_TYPE} from "../../../../constant";
+import { EVENT_TYPE } from "../../../../constant";
 
 const DropDownIcon = <img src={dropDownIcon} alt="d" className="w14 h14"/>;
 

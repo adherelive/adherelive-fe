@@ -1,4 +1,4 @@
-import {USER_CATEGORY} from "../../../constant";
+import { USER_CATEGORY } from "../../../constant";
 
 export const TABLE_COLUMN = {
     NAME: {

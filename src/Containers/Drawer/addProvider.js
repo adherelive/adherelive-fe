@@ -1,9 +1,9 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import addProviderDrawer from "../../Components/Drawer/addProvider";
-import {addProvider} from "../../modules/providers";
-import {uploadDocument} from "../../modules/auth";
-import {DRAWER} from "../../constant";
-import {close} from "../../modules/drawer";
+import { addProvider } from "../../modules/providers";
+import { uploadDocument } from "../../modules/auth";
+import { DRAWER } from "../../constant";
+import { close } from "../../modules/drawer";
 
 const mapStateToProps = (state) => {
     const {

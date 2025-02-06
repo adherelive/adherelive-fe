@@ -1,5 +1,5 @@
 import React from "react";
-import {Select} from "antd";
+import { Select } from "antd";
 // import symptoms from "./symptomList.json";
 
 const formOptions = [

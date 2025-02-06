@@ -1,5 +1,5 @@
-import {doRequest} from "../../Helper/network";
-import {DELETE_TEMPLATE_RELATED_TYPE, REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { DELETE_TEMPLATE_RELATED_TYPE, REQUEST_TYPE } from "../../constant";
 import {
     createCarePlanTemplateUrl,
     deleteCarePlanTemplate,

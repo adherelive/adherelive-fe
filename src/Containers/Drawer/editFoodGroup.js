@@ -1,11 +1,11 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import EditFoodGroupDrawer from "../../Components/Drawer/editFoodGroup";
-import {close} from "../../modules/drawer";
-import {addFoodItem, storeFoodItemAndDetails, updateFoodItem,} from "../../modules/foodItems";
-import {searchFood} from "../../modules/searchedFoodItems";
-import {clearLatestCreatedFoodItem} from "../../modules/latestCreatedFood";
-import {googleTranslate} from "../../modules/cdss";
+import { close } from "../../modules/drawer";
+import { addFoodItem, storeFoodItemAndDetails, updateFoodItem, } from "../../modules/foodItems";
+import { searchFood } from "../../modules/searchedFoodItems";
+import { clearLatestCreatedFoodItem } from "../../modules/latestCreatedFood";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
     const {auth} = state;

@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import Footer from "../footer";
 // import Form from "antd/es/form";
 import messages from "./message";
@@ -9,7 +9,7 @@ import message from "antd/es/message";
 
 import AddProviderForm from "./form";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class addProviderDrawer extends Component {

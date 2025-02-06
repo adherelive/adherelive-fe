@@ -1,13 +1,13 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import TwilioChat from "../../Components/ChatFullScreen/twilioChat";
-import {getSymptomDetails} from "../../modules/symptoms";
-import {getDoctorPaymentProduct} from "../../modules/doctors";
-import {getVitalOccurence} from "../../modules/vital_occurence";
+import { getSymptomDetails } from "../../modules/symptoms";
+import { getDoctorPaymentProduct } from "../../modules/doctors";
+import { getVitalOccurence } from "../../modules/vital_occurence";
 
-import {fetchChatAccessToken} from "../../modules/twilio";
-import {addMessageOfChat, raiseChatNotification,} from "../../modules/chatMessages";
+import { fetchChatAccessToken } from "../../modules/twilio";
+import { addMessageOfChat, raiseChatNotification, } from "../../modules/chatMessages";
 
-import {getAllFeatures, toggleChatPermission, toggleVideoPermission,} from "../../modules/featuresMappings";
+import { getAllFeatures, toggleChatPermission, toggleVideoPermission, } from "../../modules/featuresMappings";
 
 const mapStateToProps = (state) => {
     const {

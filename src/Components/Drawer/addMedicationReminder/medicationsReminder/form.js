@@ -1,5 +1,5 @@
-import React, {Component, Fragment, useRef, useEffect} from "react";
-import {Button, Input, message, Radio} from "antd";
+import React, { Component, Fragment } from "react";
+import { Button, Input, message, Radio } from "antd";
 import moment from "moment";
 import participantsField from "../common/participants";
 import startTimeField from "../common/startTime";
@@ -22,10 +22,10 @@ import instructions from "../common/instructions";
 import formulation from "../common/formulation";
 
 import messages from "../message";
-import {hasErrors, isNumber} from "../../../../Helper/validation";
-import {DAYS_NUMBER, MEDICINE_UNITS, REPEAT_TYPE, USER_CATEGORY, TABLET,} from "../../../../constant";
+import { hasErrors, isNumber } from "../../../../Helper/validation";
+import { DAYS_NUMBER, MEDICINE_UNITS, REPEAT_TYPE, USER_CATEGORY, } from "../../../../constant";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 import isEmpty from "../../../../Helper/is-empty";
 

@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {searchVitals} from "../../Helper/urls/vitals";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { searchVitals } from "../../Helper/urls/vitals";
 
 export const SEARCH_VITAL_START = "SEARCH_VITAL_START";
 export const SEARCH_VITAL_COMPLETED = "SEARCH_VITAL_COMPLETED";

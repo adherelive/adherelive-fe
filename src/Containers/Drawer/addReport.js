@@ -1,8 +1,8 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import addReportDrawer from "../../Components/Drawer/addReportDrawer";
-import {DRAWER} from "../../constant";
-import {close} from "../../modules/drawer";
-import {addReport, uploadReport} from "../../modules/reports";
+import { DRAWER } from "../../constant";
+import { close } from "../../modules/drawer";
+import { addReport, uploadReport } from "../../modules/reports";
 
 const mapStateToProps = (state) => {
     const {

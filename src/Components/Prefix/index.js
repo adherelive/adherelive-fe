@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 
-import {Select} from "antd";
+import { Select } from "antd";
 import Form from "antd/es/form";
 
 import india from "../../Assets/images/india.png";

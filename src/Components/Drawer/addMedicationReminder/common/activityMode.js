@@ -1,9 +1,9 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {Form, Radio} from "antd";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { Form, Radio } from "antd";
 
 import messages from "../message";
-import {getActivityBetween} from "../constant";
+import { getActivityBetween } from "../constant";
 import appointmentType from "./appointmentType";
 
 const {Item: FormItem} = Form;

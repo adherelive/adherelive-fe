@@ -1,9 +1,9 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import DietResponseDrawer from "../../Components/Drawer/dietResponses";
 
-import {close} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
+import { close } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {

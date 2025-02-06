@@ -1,6 +1,5 @@
-import React, {useState} from "react";
-import {Input} from "antd";
-import isEmpty from "../../../../Helper/is-empty";
+import React, { useState } from "react";
+import { Input } from "antd";
 
 function MiddleTable() {
     const [tableData, setTableData] = useState([

@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import ReactMde from "react-mde";
 import { marked } from "marked"; // Use marked instead of Showdown
 import "react-mde/lib/styles/css/react-mde-all.css";
@@ -8,7 +8,7 @@ import Radio from "antd/es/radio";
 import message from "antd/es/message";
 
 import messages from "./messages";
-import {ArrowLeftOutlined} from "@ant-design/icons";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 /**
  * Replaced Showdown with marked

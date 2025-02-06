@@ -1,5 +1,5 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
 import {
     addCareplanForPatientUrl,
     getAddPatientUrl,
@@ -9,8 +9,8 @@ import {
     searchPatientForDoctorUrl,
     searchPatientFromNumUrl,
 } from "../../Helper/urls/patients";
-import {getInitialData} from "./../auth/index";
-import {getPatientMissedEventsUrl} from "../../Helper/urls/event";
+import { getInitialData } from "./../auth/index";
+import { getPatientMissedEventsUrl } from "../../Helper/urls/event";
 
 export const ADD_PATIENT = "ADD_PATIENT";
 export const ADD_PATIENT_COMPLETED = "ADD_PATIENT_COMPLETED";

@@ -1,10 +1,9 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {Button, Checkbox, Drawer, Input, message, Modal, Select, Spin, TimePicker,} from "antd";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { Button, Checkbox, Drawer, Input, message, Modal, Select, Spin, TimePicker, } from "antd";
 
 import {
     APPOINTMENT_TYPE_TITLE,
-    DAYS,
     DAYS_TEXT_NUM_SHORT,
     EVENT_TYPE,
     MEDICATION_TIMING,
@@ -31,14 +30,8 @@ import SyrupIcon from "../../../Assets/images/pharmacy.png";
 import uuid from "react-uuid";
 import messages from "./message";
 import addDays from "date-fns/addDays";
-import getDay from "date-fns/getDay";
-import getYear from "date-fns/getYear";
-import getMonth from "date-fns/getMonth";
-import getHours from "date-fns/getHours";
-import getMinutes from "date-fns/getMinutes";
 
-import {DeleteFilled, EditFilled, PoweroffOutlined} from "@ant-design/icons";
-import Icon from "@ant-design/icons";
+import { DeleteFilled, EditFilled, PoweroffOutlined } from "@ant-design/icons";
 import isEmpty from "../../../Helper/is-empty";
 
 const {Option} = Select;

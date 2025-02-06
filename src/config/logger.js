@@ -1,7 +1,5 @@
 // file: src/config/logger.js
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import moment from "moment";
+import React from "react";
 
 const LOG_LEVELS = {
     ERROR: 0,

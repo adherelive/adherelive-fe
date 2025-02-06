@@ -1,10 +1,8 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import DoctorTransactionPage from "../../../Components/Pages/doctorTransactionPage";
-import {withRouter} from "react-router-dom";
-import { open } from "../../../modules/drawer";
-import { DRAWER } from "../../../constant";
+import { withRouter } from "react-router-dom";
 // code implementation after phase 1 for Subscription
-import {getAllTransactions} from "../../../modules/subscription/transactions/index";
+import { getAllTransactions } from "../../../modules/subscription/transactions/index";
 
 const mapStateToProps = (state) => {
     const {

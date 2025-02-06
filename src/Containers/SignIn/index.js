@@ -1,8 +1,8 @@
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import SignIn from "../../Components/SignIn";
-import {getInitialData, signIn, signOut, signUp, verifyUser,} from "../../modules/auth";
-import {connect} from "react-redux";
-import {getUserRoles} from "../../modules/userRoles";
+import { getInitialData, signIn, signOut, signUp, verifyUser, } from "../../modules/auth";
+import { connect } from "react-redux";
+import { getUserRoles } from "../../modules/userRoles";
 
 const mapStateToProps = (state) => {
     const {graphs, auth} = state;

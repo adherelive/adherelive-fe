@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import Drawer from "antd/es/drawer";
 import Input from "antd/es/input";
 import Upload from "antd/es/upload";
@@ -9,13 +9,7 @@ import Button from "antd/es/button";
 import Footer from "../footer";
 import confirm from "antd/es/modal/confirm";
 
-import {
-  DeleteTwoTone,
-  PlusOutlined,
-  EyeTwoTone,
-  DownloadOutlined,
-  LoadingOutlined,
-} from "@ant-design/icons";
+import { DeleteTwoTone, DownloadOutlined, EyeTwoTone, LoadingOutlined, PlusOutlined, } from "@ant-design/icons";
 
 import messages from "./message";
 

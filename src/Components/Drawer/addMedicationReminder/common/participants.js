@@ -1,8 +1,8 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {Checkbox, Form, Input, Radio, Select} from "antd";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { Form, Radio, Select } from "antd";
 import moment from "moment";
-import {ACTIVITY_TYPE, APPOINTMENT_TYPE, EVENT_TYPE, USER_CATEGORY, USER_STATUS,} from "../../../../constant";
+import { ACTIVITY_TYPE, APPOINTMENT_TYPE, EVENT_TYPE, USER_CATEGORY, USER_STATUS, } from "../../../../constant";
 import messages from "../message";
 // import dropDownIcon from "../../../../Assets/images/material-icons-black-arrow-drop-down.svg";
 import userPlaceHolder from "../../../../Assets/images/ico-placeholder-userdp.svg";

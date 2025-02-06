@@ -1,12 +1,12 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {Form, Input, Radio, Tag} from "antd";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { Form, Input, Radio, Tag } from "antd";
 import messages from "../message";
-import {ALTERNATE_DAYS, DAYS} from "../../../../constant";
+import { ALTERNATE_DAYS, DAYS } from "../../../../constant";
 import startDate from "./startDate";
 import endDate from "./endDate";
 import moment from "moment";
-import whenToTake, {WHEN_TO_TAKE_BUTTONS,} from "../../addMedicationReminder/common/whenTotakeMedicaine";
+import whenToTake, { WHEN_TO_TAKE_BUTTONS, } from "../../addMedicationReminder/common/whenTotakeMedicaine";
 
 const {Item: FormItem} = Form;
 const {CheckableTag} = Tag;

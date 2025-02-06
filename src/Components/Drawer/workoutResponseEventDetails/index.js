@@ -1,11 +1,11 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import Drawer from "antd/es/drawer";
 import moment from "moment";
 import messages from "./messages";
 import Modal from "antd/es/modal";
 import CheckCircleFilled from "@ant-design/icons/CheckCircleFilled";
-import {VIDEO_TYPES} from "../../../constant";
+import { VIDEO_TYPES } from "../../../constant";
 import message from "antd/es/message";
 
 class WorkoutReponseEventDetailsDrawer extends Component {

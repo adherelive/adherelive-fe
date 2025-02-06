@@ -1,8 +1,7 @@
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import SearchPatient from "../../Components/SearchPatient/index";
-import { getInitialData } from "../../modules/auth";
-import {connect} from "react-redux";
-import {searchPatientForDoctor, searchPatientFromNum,} from "../../modules/patients";
+import { connect } from "react-redux";
+import { searchPatientForDoctor, searchPatientFromNum, } from "../../modules/patients";
 
 const mapStateToProps = (state) => {
     const {

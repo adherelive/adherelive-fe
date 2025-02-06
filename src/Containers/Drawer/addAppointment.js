@@ -1,9 +1,9 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import AddAppointmentDrawer from "../../Components/Drawer/addAppointment";
-import {close} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
-import {getMedications} from "../../modules/medications";
+import { close } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
+import { getMedications } from "../../modules/medications";
 import {
     addAppointment,
     addCarePlanAppointment,
@@ -17,7 +17,7 @@ import {
     removeFavourite,
     removeFavouriteByRecordId,
 } from "../../modules/favouritesData/index";
-import {googleTranslate} from "../../modules/cdss";
+import { googleTranslate } from "../../modules/cdss";
 
 // code implementation after phase 1 for Subscription
 import {
@@ -25,7 +25,7 @@ import {
     setScheduleAppointmentData,
     updateActivityById
 } from "../../modules/subscription/activities";
-import {setFlashCard} from "../../modules/subscription/flashcard";
+import { setFlashCard } from "../../modules/subscription/flashcard";
 
 const mapStateToProps = (state) => {
     const {

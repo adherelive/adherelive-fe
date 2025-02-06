@@ -1,8 +1,8 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Routes from "../../Routes";
-import {getInitialData} from "../../modules/auth";
-import {open} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
+import { getInitialData } from "../../modules/auth";
+import { open } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {

@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import generateRow from "./dataRow";
 import getColumn from "./header";
 import Table from "antd/es/table";

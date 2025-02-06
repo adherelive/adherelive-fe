@@ -1,8 +1,8 @@
 // import { TREATMENT_INITIAL_STATE } from "../../data";
 
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {searchConditions} from "../../Helper/urls/conditions";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { searchConditions } from "../../Helper/urls/conditions";
 
 export const SEARCH_CONDITION_START = "SEARCH_CONDITION_START";
 export const SEARCH_CONDITION_COMPLETED = "SEARCH_CONDITION_COMPLETED";

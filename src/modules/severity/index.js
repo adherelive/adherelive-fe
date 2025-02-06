@@ -1,7 +1,7 @@
 // import { TREATMENT_INITIAL_STATE } from "../../data";
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {searchSeverities} from "../../Helper/urls/severity";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { searchSeverities } from "../../Helper/urls/severity";
 
 export const SEARCH_SEVERITY_START = "SEARCH_SEVERITY_START";
 export const SEARCH_SEVERITY_COMPLETED = "SEARCH_SEVERITY_COMPLETED";

@@ -1,4 +1,4 @@
-import {GET_WORKOUT_DETAILS_COMPLETED} from "../workouts";
+import { GET_WORKOUT_DETAILS_COMPLETED } from "../workouts";
 
 function repetitionsReducer(state, data) {
     const {repetitions} = data || {};

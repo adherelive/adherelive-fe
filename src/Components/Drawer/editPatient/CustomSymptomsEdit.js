@@ -1,7 +1,6 @@
 import React from "react";
-import {Select} from "antd";
+import { Select } from "antd";
 // import symptoms from "../addPatient/symptomList.json";
-import isEmpty from "../../../Helper/is-empty";
 
 const symptoms = [
     {

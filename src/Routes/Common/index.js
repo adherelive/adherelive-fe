@@ -1,6 +1,6 @@
-import React, {Component} from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import {PATH} from "../../constant";
+import React, { Component } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { PATH } from "../../constant";
 
 import Consent from "../../Containers/Pages/userConsentPage";
 

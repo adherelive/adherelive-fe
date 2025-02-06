@@ -1,4 +1,4 @@
-import {ACTIVITY_TYPE, APPOINTMENT_TYPE, USER_CATEGORY,} from "../../../constant";
+import { ACTIVITY_TYPE, APPOINTMENT_TYPE, USER_CATEGORY, } from "../../../constant";
 import messages from "./message";
 
 const DEFAULT = "DEFAULT";
