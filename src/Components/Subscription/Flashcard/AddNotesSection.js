@@ -1,6 +1,6 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import TextArea from "antd/lib/input/TextArea";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import isEmpty from "../../../Helper/is-empty";
 
 function AddNotesSection({notesData, setNotesData}) {

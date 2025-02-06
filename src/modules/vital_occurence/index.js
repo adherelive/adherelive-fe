@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {getVitalOccurenceUrl} from "../../Helper/urls/vitals";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { getVitalOccurenceUrl } from "../../Helper/urls/vitals";
 
 export const GET_VITAL_OCCURENCE_START = "GET_VITAL_OCCURENCE_START";
 export const GET_VITAL_OCCURENCE_COMPLETED = "GET_VITAL_OCCURENCE_COMPLETED";

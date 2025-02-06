@@ -1,6 +1,6 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
-import {getLastVisitAlerts} from "../../../../modules/scheduleEvents";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { getLastVisitAlerts } from "../../../../modules/scheduleEvents";
 import PatientAlerts from "../../../../Components/Patient/details/common/patientAlerts";
 
 const mapStateToProps = (state) => {

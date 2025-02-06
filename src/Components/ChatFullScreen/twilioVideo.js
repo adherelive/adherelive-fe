@@ -1,7 +1,7 @@
-import React, {Component, Fragment} from "react";
+import React, { Component, Fragment } from "react";
 import Video from "twilio-video";
 // import TwilioChat from "../TwilioChat";
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
 import moment from "moment";
 import UserDpPlaceholder from "../../Assets/images/ico-placeholder-userdp.svg";
 import StartCallIcon from "../../Assets/images/ico-vc-start-call.png";
@@ -11,12 +11,12 @@ import AudioIcon from "../../Assets/images/ico-vc-audio.png";
 import VideoIcon from "../../Assets/images/ico-vc-video.png";
 import VideoDisabledIcon from "../../Assets/images/ico-vc-video-off.png";
 import AudioDisabledIcon from "../../Assets/images/ico-vc-audio-off.png";
-import {doRequest} from "../../Helper/network";
-import {Twilio} from "../../Helper/urls";
-import {REQUEST_TYPE, USER_CATEGORY} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { Twilio } from "../../Helper/urls";
+import { REQUEST_TYPE, USER_CATEGORY } from "../../constant";
 
-import { Button, message, Spin } from "antd";
-import {LoadingOutlined} from "@ant-design/icons";
+import { Button } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 class VideoComponent extends Component {
     constructor(props) {

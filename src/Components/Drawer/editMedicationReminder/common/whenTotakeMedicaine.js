@@ -1,11 +1,11 @@
-import React, {Component, Fragment} from "react";
-import {Form, Icon, Radio, Select} from "antd";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { Form, Radio, Select } from "antd";
+import { injectIntl } from "react-intl";
 import messages from "../message";
 import moment from "moment";
 
-import {WHEN_TO_TAKE_BUTTONS} from "../../addMedicationReminder/common/whenTotakeMedicaine";
-import {WHEN_TO_TAKE_ABBR_TYPES} from "../../../../constant";
+import { WHEN_TO_TAKE_BUTTONS } from "../../addMedicationReminder/common/whenTotakeMedicaine";
+import { WHEN_TO_TAKE_ABBR_TYPES } from "../../../../constant";
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;

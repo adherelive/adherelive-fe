@@ -1,5 +1,5 @@
 import * as Chart from "chart.js";
-import {GRAPH_COLORS} from "../constant";
+import { GRAPH_COLORS } from "../constant";
 
 export default (data) => {
     const {dashboard_report = []} = data || {};

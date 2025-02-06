@@ -1,25 +1,10 @@
-import React, {Fragment, useState} from "react";
-import { injectIntl } from "react-intl";
-import {
-  Drawer,
-  Icon,
-  Select,
-  Input,
-  message,
-  Button,
-  Spin,
-  Radio,
-  DatePicker,
-} from "antd";
+import React, { Fragment, useState } from "react";
+import { Button, Drawer, Input, message, Radio, Select, } from "antd";
 // import { CONSULTATION_FEE_TYPE_TEXT } from "../../../constant";
-
-import moment from "moment";
-import throttle from "lodash-es/throttle";
 // import messages from "./message";
-import Footer from "../../../Drawer/footer";
 import Form from "antd/es/form";
 import InputNumber from "antd/es/input-number";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import isEmpty from "../../../../Helper/is-empty";
 
 const {Option} = Select;

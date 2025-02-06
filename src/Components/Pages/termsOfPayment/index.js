@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import message from "antd/es/message";
 import ReactMarkdown from "react-markdown";
 import CompanyIcon from "../../../Assets/images/logo3x.png";

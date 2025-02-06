@@ -1,17 +1,8 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import editAccountDetailsDrawer from "../../Components/Drawer/editAccountDetails";
-import {
-  addAccountDetails,
-  getAccountDetails,
-  updateAccountDetails,
-} from "../../modules/accountDetails";
-import {DRAWER} from "../../constant";
-import {close} from "../../modules/drawer";
-import {
-  addDoctorPaymentProduct,
-  getAdminPaymentProduct,
-  getDoctorPaymentProduct,
-} from "../../modules/doctors";
+import { getAccountDetails, updateAccountDetails, } from "../../modules/accountDetails";
+import { DRAWER } from "../../constant";
+import { close } from "../../modules/drawer";
 
 // import { createReminder, updateReminder } from "../../modules/reminder"; // write to add to database
 const mapStateToProps = (state) => {

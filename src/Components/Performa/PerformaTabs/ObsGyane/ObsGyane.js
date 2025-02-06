@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import SelectObsGyaneForm from "./SelectObsGyaneForm";
 import isEmpty from "../../../../Helper/is-empty";
 import LabReports from "../../PerformaForms/ObsGyane/LabReports";

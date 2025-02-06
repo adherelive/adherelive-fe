@@ -1,13 +1,13 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import {ClockCircleOutlined, DeleteTwoTone, EditFilled, EnvironmentFilled, Icon} from "@ant-design/icons";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { ClockCircleOutlined, DeleteTwoTone, EditFilled, EnvironmentFilled } from "@ant-design/icons";
 import uuid from "react-uuid";
-import {Input, message} from "antd";
-import {DAYS_TEXT_NUM_SHORT, FULL_DAYS, FULL_DAYS_NUMBER, PATH, USER_CATEGORY,} from "../../constant";
+import { Input, message } from "antd";
+import { DAYS_TEXT_NUM_SHORT, FULL_DAYS, FULL_DAYS_NUMBER, PATH, USER_CATEGORY, } from "../../constant";
 import UploadSteps from "./steps";
 import LocationModal from "./locationmodal";
 import TimingModal from "./timingModal";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import moment from "moment";
 import messages from "./messages";
 

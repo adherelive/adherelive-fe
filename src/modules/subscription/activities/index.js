@@ -1,5 +1,5 @@
-import {doRequest} from "../../../Helper/network";
-import {REQUEST_TYPE} from "../../../constant";
+import { doRequest } from "../../../Helper/network";
+import { REQUEST_TYPE } from "../../../constant";
 import {
     activitiesUrl,
     getSecondaryDoctorUrl,
@@ -10,7 +10,7 @@ import {
     updateActivityUrl,
     updateReasonForReassignement,
 } from "../../../Helper/urls/subscriptions";
-import {SET_ACTIVITY_DATA_FOR_SCHEDULE, SET_PENDING_ACTIVITIES_TABLE_DATA,} from "../../../reducer/index";
+import { SET_ACTIVITY_DATA_FOR_SCHEDULE, SET_PENDING_ACTIVITIES_TABLE_DATA, } from "../../../reducer/index";
 
 export const getAllActivities = (activityStatus, dueDateSort) => {
     let response = {};

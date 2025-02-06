@@ -1,8 +1,7 @@
 import React from "react";
 import moment from "moment";
-import { CONSULTATION_FEE_TYPE_TEXT } from "../../../../constant";
 import Tooltip from "antd/es/tooltip";
-import {EditOutlined} from "@ant-design/icons";
+import { EditOutlined } from "@ant-design/icons";
 
 export default (props) => {
     const {data: {activities: {appointment_time = {}} = {}} = {}} =

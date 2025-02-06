@@ -1,9 +1,9 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import EditWorkoutDrawer from "../../Components/Drawer/editWorkout";
-import {close} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
-import {addExercise} from "../../modules/exercises";
+import { close } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
+import { addExercise } from "../../modules/exercises";
 import {
     deleteWorkout,
     getSingleWorkoutDetails,
@@ -11,8 +11,8 @@ import {
     updateWorkout,
     updateWorkoutTotalCalories,
 } from "../../modules/workouts";
-import {getPatientCarePlanDetails} from "../../modules/carePlans";
-import {googleTranslate} from "../../modules/cdss";
+import { getPatientCarePlanDetails } from "../../modules/carePlans";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
     const {auth} = state;

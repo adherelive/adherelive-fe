@@ -1,4 +1,4 @@
-import {formatProviderTableData, TABLE_COLUMN} from "../helper";
+import { formatProviderTableData, TABLE_COLUMN } from "../helper";
 
 export default (data) => {
     const {id, openEditProviderDrawer} = data;

@@ -3,7 +3,7 @@ import edit_image from "../../../../Assets/images/edit.svg";
 import messages from "../messages";
 import Tooltip from "antd/es/tooltip";
 // import EyeFilled from "@ant-design/icons/EyeFilled";
-import {EyeFilled} from "@ant-design/icons";
+import { EyeFilled } from "@ant-design/icons";
 
 export default (props) => {
     const {action, id, formatMessage, canViewDetails = false} = props || {};

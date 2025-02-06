@@ -1,10 +1,10 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {Form, Input, Radio, Tag} from "antd";
-import {ALTERNATE_DAYS, DAYS} from "../../../../constant";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { Form, Input, Radio, Tag } from "antd";
+import { ALTERNATE_DAYS, DAYS } from "../../../../constant";
 import startDate from "./startDate";
 import endDate from "./endDate";
-import whenToTake, {WHEN_TO_TAKE_BUTTONS} from "./whenTotakeMedicaine";
+import whenToTake, { WHEN_TO_TAKE_BUTTONS } from "./whenTotakeMedicaine";
 import messages from "../message";
 import moment from "moment";
 

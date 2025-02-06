@@ -1,6 +1,6 @@
-import {ONBOARDING_STATUS, PATH, REQUEST_TYPE, USER_CATEGORY,} from "../../constant";
-import {doRequest} from "../../Helper/network";
-import {Auth} from "../../Helper/urls";
+import { ONBOARDING_STATUS, PATH, REQUEST_TYPE, USER_CATEGORY, } from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { Auth } from "../../Helper/urls";
 
 export const SIGNING = "SIGNING";
 export const SIGNING_COMPLETED = "SIGNING_COMPLETED";

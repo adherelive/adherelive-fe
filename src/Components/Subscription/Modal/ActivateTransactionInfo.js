@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Button, Modal} from "antd";
+import React, { useState } from "react";
+import { Button, Modal } from "antd";
 import message from "antd/es/message";
-import {useDispatch} from "react-redux";
-import {activateTransaction} from "../../../modules/subscription/transactions";
+import { useDispatch } from "react-redux";
+import { activateTransaction } from "../../../modules/subscription/transactions";
 import moment from "moment";
 import isEmpty from "../../../Helper/is-empty";
 

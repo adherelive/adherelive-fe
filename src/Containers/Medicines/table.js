@@ -1,5 +1,5 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import MedicineTable from "../../Components/Medicines/table";
 import {
     deleteMedicine,
@@ -9,10 +9,7 @@ import {
     mapMedicineToPublic,
     resetSearchPrivate,
     resetSearchPublic,
-    searchMedicine,
 } from "../../modules/medicines";
-import { open } from "../../modules/drawer";
-import { DRAWER } from "../../constant";
 
 const mapStateToProps = (state) => {
     const {

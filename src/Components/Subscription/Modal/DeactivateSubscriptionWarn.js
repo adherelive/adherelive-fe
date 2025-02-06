@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Button, Modal} from "antd";
+import React, { useState } from "react";
+import { Button, Modal } from "antd";
 import message from "antd/es/message";
-import {useDispatch} from "react-redux";
-import {updateSubscriptions} from "../../../modules/subscription/subscriptions";
+import { useDispatch } from "react-redux";
+import { updateSubscriptions } from "../../../modules/subscription/subscriptions";
 
 function DeactivateSubscriptionWarn({data}) {
     const dispatch = useDispatch();

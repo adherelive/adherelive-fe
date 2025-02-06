@@ -1,5 +1,4 @@
-import {defineMessages} from "react-intl";
-import messages from "../PatientDetails/message";
+import { defineMessages } from "react-intl";
 
 const message = defineMessages({
     add_appointment: {

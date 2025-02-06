@@ -1,5 +1,5 @@
 import React from "react";
-import {WHEN_TO_TAKE_ABBR_LABELS} from "../../../../constant";
+import { WHEN_TO_TAKE_ABBR_LABELS } from "../../../../constant";
 
 export default (props) => {
     const {medicationData} = props || {};

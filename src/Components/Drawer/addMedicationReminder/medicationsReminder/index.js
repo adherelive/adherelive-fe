@@ -1,9 +1,9 @@
-import React, {Component} from "react";
-import {Drawer, message} from "antd";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { Drawer, message } from "antd";
+import { injectIntl } from "react-intl";
 
 import moment from "moment";
-import {MEDICINE_UNITS, WHEN_TO_TAKE_ABBR_TYPES} from "../../../../constant";
+import { MEDICINE_UNITS, WHEN_TO_TAKE_ABBR_TYPES } from "../../../../constant";
 import AddMedicationReminderForm from "./form";
 import AddMedicineDrawer from "../../../../Containers/Drawer/addMedicine";
 
@@ -16,7 +16,7 @@ import startDateField from "../common/startDate";
 import endDateField from "../common/endDate";
 import repeatDaysField from "../common/selectedDays";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class AddMedicationReminder extends Component {

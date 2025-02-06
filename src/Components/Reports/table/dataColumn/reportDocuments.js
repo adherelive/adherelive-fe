@@ -1,5 +1,5 @@
-import React, {Fragment} from "react";
-import {PaperClipOutlined} from "@ant-design/icons";
+import React, { Fragment } from "react";
+import { PaperClipOutlined } from "@ant-design/icons";
 
 const REPORT_DOCUMENTS_TO_SHOW = 3;
 

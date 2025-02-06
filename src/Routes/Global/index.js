@@ -1,5 +1,5 @@
-import React, {Component, lazy} from "react";
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import React, { Component, lazy } from "react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 // import landingPage from "../Components/landingPage";
 // import Signup from "../Containers/Invite";
 // import Identify from "../Components/forgotPassword/Identify";
@@ -11,7 +11,7 @@ import Validation from "../../Containers/Validation";
 import ForgotPassword from "../../Containers/forgotPassword";
 import ResetPassword from "../../Containers/forgotPassword/resetPassword";
 //import SignIn from "../../Components/SignIn";
-import {PATH} from "../../constant";
+import { PATH } from "../../constant";
 
 const TermsOfService = lazy(() =>
     import(

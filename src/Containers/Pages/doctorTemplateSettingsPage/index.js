@@ -1,13 +1,13 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import TemplatePage from "../../../Components/Pages/doctorTemplateSettingsPage";
-import {DRAWER} from "../../../constant";
-import {open} from "../../../modules/drawer";
-import {getVitalOccurence} from "../../../modules/vital_occurence";
-import {getAppointmentsDetails} from "../../../modules/appointments";
-import {getMedicationDetails} from "../../../modules/otherDetails";
-import {searchMedicine} from "../../../modules/medicines";
-import {getAllTemplatesForDoctor, getAllTemplatesForDoctorUsingQuery,} from "../../../modules/carePlanTemplates";
+import { DRAWER } from "../../../constant";
+import { open } from "../../../modules/drawer";
+import { getVitalOccurence } from "../../../modules/vital_occurence";
+import { getAppointmentsDetails } from "../../../modules/appointments";
+import { getMedicationDetails } from "../../../modules/otherDetails";
+import { searchMedicine } from "../../../modules/medicines";
+import { getAllTemplatesForDoctor, getAllTemplatesForDoctorUsingQuery, } from "../../../modules/carePlanTemplates";
 
 const mapStateToProps = (state) => {
     // console.log("3289467832482354723874792384 STATE",state);

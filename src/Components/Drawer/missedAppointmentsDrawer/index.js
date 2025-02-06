@@ -1,9 +1,9 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import { Drawer, message, Spin } from "antd";
-import {USER_CATEGORY} from "../../../constant";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
+import { Drawer, Spin } from "antd";
+import { USER_CATEGORY } from "../../../constant";
 import messages from "./message";
-import {getName} from "../../../Helper/validation";
+import { getName } from "../../../Helper/validation";
 import MissedAppointmentCard from "../../Cards/patient/missedAppointment";
 
 class MissedAppointmentsDrawer extends Component {

@@ -1,8 +1,7 @@
 import React from "react";
-import {Button} from "antd";
-import {PoweroffOutlined} from "@ant-design/icons";
-import {injectIntl} from "react-intl";
-import messages from "./message";
+import { Button } from "antd";
+import { PoweroffOutlined } from "@ant-design/icons";
+import { injectIntl } from "react-intl";
 
 export default injectIntl((props) => {
     const {

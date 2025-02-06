@@ -1,20 +1,20 @@
-import React, {lazy, Suspense} from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
 // import { createRoot } from 'react-dom/client';
 import reportWebVitals from "./reportWebVitals";
 
-import {Provider} from "react-redux";
-import {addLocaleData, IntlProvider} from "react-intl";
+import { Provider } from "react-redux";
+import { addLocaleData, IntlProvider } from "react-intl";
 import arLocaleData from "react-intl/locale-data/ar";
 import esLocaleData from "react-intl/locale-data/es";
 import hiLocalData from "react-intl/locale-data/hi";
 import translations from "./i18n/locales";
-import {getQuery} from "./Helper/queryString";
+import { getQuery } from "./Helper/queryString";
 import store from "./store";
 
 import "./Styles/index.less";
-import {DevSupport} from "@react-buddy/ide-toolbox";
-import {ComponentPreviews, useInitial} from "./react-buddy";
+import { DevSupport } from "@react-buddy/ide-toolbox";
+import { ComponentPreviews, useInitial } from "./react-buddy";
 
 const Desktop = lazy(() =>
     import(/* webpackChunkName: "DesktopWrapper" */ "./Containers/Routes")

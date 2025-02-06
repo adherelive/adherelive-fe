@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {Twilio} from "../../Helper/urls";
-import {REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { Twilio } from "../../Helper/urls";
+import { REQUEST_TYPE } from "../../constant";
 
 const intialState = {};
 

@@ -1,5 +1,5 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
 import * as UserRoleUrls from "../../Helper/urls/userRoles";
 
 export const GET_USER_ROLES_START = "GET_USER_ROLES_START";

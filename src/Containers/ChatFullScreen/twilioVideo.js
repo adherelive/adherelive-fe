@@ -1,7 +1,7 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import TwilioVideo from "../../Components/ChatFullScreen/twilioVideo";
 
-import {fetchVideoAccessToken} from "../../modules/twilio";
+import { fetchVideoAccessToken } from "../../modules/twilio";
 // import {
 //     fetchEventUsers,
 //     addVideoRoomParticipantsInEvent

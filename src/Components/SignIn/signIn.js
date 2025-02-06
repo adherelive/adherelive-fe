@@ -1,12 +1,12 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {Button, Input, message} from "antd";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { Button, Input, message } from "antd";
 import messages from "./message";
-import {withRouter} from "react-router-dom";
-import {PATH} from "../../constant";
+import { withRouter } from "react-router-dom";
+import { PATH } from "../../constant";
 import config from "../../config";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 const {Item: FormItem} = Form;

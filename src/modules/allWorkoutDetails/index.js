@@ -1,4 +1,4 @@
-import {GET_WORKOUT_DETAILS_COMPLETED} from "../workouts";
+import { GET_WORKOUT_DETAILS_COMPLETED } from "../workouts";
 
 function getAllWorkoutDetailsReducer(state, data) {
     const {days, repetitions, start_time = {}} = data || {};

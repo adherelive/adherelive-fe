@@ -1,8 +1,7 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
-import Button from "antd/es/button";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import message from "antd/es/message";
-import {TABLE_DEFAULT_BLANK_FIELD} from "../../constant";
+import { TABLE_DEFAULT_BLANK_FIELD } from "../../constant";
 import messages from "./messages";
 
 class ProviderAccountDetails extends Component {

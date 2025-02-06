@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 import Drawer from "antd/es/drawer";
 
 import MedicationTimeline from "../../../Containers/Medications/timeline";

@@ -1,16 +1,15 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 // import messages from "./message";
 // import {formatMessage} from "react-intl/src/format";
 import moment from "moment";
 import uuid from "react-uuid";
-import {Button, Checkbox, message, Modal, TimePicker} from "antd";
-import {FULL_DAYS} from "../../constant";
+import { Button, Checkbox, message, Modal } from "antd";
+import { FULL_DAYS } from "../../constant";
 import messages from "./messages";
-import {ClockCircleOutlined, MinusCircleFilled} from "@ant-design/icons";
+import { ClockCircleOutlined, MinusCircleFilled } from "@ant-design/icons";
 import Dropdown from "antd/es/dropdown";
 import TimeKeeper from "react-timekeeper";
-import Icon from "@ant-design/icons";
 
 // const Initial_State = {
 //     daySelected: {

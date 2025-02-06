@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {getDoctorAccountDetailsUrl} from "../../Helper/urls/doctor";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { getDoctorAccountDetailsUrl } from "../../Helper/urls/doctor";
 import {
     accountDetailsForCreatedByProviderUrl,
     accountDetailsUrl,

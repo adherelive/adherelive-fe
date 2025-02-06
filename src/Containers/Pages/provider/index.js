@@ -1,8 +1,8 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import AdminProviderPage from "../../../Components/Pages/adminProvider";
-import {withRouter} from "react-router-dom";
-import {open} from "../../../modules/drawer";
-import {DRAWER} from "../../../constant";
+import { withRouter } from "react-router-dom";
+import { open } from "../../../modules/drawer";
+import { DRAWER } from "../../../constant";
 
 const mapStateToProps = (state) => {
     const {} = state;

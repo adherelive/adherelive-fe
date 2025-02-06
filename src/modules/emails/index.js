@@ -1,4 +1,4 @@
-import {SEARCH_DOCTOR_COMPLETE} from "../doctors";
+import { SEARCH_DOCTOR_COMPLETE } from "../doctors";
 
 function emailsReducer(state, data) {
     const {emails = {}} = data || {};

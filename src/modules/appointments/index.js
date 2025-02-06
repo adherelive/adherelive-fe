@@ -1,5 +1,5 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
 import {
     addAppointmentUrl,
     addCarePlanAppointmentUrl,
@@ -9,7 +9,7 @@ import {
     getAppointmentsDetailsUrl,
     updateAppointmentUrl,
 } from "../../Helper/urls/appointments";
-import {SET_APPOINTMENT_FOR_DAY} from "../../reducer/index";
+import { SET_APPOINTMENT_FOR_DAY } from "../../reducer/index";
 
 export const ADD_APPOINTMENT_START = "ADD_APPOINTMENT_START";
 export const ADD_APPOINTMENT_COMPLETE = "ADD_APPOINTMENT_COMPLETE";

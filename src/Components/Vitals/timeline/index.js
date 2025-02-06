@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import moment from "moment";
 import Loading from "../../Common/Loading";
 import messages from "./messages";
@@ -7,11 +7,8 @@ import Timeline from "antd/es/timeline";
 import message from "antd/es/message";
 import ClockCircleOutlined from "@ant-design/icons/es/icons/ClockCircleOutlined";
 import CheckCircleOutlined from "@ant-design/icons/es/icons/CheckCircleOutlined";
-import DeleteOutlined from "@ant-design/icons/es/icons/DeleteOutlined";
-import editIcon from "../../../Assets/images/edit.svg";
 import Modal from "antd/es/modal";
 import Button from "antd/es/button";
-import Form from "antd/es/form";
 import Input from "antd/es/input";
 
 const {Item: TimelineItem} = Timeline;

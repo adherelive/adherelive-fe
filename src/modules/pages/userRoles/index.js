@@ -1,4 +1,4 @@
-import {GET_USER_ROLES_COMPLETED} from "../../userRoles";
+import { GET_USER_ROLES_COMPLETED } from "../../userRoles";
 
 function userRoleReducer(state, data) {
     const {user_role_ids} = data || {};

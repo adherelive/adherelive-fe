@@ -1,9 +1,9 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
-import {Form, Select} from "antd";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
+import { Form, Select } from "antd";
 
 import dropDownIcon from "../../../../Assets/images/material-icons-black-arrow-drop-down.svg";
-import {REPEAT_OPTION, REPEAT_TYPE} from "../../../../constant";
+import { REPEAT_OPTION, REPEAT_TYPE } from "../../../../constant";
 
 const DropDownIcon = <img src={dropDownIcon} alt="d" className="w24 h24"/>;
 

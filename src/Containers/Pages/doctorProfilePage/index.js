@@ -1,6 +1,6 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import DoctorProfilePage from "../../../Components/Pages/doctorProfilePage";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import {
     activateDoctor,
     deactivateDoctor,
@@ -8,11 +8,11 @@ import {
     updateDoctor,
     verifyDoctor,
 } from "../../../modules/doctors";
-import {searchSpecialties} from "../../../modules/specialities";
-import {searchCouncil} from "../../../modules/councils";
-import {deleteDoctorQualificationImage, deleteDoctorRegistrationImage,} from "../../../modules/onBoarding";
-import {searchDegree} from "../../../modules/degrees";
-import {searchCollege} from "../../../modules/colleges";
+import { searchSpecialties } from "../../../modules/specialities";
+import { searchCouncil } from "../../../modules/councils";
+import { deleteDoctorQualificationImage, deleteDoctorRegistrationImage, } from "../../../modules/onBoarding";
+import { searchDegree } from "../../../modules/degrees";
+import { searchCollege } from "../../../modules/colleges";
 
 // import {open} from "../../../modules/drawer";
 // import {DRAWER} from "../../../constant";

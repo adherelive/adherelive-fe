@@ -1,5 +1,5 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
 import {
     getAllMissedChartsCount,
     getAllMissedEventDataByQueryUrl,
@@ -12,8 +12,8 @@ import {
     getCalenderDataForDayUrl,
     getDoctorsCalenderDataForDayUrl,
 } from "../../Helper/urls/provider";
-import {getPatientLastVisitAlertUrl} from "../../Helper/url/patients";
-import {SET_MISSED_CHART_DRAWER_LOADING} from "../commonReducer";
+import { getPatientLastVisitAlertUrl } from "../../Helper/url/patients";
+import { SET_MISSED_CHART_DRAWER_LOADING } from "../commonReducer";
 
 export const GET_SCHEDULE_EVENTS_START = "GET_SCHEDULE_EVENTS_START";
 export const GET_SCHEDULE_EVENTS_COMPLETED = "GET_SCHEDULE_EVENTS_COMPLETED";

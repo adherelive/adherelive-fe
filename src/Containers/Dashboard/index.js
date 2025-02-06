@@ -1,29 +1,29 @@
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Dashboard from "../../Components/Dashboard";
-import {getInitialData, signOut} from "../../modules/auth";
-import {addPatient, searchPatientFromNum} from "../../modules/patients";
-import {searchMedicine} from "../../modules/medicines";
-import {searchTreatment} from "../../modules/treatments";
-import {searchCondition} from "../../modules/conditions";
-import {searchSeverity} from "../../modules/severity";
-import {getGraphs, updateGraphs} from "../../modules/graphs";
-import {connect} from "react-redux";
-import {closePopUp} from "../../modules/chat";
-import {fetchChatAccessToken} from "../../modules/twilio";
-import {addToWatchlist, removePatientFromWatchlist,} from "../../modules/doctors";
-import {showVerifyModal} from "../../modules/pages/features";
-import {getAllFeatures} from "../../modules/featuresMappings";
-import {DRAWER} from "../../constant";
-import {open} from "../../modules/drawer";
+import { getInitialData, signOut } from "../../modules/auth";
+import { addPatient, searchPatientFromNum } from "../../modules/patients";
+import { searchMedicine } from "../../modules/medicines";
+import { searchTreatment } from "../../modules/treatments";
+import { searchCondition } from "../../modules/conditions";
+import { searchSeverity } from "../../modules/severity";
+import { getGraphs, updateGraphs } from "../../modules/graphs";
+import { connect } from "react-redux";
+import { closePopUp } from "../../modules/chat";
+import { fetchChatAccessToken } from "../../modules/twilio";
+import { addToWatchlist, removePatientFromWatchlist, } from "../../modules/doctors";
+import { showVerifyModal } from "../../modules/pages/features";
+import { getAllFeatures } from "../../modules/featuresMappings";
+import { DRAWER } from "../../constant";
+import { open } from "../../modules/drawer";
 import {
     getAllMissedEventChartCount,
     getAllMissedEventDataByQuery,
     getAllMissedScheduleEvents,
 } from "../../modules/scheduleEvents";
-import {setUnseenNotificationCount} from "../../modules/pages/NotificationCount";
-import {getAllDietsForDoctor} from "../../modules/diets";
+import { setUnseenNotificationCount } from "../../modules/pages/NotificationCount";
+import { getAllDietsForDoctor } from "../../modules/diets";
 // code implementation after phase 1 for CDSS/mongodb
-import {addDiagnosis, diagnosisSearch, getDiagnosisList,} from "../../modules/cdss";
+import { addDiagnosis, diagnosisSearch, getDiagnosisList, } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
     const {

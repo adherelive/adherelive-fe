@@ -1,12 +1,12 @@
-import React, {Component} from "react";
-import {message} from "antd";
-import {Spring} from "react-spring/renderprops";
+import React, { Component } from "react";
+import { message } from "antd";
+import { Spring } from "react-spring/renderprops";
 import SignUpForm from "./signUp";
 
 import rightArrow from "../../Assets/images/next.png";
-import {PATH} from "../../constant";
+import { PATH } from "../../constant";
 
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
 import messages from "./message";
 
 class ToggleSignUp extends Component {

@@ -1,10 +1,9 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import AddFoodItemDrawer from "../../Components/Drawer/addFoodItem";
-import {close} from "../../modules/drawer";
-import { DRAWER } from "../../constant";
-import {addFoodItem} from "../../modules/foodItems";
-import {searchFood} from "../../modules/searchedFoodItems";
+import { close } from "../../modules/drawer";
+import { addFoodItem } from "../../modules/foodItems";
+import { searchFood } from "../../modules/searchedFoodItems";
 
 const mapStateToProps = (state) => {
     const {auth} = state;

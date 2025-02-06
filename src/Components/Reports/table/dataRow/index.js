@@ -1,4 +1,4 @@
-import {formatReportData, TABLE_COLUMN} from "../helper";
+import { formatReportData, TABLE_COLUMN } from "../helper";
 
 export default (data) => {
     const {formatMessage, openEditDrawer, id, openModal} = data;

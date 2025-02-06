@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {getNotifications} from "../../Helper/urls/notifications";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { getNotifications } from "../../Helper/urls/notifications";
 
 export const GET_NOTIFICATION_START = "GET_NOTIFICATION_START";
 export const GET_NOTIFICATION_COMPLETED = "GET_NOTIFICATION_COMPLETED";

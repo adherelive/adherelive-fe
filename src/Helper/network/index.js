@@ -1,5 +1,5 @@
 import axios from "axios";
-import {HOST} from "../../constant";
+import { HOST } from "../../constant";
 
 export const doRequest = async (requestdata) => {
     const defaultHeader = {};

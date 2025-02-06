@@ -1,6 +1,6 @@
 import edit_image from "../../../../Assets/images/edit.svg";
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 
 class editPatientColumn extends Component {
     constructor(props) {

@@ -1,11 +1,11 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
 import {
     fetchGetAllFeaturesUrl,
     fetchToggleChatPermissionUrl,
     fetchToggleVideoCallPermissionUrl,
 } from "../../Helper/urls/features";
-import {UPDATE_FEATURES} from "../features";
+import { UPDATE_FEATURES } from "../features";
 
 const initialState = {};
 

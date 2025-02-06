@@ -1,7 +1,7 @@
-import React, {Component, Fragment} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component, Fragment } from "react";
+import { injectIntl } from "react-intl";
 import messages from "./message";
-import {connect} from "getstream";
+import { connect } from "getstream";
 import {
     FEATURES,
     MISSED_ACTIONS,
@@ -20,13 +20,12 @@ import PatientDetailsDrawer from "../../Containers/Drawer/patientDetails";
 
 import ChatPopup from "../../Containers/ChatPopup";
 import AddPatientDrawer from "../Drawer/addPatient";
-import Loading from "../Common/Loading";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Donut from "../Common/graphs/donut";
 import GraphsModal from "./graphsModal";
-import {getPatientConsultingUrl, getPatientConsultingVideoUrl} from "../../Helper/url/patients";
+import { getPatientConsultingUrl, getPatientConsultingVideoUrl } from "../../Helper/url/patients";
 import config from "../../config";
-import {Button, Dropdown, Menu, message, Modal, Spin} from "antd";
+import { Button, Dropdown, Menu, message, Modal, Spin } from "antd";
 import SearchPatient from "../../Containers/SearchPatient";
 import MissedAppointmentsDrawer from "../../Containers/Drawer/missedAppointment";
 import MissedVitalsDrawer from "../../Containers/Drawer/missedVital";
@@ -34,13 +33,12 @@ import MissedMedicationsDrawer from "../../Containers/Drawer/missedMedication";
 import MissedDietsDrawer from "../../Containers/Drawer/missedDiet";
 import MissedWorkoutsDrawer from "../../Containers/Drawer/missedWorkout";
 import isEmpty from "../../Helper/is-empty";
-import {PlusOutlined} from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 // New Code for Subscription
 import ScheduledActivitiesTable from "../../Containers/subscription/ScheduleActivitiesTable";
 import PendingActivitiesTable from "../../Containers/subscription/PendingActivitiesTable";
 
 // helpers...
-import { getRoomId } from "../../Helper/twilio";
 
 const {GETSTREAM_API_KEY, GETSTREAM_APP_ID} = config;
 const {TabPane} = Tabs;

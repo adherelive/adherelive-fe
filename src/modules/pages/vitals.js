@@ -1,4 +1,4 @@
-import {ADD_VITAL_COMPLETED} from "../vitals";
+import { ADD_VITAL_COMPLETED } from "../vitals";
 
 function newVitalReducer(state, data) {
     const {vital_id = ""} = data || {};

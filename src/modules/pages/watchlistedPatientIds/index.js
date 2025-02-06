@@ -1,4 +1,4 @@
-import {GET_PATIENT_PAGINATED_COMPLETED} from "../paginatedPatients";
+import { GET_PATIENT_PAGINATED_COMPLETED } from "../paginatedPatients";
 
 function getWatchlistPatientIdsReducer(state, data) {
     const {watchlist, offset, sort_by_name, patient_ids} = data || {};

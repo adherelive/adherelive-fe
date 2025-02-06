@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {injectIntl} from "react-intl";
+import React, { Component } from "react";
+import { injectIntl } from "react-intl";
 
 import Drawer from "antd/es/drawer";
 // import Form from "antd/es/form";
@@ -10,7 +10,7 @@ import Button from "antd/es/button";
 import EditMedicationReminderForm from "./form";
 
 import participants from "../common/participants";
-import {MEDICINE_UNITS} from "../../../../constant";
+import { MEDICINE_UNITS } from "../../../../constant";
 import messages from "../message";
 import Footer from "../../footer";
 import startTimeField from "../common/startTime";
@@ -21,7 +21,7 @@ import repeatDaysField from "../common/selectedDays";
 import moment from "moment";
 import AddMedicineDrawer from "../../../../Containers/Drawer/addMedicine";
 // code implementation after phase 1 for antd v4
-import { Form, Mention } from "@ant-design/compatible";
+import { Form } from "@ant-design/compatible";
 import "@ant-design/compatible/assets/index.css";
 
 class EditMedicationReminder extends Component {

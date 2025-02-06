@@ -1,12 +1,12 @@
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import AddDietDrawer from "../../Components/Drawer/addDiet";
-import {close, open} from "../../modules/drawer";
-import {DRAWER} from "../../constant";
-import {getPortions} from "../../modules/portions";
-import {addFoodItem} from "../../modules/foodItems";
-import {addDiet, getPatientPreferenceDietDetails} from "../../modules/diets";
-import {googleTranslate} from "../../modules/cdss";
+import { close } from "../../modules/drawer";
+import { DRAWER } from "../../constant";
+import { getPortions } from "../../modules/portions";
+import { addFoodItem } from "../../modules/foodItems";
+import { addDiet, getPatientPreferenceDietDetails } from "../../modules/diets";
+import { googleTranslate } from "../../modules/cdss";
 
 const mapStateToProps = (state) => {
     const {auth} = state;

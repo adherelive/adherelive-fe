@@ -4,7 +4,7 @@ import Tooltip from "antd/es/tooltip";
 import messages from "../messages";
 import confirm from "antd/es/modal/confirm";
 import moment from "moment";
-import {CheckCircleOutlined, DeleteOutlined, Icon} from "@ant-design/icons";
+import { CheckCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const ALL_TABS = {
     PUBLIC: "1",

@@ -1,7 +1,6 @@
-import React, {useState} from "react";
-import {Checkbox, Input} from "antd";
+import React, { useState } from "react";
+import { Checkbox, Input } from "antd";
 import ObstctricHistorytable from "./ObstctricHistorytable";
-import MiddleTable from "./MiddleTable";
 
 function BasicInfo() {
     const [values, setValues] = useState({

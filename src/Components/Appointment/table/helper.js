@@ -1,4 +1,4 @@
-import {getUserDetails} from "../../../Helper/userDetails";
+import { getUserDetails } from "../../../Helper/userDetails";
 
 export const TABLE_COLUMN = {
     ORGANIZER: {

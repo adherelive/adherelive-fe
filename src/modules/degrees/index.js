@@ -1,6 +1,6 @@
-import {doRequest} from "../../Helper/network";
-import {REQUEST_TYPE} from "../../constant";
-import {searchDegrees} from "../../Helper/urls/degrees";
+import { doRequest } from "../../Helper/network";
+import { REQUEST_TYPE } from "../../constant";
+import { searchDegrees } from "../../Helper/urls/degrees";
 
 export const SEARCH_DEGREES_START = "SEARCH_DEGREES_START";
 export const SEARCH_DEGREES_COMPLETED = "SEARCH_DEGREES_COMPLETED";

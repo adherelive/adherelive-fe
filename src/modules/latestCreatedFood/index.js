@@ -1,4 +1,4 @@
-import {ADD_FOOD_ITEM_COMPLETED} from "../foodItems";
+import { ADD_FOOD_ITEM_COMPLETED } from "../foodItems";
 
 const CLEAR_LATEST_CREATED_FOOD_ITEM = "CLEAR_LATEST_CREATED_FOOD_ITEM";
 
