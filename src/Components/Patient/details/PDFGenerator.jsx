@@ -15,7 +15,7 @@ class PDFGenerator extends React.Component {
         };
 
         // In Docker, this would be your Node.js service URL
-        this.apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'http://api-service:3000';
+        this.apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost/api:3000';
     }
 
     componentDidMount() {
@@ -23,7 +23,7 @@ class PDFGenerator extends React.Component {
         this.setupProgressPolling();
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         // Handle polling setup/cleanup when jobId changes
         if (this.state.jobId !== prevState.jobId) {
             this.setupProgressPolling();
