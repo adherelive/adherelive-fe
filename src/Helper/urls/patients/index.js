@@ -36,6 +36,10 @@ export const generatePrescriptionUrl = (careplan_id) => {
     return `/api/prescription/details/${careplan_id}`;
 };
 
+export const generatePrescriptionPDFUrl = (careplan_id) => {
+    return `/api/prescriptions/generate_pdf/${careplan_id}`;
+};
+
 export const getPatientsPaginatedUrl = (data) => {
     const {sort_createdAt, sort_name, offset, watchlist} = data || {};
     if (sort_name === null) {
