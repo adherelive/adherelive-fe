@@ -1,169 +1,72 @@
-// PDFGenerator.jsx
-import React from 'react';
-// Note: We'll use a different UI library since @mui/material requires React 17+
-import Modal from 'react-modal';
+// Frontend React Component (src/components/PdfGenerator.jsx)
+import React, { useState } from 'react';
+import axios from 'axios';
 
-class PDFGenerator extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isDialogOpen: false,
-            previewHtml: null,
-            jobId: null,
-            progress: 0,
-            generating: false
-        };
+const PdfGenerator = () => {
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [language, setLanguage] = useState('');
 
-        // In Docker, this would be your Node.js service URL
-        this.apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost/api:3000';
-    }
-
-    componentDidMount() {
-        // Initialize polling if needed
-        this.setupProgressPolling();
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        // Handle polling setup/cleanup when jobId changes
-        if (this.state.jobId !== prevState.jobId) {
-            this.setupProgressPolling();
-        }
-    }
-
-    componentWillUnmount() {
-        // Clean up polling interval
-        if (this.pollInterval) {
-            clearInterval(this.pollInterval);
-        }
-    }
-
-    setupProgressPolling = () => {
-        if (this.pollInterval) {
-            clearInterval(this.pollInterval);
-        }
-
-        if (this.state.jobId && this.state.generating) {
-            this.pollInterval = setInterval(this.checkJobStatus, 1000);
-        }
-    }
-
-    checkJobStatus = async () => {
+    const handleGeneratePDF = async () => {
         try {
-            const response = await fetch(
-                `${this.apiBaseUrl}/api/pdf-status/${this.state.jobId}`,
-                {
-                    credentials: 'include',  // Important for cross-origin requests
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+            setIsGenerating(true);
+
+            // First, prompt user for language selection
+            const response = await axios.post('/api/generate-pdf', {
+                language: language,
+            }, {
+                onUploadProgress: (progressEvent) => {
+                    const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                    setProgress(percentCompleted);
                 }
-            );
-
-            const { progress, completed, pdfUrl } = await response.json();
-
-            this.setState({ progress });
-
-            if (completed) {
-                this.setState({ generating: false });
-                clearInterval(this.pollInterval);
-
-                if (pdfUrl) {
-                    // Handle PDF download through API service
-                    window.location.href = `${this.apiBaseUrl}${pdfUrl}`;
-                }
-            }
-        } catch (error) {
-            console.error('Error checking job status:', error);
-        }
-    }
-
-    generatePreview = async (language) => {
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/api/preview-pdf`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    templateName: this.props.templateName,
-                    data: this.props.data,
-                    language
-                })
             });
 
-            if (!response.ok) throw new Error('Preview generation failed');
+            // Create a blob from the PDF data and download it
+            const blob = new Blob([response.data], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `document_${language}.pdf`;
+            link.click();
 
-            const html = await response.text();
-            this.setState({ previewHtml: html });
         } catch (error) {
-            console.error('Error generating preview:', error);
+            console.error('Error generating PDF:', error);
+        } finally {
+            setIsGenerating(false);
+            setProgress(0);
         }
-    }
+    };
 
-    render() {
-        const { isDialogOpen, previewHtml, generating, progress } = this.state;
+    return (
+        <div className="p-4">
+            <button
+                onClick={() => {
+                    const userLanguage = window.confirm('Would you like the document in Hindi/Devanagari? Click OK for Hindi, Cancel for English')
+                        ? 'hi'
+                        : 'en';
+                    setLanguage(userLanguage);
+                    handleGeneratePDF();
+                }}
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+                disabled={isGenerating}
+            >
+                Generate PDF
+            </button>
 
-        return (
-            <div>
-                <button onClick={() => this.setState({ isDialogOpen: true })}>
-                    Generate PDF
-                </button>
-
-                <Modal
-                    isOpen={isDialogOpen}
-                    onRequestClose={() => this.setState({ isDialogOpen: false })}
-                    contentLabel="PDF Generation Dialog"
-                >
-                    <div className="modal-content">
-                        {previewHtml ? (
-                            <div className="preview-container">
-                                <div dangerouslySetInnerHTML={{ __html: previewHtml }} />
-                            </div>
-                        ) : (
-                            <p>Select a language to preview the PDF:</p>
-                        )}
-
-                        {generating && (
-                            <div className="progress-container">
-                                <progress value={progress} max="100" />
-                                <p>Generating PDF: {progress}%</p>
-                            </div>
-                        )}
-
-                        <div className="button-container">
-                            {!previewHtml ? (
-                                <>
-                                    <button onClick={() => this.generatePreview('en')}>
-                                        Preview in English
-                                    </button>
-                                    <button onClick={() => this.generatePreview('hi')}>
-                                        Preview in Hindi
-                                    </button>
-                                </>
-                            ) : (
-                                <>
-                                    <button
-                                        onClick={() => this.startPDFGeneration(previewHtml.language)}
-                                        disabled={generating}
-                                    >
-                                        Generate PDF
-                                    </button>
-                                    <button onClick={() => this.setState({ previewHtml: null })}>
-                                        Back to Language Selection
-                                    </button>
-                                </>
-                            )}
-                            <button onClick={() => this.setState({ isDialogOpen: false })}>
-                                Cancel
-                            </button>
+            {isGenerating && (
+                <div className="mt-4">
+                    <div className="w-full bg-gray-200 rounded">
+                        <div
+                            className="bg-blue-500 text-white text-center p-1 rounded"
+                            style={{ width: `${progress}%` }}
+                        >
+                            {progress}%
                         </div>
                     </div>
-                </Modal>
-            </div>
-        );
-    }
-}
+                </div>
+            )}
+        </div>
+    );
+};
 
-export default PDFGenerator;
+export default PdfGenerator;
