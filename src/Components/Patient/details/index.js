@@ -700,65 +700,9 @@ const PatientTreatmentCard = ({
     const [progress, setProgress] = useState(0);
     const [language, setLanguage] = useState('');
 
-    const handleGeneratePDF = async () => {
-        try {
-            setIsGenerating(true);
-
-            // First, prompt user for language selection
-            // const response = await axios.post(`/api/prescriptions/generate-pdf/${carePlanID}`, {
-            //     language: language,
-            // }, {
-            //     onUploadProgress: (progressEvent) => {
-            //         const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            //         setProgress(percentCompleted);
-            //     }
-            // });
-
-            // Create a blob from the PDF data and download it
-            // const blob = new Blob([response.data], { type: 'application/pdf' });
-            // const url = window.URL.createObjectURL(blob);
-            // const link = document.createElement('a');
-            // link.href = url;
-            // link.download = `document_${language}.pdf`;
-            // link.click();
-            generatePrescriptionPDFUrl(selectedCarePlanId);
-
-        } catch (error) {
-            console.error('Error generating PDF:', error);
-        } finally {
-            setIsGenerating(false);
-            setProgress(0);
-        }
-    };
-
     return (
         <div className="treatment mt20 tal bg-faint-grey">
             <div className="header-div flex align-center justify-space-between">
-                <Button
-                    type="ghost"
-                    className="flex align-center justify-space-evenly"
-
-                    onClick={() => {
-                        const userLanguage = window.confirm('Would you like the document in Hindi/Devanagari? Click OK for Hindi, Cancel for English')
-                            ? 'hi'
-                            : 'en';
-                        setLanguage(userLanguage);
-                        handleGeneratePDF();
-                    }}
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                    disabled={isGenerating}
-                >
-                        <span className="fs14">
-                        {" "}
-                            {formatMessage(messages.prescription)}
-                        </span>
-                    <img
-                        title={"Generate PDF"}
-                        src={ShareIcon}
-                        alt="prescription pdf icon"
-                        className="pointer w15 ml14"
-                    ></img>
-                </Button>
                 <h3>{formatMessage(messages.treatment_details)}</h3>
                 {selectedCarePlanId && isPrescriptionOfCurrentDoc ? (
                     <a
