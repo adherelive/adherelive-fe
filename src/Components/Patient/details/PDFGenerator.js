@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const PdfGenerator = () => {
+const PDFGenerator = () => {
     const [isGenerating, setIsGenerating] = useState(false);
     const [progress, setProgress] = useState(0);
     const [language, setLanguage] = useState('');
@@ -12,7 +12,7 @@ const PdfGenerator = () => {
             setIsGenerating(true);
 
             // First, prompt user for language selection
-            const response = await axios.post('/api/generate-pdf', {
+            const response = await axios.post('/api/prescriptions/generate-pdf', {
                 language: language,
             }, {
                 onUploadProgress: (progressEvent) => {
@@ -69,4 +69,4 @@ const PdfGenerator = () => {
     );
 };
 
-export default PdfGenerator;
+export default PDFGenerator;

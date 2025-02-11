@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState } from "react";
 import { injectIntl } from "react-intl";
 import { connect } from "getstream";
 import messages from "./message";
@@ -101,6 +101,7 @@ import SubscriptionTable from "../../Subscription/SubscriptionTable";
 import FlashCard from "../../Subscription/Flashcard";
 import AddPerforma from "../../Performa/Drawer/AddPerforma";
 import PerformaTabs from "../../Performa/PerformaTabs/PerformaTabs";
+import axios from "axios";
 
 const BLANK_TEMPLATE = "Blank Template";
 const {TabPane} = Tabs;
@@ -461,6 +462,7 @@ const PatientCard = ({
             </Menu.Item>
         </Menu>
     );
+
     return (
         <div className="flex direction-column tac br10 bg-faint-grey">
             {/* <div className="flex justify-end pt20 pl20 pr20 pb6">
@@ -691,14 +693,72 @@ const PatientTreatmentCard = ({
     } catch (e) {
         finalArray = treatment_symptoms;
     }
-
     // let newClinicalNotes = treatment_clinical_notes.split("follow up advise");
-
     // console.log("newClinicalNotes", newClinicalNotes);
+
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [language, setLanguage] = useState('');
+
+    const handleGeneratePDF = async (carePlanID) => {
+        try {
+            setIsGenerating(true);
+
+            // First, prompt user for language selection
+            const response = await axios.post(`/api/prescriptions/generate-pdf/${carePlanID}`, {
+                language: language,
+            }, {
+                onUploadProgress: (progressEvent) => {
+                    const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                    setProgress(percentCompleted);
+                }
+            });
+
+            // Create a blob from the PDF data and download it
+            const blob = new Blob([response.data], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `document_${language}.pdf`;
+            link.click();
+
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+        } finally {
+            setIsGenerating(false);
+            setProgress(0);
+        }
+    };
 
     return (
         <div className="treatment mt20 tal bg-faint-grey">
             <div className="header-div flex align-center justify-space-between">
+                <button
+                    onClick={() => {
+                        const userLanguage = window.confirm('Would you like the document in Hindi/Devanagari? Click OK for Hindi, Cancel for English')
+                            ? 'hi'
+                            : 'en';
+                        setLanguage(userLanguage);
+                        handleGeneratePDF(`${generatePrescriptionPDFUrl(selectedCarePlanId)}`);
+                    }}
+                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                    disabled={isGenerating}
+                >
+                    Generate PDF
+                </button>
+
+                {isGenerating && (
+                    <div className="mt-4">
+                        <div className="w-full bg-gray-200 rounded">
+                            <div
+                                className="bg-blue-500 text-white text-center p-1 rounded"
+                                style={{ width: `${progress}%` }}
+                            >
+                                {progress}%
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <h3>{formatMessage(messages.treatment_details)}</h3>
                 {selectedCarePlanId && isPrescriptionOfCurrentDoc ? (
                     <a
