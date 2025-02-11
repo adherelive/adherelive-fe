@@ -5,7 +5,7 @@ import messages from "./message";
 import edit_image from "../../../Assets/images/edit.svg";
 import { getUploadAppointmentDocumentUrl } from "../../../Helper/urls/appointments";
 import { doRequest } from "../../../Helper/network";
-import { generatePrescriptionPDFUrl } from "../../../Helper/urls/patients";
+import { generatePrescriptionUrl } from "../../../Helper/urls/patients";
 import ShareIcon from "../../../Assets/images/redirect3x.png";
 import EyeFilled from "@ant-design/icons/EyeFilled";
 import { getName } from "../../../Helper/validation";
@@ -706,7 +706,7 @@ const PatientTreatmentCard = ({
                 <h3>{formatMessage(messages.treatment_details)}</h3>
                 {selectedCarePlanId && isPrescriptionOfCurrentDoc ? (
                     <a
-                        href={`${generatePrescriptionPDFUrl(selectedCarePlanId)}`}
+                        href={`${generatePrescriptionUrl(selectedCarePlanId)}`}
                         target={"_blank"}
                         className="presc-link"
                     >
