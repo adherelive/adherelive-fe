@@ -721,7 +721,7 @@ const PatientTreatmentCard = ({
             // link.href = url;
             // link.download = `document_${language}.pdf`;
             // link.click();
-            `${generatePrescriptionPDFUrl(selectedCarePlanId)}`
+            generatePrescriptionPDFUrl(selectedCarePlanId);
 
         } catch (error) {
             console.error('Error generating PDF:', error);
