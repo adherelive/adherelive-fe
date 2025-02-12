@@ -381,11 +381,11 @@ const LanguageSelectionModal = ({ isOpen, onClose, children }) => {
 
     return (
         <div
-            className="popup-overlay fixed inset-0 flex align-center justify-center"
+            className="popup-overlay fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
             onClick={onClose}
         >
             <div
-                className="popup-content"
+                className="popup-content bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4 z-50"
                 onClick={e => e.stopPropagation()}
             >
                 {children}
