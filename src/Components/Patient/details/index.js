@@ -11,7 +11,7 @@ import EyeFilled from "@ant-design/icons/EyeFilled";
 import { getName } from "../../../Helper/validation";
 import isEmpty from "../../../Helper/is-empty";
 import { Button, Dropdown, message, Spin, Table, Tabs } from "antd";
-import Modal from "antd/es/modal";
+import { Modal } from "antd/es/modal";
 import Menu from "antd/es/menu";
 import Tooltip from "antd/es/tooltip";
 
@@ -376,7 +376,7 @@ const columns_appointments_non_editable = [
 ];
 
 // Modal to generate the PDF prescription document
-const Modal = ({ isOpen, onClose, children }) => {
+const LanguageSelectionModal = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
 
     return (
@@ -775,7 +775,7 @@ const PatientTreatmentCard = ({
                 )}
             </div>
 
-            <Modal
+            <LanguageSelectionModal
                 isOpen={showLanguageDialog}
                 onClose={() => setShowLanguageDialog(false)}
             >
@@ -820,7 +820,7 @@ const PatientTreatmentCard = ({
                         </button>
                     </div>
                 </div>
-            </Modal>
+            </LanguageSelectionModal>
 
             <div className="treatment-details pl16 pr16 ">
                 <div className="flex direction-column mb14 mt20">
