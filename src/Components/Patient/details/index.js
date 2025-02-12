@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState } from "react";
 import { injectIntl } from "react-intl";
 import { connect } from "getstream";
 import messages from "./message";
@@ -10,6 +10,13 @@ import ShareIcon from "../../../Assets/images/redirect3x.png";
 import EyeFilled from "@ant-design/icons/EyeFilled";
 import { getName } from "../../../Helper/validation";
 import isEmpty from "../../../Helper/is-empty";
+import { Button, Dropdown, message, Spin, Table, Tabs } from "antd";
+import Modal from "antd/es/modal";
+import Menu from "antd/es/menu";
+import Tooltip from "antd/es/tooltip";
+
+import OtpInput from "react-otp-input";
+import axios from "axios";
 
 import config from "../../../config";
 
@@ -32,11 +39,6 @@ import {
     USER_CATEGORY,
     USER_PERMISSIONS,
 } from "../../../constant";
-import { Button, Dropdown, message, Spin, Table, Tabs } from "antd";
-import Modal from "antd/es/modal";
-import Menu from "antd/es/menu";
-
-import OtpInput from "react-otp-input";
 
 // DRAWERS
 import VitalTimelineDrawer from "../../../Containers/Drawer/vitalTimeline";
@@ -92,7 +94,6 @@ import { getPatientConsultingVideoUrl } from "../../../Helper/url/patients";
 import SymptomTabs from "../../../Containers/Symptoms";
 import { getRoomId } from "../../../Helper/twilio";
 import { getFullName } from "../../../Helper/common";
-import Tooltip from "antd/es/tooltip";
 
 // code implementation after phase 1 for Subscription
 import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscription";
@@ -176,16 +177,16 @@ const columns_symptoms = [
     },
     /**
      * TODO: Check why this part has been commented
-    {
-      title: "",
-      dataIndex: "edit",
-      key: "edit",
-      render: () => (
-        <div className="edit-medication">
-          <img src={edit_image} className="edit-medication-icon" />
-        </div>
-      ),
-    },
+     {
+     title: "",
+     dataIndex: "edit",
+     key: "edit",
+     render: () => (
+     <div className="edit-medication">
+     <img src={edit_image} className="edit-medication-icon" />
+     </div>
+     ),
+     },
      */
 ];
 
@@ -255,7 +256,7 @@ const columns_appointments = [
 
             const appointmentEvent =
                 Object.keys(schedule_events).filter((id) => {
-                    const {event_id = {}} = schedule_events[id] || {};
+                    const {event_id = {}} = schedule_events[ id ] || {};
 
                     return event_id === appointment_id;
                 }) || [];
@@ -301,11 +302,11 @@ const columns_appointments = [
             const {basic_info: {user_role_id = null} = {}} = carePlan || {};
             let canViewDetails = true;
             if (
-                (!isOtherCarePlan &&
-                    user_role_id.toString() === auth_role.toString()) ||
+                ( !isOtherCarePlan &&
+                    user_role_id.toString() === auth_role.toString() ) ||
                 // code implementation after phase 1
-                (!isEmpty(carePlan) &&
-                    carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true)
+                ( !isEmpty(carePlan) &&
+                    carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true )
             ) {
                 canViewDetails = false;
             }
@@ -409,9 +410,9 @@ const PatientProfileHeader = ({
                         <span className="fs16">Recommend</span>
                     </Button>
                 </Dropdown>
-                {(showAddButton ||
+                {( showAddButton ||
                     user_role_id.toString() === auth_role.toString() ||
-                    secondary_doctor_user_role_ids.includes(auth_role) === true) && (
+                    secondary_doctor_user_role_ids.includes(auth_role) === true ) && (
                     <Dropdown
                         overlay={getMenu()}
                         trigger={["click"]}
@@ -452,7 +453,7 @@ const PatientCard = ({
                          patientDetailsData,
                      }) => {
     const {details: {comorbidities, allergies} = {}} =
-    patientDetailsData[patient_id] || {};
+    patientDetailsData[ patient_id ] || {};
 
     const menu = (
         <Menu>
@@ -461,6 +462,7 @@ const PatientCard = ({
             </Menu.Item>
         </Menu>
     );
+
     return (
         <div className="flex direction-column tac br10 bg-faint-grey">
             {/* <div className="flex justify-end pt20 pl20 pr20 pb6">
@@ -501,7 +503,7 @@ const PatientCard = ({
                                 : patientFullName}
                         </div>
                         <div className="align-self-start">
-                            {' '}({gender ? `${GENDER[gender].view} ` : ""}
+                            {' '}({gender ? `${GENDER[ gender ].view} ` : ""}
                             {patient_age})
                         </div>
                     </div>
@@ -637,26 +639,26 @@ const PatientTreatmentCard = ({
     const time = moment().format("Do MMMM YYYY, hh:mm a");
 
     // code implementation after phase 1
-    let carePlan = care_plans[selectedCarePlanId] || {};
+    let carePlan = care_plans[ selectedCarePlanId ] || {};
 
     console.log(carePlan.secondary_doctor_user_role_ids);
     const isPrescriptionOfCurrentDoc =
-        (!isOtherCarePlan && user_role_id.toString() === auth_role.toString()) ||
-        (!isEmpty(carePlan) &&
+        ( !isOtherCarePlan && user_role_id.toString() === auth_role.toString() ) ||
+        ( !isEmpty(carePlan) &&
             carePlan.secondary_doctor_user_role_ids !== undefined &&
-            carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true);
+            carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true );
 
     let all_providers = "",
         count = 1;
     for (let each in secondary_doctor_user_role_ids) {
-        const role_id = secondary_doctor_user_role_ids[each] || {};
+        const role_id = secondary_doctor_user_role_ids[ each ] || {};
 
         const {basic_info: {user_identity = null, linked_id = null} = {}} =
-        user_roles[role_id] || {};
+        user_roles[ role_id ] || {};
 
         let doctor_id = null;
         for (let doctorId in doctors) {
-            const {basic_info: {user_id} = {}} = doctors[doctorId] || {};
+            const {basic_info: {user_id} = {}} = doctors[ doctorId ] || {};
             if (user_identity == user_id) {
                 doctor_id = doctorId;
                 break;
@@ -664,11 +666,11 @@ const PatientTreatmentCard = ({
         }
 
         const {basic_info: {name: provider_name = ""} = {}} =
-        providers[linked_id] || {};
+        providers[ linked_id ] || {};
 
         const {
             basic_info: {first_name = "", middle_name = "", last_name = ""} = {},
-        } = doctors[doctor_id] || {};
+        } = doctors[ doctor_id ] || {};
 
         let doctor_name = `${getName(first_name)}  ${getName(
             middle_name
@@ -691,39 +693,62 @@ const PatientTreatmentCard = ({
     } catch (e) {
         finalArray = treatment_symptoms;
     }
-
     // let newClinicalNotes = treatment_clinical_notes.split("follow up advise");
-
     // console.log("newClinicalNotes", newClinicalNotes);
+
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [language, setLanguage] = useState('');
+
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleGeneratePrescription = (language) => {
+        const url = generatePrescriptionUrl(selectedCarePlanId, language);
+        //const newUrl = `${url}?lang=${language}`; // Append the language parameter
+        window.open(url, '_blank'); // Open in a new tab
+        setShowPopup(false); // Close the popup
+    };
 
     return (
         <div className="treatment mt20 tal bg-faint-grey">
             <div className="header-div flex align-center justify-space-between">
                 <h3>{formatMessage(messages.treatment_details)}</h3>
                 {selectedCarePlanId && isPrescriptionOfCurrentDoc ? (
-                    <a
-                        href={`${generatePrescriptionUrl(selectedCarePlanId)}`}
-                        target={"_blank"}
-                        className="presc-link"
+                    <Button
+                        type="ghost"
+                        className="flex align-center justify-space-evenly presc-link"
+                        onClick={() => setShowPopup(true)} // Show popup on button click
                     >
-                        <Button
-                            type="ghost"
-                            className="flex align-center justify-space-evenly"
-                        >
-              <span className="fs14">
-                {" "}
-                  {formatMessage(messages.prescription)}
-              </span>
-                            <img
-                                title={"Generate Prescription"}
-                                src={ShareIcon}
-                                alt="prescription icon"
-                                className="pointer w15 ml14"
-                            ></img>
-                        </Button>
-                    </a>
+                        <span className="fs14">{formatMessage(messages.prescription)}</span>
+                        <img
+                            title={"Generate Prescription"}
+                            src={ShareIcon}
+                            alt="prescription icon"
+                            className="pointer w15 ml14"
+                        />
+                    </Button>
                 ) : null}
             </div>
+
+            {/* Popup */}
+            {showPopup && (
+                <div className="popup-overlay"> {/* Style this as a modal overlay */}
+                    <div className="popup-content"> {/* Style this as a modal content area */}
+                        <p>{formatMessage({ id: 'generate_in_english', defaultMessage: 'Generate in Hindi?' })}</p> {/* Use formatMessage for i18n */}
+                        <div className="popup-buttons">
+                            <Button type="primary" onClick={() => handleGeneratePrescription('hi')}>
+                                {formatMessage({ id: 'yes', defaultMessage: 'Yes' })}
+                            </Button>
+                            <Button onClick={() => handleGeneratePrescription('en')}>
+                                {formatMessage({ id: 'no', defaultMessage: 'No' })} {/* Or a more specific label */}
+                            </Button>
+                            <Button type="danger" onClick={() => setShowPopup(false)}>
+                                {formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <div className="treatment-details pl16 pr16 ">
                 <div className="flex direction-column mb14 mt20">
@@ -946,7 +971,7 @@ class PatientDetails extends Component {
                 !isEmpty(care_plan_ids) &&
                 care_plan_ids.filter((id) => {
                     const {basic_info: {patient_id: carePlanPatientId = "0"} = {}} =
-                    care_plans[id] || {};
+                    care_plans[ id ] || {};
 
                     if (carePlanPatientId.toString() === patient_id) {
                         return id;
@@ -1086,9 +1111,9 @@ class PatientDetails extends Component {
         } = prevProps;
 
         if (
-            (redirected_p_id && redirected_p_id !== prev_redirected_p_id) ||
-            (care_plan_id && care_plan_id !== prev_care_plan_id) ||
-            (tab && tab !== prev_tab)
+            ( redirected_p_id && redirected_p_id !== prev_redirected_p_id ) ||
+            ( care_plan_id && care_plan_id !== prev_care_plan_id ) ||
+            ( tab && tab !== prev_tab )
         ) {
             await this.handleInitialData(redirected_p_id);
             if (Object.keys(notification_redirect).length) {
@@ -1249,12 +1274,12 @@ class PatientDetails extends Component {
                 } = {},
                 organizer: {id: organizer_id, name = ""} = {},
                 active_event_id = null,
-            } = appointments[id] || {};
+            } = appointments[ id ] || {};
             let typeTitle = "";
             let description = "";
 
-            if (!isEmpty(appointments[id])) {
-                typeTitle = APPOINTMENT_TYPE_TITLE[details.type].title;
+            if (!isEmpty(appointments[ id ])) {
+                typeTitle = APPOINTMENT_TYPE_TITLE[ details.type ].title;
 
                 description = "";
                 if (details.type === "3") {
@@ -1335,8 +1360,8 @@ class PatientDetails extends Component {
                 // organizer: organizer_type === "doctor" ? doctors[organizer_id] : patients[organizer_id].
                 side: side,
                 key: index,
-                body_part_key: parts[0] ? parts[0] : "",
-                body_part: parts[0] ? this.getBodyPartName(parts[0]) : "--",
+                body_part_key: parts[ 0 ] ? parts[ 0 ] : "",
+                body_part: parts[ 0 ] ? this.getBodyPartName(parts[ 0 ]) : "--",
                 description: text,
                 image_document_ids,
                 audio_document_ids,
@@ -1363,9 +1388,9 @@ class PatientDetails extends Component {
                     end_date,
                     details: {medicine_id, repeat_days, medicine_type = "1"} = {},
                 } = {},
-            } = medications[id] || {};
+            } = medications[ id ] || {};
 
-            const {basic_info: {name, type} = {}} = medicines[medicine_id] || {};
+            const {basic_info: {name, type} = {}} = medicines[ medicine_id ] || {};
             return {
                 // organizer: organizer_type === "doctor" ? doctors[organizer_id] : patients[organizer_id].
                 key: id,
@@ -1397,14 +1422,14 @@ class PatientDetails extends Component {
 
     handleItemSelect = ({selectedKeys}) => {
         const {openAppointmentDrawer} = this.props;
-        switch (selectedKeys[0]) {
+        switch (selectedKeys[ 0 ]) {
             case APPOINTMENT:
                 openAppointmentDrawer();
             default:
                 openAppointmentDrawer();
                 break;
         }
-        this.setState({selectedKeys: selectedKeys[0]});
+        this.setState({selectedKeys: selectedKeys[ 0 ]});
     };
 
     formatMessage = (data) => this.props.intl.formatMessage(data);
@@ -1717,11 +1742,11 @@ class PatientDetails extends Component {
         const {basic_info: {user_role_id = null} = {}} = carePlan || {};
         let canViewDetails = true;
         if (
-            (!isOtherCarePlan &&
-                user_role_id.toString() === auth_role.toString()) ||
+            ( !isOtherCarePlan &&
+                user_role_id.toString() === auth_role.toString() ) ||
             // code implementation after phase 1
-            (!isEmpty(carePlan) &&
-                carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true)
+            ( !isEmpty(carePlan) &&
+                carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true )
         ) {
             canViewDetails = false;
         }
@@ -1796,7 +1821,7 @@ class PatientDetails extends Component {
         let videoCallBlocked = false;
         const videoCallFeatureId = this.getFeatureId(FEATURES.VIDEO_CALL);
         const otherUserCategoryId = this.getOtherUserCategoryId();
-        const {[otherUserCategoryId]: mappingsData = []} = features_mappings;
+        const {[ otherUserCategoryId ]: mappingsData = []} = features_mappings;
 
         if (mappingsData.indexOf(videoCallFeatureId) >= 0) {
             videoCallBlocked = false;
@@ -1812,7 +1837,7 @@ class PatientDetails extends Component {
         const featuresIds = Object.keys(features);
 
         for (const id of featuresIds) {
-            const {[id]: {name = null} = ({} = {})} = features;
+            const {[ id ]: {name = null} = ( {} = {} )} = features;
 
             if (name === featureName) {
                 return parseInt(id, 10);
@@ -1829,17 +1854,17 @@ class PatientDetails extends Component {
 
     /**
      * TODO: This function is not being used anywhere in the code
-    maximizeChat = () => {
-      const { patient_id } = this.props;
-      window.open(
-        `${config.WEB_URL}${getPatientConsultingUrl(patient_id)}`,
-        "_blank"
-      );
-    };
+     maximizeChat = () => {
+     const { patient_id } = this.props;
+     window.open(
+     `${config.WEB_URL}${getPatientConsultingUrl(patient_id)}`,
+     "_blank"
+     );
+     };
 
-    showTemplateDrawer = () => {
-        this.setState({templateDrawerVisible: true});
-    };
+     showTemplateDrawer = () => {
+     this.setState({templateDrawerVisible: true});
+     };
      */
 
     onCloseTemplate = async () => {
@@ -1953,7 +1978,7 @@ class PatientDetails extends Component {
         const {handleOtpModal} = this;
 
         const {basic_info: {full_name} = {}} =
-        patientDetailsData[patient_id] || {};
+        patientDetailsData[ patient_id ] || {};
 
         this.setState({consentLoading: true});
         const response = await requestConsent(patient_id);
@@ -2054,7 +2079,7 @@ class PatientDetails extends Component {
         let doctorId = null;
 
         Object.keys(doctors).forEach((id) => {
-            const {basic_info: {user_id} = {}} = doctors[id] || {};
+            const {basic_info: {user_id} = {}} = doctors[ id ] || {};
 
             if (user_id === authenticated_user) {
                 doctorId = id;
@@ -2065,7 +2090,7 @@ class PatientDetails extends Component {
 
         const {
             basic_info: {doctor_id},
-        } = care_plans[id] || {};
+        } = care_plans[ id ] || {};
         if (doctorId === `${doctor_id}`) {
             isOtherCarePlan = false;
         }
@@ -2139,21 +2164,21 @@ class PatientDetails extends Component {
         let doctor_id = null;
 
         Object.keys(doctors).forEach((id) => {
-            const {basic_info: {user_id} = {}} = doctors[id] || {};
+            const {basic_info: {user_id} = {}} = doctors[ id ] || {};
 
             if (user_id === authenticated_user) {
                 doctor_id = id;
             }
         });
 
-        let patientData = patientDetailsData[id] || {};
+        let patientData = patientDetailsData[ id ] || {};
         let treatment = "";
         let condition = "";
         let severity = "";
 
         let carePlanData = {};
         const {selectedCarePlanId = null} = this.state;
-        const carePlan = care_plans[selectedCarePlanId] || {};
+        const carePlan = care_plans[ selectedCarePlanId ] || {};
 
         let {basic_info = {}} = carePlan || {};
         let {
@@ -2171,25 +2196,25 @@ class PatientDetails extends Component {
         } = carePlan || {};
 
         let {basic_info: {name: treatmentName = ""} = {}} =
-        treatments[cTreatment] || {};
+        treatments[ cTreatment ] || {};
         let {basic_info: {name: severityName = ""} = {}} =
-        severities[cSeverity] || {};
+        severities[ cSeverity ] || {};
         let {basic_info: {name: conditionName = ""} = {}} =
-        conditions[cCondition] || {};
+        conditions[ cCondition ] || {};
 
         treatment = treatmentName;
         condition = conditionName;
         severity = severityName;
 
         carePlanData = {
-            ...care_plans[carePlanId],
+            ...care_plans[ carePlanId ],
             treatment,
             condition,
             severity,
         };
 
         patientData = {
-            ...patientDetailsData[id],
+            ...patientDetailsData[ id ],
             treatment,
             condition,
             severity,
@@ -2205,22 +2230,22 @@ class PatientDetails extends Component {
 
         /**
          * TODO: Why is this commented?
-        if(allAppointmentDocs[key]){
-          const {upload_documents = {}} = allAppointmentDocs[key];
-          console.log("783423452374672348",upload_documents);
-          for (let doc of upload_documents) {
-            console.log("handleBeforeUploadRegistration document ---> doc: ",doc);
-            let fileName = file.name;
-            let newFileName = fileName.replace(/\s/g, '');
-            if (doc.includes(newFileName)) {
-              console.log("DUPLICATE");
-              message.error(this.formatMessage(messages.duplicateError));
-              return false;
-            }
-          }
-          console.log("handleBeforeUploadRegistration Called");
-          return true
-        }
+         if(allAppointmentDocs[key]){
+         const {upload_documents = {}} = allAppointmentDocs[key];
+         console.log("783423452374672348",upload_documents);
+         for (let doc of upload_documents) {
+         console.log("handleBeforeUploadRegistration document ---> doc: ",doc);
+         let fileName = file.name;
+         let newFileName = fileName.replace(/\s/g, '');
+         if (doc.includes(newFileName)) {
+         console.log("DUPLICATE");
+         message.error(this.formatMessage(messages.duplicateError));
+         return false;
+         }
+         }
+         console.log("handleBeforeUploadRegistration Called");
+         return true
+         }
          */
         console.log("handleBeforeUploadRegistration Called");
         return true;
@@ -2228,79 +2253,79 @@ class PatientDetails extends Component {
 
     /**
      * TODO: This function is not being used anywhere in the code
-    handleAddAppointmentDocuments = (appointment_id)  => info => {
-      const fileList = info.fileList;
-      let key = appointment_id;
-      let {  allAppointmentDocs={} } = this.state;
-      console.log("4334543535345345",info);
-    }
+     handleAddAppointmentDocuments = (appointment_id)  => info => {
+     const fileList = info.fileList;
+     let key = appointment_id;
+     let {  allAppointmentDocs={} } = this.state;
+     console.log("4334543535345345",info);
+     }
 
-    handleChangeList = key => info => {
-      console.log("234532432423423",info);
-      const fileList = info.fileList;
-      let { education = {} } = this.state;
-      let newEducation = education;
-      let { photos = [], photo = [] } = newEducation[key];
-      for (let item of fileList) {
+     handleChangeList = key => info => {
+     console.log("234532432423423",info);
+     const fileList = info.fileList;
+     let { education = {} } = this.state;
+     let newEducation = education;
+     let { photos = [], photo = [] } = newEducation[key];
+     for (let item of fileList) {
 
-        let uid = item.uid;
-        let push = true;
+     let uid = item.uid;
+     let push = true;
 
-        if (typeof (item) == 'object') {
-          for (let photo of photos) {
+     if (typeof (item) == 'object') {
+     for (let photo of photos) {
 
-            let { name = '' } = item;
-            let fileName = name;
-            let newFileName = fileName.replace(/\s/g, '');
-            if (photo.includes(newFileName)) {
-              push = false;
-            }
-          }
-        }
-        if (newEducation[key].photo && newEducation[key].photo.length) {
-          for (let pic of newEducation[key].photo) {
-            if (pic.uid === uid) {
-              push = false;
-            }
-          }
-        }
-        if (push) {
-          newEducation[key].photo.push(item);
-        }
-      };
+     let { name = '' } = item;
+     let fileName = name;
+     let newFileName = fileName.replace(/\s/g, '');
+     if (photo.includes(newFileName)) {
+     push = false;
+     }
+     }
+     }
+     if (newEducation[key].photo && newEducation[key].photo.length) {
+     for (let pic of newEducation[key].photo) {
+     if (pic.uid === uid) {
+     push = false;
+     }
+     }
+     }
+     if (push) {
+     newEducation[key].photo.push(item);
+     }
+     };
 
-      this.setState({ education: newEducation });
-    };
+     this.setState({ education: newEducation });
+     };
      */
-    
+
     onUploadCompleteRegistration = async (data = {}, key) => {
         const {upload_documents: latest_docs = {}} = data;
 
         /**
          * TODO: Why is this commented?
-        const { allAppointmentDocs ={} } = this.state;
-        console.log("onUploadCompleteRegistration ---> data: ",data);
+         const { allAppointmentDocs ={} } = this.state;
+         console.log("onUploadCompleteRegistration ---> data: ",data);
 
-        const {storeAppointmentDocuments} = this.props;
-        let appointmentDocs = allAppointmentDocs[key];
-        allAppointmentDocs[key] = {...appointmentDocs,upload_documents};
-        let newAppointmentDocs = allAppointmentDocs[key];
-        this.setState({allAppointmentDocs:{...allAppointmentDocs}});
-        storeAppointmentDocuments(data);
+         const {storeAppointmentDocuments} = this.props;
+         let appointmentDocs = allAppointmentDocs[key];
+         allAppointmentDocs[key] = {...appointmentDocs,upload_documents};
+         let newAppointmentDocs = allAppointmentDocs[key];
+         this.setState({allAppointmentDocs:{...allAppointmentDocs}});
+         storeAppointmentDocuments(data);
          */
 
         const {allAppointmentDocs = {}} = this.state;
         let newAppointmentDocs = allAppointmentDocs;
 
-        if (newAppointmentDocs[key]) {
-            let newDocs = newAppointmentDocs[key].upload_documents;
-            newAppointmentDocs[key].upload_documents = latest_docs;
+        if (newAppointmentDocs[ key ]) {
+            let newDocs = newAppointmentDocs[ key ].upload_documents;
+            newAppointmentDocs[ key ].upload_documents = latest_docs;
             this.setState({
                 allAppointmentDocs: newAppointmentDocs,
             });
         } else {
-            newAppointmentDocs[key] = {};
-            newAppointmentDocs[key].upload_documents = latest_docs;
+            newAppointmentDocs[ key ] = {};
+            newAppointmentDocs[ key ].upload_documents = latest_docs;
             this.setState({
                 allAppointmentDocs: newAppointmentDocs,
             });
@@ -2313,7 +2338,7 @@ class PatientDetails extends Component {
                 let {allAppointmentDocs = {}} = this.state;
                 const {storeAppointmentDocuments} = this.props;
 
-                let newAppointmentDocs = allAppointmentDocs[key];
+                let newAppointmentDocs = allAppointmentDocs[ key ];
 
                 let data = new FormData();
                 data.append("files", file);
@@ -2410,13 +2435,13 @@ class PatientDetails extends Component {
         const {selectedCarePlanId, patientDetailsData} = this.state;
 
         const {basic_info: {doctor_id, patient_id} = {}} =
-        care_plans[selectedCarePlanId] || {};
+        care_plans[ selectedCarePlanId ] || {};
         const {basic_info: {user_id: doctorUserId} = {}} =
-        doctors[doctor_id] || {};
+        doctors[ doctor_id ] || {};
         const {
             basic_info: {user_id: patientUserID} = {},
             user_role_id: patientRoleId = null,
-        } = patientDetailsData[patient_id] || {};
+        } = patientDetailsData[ patient_id ] || {};
 
         const roomId = getRoomId(doctorRoleId, patientRoleId);
 
@@ -2428,7 +2453,7 @@ class PatientDetails extends Component {
 
     setActiveKey = (value) => {
         const {getAppointments, getRecommendServiceAndSubscription} = this.props;
-        let patientId = window.location.href.split("/")[4];
+        let patientId = window.location.href.split("/")[ 4 ];
 
         if (value === "2") {
             getAppointments(patientId);
@@ -2562,7 +2587,7 @@ class PatientDetails extends Component {
         let doctorId = null;
 
         Object.keys(doctors).forEach((id) => {
-            const {basic_info: {user_id} = {}} = doctors[id] || {};
+            const {basic_info: {user_id} = {}} = doctors[ id ] || {};
 
             if (user_id === authenticated_user) {
                 doctorId = id;
@@ -2571,14 +2596,14 @@ class PatientDetails extends Component {
 
         let reportsExist = false;
         Object.keys(reports).forEach((id) => {
-            const {basic_info: {patient_id: p_id} = {}} = reports[id] || {};
+            const {basic_info: {patient_id: p_id} = {}} = reports[ id ] || {};
             if (parseInt(patient_id) === parseInt(p_id)) {
                 reportsExist = true;
             }
         });
 
         let {basic_info: {name: firstTemplateName = ""} = {}} =
-        care_plan_templates[care_plan_template_ids[0]] || {};
+        care_plan_templates[ care_plan_template_ids[ 0 ] ] || {};
 
         // TODO: dummy care plan
         let carePlanId = selectedCarePlanId;
@@ -2631,18 +2656,18 @@ class PatientDetails extends Component {
                 } = {},
                 symptoms: carePlan_symptoms = "",
             } = {},
-        } = care_plans[carePlanId] || {};
+        } = care_plans[ carePlanId ] || {};
         const {basic_info: {name: treatment = ""} = {}} =
-        treatments[treatment_id] || {};
+        treatments[ treatment_id ] || {};
         const {basic_info: {name: condition = ""} = {}} =
-        conditions[condition_id] || {};
+        conditions[ condition_id ] || {};
         const {basic_info: {name: severity = ""} = {}} =
-        severities[severity_id] || {};
+        severities[ severity_id ] || {};
 
-        const diagnosis_type_obj = DIAGNOSIS_TYPE[d_type] || {};
-        const diagnosis_type = diagnosis_type_obj["value"] || "";
+        const diagnosis_type_obj = DIAGNOSIS_TYPE[ d_type ] || {};
+        const diagnosis_type = diagnosis_type_obj[ "value" ] || "";
 
-        let carePlan = care_plans[carePlanId] || {};
+        let carePlan = care_plans[ carePlanId ] || {};
         let {
             details: {
                 condition_id: cId = 0,
@@ -2657,7 +2682,7 @@ class PatientDetails extends Component {
                     severity_id: sIdTemp = 0,
                     treatment_id: tIdTemp = 0,
                 } = {},
-            } = care_plan_templates[carePlanTemplateId] || {};
+            } = care_plan_templates[ carePlanTemplateId ] || {};
             carePlan.treatment_id = tIdTemp;
             carePlan.severity_id = sIdTemp;
             carePlan.condition_id = cIdTemp;
@@ -2673,7 +2698,7 @@ class PatientDetails extends Component {
                 last_name: doctor_last_name,
                 user_id: doctorUserId = 1,
             } = {},
-        } = doctors[doctor_id] || {};
+        } = doctors[ doctor_id ] || {};
 
         let showUseTemplate = true;
         if (cPAppointmentIds.length || cPMedicationIds.length) {
@@ -2705,7 +2730,7 @@ class PatientDetails extends Component {
                 user_id: patientUserId = "",
             } = {},
             user_role_id: patientRoleId = null,
-        } = patientDetailsData[patient_id] || {};
+        } = patientDetailsData[ patient_id ] || {};
 
         const doctorRoleId = auth_role;
 
@@ -2713,7 +2738,7 @@ class PatientDetails extends Component {
         const roomId = getRoomId(doctorRoleId, patientRoleId);
 
         const {basic_info: {mobile_number = "", email, prefix = ""} = {}} =
-        patientUserDetails[user_id] || {};
+        patientUserDetails[ user_id ] || {};
 
         const {
             close,
@@ -2727,10 +2752,10 @@ class PatientDetails extends Component {
         console.log("Props inside PatientDetails Class ---> ", {props: this.props});
 
         let showAddButton =
-            (authPermissions.includes(USER_PERMISSIONS.APPOINTMENTS.ADD) ||
+            ( authPermissions.includes(USER_PERMISSIONS.APPOINTMENTS.ADD) ||
                 authPermissions.includes(USER_PERMISSIONS.MEDICATIONS.ADD) ||
                 authPermissions.includes(USER_PERMISSIONS.VITALS.ADD) ||
-                authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD)) &&
+                authPermissions.includes(USER_PERMISSIONS.CARE_PLAN.ADD) ) &&
             !isOtherCarePlan;
 
         let docName = doctor_first_name
@@ -2745,7 +2770,7 @@ class PatientDetails extends Component {
         const {
             basic_info: {user_role_id = null} = {},
             secondary_doctor_user_role_ids = [],
-        } = care_plans[selectedCarePlanId];
+        } = care_plans[ selectedCarePlanId ];
 
         // let defaultActiveKeyValue = "1";
         const {activeKey = "1"} = this.state;
@@ -2882,8 +2907,8 @@ class PatientDetails extends Component {
                                                     onChange={this.setActiveKey}
                                                     activeKey={activeKey}
                                                 >
-                                                    {(authenticated_category === USER_CATEGORY.DOCTOR ||
-                                                        authenticated_category === USER_CATEGORY.HSP) && (
+                                                    {( authenticated_category === USER_CATEGORY.DOCTOR ||
+                                                        authenticated_category === USER_CATEGORY.HSP ) && (
                                                         // code implementation after phase 1 changes made
                                                         // &&
                                                         // isOtherCarePlan
@@ -2951,8 +2976,8 @@ class PatientDetails extends Component {
                                                         <SymptomTabs patientId={patient_id}/>
                                                     </TabPane>
                                                     <TabPane
-                                                        tab={PATIENT_TABS.ACTIONS["name"]}
-                                                        key={PATIENT_TABS.ACTIONS["key"]}
+                                                        tab={PATIENT_TABS.ACTIONS[ "name" ]}
+                                                        key={PATIENT_TABS.ACTIONS[ "key" ]}
                                                     >
                                                         {vitalIds.length > 0 ? (
                                                             <VitalTable
@@ -2976,14 +3001,14 @@ class PatientDetails extends Component {
                                                         )}
                                                     </TabPane>
                                                     <TabPane
-                                                        tab={PATIENT_TABS.REPORTS["name"]}
-                                                        key={PATIENT_TABS.REPORTS["key"]}
+                                                        tab={PATIENT_TABS.REPORTS[ "name" ]}
+                                                        key={PATIENT_TABS.REPORTS[ "key" ]}
                                                     >
                                                         <ReportTable patientId={patient_id}/>
                                                     </TabPane>
                                                     <TabPane
-                                                        tab={PATIENT_TABS.DIETS["name"]}
-                                                        key={PATIENT_TABS.DIETS["key"]}
+                                                        tab={PATIENT_TABS.DIETS[ "name" ]}
+                                                        key={PATIENT_TABS.DIETS[ "key" ]}
                                                     >
                                                         {dietIds.length > 0 ? (
                                                             <DietTable
@@ -3006,8 +3031,8 @@ class PatientDetails extends Component {
                                                     </TabPane>
 
                                                     <TabPane
-                                                        tab={PATIENT_TABS.WORKOUTS["name"]}
-                                                        key={PATIENT_TABS.WORKOUTS["key"]}
+                                                        tab={PATIENT_TABS.WORKOUTS[ "name" ]}
+                                                        key={PATIENT_TABS.WORKOUTS[ "key" ]}
                                                     >
                                                         {workoutIds.length > 0 ? (
                                                             <WorkoutTable
@@ -3032,8 +3057,8 @@ class PatientDetails extends Component {
                                                     </TabPane>
                                                     {/* code implementation after phase 1 for subscriptions */}
                                                     <TabPane
-                                                        tab={PATIENT_TABS.SUBSCRIPTIONS["name"]}
-                                                        key={PATIENT_TABS.SUBSCRIPTIONS["key"]}
+                                                        tab={PATIENT_TABS.SUBSCRIPTIONS[ "name" ]}
+                                                        key={PATIENT_TABS.SUBSCRIPTIONS[ "key" ]}
                                                     >
                                                         <SubscriptionTable
                                                             recommendServices={this.props.recommendServices}
@@ -3084,9 +3109,9 @@ class PatientDetails extends Component {
                     {popUpVisible && (
                         <div
                             className={
-                                (drawerVisible || templateDrawerVisible) && minimized
+                                ( drawerVisible || templateDrawerVisible ) && minimized
                                     ? "chat-popup-minimized"
-                                    : (drawerVisible || templateDrawerVisible) && !minimized
+                                    : ( drawerVisible || templateDrawerVisible ) && !minimized
                                         ? "chat-popup"
                                         : minimized
                                             ? "chat-popup-minimized-closedDrawer"
