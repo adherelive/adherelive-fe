@@ -381,11 +381,11 @@ const LanguageSelectionModal = ({ isOpen, onClose, children }) => {
 
     return (
         <div
-            className="popup-overlay fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+            className="popup-overlay fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-999"
             onClick={onClose}
         >
             <div
-                className="popup-content bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4 z-50"
+                className="popup-content bg-dark-grey p-6 rounded-lg shadow-xl max-w-md w-full mx-4 z-50"
                 onClick={e => e.stopPropagation()}
             >
                 {children}
@@ -693,7 +693,7 @@ const PatientTreatmentCard = ({
         let doctor_id = null;
         for (let doctorId in doctors) {
             const {basic_info: {user_id} = {}} = doctors[ doctorId ] || {};
-            if (user_identity == user_id) {
+            if (user_identity === user_id) {
                 doctor_id = doctorId;
                 break;
             }
@@ -752,7 +752,7 @@ const PatientTreatmentCard = ({
                 {selectedCarePlanId && isPrescriptionOfCurrentDoc && (
                     <button
                         type="button"
-                        className="flex items-center px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+                        className="flex items-center px-4 py-2 bg-dark-grey bg-opacity-50 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
                         onClick={() => setShowLanguageDialog(true)}
                     >
             <span className="text-sm mr-2">
