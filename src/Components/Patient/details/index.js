@@ -704,8 +704,8 @@ const PatientTreatmentCard = ({
 
     const handleGeneratePrescription = (language) => {
         const url = generatePrescriptionUrl(selectedCarePlanId, language);
-        const newUrl = `${url}?lang=${language}`; // Append the language parameter
-        window.open(newUrl, '_blank'); // Open in a new tab
+        //const newUrl = `${url}?lang=${language}`; // Append the language parameter
+        window.open(url, '_blank'); // Open in a new tab
         setShowPopup(false); // Close the popup
     };
 
