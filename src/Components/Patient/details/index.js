@@ -11,7 +11,7 @@ import EyeFilled from "@ant-design/icons/EyeFilled";
 import { getName } from "../../../Helper/validation";
 import isEmpty from "../../../Helper/is-empty";
 import { Button, Dropdown, message, Spin, Table, Tabs } from "antd";
-import { Modal } from "antd/es/modal";
+import Modal from "antd/es/modal";
 import Menu from "antd/es/menu";
 import Tooltip from "antd/es/tooltip";
 
