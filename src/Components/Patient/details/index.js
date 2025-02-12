@@ -10,6 +10,13 @@ import ShareIcon from "../../../Assets/images/redirect3x.png";
 import EyeFilled from "@ant-design/icons/EyeFilled";
 import { getName } from "../../../Helper/validation";
 import isEmpty from "../../../Helper/is-empty";
+import { Button, Dropdown, message, Spin, Table, Tabs } from "antd";
+import Modal from "antd/es/modal";
+import Menu from "antd/es/menu";
+import Tooltip from "antd/es/tooltip";
+
+import OtpInput from "react-otp-input";
+import axios from "axios";
 
 import config from "../../../config";
 
@@ -32,11 +39,6 @@ import {
     USER_CATEGORY,
     USER_PERMISSIONS,
 } from "../../../constant";
-import { Button, Dropdown, message, Spin, Table, Tabs } from "antd";
-import Modal from "antd/es/modal";
-import Menu from "antd/es/menu";
-
-import OtpInput from "react-otp-input";
 
 // DRAWERS
 import VitalTimelineDrawer from "../../../Containers/Drawer/vitalTimeline";
@@ -92,7 +94,6 @@ import { getPatientConsultingVideoUrl } from "../../../Helper/url/patients";
 import SymptomTabs from "../../../Containers/Symptoms";
 import { getRoomId } from "../../../Helper/twilio";
 import { getFullName } from "../../../Helper/common";
-import Tooltip from "antd/es/tooltip";
 
 // code implementation after phase 1 for Subscription
 import RecommendSubscription from "../../Subscription/Drawer/RecommendSubscription";
@@ -101,7 +102,6 @@ import SubscriptionTable from "../../Subscription/SubscriptionTable";
 import FlashCard from "../../Subscription/Flashcard";
 import AddPerforma from "../../Performa/Drawer/AddPerforma";
 import PerformaTabs from "../../Performa/PerformaTabs/PerformaTabs";
-import axios from "axios";
 
 const BLANK_TEMPLATE = "Blank Template";
 const {TabPane} = Tabs;
@@ -700,34 +700,55 @@ const PatientTreatmentCard = ({
     const [progress, setProgress] = useState(0);
     const [language, setLanguage] = useState('');
 
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleGeneratePrescription = (language) => {
+        const url = generatePrescriptionUrl(selectedCarePlanId, language);
+        const newUrl = `${url}?lang=${language}`; // Append the language parameter
+        window.open(newUrl, '_blank'); // Open in a new tab
+        setShowPopup(false); // Close the popup
+    };
+
     return (
         <div className="treatment mt20 tal bg-faint-grey">
             <div className="header-div flex align-center justify-space-between">
                 <h3>{formatMessage(messages.treatment_details)}</h3>
                 {selectedCarePlanId && isPrescriptionOfCurrentDoc ? (
-                    <a
-                        href={`${generatePrescriptionUrl(selectedCarePlanId)}`}
-                        target={"_blank"}
-                        className="presc-link"
+                    <Button
+                        type="ghost"
+                        className="flex align-center justify-space-evenly presc-link"
+                        onClick={() => setShowPopup(true)} // Show popup on button click
                     >
-                        <Button
-                            type="ghost"
-                            className="flex align-center justify-space-evenly"
-                        >
-                        <span className="fs14">
-                        {" "}
-                          {formatMessage(messages.prescription)}
-                        </span>
-                            <img
-                                title={"Generate Prescription"}
-                                src={ShareIcon}
-                                alt="prescription icon"
-                                className="pointer w15 ml14"
-                            ></img>
-                        </Button>
-                    </a>
+                        <span className="fs14">{formatMessage(messages.prescription)}</span>
+                        <img
+                            title={"Generate Prescription"}
+                            src={ShareIcon}
+                            alt="prescription icon"
+                            className="pointer w15 ml14"
+                        />
+                    </Button>
                 ) : null}
             </div>
+
+            {/* Popup */}
+            {showPopup && (
+                <div className="popup-overlay"> {/* Style this as a modal overlay */}
+                    <div className="popup-content"> {/* Style this as a modal content area */}
+                        <p>{formatMessage({ id: 'generate_in_english', defaultMessage: 'Generate in Hindi?' })}</p> {/* Use formatMessage for i18n */}
+                        <div className="popup-buttons">
+                            <Button type="primary" onClick={() => handleGeneratePrescription('hi')}>
+                                {formatMessage({ id: 'yes', defaultMessage: 'Yes' })}
+                            </Button>
+                            <Button onClick={() => handleGeneratePrescription('en')}>
+                                {formatMessage({ id: 'no', defaultMessage: 'No' })} {/* Or a more specific label */}
+                            </Button>
+                            <Button type="danger" onClick={() => setShowPopup(false)}>
+                                {formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <div className="treatment-details pl16 pr16 ">
                 <div className="flex direction-column mb14 mt20">
