@@ -757,7 +757,7 @@ const PatientTreatmentCard = ({
                             onClick={() => handleGenerateTest('hi')} // Or default language
                         >
                         <span className="text-sm mr-2">
-                            {formatMessage(messages.generate_prescription)} {/* New label */}
+                            {formatMessage(messages.test_prescription)} {/* New label */}
                         </span>
                             <svg
                                 className="w-4 h-4"
@@ -1527,6 +1527,7 @@ class PatientDetails extends Component {
         switch (selectedKeys[ 0 ]) {
             case APPOINTMENT:
                 openAppointmentDrawer();
+                break;
             default:
                 openAppointmentDrawer();
                 break;
