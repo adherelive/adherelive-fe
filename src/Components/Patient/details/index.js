@@ -754,7 +754,7 @@ const PatientTreatmentCard = ({
                         <button
                             type="button"
                             className="flex items-center px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors mr-2" // Add margin-right
-                            onClick={() => handleGenerateTest('en')} // Or default language
+                            onClick={() => handleGenerateTest('hi')} // Or default language
                         >
                         <span className="text-sm mr-2">
                             {formatMessage(messages.generate_prescription)} {/* New label */}
