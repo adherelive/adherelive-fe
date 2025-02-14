@@ -5,8 +5,7 @@ import messages from "./message";
 import edit_image from "../../../Assets/images/edit.svg";
 import { getUploadAppointmentDocumentUrl } from "../../../Helper/urls/appointments";
 import { doRequest } from "../../../Helper/network";
-import { generatePrescriptionUrl } from "../../../Helper/urls/patients";
-import ShareIcon from "../../../Assets/images/redirect3x.png";
+import { generatePrescriptionUrl, generatePrescriptionTestUrl } from "../../../Helper/urls/patients";
 import EyeFilled from "@ant-design/icons/EyeFilled";
 import { getName } from "../../../Helper/validation";
 import isEmpty from "../../../Helper/is-empty";
@@ -16,7 +15,6 @@ import Menu from "antd/es/menu";
 import Tooltip from "antd/es/tooltip";
 
 import OtpInput from "react-otp-input";
-import axios from "axios";
 
 import config from "../../../config";
 
@@ -178,14 +176,14 @@ const columns_symptoms = [
     /**
      * TODO: Check why this part has been commented
      {
-         title: "",
-         dataIndex: "edit",
-         key: "edit",
-         render: () => (
-             <div className="edit-medication">
-                <img src={edit_image} className="edit-medication-icon" />
-             </div>
-         ),
+     title: "",
+     dataIndex: "edit",
+     key: "edit",
+     render: () => (
+     <div className="edit-medication">
+     <img src={edit_image} className="edit-medication-icon" />
+     </div>
+     ),
      },
      */
 ];
@@ -376,7 +374,7 @@ const columns_appointments_non_editable = [
 ];
 
 // Modal to generate the PDF prescription document
-const LanguageSelectionModal = ({ isOpen, onClose, children }) => {
+const LanguageSelectionModal = ({isOpen, onClose, children}) => {
     if (!isOpen) return null;
 
     return (
@@ -670,17 +668,17 @@ const PatientTreatmentCard = ({
             carePlan.secondary_doctor_user_role_ids.includes(auth_role) === true );
 
     /** TODO: Check and replace the above
-    // Simplified care plan access with fallback
-    const carePlan = care_plans && care_plans[selectedCarePlanId]
-        ? care_plans[selectedCarePlanId]
-        : {};
+     // Simplified care plan access with fallback
+     const carePlan = care_plans && care_plans[selectedCarePlanId]
+     ? care_plans[selectedCarePlanId]
+     : {};
 
-    // Simplified permission check
-    const isPrescriptionOfCurrentDoc = !isOtherCarePlan && (
-        user_role_id.toString() === auth_role.toString() ||
-        (carePlan.secondary_doctor_user_role_ids &&
-            carePlan.secondary_doctor_user_role_ids.includes(auth_role))
-    );*/
+     // Simplified permission check
+     const isPrescriptionOfCurrentDoc = !isOtherCarePlan && (
+     user_role_id.toString() === auth_role.toString() ||
+     (carePlan.secondary_doctor_user_role_ids &&
+     carePlan.secondary_doctor_user_role_ids.includes(auth_role))
+     );*/
 
     let all_providers = "",
         count = 1;
@@ -742,22 +740,54 @@ const PatientTreatmentCard = ({
         setShowLanguageDialog(false);
     };
 
+    const handleGenerateTest = (language) => {
+        const url = generatePrescriptionTestUrl(language);
+        window.open(url, '_blank');
+        setShowLanguageDialog(false);
+    };
+
     return (
         <div className="treatment mt20 tal bg-faint-grey">
             <div className="header-div flex align-center justify-space-between">
-                <h3 className="text-lg font-semibold">
-                    {formatMessage(messages.treatment_details)}
-                </h3>
-
+                <div className="flex items-center"> {/* Container for the new button */}
+                    {selectedCarePlanId && isPrescriptionOfCurrentDoc && (
+                        <button
+                            type="button"
+                            className="flex items-center px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors mr-2" // Add margin-right
+                            onClick={() => handleGenerateTest('en')} // Or default language
+                        >
+                        <span className="text-sm mr-2">
+                            {formatMessage(messages.generate_prescription)} {/* New label */}
+                        </span>
+                            <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" // Add xmlns for better compatibility
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M10 21h7a2 2 0 002-2V5a2 2 0 00-2-2h-7a2 2 0 00-2 2v14a2 2 0 002 2z" // Example icon
+                                />
+                            </svg>
+                        </button>
+                    )}
+                    <h3 className="text-lg font-semibold">
+                        {formatMessage(messages.treatment_details)}
+                    </h3>
+                </div> {/* Close the container */}
                 {selectedCarePlanId && isPrescriptionOfCurrentDoc && (
                     <button
                         type="button"
                         className="flex items-center px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
                         onClick={() => setShowLanguageDialog(true)}
                     >
-            <span className="text-sm mr-2">
-              {formatMessage(messages.prescription)}
-            </span>
+                    <span className="text-sm mr-2">
+                      {formatMessage(messages.prescription)}
+                    </span>
                         <svg
                             className="w-4 h-4"
                             fill="none"
@@ -800,7 +830,7 @@ const PatientTreatmentCard = ({
                             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
                             onClick={() => handleGeneratePrescription('hi')}
                         >
-                            {formatMessage({ id: 'hindi', defaultMessage: 'Hindi' })}
+                            {formatMessage({id: 'hindi', defaultMessage: 'Hindi'})}
                         </button>
 
                         <button
@@ -808,7 +838,7 @@ const PatientTreatmentCard = ({
                             className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
                             onClick={() => handleGeneratePrescription('en')}
                         >
-                            {formatMessage({ id: 'english', defaultMessage: 'English' })}
+                            {formatMessage({id: 'english', defaultMessage: 'English'})}
                         </button>
 
                         <button
@@ -816,7 +846,7 @@ const PatientTreatmentCard = ({
                             className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
                             onClick={() => setShowLanguageDialog(false)}
                         >
-                            {formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
+                            {formatMessage({id: 'cancel', defaultMessage: 'Cancel'})}
                         </button>
                     </div>
                 </div>
@@ -2173,7 +2203,7 @@ class PatientDetails extends Component {
             this.props.setPerformaTabs([{tabName: "Obs gyne", key: "1"}]);
         } else {
             this.props.setPerformaTabs([
-                {tabName: "Obs gyne", key: "1"},
+                {tabName: "Obs & Gynae", key: "1"},
                 {tabName: "Mental Health", key: "2"},
             ]);
         }
