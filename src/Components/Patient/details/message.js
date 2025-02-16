@@ -574,6 +574,11 @@ const messages = defineMessages({
         description: "",
         defaultMessage: "Prescription",
     },
+    test_prescription: {
+        id: "app.patient_profile.prescription",
+        description: "",
+        defaultMessage: "Test",
+    },
     emptyAppointmentTable: {
         id: "app.appointment.table.emptyAppointmentTable",
         description: "",
