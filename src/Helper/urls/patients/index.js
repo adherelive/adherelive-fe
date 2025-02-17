@@ -36,6 +36,10 @@ export const generatePrescriptionUrl = (careplan_id, language) => {
     return `/api/prescription/details/${careplan_id}/${language}`;
 };
 
+export const generatePrescriptionTestUrl = (language) => {
+    return `/api/prescription/test/${language}`;
+};
+
 export const getPatientsPaginatedUrl = (data) => {
     const {sort_createdAt, sort_name, offset, watchlist} = data || {};
     if (sort_name === null) {
