@@ -22,7 +22,7 @@
     "url": "https://github.com/adherelive/adherelive-fe/issues"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "cross-env PORT=3005 craco start",
     "build": "GENERATE_SOURCEMAP=false craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
@@ -103,6 +103,7 @@
     "@babel/preset-react": "^7.19.0",
     "babel-plugin-react-intl": "^8.2.25",
     "babel-preset-react-app": "^10.0.1",
+    "cross-env": "^7.0.3",
     "prettier": "^2.7.1"
   },
   "browserslist": {

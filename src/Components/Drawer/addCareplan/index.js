@@ -381,14 +381,15 @@ class AddCarePlanDrawer extends Component {
 
         const response = await googleTranslate(textToTranslate);
         const {data = {}} = response || {};
+        let decodedText = decodeURIComponent(data.translations[0].translatedText); 
         if (data) {
             if (translateFor === "clinicalNotes") {
                 this.setState({
-                    clinical_notes: data.translations[0].translatedText,
+                    clinical_notes: decodedText,
                 });
             } else if (translateFor === "followupAdvise") {
                 this.setState({
-                    followup_advise: data.translations[0].translatedText,
+                    followup_advise: decodedText,
                 });
             }
         } else {

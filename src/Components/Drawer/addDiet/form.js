@@ -90,8 +90,9 @@ class DietFieldsFrom extends Component {
 
         const response = await googleTranslate(textToTranslate);
         const {data = {}} = response || {};
+        let decodedText = decodeURIComponent(data.translations[0].translatedText); 
         if (data) {
-            setFieldsValue({[WHAT_NOT_TO_DO]: data.translations[0].translatedText});
+            setFieldsValue({[WHAT_NOT_TO_DO]: decodedText});
         } else {
             alert("Something went wrong");
         }

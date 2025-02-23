@@ -36,9 +36,10 @@ class Formulation extends Component {
         let textToTranslate = currentValue;
 
         const response = await googleTranslate(textToTranslate);
+        let decodedText = decodeURIComponent(data.translations[0].translatedText); 
         const {data = {}} = response || {};
         if (data) {
-            setFieldsValue({[FIELD_NAME]: data.translations[0].translatedText});
+            setFieldsValue({[FIELD_NAME]: decodedText});
         } else {
             alert("Something went wrong");
         }

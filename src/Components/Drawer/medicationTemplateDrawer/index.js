@@ -2083,7 +2083,6 @@ class TemplateDrawer extends Component {
                               </p>
                             )} */
                         }
-
                         <div className="flex add-more" onClick={this.showAddVital}>
                             {this.formatMessage(messages.addMore)}
                         </div>

@@ -967,8 +967,9 @@ class AddAppointmentForm extends Component {
 
         const response = await googleTranslate(textToTranslate);
         const {data = {}} = response || {};
+        let decodedText = decodeURIComponent(data.translations[0].translatedText); 
         if (data) {
-            setFieldsValue({[DESCRIPTION]: data.translations[0].translatedText});
+            setFieldsValue({[DESCRIPTION]: decodedText});
         } else {
             alert("Something went wrong");
         }

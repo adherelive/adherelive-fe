@@ -531,8 +531,9 @@ class AddFoodGroupForm extends Component {
 
         const response = await googleTranslate(textToTranslate);
         const {data = {}} = response || {};
+        let decodedText = decodeURIComponent(data.translations[0].translatedText); 
         if (data) {
-            setFieldsValue({[NOTES]: data.translations[0].translatedText});
+            setFieldsValue({[NOTES]: decodedText});
         } else {
             alert("Something went wrong");
         }

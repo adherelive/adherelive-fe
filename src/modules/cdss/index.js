@@ -109,8 +109,8 @@ export const googleTranslate = async (textToConvert, fromLang = "en", toLang = "
 
     try {
         const response = await doRequest({ method: REQUEST_TYPE.GET, url: url.toString() });
-        const { data, message = "" } = response.payload || {};
-        return { status: response.status, data, message };
+        const { data, message = "" } = response || {};
+        return { status: response.status, data, data };
     } catch (error) {
         console.error("Google Translate Error: ", error);
         return { status: "error", message: "Translation failed" };

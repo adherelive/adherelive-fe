@@ -40,8 +40,9 @@ class Formulation extends Component {
 
         const response = await googleTranslate(textToTranslate);
         const {data = {}} = response || {};
+        let decodedText = decodeURIComponent(data.translations[0].translatedText); 
         if (data) {
-            setFieldsValue({[FIELD_NAME]: data.translations[0].translatedText});
+            setFieldsValue({[FIELD_NAME]: decodedText});
         } else {
             alert("Something went wrong");
         }
